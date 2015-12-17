@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.ConfigurationController">
+   <center>
+      <AnchorPane prefHeight="160.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="190.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="99.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="351.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="122.0" minHeight="0.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Instruction Set: " textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <ChoiceBox prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleLocate" text="Locate" />
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="110.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="110.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="237.0" text="Select a custom instruction set" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextArea editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="600.0" text="CALVIS gives you freedom to add your own set of custom instructions.&#10;Choose a csv file that follows the instruction set format for this session." wrapText="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Trebuchet MS" size="13.0" />
+                     </font>
+                  </TextArea>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="600.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="0.0" prefWidth="0.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="49.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="90.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="305.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="438.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="348.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="4.0" prefHeight="7.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="27.0" prefWidth="70.0" text="Cancel" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSkip" prefHeight="27.0" prefWidth="70.0" text="Skip" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="210.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="27.0" prefWidth="70.0" text="Save" />
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
