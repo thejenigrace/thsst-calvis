@@ -1,9 +1,9 @@
 package MainEditor;
 
-import Editor.controller.EditorController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import SimulatorVisualizer.controller.SimulationEngine;
 import MainEditor.controller.ConfigurationController;
+import MainEditor.controller.WorkspaceController;
+import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -57,7 +57,13 @@ public class MainApp extends Application {
      * @throws IOException
      */
     public void showWorkspace() throws IOException {
-        BorderPane workspaceLayout = FXMLLoader.load(getClass().getResource("/fxml/workspace.fxml"));
+        // Load root layout from fxml file
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
+        Parent workspaceLayout = (BorderPane) loader.load();
+
+        WorkspaceController workspaceController = loader.getController();
+
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
         primaryStage.setMaximized(true);
@@ -89,7 +95,7 @@ public class MainApp extends Application {
 
         SimulationEngine simEng = new SimulationEngine(envCon.getRegisters(), envCon.getMemory());
 
-        EditorController ediCon = new EditorController(envCon.getParser(), simEng);
+//        EditorController ediCon = new EditorController(envCon.getParser(), simEng);
 
         launch(args);
     }

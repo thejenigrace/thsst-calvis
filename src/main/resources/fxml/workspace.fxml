@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.WorkspaceController">
+<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../css/assembly-keywords.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.WorkspaceController">
     <top>
         <VBox prefHeight="39.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
@@ -37,8 +37,8 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Navigate">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Find" />
-                                <MenuItem mnemonicParsing="false" text="Find &amp; Replace" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleFind" text="Find" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleFindAndReplace" text="Find &amp; Replace" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Execute">
@@ -78,7 +78,7 @@
                     <items>
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/open.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/save.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/undo.png);"/>
+                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/undo.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/redo.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/cut.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/copy.png);" />
