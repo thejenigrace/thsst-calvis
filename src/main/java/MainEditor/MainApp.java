@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+    public static Stage primaryStage;
 
     /**
      * Method implemented by extending the class to Application.
@@ -41,6 +41,7 @@ public class MainApp extends Application {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/configuration.fxml"));
+//        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
         Parent root = (BorderPane) loader.load();
 
         // Give the controller access to the main app
@@ -60,8 +61,8 @@ public class MainApp extends Application {
         BorderPane workspaceLayout = FXMLLoader.load(getClass().getResource("/fxml/workspace.fxml"));
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(true);
+//        primaryStage.setMaximized(true);
+//        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

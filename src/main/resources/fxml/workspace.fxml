@@ -9,30 +9,71 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.input.KeyCodeCombination?>
 <BorderPane fx:id="root" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.WorkspaceController">
     <top>
         <VBox prefHeight="39.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
-                <MenuBar>
+                <MenuBar id="MenuBar">
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#handleNewFile" text="New File" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleOpenFile" text="Open File" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleSaveFile" text="Save" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleSaveAsFile" text="Save As" />
+                                <MenuItem mnemonicParsing="true" onAction="#handleNewFile" text="New File" accelerator="Ctrl + N">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="true" onAction="#handleOpenFile" text="Open File" accelerator="Ctrl + O">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="true" onAction="#handleSaveFile" text="Save" accelerator="Ctrl + S">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="true" onAction="#handleSaveAsFile" text="Save As" accelerator="Ctrl + Shift + S">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem mnemonicParsing="false" onAction="#handleExitApp" text="Exit" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleExitApp" text="Exit" accelerator="Ctrl + E">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Undo" />
-                                <MenuItem mnemonicParsing="false" text="Redo" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleUndo" text="Undo" accelerator="Ctrl + Z">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#handleRedo" text="Redo" accelerator="Ctrl + Y">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem mnemonicParsing="false" text="Cut" />
-                                <MenuItem mnemonicParsing="false" text="Copy" />
-                                <MenuItem mnemonicParsing="false" text="Paste" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleCut" text="Cut" accelerator="Ctrl + X">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#handleCopy" text="Copy" accelerator="Ctrl + C">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#handlePaste" text="Paste" accelerator="Ctrl + V">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Navigate">
@@ -54,7 +95,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Visualize">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="HIghlight" />
+                                <MenuItem mnemonicParsing="false" text="Highlight" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Window">
@@ -76,19 +117,18 @@
                 </MenuBar>
                 <ToolBar>
                     <items>
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/open.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/save.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/undo.png);"/>
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/redo.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/cut.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/copy.png);" />
-                        <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/paste.png);" />
+                        <Button mnemonicParsing="false" onAction="#handleOpenFile" style="-fx-graphic: url(/icon/open.png);" />
+                        <Button mnemonicParsing="false" onAction="#handleSaveFile" style="-fx-graphic: url(/icon/save.png);" />
+                        <Button mnemonicParsing="false" onAction="#handleUndo" style="-fx-graphic: url(/icon/undo.png);"/>
+                        <Button mnemonicParsing="false" onAction="#handleRedo" style="-fx-graphic: url(/icon/redo.png);" />
+                        <Button mnemonicParsing="false" onAction="#handleCut" style="-fx-graphic: url(/icon/cut.png);" />
+                        <Button mnemonicParsing="false" onAction="#handleCopy" style="-fx-graphic: url(/icon/copy.png);" />
+                        <Button mnemonicParsing="false" onAction="#handlePaste" style="-fx-graphic: url(/icon/paste.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/find.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/play.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/stop.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/next.png);" />
                         <Button mnemonicParsing="false" style="-fx-graphic: url(/icon/reset.png);" />
-
                     </items>
                 </ToolBar>
             </children>
