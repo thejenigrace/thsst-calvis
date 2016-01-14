@@ -5,6 +5,8 @@ import EnvironmentConfiguration.model.InstructionList;
 import EnvironmentConfiguration.model.Memory;
 import EnvironmentConfiguration.model.RegisterList;
 
+import java.util.ArrayList;
+
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
@@ -14,12 +16,11 @@ public class EnvironmentConfigurator {
     private Memory memory;
     private RegisterList registers;
 
-    public EnvironmentConfigurator(){
-
+    public EnvironmentConfigurator(ArrayList<String> filepaths){
         // 1. Setup the environment
-        this.memory = new Memory(16, "Memory/config.csv");
-        this.registers = new RegisterList("Registers/register_list.csv");
-        InstructionList instructions = new InstructionList("Instructions/instruction_list.csv");
+        this.memory = new Memory(16, filepaths.get(0));
+        this.registers = new RegisterList(filepaths.get(1));
+        InstructionList instructions = new InstructionList(filepaths.get(2));
 
         // 2. Create the EnvironmentConfiguration.model.CALVISParser with Dynamic Grammar from
         // the list of instructions and list of registers

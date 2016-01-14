@@ -25,7 +25,7 @@
                   <ChoiceBox prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Pane GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleLocate" text="Locate" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleLocate" text="Locate" />
                      </children>
                   </Pane>
                </children>

@@ -1,6 +1,7 @@
 package EnvironmentConfiguration.model;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -32,7 +33,7 @@ public class Memory {
 
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(new File(csvFile)));
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator

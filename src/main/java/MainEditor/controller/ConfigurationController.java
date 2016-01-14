@@ -15,6 +15,8 @@ public class ConfigurationController {
 
     // Reference to the main application
     private MainApp mainApp;
+    private FileChooser fileChooser = new FileChooser();
+    FileChooser.ExtensionFilter extensionFiler = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
     /**
      * Is called by the main application to give a reference back to itself.
@@ -27,6 +29,9 @@ public class ConfigurationController {
     /**
      * Opens a FileChooser to let the user select an instruction set to load.
      */
+
+
+
     @FXML
     private void handleLocate(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();

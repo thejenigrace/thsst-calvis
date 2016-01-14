@@ -94,6 +94,7 @@ public class RegisterList {
 //										+ " at row " + (lineCounter + 1));
 					}
 				}
+				//apply logic that if
 				
 				lineCounter++;
 			}
