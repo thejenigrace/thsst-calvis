@@ -1,7 +1,11 @@
 package MainEditor;
 
+import Editor.controller.EditorController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import SimulatorVisualizer.controller.SimulationEngine;
 import MainEditor.controller.ConfigurationController;
+import MainEditor.controller.WorkspaceController;
+import SimulatorVisualizer.controller.SimulationEngine;
 import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +44,6 @@ public class MainApp extends Application {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/configuration.fxml"));
-//        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
         Parent root = (BorderPane) loader.load();
 
         // Give the controller access to the main app
@@ -57,7 +60,13 @@ public class MainApp extends Application {
      * @throws IOException
      */
     public void showWorkspace() throws IOException {
-        BorderPane workspaceLayout = FXMLLoader.load(getClass().getResource("/fxml/workspace.fxml"));
+        // Load root layout from fxml file
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
+        Parent workspaceLayout = (BorderPane) loader.load();
+
+        WorkspaceController workspaceController = loader.getController();
+
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
 //        primaryStage.setMaximized(true);

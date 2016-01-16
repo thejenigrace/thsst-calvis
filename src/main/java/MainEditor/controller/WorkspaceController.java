@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +19,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
 import org.fxmisc.richtext.CodeArea;
@@ -23,12 +28,16 @@ import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
 
+import java.io.IOException;
+import java.net.URL;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,7 +52,10 @@ import javafx.stage.FileChooser;
 /**
  * Created by Jennica Alcalde on 10/1/2015.
  */
-public class WorkspaceController {
+public class WorkspaceController implements Initializable {
+
+    private HashMap<Integer, int[]> findHighlightRanges;
+    private int currentFindRangeIndex;
 
     private CodeArea codeArea;
     private ExecutorService executor;
@@ -69,6 +81,11 @@ public class WorkspaceController {
                     + "|(?<STRING>" + STRING_PATTERN + ")"
                     + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
     );
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
         Matcher matcher = PATTERN.matcher(text);
@@ -221,6 +238,7 @@ public class WorkspaceController {
 
     /**
      * Action for New File; a MenuItem in File.
+     *
      * @param event
      */
     @FXML
@@ -243,6 +261,7 @@ public class WorkspaceController {
 
     /**
      * Action for Open File; a MenuItem in File.
+     *
      * @param event
      */
     @FXML
@@ -293,6 +312,7 @@ public class WorkspaceController {
 
     /**
      * Action for Save; a MenuItem in File.
+     *
      * @param event
      */
     @FXML
@@ -314,6 +334,7 @@ public class WorkspaceController {
 
     /**
      * Action for Save As; a MenuItem in File.
+     *
      * @param event
      */
     @FXML
@@ -394,10 +415,117 @@ public class WorkspaceController {
 
     /**
      * Action for Exit; a MenuItem in File.
+     *
      * @param event
      */
     @FXML
     private void handleExitApp(ActionEvent event) {
         System.exit(0);
+    }
+
+    @FXML
+    private void handleFind(ActionEvent event) throws IOException {
+        // Load root layout from fxml file
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/find.fxml"));
+        Parent findView = (BorderPane) loader.load();
+
+        Stage findDialogStage = new Stage();
+        findDialogStage.initModality(Modality.APPLICATION_MODAL);
+        findDialogStage.setTitle("Find");
+        findDialogStage.setScene(new Scene(findView));
+        findDialogStage.setResizable(false);
+        findDialogStage.setX(root.getWidth() / 3);
+        findDialogStage.setY(root.getHeight() / 3);
+        findDialogStage.show();
+
+        // Pass the current code in the text editor to FindDialogController
+        FindDialogController findDialogController = loader.getController();
+        findDialogController.setWorkspaceController(this);
+        findDialogController.setDialogStage(findDialogStage);
+        findDialogController.setCode(codeArea.getText());
+    }
+
+    @FXML
+    private void handleFindAndReplace(ActionEvent event) throws IOException {
+        // Load root layout from fxml file
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+        Parent findAndReplaceView = (BorderPane) loader.load();
+
+        Stage findAndReplaceDialogStage = new Stage();
+        findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
+        findAndReplaceDialogStage.setTitle("Find & Replace");
+        findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
+        findAndReplaceDialogStage.setResizable(false);
+        findAndReplaceDialogStage.setX(root.getWidth() / 3);
+        findAndReplaceDialogStage.setY(root.getHeight() / 3);
+        findAndReplaceDialogStage.show();
+
+        // Pass the current code in the text editor to FindDialogController
+        FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
+        findAndReplaceDialogController.setWorkspaceController(this);
+        findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
+    }
+
+    public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
+        System.out.println("onActionFind");
+
+        this.findHighlightRanges = findHighlightRanges;
+        if (findHighlightRanges.size() != 0) {
+            currentFindRangeIndex = 0;
+            int[] range = findHighlightRanges.get(0);
+            codeArea.selectRange(range[0], range[1]);
+        }
+    }
+
+    public void onActionUp() {
+        int[] range;
+        if(findHighlightRanges.size() != 0) {
+            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+            if(currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
+                currentFindRangeIndex++;
+                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                range = findHighlightRanges.get(currentFindRangeIndex);
+                codeArea.selectRange(range[0], range[1]);
+            }
+        }
+    }
+
+    public  void onActionDown() {
+        int[] range;
+        if(findHighlightRanges.size() != 0) {
+            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+            if(currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
+                currentFindRangeIndex--;
+                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                range = findHighlightRanges.get(currentFindRangeIndex);
+                codeArea.selectRange(range[0], range[1]);
+            }
+        }
+    }
+
+    public void onActionFindAndReplace(String find, String replace) {
+        System.out.println("BTW find: " + find);
+        System.out.println("BTW replace: " + replace);
+
+        String text = codeArea.getText();
+        Pattern p = Pattern.compile(find);
+        Matcher m = p.matcher(text);
+
+        StringBuffer sb = new StringBuffer();
+
+        int c = 0;
+        while (m.find()) {
+            m.appendReplacement(sb, replace);
+            c++;
+        }
+
+        System.out.println("count: " + c);
+
+        m.appendTail(sb);
+        System.out.println("sb: " + sb);
+
+        codeArea.replaceText(sb.toString());
     }
 }
