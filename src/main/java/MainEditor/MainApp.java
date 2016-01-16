@@ -1,9 +1,8 @@
 package MainEditor;
 
-import Editor.controller.EditorController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import SimulatorVisualizer.controller.SimulationEngine;
 import MainEditor.controller.ConfigurationController;
+import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -90,7 +89,7 @@ public class MainApp extends Application {
 
         SimulationEngine simEng = new SimulationEngine(envCon.getRegisters(), envCon.getMemory());
 
-        EditorController ediCon = new EditorController(envCon.getParser(), simEng);
+//        EditorController ediCon = new EditorController(envCon.getParser(), simEng);
 
         launch(args);
     }
