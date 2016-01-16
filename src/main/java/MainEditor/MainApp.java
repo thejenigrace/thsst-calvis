@@ -1,11 +1,8 @@
 package MainEditor;
 
-import Editor.controller.EditorController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import SimulatorVisualizer.controller.SimulationEngine;
 import MainEditor.controller.ConfigurationController;
 import MainEditor.controller.WorkspaceController;
-import SimulatorVisualizer.controller.SimulationEngine;
 import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -69,8 +66,8 @@ public class MainApp extends Application {
 
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
-//        primaryStage.setMaximized(true);
-//        primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
