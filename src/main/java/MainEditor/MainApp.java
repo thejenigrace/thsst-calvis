@@ -1,10 +1,7 @@
 package MainEditor;
 
-import Editor.controller.EditorController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;
-import SimulatorVisualizer.controller.SimulationEngine;
-import MainEditor.controller.ConfigurationController;
 import MainEditor.controller.WorkspaceController;
 import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
@@ -15,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -68,7 +64,8 @@ public class MainApp extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setResizable(true);
         primaryStage.show();
-        ShowTestEditor();
+
+        showTestEditor();
     }
 
     /**
@@ -109,7 +106,7 @@ public class MainApp extends Application {
         return configController;
     }
 
-    private void ShowTestEditor(){
+    private void showTestEditor(){
 
         EnvironmentConfigurator envCon = new EnvironmentConfigurator(configController.getConfigurationFilePath());
 
