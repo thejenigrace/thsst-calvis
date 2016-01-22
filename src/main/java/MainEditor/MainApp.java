@@ -1,10 +1,7 @@
 package MainEditor;
 
-import Editor.controller.SystemController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
-import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +17,9 @@ import java.io.IOException;
 public class MainApp extends Application {
 
     public static Stage primaryStage;
-    private FXMLLoader loader;
-    private Parent root;
-    private ConfigurationEnvironmentController configController;
+//    private FXMLLoader loader;
+//    private Parent root;
+    // private EnvironmentBuilder configController;
 
     /**
      * Method implemented by extending the class to Application.
@@ -32,8 +29,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("CALVIS Instruction Set Configuration");
-
+        this.primaryStage.setTitle("CALVIS Environment Configuration");
         initRootLayout();
     }
 
@@ -43,9 +39,22 @@ public class MainApp extends Application {
      */
     public void initRootLayout() throws IOException{
         loadPrimaryStageController();
+    }
+
+    public void loadPrimaryStageController() throws IOException {
+        EnvironmentConfigurator ec = new EnvironmentConfigurator();
+        ec.setMainApp(this);
+        ec.begin();
+
+        Parent root = ec.getParent();
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+
+//        Give the controller access to the main app
+//        configController = (EnvironmentBuilder)  loader.getController();
+//        configController.setMainApp(this);
+
     }
 
     /**
@@ -55,7 +64,7 @@ public class MainApp extends Application {
     public void showWorkspace() throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/workspace.fxml"));
         Parent workspaceLayout = (BorderPane) loader.load();
 
         WorkspaceController workspaceController = loader.getController();
@@ -66,8 +75,9 @@ public class MainApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
 
-        workspaceController.setEngine(buildEnvironment());
+       // workspaceController.setEngine(buildEnvironment());
         workspaceController.displayDefaultWindows();
+
     }
 
     /**
@@ -85,17 +95,21 @@ public class MainApp extends Application {
         return this.primaryStage;
     }
 
-    public void loadPrimaryStageController() throws IOException {
-        // Load root layout from fxml file
-        loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
-        root = (BorderPane) loader.load();
+//
+//    public EnvironmentBuilder getStageController(){
+//        return configController;
+//    }
 
-        // Give the controller access to the main app
-        configController = (ConfigurationEnvironmentController)  loader.getController();
-        configController.setMainApp(this);
-
-    }
+//    private SystemController buildEnvironment(){
+//        EnvironmentConfigurator envCon = new
+//                EnvironmentConfigurator(configController.getConfigurationFilePath());
+//        SimulationEngine simEng = new
+//                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
+//        SystemController ediCon = new
+//                SystemController(envCon.getParser(), simEng);
+//
+//        return ediCon;
+//    }
 
     /**
      * Main method to run the application.
@@ -105,18 +119,4 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    public ConfigurationEnvironmentController getStageController(){
-        return configController;
-    }
-
-    private SystemController buildEnvironment(){
-        EnvironmentConfigurator envCon = new
-                EnvironmentConfigurator(configController.getConfigurationFilePath());
-        SimulationEngine simEng = new
-                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
-        SystemController ediCon = new
-                SystemController(envCon.getParser(), simEng);
-
-        return ediCon;
-    }
 }

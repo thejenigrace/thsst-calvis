@@ -1,4 +1,4 @@
-package MainEditor.controller;
+package EnvironmentConfiguration.controller;
 
 import MainEditor.MainApp;
 import javafx.event.ActionEvent;
@@ -19,11 +19,13 @@ import java.util.ResourceBundle;
 /**
  * Created by Ivan on 12/29/2015.
  */
-public class ConfigurationEnvironmentController implements Initializable{
-    // Reference to the main application
+public class EnvironmentBuilder implements Initializable{
+
     private MainApp mainApp;
-    private FileChooser fileChooser = new FileChooser();
+    private EnvironmentConfigurator environmentConfigurator;
+    private FileChooser fileChooser;
     private FileChooser.ExtensionFilter extensionFilter;
+
     /**
      * Is called by the main application to give a reference back to itself.
      * @param mainApp
@@ -31,7 +33,9 @@ public class ConfigurationEnvironmentController implements Initializable{
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-    public ConfigurationEnvironmentController(){
+
+    public EnvironmentBuilder(){
+        fileChooser = new FileChooser();
         extensionFilter =  new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extensionFilter);
     }
@@ -93,8 +97,9 @@ public class ConfigurationEnvironmentController implements Initializable{
     @FXML
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
         mainApp.hidePrimaryStage();
-        if(verifyErrorConfigurationFiles())
-        mainApp.showWorkspace();
+        if(verifyErrorConfigurationFiles()) {
+           mainApp.showWorkspace();
+        }
     }
 
     @FXML
@@ -135,6 +140,7 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     private boolean verifyErrorConfigurationFiles(){
+
         return true;
     }
 }

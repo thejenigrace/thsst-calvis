@@ -6,17 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -30,15 +25,12 @@ import org.fxmisc.richtext.StyleSpansBuilder;
 
 import java.io.IOException;
 import java.net.URL;
-import java.awt.*;
 import java.io.*;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -46,7 +38,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.lang.Object;
 import javafx.stage.FileChooser;
 
 /**
@@ -224,7 +215,7 @@ public class WorkspaceController implements Initializable {
         );
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/registers.fxml"));
         Parent registersView = (SplitPane) loader.load();
 
        // SplitPane registersView = FXMLLoader.load(getClass().getResource("/fxml/registers.fxml"));
@@ -252,7 +243,7 @@ public class WorkspaceController implements Initializable {
                 80
         );
 
-        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/memory.fxml"));
+        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/MainAppEditor/memory.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(memoryView);
 
@@ -479,7 +470,7 @@ public class WorkspaceController implements Initializable {
     private void handleFind(ActionEvent event) throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/find.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/find.fxml"));
         Parent findView = (BorderPane) loader.load();
 
         Stage findDialogStage = new Stage();
@@ -502,7 +493,7 @@ public class WorkspaceController implements Initializable {
     private void handleFindAndReplace(ActionEvent event) throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/find_and_replace.fxml"));
         Parent findAndReplaceView = (BorderPane) loader.load();
 
         Stage findAndReplaceDialogStage = new Stage();
