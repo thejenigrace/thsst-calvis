@@ -1,10 +1,12 @@
 package MainEditor.controller;
 
+import Editor.controller.SystemController;
 import MainEditor.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.Initializable;
@@ -15,9 +17,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -60,11 +60,13 @@ public class WorkspaceController implements Initializable {
     private CodeArea codeArea;
     private ExecutorService executor;
 
-    private static final String[] KEYWORDS = new String[]{
+    private SystemController sysCon;
+
+    private static String[] KEYWORDS = new String[]{
             "mov", "lea"
     };
 
-    private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+    private static String KEYWORD_PATTERN;
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
     private static final String BRACKET_PATTERN = "\\[|\\]";
@@ -72,20 +74,41 @@ public class WorkspaceController implements Initializable {
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
 
-    private static final Pattern PATTERN = Pattern.compile(
-            "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-                    + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                    + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                    + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                    + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-                    + "|(?<STRING>" + STRING_PATTERN + ")"
-                    + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
-    );
+    private static Pattern PATTERN;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    public void setEngine(SystemController sysCon){
+        this.sysCon = sysCon;
+
+        // Get keywords for highlighting
+        this.KEYWORDS = sysCon.getKeywords();
+        this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+        this.PATTERN = Pattern.compile(
+                        "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
+                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
+                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+                        + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
+                        + "|(?<STRING>" + STRING_PATTERN + ")"
+                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+        );
+    }
+
+    public void displayDefaultWindows(){
+        newFile();
+        ActionEvent ae = new ActionEvent();
+        try {
+            handleMemoryWindow(ae);
+            handleRegistersWindow(ae);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
         Matcher matcher = PATTERN.matcher(text);
@@ -131,7 +154,7 @@ public class WorkspaceController implements Initializable {
     }
 
     //create text editor window
-    private void newFile() {
+    public void newFile() {
         Window w = initWindowProperties(
                 "Text Editor",
                 root.getWidth()/3-10,
@@ -150,7 +173,8 @@ public class WorkspaceController implements Initializable {
         w.getContentPane().getChildren().add(codeArea);
 
         // add the window to the canvas
-        root.getChildren().add(w);
+        root.setCenter(w);
+        //root.getChildren().add(w);
     }
 
     private void newFile(String fileName) {
@@ -172,7 +196,8 @@ public class WorkspaceController implements Initializable {
         w.getContentPane().getChildren().add(codeArea);
 
         // add the window to the canvas
-        root.getChildren().add(w);
+        root.setCenter(w);
+        //root.getChildren().add(w);
     }
 
     @FXML
@@ -198,11 +223,23 @@ public class WorkspaceController implements Initializable {
                 80
         );
 
-        SplitPane registersView = FXMLLoader.load(getClass().getResource("/fxml/registers.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
+        Parent registersView = (SplitPane) loader.load();
+
+       // SplitPane registersView = FXMLLoader.load(getClass().getResource("/fxml/registers.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(registersView);
 
-        root.getChildren().add(w);
+        root.setLeft(w);
+        //root.getChildren().add(w);
+
+        // Pass the current code in the text editor to FindDialogController
+        RegistersController registersController = loader.getController();
+
+      //  String[] registerKeywords = this.sysCon.getRegisterKeywords();
+
+
     }
 
     @FXML
@@ -219,7 +256,8 @@ public class WorkspaceController implements Initializable {
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(memoryView);
 
-        root.getChildren().add(w);
+        root.setRight(w);
+        //root.getChildren().add(w);
     }
 
     @FXML
@@ -233,7 +271,21 @@ public class WorkspaceController implements Initializable {
         );
 
         w.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+
+        //root.setBottom(w);
         root.getChildren().add(w);
+    }
+
+    /**
+     * Action for Play Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handlePlay(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            this.sysCon.play(codeArea.getText());
+        }
     }
 
     /**
@@ -243,7 +295,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleNewFile(ActionEvent event) {
-        if (codeArea.isVisible()) {
+        if (codeArea != null && codeArea.isVisible()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Do you want to create a new file?");

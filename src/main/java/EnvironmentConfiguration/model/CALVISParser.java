@@ -23,7 +23,7 @@ public class CALVISParser {
 	private RegisterList registers;
 	private Memory memory;
 	private Calculator calculator;
-	private HashMap<Integer, CALVISInstruction> mappedInstruction;
+	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers,
@@ -33,7 +33,7 @@ public class CALVISParser {
 		this.registers = registers;
 		this.memory = memory;
 		this.calculator = new Calculator(registers, memory);
-		this.mappedInstruction = new HashMap<Integer, CALVISInstruction>();
+		this.mappedInstruction = new HashMap<String, CALVISInstruction>();
 		this.lineNumber = 0;
 		
 		Iterator<String[]> instructionProductionRules = 
@@ -258,7 +258,8 @@ public class CALVISParser {
 					CALVISInstruction calvis = new CALVISInstruction(someInstruction,
 							tokenArr.toArray(), registers, memory);
 
-					mappedInstruction.put(lineNumber, calvis);
+					String instructionAdd = Integer.toHexString(lineNumber);
+					mappedInstruction.put(reformatAddress(instructionAdd), calvis);
 					lineNumber++;
 
 //					try {
@@ -396,14 +397,29 @@ public class CALVISParser {
 		return concatenateOrSubRules(list);
 	}
 
-	public HashMap<Integer, CALVISInstruction> parse(String code){
+	private String reformatAddress(String add){
+		String newAdd = add.toUpperCase();
+		for (int i = 0; i < (this.memory.MAX_ADDRESS_SIZE / 2) - add.length(); i++){
+			newAdd = "0" + newAdd;
+		}
+		return newAdd;
+	}
+
+	public HashMap<String, CALVISInstruction> parse(String code){
 		try {
-			mappedInstruction.clear();
-			exe.eval(code);
+			this.mappedInstruction.clear();
+			this.lineNumber = 0;
+			this.exe.eval(code);
 		} catch(Exception e){
 			System.out.println("Additional error messages: " + e.getMessage());
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return this.mappedInstruction;
 	}
+
+	public Iterator<String> getInstructionKeys() {
+		return this.instructions.getInstructionKeys();
+	}
+
+
 }

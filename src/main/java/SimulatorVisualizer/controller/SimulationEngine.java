@@ -20,14 +20,28 @@ public class SimulationEngine {
         this.memory = memory;
     }
 
-    public void beginSimulation(HashMap<Integer, CALVISInstruction> m){
-        HashMap<Integer, CALVISInstruction> map = m;
-        Iterator<Integer> keys = map.keySet().iterator();
-        while (keys.hasNext()){
-            System.out.println("hello");
-            Integer key = keys.next();
-            map.get(key).execute(); // EXECUTE THE CALVIS INSTRUCTION
-            registers.print();
+    public void beginSimulation(HashMap<String, CALVISInstruction> m){
+        HashMap<String, CALVISInstruction> map = m;
+        Iterator<String> keys = map.keySet().iterator();
+
+        while (map.containsKey(registers.get("EIP"))){
+            String currentLine = registers.get("EIP");
+            System.out.println("EIP: "+ currentLine);
+            map.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+            int value = Integer.parseInt(currentLine, 16);
+            value++;
+            registers.set("EIP", Integer.toHexString(value));
+
+            updateInterface();
         }
     }
+
+    public Iterator<String> getRegisterKeys(){
+        return this.registers.getRegisterKeys();
+    }
+
+    public void updateInterface(){
+        //registers
+    }
+
 }

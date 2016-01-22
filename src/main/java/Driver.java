@@ -6,7 +6,7 @@ public class Driver {
 //
 //		SimulationEngine simEng = new SimulationEngine(envCon.getRegisters(), envCon.getMemory());
 //
-//		EditorController ediCon = new EditorController(envCon.getParser(), simEng);
+//		SystemController ediCon = new SystemController(envCon.getParser(), simEng);
 		// 400 to 1FFFF
 		// String[] j = new String[4294967296];
 	}

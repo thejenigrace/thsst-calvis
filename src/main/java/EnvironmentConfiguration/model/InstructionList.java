@@ -93,4 +93,7 @@ public class InstructionList {
 		return this.grammarDefinition.iterator();
 	}
 
+	public Iterator<String> getInstructionKeys(){
+		return this.map.keySet().iterator();
+	}
 }

@@ -74,24 +74,24 @@
        <GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
            <children>
                <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Memory Configuration File" textAlignment="CENTER" GridPane.rowIndex="0" />
-               <ChoiceBox prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id = "memoryChoiceBox"/>
+               <ChoiceBox fx:id="memoryChoiceBox" prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                <Pane GridPane.columnIndex="2" GridPane.rowIndex="0">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="21.0" mnemonicParsing="false"  text="Locate" onAction="#handleLocateMemory"/>
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateMemory" prefHeight="26.0" prefWidth="51.0" text="Locate" />
                    </children>
                </Pane>
                <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Registers Configuration File" textAlignment="CENTER" GridPane.rowIndex="1" />
-               <ChoiceBox prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id = "registerChoiceBox"/>
+               <ChoiceBox fx:id="registerChoiceBox" prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Pane GridPane.columnIndex="2" GridPane.rowIndex="1">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="21.0" mnemonicParsing="false"  text="Locate" onAction="#handleLocateRegister"/>
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleLocateRegister" text="Locate" />
                    </children>
                </Pane>
                <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Instruction Configuration File" textAlignment="CENTER" GridPane.rowIndex="2" />
-               <ChoiceBox prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id = "instructionChoiceBox"/>
+               <ChoiceBox fx:id="instructionChoiceBox" prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <Pane GridPane.columnIndex="2" GridPane.rowIndex="2">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="21.0" mnemonicParsing="false"  text="Locate" onAction="#handleLocateInstruction" />
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateInstruction" text="Locate" />
                    </children>
                </Pane>
            </children>

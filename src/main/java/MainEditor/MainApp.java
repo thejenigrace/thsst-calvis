@@ -1,5 +1,6 @@
 package MainEditor;
 
+import Editor.controller.SystemController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
@@ -65,7 +66,8 @@ public class MainApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
 
-        showTestEditor();
+        workspaceController.setEngine(buildEnvironment());
+        workspaceController.displayDefaultWindows();
     }
 
     /**
@@ -92,6 +94,7 @@ public class MainApp extends Application {
         // Give the controller access to the main app
         configController = (ConfigurationEnvironmentController)  loader.getController();
         configController.setMainApp(this);
+
     }
 
     /**
@@ -106,12 +109,14 @@ public class MainApp extends Application {
         return configController;
     }
 
-    private void showTestEditor(){
+    private SystemController buildEnvironment(){
+        EnvironmentConfigurator envCon = new
+                EnvironmentConfigurator(configController.getConfigurationFilePath());
+        SimulationEngine simEng = new
+                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
+        SystemController ediCon = new
+                SystemController(envCon.getParser(), simEng);
 
-        EnvironmentConfigurator envCon = new EnvironmentConfigurator(configController.getConfigurationFilePath());
-
-        SimulationEngine simEng = new SimulationEngine(envCon.getRegisters(), envCon.getMemory());
-
-//        EditorController ediCon = new EditorController(envCon.getParser(), simEng);
+        return ediCon;
     }
 }

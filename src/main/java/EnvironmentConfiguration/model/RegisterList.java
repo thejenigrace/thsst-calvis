@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class RegisterList {
 	
@@ -94,11 +90,18 @@ public class RegisterList {
 //										+ " at row " + (lineCounter + 1));
 					}
 				}
-				//apply logic that if
-				
 				lineCounter++;
 			}
-			
+
+			// should check for register configuration errors...
+			for (String[] lookupEntry : this.lookup){
+				// if all source (mother) registers are existent
+				if ( !this.map.containsKey(lookupEntry[1]) ){
+					System.out.println("Register Configuration Error: " + lookupEntry[1] +
+					" does not exist.");
+					break;
+				}
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -118,7 +121,17 @@ public class RegisterList {
 	public Iterator<String[]> getRegisterList(){
 		return this.lookup.iterator();
 	}
-	
+
+	public Iterator<String> getRegisterKeys(){
+		List registerKeys = new ArrayList<>();
+		Iterator<String[]> iterator = getRegisterList();
+		while(iterator.hasNext()){
+			String regName = iterator.next()[0];
+			registerKeys.add(regName);
+		}
+		return registerKeys.iterator();
+	}
+
 	public EFlags getEFlags(){
 		return (EFlags) this.map.get("EFLAGS");
 	}
