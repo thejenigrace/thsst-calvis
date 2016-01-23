@@ -11,7 +11,7 @@ public class RegisterList {
 	private HashMap<String, Register> map;
 	private ArrayList<String[]> lookup;
 	static int MAX_SIZE = 32; //default is 32 bit registers
-
+	private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 	public RegisterList(String csvFile) {
 		
 		this.map = new HashMap<String, Register>();
@@ -29,19 +29,19 @@ public class RegisterList {
 
 			    // use comma as separator
 				String[] reg = line.split(cvsSplitBy);
-				
+
 				// trim every row just in case
 				for (int i = 0; i < reg.length; i++){
 					reg[i] = reg[i].trim();
 				}
-				
+
 //				System.out.println("EnvironmentConfiguration.model.Register [name= " + reg[0]
 //	                                 + " , source=" + reg[1] 
 //	                                 + " , size=" + reg[2]
 //	                                 + " , type=" + reg[3]		 
 //	                                 + " , start=" + reg[4]
 //	                                 + " , end=" + reg[5]+ "]");
-				
+
 				// we need to get the max register size listed in the csv file
 				int regSize = 0;
 				// don't get the table headers
@@ -69,8 +69,7 @@ public class RegisterList {
 					// add csv row to lookup table
 					this.lookup.add(reg);
 				}
-				
-				
+
 				// if a register is the source register itself
 				if ( reg[0].equals(reg[1]) ){
 					// populate register value with hex value of 0s depending on register size
@@ -90,17 +89,26 @@ public class RegisterList {
 //										+ " at row " + (lineCounter + 1));
 					}
 				}
+
 				lineCounter++;
 			}
 
 			// should check for register configuration errors...
+			int index = 1;
+			boolean isFoundError = true;
 			for (String[] lookupEntry : this.lookup){
+
 				// if all source (mother) registers are existent
 				if ( !this.map.containsKey(lookupEntry[1]) ){
-					System.out.println("Register Configuration Error: " + lookupEntry[1] +
-					" does not exist.");
-					break;
+					if(isFoundError) {
+						errorMessages.add(new ErrorMessage("register list error", "Error at Configuration file - Register List"));
+						isFoundError = false;
+					}
+					System.out.println("Register Configuration Error: " + lookupEntry[1] + "does not exist At line " + index);
+					errorMessages.add(new ErrorMessage("register list error", "Register Configuration Error: " + lookupEntry[1] + "does not exist At line " + index + "\n"));
 				}
+				index++;
+				//System.out.println("sdadsad");
 			}
 
 		} catch (FileNotFoundException e) {
@@ -117,7 +125,7 @@ public class RegisterList {
 			}
 		}
 	}
-	
+
 	public Iterator<String[]> getRegisterList(){
 		return this.lookup.iterator();
 	}
@@ -260,5 +268,9 @@ public class RegisterList {
 			Map.Entry<String, Register> x = ite.next();
 				System.out.println(x);
 		}
+	}
+
+	public ArrayList<ErrorMessage> getErrorMessages(){
+		return errorMessages;
 	}
 }

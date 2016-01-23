@@ -1,9 +1,6 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.CALVISParser;
-import EnvironmentConfiguration.model.InstructionList;
-import EnvironmentConfiguration.model.Memory;
-import EnvironmentConfiguration.model.RegisterList;
+import EnvironmentConfiguration.model.*;
 
 import java.util.ArrayList;
 
@@ -16,6 +13,7 @@ public class EnvironmentConfigurator {
     private Memory memory;
     private RegisterList registers;
     private InstructionList instructions;
+    private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 
     public EnvironmentConfigurator(ArrayList<String> filepaths){
         // 1. Setup the environment
@@ -23,8 +21,13 @@ public class EnvironmentConfigurator {
         this.registers = new RegisterList(filepaths.get(1));
         this.instructions = new InstructionList(filepaths.get(2));
 
+        //1.5 check for errors
+        errorMessages.addAll(this.registers.getErrorMessages());
+
         // 2. Create the CALVISParser based on the environment
         this.p = new CALVISParser(instructions, registers, memory);
+
+
     }
 
     public CALVISParser getParser(){
@@ -41,6 +44,10 @@ public class EnvironmentConfigurator {
 
     public InstructionList getInstructions(){
         return this.instructions;
+    }
+
+    public ArrayList<ErrorMessage> getErrorMessages(){
+        return errorMessages;
     }
 
 }

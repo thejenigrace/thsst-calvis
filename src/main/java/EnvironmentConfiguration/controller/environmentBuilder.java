@@ -2,6 +2,7 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.controller.VerifierController;
+import EnvironmentConfiguration.model.ErrorMessage;
 import MainEditor.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class ConfigurationEnvironmentController implements Initializable{
     private VerifierController verifierController = new VerifierController();
     private FileChooser fileChooser = new FileChooser();
     private FileChooser.ExtensionFilter extensionFilter;
+    private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+
     /**
      * Is called by the main application to give a reference back to itself.
      * @param mainApp
@@ -95,9 +98,13 @@ public class ConfigurationEnvironmentController implements Initializable{
 
     @FXML
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
-        mainApp.hidePrimaryStage();
-        if(verifyErrorConfigurationFiles())
-            mainApp.showWorkspace(new EnvironmentConfigurator(getConfigurationFilePath()));
+        EnvironmentConfigurator environmentConfigurator = new EnvironmentConfigurator(getConfigurationFilePath());
+        errorMessages.addAll(verifierController.checkFileNotFoundMessage(getConfigurationFilePath()));
+        errorMessages.addAll(environmentConfigurator.getErrorMessages());
+        if(verifyErrorConfigurationFiles(errorMessages)) {
+            mainApp.hidePrimaryStage();
+            mainApp.showWorkspace(environmentConfigurator);
+        }
     }
 
     @FXML
@@ -137,13 +144,11 @@ public class ConfigurationEnvironmentController implements Initializable{
         return ConfigurationFilePaths;
     }
 
-    private boolean verifyErrorConfigurationFiles(){
-        boolean isError = verifierController.verify(getConfigurationFilePath());
-        if(isError)
+    private boolean verifyErrorConfigurationFiles(ArrayList<ErrorMessage> errorMessages){
+        if(errorMessages.size() <= 0)
             return true;
         else{
-            verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
-            verifierController.showErrorList();
+            verifierController.showErrorList(errorMessages);
         }
         return false;
     }
