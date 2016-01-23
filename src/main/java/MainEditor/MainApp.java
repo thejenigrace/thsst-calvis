@@ -1,6 +1,6 @@
 package MainEditor;
 
-import Editor.controller.SystemController;
+import MainEditor.controller.SystemController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
@@ -58,16 +58,18 @@ public class MainApp extends Application {
         loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
         Parent workspaceLayout = (BorderPane) loader.load();
 
-        WorkspaceController workspaceController = loader.getController();
-
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
         primaryStage.setMaximized(true);
         primaryStage.setResizable(true);
         primaryStage.show();
 
-        workspaceController.setEngine(buildEnvironment());
+        WorkspaceController workspaceController = loader.getController();
         workspaceController.displayDefaultWindows();
+        workspaceController.setEngine(buildEnvironment());
+
+//        EnvironmentConfigurator environment = ec;
+//        workspaceController.buildSystem(environment);
     }
 
     /**
@@ -103,10 +105,6 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public ConfigurationEnvironmentController getStageController(){
-        return configController;
     }
 
     private SystemController buildEnvironment(){

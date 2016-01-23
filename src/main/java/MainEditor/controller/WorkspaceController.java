@@ -1,22 +1,18 @@
 package MainEditor.controller;
 
-import Editor.controller.SystemController;
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.MainApp;
+import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -30,15 +26,12 @@ import org.fxmisc.richtext.StyleSpansBuilder;
 
 import java.io.IOException;
 import java.net.URL;
-import java.awt.*;
 import java.io.*;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -46,7 +39,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.lang.Object;
 import javafx.stage.FileChooser;
 
 /**
@@ -62,23 +54,45 @@ public class WorkspaceController implements Initializable {
 
     private SystemController sysCon;
 
-    private static String[] KEYWORDS = new String[]{
-            "mov", "lea"
-    };
-
-    private static String KEYWORD_PATTERN;
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
     private static final String BRACKET_PATTERN = "\\[|\\]";
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-
+    private static String[] KEYWORDS;
+    private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    /* Not in use yet
+     */
+    public void buildSystem(EnvironmentConfigurator env){
+        SimulationEngine se = new SimulationEngine(env.getRegisters(),env.getMemory());
+        this.sysCon = new SystemController(env.getParser(),se);
+        //1. Set the Code Environment
+        setCodeEnvironment(env);
+
+        // Get keywords for highlighting
+
+    }
+
+    public void setCodeEnvironment(EnvironmentConfigurator env){
+        this.KEYWORDS = sysCon.getKeywords();
+        this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+        this.PATTERN = Pattern.compile(
+                "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
+                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
+                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+                        + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
+                        + "|(?<STRING>" + STRING_PATTERN + ")"
+                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+        );
     }
 
     public void setEngine(SystemController sysCon){

@@ -1,4 +1,4 @@
-package Editor.controller;
+package MainEditor.controller;
 
 import EnvironmentConfiguration.model.CALVISInstruction;
 import EnvironmentConfiguration.model.CALVISParser;
@@ -33,19 +33,15 @@ public class SystemController {
         List<String> keywordsList = new ArrayList<>();
 
         Iterator<String> registerIterator = sim.getRegisterKeys();
-        Iterator<String> instructionIterator = parser.getInstructionKeys();
+       // Iterator<String> instructionIterator = parser.getInstructionKeys();
 
         populateKeywords(keywordsList, registerIterator);
-        populateKeywords(keywordsList, instructionIterator);
+       // populateKeywords(keywordsList, instructionIterator);
 
         String[] keywordsArray = new String[keywordsList.size()];
         keywordsArray = keywordsList.toArray(keywordsArray);
         return keywordsArray;
     }
-
-//    public List<> getRegisters(){
-//        this
-//    }
 
     private void populateKeywords(List keywordsList, Iterator<String> iterator){
         while (iterator.hasNext()){

@@ -15,17 +15,15 @@ public class EnvironmentConfigurator {
     private CALVISParser p;
     private Memory memory;
     private RegisterList registers;
+    private InstructionList instructions;
 
     public EnvironmentConfigurator(ArrayList<String> filepaths){
         // 1. Setup the environment
         this.memory = new Memory(16, filepaths.get(0));
         this.registers = new RegisterList(filepaths.get(1));
-        InstructionList instructions = new InstructionList(filepaths.get(2));
+        this.instructions = new InstructionList(filepaths.get(2));
 
-        // 2. Create the EnvironmentConfiguration.model.CALVISParser with Dynamic Grammar from
-        // the list of instructions and list of registers
-        // include the memory to bind instruction actions
-
+        // 2. Create the CALVISParser based on the environment
         this.p = new CALVISParser(instructions, registers, memory);
     }
 
@@ -39,6 +37,10 @@ public class EnvironmentConfigurator {
 
     public RegisterList getRegisters() {
         return this.registers;
+    }
+
+    public InstructionList getInstructions(){
+        return this.instructions;
     }
 
 }
