@@ -4,13 +4,8 @@ import EnvironmentConfiguration.model.CALVISParser;
 import EnvironmentConfiguration.model.InstructionList;
 import EnvironmentConfiguration.model.Memory;
 import EnvironmentConfiguration.model.RegisterList;
-import MainEditor.MainApp;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -20,38 +15,16 @@ public class EnvironmentConfigurator {
     private CALVISParser p;
     private Memory memory;
     private RegisterList registers;
+    private InstructionList instructions;
 
-    private MainApp mainApp;
-    private Parent root;
+    public EnvironmentConfigurator(ArrayList<String> filepaths){
+        // 1. Setup the environment
+        this.memory = new Memory(16, filepaths.get(0));
+        this.registers = new RegisterList(filepaths.get(1));
+        this.instructions = new InstructionList(filepaths.get(2));
 
-    public EnvironmentConfigurator() throws IOException {
-//        // 1. Setup the environment
-//        this.memory = new Memory(16, filepaths.get(0));
-//        this.registers = new RegisterList(filepaths.get(1));
-//        InstructionList instructions = new InstructionList(filepaths.get(2));
-//
-//        // 2. Create the EnvironmentConfiguration.model.CALVISParser with Dynamic Grammar from
-//        // the list of instructions and list of registers
-//        // include the memory to bind instruction actions
-//
-//        this.p = new CALVISParser(instructions, registers, memory);
-    }
-
-    private void createEnvironmentBuilder() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/EnvironmentConfiguration/environmentBuilder.fxml"));
-        root = (BorderPane) loader.load();
-
-        EnvironmentBuilder eb = loader.getController();
-        eb.setMainApp(mainApp);
-    }
-
-    public void begin() throws IOException {
-        createEnvironmentBuilder();
-    }
-
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+        // 2. Create the CALVISParser based on the environment
+        this.p = new CALVISParser(instructions, registers, memory);
     }
 
     public CALVISParser getParser(){
@@ -66,7 +39,8 @@ public class EnvironmentConfigurator {
         return this.registers;
     }
 
-    public Parent getParent() {
-        return this.root;
+    public InstructionList getInstructions(){
+        return this.instructions;
     }
+
 }

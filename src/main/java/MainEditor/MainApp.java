@@ -1,7 +1,10 @@
 package MainEditor;
 
+import MainEditor.controller.SystemController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
+import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +20,9 @@ import java.io.IOException;
 public class MainApp extends Application {
 
     public static Stage primaryStage;
-//    private FXMLLoader loader;
-//    private Parent root;
-    // private EnvironmentBuilder configController;
+    private FXMLLoader loader;
+    private Parent root;
+    private ConfigurationEnvironmentController configController;
 
     /**
      * Method implemented by extending the class to Application.
@@ -29,7 +32,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("CALVIS Environment Configuration");
+        this.primaryStage.setTitle("CALVIS Instruction Set Configuration");
+
         initRootLayout();
     }
 
@@ -39,22 +43,9 @@ public class MainApp extends Application {
      */
     public void initRootLayout() throws IOException{
         loadPrimaryStageController();
-    }
-
-    public void loadPrimaryStageController() throws IOException {
-        EnvironmentConfigurator ec = new EnvironmentConfigurator();
-        ec.setMainApp(this);
-        ec.begin();
-
-        Parent root = ec.getParent();
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-
-//        Give the controller access to the main app
-//        configController = (EnvironmentBuilder)  loader.getController();
-//        configController.setMainApp(this);
-
     }
 
     /**
@@ -64,10 +55,8 @@ public class MainApp extends Application {
     public void showWorkspace() throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/workspace.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
         Parent workspaceLayout = (BorderPane) loader.load();
-
-        WorkspaceController workspaceController = loader.getController();
 
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
@@ -75,9 +64,12 @@ public class MainApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
 
-       // workspaceController.setEngine(buildEnvironment());
+        WorkspaceController workspaceController = loader.getController();
         workspaceController.displayDefaultWindows();
+        workspaceController.setEngine(buildEnvironment());
 
+//        EnvironmentConfigurator environment = ec;
+//        workspaceController.buildSystem(environment);
     }
 
     /**
@@ -95,21 +87,17 @@ public class MainApp extends Application {
         return this.primaryStage;
     }
 
-//
-//    public EnvironmentBuilder getStageController(){
-//        return configController;
-//    }
+    public void loadPrimaryStageController() throws IOException {
+        // Load root layout from fxml file
+        loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
+        root = (BorderPane) loader.load();
 
-//    private SystemController buildEnvironment(){
-//        EnvironmentConfigurator envCon = new
-//                EnvironmentConfigurator(configController.getConfigurationFilePath());
-//        SimulationEngine simEng = new
-//                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
-//        SystemController ediCon = new
-//                SystemController(envCon.getParser(), simEng);
-//
-//        return ediCon;
-//    }
+        // Give the controller access to the main app
+        configController = (ConfigurationEnvironmentController)  loader.getController();
+        configController.setMainApp(this);
+
+    }
 
     /**
      * Main method to run the application.
@@ -119,4 +107,14 @@ public class MainApp extends Application {
         launch(args);
     }
 
+    private SystemController buildEnvironment(){
+        EnvironmentConfigurator envCon = new
+                EnvironmentConfigurator(configController.getConfigurationFilePath());
+        SimulationEngine simEng = new
+                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
+        SystemController ediCon = new
+                SystemController(envCon.getParser(), simEng);
+
+        return ediCon;
+    }
 }

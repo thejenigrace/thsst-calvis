@@ -1,7 +1,8 @@
 package MainEditor.controller;
 
-import Editor.controller.SystemController;
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.MainApp;
+import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,23 +54,45 @@ public class WorkspaceController implements Initializable {
 
     private SystemController sysCon;
 
-    private static String[] KEYWORDS = new String[]{
-            "mov", "lea"
-    };
-
-    private static String KEYWORD_PATTERN;
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
     private static final String BRACKET_PATTERN = "\\[|\\]";
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-
+    private static String[] KEYWORDS;
+    private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    /* Not in use yet
+     */
+    public void buildSystem(EnvironmentConfigurator env){
+        SimulationEngine se = new SimulationEngine(env.getRegisters(),env.getMemory());
+        this.sysCon = new SystemController(env.getParser(),se);
+        //1. Set the Code Environment
+        setCodeEnvironment(env);
+
+        // Get keywords for highlighting
+
+    }
+
+    public void setCodeEnvironment(EnvironmentConfigurator env){
+        this.KEYWORDS = sysCon.getKeywords();
+        this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+        this.PATTERN = Pattern.compile(
+                "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
+                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
+                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+                        + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
+                        + "|(?<STRING>" + STRING_PATTERN + ")"
+                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+        );
     }
 
     public void setEngine(SystemController sysCon){

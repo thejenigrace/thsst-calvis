@@ -238,19 +238,10 @@ public class CALVISParser {
 
 				@Override
 				public Object act(Object[] args) {
-//					System.out.print("Performing action: " + args.length + args.toString());
-//					for (int i = 0; i < args.length; i++){
-//						if ( args[i] instanceof EnvironmentConfiguration.model.Token)
-//							System.out.print(((EnvironmentConfiguration.model.Token) args[i]).getValue() + " ");
-//						else
-//							System.out.print(args[i].toString() + " ");
-//					}
-//					System.out.println();
-//					registers.print();
-
 					int numParameters = args.length / 2;
 					Instruction someInstruction = instructions.getInstruction(args[0].toString());
 					ArrayList<Token> tokenArr = new ArrayList<Token>();
+
 					for (int i = 0; i < numParameters; i++) {
 						tokenArr.add((Token) args[i*2+1]);
 					}
@@ -262,29 +253,6 @@ public class CALVISParser {
 					mappedInstruction.put(reformatAddress(instructionAdd), calvis);
 					lineNumber++;
 
-//					try {
-//						switch(numParameters){
-//							case 0: someInstruction.execute(registers, memory);
-//									break;
-//							case 1: someInstruction.execute((EnvironmentConfiguration.model.Token) args[1],
-//															registers, memory);
-//									break;
-//							case 2: someInstruction.execute((EnvironmentConfiguration.model.Token) args[1],
-//															(EnvironmentConfiguration.model.Token) args[3],
-//															registers, memory);
-//									break;
-//							case 3: someInstruction.execute((EnvironmentConfiguration.model.Token) args[1],
-//															(EnvironmentConfiguration.model.Token) args[3],
-//															(EnvironmentConfiguration.model.Token) args[5],
-//															registers, memory);
-//									break;
-//						}
-//					} catch (Exception e){
-//						System.out.println("FATAL ERROR: " + e.getCause());
-//						e.printStackTrace();
-//						//System.out.println("Caused by: " + ((EvalError) e.getCause()) );
-//						// + " [" + ((EvalError) e.getCause()).getErrorSourceFile() + "] {" + ((EvalError) e.getCause()).getErrorText());
-//					}
 					return null;
 				}
 			});
@@ -323,7 +291,7 @@ public class CALVISParser {
 		ArrayList<Element> list = new ArrayList<Element>();
 		while (keys.hasNext()){
 			String key = keys.next();
-			// we dont want duplicates, so just get registers depending on size.
+			// we don't want duplicates, so just get registers depending on size.
 			if ( Integer.parseInt(key) > 4){ 
 				Element temp = getRegisterElements(key);
 				list.add(temp);
@@ -354,20 +322,15 @@ public class CALVISParser {
 				
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
-					producedList.get(i).setAction(new Action<Object>(){
-
-						@Override
-						public Token act(Object arg0) {
-							if ( arg0 instanceof Token){
-								return (Token) arg0;
-							}
-							if ( arg0.toString().contains("0x")){
-								return new Token(Token.hex, (String) arg0);
-							}
-							return new Token(Token.reg, (String) arg0);
-						}
-						
-					});
+					producedList.get(i).setAction((Action<Object>) arg0 -> {
+                        if ( arg0 instanceof Token){
+                            return (Token) arg0;
+                        }
+                        if ( arg0.toString().contains("0x")){
+                            return new Token(Token.hex, (String) arg0);
+                        }
+                        return new Token(Token.reg, (String) arg0);
+                    });
 				}
 				return osb;
 			}
@@ -411,15 +374,10 @@ public class CALVISParser {
 			this.lineNumber = 0;
 			this.exe.eval(code);
 		} catch(Exception e){
-			System.out.println("Additional error messages: " + e.getMessage());
+			System.out.println("CALVIS Parsing error message: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return this.mappedInstruction;
 	}
-
-	public Iterator<String> getInstructionKeys() {
-		return this.instructions.getInstructionKeys();
-	}
-
 
 }
