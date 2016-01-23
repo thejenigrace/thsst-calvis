@@ -1,5 +1,7 @@
 package MainEditor.controller;
 
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import EnvironmentConfiguration.controller.VerifierController;
 import MainEditor.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 public class ConfigurationEnvironmentController implements Initializable{
     // Reference to the main application
     private MainApp mainApp;
+    private VerifierController verifierController = new VerifierController();
     private FileChooser fileChooser = new FileChooser();
     private FileChooser.ExtensionFilter extensionFilter;
     /**
@@ -94,7 +97,7 @@ public class ConfigurationEnvironmentController implements Initializable{
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
         mainApp.hidePrimaryStage();
         if(verifyErrorConfigurationFiles())
-        mainApp.showWorkspace();
+            mainApp.showWorkspace(new EnvironmentConfigurator(getConfigurationFilePath()));
     }
 
     @FXML
@@ -135,6 +138,13 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     private boolean verifyErrorConfigurationFiles(){
-        return true;
+        boolean isError = verifierController.verify(getConfigurationFilePath());
+        if(isError)
+            return true;
+        else{
+            verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
+            verifierController.showErrorList();
+        }
+        return false;
     }
 }
