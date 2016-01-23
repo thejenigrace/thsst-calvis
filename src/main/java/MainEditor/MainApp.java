@@ -66,7 +66,7 @@ public class MainApp extends Application {
 
         WorkspaceController workspaceController = loader.getController();
         workspaceController.displayDefaultWindows();
-        workspaceController.setEngine(buildEnvironment());
+        //workspaceController.setEngine(buildEnvironment());
 
 //        EnvironmentConfigurator environment = ec;
 //        workspaceController.buildSystem(environment);
@@ -107,14 +107,4 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    private SystemController buildEnvironment(){
-        EnvironmentConfigurator envCon = new
-                EnvironmentConfigurator(configController.getConfigurationFilePath());
-        SimulationEngine simEng = new
-                SimulationEngine(envCon.getRegisters(), envCon.getMemory());
-        SystemController ediCon = new
-                SystemController(envCon.getParser(), simEng);
-
-        return ediCon;
-    }
 }
