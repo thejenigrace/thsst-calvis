@@ -52,7 +52,7 @@ public class MainApp extends Application {
      * Opens a stage to show CALVIS workspace.
      * @throws IOException
      */
-    public void showWorkspace() throws IOException {
+    public void showWorkspace(EnvironmentConfigurator environmentConfigurator) throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));

@@ -1,5 +1,7 @@
-package EnvironmentConfiguration.controller;
+package MainEditor.controller;
 
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import EnvironmentConfiguration.controller.VerifierController;
 import MainEditor.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,13 +21,12 @@ import java.util.ResourceBundle;
 /**
  * Created by Ivan on 12/29/2015.
  */
-public class EnvironmentBuilder implements Initializable{
-
+public class ConfigurationEnvironmentController implements Initializable{
+    // Reference to the main application
     private MainApp mainApp;
-    private EnvironmentConfigurator environmentConfigurator;
-    private FileChooser fileChooser;
+    private VerifierController verifierController = new VerifierController();
+    private FileChooser fileChooser = new FileChooser();
     private FileChooser.ExtensionFilter extensionFilter;
-
     /**
      * Is called by the main application to give a reference back to itself.
      * @param mainApp
@@ -33,9 +34,7 @@ public class EnvironmentBuilder implements Initializable{
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
-    public EnvironmentBuilder(){
-        fileChooser = new FileChooser();
+    public ConfigurationEnvironmentController(){
         extensionFilter =  new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extensionFilter);
     }
@@ -97,9 +96,8 @@ public class EnvironmentBuilder implements Initializable{
     @FXML
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
         mainApp.hidePrimaryStage();
-        if(verifyErrorConfigurationFiles()) {
-           mainApp.showWorkspace();
-        }
+        if(verifyErrorConfigurationFiles())
+            mainApp.showWorkspace(new EnvironmentConfigurator(getConfigurationFilePath()));
     }
 
     @FXML
@@ -140,7 +138,13 @@ public class EnvironmentBuilder implements Initializable{
     }
 
     private boolean verifyErrorConfigurationFiles(){
-
-        return true;
+        boolean isError = verifierController.verify(getConfigurationFilePath());
+        if(isError)
+            return true;
+        else{
+            verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
+            verifierController.showErrorList();
+        }
+        return false;
     }
 }
