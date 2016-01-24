@@ -1,10 +1,9 @@
 package MainEditor;
 
-import MainEditor.controller.SystemController;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
-import SimulatorVisualizer.controller.SimulationEngine;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -65,11 +64,9 @@ public class MainApp extends Application {
         primaryStage.show();
 
         WorkspaceController workspaceController = loader.getController();
+        EnvironmentConfigurator environment = environmentConfigurator;
+        workspaceController.buildSystem(environment);
         workspaceController.displayDefaultWindows();
-        //workspaceController.setEngine(buildEnvironment());
-
-//        EnvironmentConfigurator environment = ec;
-//        workspaceController.buildSystem(environment);
     }
 
     /**

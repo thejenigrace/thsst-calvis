@@ -6,14 +6,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+
 public class RegisterList {
-	
+
+	static int MAX_SIZE = 32; //default is 32 bit registers
+
+	private static final int NAME = 0;
+	private static final int SOURCE = 1;
+	private static final int SIZE = 2;
+	private static final int TYPE = 3;
+	private static final int START = 4;
+	private static final int END = 5;
+
 	private HashMap<String, Register> map;
 	private ArrayList<String[]> lookup;
-	static int MAX_SIZE = 32; //default is 32 bit registers
 	private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+
 	public RegisterList(String csvFile) {
-		
 		this.map = new HashMap<String, Register>();
 		this.lookup = new ArrayList<String[]>();
 		
@@ -23,18 +32,14 @@ public class RegisterList {
 		int lineCounter = 0;
 			
 		try {
-
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
-
 			    // use comma as separator
 				String[] reg = line.split(cvsSplitBy);
-
 				// trim every row just in case
 				for (int i = 0; i < reg.length; i++){
 					reg[i] = reg[i].trim();
 				}
-
 //				System.out.println("EnvironmentConfiguration.model.Register [name= " + reg[0]
 //	                                 + " , source=" + reg[1] 
 //	                                 + " , size=" + reg[2]
@@ -46,12 +51,12 @@ public class RegisterList {
 				int regSize = 0;
 				// don't get the table headers
 				if ( lineCounter != 0 ){
-					regSize = Integer.parseInt(reg[2]);
+					regSize = Integer.parseInt(reg[SIZE]);
 					if ( MAX_SIZE < regSize )
 						MAX_SIZE = regSize;
 					
-					int startIndex = Integer.parseInt(reg[4]);
-					int endIndex = Integer.parseInt(reg[5]);
+					int startIndex = Integer.parseInt(reg[START]);
+					int endIndex = Integer.parseInt(reg[END]);
 					
 					// System.out.println(source.getValue().substring(startIndex, endIndex + 1));
 					
@@ -62,34 +67,28 @@ public class RegisterList {
 					// reverse order of indices
 					endIndex = (( RegisterList.MAX_SIZE / 4 ) - 1) - endIndex;
 					startIndex = (( RegisterList.MAX_SIZE / 4) - 1) - startIndex;
-					reg[4] = String.valueOf(endIndex);
-					reg[5] = String.valueOf(startIndex);
-					
-					reg[0] = reg[0].toUpperCase();
+					reg[START] = String.valueOf(endIndex);
+					reg[END] = String.valueOf(startIndex);
+					reg[NAME] = reg[NAME].toUpperCase();
 					// add csv row to lookup table
 					this.lookup.add(reg);
 				}
 
 				// if a register is the source register itself
-				if ( reg[0].equals(reg[1]) ){
-					// populate register value with hex value of 0s depending on register size
-					String regInitialValue = "";
-					for ( int zCount = 0; zCount < regSize / 4; zCount++ ){
-						regInitialValue += "0";
-					}
-					switch(reg[3]){
+				if ( reg[NAME].equals(reg[SOURCE]) ){
+					switch(reg[TYPE]){
 						case "1":
-						case "2":	Register g = new Register(regInitialValue, reg[1]);
-									this.map.put(reg[1], g);
+						case "2":	Register g = new Register(reg[NAME], regSize);
+									this.map.put(reg[NAME], g);
 									break;
-						case "4": 	EFlags e = new EFlags(regInitialValue.substring(1) + "2", reg[1]);
-									this.map.put(reg[1], e);
+						case "4": 	EFlags e = new EFlags(reg[NAME], regSize);
+									this.map.put(reg[NAME], e);
 									break;
-//						default:	System.out.println("Invalid EnvironmentConfiguration.model.Register Type: " + reg[3]
-//										+ " at row " + (lineCounter + 1));
+						default:	errorMessages.add(
+										new ErrorMessage("Register List Error",
+											"Invalid Register Type: " + reg[TYPE] + " at row " + (lineCounter + 1)));
 					}
 				}
-
 				lineCounter++;
 			}
 
@@ -101,19 +100,16 @@ public class RegisterList {
 				// if all source (mother) registers are existent
 				if ( !this.map.containsKey(lookupEntry[1]) ){
 					if(isFoundError) {
-						errorMessages.add(new ErrorMessage("register list error", "Error at Configuration file - Register List"));
+						errorMessages.add(new ErrorMessage("Register List Error", "Error at Configuration file - Register List"));
 						isFoundError = false;
 					}
-					System.out.println("Register Configuration Error: " + lookupEntry[1] + "does not exist At line " + index);
-					errorMessages.add(new ErrorMessage("register list error", "Register Configuration Error: " + lookupEntry[1] + "does not exist At line " + index + "\n"));
+					System.out.println("Register Configuration Error: " + lookupEntry[1] + "does not exist at line " + index);
+					errorMessages.add(new ErrorMessage("Register List Error", "Register Configuration Error: " + lookupEntry[1] + "does not exist at line " + index + "\n"));
 				}
 				index++;
-				//System.out.println("sdadsad");
 			}
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (br != null) {
@@ -130,6 +126,9 @@ public class RegisterList {
 		return this.lookup.iterator();
 	}
 
+	/*
+		getRegisterKeys() is used for getting all register names to be highlighted
+	 */
 	public Iterator<String> getRegisterKeys(){
 		List registerKeys = new ArrayList<>();
 		Iterator<String[]> iterator = getRegisterList();
@@ -144,86 +143,57 @@ public class RegisterList {
 		return (EFlags) this.map.get("EFLAGS");
 	}
 	
-	public boolean isExisting(String regname){
-		for (String[] x : this.lookup){
-			if ( x[0].equals(regname) ){
-				return true;
-			}
-		}
-		return false;
+	public boolean isExisting(String registerName){
+		return (find(registerName) != null) ;
 	}
 	
-	public int getSize(String regname){
-		return getSize(new Token(Token.reg, regname));
+	public int getSize(String registerName){
+		return getSize(new Token(Token.reg, registerName));
 	}
 	
 	public int getSize(Token a){
 		String key = a.getValue();
-		String size = "0";
-		for (String[] x : this.lookup){
-			//System.out.println(x[0] + "=" + key);
-			if ( x[0].equals(key) ){
-				size = x[2];
-				break;
-			}
-		}
+		String size;
+		size = find(key)[SIZE];
 		return Integer.parseInt(size);
 	}
 	
-	public String get(String regname){
-		return get(new Token(Token.reg, regname));
+	public String get(String registerName){
+		return get(new Token(Token.reg, registerName));
 	}
 	
 	public String get(Token a){
-		
 		// find the mother/source register
 		String key = a.getValue();
-		String[] register = null;
-		for (String[] x : this.lookup){
-			//System.out.println(x[0] + "=" + key);
-			if ( x[0].equals(key) ){
-				register = x;
-				break;
-			}
-		}
+		String[] register = find(key);
 		
 		// get the mother register
 		if ( isExisting(key) ) {
-			Register mother = this.map.get(register[1]);
-			int startIndex = Integer.parseInt(register[4]);
-			int endIndex = Integer.parseInt(register[5]);
-			
+			Register mother = this.map.get(register[SOURCE]);
+			int startIndex = Integer.parseInt(register[START]);
+			int endIndex = Integer.parseInt(register[END]);
 			// System.out.println(source.getValue().substring(startIndex, endIndex + 1));
-			
 			// return the indicated child register value
 			return mother.getValue().substring(startIndex, endIndex + 1);
 		} else {
 			System.out.println("ERROR: EnvironmentConfiguration.model.Register " + key + " does not exist.");
 		}
 		return null;
-		
 	}
 	
-	public void set(String regname, String hexString){
-		set(new Token(Token.reg, regname), hexString);
+	public void set(String registerName, String hexString){
+		set(new Token(Token.reg, registerName), hexString);
 	}
 	
 	public void set(Token a, String hexString){
 		String key = a.getValue();
-		String[] register = null;
-		
-		for (String[] x : this.lookup){
-			if ( x[0].equals(key) ){
-				register = x;
-				break;
-			}
-		}
+		String[] register = find(key);
 		
 		// get the mother register
 		
-		Register mother = this.map.get(register[1]);
-		int startIndex = Integer.parseInt(register[4]);
-		int endIndex = Integer.parseInt(register[5]);
+		Register mother = this.map.get(register[SOURCE]);
+		int startIndex = Integer.parseInt(register[START]);
+		int endIndex = Integer.parseInt(register[END]);
 		
 		//check for mismatch between parameter hexString and child register value		
 		String child = mother.getValue().substring(startIndex, endIndex + 1);
@@ -257,7 +227,7 @@ public class RegisterList {
 	public void clear(){
 		Iterator<String> keys = this.map.keySet().iterator();
 		while (keys.hasNext()){
-			this.map.get(keys.next()).setValue("");
+			this.map.get(keys.next()).initializeValue();
 		}
 	}
 	
@@ -268,6 +238,19 @@ public class RegisterList {
 			Map.Entry<String, Register> x = ite.next();
 				System.out.println(x);
 		}
+	}
+
+	public String[] find(String registerName){
+		for (String[] x : this.lookup){
+			if ( x[0].equals(registerName) ){
+				return x;
+			}
+		}
+		return null;
+	}
+
+	public Map getRegisterMap(){
+		return this.map;
 	}
 
 	public ArrayList<ErrorMessage> getErrorMessages(){

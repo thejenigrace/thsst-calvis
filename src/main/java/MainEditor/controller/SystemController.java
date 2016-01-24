@@ -1,13 +1,9 @@
 package MainEditor.controller;
 
-import EnvironmentConfiguration.model.CALVISInstruction;
-import EnvironmentConfiguration.model.CALVISParser;
-import SimulatorVisualizer.controller.SimulationEngine;
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import EnvironmentConfiguration.model.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -15,28 +11,67 @@ import java.util.List;
  */
 public class SystemController {
 
+    private EnvironmentConfigurator environment;
+    private RegisterList registerList;
+    private InstructionList instructionList;
+    private Memory memory;
     private CALVISParser parser;
-    private SimulationEngine sim;
+    private List<AssemblyComponent> observerList;
 
-    public SystemController(CALVISParser parser, SimulationEngine sim){
-        this.parser = parser;
-        this.sim = sim;
+    public SystemController(EnvironmentConfigurator ec){
+        this.environment = ec;
+        this.parser = environment.getParser();
+        this.registerList = environment.getRegisters();
+        this.instructionList = environment.getInstructions();
+        this.memory = environment.getMemory();
+        this.observerList = new ArrayList<>();
+    }
+
+    public void attach(AssemblyComponent observer){
+        observer.setSysCon(this);
+        observerList.add(observer);
+    }
+
+    public void notifyAllObservers(){
+        observerList.forEach(AssemblyComponent::update);
+    }
+
+    public RegisterList getRegisterState(){
+        return this.registerList;
     }
 
     public void play(String code) {
         System.out.println("Parsing: \n" + code);
         HashMap<String, CALVISInstruction> mappedInstruction = parser.parse(code);
-        sim.beginSimulation(mappedInstruction);
+        this.registerList.clear();
+        this.memory.clear();
+        beginSimulation(mappedInstruction);
+    }
+
+    private void beginSimulation(HashMap<String, CALVISInstruction> m){
+        HashMap<String, CALVISInstruction> map = m;
+        Iterator<String> keys = map.keySet().iterator();
+
+        while (map.containsKey(environment.getRegisters().get("EIP"))){
+            String currentLine = environment.getRegisters().get("EIP");
+            System.out.println("EIP: "+ currentLine);
+            map.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+            int value = Integer.parseInt(currentLine, 16);
+            value++;
+            environment.getRegisters().set("EIP", Integer.toHexString(value));
+
+            notifyAllObservers();
+        }
     }
 
     public String[] getKeywords(){
         List<String> keywordsList = new ArrayList<>();
 
-        Iterator<String> registerIterator = sim.getRegisterKeys();
-       // Iterator<String> instructionIterator = parser.getInstructionKeys();
+        Iterator<String> registerIterator = registerList.getRegisterKeys();
+        Iterator<String> instructionIterator = instructionList.getInstructionKeys();
 
         populateKeywords(keywordsList, registerIterator);
-       // populateKeywords(keywordsList, instructionIterator);
+        populateKeywords(keywordsList, instructionIterator);
 
         String[] keywordsArray = new String[keywordsList.size()];
         keywordsArray = keywordsList.toArray(keywordsArray);

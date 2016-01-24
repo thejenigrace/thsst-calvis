@@ -2,8 +2,14 @@ package EnvironmentConfiguration.model;
 
 public class EFlags extends Register {
 
-	public EFlags(String value, String name) {
-		super(value, name);
+	public EFlags(String name, int size) {
+		super(name, size);
+	}
+
+	@Override
+	public void initializeValue(){
+		super.initializeValue();
+		this.value = this.value.substring(1) + "2";
 	}
 	
 	public char getFlagIndex(int index){
