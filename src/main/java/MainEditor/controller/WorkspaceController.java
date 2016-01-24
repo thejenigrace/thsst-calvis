@@ -2,7 +2,6 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.MainApp;
-import SimulatorVisualizer.controller.SimulationEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,13 +71,12 @@ public class WorkspaceController implements Initializable {
     /* Not in use yet
      */
     public void buildSystem(EnvironmentConfigurator env){
-        SimulationEngine se = new SimulationEngine(env.getRegisters(),env.getMemory());
-        this.sysCon = new SystemController(env.getParser(),se);
-        //1. Set the Code Environment
+        this.sysCon = new SystemController(env);
+        /*
+            Set the code environment
+            This includes the keywords to be highlighted.
+         */
         setCodeEnvironment(env);
-
-        // Get keywords for highlighting
-
     }
 
     public void setCodeEnvironment(EnvironmentConfigurator env){
@@ -95,27 +93,10 @@ public class WorkspaceController implements Initializable {
         );
     }
 
-    public void setEngine(SystemController sysCon){
-        this.sysCon = sysCon;
-
-        // Get keywords for highlighting
-        this.KEYWORDS = sysCon.getKeywords();
-        this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
-        this.PATTERN = Pattern.compile(
-                        "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                        + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-                        + "|(?<STRING>" + STRING_PATTERN + ")"
-                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
-        );
-    }
-
     public void displayDefaultWindows(){
-        newFile();
         ActionEvent ae = new ActionEvent();
         try {
+            handleTextEditorWindow(ae);
             handleMemoryWindow(ae);
             handleRegistersWindow(ae);
         } catch (Exception e){
@@ -248,12 +229,10 @@ public class WorkspaceController implements Initializable {
         root.setLeft(w);
         //root.getChildren().add(w);
 
-        // Pass the current code in the text editor to FindDialogController
+        // Attach registersController to SystemController
         RegistersController registersController = loader.getController();
-
-      //  String[] registerKeywords = this.sysCon.getRegisterKeywords();
-
-
+        this.sysCon.attach(registersController);
+        registersController.build();
     }
 
     @FXML

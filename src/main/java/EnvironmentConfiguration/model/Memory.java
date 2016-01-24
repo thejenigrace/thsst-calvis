@@ -176,5 +176,12 @@ public class Memory {
 				System.out.println(x);
 		}
 	}
+
+	public void clear(){
+		Iterator<String> keys = this.mem.keySet().iterator();
+		while (keys.hasNext()){
+			this.mem.put((keys.next()), "00" );
+		}
+	}
 	
 }
