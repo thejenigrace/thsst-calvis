@@ -7,7 +7,7 @@
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0">
          <children>
-            <TableView fx:id="tableViewMemory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
                   <TableColumn fx:id="memoryAddress" prefWidth="140.0" text="Address" />
                   <TableColumn fx:id="memoryRepresentation" prefWidth="189.0" text="Representation" />

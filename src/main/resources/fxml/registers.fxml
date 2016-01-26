@@ -4,49 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<SplitPane dividerPositions="0.5" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.RegistersController">
+<SplitPane dividerPositions="0.85" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.RegistersController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
-            <children>
-                <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="0.0">
-                    <panes>
-                        <TitledPane fx:id="titledPaneRegisters" animated="true" collapsible="true" expanded="true"
-                                    text="Registers">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0">
-                                    <children>
-                                        <TableView fx:id="tableViewRegister" AnchorPane.bottomAnchor="0.0"
-                                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                   AnchorPane.topAnchor="0.0">
-                                            <columns>
-                                                <TableColumn fx:id="registerName" text="Registers"/>
-                                                <TableColumn fx:id="registerValue" text="Value"/>
-                                            </columns>
-                                        </TableView>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </TitledPane>
-                    </panes>
-                </Accordion>
-            </children>
-        </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
-            <children>
-                <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="0.0">
-                    <panes>
-                        <TitledPane fx:id="titledPaneFlags" animated="true" collapsible="true" expanded="true"
-                                    text="Flags">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0"/>
-                            </content>
-                        </TitledPane>
-                    </panes>
-                </Accordion>
-            </children>
-        </AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                  <children>
+                      <TableView fx:id="tableViewRegister" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="registerName" text="Registers" />
+                              <TableColumn fx:id="registerValue" text="Value" />
+                          </columns>
+                      </TableView>
+                  </children>
+              </AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0" />
     </items>
 </SplitPane>

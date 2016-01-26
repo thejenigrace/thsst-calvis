@@ -126,9 +126,9 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     private void initializeDefaultChoiceBoxes(){
-        memoryChoiceBox.getItems().add("Memory\\config.csv");
-        registerChoiceBox.getItems().add("Registers\\register_list.csv");
-        instructionChoiceBox.getItems().add("Instructions\\instruction_list.csv");
+        memoryChoiceBox.getItems().add("Memory/config.csv");
+        registerChoiceBox.getItems().add("Registers/register_list.csv");
+        instructionChoiceBox.getItems().add("Instructions/instruction_list.csv");
 
         memoryChoiceBox.getSelectionModel().selectFirst();
         registerChoiceBox.getSelectionModel().selectFirst();
