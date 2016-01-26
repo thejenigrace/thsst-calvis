@@ -2,7 +2,6 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.model.Register;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,12 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -45,6 +40,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
         titledPaneRegisters.setExpanded(true);
     }
 
+    @Override
     public void build(){
         Map map = this.sysCon.getRegisterState().getRegisterMap();
         ObservableList<Map.Entry<String, Register>> items = FXCollections.observableArrayList(map.entrySet());
@@ -56,3 +52,4 @@ public class RegistersController extends AssemblyComponent implements Initializa
         tableViewRegister.refresh();
     }
 }
+

@@ -1,7 +1,8 @@
-package MainEditor.controller;
+package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.model.*;
+import MainEditor.controller.AssemblyComponent;
 
 import java.util.*;
 
@@ -38,6 +39,10 @@ public class SystemController {
 
     public RegisterList getRegisterState(){
         return this.registerList;
+    }
+
+    public Memory getMemoryState(){
+        return this.memory;
     }
 
     public void play(String code) {

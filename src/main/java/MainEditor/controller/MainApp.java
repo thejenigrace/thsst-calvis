@@ -1,4 +1,4 @@
-package MainEditor;
+package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;

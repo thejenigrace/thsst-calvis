@@ -3,7 +3,6 @@ package MainEditor.controller;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.controller.VerifierController;
 import EnvironmentConfiguration.model.ErrorMessage;
-import MainEditor.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -126,9 +125,9 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     private void initializeDefaultChoiceBoxes(){
-        memoryChoiceBox.getItems().add("Memory\\config.csv");
-        registerChoiceBox.getItems().add("Registers\\register_list.csv");
-        instructionChoiceBox.getItems().add("Instructions\\instruction_list.csv");
+        memoryChoiceBox.getItems().add("Memory/config.csv");
+        registerChoiceBox.getItems().add("Registers/register_list.csv");
+        instructionChoiceBox.getItems().add("Instructions/instruction_list.csv");
 
         memoryChoiceBox.getSelectionModel().selectFirst();
         registerChoiceBox.getSelectionModel().selectFirst();

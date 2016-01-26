@@ -4,19 +4,24 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Memory {
-	
-	private HashMap<String, String> mem;
-    private ArrayList<String[]> lookup;
+
 	static int MAX_ADDRESS_SIZE;
-	
+
+	private TreeMap<String, String> mem;
+    private ArrayList<String[]> lookup;
+
 	public Memory(int bitSize, String csvFile){
         MAX_ADDRESS_SIZE = bitSize;
-        mem = new HashMap<>();
+        mem = new TreeMap<>();
         int maxMemoryAddress = (int) Math.pow(2, bitSize);
+
 		for ( int i = 0; i <= maxMemoryAddress; i++){
 			String address = reformatAddress(Integer.toHexString(i));
 			//mem.put(address, "00");
@@ -29,10 +34,9 @@ public class Memory {
         String cvsSplitBy = ",";
         int lineCounter = 0;
 
-        this.lookup = new ArrayList<String[]>();
+        this.lookup = new ArrayList<>();
 
         try {
-
             br = new BufferedReader(new FileReader(new File(csvFile)));
             while ((line = br.readLine()) != null) {
 
@@ -63,6 +67,10 @@ public class Memory {
             }
         }
 
+	}
+
+	public Map getMemoryMap(){
+		return this.mem;
 	}
 	
 	private String reformatAddress(String add){

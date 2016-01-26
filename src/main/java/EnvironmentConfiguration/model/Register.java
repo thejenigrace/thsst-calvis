@@ -13,8 +13,8 @@ public class Register {
 		initializeValue();
 	}
 
-	/*	initializeValue()
-	 	populates register value with hex value of 0s depending on size
+	/*	populates register value with hex value
+		of 0s depending on size
 	  */
 	public void initializeValue(){
 		String regInitialValue = "";

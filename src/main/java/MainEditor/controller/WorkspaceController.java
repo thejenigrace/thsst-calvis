@@ -1,7 +1,7 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import MainEditor.MainApp;
+import SimulatorVisualizer.controller.SystemController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,11 +76,11 @@ public class WorkspaceController implements Initializable {
             Set the code environment
             This includes the keywords to be highlighted.
          */
-        setCodeEnvironment(env);
+        setCodeEnvironment();
     }
 
-    public void setCodeEnvironment(EnvironmentConfigurator env){
-        this.KEYWORDS = sysCon.getKeywords();
+    public void setCodeEnvironment(){
+        this.KEYWORDS = this.sysCon.getKeywords();
         this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
         this.PATTERN = Pattern.compile(
                 "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
@@ -245,12 +245,21 @@ public class WorkspaceController implements Initializable {
                 80
         );
 
-        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/memory.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
+        Parent memoryView = (ScrollPane) loader.load();
+
+//        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/memory.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(memoryView);
 
         root.setRight(w);
         //root.getChildren().add(w);
+
+        // Attach registersController to SystemController
+        MemoryController memoryController = loader.getController();
+        this.sysCon.attach(memoryController);
+        memoryController.build();
     }
 
     @FXML
