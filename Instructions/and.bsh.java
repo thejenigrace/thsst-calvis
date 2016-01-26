@@ -1,5 +1,3 @@
-import EnvironmentConfiguration.model.Calculator;
-
  execute(des, src, registers, memory) {
  	Calculator calculator = new EnvironmentConfiguration.model.Calculator(registers, memory);
 
@@ -9,23 +7,24 @@ import EnvironmentConfiguration.model.Calculator;
  			String x = registers.get(src);
  			String y = registers.get(des);
 
+            String s = calculator.hexToBinary(x);
+            String d = calculator.hexToBinary(y);
 
- 			System.out.println("des: " + calculator.hexToBinary(y) + " src: " + calculator.hexToBinary(x));
- 			System.out.println("hello");
             String result = "";
-        /*
-      for (int i = 0; i < 32; i++) {
-        if (y.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
 
- 	  registers.set(des, result);
+        for (int i = 0; i < registers.getSize(des); i++) {
+            if (s.charAt(i) == '1' && d.charAt(i) == '1') {
+                result = result.concat("1");
+            }
+            else {
+                result = result.concat("0");
+            }
+        }
 
-        */
+		 result = calculator.binaryToHex(result);
+		 registers.set(des, result);
+
+
       //  EFlags flags = registers.getEflags();
       //  flags.setCarryFlag("0");
       /*
