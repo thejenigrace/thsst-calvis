@@ -32,9 +32,7 @@ public class Memory {
         String line;
         String cvsSplitBy = ",";
         int lineCounter = 0;
-
         this.lookup = new ArrayList<>();
-
         try {
             br = new BufferedReader(new FileReader(new File(csvFile)));
             while ((line = br.readLine()) != null) {
@@ -92,8 +90,7 @@ public class Memory {
             }
         }
 
-		write(baseAddr, value, offset); 
-		
+		write(baseAddr, value, offset);
 	}
 
 	public void write(Token baseAddrToken, String value, int offset){

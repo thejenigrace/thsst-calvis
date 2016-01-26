@@ -2,10 +2,12 @@ package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.model.*;
-import MainEditor.controller.AssemblyComponent;
+import MainEditor.model.AssemblyComponent;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
