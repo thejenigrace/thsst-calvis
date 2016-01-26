@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
 
 import java.net.URL;
 import java.util.Map;
@@ -35,7 +34,6 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 p -> new SimpleStringProperty(p.getValue().getKey()));
         registerValue.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue().toString()));
-        titledPaneRegisters.setExpanded(true);
     }
 
     @Override

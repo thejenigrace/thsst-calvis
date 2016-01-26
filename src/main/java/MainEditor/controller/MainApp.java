@@ -1,9 +1,7 @@
 package MainEditor.controller;
 
-import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import MainEditor.controller.ConfigurationEnvironmentController;
-import MainEditor.controller.WorkspaceController;
 import EnvironmentConfiguration.controller.ConfigurationEnvironmentController;
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
