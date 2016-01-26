@@ -289,6 +289,18 @@ public class WorkspaceController implements Initializable {
             this.sysCon.play(codeArea.getText());
         }
     }
+    /**
+     * Action for Stop Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleStop(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            this.sysCon.stop();
+        }
+
+    }
 
     /**
      * Action for New File; a MenuItem in File.

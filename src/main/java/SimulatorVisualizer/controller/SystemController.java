@@ -1,8 +1,13 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.*;
+import EnvironmentConfiguration.model.CALVISInstruction;
+import EnvironmentConfiguration.model.CALVISParser;
+import EnvironmentConfiguration.model.InstructionList;
+import EnvironmentConfiguration.model.Memory;
+import EnvironmentConfiguration.model.RegisterList;
 import MainEditor.model.AssemblyComponent;
+import SimulatorVisualizer.model.SimulationState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +19,16 @@ import java.util.List;
  */
 public class SystemController {
 
+    static long SIMULATION_DELAY = 1500;
+
     private EnvironmentConfigurator environment;
     private RegisterList registerList;
     private InstructionList instructionList;
     private Memory memory;
     private CALVISParser parser;
     private List<AssemblyComponent> observerList;
+    private SimulationState state;
+    private HashMap<String, CALVISInstruction> executionMap;
 
     public SystemController(EnvironmentConfigurator ec){
         this.environment = ec;
@@ -28,6 +37,7 @@ public class SystemController {
         this.instructionList = environment.getInstructions();
         this.memory = environment.getMemory();
         this.observerList = new ArrayList<>();
+        this.state = SimulationState.STOP;
     }
 
     public void attach(AssemblyComponent observer){
@@ -48,29 +58,64 @@ public class SystemController {
     }
 
     public void play(String code) {
-        System.out.println("Parsing: \n" + code);
-        HashMap<String, CALVISInstruction> mappedInstruction = parser.parse(code);
-        this.registerList.clear();
-        this.memory.clear();
-        beginSimulation(mappedInstruction);
-    }
-
-    private void beginSimulation(HashMap<String, CALVISInstruction> m){
-        HashMap<String, CALVISInstruction> map = m;
-        Iterator<String> keys = map.keySet().iterator();
-
-        while (map.containsKey(environment.getRegisters().get("EIP"))){
-            String currentLine = environment.getRegisters().get("EIP");
-            System.out.println("EIP: "+ currentLine);
-            map.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
-            int value = Integer.parseInt(currentLine, 16);
-            value++;
-            environment.getRegisters().set("EIP", Integer.toHexString(value));
-
-            notifyAllObservers();
+        switch (this.state){
+            case PLAY:
+                break;
+            case PAUSE:
+                break;
+            case STOP:
+                reset();
+                parse(code);
+                beginSimulation();
+                break;
         }
     }
 
+    public void pause() {
+        if ( this.state == SimulationState.PLAY ) {
+            this.state = SimulationState.PAUSE;
+        }
+    }
+
+    public void stop() {
+        this.state = SimulationState.STOP;
+    }
+
+    public void reset(){
+        this.registerList.clear();
+        this.memory.clear();
+        notifyAllObservers();
+    }
+
+    private void parse(String code){
+        executionMap = parser.parse(code);
+    }
+
+    private void beginSimulation(){
+        new Thread() {
+            public void run(){
+                while ((state == SimulationState.PLAY) &&
+                        executionMap.containsKey(environment.getRegisters().get("EIP"))){
+                    try {
+                        Thread.sleep(SIMULATION_DELAY);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    String currentLine = environment.getRegisters().get("EIP");
+                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+                    int value = Integer.parseInt(currentLine, 16);
+                    value++;
+                    environment.getRegisters().set("EIP", Integer.toHexString(value));
+                    notifyAllObservers();
+                }
+            }
+        }.start();
+
+    }
+
+    /** Method used to get the keywords
+     *  needed to be highlighted in the text editor
+     */
     public String[] getKeywords(){
         List<String> keywordsList = new ArrayList<>();
 
@@ -85,6 +130,9 @@ public class SystemController {
         return keywordsArray;
     }
 
+    /** Method used to populate @param keywordsList
+     *  with both upper case and lower case keywords from @param iterator
+     */
     private void populateKeywords(List keywordsList, Iterator<String> iterator){
         while (iterator.hasNext()){
             String key = iterator.next();
@@ -92,7 +140,5 @@ public class SystemController {
             keywordsList.add(key.toLowerCase());
         }
     }
-
-
 
 }
