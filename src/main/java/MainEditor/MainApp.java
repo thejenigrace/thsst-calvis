@@ -3,7 +3,6 @@ package MainEditor;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.controller.ConfigurationEnvironmentController;
 import MainEditor.controller.WorkspaceController;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,8 +58,8 @@ public class MainApp extends Application {
 
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(true);
+//        primaryStage.setMaximized(true);
+//        primaryStage.setResizable(true);
         primaryStage.show();
 
         WorkspaceController workspaceController = loader.getController();
