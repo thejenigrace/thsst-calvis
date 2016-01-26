@@ -23,11 +23,10 @@ public class Memory {
         int maxMemoryAddress = (int) Math.pow(2, bitSize);
 
 		for ( int i = 0; i <= maxMemoryAddress; i++){
-			String address = reformatAddress(Integer.toHexString(i));
-			//mem.put(address, "00");
-			mem.put(address, address.substring(3) + address.substring(3));
-		}		
-		//print("0000", "00FF");
+			String address = Memory.reformatAddress(Integer.toHexString(i));
+			mem.put(address, "00");
+			//mem.put(address, address.substring(3) + address.substring(3));
+		}
 
         BufferedReader br = null;
         String line;
@@ -39,20 +38,16 @@ public class Memory {
         try {
             br = new BufferedReader(new FileReader(new File(csvFile)));
             while ((line = br.readLine()) != null) {
-
                 // use comma as separator
                 String[] row = line.split(cvsSplitBy);
-
                 // trim every row just in case
                 for (int i = 0; i < row.length; i++) {
                     row[i] = row[i].trim();
                 }
-
                 if ( lineCounter != 0 ) {
                     this.lookup.add(row);
                    // System.out.println(" [Prefix = " + row[0] + ", Size = " + row[1] + "]");
                 }
-
                 lineCounter++;
             }
         } catch (Exception e) {
@@ -73,7 +68,7 @@ public class Memory {
 		return this.mem;
 	}
 	
-	private String reformatAddress(String add){
+	private static String reformatAddress(String add){
 		String newAdd = add.toUpperCase();
 		for (int i = 0; i < (MAX_ADDRESS_SIZE / 4) - add.length(); i++){
 			newAdd = "0" + newAdd;
@@ -96,13 +91,7 @@ public class Memory {
                 break;
             }
         }
-//		if ( des_value.contains("dword") )
-//			offset = 8;
-//		else if ( des_value.contains("word") )
-//			offset = 4;
-//		else if ( des_value.contains("byte") )
-//			offset = 2;
-		
+
 		write(baseAddr, value, offset); 
 		
 	}
@@ -116,7 +105,7 @@ public class Memory {
 			Integer inc;
 			inc = Integer.parseInt(baseAddr, 16);
 			for ( int i = 0; i < offset / 2; i++ ){
-				this.mem.put(reformatAddress(Integer.toHexString(inc)), 
+				this.mem.put(Memory.reformatAddress(Integer.toHexString(inc)),
 						value.substring((value.length() - 2) - (i*2) , value.length() - (i * 2) ));
 				inc++;
 			}
@@ -144,13 +133,6 @@ public class Memory {
                 break;
             }
         }
-//		if ( srcVal.contains("dword") )
-//			offset = 8;
-//		else if ( srcVal.contains("word") )
-//			offset = 4;
-//		else if ( srcVal.contains("byte") )
-//			offset = 2;
-		
 		return read(baseAddr, offset); 
 	}
 	
@@ -160,10 +142,9 @@ public class Memory {
 	
 	public String read(String baseAddr, int offset){
 		String result = "";
-		Integer inc = new Integer(0);
+		Integer inc;
 		
 		System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
-	
 		inc = Integer.parseInt(baseAddr, 16);
 		int offsetHex = offset/4;
 		for ( int i = 0; i < offsetHex / 2; i++ ){

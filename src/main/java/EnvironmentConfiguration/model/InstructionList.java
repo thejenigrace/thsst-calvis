@@ -56,11 +56,8 @@ public class InstructionList {
 							"\n return (EnvironmentConfiguration.model.Instruction) this");
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);
-				}			
-				
+				}
 			}
-			
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -26,8 +26,6 @@ public class EnvironmentConfigurator {
 
         // 2. Create the CALVISParser based on the environment
         this.p = new CALVISParser(instructions, registers, memory);
-
-
     }
 
     public CALVISParser getParser(){

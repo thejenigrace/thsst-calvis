@@ -10,8 +10,8 @@
          <children>
             <TableView fx:id="tableViewMemory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="memoryAddress" prefWidth="196.0" text="Address" />
-                  <TableColumn fx:id="memoryRepresentation" prefWidth="133.0" text="Representation" />
+                  <TableColumn fx:id="memoryAddress" prefWidth="160.0" text="Address" />
+                  <TableColumn fx:id="memoryRepresentation" prefWidth="172.0" text="Representation" />
                </columns>
             </TableView>
          </children>
