@@ -1,9 +1,8 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import MainEditor.controller.ConfigurationEnvironmentController;
-import MainEditor.controller.WorkspaceController;
 
+import EnvironmentConfiguration.controller.ConfigurationEnvironmentController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -91,9 +90,8 @@ public class MainApp extends Application {
         root = (BorderPane) loader.load();
 
         // Give the controller access to the main app
-        configController = (ConfigurationEnvironmentController)  loader.getController();
+        configController = loader.getController();
         configController.setMainApp(this);
-
     }
 
     /**

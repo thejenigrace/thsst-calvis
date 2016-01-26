@@ -1,4 +1,4 @@
-package MainEditor.controller;
+package MainEditor.model;
 
 import SimulatorVisualizer.controller.SystemController;
 

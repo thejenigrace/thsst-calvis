@@ -1,6 +1,7 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.model.Register;
+import MainEditor.model.AssemblyComponent;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

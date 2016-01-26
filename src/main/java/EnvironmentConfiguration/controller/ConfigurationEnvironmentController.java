@@ -1,8 +1,9 @@
-package MainEditor.controller;
+package EnvironmentConfiguration.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.controller.VerifierController;
 import EnvironmentConfiguration.model.ErrorMessage;
+import MainEditor.controller.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
