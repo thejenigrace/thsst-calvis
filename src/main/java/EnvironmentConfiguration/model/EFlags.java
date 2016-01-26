@@ -53,53 +53,52 @@ public class EFlags extends Register {
 			System.out.println("Invalid flag value");
 		}
 	}
-	
-	
-	public String getCarryFlag(){
+
+	public String getCarryFlag() {
 		return getFlagIndex(0) + "";
 	}
 	
-	public String getParityFlag(){
+	public String getParityFlag() {
 		return getFlagIndex(2) + "";
 	}
 	
-	public String getAuxiliaryFlag(){
+	public String getAuxiliaryFlag() {
 		return getFlagIndex(4) + "";
 	}
 	
-	public String getZeroFlag(){
+	public String getZeroFlag() {
 		return getFlagIndex(6) + "";
 	}
 	
-	public String getSignFlag(){
+	public String getSignFlag() {
 		return getFlagIndex(7) + "";
 	}
 	
-	public String getOverflowFlag(){
+	public String getOverflowFlag() {
 		return getFlagIndex(11) + "";
 	}
 	
-	public void setCarryFlag(String value){
+	public void setCarryFlag(String value) {
 		setFlagIndex(0, value);
 	}
 	
-	public void setParityFlag(String value){
+	public void setParityFlag(String value) {
 		setFlagIndex(2, value);
 	}
 	
-	public void setAuxiliaryFlag(String value){
+	public void setAuxiliaryFlag(String value) {
 		setFlagIndex(4, value);
 	}
 	
-	public void setZeroFlag(String value){
+	public void setZeroFlag(String value) {
 		setFlagIndex(6, value);
 	}
 	
-	public void setSignFlag(String value){
+	public void setSignFlag(String value) {
 		setFlagIndex(7, value);
 	}
 	
-	public void setOverflowFlag(String value){
+	public void setOverflowFlag(String value) {
 		setFlagIndex(11, value);
 	}
 }

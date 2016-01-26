@@ -7,7 +7,12 @@ public class Calculator {
 	
 	private RegisterList registers;
 	private Memory mem;
-	
+
+	//to delete
+	public Calculator() {
+
+	}
+
 	public Calculator(RegisterList regs, Memory m){
 		this.registers = regs;
 		this.mem = m;
@@ -106,5 +111,71 @@ public class Calculator {
 			default		: System.out.println("Condition not found");
 						  return false;	
 		}	
+	}
+
+	/*
+	 * For 32-bit,
+	 * convert value from hex to binary
+	 * returns string (32-bit binary)
+	 */
+	public String hexToBinary(String value) {
+		String val = Integer.toBinaryString(Integer.parseInt(value, 16));
+		int missingZeroes = 32 - val.length();
+
+		//zero extend
+		for(int k = 0; k < missingZeroes; k++) {
+			val = "0" + val;
+		}
+
+		return val;
+	}
+
+	/*
+	 * For 32-bit,
+	 * convert value from binary to hex
+	 * returns string (32-bit hex)
+	 */
+	public String binaryToHex(String value) {
+		String val = Integer.toHexString(Integer.parseInt(value, 2));
+		int missingZeroes = 8 - val.length();
+
+		//zero extend
+		for(int k = 0; k < missingZeroes; k++) {
+			val = "0" + val;
+		}
+
+		return val;
+	}
+
+	/*
+	 * For 32-bit,
+	 * zero extend hex
+	 * returns string (32-bit hex)
+	 */
+	public String hexZeroExtend(String value) {
+		int missingZeroes = 8 - value.length();
+
+		//zero extend
+		for(int k = 0; k < missingZeroes; k++) {
+			value = "0" + value;
+		}
+
+		return value;
+	}
+
+	/*
+	 * For 32-bit,
+	 * zero extend binary
+	 * returns string (32-bit hinary)
+	 */
+	public String binaryZeroExtend(String value) {
+		int missingZeroes = 32 - value.length();
+
+		//zero extend
+		for(int k = 0; k < missingZeroes; k++) {
+			value = "0" + value;
+		}
+
+		return value;
 	}
 }

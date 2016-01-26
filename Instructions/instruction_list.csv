@@ -5,3 +5,4 @@ xlat,Instructions/xlat.bsh,0,,
 nop,Instructions/nop.bsh,0,,
 cmov,Instructions/cmov.bsh,2,r/m,r/m/i
 add,Instructions/add.bsh,2,r/m/,r/m/i
+and,Instructions/and.bsh,2,r/m,r/m/i

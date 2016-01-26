@@ -141,6 +141,7 @@ public class ConfigurationEnvironmentController implements Initializable{
         ConfigurationFilePaths.add((String)registerChoiceBox.getSelectionModel().getSelectedItem());
         ConfigurationFilePaths.add((String)instructionChoiceBox.getSelectionModel().getSelectedItem());
 
+
         return ConfigurationFilePaths;
     }
 
