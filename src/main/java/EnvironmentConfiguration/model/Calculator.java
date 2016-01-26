@@ -113,6 +113,14 @@ public class Calculator {
 		}	
 	}
 
+	public String reformatAddress(String add){
+		String newAdd = add.toUpperCase();
+		for (int i = 0; i < (Memory.MAX_ADDRESS_SIZE / 2) - add.length(); i++){
+			newAdd = "0" + newAdd;
+		}
+		return newAdd;
+	}
+
 	/*
 	 * For 32-bit,
 	 * convert value from hex to binary

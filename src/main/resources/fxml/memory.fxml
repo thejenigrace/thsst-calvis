@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
@@ -9,9 +10,8 @@
          <children>
             <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="memoryAddress" prefWidth="140.0" text="Address" />
-                  <TableColumn fx:id="memoryRepresentation" prefWidth="189.0" text="Representation" />
-                  <TableColumn fx:id="memoryInstruction" prefWidth="268.0" text="Instruction" />
+                  <TableColumn fx:id="memoryAddress" prefWidth="160.0" text="Address" />
+                  <TableColumn fx:id="memoryRepresentation" prefWidth="172.0" text="Representation" />
                </columns>
             </TableView>
          </children>

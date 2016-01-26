@@ -25,10 +25,6 @@ public class Token {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
-	public void appendValue(String value){
-		this.value = this.value.concat(value);
-	}
 
 	public Token(String type, String value) {
 		this.type = type;

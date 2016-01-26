@@ -35,6 +35,7 @@ public class EFlags extends Register {
 				val = "0" + val;
 			}
 
+			// val = 000000000000000000000000000000000
 			char[] extended = val.toCharArray();
 			extended[32 - 1 - index] = a.charAt(0);
 			val = new String(extended);

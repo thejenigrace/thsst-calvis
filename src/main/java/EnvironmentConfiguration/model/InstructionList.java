@@ -52,14 +52,12 @@ public class InstructionList {
 				if ( !inst[1].equals("Location") ){
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
-					Instruction com =  (Instruction) scanner.eval(" return (EnvironmentConfiguration.model.Instruction) this");
+					Instruction com =  (Instruction) scanner.eval("import EnvironmentConfiguration.model.Calculator;" +
+							"\n return (EnvironmentConfiguration.model.Instruction) this");
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);
-				}			
-				
+				}
 			}
-			
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

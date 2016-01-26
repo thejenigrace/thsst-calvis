@@ -7,6 +7,9 @@ public class ErrorMessage {
 
     private String category;
     private String message;
+    private int linenumber;
+    private String filelocation;
+
 
     public ErrorMessage(String category, String message){
         this.category = category;
