@@ -1,6 +1,7 @@
 package EnvironmentConfiguration.model;
 
 public interface Instruction {
+
 	
 	void execute(RegisterList r, Memory m);
 	

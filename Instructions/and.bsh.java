@@ -1,27 +1,30 @@
  execute(des, src, registers, memory) {
- 	Calculator calculator = new Calculator();
+ 	Calculator calculator = new EnvironmentConfiguration.model.Calculator(registers, memory);
 
  	if ( des.isRegister() ) {
  		if ( src.isRegister() ) {
  			System.out.println("AND register and register");
  			String x = registers.get(src);
  			String y = registers.get(des);
- 			System.out.println("des: " + y + "src: " + x);
- 			System.out.println("hello");
+
+            String s = calculator.hexToBinary(x);
+            String d = calculator.hexToBinary(y);
+
             String result = "";
-        /*
-      for (int i = 0; i < 32; i++) {
-        if (y.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
 
- 	  registers.set(des, result);
+        for (int i = 0; i < registers.getSize(des); i++) {
+            if (s.charAt(i) == '1' && d.charAt(i) == '1') {
+                result = result.concat("1");
+            }
+            else {
+                result = result.concat("0");
+            }
+        }
 
-        */
+		 result = calculator.binaryToHex(result);
+		 registers.set(des, result);
+
+
       //  EFlags flags = registers.getEflags();
       //  flags.setCarryFlag("0");
       /*
