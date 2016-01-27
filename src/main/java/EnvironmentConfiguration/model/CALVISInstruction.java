@@ -32,8 +32,6 @@ public class CALVISInstruction {
         } catch (Exception e){
             System.out.println("Instruction Execution Error: " + e.getCause());
             e.printStackTrace();
-            //System.out.println("Caused by: " + ((EvalError) e.getCause()) );
-            // + " [" + ((EvalError) e.getCause()).getErrorSourceFile() + "] {" + ((EvalError) e.getCause()).getErrorText());
         }
     }
 }

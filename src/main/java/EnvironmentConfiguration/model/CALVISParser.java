@@ -36,6 +36,7 @@ public class CALVISParser {
 		this.lineNumber = 0;		
 		this.lang = new Lang("CALVIS");
 		
+
 		Grule assembly = lang.newGrule();
 		Grule variableDeclarations = lang.newGrule();	
 		Grule variable = lang.newGrule();
@@ -45,9 +46,13 @@ public class CALVISParser {
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
 		Grule memoryAddressingMode = lang.newGrule();
-		Grule memoryExpr = lang.newGrule();
-		Grule memoryAddExpr = lang.newGrule();
-		Grule memoryTimesExpr = lang.newGrule();
+		Grule memoryExpression = lang.newGrule();
+		Grule memoryBase = lang.newGrule();
+		Grule memoryIndex = lang.newGrule();
+		Grule memoryDisplacement = lang.newGrule();
+
+//		Grule memoryAddExpr = lang.newGrule();
+//		Grule memoryTimesExpr = lang.newGrule();
 		
 		TokenDef dbToken = lang.newToken("DB");
 		TokenDef dwToken = lang.newToken("DW");
@@ -72,71 +77,94 @@ public class CALVISParser {
 
 		// memory addressing mode constructs
 		// memory ::= [ memoryExpr ]
-		memoryAddressingMode.define(lsb, memoryExpr, rsb)
-		.action(new Action<Object[]>() {
-		    public Token act(Object[] matched) {
-		    	Token mem = (Token) matched[1];
-		    	mem.setType(Token.mem);
-		    	return mem;
-		    }
+		memoryAddressingMode.define(lsb, memoryExpression, rsb)
+		.action((Action<Object[]>) matched -> {
+			for (Object obj : matched){
+				System.out.println("memory addressing mode rule: " + obj);
+			}
+            Token mem = (Token) matched[1];
+            mem.setType(Token.mem);
+            return mem;
+        });
+
+		//memoryExpression ::= base + index * scale + displacement
+		memoryExpression.define(memoryBase, CC.op(memoryIndex), CC.op(memoryDisplacement))
+		.action((Action<Object[]>) matched -> {
+			for (Object obj : matched){
+				System.out.println("memory expression rule: " + obj);
+			}
+			return null;
 		});
 
-//		memoryExpr ::= base + index * scale + displacement
-//		memoryExpr.define(memoryBase).alt(hex);
-//
-//		memoryBase.define(getAllMemoryAddressableElements(), memoryScale)
-//				.alt(getAllMemoryAddressableElements(), plus,  memoryScale);
-//
-//		memoryScale.define(getMemoryIndexScalabaleElements(), CC.op(times, "[1248]"), memoryDisplacement);
-//
-//		memoryDisplacement.define(displace, hex);
-//
-//		displace.define(plus).alt(minus);
+		memoryBase.define(getAllMemoryAddressableElements())
+				.alt(hex)
+					.action((Action<Object>) matched -> {
+							System.out.println("memory base rule: " + matched);
+						return null;
+					});
+
+		memoryIndex.define( plus, getMemoryIndexScalableElements(), CC.op(times, "[1248]"))
+				.alt(CC.op("[1248]", times), getMemoryIndexScalableElements())
+					.action((Action<Object[]>) matched -> {
+						for (Object obj : matched){
+							System.out.println("memory index rule: " +obj);
+						}
+                        return null;
+                    });
+
+		memoryDisplacement.define(plus.or(minus), hex)
+				.action((Action<Object[]>) matched -> {
+                    //no + or - yet
+					for (Object obj : matched){
+						System.out.println("memory displacement rule: " +obj);
+					}
+					return null;
+                });
 		
-		memoryExpr.define(memoryAddExpr, CC.ks(plus, memoryAddExpr))
-		.action(new Action<Object[]>() {
-		    public Token act(Object[] matched) {
-		    	Object[] ms = (Object[]) matched;
-		        Token a = (Token) matched[0];
-		        Object[] aPairs = (Object[]) ms[1];
-		        	for (Object p : aPairs) {
-		        		String op = (String) ((Object[]) p)[0];
-		                Token b = new Token(Token.hex, ((Object[]) p)[1].toString());
-		                a = calculator.compute(new Token[]{a,b}, op);
-		            }
-		        return (Token) a;
-		    }
-		});		
-		
-		memoryAddExpr.define(getMemoryIndexScalableElements(), CC.kc(times, "[1248]"))
-		.action(new Action<Object[]>() {
-		    public Token act(Object[] matched) {
-		    	Object[] ms = (Object[]) matched;
-		        Token a = new Token(Token.reg, matched[0].toString());
-		        Object[] aPairs = (Object[]) ms[1];
-		        	for (Object p : aPairs) {
-		        		String op = (String) ((Object[]) p)[0];
-		                Token b = new Token(Token.hex, ((Object[]) p)[1].toString());
-		                a = calculator.compute(new Token[]{a,b}, op);
-		            }
-		        return (Token) a;
-		    }
-		}).alt(memoryTimesExpr).action(new Action<Object>() {
-		    public Token act(Object matched) {
-		        return (Token) matched;
-		    }
-		});
-		
-		memoryTimesExpr.define(getAllMemoryAddressableElements())
-			.action(new Action<Object>() {
-				public Token act(Object matched) {
-					return calculator.compute(new Token[]{(Token) matched}, "nop");
-				}
-		}).alt(hex).action(new Action<Object>() {
-		    public Token act(Object matched) {
-		        return new Token(Token.hex, matched.toString());
-		    }
-		});
+//		memoryExpr.define(memoryAddExpr, CC.ks(plus, memoryAddExpr))
+//		.action(new Action<Object[]>() {
+//		    public Token act(Object[] matched) {
+//		    	Object[] ms = (Object[]) matched;
+//		        Token a = (Token) matched[0];
+//		        Object[] aPairs = (Object[]) ms[1];
+//		        	for (Object p : aPairs) {
+//		        		String op = (String) ((Object[]) p)[0];
+//		                Token b = new Token(Token.hex, ((Object[]) p)[1].toString());
+//		                a = calculator.compute(new Token[]{a,b}, op);
+//		            }
+//		        return (Token) a;
+//		    }
+//		});
+//
+//		memoryAddExpr.define(getMemoryIndexScalableElements(), CC.kc(times, "[1248]"))
+//		.action(new Action<Object[]>() {
+//		    public Token act(Object[] matched) {
+//		    	Object[] ms = (Object[]) matched;
+//		        Token a = new Token(Token.reg, matched[0].toString());
+//		        Object[] aPairs = (Object[]) ms[1];
+//		        	for (Object p : aPairs) {
+//		        		String op = (String) ((Object[]) p)[0];
+//		                Token b = new Token(Token.hex, ((Object[]) p)[1].toString());
+//		                a = calculator.compute(new Token[]{a,b}, op);
+//		            }
+//		        return (Token) a;
+//		    }
+//		}).alt(memoryTimesExpr).action(new Action<Object>() {
+//		    public Token act(Object matched) {
+//		        return (Token) matched;
+//		    }
+//		});
+//
+//		memoryTimesExpr.define(getAllMemoryAddressableElements())
+//			.action(new Action<Object>() {
+//				public Token act(Object matched) {
+//					return calculator.compute(new Token[]{(Token) matched}, "nop");
+//				}
+//		}).alt(hex).action(new Action<Object>() {
+//		    public Token act(Object matched) {
+//		        return new Token(Token.hex, matched.toString());
+//		    }
+//		});
 		
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();

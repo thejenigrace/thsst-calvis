@@ -59,22 +59,27 @@ public class WorkspaceController implements Initializable {
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
+    @FXML
+    private BorderPane root;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    /* Not in use yet
-     */
+    @FXML
+    private void handleTextEditorWindow(ActionEvent event) {
+        newFile();
+    }
+
     public void buildSystem(EnvironmentConfigurator env){
         this.sysCon = new SystemController(env);
-        /*
-            Set the code environment
-            This includes the keywords to be highlighted.
-         */
         setCodeEnvironment();
     }
 
+    /** Method for configuring the highlighted
+     *  keywords within the text editor
+     */
     public void setCodeEnvironment(){
         this.KEYWORDS = this.sysCon.getKeywords();
         this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
@@ -99,7 +104,6 @@ public class WorkspaceController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
         Matcher matcher = PATTERN.matcher(text);
@@ -134,14 +138,6 @@ public class WorkspaceController implements Initializable {
         window.getLeftIcons().add(new CloseIcon(window));
 
         return window;
-    }
-
-    @FXML
-    private BorderPane root;
-
-    @FXML
-    private void handleTextEditorWindow(ActionEvent event) {
-        newFile();
     }
 
     //create text editor window

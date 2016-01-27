@@ -58,15 +58,17 @@ public class SystemController {
     }
 
     public void play(String code) {
-        switch (this.state){
-            case PLAY:
+        switch (this.state) {
+            case PLAY: // System is currently playing, so don't play anymore
                 break;
             case PAUSE:
-                break;
-            case STOP:
-                reset();
-                parse(code);
                 beginSimulation();
+                break;
+            case STOP: // System is not running, so we play
+               // reset();
+                parse(code);
+               // this.state = SimulationState.PLAY;
+               // beginSimulation();
                 break;
         }
     }
@@ -82,6 +84,7 @@ public class SystemController {
     }
 
     public void reset(){
+        stop();
         this.registerList.clear();
         this.memory.clear();
         notifyAllObservers();
@@ -101,13 +104,18 @@ public class SystemController {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    // 1. Retrieve EIP value and store it to @var currentLine
                     String currentLine = environment.getRegisters().get("EIP");
+                    // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
                     executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+                    // 3. Increment @var currentLine and store it to EIP register
                     int value = Integer.parseInt(currentLine, 16);
                     value++;
                     environment.getRegisters().set("EIP", Integer.toHexString(value));
+                    // 4. Notify all observers that an instruction has been executed
                     notifyAllObservers();
                 }
+                state = SimulationState.STOP;
             }
         }.start();
 

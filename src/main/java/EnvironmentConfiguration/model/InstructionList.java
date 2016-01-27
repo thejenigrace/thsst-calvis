@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import bsh.EvalError;
 import bsh.Interpreter;
 
@@ -25,13 +26,11 @@ public class InstructionList {
 		this.grammarDefinition = new ArrayList<String[]>();
 		
 		try {
-
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 
 			    // use comma as separator
 				String[] inst = line.split(cvsSplitBy);
-				
 				// trim every row just in case.
 				for (int i = 0; i < inst.length; i++){
 					inst[i] = inst[i].trim();
@@ -52,20 +51,14 @@ public class InstructionList {
 				if ( !inst[1].equals("Location") ){
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
-					Instruction com =  (Instruction) scanner.eval("import EnvironmentConfiguration.model.Calculator;" +
-							"\n return (EnvironmentConfiguration.model.Instruction) this");
+					Instruction com =  (Instruction) scanner.eval(prepareImportStatements());
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);
 				}
 			}
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (EvalError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+		} finally{
 			if (br != null) {
 				try {
 					br.close();
@@ -75,7 +68,16 @@ public class InstructionList {
 			}
 		}
 	}
-	
+
+	private String prepareImportStatements(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("import EnvironmentConfiguration.model.Token;");
+		sb.append("import EnvironmentConfiguration.model.RegisterList;");
+		sb.append("import EnvironmentConfiguration.model.Memory;");
+		sb.append("import EnvironmentConfiguration.model.Calculator;");
+		sb.append("\n return (EnvironmentConfiguration.model.Instruction) this");
+		return sb.toString();
+	}
 	public Instruction getInstruction(Token t){
 		return getInstruction(t.getValue());
 	}
@@ -94,4 +96,5 @@ public class InstructionList {
 	public Iterator<String> getInstructionKeys(){
 		return this.map.keySet().iterator();
 	}
+
 }
