@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
-   <content>
+<SplitPane dividerPositions="0.85" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
+   <items>
       <AnchorPane minHeight="0.0" minWidth="0.0">
          <children>
             <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="memoryAddress" prefWidth="160.0" text="Address" />
-                  <TableColumn fx:id="memoryRepresentation" prefWidth="172.0" text="Representation" />
+                  <TableColumn fx:id="memoryAddress" prefWidth="100.0" text="Address" />
+                  <TableColumn fx:id="memoryRepresentation" prefWidth="100.0" text="Value" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
-   </content>
-</ScrollPane>
+   </items>
+</SplitPane>

@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -243,7 +242,7 @@ public class WorkspaceController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
-        Parent memoryView = (ScrollPane) loader.load();
+        Parent memoryView = (SplitPane) loader.load();
 
 //        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/memory.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));

@@ -16,6 +16,16 @@
                       </TableView>
                   </children>
               </AnchorPane>
-              <AnchorPane minHeight="0.0" minWidth="0.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+         <children>
+            <TableView fx:id="tableViewRegister1" prefHeight="75.0" prefWidth="248.0" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="eFlagsName1" prefWidth="65.0" text="EFLAGS" />
+                  <TableColumn fx:id="eFlagsValue1" prefWidth="65.0" text="Value" />
+                  <TableColumn fx:id="eFlagsName2" prefWidth="65.0" text="EFLAGS" />
+                  <TableColumn fx:id="eFlagsValue2" prefWidth="65.0" text="Value" />
+               </columns>
+            </TableView>
+         </children></AnchorPane>
     </items>
 </SplitPane>
