@@ -128,15 +128,19 @@ public class RegisterList {
 		}
 	}
 
-	public int getSize(String registerName){
-		return getSize(new Token(Token.reg, registerName));
+	public int getBitSize(String registerName){
+		return getBitSize(new Token(Token.reg, registerName));
 	}
 	
-	public int getSize(Token a){
+	public int getBitSize(Token a){
 		String key = a.getValue();
 		String size;
 		size = find(key)[SIZE];
 		return Integer.parseInt(size);
+	}
+
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
 	}
 	
 	public String get(String registerName){
