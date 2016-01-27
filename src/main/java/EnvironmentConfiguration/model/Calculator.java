@@ -37,7 +37,7 @@ public class Calculator {
 				int indexOfStringAddress = operands[g].length() - (Memory.MAX_ADDRESS_SIZE/4);
 
 //				Check for upper half
-//				if ( registers.getSize(regName) > EnvironmentConfiguration.model.Memory.MAX_ADDRESS_SIZE ){
+//				if ( registers.getBitSize(regName) > EnvironmentConfiguration.model.Memory.MAX_ADDRESS_SIZE ){
 //					for(int i = 0; i < indexOfStringAddress; i++){
 //						if (addressCharArray[i] != '0'){
 //							System.out.println("Can't use register " + regName + ":" + operands[g]);
@@ -126,9 +126,9 @@ public class Calculator {
 	 * convert value from hex to binary
 	 * returns string (32-bit binary)
 	 */
-	public String hexToBinary(String value) {
+	public String hexToBinaryString(String value, Token des) {
 		String val = Integer.toBinaryString(Integer.parseInt(value, 16));
-		int missingZeroes = 32 - val.length();
+		int missingZeroes = registers.getBitSize(des) - val.length();
 
 		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
@@ -143,9 +143,9 @@ public class Calculator {
 	 * convert value from binary to hex
 	 * returns string (32-bit hex)
 	 */
-	public String binaryToHex(String value) {
+	public String binaryToHexString(String value, Token des) {
 		String val = Integer.toHexString(Integer.parseInt(value, 2));
-		int missingZeroes = 8 - val.length();
+		int missingZeroes = registers.getHexSize(des) - val.length();
 
 		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {

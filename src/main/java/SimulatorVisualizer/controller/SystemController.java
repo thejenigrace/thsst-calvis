@@ -66,6 +66,7 @@ public class SystemController {
             case STOP:
                 reset();
                 parse(code);
+                this.state = SimulationState.PLAY;
                 beginSimulation();
                 break;
         }
@@ -108,6 +109,8 @@ public class SystemController {
                     environment.getRegisters().set("EIP", Integer.toHexString(value));
                     notifyAllObservers();
                 }
+
+                state = SimulationState.STOP;
             }
         }.start();
 
