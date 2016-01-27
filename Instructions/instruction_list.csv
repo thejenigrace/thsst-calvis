@@ -1,8 +1,8 @@
 EnvironmentConfiguration.model.Instruction,Location,Parameters,,
-mov,Instructions/mov.bsh,2,r/m,r/m/i
-lea,Instructions/lea.bsh,2,r16/r32,m
-xlat,Instructions/xlat.bsh,0,,
-nop,Instructions/nop.bsh,0,,
-cmov,Instructions/cmov.bsh,2,r/m,r/m/i
+mov,Instructions/mov.bsh.java,2,r/m,r/m/i
+lea,Instructions/lea.bsh.java,2,r16/r32,m
+xlat,Instructions/xlat.bsh.java,0,,
+nop,Instructions/nop.bsh.java,0,,
+cmov,Instructions/cmov.bsh.java,2,r/m,r/m/i
 add,Instructions/add.bsh.java,2,r/m/,r/m/i
-and,Instructions/and.bsh,2,r/m,r/m/i
+and,Instructions/and.bsh.java,2,r/m,r/m/i
