@@ -24,6 +24,8 @@
  		else if ( src.isHex() ) {
 // 			System.out.println("Adding immediate to register");
  			String x = src.getValue();
+		 	String y = registers.get(des);
+
  			registers.set(des, x);
  		}
  		else if ( src.isMemory() ){
