@@ -1,5 +1,7 @@
 package EnvironmentConfiguration.model;
 
+import java.math.BigInteger;
+
 public class Calculator {
 	
 	static final String times = "*";
@@ -127,10 +129,10 @@ public class Calculator {
 	 * returns string (32-bit binary)
 	 */
 	public String hexToBinaryString(String value, Token des) {
-		String val = Integer.toBinaryString(Integer.parseInt(value, 16));
+		BigInteger bi = new BigInteger(value, 16);
+		String val = bi.toString(2);
 		int missingZeroes = registers.getBitSize(des) - val.length();
 
-		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
 			val = "0" + val;
 		}
@@ -144,10 +146,10 @@ public class Calculator {
 	 * returns string (32-bit hex)
 	 */
 	public String binaryToHexString(String value, Token des) {
-		String val = Integer.toHexString(Integer.parseInt(value, 2));
+		BigInteger bi = new BigInteger(value, 2);
+		String val = bi.toString(16);
 		int missingZeroes = registers.getHexSize(des) - val.length();
 
-		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
 			val = "0" + val;
 		}
@@ -160,12 +162,14 @@ public class Calculator {
 	 * zero extend hex
 	 * returns string (32-bit hex)
 	 */
-	public String hexZeroExtend(String value) {
-		int missingZeroes = 8 - value.length();
+	public String hexZeroExtend(String value, Token des) {
+		int missingZeroes = registers.getHexSize(des) - value.length();
 
 		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			value = "0" + value;
+		if(missingZeroes > 0) {
+			for(int k = 0; k < missingZeroes; k++) {
+				value = "0" + value;
+			}
 		}
 
 		return value;
@@ -176,12 +180,14 @@ public class Calculator {
 	 * zero extend binary
 	 * returns string (32-bit hinary)
 	 */
-	public String binaryZeroExtend(String value) {
-		int missingZeroes = 32 - value.length();
+	public String binaryZeroExtend(String value, Token des) {
+		int missingZeroes = registers.getBitSize(des) - value.length();
 
 		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			value = "0" + value;
+		if(missingZeroes > 0) {
+			for(int k = 0; k < missingZeroes; k++) {
+				value = "0" + value;
+			}
 		}
 
 		return value;

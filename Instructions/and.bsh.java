@@ -3,264 +3,110 @@
 
  	if ( des.isRegister() ) {
  		if ( src.isRegister() ) {
- 			System.out.println("AND register and register");
- 			String x = registers.get(src);
- 			String y = registers.get(des);
+      System.out.println("AND register and register");
 
-            String s = calculator.hexToBinary(x);
-            String d = calculator.hexToBinary(y);
+      //get size of des, src
+      int desSize = registers.getBitSize(des);
+      int srcSize = registers.getBitSize(src);
 
-            String result = "";
+      if ( (desSize == srcSize) && ((desSize == 32) || (desSize == 16) || (desSize == 8)) ) {
+        //get hex value of des, src then convert to binary
+        String source = calculator.hexToBinaryString(registers.get(src), src);
+        String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-        for (int i = 0; i < registers.getSize(des); i++) {
-            if (s.charAt(i) == '1' && d.charAt(i) == '1') {
-                result = result.concat("1");
-            }
-            else {
-                result = result.concat("0");
-            }
+        String result = "";
+
+        for (int i = 0; i < desSize; i++) {
+          if (source.charAt(i) == '1' && destination.charAt(i) == '1') {
+            result = result.concat("1");
+          }
+          else {
+            result = result.concat("0");
+          }
         }
 
-		 result = calculator.binaryToHex(result);
-		 registers.set(des, result);
+        result = calculator.binaryToHexString(result, des);
+        registers.set(des, result);
 
+        //FLAGS
+        EFlags flags = registers.getEFlags();
 
-      //  EFlags flags = registers.getEflags();
-      //  flags.setCarryFlag("0");
-      /*
-        registers.setCF("0");
-        registers.setOF(0);
-        registers.setAF(-1); undefined
+        flags.setCarryFlag("0");
+        flags.setOverflowFlag("0");
 
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
+        String d = registers.get(des);
+        if(d.equals("00") || d.equals("0000") || d.equals("00000000")) {
+          flags.setZeroFlag("1");
+        }
+        else {
+          flags.setZeroFlag("0");
+        }
 
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
- 		}
+        String sign = "" + calculator.hexToBinaryString(registers.get(des), des).charAt(0);
+        System.out.println("result: " + calculator.hexToBinaryString(registers.get(des), des) + "\nsign: " + sign);
+        flags.setSignFlag(sign);
+
+        System.out.println("CF: " + flags.getCarryFlag() +
+                         "\nOF: " + flags.getOverflowFlag() +
+                         "\nZF: " + flags.getZeroFlag() +
+                         "\nSF: " + flags.getSignFlag() + "");
+       // flags.setAuxiliaryFlag(); undefined
+       // flags.setParityFlag();
+      }
+    }
  		else if ( src.isMemory() ) {
  			System.out.println("AND register and memory");
- 			int des_reg_size = registers.getSize(des);
- 			String x = memory.read(src, des_reg_size);
-      String result = "";
 
-      for (int i = 0; i < registers.getSize(des); i++) {
-        if (des.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
- 			registers.set(des, result);
-
-      /*
-        registers.setCF(0);
-        registers.setOF(0);
-        registers.setAF(-1); undefined
-
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
-
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
  		}
-    else if ( scr.isHex() ) {
+    else if ( src.isHex() ) {
       System.out.println("AND register and immediate");
-      String x = src;
-      String result = "";
 
-      for (int i = 0; i < registers.getSize(des); i++) {
-        if (des.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
+      //get size of des, src
+      int desSize = registers.getBitSize(des);
+      int srcSize = src.getValue().length();
+      // registers.set(src, calculator.hexZeroExtend(src.getValue(), des));
+      // int srcSize = registers.getBitSize(src);
+
+      if ( (desSize >= srcSize) && ((desSize == 32) || (desSize == 16) || (desSize == 8)) ) {
+        //get hex value of des, src then convert to binary
+        String source = calculator.hexToBinaryString(src.getValue(), des);
+        String destination = calculator.hexToBinaryString(registers.get(des), des);
+
+        String result = "";
+
+        for (int i = 0; i < desSize; i++) {
+          if (source.charAt(i) == '1' && destination.charAt(i) == '1') {
+            result = result.concat("1");
+          }
+          else {
+            result = result.concat("0");
+          }
         }
-        else {
-          result.concat("0");
-        }
+
+        result = calculator.binaryToHexString(result, des);
+        registers.set(des, result);
       }
- 			registers.set(des, result);
 
-      /*
-        registers.setCF(0);
-        registers.setOF(0);
-        registers.setAF(-1); undefined
+      //FLAGS
+      EFlags flags = registers.getEFlags();
 
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
+      flags.setCarryFlag("0");
+      flags.setOverflowFlag("0");
 
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
     }
  	}
- 	else if ( des.isMemory() ){
+ 	else if ( des.isMemory() ) {
     if ( src.isRegister() ) {
  			System.out.println("AND memory and register");
- 			String x = registers.get(src);
-      String result = "";
 
-      for (int i = 0; i < registers.getSize(des); i++) {
-        if (des.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
- 			registers.set(des, result);
-
-      /*
-        registers.setCF(0);
-        registers.setOF(0);
-        registers.setAF(-1); undefined
-
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
-
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
- 		}
+    }
  		else if ( src.isMemory() ) {
  			System.out.println("AND memory and memory");
- 			int des_reg_size = registers.getSize(des);
- 			String x = memory.read(src, des_reg_size);
-      String result = "";
 
-      for (int i = 0; i < registers.getSize(des); i++) {
-        if (des.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
- 			registers.set(des, result);
-
-      /*
-        registers.setCF(0);
-        registers.setOF(0);
-        registers.setAF(-1); undefined
-
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
-
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
  		}
-    else if ( scr.isHex() ) {
-      System.out.println("AND memory and immediate");
-      String x = src;
-      String result = "";
+    else if ( src.isHex() ) {
+  		System.out.println("AND memory and immediate");
 
-      for (int i = 0; i < registers.getSize(des); i++) {
-        if (des.charAt(i) == '1' && x.charAt(i) == '1') {
-          result.concat("1");
-        }
-        else {
-          result.concat("0");
-        }
-      }
- 			registers.set(des, result);
-
-      /*
-        registers.setCF(0);
-        registers.setOF(0);
-        registers.setAF(-1); undefined
-
-        if (des == 0)
-          registers.setZF(1)
-        else
-          registers.setZF(0)
-
-        registers.setSF(des.charAt(0));
-		
-		int i = registers.getSize(des);
-		int count = 0;
-		int counter = 0;
-		while ( counter <= 7 ) {
-			if ( des.charAt(i) == '1' )
-				count++;
-			counter ++
-		}
-		if ( count % 2 == 0 )
-			registers.setPF(1);
-		else
-			registers.setPF(0);
-      */
     }
  	}
  }

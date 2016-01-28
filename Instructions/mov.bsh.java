@@ -1,6 +1,6 @@
  execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
- 		if ( src.isRegister() ) { 
+ 		if ( src.isRegister() ) {
  			System.out.println("Moving register to register");
  			String x = registers.get(src);
  			registers.set(des, x);
@@ -27,9 +27,9 @@
  		else if ( src.isHex() ){
  			System.out.println("Moving immediate to memory");
  			String x = src.getValue();
- 			
- 			/* we need to know how big of a memory chunk 
- 				we'll need for the memory.write() 
+
+ 			/* we need to know how big of a memory chunk
+ 				we'll need for the memory.write()
  			 	Pass the des token as a parameter
  			 	des contains the keywords byte, word, dword to denote the size
  			 */

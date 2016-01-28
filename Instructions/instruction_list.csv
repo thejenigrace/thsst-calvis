@@ -6,3 +6,6 @@ nop,Instructions/nop.bsh.java,0,,
 cmov,Instructions/cmov.bsh.java,2,r/m,r/m/i
 add,Instructions/add.bsh.java,2,r/m/,r/m/i
 and,Instructions/and.bsh.java,2,r/m,r/m/i
+or,Instructions/or.bsh.java,2,r/m,r/m/i
+xor,Instructions/xor.bsh.java,2,r/m,r/m/i
+not,Instructions/not.bsh.java,1,r/m

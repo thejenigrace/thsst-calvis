@@ -2,7 +2,6 @@ package EnvironmentConfiguration.model;
 
 public interface Instruction {
 
-	
 	void execute(RegisterList r, Memory m);
 	
 	void execute(Token a, RegisterList r, Memory m);
