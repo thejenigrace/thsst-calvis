@@ -3,7 +3,7 @@
 
  	if ( des.isRegister() ) {
  		if ( src.isRegister() ) {
-      System.out.println("AND register and register");
+      System.out.println("OR register and register");
 
       //get size of des, src
       int desSize = registers.getBitSize(des);
@@ -24,11 +24,11 @@
         String result = "";
 
         for (int i = 0; i < desSize; i++) {
-          if (source.charAt(i) == '1' && destination.charAt(i) == '1') {
-            result = result.concat("1");
+          if (source.charAt(i) == '0' && destination.charAt(i) == '0') {
+            result = result.concat("0");
           }
           else {
-            result = result.concat("0");
+            result = result.concat("1");
           }
         }
 
@@ -65,11 +65,11 @@
       }
     }
  		else if ( src.isMemory() ) {
- 			System.out.println("AND register and memory");
+ 			System.out.println("OR register and memory");
 
  		}
     else if ( src.isHex() ) {
-      System.out.println("AND register and immediate");
+      System.out.println("OR register and immediate");
 
       //get size of des, src
       int desSize = registers.getBitSize(des);
@@ -92,11 +92,11 @@
         String result = "";
 
         for (int i = 0; i < desSize; i++) {
-          if (source.charAt(i) == '1' && destination.charAt(i) == '1') {
-            result = result.concat("1");
+          if (source.charAt(i) == '0' && destination.charAt(i) == '0') {
+            result = result.concat("0");
           }
           else {
-            result = result.concat("0");
+            result = result.concat("1");
           }
         }
 
@@ -135,15 +135,15 @@
  	}
  	else if ( des.isMemory() ) {
     if ( src.isRegister() ) {
- 			System.out.println("AND memory and register");
+ 			System.out.println("OR memory and register");
 
     }
  		else if ( src.isMemory() ) {
- 			System.out.println("AND memory and memory");
+ 			System.out.println("OR memory and memory");
 
  		}
     else if ( src.isHex() ) {
-  		System.out.println("AND memory and immediate");
+  		System.out.println("OR memory and immediate");
 
     }
  	}

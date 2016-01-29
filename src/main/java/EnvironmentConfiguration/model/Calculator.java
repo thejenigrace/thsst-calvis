@@ -165,12 +165,14 @@ public class Calculator {
 	 * zero extend hex
 	 * returns string (32-bit hex)
 	 */
-	public String hexZeroExtend(String value) {
-		int missingZeroes = 8 - value.length();
+	public String hexZeroExtend(String value, Token des) {
+		int missingZeroes = registers.getHexSize(des) - value.length();
 
 		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			value = "0" + value;
+		if(missingZeroes > 0) {
+			for(int k = 0; k < missingZeroes; k++) {
+				value = "0" + value;
+			}
 		}
 
 		return value;
@@ -181,14 +183,32 @@ public class Calculator {
 	 * zero extend binary
 	 * returns string (32-bit hinary)
 	 */
-	public String binaryZeroExtend(String value) {
-		int missingZeroes = 32 - value.length();
+	public String binaryZeroExtend(String value, Token des) {
+		int missingZeroes = registers.getBitSize(des) - value.length();
 
 		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			value = "0" + value;
+		if(missingZeroes > 0) {
+			for(int k = 0; k < missingZeroes; k++) {
+				value = "0" + value;
+			}
 		}
 
 		return value;
+	}
+
+	public String checkParity(String value, Token des) {
+		String parity = new StringBuffer(value).reverse().toString();
+		int count = 0;
+
+		for(int i = 0; i < 8; i++) {
+			if(parity.charAt(i) == '1') {
+				count++;
+			}
+		}
+
+		if(count % 2 == 0 && count != 0) {
+			return "1";
+		}
+		return "0";
 	}
 }
