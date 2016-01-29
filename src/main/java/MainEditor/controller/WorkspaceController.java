@@ -2,6 +2,7 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import SimulatorVisualizer.controller.SystemController;
+import SimulatorVisualizer.model.SimulationState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,12 +26,18 @@ import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -45,8 +52,6 @@ public class WorkspaceController implements Initializable {
     private int currentFindRangeIndex;
 
     private CodeArea codeArea;
-    private ExecutorService executor;
-
     private SystemController sysCon;
 
     private static final String PAREN_PATTERN = "\\(|\\)";
@@ -140,6 +145,13 @@ public class WorkspaceController implements Initializable {
         return window;
     }
 
+    private void initializeCodeArea(){
+        this.codeArea = new CodeArea();
+        TextEditorController textEditorController = new TextEditorController(codeArea);
+        this.sysCon.attach(textEditorController);
+        this.sysCon.reset();
+    }
+
     //create text editor window
     public void newFile() {
         Window w = initWindowProperties(
@@ -151,35 +163,9 @@ public class WorkspaceController implements Initializable {
         );
 
         // add some content
-        executor = Executors.newSingleThreadExecutor();
-        codeArea = new CodeArea();
+        initializeCodeArea();
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.richChanges().subscribe(change -> {
-            codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
-        });
-        w.getContentPane().getChildren().add(codeArea);
-
-        // add the window to the canvas
-        root.setCenter(w);
-        //root.getChildren().add(w);
-    }
-
-    private void newFile(String fileName) {
-        Window w = initWindowProperties(
-                fileName,
-                root.getWidth()/3-10,
-                root.getHeight()/2+10,
-                10,
-                80
-        );
-
-        // add some content
-        executor = Executors.newSingleThreadExecutor();
-        codeArea = new CodeArea();
-        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.richChanges().subscribe(change -> {
-            codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
-        });
+        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
         w.getContentPane().getChildren().add(codeArea);
 
         // add the window to the canvas
@@ -231,7 +217,7 @@ public class WorkspaceController implements Initializable {
     private void handleMemoryWindow(ActionEvent event) throws Exception {
         Window w = initWindowProperties(
                 "Memory",
-                root.getWidth()/3-20,
+                root.getWidth()/5-20,
                 root.getHeight()/2+10,
                 root.getWidth()-root.getWidth()/3,
                 80
@@ -309,7 +295,7 @@ public class WorkspaceController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                codeArea.clear();
+                newFile();
                 MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
             } else {
                 // ... user chose CANCEL or closed the dialog
@@ -334,6 +320,7 @@ public class WorkspaceController implements Initializable {
         File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
         if(file != null) {
+            newFile();
             codeArea.replaceText(readFile(file));
             MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
         }
@@ -348,7 +335,6 @@ public class WorkspaceController implements Initializable {
 
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
-
             String text;
             while ((text = bufferedReader.readLine()) != null) {
                 stringBuffer.append(text + "\n");
@@ -385,7 +371,7 @@ public class WorkspaceController implements Initializable {
         File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
         if(file != null) {
-            WriteFile(codeArea.getText(), file);
+            writeFile(codeArea.getText(), file);
             MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
         }
     }
@@ -407,7 +393,7 @@ public class WorkspaceController implements Initializable {
         File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
         if(file != null){
-            WriteFile(codeArea.getText(), file);
+            writeFile(codeArea.getText(), file);
             MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
         }
     }
@@ -415,7 +401,7 @@ public class WorkspaceController implements Initializable {
     /*
      * Write
      */
-    private void WriteFile(String content, File file) {
+    private void writeFile(String content, File file) {
         try {
             FileWriter fileWriter = null;
             fileWriter = new FileWriter(file);

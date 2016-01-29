@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.*?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
    <content>
-      <AnchorPane minHeight="0.0" minWidth="0.0">
+      <AnchorPane>
          <children>
             <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="memoryAddress" prefWidth="160.0" text="Address" />
-                  <TableColumn fx:id="memoryRepresentation" prefWidth="172.0" text="Representation" />
+                  <TableColumn fx:id="memoryAddress" text="Address" />
+                  <TableColumn fx:id="memoryRepresentation" text="Value" />
                </columns>
             </TableView>
          </children>

@@ -13,7 +13,7 @@ public class Register {
 		initializeValue();
 	}
 
-	/*	populates register value with hex value
+	/*	populates register value with HEX value
 		of 0s depending on size
 	  */
 	public void initializeValue(){

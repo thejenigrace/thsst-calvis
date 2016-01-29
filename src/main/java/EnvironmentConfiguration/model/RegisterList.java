@@ -4,12 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.TreeMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 public class RegisterList {
 
@@ -44,12 +39,14 @@ public class RegisterList {
 				for (int i = 0; i < reg.length; i++){
 					reg[i] = reg[i].trim();
 				}
+
 //				System.out.println("EnvironmentConfiguration.model.Register [name= " + reg[0]
-//	                                 + " , source=" + reg[1] 
+//	                                 + " , source=" + reg[1]
 //	                                 + " , size=" + reg[2]
-//	                                 + " , type=" + reg[3]		 
+//	                                 + " , type=" + reg[3]
 //	                                 + " , start=" + reg[4]
 //	                                 + " , end=" + reg[5]+ "]");
+
 
 				// we need to get the max register size listed in the csv file
 				int regSize = 0;
@@ -63,7 +60,7 @@ public class RegisterList {
 					int endIndex = Integer.parseInt(reg[END]);
 					// System.out.println(source.getValue().substring(startIndex, endIndex + 1));
 					
-					// need to convert start and end indices into hex equivalents
+					// need to convert start and end indices into HEX equivalents
 					endIndex = (( endIndex + 1 ) / 4 ) - 1;
 					startIndex = startIndex / 4;
 					
@@ -72,6 +69,7 @@ public class RegisterList {
 					startIndex = (( RegisterList.MAX_SIZE / 4) - 1) - startIndex;
 					reg[START] = String.valueOf(endIndex);
 					reg[END] = String.valueOf(startIndex);
+
 					reg[NAME] = reg[NAME].toUpperCase();
 					// add csv row to lookup table
 					this.lookup.add(reg);
@@ -128,8 +126,33 @@ public class RegisterList {
 		}
 	}
 
+	private String[] split(String line) {
+		char[] charArr = line.toCharArray();
+		int numberOfCommas = 0;
+		for ( char x : charArr ){
+			if ( x == ',' ){
+				numberOfCommas++;
+			}
+		}
+		System.out.println("split: " + (numberOfCommas+1));
+		String[] array = new String[numberOfCommas+1];
+		String[] lineArray = line.split(",");
+		for (int i = 0; i < array.length; i++) {
+			if ( i <= lineArray.length - 1){
+				array[i] = lineArray[i];
+			}
+			else {
+				array[i] = "";
+			}
+		}
+		for ( String s : array ){
+			System.out.print("[" + s + "]" + " " );
+		}
+		return array;
+	}
+
 	public int getBitSize(String registerName){
-		return getBitSize(new Token(Token.reg, registerName));
+		return getBitSize(new Token(Token.REG, registerName));
 	}
 	
 	public int getBitSize(Token a){
@@ -144,7 +167,7 @@ public class RegisterList {
 	}
 	
 	public String get(String registerName){
-		return get(new Token(Token.reg, registerName));
+		return get(new Token(Token.REG, registerName));
 	}
 	
 	public String get(Token a){
@@ -167,7 +190,7 @@ public class RegisterList {
 	}
 	
 	public void set(String registerName, String hexString){
-		set(new Token(Token.reg, registerName), hexString);
+		set(new Token(Token.REG, registerName), hexString);
 	}
 	
 	public void set(Token a, String hexString){
@@ -259,8 +282,18 @@ public class RegisterList {
 		return (find(registerName) != null);
 	}
 
-
 	public ArrayList<ErrorMessage> getErrorMessages(){
 		return errorMessages;
+	}
+
+	public Integer[] getAvailableSizes(){
+		Set<Integer> available = new HashSet<>();
+		Iterator iterator = getRegisterKeys();
+		while(iterator.hasNext()){
+			String registerName = (String) iterator.next();
+			available.add(getBitSize(registerName));
+		}
+		Integer[] list = new Integer[available.size()];
+		return available.toArray(list);
 	}
 }

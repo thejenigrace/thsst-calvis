@@ -27,13 +27,11 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /* Lambda p -> new SimpleStringProperty is from code below
-           new Callback<TableColumn.CellDataFeatures<Map.Entry<String, Register>, String>, ObservableValue<String>>()
-          */
         registerName.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
         registerValue.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue().toString()));
+
     }
 
     @Override
@@ -44,7 +42,12 @@ public class RegistersController extends AssemblyComponent implements Initializa
     }
 
     @Override
-    public void update() {
+    public void update(String currentLine, int lineNumber) {
+        tableViewRegister.refresh();
+    }
+
+    @Override
+    public void refresh() {
         tableViewRegister.refresh();
     }
 }

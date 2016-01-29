@@ -6,8 +6,10 @@ import EnvironmentConfiguration.model.CALVISParser;
 import EnvironmentConfiguration.model.InstructionList;
 import EnvironmentConfiguration.model.Memory;
 import EnvironmentConfiguration.model.RegisterList;
+import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
+import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +47,14 @@ public class SystemController {
         observerList.add(observer);
     }
 
-    public void notifyAllObservers(){
-        observerList.forEach(AssemblyComponent::update);
+    public void notifyAllObservers(CALVISInstruction currentLine, int lineNumber){
+        for( AssemblyComponent a : observerList){
+            a.update(currentLine.toString(), lineNumber);
+        }
+    }
+
+    public void refreshAllObservers(){
+        observerList.forEach(AssemblyComponent::refresh);
     }
 
     public RegisterList getRegisterState(){
@@ -65,10 +73,10 @@ public class SystemController {
                 beginSimulation();
                 break;
             case STOP: // System is not running, so we play
-               // reset();
+                reset();
                 parse(code);
-               // this.state = SimulationState.PLAY;
-               // beginSimulation();
+                this.state = SimulationState.PLAY;
+                beginSimulation();
                 break;
         }
     }
@@ -84,10 +92,9 @@ public class SystemController {
     }
 
     public void reset(){
-        stop();
         this.registerList.clear();
         this.memory.clear();
-        notifyAllObservers();
+        refreshAllObservers();
     }
 
     private void parse(String code){
@@ -99,21 +106,23 @@ public class SystemController {
             public void run(){
                 while ((state == SimulationState.PLAY) &&
                         executionMap.containsKey(environment.getRegisters().get("EIP"))){
+
+                    // 1. Retrieve EIP value and store it to @var currentLine
+                    String currentLine = environment.getRegisters().get("EIP");
+                    // 2. Parse currentLine to int @var value
+                    int value = Integer.parseInt(currentLine, 16);
+                    // 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
+                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+                    // 4. Notify all observers that an instruction has been executed
+                    notifyAllObservers(executionMap.get(currentLine), value);
+                    // 5. Increment @var currentLine and store it to EIP register
+                    value++;
+                    environment.getRegisters().set("EIP", Integer.toHexString(value));
                     try {
                         Thread.sleep(SIMULATION_DELAY);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    // 1. Retrieve EIP value and store it to @var currentLine
-                    String currentLine = environment.getRegisters().get("EIP");
-                    // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
-                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
-                    // 3. Increment @var currentLine and store it to EIP register
-                    int value = Integer.parseInt(currentLine, 16);
-                    value++;
-                    environment.getRegisters().set("EIP", Integer.toHexString(value));
-                    // 4. Notify all observers that an instruction has been executed
-                    notifyAllObservers();
                 }
                 state = SimulationState.STOP;
             }
@@ -148,5 +157,4 @@ public class SystemController {
             keywordsList.add(key.toLowerCase());
         }
     }
-
 }

@@ -15,11 +15,11 @@ public class EnvironmentConfigurator {
     private InstructionList instructions;
     private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 
-    public EnvironmentConfigurator(ArrayList<String> filepaths){
+    public EnvironmentConfigurator(ArrayList<String> filePaths){
         // 1. Setup the environment
-        this.memory = new Memory(16, filepaths.get(0));
-        this.registers = new RegisterList(filepaths.get(1));
-        this.instructions = new InstructionList(filepaths.get(2));
+        this.memory = new Memory(32, 16, filePaths.get(0));
+        this.registers = new RegisterList(filePaths.get(1));
+        this.instructions = new InstructionList(filePaths.get(2));
 
         //1.5 check for errors
         errorMessages.addAll(this.registers.getErrorMessages());

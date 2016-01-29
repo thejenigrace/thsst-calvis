@@ -10,22 +10,33 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ *  Memory  		- Protected Mode Flat Model
+ *  address size  	- 32-bit
+ *  starts from  	- 0x0000 0000
+ *  ends at  		- 0x0000 FFFF
+ */
+
 public class Memory {
 
 	static int MAX_ADDRESS_SIZE;
 
+	static final int SIZE_DIRECTIVE_NAME = 0;
+	static final int SIZE_DIRECTIVE_SIZE = 1;
+
 	private TreeMap<String, String> mem;
-    private ArrayList<String[]> lookup;
+	private ArrayList<String[]> lookup;
 
-	public Memory(int bitSize, String csvFile){
-        MAX_ADDRESS_SIZE = bitSize;
-        mem = new TreeMap<>();
-        int maxMemoryAddress = (int) Math.pow(2, bitSize);
+	public Memory(int bitSize, int bitEndLength, String csvFile){
+        this.MAX_ADDRESS_SIZE = bitSize;
+        this.mem = new TreeMap<>();
 
-		for ( int i = 0; i <= maxMemoryAddress; i++){
-			String address = Memory.reformatAddress(Integer.toHexString(i));
-			mem.put(address, "00");
-			//mem.put(address, address.substring(3) + address.substring(3));
+		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
+		int end = Integer.parseInt(lastAddress, 16);
+		for ( int i = 0x0; i <= end; i++){
+			String address = MemoryAddressCalculator.extend(Integer.toHexString(i), bitSize, "0");
+			//mem.put(address, "00");
+			mem.put(address, "" + address.charAt(address.length()-1) + address.charAt(address.length()-1) );
 		}
 
         BufferedReader br = null;
@@ -59,7 +70,6 @@ public class Memory {
                 }
             }
         }
-
 	}
 
 	public Map getMemoryMap(){
@@ -67,17 +77,17 @@ public class Memory {
 	}
 	
 	private static String reformatAddress(String add){
-		String newAdd = add.toUpperCase();
-		for (int i = 0; i < (MAX_ADDRESS_SIZE / 4) - add.length(); i++){
-			newAdd = "0" + newAdd;
-		}
-		return newAdd;
+		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
 	public void write(Token baseAddrToken, String value, Token des){
 		write(baseAddrToken.getValue(), value, des);
 	}
-	
+
+	public void write(Token baseAddrToken, String value, int offset){
+		write(baseAddrToken.getValue(), value, offset);
+	}
+
 	public void write(String baseAddr, String value, Token des){
 		// des contains our offset.
 		String desValue = des.getValue();
@@ -93,10 +103,6 @@ public class Memory {
 		write(baseAddr, value, offset);
 	}
 
-	public void write(Token baseAddrToken, String value, int offset){
-		write(baseAddrToken.getValue(), value, offset);
-	}
-	
 	public void write(String baseAddr, String value, int offset){
 		if ( this.mem.containsKey(baseAddr)){
 			Integer inc;
@@ -106,10 +112,10 @@ public class Memory {
 						value.substring((value.length() - 2) - (i*2) , value.length() - (i * 2) ));
 				inc++;
 			}
-			System.out.println("EnvironmentConfiguration.model.Memory read in little endian starting at: " + baseAddr);
+			//System.out.println("Memory read in little endian starting at: " + baseAddr);
 		}
 		else {
-			System.out.println("EnvironmentConfiguration.model.Memory access invalid on: " + baseAddr);
+			System.out.println("Memory access invalid on: " + baseAddr);
 		}
 	}
 	
@@ -120,7 +126,11 @@ public class Memory {
 	public String read(Token baseAddrToken, Token src){
 		return read(baseAddrToken.getValue(), src);
 	}
-	
+
+	public String read(Token baseAddrToken, int offset){
+		return read(baseAddrToken.getValue(), offset);
+	}
+
 	public String read(String baseAddr, Token src){
 		String srcVal = src.getValue();
 		int offset = 0;
@@ -132,24 +142,28 @@ public class Memory {
         }
 		return read(baseAddr, offset); 
 	}
-	
-	public String read(Token baseAddrToken, int offset){
-		return read(baseAddrToken.getValue(), offset);
-	}
-	
+
 	public String read(String baseAddr, int offset){
 		String result = "";
 		Integer inc;
 		
-		System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
+		//System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
 		inc = Integer.parseInt(baseAddr, 16);
 		int offsetHex = offset/4;
 		for ( int i = 0; i < offsetHex / 2; i++ ){
 			result = read(reformatAddress(Integer.toHexString(inc))) + result;
 			inc++;
 		}
-		System.out.println("EnvironmentConfiguration.model.Memory read in little endian: " + result);
-		return result;
+		System.out.println("Memory read in little endian: " + result);
+		try{
+			if ( result.contains("null") ){
+				throw new NumberFormatException("Memory read failed at base address: " + baseAddr);
+			}
+			return result;
+		} catch ( NumberFormatException e ){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void print(String start, String end){
@@ -166,8 +180,14 @@ public class Memory {
 	public void clear(){
 		Iterator<String> keys = this.mem.keySet().iterator();
 		while (keys.hasNext()){
-			this.mem.put((keys.next()), "00" );
+			//this.mem.put((keys.next()), "00" );
+			String address = keys.next();
+			this.mem.put(address, "" + address.charAt(address.length()-1) + address.charAt(address.length()-1));
 		}
+	}
+
+	public Iterator<String[]> getLookup() {
+		return lookup.iterator();
 	}
 	
 }

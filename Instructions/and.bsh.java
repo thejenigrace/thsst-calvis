@@ -231,6 +231,7 @@
           result.concat("0");
         }
       }
+
  			registers.set(des, result);
 
       /*
