@@ -41,7 +41,8 @@
         flags.setCarryFlag("0");
         flags.setOverflowFlag("0");
 
-        if(Integer.parseInt(registers.get(des)) == 0) {
+        BigInteger bi = new BigInteger(registers.get(des), 16);
+        if(bi.equals(BigInteger.ZERO)) {
           flags.setZeroFlag("1");
         }
         else {
@@ -49,7 +50,7 @@
         }
 
         String r = calculator.hexToBinaryString(registers.get(des), des);
-        String sign = "" + r.charAt(0);
+        String sign = "" + result.charAt(0);
         flags.setSignFlag(sign);
 
         String parity = calculator.checkParity(r, des);
@@ -109,7 +110,8 @@
       flags.setCarryFlag("0");
       flags.setOverflowFlag("0");
 
-      if(Integer.parseInt(registers.get(des)) == 0) {
+      BigInteger bi = new BigInteger(registers.get(des), 16);
+      if(bi.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
       }
       else {
@@ -117,7 +119,7 @@
       }
 
       String r = calculator.hexToBinaryString(registers.get(des), des);
-      String sign = "" + r.charAt(0);
+      String sign = "" + result.charAt(0);
       flags.setSignFlag(sign);
 
       String parity = calculator.checkParity(r, des);

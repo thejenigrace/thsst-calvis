@@ -56,7 +56,8 @@ public class InstructionList {
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
 					Instruction com =  (Instruction) scanner.eval("import EnvironmentConfiguration.model.Calculator;" +
-							"import EnvironmentConfiguration.model.EFlags;" +
+							"\n import EnvironmentConfiguration.model.EFlags;" +
+							"\n import java.math.BigInteger;" +
 							"\n return (EnvironmentConfiguration.model.Instruction) this");
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);
