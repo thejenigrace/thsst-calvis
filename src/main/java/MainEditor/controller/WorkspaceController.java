@@ -27,6 +27,7 @@ import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutorService;

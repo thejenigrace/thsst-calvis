@@ -1,5 +1,5 @@
  execute(des, src, registers, memory) {
- 	Calculator calculator = new EnvironmentConfiguration.model.Calculator(registers, memory);
+ 	Calculator calculator = new Calculator(registers, memory);
 
  	if ( des.isRegister() ) {
  		if ( src.isRegister() ) {
@@ -9,7 +9,14 @@
       int desSize = registers.getBitSize(des);
       int srcSize = registers.getBitSize(src);
 
-      if ( (desSize == srcSize) && ((desSize == 32) || (desSize == 16) || (desSize == 8)) ) {
+      boolean checkSize = false;
+      for(int a : registers.getAvailableSizes()) {
+        if(a == desSize) {
+          checkSize = true;
+        }
+      }
+
+      if ( (desSize == srcSize) && checkSize ) {
         //get hex value of des, src then convert to binary
         String source = calculator.hexToBinaryString(registers.get(src), src);
         String destination = calculator.hexToBinaryString(registers.get(des), des);
@@ -34,24 +41,26 @@
         flags.setCarryFlag("0");
         flags.setOverflowFlag("0");
 
-        String d = registers.get(des);
-        if(d.equals("00") || d.equals("0000") || d.equals("00000000")) {
+        if(Integer.parseInt(registers.get(des)) == 0) {
           flags.setZeroFlag("1");
         }
         else {
           flags.setZeroFlag("0");
         }
 
-        String sign = "" + calculator.hexToBinaryString(registers.get(des), des).charAt(0);
-        System.out.println("result: " + calculator.hexToBinaryString(registers.get(des), des) + "\nsign: " + sign);
+        String r = calculator.hexToBinaryString(registers.get(des), des);
+        String sign = "" + r.charAt(0);
         flags.setSignFlag(sign);
+
+        String parity = calculator.checkParity(r, des);
+        flags.setParityFlag(parity);
 
         System.out.println("CF: " + flags.getCarryFlag() +
                          "\nOF: " + flags.getOverflowFlag() +
                          "\nZF: " + flags.getZeroFlag() +
-                         "\nSF: " + flags.getSignFlag() + "");
-       // flags.setAuxiliaryFlag(); undefined
-       // flags.setParityFlag();
+                         "\nSF: " + flags.getSignFlag() +
+                         "\nPF: " + flags.getParityFlag() + "");
+        // flags.setAuxiliaryFlag(); undefined
       }
     }
  		else if ( src.isMemory() ) {
@@ -67,7 +76,14 @@
       // registers.set(src, calculator.hexZeroExtend(src.getValue(), des));
       // int srcSize = registers.getBitSize(src);
 
-      if ( (desSize >= srcSize) && ((desSize == 32) || (desSize == 16) || (desSize == 8)) ) {
+      boolean checkSize = false;
+      for(int a : registers.getAvailableSizes()) {
+        if(a == desSize) {
+          checkSize = true;
+        }
+      }
+
+      if ( (desSize >= srcSize) && checkSize ) {
         //get hex value of des, src then convert to binary
         String source = calculator.hexToBinaryString(src.getValue(), des);
         String destination = calculator.hexToBinaryString(registers.get(des), des);
@@ -93,6 +109,26 @@
       flags.setCarryFlag("0");
       flags.setOverflowFlag("0");
 
+      if(Integer.parseInt(registers.get(des)) == 0) {
+        flags.setZeroFlag("1");
+      }
+      else {
+        flags.setZeroFlag("0");
+      }
+
+      String r = calculator.hexToBinaryString(registers.get(des), des);
+      String sign = "" + r.charAt(0);
+      flags.setSignFlag(sign);
+
+      String parity = calculator.checkParity(r, des);
+      flags.setParityFlag(parity);
+
+      System.out.println("CF: " + flags.getCarryFlag() +
+                       "\nOF: " + flags.getOverflowFlag() +
+                       "\nZF: " + flags.getZeroFlag() +
+                       "\nSF: " + flags.getSignFlag() +
+                       "\nPF: " + flags.getParityFlag() + "");
+      // flags.setAuxiliaryFlag(); undefined
     }
  	}
  	else if ( des.isMemory() ) {

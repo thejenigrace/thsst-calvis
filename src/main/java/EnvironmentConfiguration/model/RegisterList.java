@@ -4,12 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.TreeMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 public class RegisterList {
 
@@ -262,5 +257,16 @@ public class RegisterList {
 
 	public ArrayList<ErrorMessage> getErrorMessages(){
 		return errorMessages;
+	}
+
+	public Integer[] getAvailableSizes() {
+		Set<Integer> available = new HashSet<>();
+		Iterator iterator = getRegisterKeys();
+		while(iterator.hasNext()) {
+			String registerName = (String) iterator.next();
+			available.add(getBitSize(registerName));
+		}
+		Integer[] list = new Integer[available.size()];
+		return available.toArray(list);
 	}
 }

@@ -124,7 +124,6 @@ public class Calculator {
 	}
 
 	/*
-	 * For 32-bit,
 	 * convert value from hex to binary
 	 * returns string (32-bit binary)
 	 */
@@ -141,7 +140,6 @@ public class Calculator {
 	}
 
 	/*
-	 * For 32-bit,
 	 * convert value from binary to hex
 	 * returns string (32-bit hex)
 	 */
@@ -158,7 +156,6 @@ public class Calculator {
 	}
 
 	/*
-	 * For 32-bit,
 	 * zero extend hex
 	 * returns string (32-bit hex)
 	 */
@@ -176,7 +173,6 @@ public class Calculator {
 	}
 
 	/*
-	 * For 32-bit,
 	 * zero extend binary
 	 * returns string (32-bit hinary)
 	 */
@@ -191,5 +187,21 @@ public class Calculator {
 		}
 
 		return value;
+	}
+
+	public String checkParity(String value, Token des) {
+		String parity = new StringBuffer(value).reverse().toString();
+		int count = 0;
+
+		for(int i = 0; i < 8; i++) {
+			if(parity.charAt(i) == '1') {
+				count++;
+			}
+		}
+
+		if(count % 2 == 0 && count != 0) {
+			return "1";
+		}
+		return "0";
 	}
 }
