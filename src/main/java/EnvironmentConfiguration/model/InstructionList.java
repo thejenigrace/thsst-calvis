@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import bsh.EvalError;
-import bsh.Interpreter;
-
 
 public class InstructionList {
 	
@@ -55,7 +52,9 @@ public class InstructionList {
 				if ( !inst[1].equals("Location") ){
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
-					Instruction com =  (Instruction) scanner.eval("import EnvironmentConfiguration.model.Calculator;" +
+					Instruction com =  (Instruction) scanner.eval("import java.math.BigInteger;" +
+							"\n import EnvironmentConfiguration.model.Calculator;" +
+							"\n import EnvironmentConfiguration.model.EFlags;" +
 							"\n return (EnvironmentConfiguration.model.Instruction) this");
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);

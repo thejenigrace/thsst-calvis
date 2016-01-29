@@ -5,4 +5,6 @@ xlat,Instructions/xlat.bsh.java,0,,
 nop,Instructions/nop.bsh.java,0,,
 cmov,Instructions/cmov.bsh.java,2,r/m,r/m/i
 add,Instructions/add.bsh.java,2,r/m/,r/m/i
+adc,Instructions/adc.bsh.java,2,r/m,r/m/i
+inc,Instructions/inc.bsh.java,1,r/m,
 and,Instructions/and.bsh.java,2,r/m,r/m/i

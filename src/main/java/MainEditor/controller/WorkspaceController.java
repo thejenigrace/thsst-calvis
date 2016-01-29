@@ -2,6 +2,7 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import SimulatorVisualizer.controller.SystemController;
+import SimulatorVisualizer.model.SimulationState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
@@ -58,9 +60,11 @@ public class WorkspaceController implements Initializable {
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
+    @FXML
+    private Button btnPlay;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     /* Not in use yet
@@ -282,6 +286,11 @@ public class WorkspaceController implements Initializable {
     private void handlePlay(ActionEvent event) {
         if (codeArea != null && codeArea.isVisible()) {
             this.sysCon.play(codeArea.getText());
+            btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
+
+            if(sysCon.getState() == SimulationState.STOP) {
+                btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
+            }
         }
     }
     /**
@@ -293,8 +302,8 @@ public class WorkspaceController implements Initializable {
     private void handleStop(ActionEvent event) {
         if (codeArea != null && codeArea.isVisible()) {
             this.sysCon.stop();
+            btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
         }
-
     }
 
     /**

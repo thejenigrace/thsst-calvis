@@ -133,6 +133,10 @@ public class SystemController {
         return keywordsArray;
     }
 
+    public SimulationState getState() {
+        return this.state;
+    }
+
     /** Method used to populate @param keywordsList
      *  with both upper case and lower case keywords from @param iterator
      */

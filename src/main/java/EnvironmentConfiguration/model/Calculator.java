@@ -1,5 +1,7 @@
 package EnvironmentConfiguration.model;
 
+import java.math.BigInteger;
+
 public class Calculator {
 	
 	static final String times = "*";
@@ -127,7 +129,8 @@ public class Calculator {
 	 * returns string (32-bit binary)
 	 */
 	public String hexToBinaryString(String value, Token des) {
-		String val = Integer.toBinaryString(Integer.parseInt(value, 16));
+        BigInteger bi = new BigInteger(value, 16);
+		String val = bi.toString(2);
 		int missingZeroes = registers.getBitSize(des) - val.length();
 
 		//zero extend
@@ -144,7 +147,9 @@ public class Calculator {
 	 * returns string (32-bit hex)
 	 */
 	public String binaryToHexString(String value, Token des) {
-		String val = Integer.toHexString(Integer.parseInt(value, 2));
+        BigInteger bi = new BigInteger(value, 2);
+        String val = bi.toString(16);
+//		String val = Integer.toHexString(Integer.parseInt(value, 2));
 		int missingZeroes = registers.getHexSize(des) - val.length();
 
 		//zero extend

@@ -1,25 +1,54 @@
- execute(des, src, registers, memory) {
+execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
- 		if ( src.isRegister() ){
-// 			System.out.println("Add register to register");
-         String x = registers.get(src);
-         String y = registers.get(des);
+        if ( src.isRegister() ){
+ 			System.out.println("ADD register to register");
 
-         Calculator c = new Calculator(registers,memory);
-//         EFlags flags = registers.getEFlags();
-//         flags.set
-         if(registers.getBitSize(des)==registers.getBitSize(src)){
-             x=c.hexToBinaryString(x,src);
-             y=c.hexToBinaryString(y,des);
+            String x = registers.get(src);
+            String y = registers.get(des);
 
-            int result=Integer.parseInt(x,2)+Integer.parseInt(y,2);
-            registers.set(des,c.binaryToHexString(Integer.toBinaryString(result),des));
+            Calculator c = new Calculator(registers, memory);
+            EFlags ef = registers.getEFlags();
+//
+            if(registers.getBitSize(des) == registers.getBitSize(src)){
+                x = c.hexToBinaryString(x, src);
+                y = c.hexToBinaryString(y, des);
 
+                // Addition in Binary Format
+                BigInteger biX = new BigInteger(x, 2);
+                BigInteger biY = new BigInteger(y, 2);
+                BigInteger result = biX.add(biY);
+                registers.set(des, result.toString(16));
 
-            System.out.println("x = "+Integer.parseInt(x,2));
-            System.out.println("y = "+Integer.parseInt(y,2));
-            System.out.println("result = "+Integer.toBinaryString(result));
-         }
+                // Debugging
+                System.out.println("x = " + x);
+                System.out.println("y = " + y);
+                System.out.println("r = " + result.toString(16));
+
+                ef.setCarryFlag("0");
+
+                int i = registers.getBitSize(des);
+                int count = 0;
+                int counter = 0;
+//                while ( counter <= 7 ){
+//                    if ( des.charAt(count) == '1' )
+//                        count++;
+//                    counter++;
+//                }
+                if ( count % 2 == 0 )
+                    ef.setParityFlag("1");
+                else
+                    ef.setParityFlag("0");
+
+                ef.setOverflowFlag("0");
+                ef.setAuxiliaryFlag("0");
+
+                if (des == 0)
+                    ef.setZeroFlag("1");
+                else
+                    ef.setZeroFlag("0");
+
+                ef.setSignFlag("0");
+            }
  		}
  		else if ( src.isHex() ) {
 // 			System.out.println("Adding immediate to register");
