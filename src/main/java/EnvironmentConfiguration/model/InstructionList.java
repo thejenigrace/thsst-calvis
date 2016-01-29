@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import EnvironmentConfiguration.controller.HandleConfigFunctions;
 import bsh.EvalError;
 import bsh.Interpreter;
 
@@ -17,14 +18,16 @@ public class InstructionList {
 	
 	private HashMap<String, Instruction> map;
 	private ArrayList<String[]> grammarDefinition;
-	
+	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+
 	public InstructionList(String csvFile){
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
 		this.map = new HashMap<String, Instruction>();
 		this.grammarDefinition = new ArrayList<String[]>();
-		
+		int lineCounter = 0;
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
@@ -36,8 +39,11 @@ public class InstructionList {
 					inst[i] = inst[i].trim();
 				}
 
+				line.replaceAll("\\s+","");
+				//line.split();
+				String[] inst = HandleConfigFunctions.split(line);
 				inst[0] = inst[0].toUpperCase();
-				
+//				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
 				// debug printing
 //				for (int i = 0; i < inst.length; i++){
 //					inst[i] = inst[i].trim();
@@ -48,13 +54,26 @@ public class InstructionList {
 				// inst[0] contains instruction name
 				// inst[1] contains .bsh file location
 				
-				if ( !inst[1].equals("Location") ){
+				if ( !inst[1].equals("Location") ){ // do not get first row
+
+					//check here
+					ArrayList<String> missingParametersInstruction = HandleConfigFunctions.checkifMissing(inst);
+					if(missingParametersInstruction.size() > 0){
+//						isSkipped = true;
+						errorMessages.add(new ErrorMessage(
+								Types.instructionShouldNotBeEmpty,
+								missingParametersInstruction,
+								Integer.toString(lineCounter)));
+					}
+
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
 					Instruction com =  (Instruction) scanner.eval(prepareImportStatements());
 					this.map.put(inst[0].toUpperCase(), com);
 					this.grammarDefinition.add(inst);
 				}
+				}
+				lineCounter++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,5 +115,4 @@ public class InstructionList {
 	public Iterator<String> getInstructionKeys(){
 		return this.map.keySet().iterator();
 	}
-
 }
