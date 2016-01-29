@@ -1,4 +1,4 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.file_handling;
 
 import java.util.ArrayList;
 

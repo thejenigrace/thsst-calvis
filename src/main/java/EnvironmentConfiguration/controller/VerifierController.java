@@ -1,6 +1,11 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.*;
+import EnvironmentConfiguration.model.error_logging.ErrorLogger;
+import EnvironmentConfiguration.model.error_logging.ErrorMessage;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageListWithSize;
+import EnvironmentConfiguration.model.error_logging.ErrorType;
+import EnvironmentConfiguration.model.error_logging.Types;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import java.util.ArrayList;

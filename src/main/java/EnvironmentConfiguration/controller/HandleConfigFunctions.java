@@ -1,9 +1,9 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.RegisterFileErrorInvalidMessage;
-import EnvironmentConfiguration.model.RegisterFileErrorMissingMessage;
-import EnvironmentConfiguration.model.RegisterInvalid;
-import EnvironmentConfiguration.model.RegisterMissing;
+import EnvironmentConfiguration.model.error_logging.RegisterFileErrorInvalidMessage;
+import EnvironmentConfiguration.model.error_logging.RegisterFileErrorMissingMessage;
+import EnvironmentConfiguration.model.error_logging.RegisterInvalid;
+import EnvironmentConfiguration.model.error_logging.RegisterMissing;
 
 import java.util.ArrayList;
 

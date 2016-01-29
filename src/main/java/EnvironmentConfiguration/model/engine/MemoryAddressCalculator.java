@@ -1,9 +1,7 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.engine;
 
 import bsh.EvalError;
 import bsh.Interpreter;
-
-import java.math.BigInteger;
 
 /**
  * Created by Goodwin Chua on 1/27/2016.

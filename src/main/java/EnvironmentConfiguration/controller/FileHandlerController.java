@@ -1,13 +1,12 @@
-package EnvironmentConfiguration;
+package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.FilePathList;
-import EnvironmentConfiguration.model.ForSomething;
+import EnvironmentConfiguration.model.file_handling.FilePathList;
+import EnvironmentConfiguration.model.file_handling.ForSomething;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;

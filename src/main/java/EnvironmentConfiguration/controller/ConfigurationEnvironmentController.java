@@ -1,12 +1,16 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.FileHandlerController;
-import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.controller.VerifierController;
-import EnvironmentConfiguration.model.*;
-import MainEditor.MainApp;
-import EnvironmentConfiguration.model.ErrorMessage;
+import EnvironmentConfiguration.model.file_handling.ChoiceBoxLogger;
+import EnvironmentConfiguration.model.error_logging.ErrorLogger;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageListWithSize;
+import EnvironmentConfiguration.model.file_handling.FilePath;
+import EnvironmentConfiguration.model.file_handling.FilePathList;
+import EnvironmentConfiguration.model.error_logging.FilePathLogger;
+import EnvironmentConfiguration.model.file_handling.ForSomething;
+import EnvironmentConfiguration.model.file_handling.SaveFile;
 import MainEditor.controller.MainApp;
+import MainEditor.controller.StringCollectionContainer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +24,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
-import java.util.logging.FileHandler;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 
 /**
@@ -151,9 +156,6 @@ public class ConfigurationEnvironmentController implements Initializable{
 
     private void initializeDefaultChoiceBoxes(){
         ForSomething readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
-        memoryChoiceBox.getItems().add("Memory/config.csv");
-        registerChoiceBox.getItems().add("Registers/register_list.csv");
-        instructionChoiceBox.getItems().add("Instructions/instruction_list.csv");
         AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
         AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
         AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));
@@ -161,7 +163,6 @@ public class ConfigurationEnvironmentController implements Initializable{
         memoryChoiceBox.getSelectionModel().select(memoryChoiceBox.getItems().get(readSaveFile.getSelectedIndexes().get(0)));
         registerChoiceBox.getSelectionModel().select(registerChoiceBox.getItems().get(readSaveFile.getSelectedIndexes().get(1)));
         instructionChoiceBox.getSelectionModel().select(instructionChoiceBox.getItems().get(readSaveFile.getSelectedIndexes().get(2)));
-
     }
 
     public ArrayList<String> getConfigurationFilePath(){

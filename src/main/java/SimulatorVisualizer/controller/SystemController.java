@@ -1,15 +1,13 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.CALVISInstruction;
-import EnvironmentConfiguration.model.CALVISParser;
-import EnvironmentConfiguration.model.InstructionList;
-import EnvironmentConfiguration.model.Memory;
-import EnvironmentConfiguration.model.RegisterList;
-import MainEditor.controller.WorkspaceController;
+import EnvironmentConfiguration.model.engine.CALVISInstruction;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.RegisterList;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
-import com.sun.xml.internal.ws.api.pipe.FiberContextSwitchInterceptor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

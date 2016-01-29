@@ -1,4 +1,4 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.file_handling;
 
 /**
  * Created by Ivan on 1/27/2016.

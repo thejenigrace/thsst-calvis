@@ -1,6 +1,11 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.*;
+import EnvironmentConfiguration.model.error_logging.ErrorLogger;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.RegisterList;
 
 import java.util.ArrayList;
 
