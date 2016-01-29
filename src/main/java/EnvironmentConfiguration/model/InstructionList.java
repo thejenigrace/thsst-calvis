@@ -49,7 +49,12 @@ public class InstructionList {
 				// inst[0] contains instruction name
 				// inst[1] contains .bsh file location
 				
-				if ( !inst[1].equals("Location") ){
+				if ( !inst[1].equals("Location") ){ // do not get first row
+
+					//check here
+					// if (inst
+
+
 					Interpreter scanner = new Interpreter();
 					scanner.source(inst[1]);
 					Instruction com =  (Instruction) scanner.eval(" return (EnvironmentConfiguration.model.Instruction) this");

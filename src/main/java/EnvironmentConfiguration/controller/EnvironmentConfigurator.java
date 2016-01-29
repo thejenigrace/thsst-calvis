@@ -13,7 +13,7 @@ public class EnvironmentConfigurator {
     private Memory memory;
     private RegisterList registers;
     private InstructionList instructions;
-    private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
 
     public EnvironmentConfigurator(ArrayList<String> filepaths){
         // 1. Setup the environment
@@ -22,7 +22,7 @@ public class EnvironmentConfigurator {
         this.instructions = new InstructionList(filepaths.get(2));
 
         //1.5 check for errors
-        errorMessages.addAll(this.registers.getErrorMessages());
+        errorLogger.combineErrorLogger(registers.getErrorLogger());
 
         // 2. Create the CALVISParser based on the environment
         this.p = new CALVISParser(instructions, registers, memory);
@@ -46,8 +46,8 @@ public class EnvironmentConfigurator {
         return this.instructions;
     }
 
-    public ArrayList<ErrorMessage> getErrorMessages(){
-        return errorMessages;
+    public ErrorLogger getMessageLists(){
+        return errorLogger;
     }
 
 }
