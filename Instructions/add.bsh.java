@@ -26,28 +26,20 @@ execute(des, src, registers, memory) {
 
                 ef.setCarryFlag("0");
 
-                int i = registers.getBitSize(des);
-                int count = 0;
-                int counter = 0;
-//                while ( counter <= 7 ){
-//                    if ( des.charAt(count) == '1' )
-//                        count++;
-//                    counter++;
-//                }
-                if ( count % 2 == 0 )
-                    ef.setParityFlag("1");
-                else
-                    ef.setParityFlag("0");
-
-                ef.setOverflowFlag("0");
                 ef.setAuxiliaryFlag("0");
 
-                if (des == 0)
-                    ef.setZeroFlag("1");
-                else
-                    ef.setZeroFlag("0");
+                String sign = "" + result.toString(2).charAt(0);
+                ef.setSignFlag(sign);
 
-                ef.setSignFlag("0");
+                if(result.equals(BigInteger.ZERO)) {
+                    ef.setZeroFlag("1");
+                }
+                else {
+                    ef.setZeroFlag("0");
+                }
+
+                ef.setOverflowFlag("0");
+
             }
  		}
  		else if ( src.isHex() ) {
