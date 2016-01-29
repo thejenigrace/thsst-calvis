@@ -27,12 +27,10 @@ public class RegisterList {
 	public RegisterList(String csvFile) {
 		this.map = new HashMap<String, Register>();
 		this.lookup = new ArrayList<String[]>();
-
 		BufferedReader br = null;
 		String line = "";
-		String cvsSplitBy = ",";
 		int lineCounter = 0;
-
+		ArrayList<String[]> lookUpCopy = new ArrayList<String[]>();
 		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
@@ -41,25 +39,9 @@ public class RegisterList {
 
 			while ((line = br.readLine()) != null) {
 				boolean isSkipped = false;
-				// use comma as separator
-				//String[] reg = line.split(cvsSplitBy);
 				line.replaceAll("\\s+","");
-				ArrayList<String> stringProcessed = HandleConfigFunctions.generateFromSplittingStrings(line);
-				String []reg = new String[stringProcessed.size()];
-				stringProcessed.toArray(reg);
-//				System.out.println(reg.length + "dafuq");
-//				System.out.println(reg[0] + " " +reg[1] + " " +reg[2] + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
-//				System.out.println(reg.length + "dafuq");
-
-////				String[] temp = line.split(cvsSplitBy);
-//				if(temp.length < 6){
-//					isSkipped = true;
-//				}
-				// trim every row just in case
-//				for (int i = 0; i < reg.length; i++){
-//					reg[i] = reg[i].trim();
-//				}
-
+				String[] reg = HandleConfigFunctions.split(line);
+				lookUpCopy.add(reg);
 
 				ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);
 				ArrayList<String> invalidParametersRegister = HandleConfigFunctions.checkForInvalidInput(reg);
@@ -78,17 +60,6 @@ public class RegisterList {
 							invalidParametersRegister,
 							Integer.toString(lineCounter)));
 				}
-
-//				for(int x = 0; x < lookupCopy.size(); x++){
-//					System.out.println((lookupCopy.get(x))[0]);
-//				}
-
-//				System.out.println("EnvironmentConfiguration.model.Register [name= " + reg[0]
-//	                                 + " , source=" + reg[1]
-//	                                 + " , size=" + reg[2]
-//	                                 + " , type=" + reg[3]
-//	                                 + " , start=" + reg[4]
-//	                                 + " , end=" + reg[5]+ "]");
 
 				// we need to get the max register size listed in the csv file
 				if(!isSkipped) {
@@ -112,29 +83,6 @@ public class RegisterList {
 							//						reg[reg.length - 1] = "0";
 						}
 
-						//					//check if length >= 5;
-						//					if(reg.length >= 5){
-						//						errorMessages.add(new ErrorMessage(
-						//								Types.registerShouldNotBeEmpty,
-						//								HandleConfigFunctions.generateArrayListString(toCatchError),
-						//								Integer.toString(lineCounter)));
-						//						reg = HandleConfigFunctions.adjustAnArray(reg, 1);
-						//						reg[reg.length - 1] = "0";
-						//					}
-						//					else if(!HandleConfigFunctions.isInteger(reg[END], 10) || !HandleConfigFunctions.isInteger(reg[START], 10))
-						//						errorMessages.add(new ErrorMessage(
-						//								Types.registerShouldNumber,
-						//								HandleConfigFunctions.generateArrayListString(toCatchError),
-						//								Integer.toString(lineCounter)));
-						//
-						//
-						//					else {
-						//
-						//						endIndex = Integer.parseInt(reg[END]);
-						//					}
-						// System.out.println(source.getValue().substring(startIndex, endIndex + 1));
-
-						// need to convert start and end indices into hex equivalents
 						endIndex = ((endIndex + 1) / 4) - 1;
 						startIndex = startIndex / 4;
 
@@ -145,6 +93,7 @@ public class RegisterList {
 						reg[END] = String.valueOf(startIndex);
 						reg[NAME] = reg[NAME].toUpperCase();
 						// add csv row to lookup table
+						//System.out.println(reg[0] + " " +reg[1] + " " +reg[2] + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
 						this.lookup.add(reg);
 					}
 
@@ -166,39 +115,31 @@ public class RegisterList {
 										new ErrorMessage(Types.invalidRegister,
 												HandleConfigFunctions.generateArrayListString(reg[TYPE]),
 												Integer.toString(lineCounter + 1)));
-								reg[TYPE] = "0";
 								break;
 						}
 					}
 				}
 				lineCounter++;
 			}
-
+			lookUpCopy.remove(0);
 			// should check for register configuration errors...
-			int index = 1;
-			boolean isFoundError = true;
-			for (String[] lookupEntry : this.lookup){
+			int index = 0;
+			for (String[] lookupEntry : lookUpCopy){
 
 				// if all source (mother) registers are existent
+				//System.out.println(lookupEntry[1]);
 				if ( !this.map.containsKey(lookupEntry[1]) ){
-					System.out.println("Register Configuration Error: " + lookupEntry[1] + "does not exist at line " + index);
+//					int lineNumber = index;
+//					if(isEmptyError)
+//						lineNumber = index + 1;
 					errorMessages.add(new ErrorMessage(
 							Types.doesNotExist, HandleConfigFunctions.generateArrayListString(lookupEntry[1]),
-							Integer.toString(index)));
+							Integer.toString(index + 1)));
 				}
 				index++;
 			}
 
 		}
-// catch (NumberFormatException e) {
-////			errorMessages.add(new ErrorMessage(
-////					Types.registerShouldNumber, HandleConfigFunctions.generateArrayListString(toCatchError),
-////					Integer.toString(lineCounter)));
-//		}
-//		catch (IndexOutOfBoundsException index){
-////			errorMessages.add(new ErrorMessage(Types.registerShouldNotBeEmpty,
-////					new ArrayList<String>(), Integer.toString(lineCounter)));
-//		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}

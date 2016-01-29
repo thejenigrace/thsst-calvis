@@ -77,35 +77,35 @@ public class HandleConfigFunctions {
         return missingArr;
     }
 
-    public static ArrayList<String> generateFromSplittingStrings(String line){
-        String tempo = "";
-        boolean isReading = false;
-        ArrayList<String> stringProcessed = new ArrayList<String>();
-        for(int x = 0; x < line.length(); x++){
-            if(line.charAt(x) != ','){
-                tempo += line.charAt(x);
-                isReading = true;
-            }
-            else if(line.charAt(x) == ','){
-                if(isReading) {
-                    stringProcessed.add(tempo);
-                    tempo = "";
-                    isReading = false;
-                }
-                if(x < line.length() - 2)
-                    if(line.charAt(x) == line.charAt(x + 1) && line.charAt(x) == ',' && x + 1 < line.length() - 1){
-                        stringProcessed.add("");
-                    }
-
-            }
-            if(x == line.length() - 1){
-                stringProcessed.add(tempo);
-                tempo = "";
-            }
-
-        }
-        return stringProcessed;
-    }
+//    public static ArrayList<String> generateFromSplittingStrings(String line){
+//        String tempo = "";
+//        boolean isReading = false;
+//        ArrayList<String> stringProcessed = new ArrayList<String>();
+//        for(int x = 0; x < line.length(); x++){
+//            if(line.charAt(x) != ','){
+//                tempo += line.charAt(x);
+//                isReading = true;
+//            }
+//            else if(line.charAt(x) == ','){
+//                if(isReading) {
+//                    stringProcessed.add(tempo);
+//                    tempo = "";
+//                    isReading = false;
+//                }
+//                if(x < line.length() - 2)
+//                    if(line.charAt(x) == line.charAt(x + 1) && line.charAt(x) == ',' && x + 1 < line.length() - 1){
+//                        stringProcessed.add("");
+//                    }
+//
+//            }
+//            if(x == line.length() - 1){
+//                stringProcessed.add(tempo);
+//                tempo = "";
+//            }
+//
+//        }
+//        return stringProcessed;
+//    }
 
     public static ArrayList<String> checkForInvalidInput(String[] strArr){
         ArrayList<String> invalidArr = new ArrayList<String>();
@@ -134,5 +134,27 @@ public class HandleConfigFunctions {
             }
         }
         return invalidArr;
+    }
+
+    public static String[] split(String line) {
+        char[] charArr = line.toCharArray();
+        int numberOfCommas = 0;
+        for ( char x : charArr ){
+            if ( x == ',' ){
+                numberOfCommas++;
+            }
+        }
+
+        String[] array = new String[numberOfCommas+1];
+        String[] lineArray = line.split(",");
+        for (int i = 0; i < array.length; i++) {
+            if ( i <= lineArray.length - 1){
+                array[i] = lineArray[i];
+            }
+            else {
+                array[i] = "";
+            }
+        }
+        return array;
     }
 }

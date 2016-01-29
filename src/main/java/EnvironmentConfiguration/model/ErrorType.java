@@ -49,23 +49,17 @@ public class ErrorType {
             case writeRegisterFailed:
                 returningType = "ERROR: EnvironmentConfiguration.model.Register :\nWriting to register failed\n ";
                 break;
-
-            case registerShouldNumber:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nThe value " + variables.get(0) +" in line " + lineNumber + " should be castable to Integer.\n";
-                break;
-            case registerShouldNotBeEmpty:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nThere are lacking parameters in line " + lineNumber + ":\n";
+            case instructionShouldNotBeEmpty:
+                returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are lacking parameters in line " + lineNumber + ":\n";
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
                 break;
-            case registerShouldNotBeInvalid:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nThere are invalid parameters in line " + lineNumber + ":\n";
+           case registerShouldNotBeInvalid:
+                returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
                 break;
-            case registerInvalidSizeFormat:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nThe The starting or end index of The declared register " + variables.get(0) + " is invalid at line " + lineNumber + ".\n";
-        }
+            }
 
         return returningType;
     }

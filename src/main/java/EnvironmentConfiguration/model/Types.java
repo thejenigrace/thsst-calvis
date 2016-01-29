@@ -18,5 +18,9 @@ public enum Types{
     registerShouldNumber,
     registerShouldNotBeEmpty,
     registerInvalidSizeFormat,
-    registerShouldNotBeInvalid
+    registerShouldNotBeInvalid,
+    instructionPathShouldBeValid,
+    instructionShouldNotBeEmpty,
+    instructionInvalidAddressingMode,
+    instructionShouldBeNumber
 }
