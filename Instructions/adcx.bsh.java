@@ -1,12 +1,12 @@
 execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
  		if ( src.isRegister() ){
- 			System.out.println("ADC register to register");
+ 			System.out.println("ADCX register to register");
 
             String x = registers.get(src);
             String y = registers.get(des);
 
-			if(registers.getBitSize(des) == registers.getBitSize(src)){
+			if(registers.getBitSize(des) == registers.getBitSize(src) && registers.getBitSize(des) == 32){
                 Calculator c = new Calculator(registers,memory);
                 EFlags ef = registers.getEFlags();
 
@@ -33,23 +33,9 @@ execute(des, src, registers, memory) {
 
 				BigInteger biC=new BigInteger("FFFFFFFF",16);
 				if(result.compareTo(biC)==1)
-				ef.setCarryFlag("1");
+					ef.setCarryFlag("1");
 				else
-				ef.setCarryFlag("0");
-
-				ef.setParityFlag(c.checkParity(result.toString(2),des));
-
-				ef.setAuxiliaryFlag("0");
-
-				String sign=""+result.toString(2).charAt(0);
-				ef.setSignFlag(sign);
-
-				if(result.equals(BigInteger.ZERO))
-				ef.setZeroFlag("1");
-				else
-				ef.setZeroFlag("0");
-
-				ef.setOverflowFlag("0");
+					ef.setCarryFlag("0");
 
 				System.out.println("CF: "+ef.getCarryFlag()+
 						"\nPF: "+ef.getParityFlag()+
@@ -60,7 +46,7 @@ execute(des, src, registers, memory) {
 			}
  		}
  		else if ( src.isHex() ) {
-            System.out.println("ADC immediate to register");
+            System.out.println("ADCX immediate to register");
 
             String x = src.getValue();
             String y = registers.get(des);

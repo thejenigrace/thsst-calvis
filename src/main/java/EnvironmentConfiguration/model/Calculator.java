@@ -149,12 +149,26 @@ public class Calculator {
 	public String binaryToHexString(String value, Token des) {
         BigInteger bi = new BigInteger(value, 2);
         String val = bi.toString(16);
-//		String val = Integer.toHexString(Integer.parseInt(value, 2));
-		int missingZeroes = registers.getHexSize(des) - val.length();
+		int registerSize = registers.getHexSize(des);
+		int missingZeroes = registerSize - val.length();
 
 		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
 			val = "0" + val;
+		}
+
+		//remove carry flag
+        System.out.println("val.length() = " + val.length());
+        System.out.println("registerSize = " + registerSize);
+		if(val.length() > registerSize) {
+            System.out.println("REMOVE CARRY FLAG");
+			StringBuilder sb = new StringBuilder();
+
+			for(int i = 1; i < val.length(); i++)
+				sb.append(val.charAt(i));
+
+			val = sb.toString();
+            System.out.println("val = " + val);
 		}
 
 		return val;

@@ -1,7 +1,7 @@
 execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
  		if ( src.isRegister() ){
- 			System.out.println("ADC register to register");
+ 			System.out.println("ADOX register to register");
 
             String x = registers.get(src);
             String y = registers.get(des);
@@ -15,8 +15,8 @@ execute(des, src, registers, memory) {
 				BigInteger biY=new BigInteger(y,16);
 				BigInteger result=biX.add(biY);
 
-                if(ef.getCarryFlag() == "1") {
-                    System.out.println("Add Carry Flag");
+                if(ef.getOverflowFlag() == "1") {
+                    System.out.println("Add Overflow Flag");
                     result.add(new BigInteger("1"));
                 }
 
@@ -60,7 +60,7 @@ execute(des, src, registers, memory) {
 			}
  		}
  		else if ( src.isHex() ) {
-            System.out.println("ADC immediate to register");
+            System.out.println("ADOX immediate to register");
 
             String x = src.getValue();
             String y = registers.get(des);
