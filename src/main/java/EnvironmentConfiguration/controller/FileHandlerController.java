@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +35,16 @@ public class FileHandlerController {
         } else {
             return filename.substring(index + 1);
         }
+    }
+
+    public String checkIfFileExists(String filepath){
+        File f = new File(filepath);
+        ArrayList<String> pathString = new ArrayList<String>();
+        pathString.add(filepath);
+        if(!f.exists() && !filepath.isEmpty()) {
+           return new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFilePath).generateMessage(pathString);
+        }
+        return "";
     }
 
     public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){

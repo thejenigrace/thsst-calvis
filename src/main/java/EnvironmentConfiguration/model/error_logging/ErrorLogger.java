@@ -32,8 +32,9 @@ public class ErrorLogger {
         this.errorMessageListArrayList.addAll(errorMessageListArrayList);
     }
 
-    public void combineErrorLogger(ErrorLogger errorLogger){
-        this.errorMessageListArrayList.addAll(errorLogger.getAll());
+    public void combineErrorLogger(ErrorLogger... errorLogger){
+        for(int x = 0; x < errorLogger.length; x++)
+        this.errorMessageListArrayList.addAll(errorLogger[x].getAll());
     }
 
     public void clearContents(){

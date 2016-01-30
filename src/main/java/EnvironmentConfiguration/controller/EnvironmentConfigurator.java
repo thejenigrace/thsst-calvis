@@ -27,10 +27,13 @@ public class EnvironmentConfigurator {
         this.instructions = new InstructionList(filePaths.get(2));
 
         //1.5 check for errors
-        errorLogger.combineErrorLogger(registers.getErrorLogger());
-
+        errorLogger.combineErrorLogger(registers.getErrorLogger(), instructions.getErrorLogger());
         // 2. Create the CALVISParser based on the environment
-        this.p = new CALVISParser(instructions, registers, memory);
+        if(errorLogger.size() == 0) {
+            this.p = new CALVISParser(instructions, registers, memory);
+        }
+
+
     }
 
     public CALVISParser getParser(){

@@ -7,6 +7,7 @@ import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
 import EnvironmentConfiguration.model.error_logging.Types;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -31,7 +32,7 @@ public class RegisterList {
 		this.flags = new EFlags("EFLAGS", 32);
 		this.map = new TreeMap<>(orderedComparator);
 		this.lookup = new ArrayList<>();
-		
+
 		BufferedReader br = null;
 		String line = "";
 		int lineCounter = 0;
@@ -231,11 +232,11 @@ public class RegisterList {
 		}
 		return null;
 	}
-	
+
 	public void set(String registerName, String hexString){
 		set(new Token(Token.REG, registerName), hexString);
 	}
-	
+
 	public void set(Token a, String hexString){
 		String key = a.getValue();
 		String[] register = find(key);
@@ -248,7 +249,7 @@ public class RegisterList {
 
 		//check for mismatch between parameter hexString and child register value		
 		String child = mother.getValue().substring(startIndex, endIndex + 1);
-		
+
 		if ( child.length() >= hexString.length() ){
 			int differenceInLength = child.length() - hexString.length();
 			for (int i = 0; i < differenceInLength; i++){

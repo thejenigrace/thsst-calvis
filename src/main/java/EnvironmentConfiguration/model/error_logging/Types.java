@@ -15,12 +15,10 @@ public enum Types{
     doesNotExist,
     dataTypeMismatch,
     writeRegisterFailed,
-    registerShouldNumber,
     registerShouldNotBeEmpty,
     registerInvalidSizeFormat,
     registerShouldNotBeInvalid,
-    instructionPathShouldBeValid,
     instructionShouldNotBeEmpty,
-    instructionInvalidAddressingMode,
-    instructionShouldBeNumber
+    instructionShouldNotBeInvalid
+
 }
