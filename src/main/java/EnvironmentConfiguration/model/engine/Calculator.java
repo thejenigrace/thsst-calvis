@@ -1,5 +1,7 @@
 package EnvironmentConfiguration.model.engine;
 
+import java.math.BigInteger;
+
 public class Calculator {
 
 	private RegisterList registers;

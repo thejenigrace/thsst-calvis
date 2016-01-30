@@ -3,8 +3,8 @@ package EnvironmentConfiguration.model.engine;
 import EnvironmentConfiguration.controller.HandleConfigFunctions;
 import EnvironmentConfiguration.model.error_logging.ErrorLogger;
 import EnvironmentConfiguration.model.error_logging.ErrorMessage;
-import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
 import EnvironmentConfiguration.model.error_logging.Types;
+
 import bsh.Interpreter;
 
 import java.io.BufferedReader;
@@ -19,15 +19,14 @@ public class InstructionList {
 	
 	private HashMap<String, Instruction> map;
 	private ArrayList<String[]> grammarDefinition;
-	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
 	public InstructionList(String csvFile){
-		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
 		BufferedReader br = null;
 		String line = "";
-		String cvsSplitBy = ",";
-		this.map = new HashMap<String, Instruction>();
-		this.grammarDefinition = new ArrayList<String[]>();
+		this.map = new HashMap<>();
+		this.grammarDefinition = new ArrayList<>();
 		int lineCounter = 0;
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
@@ -35,6 +34,9 @@ public class InstructionList {
 				line.replaceAll("\\s+","");
 				//line.split();
 				String[] inst = HandleConfigFunctions.split(line);
+				for (int i = 0; i < inst.length; i++) {
+					inst[i] = inst[i].trim();
+				}
 				inst[0] = inst[0].toUpperCase();
 //				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
 				// debug printing
@@ -85,7 +87,9 @@ public class InstructionList {
 		sb.append("import EnvironmentConfiguration.model.engine.Token;");
 		sb.append("import EnvironmentConfiguration.model.engine.RegisterList;");
 		sb.append("import EnvironmentConfiguration.model.engine.Memory;");
+		sb.append("import EnvironmentConfiguration.model.engine.EFlags;");
 		sb.append("import EnvironmentConfiguration.model.engine.Calculator;");
+		sb.append("import java.math.BigInteger;");
 		sb.append("\n return (EnvironmentConfiguration.model.engine.Instruction) this");
 		return sb.toString();
 	}

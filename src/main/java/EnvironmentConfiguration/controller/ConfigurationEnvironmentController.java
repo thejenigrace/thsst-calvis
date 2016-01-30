@@ -1,14 +1,11 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.file_handling.ChoiceBoxLogger;
+import EnvironmentConfiguration.model.file_handling.*;
 import EnvironmentConfiguration.model.error_logging.ErrorLogger;
 import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
 import EnvironmentConfiguration.model.error_logging.ErrorMessageListWithSize;
-import EnvironmentConfiguration.model.file_handling.FilePath;
-import EnvironmentConfiguration.model.file_handling.FilePathList;
 import EnvironmentConfiguration.model.error_logging.FilePathLogger;
-import EnvironmentConfiguration.model.file_handling.ForSomething;
-import EnvironmentConfiguration.model.file_handling.SaveFile;
+import EnvironmentConfiguration.model.file_handling.FilePathHandler;
 import MainEditor.controller.MainApp;
 import MainEditor.controller.StringCollectionContainer;
 import javafx.event.ActionEvent;
@@ -155,7 +152,7 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     private void initializeDefaultChoiceBoxes(){
-        ForSomething readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
+        FilePathHandler readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
         AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
         AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
         AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));
@@ -200,7 +197,7 @@ public class ConfigurationEnvironmentController implements Initializable{
             filePathLists.add(new FilePathList("Instruction File", filepathContentList.get(2)));
 
             filePathLogger.addAll(filePathLists);
-            FileHandlerController.WriteLocationFile("SaveFile/savelist.txt", filePathLogger.getAll(),
+            FileHandlerController.writeLocationFile("SaveFile/savelist.txt", filePathLogger.getAll(),
                     new StringCollectionContainer(Integer.toString(memoryChoiceBox.getSelectionModel().getSelectedIndex()),
                             Integer.toString(registerChoiceBox.getSelectionModel().getSelectedIndex()),
                             Integer.toString(instructionChoiceBox.getSelectionModel().getSelectedIndex())).getStrArray());

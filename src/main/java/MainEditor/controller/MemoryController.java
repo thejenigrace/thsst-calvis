@@ -49,5 +49,6 @@ public class MemoryController extends AssemblyComponent implements Initializable
         Map map = this.sysCon.getMemoryState().getMemoryMap();
         ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
         tableViewMemory.setItems(items);
+
     }
 }

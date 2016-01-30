@@ -21,7 +21,7 @@
  		if ( src.isRegister() ){
  			System.out.println("Moving register to memory");
  			String x = registers.get(src);
- 			int src_reg_size = registers.getSize(src);
+ 			int src_reg_size = registers.getBitSize(src);
  			memory.write(des, x, src_reg_size);
  		}
  		else if ( src.isHex() ){

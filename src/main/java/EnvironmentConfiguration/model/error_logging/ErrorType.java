@@ -1,4 +1,4 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.error_logging;
 
 import java.util.ArrayList;
 
@@ -38,24 +38,24 @@ public class ErrorType {
                 returningType = "File not found for Register List CSV file:" + variables.get(0) + "\n";
                 break;
             case invalidRegister:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\n Invalid Register Type: " + variables.get(0)+ "at line " + lineNumber + ".\n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\n Invalid Register Type: " + variables.get(0)+ " at line " + lineNumber + ".\n";
                 break;
             case doesNotExist:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\n" + variables.get(0) + " Register does not exist at line " + lineNumber + ". \n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\n" + variables.get(0) + " Register does not exist at line " + lineNumber + ". \n";
                 break;
             case dataTypeMismatch:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nData Type Mismatch Between Register " + variables.get(0) + ": " + variables.get(1) + " and " + variables.get(2) + "\n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\nData Type Mismatch Between Register " + variables.get(0) + ": " + variables.get(1) + " and " + variables.get(2) + "\n";
                 break;
             case writeRegisterFailed:
-                returningType = "ERROR: EnvironmentConfiguration.model.Register :\nWriting to register failed\n ";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\nWriting to register failed\n ";
                 break;
             case instructionShouldNotBeEmpty:
-                returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are lacking parameters in line " + lineNumber + ":\n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Instruction :\nThere are lacking parameters in line " + lineNumber + ":\n";
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
                 break;
            case registerShouldNotBeInvalid:
-                returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
                 break;

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Created by Ivan on 1/27/2016.
  */
-public class ForSomething {
+public class FilePathHandler {
 
     private ArrayList<ArrayList<String>> filePaths;
     private ArrayList<Integer> selectedIndexes;
 
-    public ForSomething(ArrayList<ArrayList<String>> filePaths, ArrayList<Integer> selectedIndexes){
+    public FilePathHandler(ArrayList<ArrayList<String>> filePaths, ArrayList<Integer> selectedIndexes){
         this.filePaths = filePaths;
         this.selectedIndexes = selectedIndexes;
     }

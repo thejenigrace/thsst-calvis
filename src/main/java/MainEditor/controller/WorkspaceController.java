@@ -84,7 +84,7 @@ public class WorkspaceController implements Initializable {
     }
 
     public void buildSystem(EnvironmentConfigurator env){
-        this.sysCon = new SystemController(env);
+        this.sysCon = new SystemController(env, this);
         setCodeEnvironment();
     }
 
@@ -155,14 +155,14 @@ public class WorkspaceController implements Initializable {
         this.codeArea = new CodeArea();
         TextEditorController textEditorController = new TextEditorController(codeArea);
         this.sysCon.attach(textEditorController);
-        this.sysCon.reset();
+        this.sysCon.clear();
     }
 
     //create text editor window
     public void newFile() {
         Window w = initWindowProperties(
                 "Text Editor",
-                root.getWidth()/3-10,
+                root.getWidth()/2-10,
                 root.getHeight()/2+10,
                 10,
                 80
@@ -196,7 +196,7 @@ public class WorkspaceController implements Initializable {
     private void handleRegistersWindow(ActionEvent event) throws Exception {
         Window w = initWindowProperties(
                 "Registers",
-                root.getWidth()/3-20,
+                root.getWidth()/3.5-20,
                 root.getHeight()/2+10,
                 root.getWidth()/3+10,
                 80
@@ -206,7 +206,6 @@ public class WorkspaceController implements Initializable {
         loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
         Parent registersView = (SplitPane) loader.load();
 
-       // SplitPane registersView = FXMLLoader.load(getClass().getResource("/fxml/registers.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(registersView);
 
@@ -223,7 +222,7 @@ public class WorkspaceController implements Initializable {
     private void handleMemoryWindow(ActionEvent event) throws Exception {
         Window w = initWindowProperties(
                 "Memory",
-                root.getWidth()/3-20,
+                root.getWidth()/4-20,
                 root.getHeight()/2+10,
                 root.getWidth()-root.getWidth()/3,
                 80
@@ -231,9 +230,8 @@ public class WorkspaceController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
-        Parent memoryView = (SplitPane) loader.load();
+        Parent memoryView = loader.load();
 
-//        ScrollPane memoryView = FXMLLoader.load(getClass().getResource("/fxml/memory.fxml"));
         w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         w.getContentPane().getChildren().add(memoryView);
 
@@ -262,6 +260,14 @@ public class WorkspaceController implements Initializable {
         root.getChildren().add(w);
     }
 
+    public void changeIconToPause(){
+        btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
+    }
+
+    public void changeIconToPlay(){
+        btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
+    }
+
     /**
      * Action for Play Simulation; a MenuItem in Execute.
      *
@@ -270,14 +276,12 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handlePlay(ActionEvent event) {
         if (codeArea != null && codeArea.isVisible()) {
+            changeIconToPause();
             this.sysCon.play(codeArea.getText());
-            btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
-
-            if(sysCon.getState() == SimulationState.STOP) {
-                btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
-            }
         }
     }
+
+
     /**
      * Action for Stop Simulation; a MenuItem in Execute.
      *
@@ -287,7 +291,48 @@ public class WorkspaceController implements Initializable {
     private void handleStop(ActionEvent event) {
         if (codeArea != null && codeArea.isVisible()) {
             this.sysCon.stop();
-            btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
+            changeIconToPlay();
+        }
+    }
+
+    /**
+     * Action for Next Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleNext(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            this.sysCon.stop();
+            changeIconToPlay();
+        }
+    }
+
+    /**
+     * Action for Previous Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handlePrevious(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            this.sysCon.stop();
+            changeIconToPause();
+
+        }
+    }
+
+    /**
+     * Action for Reset Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleReset(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            this.sysCon.stop();
+            changeIconToPause();
+            this.sysCon.play(codeArea.getText());
         }
     }
 

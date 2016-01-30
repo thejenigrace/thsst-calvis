@@ -80,15 +80,15 @@ public class Memory {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
-	public void write(Token baseAddrToken, String value, Token des){
-		write(baseAddrToken.getValue(), value, des);
+	public void write(Token baseAddressToken, String value, Token des){
+		write(baseAddressToken.getValue(), value, des);
 	}
 
-	public void write(Token baseAddrToken, String value, int offset){
-		write(baseAddrToken.getValue(), value, offset);
+	public void write(Token baseAddressToken, String value, int offset){
+		write(baseAddressToken.getValue(), value, offset);
 	}
 
-	public void write(String baseAddr, String value, Token des){
+	public void write(String baseAddress, String value, Token des){
 		// des contains our offset.
 		String desValue = des.getValue();
 		int offset = 0; //default offset = 0;
@@ -100,14 +100,15 @@ public class Memory {
             }
         }
 
-		write(baseAddr, value, offset);
+		write(baseAddress, value, offset);
 	}
 
-	public void write(String baseAddr, String value, int offset){
-		if ( this.mem.containsKey(baseAddr)){
+	public void write(String baseAddress, String value, int offset){
+		if ( this.mem.containsKey(baseAddress)){
 			Integer inc;
-			inc = Integer.parseInt(baseAddr, 16);
-			for ( int i = 0; i < offset / 2; i++ ){
+			inc = Integer.parseInt(baseAddress, 16);
+			int offsetHex = offset/4;
+			for ( int i = 0; i < offsetHex / 2; i++ ){
 				this.mem.put(Memory.reformatAddress(Integer.toHexString(inc)),
 						value.substring((value.length() - 2) - (i*2) , value.length() - (i * 2) ));
 				inc++;
@@ -115,7 +116,7 @@ public class Memory {
 			//System.out.println("Memory read in little endian starting at: " + baseAddr);
 		}
 		else {
-			System.out.println("Memory access invalid on: " + baseAddr);
+			System.out.println("Memory access invalid on: " + baseAddress);
 		}
 	}
 	
@@ -123,15 +124,15 @@ public class Memory {
 		return this.mem.get(address);
 	}
 	
-	public String read(Token baseAddrToken, Token src){
-		return read(baseAddrToken.getValue(), src);
+	public String read(Token baseAddressToken, Token src){
+		return read(baseAddressToken.getValue(), src);
 	}
 
-	public String read(Token baseAddrToken, int offset){
-		return read(baseAddrToken.getValue(), offset);
+	public String read(Token baseAddressToken, int offset){
+		return read(baseAddressToken.getValue(), offset);
 	}
 
-	public String read(String baseAddr, Token src){
+	public String read(String baseAddress, Token src){
 		String srcVal = src.getValue();
 		int offset = 0;
         for (String[] x : this.lookup){
@@ -140,15 +141,15 @@ public class Memory {
                 break;
             }
         }
-		return read(baseAddr, offset); 
+		return read(baseAddress, offset);
 	}
 
-	public String read(String baseAddr, int offset){
+	public String read(String baseAddress, int offset){
 		String result = "";
 		Integer inc;
 		
 		//System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
-		inc = Integer.parseInt(baseAddr, 16);
+		inc = Integer.parseInt(baseAddress, 16);
 		int offsetHex = offset/4;
 		for ( int i = 0; i < offsetHex / 2; i++ ){
 			result = read(reformatAddress(Integer.toHexString(inc))) + result;
@@ -157,7 +158,7 @@ public class Memory {
 		System.out.println("Memory read in little endian: " + result);
 		try{
 			if ( result.contains("null") ){
-				throw new NumberFormatException("Memory read failed at base address: " + baseAddr);
+				throw new NumberFormatException("Memory read failed at base address: " + baseAddress);
 			}
 			return result;
 		} catch ( NumberFormatException e ){
@@ -167,7 +168,7 @@ public class Memory {
 	}
 	
 	public void print(String start, String end){
-		Map<String, String> map = new TreeMap<String, String>(mem).descendingMap();
+		Map<String, String> map = new TreeMap<>(mem).descendingMap();
 		Iterator<Map.Entry<String, String>> ite = map.entrySet().iterator();
 		while (ite.hasNext()){
 			Map.Entry<String, String> x = ite.next();

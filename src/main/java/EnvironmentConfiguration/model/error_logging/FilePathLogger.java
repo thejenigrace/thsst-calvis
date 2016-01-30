@@ -1,6 +1,8 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.error_logging;
 
-import java.lang.reflect.Array;
+import EnvironmentConfiguration.model.file_handling.FilePath;
+import EnvironmentConfiguration.model.file_handling.FilePathList;
+
 import java.util.ArrayList;
 
 /**

@@ -23,24 +23,28 @@ public class RegisterList {
 
 	private TreeMap<String, Register> map;
 	private ArrayList<String[]> lookup;
-	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+	private EFlags flags;
+	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
 	public RegisterList(String csvFile) {
 		Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
+		this.flags = new EFlags("EFLAGS", 32);
 		this.map = new TreeMap<>(orderedComparator);
 		this.lookup = new ArrayList<>();
 		
 		BufferedReader br = null;
 		String line = "";
 		int lineCounter = 0;
-		ArrayList<String[]> lookUpCopy = new ArrayList<String[]>();
-		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+		ArrayList<String[]> lookUpCopy = new ArrayList<>();
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 				boolean isSkipped = false;
-				line.replaceAll("\\s+","");
 				String[] reg = HandleConfigFunctions.split(line);
+				for (int i = 0; i < reg.length; i++) {
+					reg[i] = reg[i].trim();
+				}
 				lookUpCopy.add(reg);
 
 				ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);
@@ -112,11 +116,11 @@ public class RegisterList {
 								Register g = new Register(reg[NAME], regSize);
 								this.map.put(reg[NAME], g);
 								break;
-							case "4":
-								EFlags e = new EFlags(reg[NAME], regSize);
-								this.map.put(reg[NAME], e);
-								break;
-							/*to fix:*/
+//							case "4":
+//								EFlags e = new EFlags(reg[NAME], regSize);
+//								this.map.put(reg[NAME], e);
+//								break;
+//							/*to fix:*/
 							default:
 								errorMessages.add(
 										new ErrorMessage(Types.invalidRegister,
@@ -179,7 +183,7 @@ public class RegisterList {
 	}
 
 	public EFlags getEFlags(){
-		return (EFlags) this.map.get("EFLAGS");
+		return this.flags;
 	}
 
 	public boolean isExisting(String registerName){

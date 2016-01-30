@@ -6,8 +6,10 @@ import EnvironmentConfiguration.model.engine.CALVISParser;
 import EnvironmentConfiguration.model.engine.InstructionList;
 import EnvironmentConfiguration.model.engine.Memory;
 import EnvironmentConfiguration.model.engine.RegisterList;
+import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,9 +31,11 @@ public class SystemController {
     private List<AssemblyComponent> observerList;
     private SimulationState state;
     private HashMap<String, CALVISInstruction> executionMap;
+    private WorkspaceController workspaceController;
 
-    public SystemController(EnvironmentConfigurator ec){
+    public SystemController(EnvironmentConfigurator ec, WorkspaceController wc){
         this.environment = ec;
+        this.workspaceController = wc;
         this.parser = environment.getParser();
         this.registerList = environment.getRegisters();
         this.instructionList = environment.getInstructions();
@@ -46,8 +50,15 @@ public class SystemController {
     }
 
     public void notifyAllObservers(CALVISInstruction currentLine, int lineNumber){
-        for( AssemblyComponent a : observerList){
-            a.update(currentLine.toString(), lineNumber);
+        if ( currentLine != null ) {
+            for (AssemblyComponent a : observerList) {
+                a.update(currentLine.toString(), lineNumber);
+            }
+        }
+        else {
+            for (AssemblyComponent a : observerList) {
+                a.update(null, lineNumber);
+            }
         }
     }
 
@@ -65,13 +76,15 @@ public class SystemController {
 
     public void play(String code) {
         switch (this.state) {
-            case PLAY: // System is currently playing, so don't play anymore
+            case PLAY:
+                this.state = SimulationState.PAUSE;
                 break;
             case PAUSE:
+                this.state = SimulationState.PLAY;
                 beginSimulation();
                 break;
             case STOP: // System is not running, so we play
-                reset();
+                clear();
                 parse(code);
                 this.state = SimulationState.PLAY;
                 beginSimulation();
@@ -79,24 +92,25 @@ public class SystemController {
         }
     }
 
-    public void pause() {
-        if ( this.state == SimulationState.PLAY ) {
-            this.state = SimulationState.PAUSE;
-        }
-    }
-
     public void stop() {
         this.state = SimulationState.STOP;
+        this.executionMap = new HashMap<>();
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        clear();
     }
 
-    public void reset(){
+    public void clear(){
         this.registerList.clear();
         this.memory.clear();
         refreshAllObservers();
     }
 
     private void parse(String code){
-        executionMap = parser.parse(code);
+        this.executionMap = parser.parse(code);
     }
 
     private void beginSimulation(){
@@ -122,10 +136,19 @@ public class SystemController {
                         e.printStackTrace();
                     }
                 }
-                state = SimulationState.STOP;
+                if ( state == SimulationState.PLAY ){
+                    state = SimulationState.STOP;
+                    notifyAllObservers(null, -1);
+                }
+                Platform.runLater(
+                        new Thread() {
+                            public void run(){
+                                workspaceController.changeIconToPlay();
+                            }
+                        }
+                );
             }
         }.start();
-
     }
 
     /** Method used to get the keywords

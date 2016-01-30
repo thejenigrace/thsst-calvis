@@ -1,7 +1,7 @@
 package EnvironmentConfiguration.controller;
 
+import EnvironmentConfiguration.model.file_handling.FilePathHandler;
 import EnvironmentConfiguration.model.file_handling.FilePathList;
-import EnvironmentConfiguration.model.file_handling.ForSomething;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -35,36 +35,36 @@ public class FileHandlerController {
         }
     }
 
-    public static void WriteLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
+    public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
         Path filePath = Paths.get(filename);
-        ArrayList<String> writables = new ArrayList<String>();
+        ArrayList<String> writable = new ArrayList<>();
         for(int x = 0; x < filePathListArrayList.size(); x++){
-            writables.add(filePathListArrayList.get(x).getCategory());
-            writables.add("/*StartOfFile*/");
+            writable.add(filePathListArrayList.get(x).getCategory());
+            writable.add("/*StartOfFile*/");
             for(int y = 0; y < filePathListArrayList.get(x).size(); y++){
-                writables.add(filePathListArrayList.get(x).get(y).getLocation());
-                writables.add("/*EndOfFile*/");
+                writable.add(filePathListArrayList.get(x).get(y).getLocation());
             }
+            writable.add("/*EndOfFile*/");
 
         }
-        writables.add("/*StartOfIndex*/");
+        writable.add("/*StartOfIndex*/");
         for(int x = 0; x < selectedIndexes.size(); x++){
-            writables.add(selectedIndexes.get(x));
+            writable.add(selectedIndexes.get(x));
         }
-        writables.add("/*EndOfIndex*/");
+        writable.add("/*EndOfIndex*/");
 
         try {
-            Files.write(filePath, writables, Charset.forName("UTF-8"));
+            Files.write(filePath, writable, Charset.forName("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static ForSomething loadFilenames(String filename){
+    public static FilePathHandler loadFilenames(String filename){
         ArrayList<ArrayList<String>> completeFileNames = new ArrayList<ArrayList<String>>();
         ArrayList<String> filepathList = null;
         ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
-        //ForSomething fs = new ForSomething(completeFileNames, selectedIndexes);
+        //FilePathHandler fs = new FilePathHandler(completeFileNames, selectedIndexes);
 
         try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = br.readLine();
@@ -98,6 +98,6 @@ public class FileHandlerController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ForSomething(completeFileNames, selectedIndexes);
+        return new FilePathHandler(completeFileNames, selectedIndexes);
     }
 }

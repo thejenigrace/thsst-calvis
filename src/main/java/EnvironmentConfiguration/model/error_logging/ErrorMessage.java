@@ -1,4 +1,6 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.error_logging;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ivan on 12/29/2015.
