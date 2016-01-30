@@ -55,10 +55,10 @@
           String parity = calculator.checkParity(r, des);
           flags.setParityFlag(parity);
 
-          if(limit == 1) {
+          if(limit == 1 && originalSign.equals(sign)) {
             flags.setOverflowFlag("0");
           }
-          else if(originalSign.equals(sign)) {
+          else if(limit == 1 && !originalSign.equals(sign)) {
             flags.setOverflowFlag("1");
           }
           else {
@@ -124,10 +124,10 @@
           String parity = calculator.checkParity(r, des);
           flags.setParityFlag(parity);
 
-          if(limit == 1) {
+          if(limit == 1 && originalSign.equals(sign)) {
             flags.setOverflowFlag("0");
           }
-          else if(originalSign.equals(sign)) {
+          else if(limit == 1 && !originalSign.equals(sign)) {
             flags.setOverflowFlag("1");
           }
           else {

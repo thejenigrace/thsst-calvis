@@ -59,7 +59,7 @@
             // flags.setOverflowFlag(undefined);
           }
 
-          flags.setCarryFlag(originalDes.charAt(32 - limit).toString);
+          flags.setCarryFlag(originalDes.charAt(32 - limit).toString());
 
           //flags.setAuxiliaryFlag(undefined)
         }

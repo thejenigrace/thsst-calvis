@@ -44,7 +44,7 @@
         }
 
         String r = calculator.hexToBinaryString(registers.get(des), des);
-        String sign = "" + result.charAt(0);
+        String sign = "" + r.charAt(0);
         flags.setSignFlag(sign);
 
         String parity = calculator.checkParity(r, des);
@@ -99,7 +99,7 @@
         }
 
         String r = calculator.hexToBinaryString(registers.get(des), des);
-        String sign = "" + result.charAt(0);
+        String sign = "" + r.charAt(0);
         flags.setSignFlag(sign);
 
         String parity = calculator.checkParity(r, des);
