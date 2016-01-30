@@ -1,4 +1,4 @@
-EnvironmentConfiguration.model.Instruction,Location,Parameters,,
+EnvironmentConfiguration.model.engine.Instruction,Location,Parameters,,
 mov,Instructions/mov.bsh.java,2,r/m,r/m/i
 lea,Instructions/lea.bsh.java,2,r16/r32,m
 xlat,Instructions/xlat.bsh.java,0,,

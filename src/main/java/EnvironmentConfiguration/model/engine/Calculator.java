@@ -1,72 +1,13 @@
-package EnvironmentConfiguration.model;
-
-import java.math.BigInteger;
+package EnvironmentConfiguration.model.engine;
 
 public class Calculator {
-	
-	static final String times = "*";
-	static final String add = "+";
-	
+
 	private RegisterList registers;
 	private Memory mem;
-
-	//to delete
-	public Calculator() {
-
-	}
 
 	public Calculator(RegisterList regs, Memory m){
 		this.registers = regs;
 		this.mem = m;
-	}
-		
-	public Token compute(Token[] list, String operation){
-		
-		// if operand is a register, set var address with the value of the register
-		String operands[] = new String[list.length];
-		for ( int k = 0; k < list.length; k++){
-			operands[k] = list[k].getValue();
-		}
-		
-		for ( int g = 0; g < operands.length; g++){
-			operands[g] = operands[g];
-			if ( this.registers.isExisting(operands[g])){
-				String regName = operands[g];
-				operands[g] = this.registers.get(operands[g]);
-				//System.out.println(regName + " => " + operands[g]);
-				
-				char[] addressCharArray = operands[g].toCharArray();
-				int indexOfStringAddress = operands[g].length() - (Memory.MAX_ADDRESS_SIZE/4);
-
-//				Check for upper half
-//				if ( registers.getBitSize(regName) > EnvironmentConfiguration.model.Memory.MAX_ADDRESS_SIZE ){
-//					for(int i = 0; i < indexOfStringAddress; i++){
-//						if (addressCharArray[i] != '0'){
-//							System.out.println("Can't use register " + regName + ":" + operands[g]);
-//							System.out.println("Violated on index: " + i + " value: " + addressCharArray[i]);
-//							//return null;
-//
-//						}
-//					}
-//				}
-				operands[g] = operands[g].substring(indexOfStringAddress, operands[g].length());
-				//System.out.println("new operands[g] " + operands[g]);
-			}
-		}
-		int total = 0;
-		int hexValues[] = new int[operands.length];
-		
-		for ( int m = 0; m < hexValues.length; m++){
-			hexValues[m] = Integer.parseInt(operands[m], 16);
-		}
-
-		switch(operation){
-			case "+" : total = hexValues[0] + hexValues[1]; break;
-			case "*" : total = hexValues[0] * hexValues[1]; break;
-			case "nop" : total = hexValues[0]; break;
-		}
-		//System.out.println("total: " + total + "returning " + Integer.toHexString(total));
-		return new Token(Token.hex, "0x" + Integer.toHexString(total));
 	}
 	
 	public boolean evaluateCondition(String condition){
@@ -115,17 +56,9 @@ public class Calculator {
 		}	
 	}
 
-	public String reformatAddress(String add){
-		String newAdd = add.toUpperCase();
-		for (int i = 0; i < (Memory.MAX_ADDRESS_SIZE / 2) - add.length(); i++){
-			newAdd = "0" + newAdd;
-		}
-		return newAdd;
-	}
-
 	/*
 	 * For 32-bit,
-	 * convert value from hex to binary
+	 * convert value from HEX to binary
 	 * returns string (32-bit binary)
 	 */
 	public String hexToBinaryString(String value, Token des) {
@@ -143,8 +76,8 @@ public class Calculator {
 
 	/*
 	 * For 32-bit,
-	 * convert value from binary to hex
-	 * returns string (32-bit hex)
+	 * convert value from binary to HEX
+	 * returns string (32-bit HEX)
 	 */
 	public String binaryToHexString(String value, Token des) {
         BigInteger bi = new BigInteger(value, 2);
@@ -176,8 +109,8 @@ public class Calculator {
 
 	/*
 	 * For 32-bit,
-	 * zero extend hex
-	 * returns string (32-bit hex)
+	 * zero extend HEX
+	 * returns string (32-bit HEX)
 	 */
 	public String hexZeroExtend(String value, Token des) {
 		int missingZeroes = registers.getHexSize(des) - value.length();

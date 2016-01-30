@@ -27,12 +27,6 @@ public class MemoryController extends AssemblyComponent implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        memoryAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-//        memoryRepresentation.setCellValueFactory(new PropertyValueFactory<>("representation"));
-//        memoryInstruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
-//
-//        tableViewMemory.getItems().setAll(parseMemoryList());
-
         memoryAddress.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
         memoryRepresentation.setCellValueFactory(
@@ -41,7 +35,12 @@ public class MemoryController extends AssemblyComponent implements Initializable
 
 
     @Override
-    public void update() {
+    public void update(String currentLine, int lineNumber) {
+        tableViewMemory.refresh();
+    }
+
+    @Override
+    public void refresh() {
         tableViewMemory.refresh();
     }
 

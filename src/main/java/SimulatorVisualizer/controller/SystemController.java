@@ -1,11 +1,11 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.CALVISInstruction;
-import EnvironmentConfiguration.model.CALVISParser;
-import EnvironmentConfiguration.model.InstructionList;
-import EnvironmentConfiguration.model.Memory;
-import EnvironmentConfiguration.model.RegisterList;
+import EnvironmentConfiguration.model.engine.CALVISInstruction;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.RegisterList;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 
@@ -45,8 +45,14 @@ public class SystemController {
         observerList.add(observer);
     }
 
-    public void notifyAllObservers(){
-        observerList.forEach(AssemblyComponent::update);
+    public void notifyAllObservers(CALVISInstruction currentLine, int lineNumber){
+        for( AssemblyComponent a : observerList){
+            a.update(currentLine.toString(), lineNumber);
+        }
+    }
+
+    public void refreshAllObservers(){
+        observerList.forEach(AssemblyComponent::refresh);
     }
 
     public RegisterList getRegisterState(){
@@ -58,12 +64,13 @@ public class SystemController {
     }
 
     public void play(String code) {
-        switch (this.state){
-            case PLAY:
+        switch (this.state) {
+            case PLAY: // System is currently playing, so don't play anymore
                 break;
             case PAUSE:
+                beginSimulation();
                 break;
-            case STOP:
+            case STOP: // System is not running, so we play
                 reset();
                 parse(code);
                 this.state = SimulationState.PLAY;
@@ -85,7 +92,7 @@ public class SystemController {
     public void reset(){
         this.registerList.clear();
         this.memory.clear();
-        notifyAllObservers();
+        refreshAllObservers();
     }
 
     private void parse(String code){
@@ -97,19 +104,24 @@ public class SystemController {
             public void run(){
                 while ((state == SimulationState.PLAY) &&
                         executionMap.containsKey(environment.getRegisters().get("EIP"))){
+
+                    // 1. Retrieve EIP value and store it to @var currentLine
+                    String currentLine = environment.getRegisters().get("EIP");
+                    // 2. Parse currentLine to int @var value
+                    int value = Integer.parseInt(currentLine, 16);
+                    // 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
+                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+                    // 4. Notify all observers that an instruction has been executed
+                    notifyAllObservers(executionMap.get(currentLine), value);
+                    // 5. Increment @var currentLine and store it to EIP register
+                    value++;
+                    environment.getRegisters().set("EIP", Integer.toHexString(value));
                     try {
                         Thread.sleep(SIMULATION_DELAY);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    String currentLine = environment.getRegisters().get("EIP");
-                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
-                    int value = Integer.parseInt(currentLine, 16);
-                    value++;
-                    environment.getRegisters().set("EIP", Integer.toHexString(value));
-                    notifyAllObservers();
                 }
-
                 state = SimulationState.STOP;
             }
         }.start();
@@ -147,5 +159,4 @@ public class SystemController {
             keywordsList.add(key.toLowerCase());
         }
     }
-
 }

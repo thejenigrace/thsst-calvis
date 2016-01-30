@@ -12,7 +12,7 @@
  		}
  		else if ( src.isMemory() ){
  			System.out.println("Moving memory to register");
- 			int des_reg_size = registers.getSize(des);
+ 			int des_reg_size = registers.getBitSize(des);
  			String x = memory.read(src, des_reg_size);
  			registers.set(des, x);
  		}
@@ -28,8 +28,8 @@
  			System.out.println("Moving immediate to memory");
  			String x = src.getValue();
 
- 			/* we need to know how big of a memory chunk
- 				we'll need for the memory.write()
+ 			/* we need to know how big of a memory chunk 
+ 				we'll need for the memory.write() 
  			 	Pass the des token as a parameter
  			 	des contains the keywords byte, word, dword to denote the size
  			 */
