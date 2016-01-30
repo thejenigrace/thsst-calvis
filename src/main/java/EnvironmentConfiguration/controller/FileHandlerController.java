@@ -1,5 +1,7 @@
 package EnvironmentConfiguration.controller;
 
+import EnvironmentConfiguration.model.error_logging.InstructionFileErrorInvalidMessage;
+import EnvironmentConfiguration.model.error_logging.InstructionInvalid;
 import EnvironmentConfiguration.model.file_handling.FilePathHandler;
 import EnvironmentConfiguration.model.file_handling.FilePathList;
 
@@ -8,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.*;
-import java.lang.reflect.Array;
+
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;

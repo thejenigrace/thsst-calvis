@@ -32,8 +32,6 @@ public class EnvironmentConfigurator {
         if(errorLogger.size() == 0) {
             this.p = new CALVISParser(instructions, registers, memory);
         }
-
-
     }
 
     public CALVISParser getParser(){

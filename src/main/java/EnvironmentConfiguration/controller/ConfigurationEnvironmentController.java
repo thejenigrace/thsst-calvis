@@ -115,12 +115,6 @@ public class ConfigurationEnvironmentController implements Initializable{
     }
 
     @FXML
-    public void handleSave(ActionEvent event) throws IOException {
-//        mainApp.hidePrimaryStage();
-//        mainApp.showWorkspace();
-    }
-
-    @FXML
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
         EnvironmentConfigurator environmentConfigurator = new EnvironmentConfigurator(getConfigurationFilePath());
         ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());

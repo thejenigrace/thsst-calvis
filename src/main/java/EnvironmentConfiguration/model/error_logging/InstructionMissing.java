@@ -1,4 +1,4 @@
-package EnvironmentConfiguration.model;
+package EnvironmentConfiguration.model.error_logging;
 
 /**
  * Created by Ivan on 1/30/2016.

@@ -1,20 +1,27 @@
 package EnvironmentConfiguration.model.engine;
 
+import EnvironmentConfiguration.controller.FileHandlerController;
 import EnvironmentConfiguration.controller.HandleConfigFunctions;
+
 import EnvironmentConfiguration.model.error_logging.ErrorLogger;
 import EnvironmentConfiguration.model.error_logging.ErrorMessage;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
+import EnvironmentConfiguration.model.error_logging.InstructionFileErrorInvalidMessage;
+import EnvironmentConfiguration.model.error_logging.InstructionFileErrorMissingMessage;
+import EnvironmentConfiguration.model.error_logging.InstructionInvalid;
+import EnvironmentConfiguration.model.error_logging.InstructionMissing;
 import EnvironmentConfiguration.model.error_logging.Types;
 
 import bsh.Interpreter;
+import bsh.EvalError;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-
 
 public class InstructionList {
 	
@@ -38,11 +45,10 @@ public class InstructionList {
 				br.readLine();
 				while ((line = br.readLine()) != null) {
 
+					String[] inst = HandleConfigFunctions.split(line, ',');
 					for (int i = 0; i < inst.length; i++) {
 						inst[i] = inst[i].trim();
 					}
-
-					String[] inst = HandleConfigFunctions.split(line, ',');
 					inst[0] = inst[0].toUpperCase();
 	//				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
 					// debug printing
@@ -60,8 +66,8 @@ public class InstructionList {
 						//check here
 						ArrayList<String> missingParametersInstruction = HandleConfigFunctions.checkifMissing(inst);
 
-						ArrayList<String> instructionErrorCollection = new ArrayList<String>();
-						ArrayList<String> instructionMissingCollection = new ArrayList<String>();
+						ArrayList<String> instructionErrorCollection = new ArrayList<>();
+						ArrayList<String> instructionMissingCollection = new ArrayList<>();
 						boolean isInteger = HandleConfigFunctions.isInteger(inst[2], 10);
 						boolean hasNoParameter = Integer.parseInt(inst[2]) > 0;
 
@@ -106,12 +112,12 @@ public class InstructionList {
 							}
 							else {
 								//check if parameter size is equals to size of recieved parameters and if size > 0
-								int parameterRecievedCount = line.split(",").length - 3;
-								if(parameterSize != parameterRecievedCount && parameterSize > 0){
+								int parameterReceivedCount = line.split(",").length - 3;
+								if(parameterSize != parameterReceivedCount && parameterSize > 0){
 									instructionErrorCollection.add(
 											new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileLackingParameterCount).
 													generateMessage(HandleConfigFunctions.generateArrayListString(inst[2],
-															Integer.toString(parameterRecievedCount)))
+															Integer.toString(parameterReceivedCount)))
 									);
 								}
 								//check if contains more than 0 parameters
@@ -213,11 +219,12 @@ public class InstructionList {
 
 	private ArrayList<String> doParameterChecking(String[] inst){
 		ArrayList<String> instructionErrorCollection = new ArrayList<String>();
-		String[] acceptableInputs = {"r", "m", "i", "r16", "r32"};
-		for (int x = 0; x < inst.length - 1 - Integer.parseInt(inst[2]); x++) {
-			String addressingArray[] = HandleConfigFunctions.split(inst[x + 3], '/');
+		String[] acceptableInputs = {"r", "m", "i", "r16", "r32", "m32"};
+		int i =  3;
+		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
+			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');
 			String[] tempContainers = new String[addressingArray.length];
-			ArrayList<String> parameterErrors = new ArrayList<String>();
+			ArrayList<String> parameterErrors = new ArrayList<>();
 			int z = 0;
 			for (int y = 0; y < addressingArray.length; y++) {
 				if (HandleConfigFunctions.StringSearchInstruction(acceptableInputs, addressingArray[y]) &&
@@ -228,10 +235,11 @@ public class InstructionList {
 					parameterErrors.add(addressingArray[y]);
 			}
 			if(parameterErrors.size() > 0) {
-				parameterErrors.add(0, Integer.toString(x + 1));
+				parameterErrors.add(0, Integer.toString(i + 1));
 				instructionErrorCollection.add(new InstructionFileErrorInvalidMessage(InstructionInvalid.
 						invalidDuplicateFileRegisterDestinationParameter).generateMessage(parameterErrors));
 			}
+			i++;
 		}
 		return instructionErrorCollection;
 	}

@@ -4,11 +4,11 @@ lea,Instructions/lea.bsh.java,2,r16/r32,m
 xlat,Instructions/xlat.bsh.java,0,,
 nop,Instructions/nop.bsh.java,0,,
 cmov,Instructions/cmov.bsh.java,2,r/m,r/m/i
-add,Instructions/add.bsh.java,2,r/m/,r/m/i
+add,Instructions/add.bsh.java,2,r/m,r/m/i
 adc,Instructions/adc.bsh.java,2,r/m,r/m/i
 adcx,Instructions/adcx.bsh.java,2,r32,r/m32
 adox,Instructions/adox.bsh.java,2,r32,r/m32
-inc,Instructions/inc.bsh.java,1,r/m,
+inc,Instructions/inc.bsh.java,1,r/m
 and,Instructions/and.bsh.java,2,r/m,r/m/i
 or,Instructions/or.bsh.java,2,r/m,r/m/i
 xor,Instructions/xor.bsh.java,2,r/m,r/m/i

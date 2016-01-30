@@ -42,7 +42,7 @@ public class RegisterList {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 				boolean isSkipped = false;
-				String[] reg = HandleConfigFunctions.split(line);
+				String[] reg = HandleConfigFunctions.split(line, ',');
 				for (int i = 0; i < reg.length; i++) {
 					reg[i] = reg[i].trim();
 				}
