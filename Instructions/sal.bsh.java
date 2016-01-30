@@ -142,7 +142,7 @@ execute(des, src, registers, memory) {
    }
  }
  else if ( des.isMemory() ){
-   if( src.isRegister() ) {
+   if( src.isRegister() && src.getValue().equals("CL") ) {
 
    }
    else if ( src.isHex() && registers.get(src).length() == 2){
