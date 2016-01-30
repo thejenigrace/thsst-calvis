@@ -2,11 +2,10 @@ package EnvironmentConfiguration;
 
 import EnvironmentConfiguration.model.FilePathList;
 import EnvironmentConfiguration.model.ForSomething;
+import EnvironmentConfiguration.model.InstructionFileErrorInvalidMessage;
+import EnvironmentConfiguration.model.InstructionInvalid;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -36,6 +35,16 @@ public class FileHandlerController {
         }
     }
 
+    public String checkIfFileExists(String filepath){
+        File f = new File(filepath);
+        ArrayList<String> pathString = new ArrayList<String>();
+        pathString.add(filepath);
+        if(!f.exists() && !filepath.isEmpty()) {
+           return new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFilePath).generateMessage(pathString);
+        }
+        return "";
+    }
+
     public static void WriteLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
         Path filePath = Paths.get(filename);
         ArrayList<String> writables = new ArrayList<String>();
@@ -44,8 +53,8 @@ public class FileHandlerController {
             writables.add("/*StartOfFile*/");
             for(int y = 0; y < filePathListArrayList.get(x).size(); y++){
                 writables.add(filePathListArrayList.get(x).get(y).getLocation());
-                writables.add("/*EndOfFile*/");
             }
+            writables.add("/*EndOfFile*/");
 
         }
         writables.add("/*StartOfIndex*/");
@@ -101,4 +110,6 @@ public class FileHandlerController {
         }
         return new ForSomething(completeFileNames, selectedIndexes);
     }
+
+
 }

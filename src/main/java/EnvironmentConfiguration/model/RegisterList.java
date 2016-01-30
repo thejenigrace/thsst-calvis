@@ -40,7 +40,7 @@ public class RegisterList {
 			while ((line = br.readLine()) != null) {
 				boolean isSkipped = false;
 				line.replaceAll("\\s+","");
-				String[] reg = HandleConfigFunctions.split(line);
+				String[] reg = HandleConfigFunctions.split(line, ',');
 				lookUpCopy.add(reg);
 
 				ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);

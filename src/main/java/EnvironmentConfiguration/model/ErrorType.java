@@ -54,7 +54,7 @@ public class ErrorType {
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
                 break;
-           case registerShouldNotBeInvalid:
+           case instructionShouldNotBeInvalid:
                 returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
                 for(int x = 0; x < variables.size(); x++)
                     returningType += variables.get(x) + "\n";
