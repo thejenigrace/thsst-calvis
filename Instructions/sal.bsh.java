@@ -67,11 +67,6 @@
 
           flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
 
-          System.out.println("CF: " + flags.getCarryFlag() +
-                           "\nOF: " + flags.getOverflowFlag() +
-                           "\nZF: " + flags.getZeroFlag() +
-                           "\nSF: " + flags.getSignFlag() +
-                           "\nPF: " + flags.getParityFlag() + "");
           //flags.setAuxiliaryFlag(undefined)
         }
       }
@@ -141,11 +136,6 @@
 
           flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
 
-          System.out.println("CF: " + flags.getCarryFlag() +
-                           "\nOF: " + flags.getOverflowFlag() +
-                           "\nZF: " + flags.getZeroFlag() +
-                           "\nSF: " + flags.getSignFlag() +
-                           "\nPF: " + flags.getParityFlag() + "");
           //flags.setAuxiliaryFlag(undefined)
         }
       }

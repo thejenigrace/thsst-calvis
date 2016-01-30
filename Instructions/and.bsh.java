@@ -50,11 +50,6 @@
         String parity = calculator.checkParity(r, des);
         flags.setParityFlag(parity);
 
-        System.out.println("CF: " + flags.getCarryFlag() +
-                         "\nOF: " + flags.getOverflowFlag() +
-                         "\nZF: " + flags.getZeroFlag() +
-                         "\nSF: " + flags.getSignFlag() +
-                         "\nPF: " + flags.getParityFlag() + "");
         // flags.setAuxiliaryFlag(); undefined
       }
     }
@@ -110,11 +105,6 @@
         String parity = calculator.checkParity(r, des);
         flags.setParityFlag(parity);
 
-        System.out.println("CF: " + flags.getCarryFlag() +
-                         "\nOF: " + flags.getOverflowFlag() +
-                         "\nZF: " + flags.getZeroFlag() +
-                         "\nSF: " + flags.getSignFlag() +
-                         "\nPF: " + flags.getParityFlag() + "");
         // flags.setAuxiliaryFlag(); undefined
       }
     }
