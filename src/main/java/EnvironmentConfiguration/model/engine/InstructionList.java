@@ -14,6 +14,7 @@ import EnvironmentConfiguration.model.error_logging.Types;
 
 import bsh.Interpreter;
 import bsh.EvalError;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 public class InstructionList {
 	
@@ -103,6 +105,7 @@ public class InstructionList {
 						}
 						else if(isInteger){
 							int parameterSize = Integer.parseInt(inst[2]);
+
 							//check if negative
 							if(Math.signum(parameterSize) == -1.0) {
 								instructionErrorCollection.add(
@@ -125,6 +128,21 @@ public class InstructionList {
 									instructionErrorCollection = doParameterChecking(inst);
 								}
 							}
+//							for(int x = 3; x < inst.length - 1; x++) {
+//								int countOfVar = inst[x].split("/").length;
+//								int countOfSep = StringUtils.countMatches(inst[x], "/");
+//								boolean[] errorParameters = new boolean[inst.length - 3];
+//								boolean containsOtherThan = Pattern.matches("[rmi|0-9/]+", inst[x]);
+//								if((countOfVar != countOfSep + 1 && parameterSize > 0 )|| !containsOtherThan) {
+//									instructionErrorCollection.add(
+//											new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileNegativeCount).
+//													generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
+//									);
+//									errorParameters[x - 3] = true;
+//								}
+//								else
+//									errorParameters[x - 3] = false;
+//							}
 						}
 
 						//set missing path Error
@@ -219,25 +237,34 @@ public class InstructionList {
 
 	private ArrayList<String> doParameterChecking(String[] inst){
 		ArrayList<String> instructionErrorCollection = new ArrayList<String>();
-		String[] acceptableInputs = {"r", "m", "i", "r16", "r32", "m32"};
+		String[] acceptableInputs = {"r", "m", "i"};
 		int i =  3;
 		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
 			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');
 			String[] tempContainers = new String[addressingArray.length];
-			ArrayList<String> parameterErrors = new ArrayList<>();
+			ArrayList<String> parameterNonExistent = new ArrayList<>();
+			ArrayList<String> parameterDuplicate = new ArrayList<>();
 			int z = 0;
 			for (int y = 0; y < addressingArray.length; y++) {
-				if (HandleConfigFunctions.StringSearchInstruction(acceptableInputs, addressingArray[y]) &&
-						!HandleConfigFunctions.StringSearchInstruction(tempContainers, new String(addressingArray[y]))) {
-					tempContainers[z] = addressingArray[y];
-					z++;
+				if (HandleConfigFunctions.StringSearchContains(acceptableInputs, addressingArray[y])){
+					if(!HandleConfigFunctions.StringSearchInstruction(tempContainers, new String(addressingArray[y]))){
+						tempContainers[z] = addressingArray[y];
+						z++;
+					}
+					else
+						parameterDuplicate.add(addressingArray[y]);
 				} else
-					parameterErrors.add(addressingArray[y]);
+					parameterNonExistent.add(addressingArray[y]);
 			}
-			if(parameterErrors.size() > 0) {
-				parameterErrors.add(0, Integer.toString(i + 1));
+			if(parameterDuplicate.size() > 0) {
+				parameterDuplicate.add(0, Integer.toString(i + 1));
 				instructionErrorCollection.add(new InstructionFileErrorInvalidMessage(InstructionInvalid.
-						invalidDuplicateFileRegisterDestinationParameter).generateMessage(parameterErrors));
+						invalidDuplicateFileRegisterDestinationParameter).generateMessage(parameterDuplicate));
+			}
+			if(parameterNonExistent.size() > 0) {
+				parameterNonExistent.add(0, Integer.toString(i + 1));
+				instructionErrorCollection.add(new InstructionFileErrorInvalidMessage(InstructionInvalid.
+						invalidParameterFormat).generateMessage(parameterNonExistent));
 			}
 			i++;
 		}

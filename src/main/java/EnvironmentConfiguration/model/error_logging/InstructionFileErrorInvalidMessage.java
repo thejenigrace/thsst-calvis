@@ -41,6 +41,11 @@ public class InstructionFileErrorInvalidMessage {
                 returnMessage = "Lacked the Number of Parameters. Number Required:" + variables.get(0) + ", Recieved: "+
                         variables.get(1);
                 break;
+            case invalidParameterFormat:
+                returnMessage = "Invalid Value Specification For Parameter : "+ variables.get(0) + " \n";
+                for(int x = 1; x < variables.size(); x++)
+                    returnMessage += "       " + variables.get(x) + "\n";
+                break;
         }
         return  returnMessage;
     }

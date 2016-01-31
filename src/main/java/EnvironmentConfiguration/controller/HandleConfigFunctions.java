@@ -4,8 +4,10 @@ import EnvironmentConfiguration.model.error_logging.RegisterFileErrorInvalidMess
 import EnvironmentConfiguration.model.error_logging.RegisterFileErrorMissingMessage;
 import EnvironmentConfiguration.model.error_logging.RegisterInvalid;
 import EnvironmentConfiguration.model.error_logging.RegisterMissing;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ivan on 1/28/2016.
@@ -137,6 +139,27 @@ public class HandleConfigFunctions {
             }
         }
         return false;
+    }
+
+    public static boolean StringSearchContains (String[] a, String key) {
+        String tempo = key.substring(1);
+        for(int x = 0; x < a.length; x++) {
+            if ((a[x].charAt(0) == key.charAt(0))) {
+                if (tempo.length() == 0)
+                    return true;
+                else if (!Pattern.matches("[a-zA-Z]+", tempo))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public static String[] removeAllSpecificElements(String[] array, String key){
+        for(int x = 0; x < array.length; x++){
+            if(array[x].equals(key))
+                array = ArrayUtils.remove(array, x);
+        }
+        return array;
     }
 
 }
