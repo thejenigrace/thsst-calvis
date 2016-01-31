@@ -3,7 +3,7 @@ execute(des, src, registers, memory) {
 
  if ( des.isRegister() ) {
    if( src.isRegister() && src.getValue().equals("CL") ) {
-     System.out.println("SHL register and CL");
+     System.out.println("SAL register and CL");
 
      //get size of des
      int desSize = registers.getBitSize(des);
@@ -72,7 +72,7 @@ execute(des, src, registers, memory) {
      }
    }
    else if ( src.isHex() && src.getValue().length() <= 2){
-     System.out.println("SHL register and i8");
+     System.out.println("SAL register and i8");
 
      //get size of des
      int desSize = registers.getBitSize(des);
@@ -143,10 +143,10 @@ execute(des, src, registers, memory) {
  }
  else if ( des.isMemory() ){
    if( src.isRegister() && src.getValue().equals("CL") ) {
-
+     System.out.println("SAL memory and CL");
    }
    else if ( src.isHex() && registers.get(src).length() == 2){
-
+     System.out.println("SAL memory and i8");
    }
  }
 }

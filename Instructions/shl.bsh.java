@@ -143,9 +143,11 @@
  	}
  	else if ( des.isMemory() ){
     if( src.isRegister() && src.getValue().equals("CL") ) {
+      System.out.println("SHL memory and CL");
 
     }
     else if ( src.isHex() && registers.get(src).length() == 2){
+      System.out.println("SHL memory and i8");
 
     }
  	}
