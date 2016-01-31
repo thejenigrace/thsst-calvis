@@ -109,6 +109,11 @@ public class Calculator {
 		return val;
 	}
 
+//    public long convertSignedInteger(String value) {
+//        Long result = Long.parseLong(value, 16);
+//
+//    }
+
     public String[] cutToCertainSize(String value, Token src) {
         BigInteger bi = new BigInteger(value, 16);
         String val = bi.toString(16);
