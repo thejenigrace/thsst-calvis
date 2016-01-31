@@ -10,7 +10,7 @@ public enum InstructionInvalid {
     invalidDuplicateFileRegisterDestinationParameter,
     invalidFileNoSuchAddressingVariable,
     invalidFileExceededParameterCount,
-    invalidFileLackingParameterCount
-
+    invalidFileLackingParameterCount,
+    invalidParameterFormat
 }
 
