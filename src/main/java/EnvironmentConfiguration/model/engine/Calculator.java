@@ -109,6 +109,45 @@ public class Calculator {
 		return val;
 	}
 
+    public String[] cutToCertainSize(String value, Token src) {
+        BigInteger bi = new BigInteger(value, 16);
+        String val = bi.toString(16);
+        int size = registers.getHexSize(src);
+        System.out.println("c.size = " + size);
+        int missingZeroes = size * 2 - val.length();
+
+        //zero extend
+        for(int k = 0; k < missingZeroes; k++) {
+            val = "0" + val;
+        }
+
+        System.out.println("c.val = " + val);
+
+        StringBuilder sb0 = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
+        String[] result = new String[2];
+        for(int i = 0; i < val.length(); i++){
+            if(i < size)
+                sb0.append(val.charAt(i));
+            else
+                sb1.append(val.charAt(i));
+
+//            System.out.println("i-size == size-1 : " + (i-size) + " == " + (size-1));
+
+            if(i-size-1 == 0){
+                System.out.println("Initialize result[0]");
+                result[0] = sb0.toString();
+            }
+
+            if (i-size == size-1){
+                System.out.println("Initialize result[1]");
+                result[1]=sb1.toString();
+            }
+        }
+
+        return result;
+    }
+
 	/*
 	 * For 32-bit,
 	 * zero extend HEX
