@@ -109,10 +109,42 @@ public class Calculator {
 		return val;
 	}
 
-//    public long convertSignedInteger(String value) {
-//        Long result = Long.parseLong(value, 16);
-//
-//    }
+    public long convertToSignedInteger(BigInteger value, int size) {
+        long bongga = Long.parseLong(value.toString());
+        String str = value.toString(2);
+
+        int missingZeroes = size - str.length();
+
+        //zero extend
+        for(int k = 0; k < missingZeroes; k++) {
+            str = "0" + str;
+        }
+
+        if(str.charAt(0) == '1'){
+            BigInteger ry = value.subtract(BigInteger.ONE);
+            System.out.println("ry = " + ry.toString(2));
+            String temp = ry.toString(2);
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < temp.length(); i++) {
+                if(temp.charAt(i) == '1')
+                    sb.append("0");
+                else if(temp.charAt(i) == '0')
+                    sb.append("1");
+            }
+
+            System.out.println("sb = " + sb.toString());
+
+            BigInteger z = new BigInteger(sb.toString(), 2);
+            System.out.println("b = " + z.toString());
+
+            String f = "-" + z.toString();
+            System.out.println("parse = " + Long.parseLong(f));
+            bongga = Long.parseLong(f);
+            System.out.println(Long.toHexString(bongga));
+        }
+
+        return bongga;
+    }
 
     public String[] cutToCertainSize(String value, Token src) {
         BigInteger bi = new BigInteger(value, 16);
