@@ -43,7 +43,7 @@ execute(src, registers, memory) {
                 String[] finalize = c.cutToCertainSize(result.toString(16), src);
                 registers.set("DX", finalize[0]);
                 registers.set("AX", finalize[1]);
-
+        
                 System.out.println("finalize[0] = " + finalize[0]);
                 System.out.println("finalize[1] = " + finalize[1]);
 
