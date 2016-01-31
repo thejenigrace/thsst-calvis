@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class TextEditorController extends AssemblyComponent {
 
     private CodeArea codeArea;
+	private Pattern pattern;
 
     public TextEditorController(CodeArea codeArea){
         this.codeArea = codeArea;
@@ -20,14 +21,12 @@ public class TextEditorController extends AssemblyComponent {
 
     @Override
     public void update(String currentLine, int lineNumber) {
-
         if (currentLine != null) {
-            String find_pattern = "(?m)^.*$";
-            Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
             Matcher matcher = pattern.matcher(this.codeArea.getText());
             HashMap<Integer, int[]> findHighlightRanges = new HashMap<>();
             // c represents matched
             int c = 0;
+
             while (matcher.find()) {
                 int[] arrRange = new int[2];
                 arrRange[0] = matcher.start();
@@ -36,13 +35,15 @@ public class TextEditorController extends AssemblyComponent {
                 c++;
             }
             int[] range = findHighlightRanges.get(lineNumber);
-            if (range != null) {
-                codeArea.selectRange(range[0], range[1]);
-                codeArea.redo();
-            }
+	        if ( range != null ) {
+		       // System.out.println(range[0] + " to " + range[1]);
+		        codeArea.selectRange(range[0], range[1]);
+		        codeArea.redo();
+	        }
         }
         else {
-            codeArea.selectRange(0,0);
+	        System.out.println("null currentLine");
+	        codeArea.selectRange(0,0);
             codeArea.redo();
         }
     }
@@ -55,6 +56,9 @@ public class TextEditorController extends AssemblyComponent {
 
     @Override
     public void build() {
-
+	    String[] arr = this.sysCon.getInstructionKeywords();
+	    String expression =  String.join("|", arr) ;
+	    expression = "(" + expression +")(.*)";
+	    pattern = Pattern.compile("(?<FIND>" + expression + ")");
     }
 }

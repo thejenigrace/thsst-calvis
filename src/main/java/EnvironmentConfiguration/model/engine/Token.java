@@ -2,11 +2,11 @@ package EnvironmentConfiguration.model.engine;
 
 public class Token {
 	
-	static final String HEX = "type_HEX";
-	static final String REG = "type_REG";
-	static final String MEM = "type_MEM";
-	static final String DEC = "type_DEC";
-	static final String LABEL = "type_LBL";
+	public static final String HEX = "type_HEX";
+	public static final String REG = "type_REG";
+	public static final String MEM = "type_MEM";
+	public static final String DEC = "type_DEC";
+	public static final String LABEL = "type_LBL";
 	
 	private String value;
 	private String type;

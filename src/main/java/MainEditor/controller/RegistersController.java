@@ -71,15 +71,16 @@ public class RegistersController extends AssemblyComponent implements Initializa
         tableViewRegister.refresh();
 
         flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
-
         tableViewFlags1.setItems(flagList1);
-
         tableViewFlags1.refresh();
     }
 
     @Override
     public void refresh() {
         tableViewRegister.refresh();
+
+        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
+        tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
     }
 }

@@ -258,28 +258,47 @@ public class CALVISParser {
 
 			// bind action from BSH files
 			Alternative instructionAlternative = new Alternative(elements);
-			instructionAlternative.setAction((Action<Object[]>) args -> {
-				int numParameters1 = args.length / 2;
-				String anInstruction = args[0].toString();
 
-				Instruction someInstruction = instructions.getInstruction(anInstruction);
-				ArrayList<Object> tokenArr = new ArrayList<>();
+			if ( numParameters == 1) {
+				instructionAlternative.setAction((Action<Object>) args -> {
+					String anInstruction = (String) args;
+					//System.out.println(anInstruction);
 
-				for (int i = 0; i < numParameters1; i++) {
-					tokenArr.add(args[i*2+1]);
-				}
-				Object[] tokens = new Object[tokenArr.size()];
-				tokens = tokenArr.toArray(tokens);
+					Instruction someInstruction = instructions.getInstruction(anInstruction);
+					CALVISInstruction calvisInstruction =
+							new CALVISInstruction(someInstruction, anInstruction, null, registers, memory);
 
-				CALVISInstruction calvisInstruction =
-						new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
+					String instructionAdd = Integer.toHexString(lineNumber);
+					mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+							RegisterList.instructionPointerSize, "0" ), calvisInstruction);
+					lineNumber++;
+					return null;
+				});
+			}
+			else {
+				instructionAlternative.setAction((Action<Object[]>) args -> {
+					int numParameters1 = args.length / 2;
+					String anInstruction = args[0].toString();
 
-				String instructionAdd = Integer.toHexString(lineNumber);
-				mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-										Memory.MAX_ADDRESS_SIZE, "0" ), calvisInstruction);
-				lineNumber++;
-				return null;
-			});
+					Instruction someInstruction = instructions.getInstruction(anInstruction);
+					ArrayList<Object> tokenArr = new ArrayList<>();
+
+					for (int i = 0; i < numParameters1; i++) {
+						tokenArr.add(args[i * 2 + 1]);
+					}
+					Object[] tokens = new Object[tokenArr.size()];
+					tokens = tokenArr.toArray(tokens);
+
+					CALVISInstruction calvisInstruction =
+							new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
+
+					String instructionAdd = Integer.toHexString(lineNumber);
+					mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+							Memory.MAX_ADDRESS_SIZE, "0"), calvisInstruction);
+					lineNumber++;
+					return null;
+				});
+			}
 			altList.add(instructionAlternative);
 		}
 

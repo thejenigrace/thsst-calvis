@@ -1,6 +1,6 @@
 execute(registers, memory) {
-	
 	//get contents of registers BX and AL
+
 	String BX = registers.get("BX");
 	String AL = registers.get("AL");
 
@@ -9,6 +9,11 @@ execute(registers, memory) {
 
 	// transform result into hex string and store in string AL 
 	AL = Integer.toHexString(result);
+
+	Calculator cal = new Calculator(registers, memory);
+
+	Token t = new Token (Token.REG, "AL");
+	AL = cal.hexZeroExtend(AL, t);
 
 	// get the last 2 bytes only
 	AL = AL.substring(AL.length()-2, AL.length());

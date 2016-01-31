@@ -19,8 +19,11 @@ public class CALVISInstruction {
     }
 
     public void execute(){
-        int numParameters = params.length;
-        Token[] tokens = evaluateParameters();
+        int numParameters = 0;
+        if ( params != null ){
+            numParameters = params.length;
+        }
+        Token[] tokens = evaluateParameters(numParameters);
         try {
             switch(numParameters){
                 case 0:
@@ -42,9 +45,9 @@ public class CALVISInstruction {
         }
     }
 
-    private Token[] evaluateParameters() {
-        Token[] tokens = new Token[params.length];
-        for (int i = 0; i < params.length; i++) {
+    private Token[] evaluateParameters(int size) {
+        Token[] tokens = new Token[size];
+        for (int i = 0; i < size; i++) {
             if ( params[i] instanceof Token ) {
                 tokens[i] = (Token) params[i];
             }

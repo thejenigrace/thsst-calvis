@@ -15,6 +15,7 @@ import java.util.*;
 public class RegisterList {
 
 	static int MAX_SIZE = 32; //default is 32 bit registers
+
 	static final int NAME = 0;
 	static final int SOURCE = 1;
 	static final int SIZE = 2;
@@ -26,6 +27,9 @@ public class RegisterList {
 	private ArrayList<String[]> lookup;
 	private EFlags flags;
 	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
+
+	public static String instructionPointerName = "EIP";
+	public static int instructionPointerSize = 32;
 
 	public RegisterList(String csvFile) {
 		Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
@@ -116,6 +120,12 @@ public class RegisterList {
 							case "2":
 								Register g = new Register(reg[NAME], regSize);
 								this.map.put(reg[NAME], g);
+								break;
+							case "3": // Instruction Pointer
+								Register h = new Register(reg[NAME], regSize);
+								instructionPointerName = reg[NAME];
+								instructionPointerSize = regSize;
+								this.map.put(reg[NAME], h);
 								break;
 //							case "4":
 //								EFlags e = new EFlags(reg[NAME], regSize);
@@ -280,10 +290,23 @@ public class RegisterList {
 		}
 	}
 
+	public String getInstructionPointer(){
+		return get(instructionPointerName);
+	}
+
+	public void setInstructionPointer(String value){
+		set(instructionPointerName, value);
+	}
+
+	public void putAll(Map<String, Register> newMap){
+		this.map.putAll(newMap);
+	}
+
 	public void clear(){
 		for (String s : this.map.keySet()) {
 			this.map.get(s).initializeValue();
 		}
+		flags.initializeValue();
 	}
 
 	public void print(){
