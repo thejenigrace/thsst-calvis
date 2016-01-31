@@ -9,6 +9,7 @@
       int desSize = registers.getBitSize(des);
       int srcSize = registers.getBitSize(src);
 
+      //check if des size is 8-, 16-, 32-bit
       boolean checkSize = false;
       for(int a : registers.getAvailableSizes()) {
         if(a == desSize) {
@@ -16,23 +17,16 @@
         }
       }
 
-      if ( (desSize == srcSize) && checkSize ) {
+      if( (desSize == srcSize) && checkSize ) {
         //get hex value of des, src then convert to binary
         String source = calculator.hexToBinaryString(registers.get(src), src);
         String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-        String result = "";
+        BigInteger biSrc = new BigInteger(source, 2);
+        BigInteger biDes = new BigInteger(destination, 2);
+        BigInteger biResult = biDes.xor(biSrc);
 
-        for (int i = 0; i < desSize; i++) {
-          if (source.charAt(i) == destination.charAt(i)) {
-            result = result.concat("0");
-          }
-          else {
-            result = result.concat("1");
-          }
-        }
-
-        result = calculator.binaryToHexString(result, des);
+        String result = calculator.binaryToHexString(biResult.toString(2), des);
         registers.set(des, result);
 
         //FLAGS
@@ -50,59 +44,31 @@
         }
 
         String r = calculator.hexToBinaryString(registers.get(des), des);
-        String sign = "" + result.charAt(0);
+        String sign = "" + r.charAt(0);
         flags.setSignFlag(sign);
 
         String parity = calculator.checkParity(r, des);
         flags.setParityFlag(parity);
 
-        System.out.println("CF: " + flags.getCarryFlag() +
-                         "\nOF: " + flags.getOverflowFlag() +
-                         "\nZF: " + flags.getZeroFlag() +
-                         "\nSF: " + flags.getSignFlag() +
-                         "\nPF: " + flags.getParityFlag() + "");
         // flags.setAuxiliaryFlag(); undefined
       }
     }
  		else if ( src.isMemory() ) {
  			System.out.println("XOR register and memory");
 
- 		}
-    else if ( src.isHex() ) {
-      System.out.println("XOR register and immediate");
-
       //get size of des, src
       int desSize = registers.getBitSize(des);
-      int srcSize = src.getValue().length();
-      // registers.set(src, calculator.hexZeroExtend(src.getValue(), des));
-      // int srcSize = registers.getBitSize(src);
 
-      boolean checkSize = false;
-      for(int a : registers.getAvailableSizes()) {
-        if(a == desSize) {
-          checkSize = true;
-        }
-      }
+      String destination = calculator.hexToBinaryString(registers.get(des), des);
+      String s = memory.read(src, desSize);
+      String source = calculator.hexToBinaryString(s, des);
 
-      if ( (desSize >= srcSize) && checkSize ) {
-        //get hex value of des, src then convert to binary
-        String source = calculator.hexToBinaryString(src.getValue(), des);
-        String destination = calculator.hexToBinaryString(registers.get(des), des);
+      BigInteger biSrc = new BigInteger(source, 2);
+      BigInteger biDes = new BigInteger(destination, 2);
+      BigInteger biResult = biDes.xor(biSrc);
 
-        String result = "";
-
-        for (int i = 0; i < desSize; i++) {
-          if (source.charAt(i) == destination.charAt(i)) {
-            result = result.concat("0");
-          }
-          else {
-            result = result.concat("1");
-          }
-        }
-
-        result = calculator.binaryToHexString(result, des);
-        registers.set(des, result);
-      }
+      String result = calculator.binaryToHexString(biResult.toString(2), des);
+      registers.set(des, result);
 
       //FLAGS
       EFlags flags = registers.getEFlags();
@@ -119,32 +85,110 @@
       }
 
       String r = calculator.hexToBinaryString(registers.get(des), des);
-      String sign = "" + result.charAt(0);
+      String sign = "" + r.charAt(0);
       flags.setSignFlag(sign);
 
       String parity = calculator.checkParity(r, des);
       flags.setParityFlag(parity);
 
-      System.out.println("CF: " + flags.getCarryFlag() +
-                       "\nOF: " + flags.getOverflowFlag() +
-                       "\nZF: " + flags.getZeroFlag() +
-                       "\nSF: " + flags.getSignFlag() +
-                       "\nPF: " + flags.getParityFlag() + "");
       // flags.setAuxiliaryFlag(); undefined
+ 		}
+    else if ( src.isHex() ) {
+      System.out.println("XOR register and immediate");
+
+      //get size of des, src
+      int desSize = registers.getBitSize(des);
+      int srcSize = src.getValue().length();
+
+      //check if des size is 8-, 16-, 32-bit
+      boolean checkSize = false;
+      for(int a : registers.getAvailableSizes()) {
+        if(a == desSize) {
+          checkSize = true;
+        }
+      }
+
+      if( (desSize >= srcSize) && checkSize ) {
+        //get hex value of des, src then convert to binary
+        String source = calculator.hexToBinaryString(src.getValue(), des);
+        String destination = calculator.hexToBinaryString(registers.get(des), des);
+
+        BigInteger biSrc = new BigInteger(source, 2);
+        BigInteger biDes = new BigInteger(destination, 2);
+        BigInteger biResult = biDes.xor(biSrc);
+
+        String result = calculator.binaryToHexString(biResult.toString(2), des);
+        registers.set(des, result);
+
+        //FLAGS
+        EFlags flags = registers.getEFlags();
+
+        flags.setCarryFlag("0");
+        flags.setOverflowFlag("0");
+
+        BigInteger bi = new BigInteger(registers.get(des), 16);
+        if(bi.equals(BigInteger.ZERO)) {
+          flags.setZeroFlag("1");
+        }
+        else {
+          flags.setZeroFlag("0");
+        }
+
+        String r = calculator.hexToBinaryString(registers.get(des), des);
+        String sign = "" + r.charAt(0);
+        flags.setSignFlag(sign);
+
+        String parity = calculator.checkParity(r, des);
+        flags.setParityFlag(parity);
+
+        // flags.setAuxiliaryFlag(); undefined
+      }
     }
  	}
  	else if ( des.isMemory() ) {
     if ( src.isRegister() ) {
  			System.out.println("XOR memory and register");
 
-    }
- 		else if ( src.isMemory() ) {
- 			System.out.println("XOR memory and memory");
+      //get size of des, src
+      int srcSize = registers.getBitSize(src);
 
- 		}
+      String source = calculator.hexToBinaryString(registers.get(src), src);
+      String d = memory.read(des, srcSize);
+      String destination = calculator.hexToBinaryString(d, src);
+
+      BigInteger biSrc = new BigInteger(source, 2);
+      BigInteger biDes = new BigInteger(destination, 2);
+      BigInteger biResult = biDes.xor(biSrc);
+
+      String result = calculator.binaryToHexString(biResult.toString(2), src);
+      memory.write(des, result, srcSize);
+
+      //FLAGS
+      EFlags flags = registers.getEFlags();
+
+      flags.setCarryFlag("0");
+      flags.setOverflowFlag("0");
+
+      BigInteger bi = new BigInteger(memory.read(des, srcSize), 16);
+      if(bi.equals(BigInteger.ZERO)) {
+        flags.setZeroFlag("1");
+      }
+      else {
+        flags.setZeroFlag("0");
+      }
+
+      String r = calculator.hexToBinaryString(memory.read(des, srcSize), src);
+      String sign = "" + r.charAt(0);
+      flags.setSignFlag(sign);
+
+      String parity = calculator.checkParity(r, des);
+      flags.setParityFlag(parity);
+
+      // flags.setAuxiliaryFlag(); undefined
+    }
     else if ( src.isHex() ) {
   		System.out.println("XOR memory and immediate");
 
     }
- 	}
+  }
  }
