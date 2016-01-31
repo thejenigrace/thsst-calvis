@@ -8,6 +8,13 @@ add,Instructions/add.bsh.java,2,r/m,r/m/i
 adc,Instructions/adc.bsh.java,2,r/m,r/m/i
 adcx,Instructions/adcx.bsh.java,2,r32,r/m32
 adox,Instructions/adox.bsh.java,2,r32,r/m32
+sub,Instructions/sub.bsh.java,2,r/m,r/m/i
+dec,Instructions/dec.bsh.java,1,r/m
+neg,Instructions/neg.bsh.java,1,r/m
+mul,Instructions/mul.bsh.java,1,r/m
+imul,Instructions/imul.bsh.java,1,r/m
+div,Instructions/div.bsh.java,1,r/m
+idiv,Instructions/idiv.bsh.java,1,r/m
 inc,Instructions/inc.bsh.java,1,r/m
 and,Instructions/and.bsh.java,2,r/m,r/m/i
 or,Instructions/or.bsh.java,2,r/m,r/m/i

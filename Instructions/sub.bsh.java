@@ -1,7 +1,7 @@
 execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
         if ( src.isRegister() ){
- 			System.out.println("ADD register to register");
+ 			System.out.println("SUB register to register");
 
             String x = registers.get(src);
             String y = registers.get(des);
@@ -10,7 +10,7 @@ execute(des, src, registers, memory) {
                 // Addition in Binary Format
                 BigInteger biX = new BigInteger(x, 16);
                 BigInteger biY = new BigInteger(y, 16);
-                BigInteger result = biY.add(biX);
+                BigInteger result = biY.subtract(biX);
 
                 Calculator c = new Calculator(registers, memory);
                 registers.set(des, c.binaryToHexString(result.toString(2), des));
@@ -62,7 +62,7 @@ execute(des, src, registers, memory) {
                 // Addition in Binary Format
                 BigInteger biX = new BigInteger(x, 16);
                 BigInteger biY = new BigInteger(y, 16);
-                BigInteger result = biY.add(biX);
+                BigInteger result = biY.subtract(biX);
 
                 Calculator c = new Calculator(registers, memory);
                 registers.set(des, c.binaryToHexString(result.toString(2), des));

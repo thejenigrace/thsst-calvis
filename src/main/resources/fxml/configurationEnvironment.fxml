@@ -73,7 +73,7 @@
                <ChoiceBox fx:id="memoryChoiceBox" prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                <Pane GridPane.columnIndex="2" GridPane.rowIndex="0">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateMemory" prefHeight="26.0" prefWidth="51.0" text="Locate" />
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateMemory" text="Locate" />
                    </children>
                </Pane>
                <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Registers Configuration File" textAlignment="CENTER" GridPane.rowIndex="1" />
