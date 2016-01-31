@@ -139,6 +139,7 @@ public class Calculator {
 
             String f = "-" + z.toString();
             System.out.println("parse = " + Long.parseLong(f));
+
             bongga = Long.parseLong(f);
             System.out.println(Long.toHexString(bongga));
         }
