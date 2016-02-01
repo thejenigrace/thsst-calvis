@@ -19,13 +19,16 @@
                 System.out.println("b = " + b);
                 System.out.println("rr = " + r);
 
-                BigInteger result = new BigInteger(r.toString());
-
                 System.out.println("AL = "+biY.toString(2));
                 System.out.println("src (byte) = "+biX.toString(2));
-                System.out.println("result = "+ result.toString(16));
+                System.out.println("result = " +Long.toHexString(r));
 
-                registers.set("AX", result.toString(16));
+                String finalize = c.cutToCertainHexSize(Long.toHexString(r), 4);
+//
+//                System.out.println("finalize[0] = " + finalize[0]);
+//                System.out.println("finalize[1] = " + finalize[1]);
+
+                registers.set("AX",  finalize);
             } else if(registers.getBitSize(src)==16){
                 BigInteger biY=new BigInteger(registers.get("AX"),16);
                 BigInteger biX=new BigInteger(x,16);
@@ -39,13 +42,12 @@
                 System.out.println("b = " + b);
                 System.out.println("rr = " + r);
 
-                BigInteger result = new BigInteger(r.toString());
-
-                System.out.println("AL = "+biY.toString(2));
+                System.out.println("AX = "+biY.toString(2));
                 System.out.println("src (byte) = "+biX.toString(2));
-                System.out.println("result = "+ result.toString(16));
+                System.out.println("result = " +Long.toHexString(r));
 
-                String[] finalize = c.cutToCertainSize(result.toString(16), src);
+                String fix = c.cutToCertainHexSize(Long.toHexString(r), 8);
+                String[] finalize = c.cutToCertainSize(fix, src);
                 registers.set("DX", finalize[0]);
                 registers.set("AX", finalize[1]);
 
@@ -66,11 +68,12 @@
 
                 BigInteger result = new BigInteger(r.toString());
 
-                System.out.println("AL = "+biY.toString(2));
+                System.out.println("EAX = "+biY.toString(2));
                 System.out.println("src (byte) = "+biX.toString(2));
-                System.out.println("result = "+ result.toString(16));
+                System.out.println("result = "+ Long.toHexString(r));
 
-                String[] finalize = c.cutToCertainSize(result.toString(16), src);
+                String fix = c.cutToCertainHexSize(Long.toHexString(r), 16);
+                String[] finalize = c.cutToCertainSize(fix, src);
                 registers.set("EDX", finalize[0]);
                 registers.set("EAX", finalize[1]);
 

@@ -82,7 +82,7 @@ execute(des, src, registers, memory) {
 
                 ef.setParityFlag(c.checkParity(result.toString(2),des));
 
-                ef.setAuxiliaryFlag("0");
+				ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
                 String sign=""+result.toString(2).charAt(0);
                 ef.setSignFlag(sign);
