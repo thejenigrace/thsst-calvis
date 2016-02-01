@@ -67,6 +67,8 @@ public class WorkspaceController implements Initializable {
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
+    private String fileLocation = "";
+
     @FXML
 	private Button btnPlay;
 	@FXML
@@ -228,28 +230,29 @@ public class WorkspaceController implements Initializable {
 		}
 	}
 
-	/**
-	 * Action for New File; a MenuItem in File.
-	 *
-	 * @param event
-	 */
-	@FXML
-	private void handleNewFile(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible()) {
-			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.setTitle("Confirmation Dialog");
-			alert.setHeaderText("Do you want to create a new file?");
-			alert.setContentText("Your changes will be lost if you continue.");
+    /**
+     * Action for New File; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleNewFile(ActionEvent event) {
+        if (codeArea != null && codeArea.isVisible()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Do you want to create a new file?");
+            alert.setContentText("Unsaved changes will be lost if you continue.");
 
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
-				newFile();
-				MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
-			} else {
-				// ... user chose CANCEL or closed the dialog
-			}
-		}
-	}
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                newFile();
+                fileLocation = "";
+                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
+    }
 
 	/**
 	 * Action for Open File; a MenuItem in File.
@@ -260,19 +263,32 @@ public class WorkspaceController implements Initializable {
 	private void handleOpenFile(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 
-		// Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
-		fileChooser.getExtensionFilters().add(extFilter);
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+        fileChooser.getExtensionFilters().add(extFilter);
 
 		// Show open file dialog
 		File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
-		if(file != null) {
-			newFile();
-			codeArea.replaceText(readFile(file));
-			MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-		}
-	}
+        if (codeArea != null && codeArea.isVisible()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Do you want to open " + file.getName() + "?");
+            alert.setContentText("Unsaved changes will be lost if you continue.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if(file != null) {
+                    newFile();
+                    codeArea.replaceText(readFile(file));
+                    fileLocation = file.getAbsolutePath();
+                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+                }
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
+    }
 
 	/**
 	 * Action for Save; a MenuItem in File.
@@ -283,18 +299,27 @@ public class WorkspaceController implements Initializable {
 	private void handleSaveFile(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 
-		//Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-		fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-		//Show save file dialog
-		File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+        if( fileLocation.equals("") ) {
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
-		if(file != null) {
-			writeFile(codeArea.getText(), file);
-			MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-		}
-	}
+            if(file != null) {
+                writeFile(codeArea.getText(), file);
+                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+                fileLocation = file.getAbsolutePath();
+            }
+        }
+        else {
+            File file = new File(fileLocation);
+            writeFile(codeArea.getText(), file);
+            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+            fileLocation = file.getAbsolutePath();
+        }
+    }
 
 	/**
 	 * Action for Save As; a MenuItem in File.
@@ -305,18 +330,19 @@ public class WorkspaceController implements Initializable {
 	private void handleSaveAsFile(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 
-		//Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-		fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+        fileChooser.getExtensionFilters().add(extFilter);
 
 		//Show save file dialog
 		File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
-		if(file != null){
-			writeFile(codeArea.getText(), file);
-			MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-		}
-	}
+        if(file != null) {
+            writeFile(codeArea.getText(), file);
+            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+            fileLocation = file.getAbsolutePath();
+        }
+    }
 
 	/**
 	 * Action for Cut; a MenuItem in File.
