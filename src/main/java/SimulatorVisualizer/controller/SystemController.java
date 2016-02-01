@@ -1,13 +1,22 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.engine.*;
+import EnvironmentConfiguration.model.engine.CALVISInstruction;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.EFlags;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.MemoryAddressCalculator;
+import EnvironmentConfiguration.model.engine.RegisterList;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 import javafx.application.Platform;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -21,12 +30,19 @@ public class SystemController {
     private InstructionList instructionList;
     private Memory memory;
     private CALVISParser parser;
+
     private List<AssemblyComponent> observerList;
+
     private SimulationState state;
-    private HashMap<String, CALVISInstruction> executionMap;
+	private Thread thread;
+
     private WorkspaceController workspaceController;
-    private Thread thread;
-    private Stack<EnvironmentConfigurator> stack;
+
+	private HashMap<String, CALVISInstruction> executionMap;
+	private HashMap<Integer, String[][]> registerStackMap;
+	private HashMap<Integer, String> flagsStackMap;
+	private HashMap<Integer, String[][]> memoryStackMap;
+	private Integer count;
 
     public SystemController(EnvironmentConfigurator ec, WorkspaceController wc){
         this.environment = ec;
@@ -37,7 +53,11 @@ public class SystemController {
         this.memory = environment.getMemory();
         this.observerList = new ArrayList<>();
         this.state = SimulationState.STOP;
-        this.stack = new Stack<>();
+
+	    this.registerStackMap = new HashMap<>();
+	    this.flagsStackMap = new HashMap<>();
+	    this.memoryStackMap = new HashMap<>();
+	    this.count = 0;
     }
 
     public void attach(AssemblyComponent observer){
@@ -119,26 +139,53 @@ public class SystemController {
         play(codeText);
     }
 
+	public void clear(){
+		this.registerList.clear();
+		this.memory.clear();
+		this.executionMap = new HashMap<>();
+		this.registerStackMap = new HashMap<>();
+		this.flagsStackMap = new HashMap<>();
+		this.memoryStackMap = new HashMap<>();
+		this.count = 0;
+		refreshAllObservers();
+	}
+
     public void previous() {
         if ( executionMap != null ) {
             if ( state == SimulationState.PAUSE ){
-                System.out.println("previous");
-                // 1. Revert Environment back by one pop
-                this.environment = stack.pop();
-                this.registerList = environment.getRegisters();
-                this.memory = environment.getMemory();
-                // 2. Retrieve EIP value and store it to @var currentLine
-                String currentLine = registerList.get("EIP");
-                // 3. Parse currentLine to int @var value
+	            //System.out.println("previous");
+	            count--;
+	            if ( count >= 0 ) {
+		            //1. Revert Environment back by one pop
+		            String[][] registerStringArray = registerStackMap.get(count);
+		            for (int i = 0; i < registerStringArray.length; i++) {
+			            //System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
+			            //1.2 Set registerList with values from pop
+			            this.registerList.set(registerStringArray[i][0], registerStringArray[i][1]);
+		            }
+		            EFlags flags = this.registerList.getEFlags();
+		            String flagsValue = flagsStackMap.get(count);
+		            flags.setValue(flagsValue);
 
-                int value = Integer.parseInt(currentLine, 16);
-                // 4. Notify all observers that an instruction has been reverted
-                value--;
-                currentLine = Integer.toHexString(value);
-                currentLine = MemoryAddressCalculator.extend(currentLine, RegisterList.instructionPointerSize, "0");
-                System.out.println(currentLine);
-                registerList.set("EIP", currentLine);
-                notifyAllObservers(executionMap.get(currentLine), value);
+		            String[][] memoryArray = memoryStackMap.get(count);
+		            Map memoryMap = this.memory.getMemoryMap();
+		            for (int i = 0; i < memoryArray.length; i++) {
+			            memoryMap.put(memoryArray[i][0], memoryArray[i][1]);
+		            }
+
+		            // 2. Retrieve EIP value and store it to @var currentLine
+                    String currentLine = registerList.get("EIP");
+		            // 3. Parse currentLine to int @var value
+                    int value = Integer.parseInt(currentLine, 16);
+		            value--;
+		            currentLine = Integer.toHexString(value);
+		            currentLine = MemoryAddressCalculator.extend(currentLine, RegisterList.instructionPointerSize, "0");
+		            //2. Notify all observers that an instruction has been reverted
+		            notifyAllObservers(executionMap.get(currentLine), value);
+	            }
+	            else {
+		            end();
+	            }
             }
         }
     }
@@ -147,21 +194,7 @@ public class SystemController {
         if ( executionMap != null ) {
             if ( state == SimulationState.PAUSE ){
                 if ( executionMap.containsKey(registerList.get("EIP")) ) {
-                    System.out.println("next");
-                    // 1. Retrieve EIP value and store it to @var currentLine
-                    String currentLine = registerList.get("EIP");
-                    System.out.println(currentLine);
-                    // 2. Parse currentLine to int @var value
-                    int value = Integer.parseInt(currentLine, 16);
-                    // 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
-                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
-                    // 4. Notify all observers that an instruction has been executed
-                    notifyAllObservers(executionMap.get(currentLine), value);
-                    // 5. Increment @var currentLine and store it to EIP register
-                    value++;
-                    registerList.set("EIP", Integer.toHexString(value));
-                    stack.push(environment);
-                    System.out.println("pushed to stack");
+                    executeOneLine();
                 }
                 else {
                     end();
@@ -170,47 +203,82 @@ public class SystemController {
         }
     }
 
-    public void clear(){
-        this.registerList.clear();
-        this.memory.clear();
-        this.executionMap = new HashMap<>();
-        refreshAllObservers();
-    }
+	private void beginSimulation(){
+		workspaceController.enableCodeArea(false);
+		thread = new Thread(){
+			public void run(){
+				while ((state == SimulationState.PLAY) && executionMap.containsKey(registerList.get("EIP"))) {
+					executeOneLine();
+					try {
+						Thread.sleep(SIMULATION_DELAY);
+					} catch (InterruptedException e) {
+						System.out.println("Simulation Thread interrupted");
+					}
+				}
+				if (state == SimulationState.PLAY) {
+					end();
+				}
+			}
+		};
+		thread.start();
+	}
+
+	private void executeOneLine(){
+		// 1. Retrieve EIP value and store it to @var currentLine
+		String currentLine = registerList.get("EIP");
+		//System.out.println(currentLine);
+		// 2. Parse currentLine to int @var value
+		int value = Integer.parseInt(currentLine, 16);
+		// 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
+		executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+		// 4. Notify all observers that an instruction has been executed
+		notifyAllObservers(executionMap.get(currentLine), value);
+		// 5. Increment @var currentLine and store it to EIP register
+		value++;
+		registerList.set("EIP", Integer.toHexString(value));
+		count++;
+		push();
+	}
 
     private void parse(String code){
         this.executionMap = parser.parse(code);
+	    push();
     }
 
-    private void beginSimulation(){
-        workspaceController.enableCodeArea(false);
-        thread = new Thread(){
-            public void run(){
-                while ((state == SimulationState.PLAY) &&
-                            executionMap.containsKey(registerList.get("EIP"))) {
-                    // 1. Retrieve EIP value and store it to @var currentLine
-                    String currentLine = registerList.get("EIP");
-                    // 2. Parse currentLine to int @var value
-                    int value = Integer.parseInt(currentLine, 16);
-                    // 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
-                    executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
-                    // 4. Notify all observers that an instruction has been executed
-                    notifyAllObservers(executionMap.get(currentLine), value);
-                    // 5. Increment @var currentLine and store it to EIP register
-                    value++;
-                    registerList.set("EIP", Integer.toHexString(value));
-                    try {
-                        Thread.sleep(SIMULATION_DELAY);
-                    } catch (InterruptedException e) {
-                        System.out.println("Simulation Thread interrupted");
-                    }
-                }
-                if (state == SimulationState.PLAY) {
-                    end();
-                }
-            }
-        };
-        thread.start();
-    }
+	private void push(){
+		Map registerMap = registerList.getRegisterMap();
+		Iterator<String> iterator = registerMap.keySet().iterator();
+		String[][] registerStringArray = new String[registerMap.size()][2];
+		int i = 0;
+		while (iterator.hasNext()){
+			String registerName = iterator.next();
+			registerStringArray[i][0] = registerName;
+			registerStringArray[i][1] = registerList.get(registerName);
+			i++;
+		}
+		this.registerStackMap.put(count, registerStringArray);
+
+		EFlags flags = registerList.getEFlags();
+		String flagsValue = flags.getValue();
+		this.flagsStackMap.put(count, flagsValue);
+
+		Map<String, String> memoryMap = memory.getMemoryMap();
+		Iterator<String> iterator2 = memoryMap.keySet().iterator();
+		String[][] memoryArray = new String[memoryMap.size()][2];
+		int k = 0;
+		while (iterator2.hasNext()){
+			String memoryAddress = iterator2.next();
+			memoryArray[k][0] = memoryAddress;
+			memoryArray[k][1] = memoryMap.get(memoryAddress);
+			k++;
+		}
+		this.memoryStackMap.put(count, memoryArray);
+
+		//System.out.println(registerStringArray);
+//		for (int k = 0; k < registerStringArray.length; k++) {
+//			System.out.println(registerStringArray[k][0] + " : " + registerStringArray[k][1]);
+//		}
+	}
 
     /** Method used to get the keywords
      *  needed to be highlighted in the text editor

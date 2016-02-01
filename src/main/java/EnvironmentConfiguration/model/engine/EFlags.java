@@ -19,7 +19,7 @@ public class EFlags extends Register {
 		buildFlagUIs();
 	}
 
-	private void buildFlagUIs() {
+	public void buildFlagUIs() {
 		this.flagUIs = new ArrayList<>();
 		this.flagUIs.add(new FlagUI("Carry", getCarryFlag()));
 		this.flagUIs.add(new FlagUI("Sign", getSignFlag()));
@@ -40,6 +40,7 @@ public class EFlags extends Register {
 	}
 
 	public ArrayList<FlagUI> getFlagUIList(){
+		buildFlagUIs();
 		return this.flagUIs;
 	}
 

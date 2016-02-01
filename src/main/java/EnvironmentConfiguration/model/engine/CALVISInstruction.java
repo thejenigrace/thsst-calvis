@@ -58,8 +58,8 @@ public class CALVISInstruction {
         return tokens;
     }
 
-    public String getInstruction(){
-        // TO DO
-        return "";
-    }
+//    public String getInstruction(){
+//        // TO DO
+//        return "";
+//    }
 }

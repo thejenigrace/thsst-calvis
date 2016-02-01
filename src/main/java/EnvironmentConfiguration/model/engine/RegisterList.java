@@ -244,6 +244,9 @@ public class RegisterList {
 
 	public void set(String registerName, String hexString){
 		set(new Token(Token.REG, registerName), hexString);
+//		if ( registerName.equals(instructionPointerName) ){
+//			this.flags.buildFlagUIs();
+//		}
 	}
 
 	public void set(Token a, String hexString){
@@ -297,10 +300,6 @@ public class RegisterList {
 		set(instructionPointerName, value);
 	}
 
-	public void putAll(Map<String, Register> newMap){
-		this.map.putAll(newMap);
-	}
-
 	public void clear(){
 		for (String s : this.map.keySet()) {
 			this.map.get(s).initializeValue();
@@ -332,6 +331,10 @@ public class RegisterList {
 
 	public Map getRegisterMap(){
 		return this.map;
+	}
+
+	public Map copyRegisterMap(){
+		return new TreeMap<>(this.map);
 	}
 
 	public ErrorLogger getErrorLogger(){

@@ -472,7 +472,7 @@ public class WorkspaceController implements Initializable {
 	}
 
 	public void enableCodeArea(boolean flag){
-		this.codeArea.setEditable(flag);
+		this.codeArea.setDisable(!flag);
 	}
 
     public void formatCodeArea(String codeBlock){

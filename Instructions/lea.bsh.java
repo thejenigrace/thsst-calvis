@@ -1,7 +1,6 @@
 execute(des, src, registers, memory){
 	if ( src.isMemory() && des.isRegister() ){
-		EnvironmentConfiguration.model.Calculator cal = new EnvironmentConfiguration.model.Calculator(registers, memory);
-		String address = cal.computeEffectiveAddress(src);
+		String address = memory.read(src, des);
 
 		int des_reg_size = registers.getSize(des);
 		// r32, m32 ; r16, m16

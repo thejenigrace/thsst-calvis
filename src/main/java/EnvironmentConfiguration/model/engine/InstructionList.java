@@ -14,7 +14,6 @@ import EnvironmentConfiguration.model.error_logging.Types;
 
 import bsh.Interpreter;
 import bsh.EvalError;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.regex.Pattern;
 
 public class InstructionList {
 	
@@ -174,6 +172,7 @@ public class InstructionList {
 							Instruction com = (Instruction) scanner.eval(prepareImportStatements());
 							this.map.put(inst[0].toUpperCase(), com);
 							this.grammarDefinition.add(inst);
+							System.out.println("Loaded: " + inst[0]);
 						}
 					}
 					lineCounter++;
