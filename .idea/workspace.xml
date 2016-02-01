@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="235a6529-c06d-4e94-839d-50c63461c9bb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="235a6529-c06d-4e94-839d-50c63461c9bb" name="Default" comment="reset fixed">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lea.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lea.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,7 +49,49 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="WorkspaceController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3327616">
+              <caret line="272" column="68" selection-start-line="272" selection-start-column="68" selection-end-line="272" selection-end-column="68" />
+              <folding>
+                <element signature="method#initialize#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleRegistersWindow#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleMemoryWindow#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleVisualizerWindow#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleConsoleWindow#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handlePlay#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handlePlay#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleStop#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleStop#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleNext#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleNext#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handlePrevious#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handlePrevious#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleReset#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleReset#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleOpenFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleSaveAsFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleSaveAsFile#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleCut#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleCopy#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handlePaste#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleUndo#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleRedo#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="docComment;method#handleExitApp#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleFind#0;class#WorkspaceController#0" expanded="false" />
+                <element signature="method#handleFindAndReplace#0;class#WorkspaceController#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -443,8 +472,8 @@
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java" />
         <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/Instructions/lea.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
       </list>
     </option>
   </component>
@@ -479,7 +508,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -754,8 +785,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1003,7 +1032,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1011,10 +1040,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32569557" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0113464445" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2193646" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22087745" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22390318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753405" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1114,7 +1143,6 @@
             <element signature="docComment;method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleOpenFile#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="method#handleOpenFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleSaveAsFile#0;class#WorkspaceController#0" expanded="false" />
@@ -1127,8 +1155,6 @@
             <element signature="docComment;method#handleExitApp#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleFind#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleFindAndReplace#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="method#newFile#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="e#13194#13195#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1308,7 +1334,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1331,7 +1356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1357,7 +1381,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1373,7 +1396,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="36" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1381,9 +1403,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3207547">
           <caret line="168" column="36" selection-start-line="168" selection-start-column="36" selection-end-line="168" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1391,7 +1410,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.69982845">
           <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1415,7 +1433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327616">
           <caret line="211" column="6" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1423,17 +1440,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
-          <folding>
-            <element signature="method#getFlagIndex#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setFlagIndex#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setCarryFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setParityFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setAuxiliaryFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setZeroFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setSignFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setOverflowFlag#0;class#EFlags#0" expanded="false" />
-            <element signature="method#setDirectionFlag#0;class#EFlags#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1441,12 +1447,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3619211">
           <caret line="175" column="5" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
-          <folding>
-            <element signature="e#6470#6471#0" expanded="true" />
-            <element signature="e#6494#6495#0" expanded="true" />
-            <element signature="e#10452#10453#0" expanded="true" />
-            <element signature="e#10489#10490#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1476,16 +1476,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding>
-            <element signature="method#reformatAddress#0;class#Memory#0" expanded="false" />
-            <element signature="method#write#1;class#Memory#0" expanded="false" />
-            <element signature="method#write#2;class#Memory#0" expanded="false" />
-            <element signature="method#write#3;class#Memory#0" expanded="false" />
-            <element signature="method#read#3;class#Memory#0" expanded="false" />
-            <element signature="method#read#4;class#Memory#0" expanded="false" />
-            <element signature="method#print#0;class#Memory#0" expanded="false" />
-            <element signature="method#clear#0;class#Memory#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1500,10 +1490,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="473" column="45" selection-start-line="473" selection-start-column="45" selection-end-line="473" selection-end-column="45" />
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/lea.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02915952">
+          <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.087478556">
+          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.46655232">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327616">
+          <caret line="272" column="68" selection-start-line="272" selection-start-column="68" selection-end-line="272" selection-end-column="68" />
           <folding>
             <element signature="method#initialize#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleRegistersWindow#0;class#WorkspaceController#0" expanded="false" />
@@ -1523,7 +1549,6 @@
             <element signature="docComment;method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleNewFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleOpenFile#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="method#handleOpenFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleSaveFile#0;class#WorkspaceController#0" expanded="false" />
             <element signature="docComment;method#handleSaveAsFile#0;class#WorkspaceController#0" expanded="false" />
@@ -1536,50 +1561,6 @@
             <element signature="docComment;method#handleExitApp#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleFind#0;class#WorkspaceController#0" expanded="false" />
             <element signature="method#handleFindAndReplace#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="method#newFile#0;class#WorkspaceController#0" expanded="false" />
-            <element signature="e#13194#13195#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/lea.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02915952">
-          <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.087478556">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46655232">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

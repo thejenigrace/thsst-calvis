@@ -270,7 +270,7 @@ public class WorkspaceController implements Initializable {
 		// Show open file dialog
 		File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
-        if (codeArea != null && codeArea.isVisible()) {
+        if (codeArea != null && codeArea.isVisible() && file != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Do you want to open " + file.getName() + "?");
