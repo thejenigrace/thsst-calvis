@@ -331,7 +331,7 @@ public class CALVISParser {
 	}
 
 	private void prepareMemorySizeDirectives() {
-//		this.memoryTokenMap = new HashMap<>();
+		this.memoryTokenMap = new HashMap<>();
 //		Iterator<String[]> memoryTokens = this.memory.getLookup();
 //
 //		while(memoryTokens.hasNext()){
