@@ -369,7 +369,7 @@ public class WorkspaceController implements Initializable {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
         fileChooser.getExtensionFilters().add(extFilter);
 
         // Show open file dialog
@@ -420,7 +420,7 @@ public class WorkspaceController implements Initializable {
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
@@ -442,7 +442,7 @@ public class WorkspaceController implements Initializable {
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
