@@ -67,6 +67,8 @@ public class WorkspaceController implements Initializable {
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
 
+    private String fileLocation = "";
+
     @FXML
     private Button btnPlay;
 
@@ -347,11 +349,12 @@ public class WorkspaceController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Do you want to create a new file?");
-            alert.setContentText("Your changes will be lost if you continue.");
+            alert.setContentText("Unsaved changes will be lost if you continue.");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 newFile();
+                fileLocation = "";
                 MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
             } else {
                 // ... user chose CANCEL or closed the dialog
@@ -375,10 +378,23 @@ public class WorkspaceController implements Initializable {
         // Show open file dialog
         File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
-        if(file != null) {
-            newFile();
-            codeArea.replaceText(readFile(file));
-            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+        if (codeArea != null && codeArea.isVisible()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Do you want to open " + file.getName() + "?");
+            alert.setContentText("Unsaved changes will be lost if you continue.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if(file != null) {
+                    newFile();
+                    codeArea.replaceText(readFile(file));
+                    fileLocation = file.getAbsolutePath();
+                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+                }
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
         }
     }
 
@@ -423,12 +439,21 @@ public class WorkspaceController implements Initializable {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+        if( fileLocation.equals("") ) {
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
-        if(file != null) {
+            if(file != null) {
+                writeFile(codeArea.getText(), file);
+                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+                fileLocation = file.getAbsolutePath();
+            }
+        }
+        else {
+            File file = new File(fileLocation);
             writeFile(codeArea.getText(), file);
             MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+            fileLocation = file.getAbsolutePath();
         }
     }
 
@@ -448,9 +473,10 @@ public class WorkspaceController implements Initializable {
         //Show save file dialog
         File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 
-        if(file != null){
+        if(file != null) {
             writeFile(codeArea.getText(), file);
             MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+            fileLocation = file.getAbsolutePath();
         }
     }
 
