@@ -110,7 +110,7 @@ public class Calculator {
 	}
 
     public long convertToSignedInteger(BigInteger value, int size) {
-        long bongga = Long.parseLong(value.toString());
+        long result = Long.parseLong(value.toString());
         String str = value.toString(2);
 
         int missingZeroes = size - str.length();
@@ -120,31 +120,48 @@ public class Calculator {
             str = "0" + str;
         }
 
-        if(str.charAt(0) == '1'){
+        if(str.charAt(0) == '1') {
             BigInteger ry = value.subtract(BigInteger.ONE);
-            System.out.println("ry = " + ry.toString(2));
+
+//            System.out.println("ry = " + ry.toString(2));
+
             String temp = ry.toString(2);
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < temp.length(); i++) {
-                if(temp.charAt(i) == '1')
+            for (int i = 0; i < temp.length(); i++) {
+                if (temp.charAt(i) == '1')
                     sb.append("0");
-                else if(temp.charAt(i) == '0')
+                else if (temp.charAt(i) == '0')
                     sb.append("1");
             }
 
-            System.out.println("sb = " + sb.toString());
+//            System.out.println("sb = " + sb.toString());
 
             BigInteger z = new BigInteger(sb.toString(), 2);
-            System.out.println("b = " + z.toString());
+//            System.out.println("b = " + z.toString());
 
             String f = "-" + z.toString();
             System.out.println("parse = " + Long.parseLong(f));
 
-            bongga = Long.parseLong(f);
-            System.out.println(Long.toHexString(bongga));
+            result = Long.parseLong(f);
+            System.out.println(Long.toHexString(result));
         }
 
-        return bongga;
+        return result;
+    }
+
+    public String cutToCertainHexSize(String value, int size) {
+        StringBuilder sb = new StringBuilder();
+//        int i = value.length()-1;
+//        while(sb.length() != size) {
+//            sb.append(value.charAt(i));
+//            i--;
+//        }
+
+        for(int i = value.length()-1; i >= 0; i--) {
+            if(sb.length() < size)
+                sb.append(value.charAt(i));
+        }
+        return sb.reverse().toString();
     }
 
     public String[] cutToCertainSize(String value, Token src) {
@@ -221,6 +238,23 @@ public class Calculator {
 
 		return value;
 	}
+
+    public String checkAuxiliary(String a, String b) {
+        String sx = "" + a.charAt(a.length()-1);
+        String sy = "" + b.charAt(b.length()-1);
+        BigInteger x = new BigInteger(sx, 16);
+        BigInteger y = new BigInteger(sy, 16);
+        BigInteger result = y.add(x);
+
+        System.out.println("AF result = " + result.toString(2));
+        System.out.println("result.toString(2).length() = " + result.toString(2).length());
+        System.out.println("y.toString(2).length() = " + y.toString(2).length());
+
+        if(result.toString(2).length() > 4)
+            return "1";
+
+        return "0";
+    }
 
 	public String checkParity(String value, Token des) {
 		String parity = new StringBuffer(value).reverse().toString();

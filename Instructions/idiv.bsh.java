@@ -9,55 +9,85 @@ execute(src, registers, memory) {
                 BigInteger biX = new BigInteger(x, 16);
                 BigInteger biY = new BigInteger(registers.get("AX"), 16);
 
+                System.out.println("AX = " + biY.toString(16));
+                System.out.println("src (byte) = " + biX.toString(16));
+
                 long a = c.convertToSignedInteger(biX, 8);
                 long b = c.convertToSignedInteger(biY, 16);
                 biX = new BigInteger(a.toString());
                 biY = new BigInteger(b.toString());
                 BigInteger[] result = biY.divideAndRemainder(biX);
-                registers.set("AL", result[0].toString(16));
-                registers.set("AH", result[1].toString(16));
 
-                // debugging
-                System.out.println("AX = " + biY.toString(16));
-                System.out.println("src (byte) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
+                System.out.println("result0 = " + result[0].toString());
+                System.out.println("result1 = " + result[1].toString());
+
+                long r0 = Long.parseLong(result[0].toString());
+                long r1 = Long.parseLong(result[1].toString());
+
+                String fix1 = c.cutToCertainHexSize(Long.toHexString(r0), 2);
+                String fix2 = c.cutToCertainHexSize(Long.toHexString(r1), 2);
+
+                System.out.println("fix1 = " + fix1);
+                System.out.println("fix2 = " + fix2);
+
+                registers.set("AL", fix1);
+                registers.set("AH", fix2);
             } else if ( registers.getBitSize(src) == 16 ){
                 BigInteger biX = new BigInteger(x, 16);
                 String y = registers.get("DX") + registers.get("AX");
                 BigInteger biY = new BigInteger(y, 16);
+
+                System.out.println("DX, AX = " + y);
+                System.out.println("src (word) = " + biX.toString(16));
 
                 long a = c.convertToSignedInteger(biX, 16);
                 long b = c.convertToSignedInteger(biY, 32);
                 biX = new BigInteger(a.toString());
                 biY = new BigInteger(b.toString());
                 BigInteger[] result = biY.divideAndRemainder(biX);
-                registers.set("AX", result[0].toString(16));
-                registers.set("DX", result[1].toString(16));
 
-                // debugging
-                System.out.println("DX, AX = " + y);
-                System.out.println("src (word) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
+                System.out.println("result0 = " + result[0].toString());
+                System.out.println("result1 = " + result[1].toString());
+
+                long r0 = Long.parseLong(result[0].toString());
+                long r1 = Long.parseLong(result[1].toString());
+
+                String fix1 = c.cutToCertainHexSize(Long.toHexString(r0), 4);
+                String fix2 = c.cutToCertainHexSize(Long.toHexString(r1), 4);
+
+                System.out.println("fix1 = " + fix1);
+                System.out.println("fix2 = " + fix2);
+
+                registers.set("AX", fix1);
+                registers.set("DX", fix2);
             } else if ( registers.getBitSize(src) == 32 ){
                 BigInteger biX = new BigInteger(x, 16);
                 String y = registers.get("EDX") + registers.get("EAX");
                 BigInteger biY = new BigInteger(y, 16);
+
+                System.out.println("EDX, EAX = " + y);
+                System.out.println("src (dword) = " + biX.toString(16));
 
                 long a = c.convertToSignedInteger(biX, 32);
                 long b = c.convertToSignedInteger(biY, 64);
                 biX = new BigInteger(a.toString());
                 biY = new BigInteger(b.toString());
                 BigInteger[] result = biY.divideAndRemainder(biX);
-                registers.set("EAX", result[0].toString(16));
-                registers.set("EDX", result[1].toString(16));
 
-                // debugging
-                System.out.println("EDX, EAX = " + y);
-                System.out.println("src (dword) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
+                System.out.println("result0 = " + result[0].toString());
+                System.out.println("result1 = " + result[1].toString());
+
+                long r0 = Long.parseLong(result[0].toString());
+                long r1 = Long.parseLong(result[1].toString());
+
+                String fix1 = c.cutToCertainHexSize(Long.toHexString(r0), 8);
+                String fix2 = c.cutToCertainHexSize(Long.toHexString(r1), 8);
+
+                System.out.println("fix1 = " + fix1);
+                System.out.println("fix2 = " + fix2);
+
+                registers.set("EAX", fix1);
+                registers.set("EDX", fix2);
             }
         }
  }

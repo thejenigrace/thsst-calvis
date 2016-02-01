@@ -201,6 +201,10 @@ public class RegisterList {
 		return Integer.parseInt(size);
 	}
 
+	public int getHexSize(String registerName) {
+		return getBitSize(registerName) / 4;
+	}
+
 	public int getHexSize(Token a){
 		return getBitSize(a) / 4;
 	}
