@@ -1,7 +1,13 @@
 package EnvironmentConfiguration.controller;
 
-import EnvironmentConfiguration.model.*;
+import EnvironmentConfiguration.model.error_logging.ErrorLogger;
+import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.RegisterList;
 
+import java.lang.instrument.Instrumentation;
 import java.util.ArrayList;
 
 /**
@@ -13,21 +19,23 @@ public class EnvironmentConfigurator {
     private Memory memory;
     private RegisterList registers;
     private InstructionList instructions;
-    private ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
 
-    public EnvironmentConfigurator(ArrayList<String> filepaths){
+    public EnvironmentConfigurator(ArrayList<String> filePaths){
         // 1. Setup the environment
-        this.memory = new Memory(16, filepaths.get(0));
-        this.registers = new RegisterList(filepaths.get(1));
-        this.instructions = new InstructionList(filepaths.get(2));
+        this.memory = new Memory(32, 16, filePaths.get(0));
+        this.registers = new RegisterList(filePaths.get(1));
+        this.instructions = new InstructionList(filePaths.get(2));
 
         //1.5 check for errors
-        errorMessages.addAll(this.registers.getErrorMessages());
-
+        errorLogger.combineErrorLogger(registers.getErrorLogger(), instructions.getErrorLogger());
         // 2. Create the CALVISParser based on the environment
-        this.p = new CALVISParser(instructions, registers, memory);
-
-
+        if(errorLogger.size() == 0) {
+            this.p = new CALVISParser(instructions, registers, memory);
+	        System.out.println("Memory available: " +
+			        Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
+	        );
+        }
     }
 
     public CALVISParser getParser(){
@@ -46,8 +54,8 @@ public class EnvironmentConfigurator {
         return this.instructions;
     }
 
-    public ArrayList<ErrorMessage> getErrorMessages(){
-        return errorMessages;
+    public ErrorLogger getMessageLists(){
+        return errorLogger;
     }
 
 }

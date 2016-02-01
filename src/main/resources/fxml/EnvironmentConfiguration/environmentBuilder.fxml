@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnvironmentConfiguration.controller.EnvironmentBuilder">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnvironmentConfiguration.controller.ConfigurationEnvironmentController">
    <top>
       <AnchorPane prefHeight="93.0" prefWidth="606.0" BorderPane.alignment="CENTER">
          <children>
@@ -57,14 +57,10 @@
               </Pane>
               <Pane layoutX="10.0" layoutY="40.0" prefHeight="200.0" prefWidth="101.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <children>
-                      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleProceedWorkSpace" prefHeight="27.0" prefWidth="70.0" text="Next" />
+                      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleProceedWorkSpace" prefHeight="27.0" prefWidth="70.0" text="Finish" />
                   </children>
               </Pane>
-              <Pane layoutX="210.0" layoutY="40.0" prefHeight="200.0" prefWidth="109.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                  <children>
-                      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="27.0" prefWidth="70.0" text="Save" />
-                  </children>
-              </Pane>
+              <Pane layoutX="210.0" layoutY="40.0" prefHeight="200.0" prefWidth="109.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
           </children>
       </GridPane>
    </bottom>
@@ -77,7 +73,7 @@
                <ChoiceBox fx:id="memoryChoiceBox" prefHeight="27.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                <Pane GridPane.columnIndex="2" GridPane.rowIndex="0">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateMemory" prefHeight="26.0" prefWidth="51.0" text="Locate" />
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleLocateMemory" text="Locate" />
                    </children>
                </Pane>
                <Label alignment="CENTER" prefHeight="74.0" prefWidth="206.0" text="Registers Configuration File" textAlignment="CENTER" GridPane.rowIndex="1" />

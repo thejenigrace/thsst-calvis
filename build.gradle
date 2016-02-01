@@ -20,4 +20,5 @@ dependencies {
     compile group: 'org.jfxtras', name: 'jfxtras-labs', version: '8.0-r4'
     compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
     compile group: 'org.beanshell', name: 'bsh', version: '2.0b4'
+    compile 'org.apache.commons:commons-lang3:3.0'
 }

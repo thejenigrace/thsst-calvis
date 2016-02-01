@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
-   <content>
-      <AnchorPane minHeight="0.0" minWidth="0.0">
+<SplitPane orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
+   <items>
+      <AnchorPane>
          <children>
-            <TableView fx:id="tableViewMemory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="memoryAddress" prefWidth="140.0" text="Address" />
-                  <TableColumn fx:id="memoryRepresentation" prefWidth="189.0" text="Representation" />
-                  <TableColumn fx:id="memoryInstruction" prefWidth="268.0" text="Instruction" />
+                  <TableColumn fx:id="memoryAddress" maxWidth="100" minWidth="100" text="Address" />
+                  <TableColumn fx:id="memoryRepresentation" sortable="false" text="Value" />
                </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </AnchorPane>
-   </content>
-</ScrollPane>
+   </items>
+</SplitPane>
