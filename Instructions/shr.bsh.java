@@ -52,12 +52,12 @@
             flags.setOverflowFlag(originalSign);
           }
           else {
-            // flags.setOverflowFlag(undefined);
+            flags.setOverflowFlag("0"); //undefined
           }
 
           flags.setCarryFlag(originalDes.charAt(32 - limit).toString());
 
-          //flags.setAuxiliaryFlag(undefined)
+          flags.setAuxiliaryFlag("0"); //undefined
         }
       }
     }
@@ -111,12 +111,12 @@
             flags.setOverflowFlag(originalSign);
           }
           else {
-            // flags.setOverflowFlag(undefined);
+            flags.setOverflowFlag("0"); //undefined
           }
 
           flags.setCarryFlag(originalDes.charAt(32 - limit).toString());
 
-          //flags.setAuxiliaryFlag(undefined)
+          flags.setAuxiliaryFlag("0"); //undefined
         }
       }
     }

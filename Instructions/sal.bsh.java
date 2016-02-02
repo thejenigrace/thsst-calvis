@@ -62,12 +62,12 @@ execute(des, src, registers, memory) {
            flags.setOverflowFlag("1");
          }
          else {
-           // flags.setOverflowFlag(undefined);
+           flags.setOverflowFlag("0"); //undefined
          }
 
          flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
 
-         //flags.setAuxiliaryFlag(undefined)
+         flags.setAuxiliaryFlag("0"); //undefined
        }
      }
    }
@@ -131,12 +131,12 @@ execute(des, src, registers, memory) {
            flags.setOverflowFlag("1");
          }
          else {
-           // flags.setOverflowFlag(undefined);
+           flags.setOverflowFlag("0"); //undefined
          }
 
          flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
 
-         //flags.setAuxiliaryFlag(undefined)
+         flags.setAuxiliaryFlag("0"); //undefined
        }
      }
    }
