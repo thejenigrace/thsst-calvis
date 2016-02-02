@@ -100,7 +100,7 @@ public class WorkspaceController implements Initializable {
 		);
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/MainAppEditor/registers.fxml"));
 		Parent registersView = (SplitPane) loader.load();
 
 		w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -126,7 +126,7 @@ public class WorkspaceController implements Initializable {
 		);
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
+		loader.setLocation((getClass().getResource("/fxml/MainAppEditor/memory.fxml")));
 		Parent memoryView = loader.load();
 
 		w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -403,7 +403,7 @@ public class WorkspaceController implements Initializable {
 	private void handleFind(ActionEvent event) throws IOException {
 		// Load root layout from fxml file
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/find.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/MainAppEditor/find.fxml"));
 		Parent findView = (BorderPane) loader.load();
 
 		Stage findDialogStage = new Stage();
@@ -426,7 +426,7 @@ public class WorkspaceController implements Initializable {
 	private void handleFindAndReplace(ActionEvent event) throws IOException {
 		// Load root layout from fxml file
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/MainAppEditor/find_and_replace.fxml"));
 		Parent findAndReplaceView = (BorderPane) loader.load();
 
 		Stage findAndReplaceDialogStage = new Stage();

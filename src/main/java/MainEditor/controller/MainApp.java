@@ -52,7 +52,7 @@ public class MainApp extends Application {
     public void showWorkspace(EnvironmentConfigurator environmentConfigurator) throws IOException {
         // Load root layout from fxml file
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/MainAppEditor/workspace.fxml"));
         Parent workspaceLayout = (BorderPane) loader.load();
 
         primaryStage.setScene(new Scene(workspaceLayout));
@@ -85,7 +85,7 @@ public class MainApp extends Application {
     public void loadPrimaryStageController() throws IOException {
         // Load root layout from fxml file
         loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/EnvironmentConfiguration/environmentBuilder.fxml"));
         root = (BorderPane) loader.load();
 
         // Give the controller access to the main app

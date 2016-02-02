@@ -1,7 +1,7 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.*;
+import EnvironmentConfiguration.model.engine.*;
 
 import java.util.*;
 

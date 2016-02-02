@@ -23,7 +23,7 @@
             <children>
                 <SplitPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                        <!--<TableView fx:id="tableViewFlags2" prefHeight="75.0" prefWidth="124.0" stylesheets="@../css/register.css">-->
+                        <!--<TableView fx:id="tableViewFlags2" prefHeight="75.0" prefWidth="124.0" stylesheets="@../fxml.css/register.fxml.css">-->
                             <!--<columns>-->
                                 <!--<TableColumn fx:id="flagsName2" prefWidth="65.0" text="Flag" />-->
                                 <!--<TableColumn fx:id="flagsValue2" prefWidth="65.0" text="Value" />-->
