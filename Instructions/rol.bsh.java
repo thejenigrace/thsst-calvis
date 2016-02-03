@@ -1,7 +1,7 @@
 execute(des, src, registers, memory) {
 		Calculator calculator = new Calculator(registers, memory);
 		EFlags flags = registers.getEFlags();
-
+		int bitMode = 32;
 		if ( des.isRegister() ) {
 		if( src.isRegister() && src.getValue().equals("CL") ) {
 			System.out.println("SHL register and CL");
@@ -19,8 +19,8 @@ execute(des, src, registers, memory) {
 				}
 			}
 
-			BigInteger count = new BigInteger(registers.get(src), 16);
-			int limit = count.intValue();
+			int count = new BigInteger(registers.get(src), 16).intValue() % bitMode;
+			int limit = count;
 			if( checkSize && (limit >= 0 && limit <= 31) ) {
 				String destination = calculator.hexToBinaryString(registers.get(des), des);
 				BigInteger biDes = new BigInteger(destination, 2);
@@ -29,9 +29,9 @@ execute(des, src, registers, memory) {
 				//proceed rotate
 				String carryFlagValue = flags.getCarryFlag();
 				boolean bitSet = false;
-				for(int x = 0; x < count.intValue(); x++){
+				for(int x = 0; x < limit; x++){
+					bitSet = biResult.testBit(desSize - 1);
 					biResult = biResult.shiftLeft(x + 1);
-					bitSet = biDes.testBit(desSize - 1);
 					if(bitSet){
 						biResult = biResult.setBit(0);
 						carryFlagValue = "1";
@@ -97,8 +97,8 @@ execute(des, src, registers, memory) {
 				}
 			}
 
-			BigInteger count = new BigInteger(src.getValue(), 16);
-			int limit = count.intValue();
+			int count = new BigInteger((src.getValue()), 16).intValue() % bitMode;
+			int limit = count;
 			if( checkSize && (limit >= 0 && limit <= 31) ) {
 				String destination = calculator.hexToBinaryString(registers.get(des), des);
 				BigInteger biDes = new BigInteger(destination, 2);

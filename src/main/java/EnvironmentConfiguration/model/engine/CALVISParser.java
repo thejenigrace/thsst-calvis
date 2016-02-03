@@ -214,7 +214,7 @@ public class CALVISParser {
 			//System.out.println(numParameters);
 
 			Element[] elements = new Element[numParameters];
-			elements[0] = instructionName.or(lang.newToken(prodRule[0].toLowerCase()));
+			elements[0] = instructionName.or(lang.newToken(insName.toLowerCase()));
 
 			int prodRuleCounter = 3;
 			for (int i = 1; i < numParameters; i++){

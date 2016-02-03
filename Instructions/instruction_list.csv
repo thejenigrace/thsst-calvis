@@ -1,4 +1,6 @@
 EnvironmentConfiguration.model.engine.Instruction,Location,Parameters,,
+shl,Instructions/shl.bsh.java,2,r/m,r/i
+shld,Instructions/shld.bsh.java,3,r/m,r/m,r/i
 mov,Instructions/mov.bsh.java,2,r/m,r/m/i
 lea,Instructions/lea.bsh.java,2,r16/r32,m
 xlat,Instructions/xlat.bsh.java,0,,
@@ -21,7 +23,6 @@ or,Instructions/or.bsh.java,2,r/m,r/m/i
 xor,Instructions/xor.bsh.java,2,r/m,r/m/i
 not,Instructions/not.bsh.java,1,r/m
 test,Instructions/test.bsh.java,2,r/m,r/i
-shl,Instructions/shl.bsh.java,2,r/m,r/i
 rol,Instructions/rol.bsh.java,2,r/m,r/i
 ror,Instructions/ror.bsh.java,2,r/m,r/i
 rcl,Instructions/rcl.bsh.java,2,r/m,r/i
