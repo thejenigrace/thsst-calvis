@@ -2,7 +2,6 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import SimulatorVisualizer.controller.SystemController;
-import SimulatorVisualizer.model.SimulationState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +32,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.io.*;
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
@@ -158,7 +155,7 @@ public class WorkspaceController implements Initializable {
 	}
 
 	@FXML
-	private void handleConsoleWindow(ActionEvent event) {
+	private void handleConsoleWindow (ActionEvent event) throws Exception {
 		Window w = initWindowProperties(
 				"Console",
 				root.getWidth()/2-20,
@@ -166,8 +163,21 @@ public class WorkspaceController implements Initializable {
 				10,
 				root.getHeight()/2+100
 		);
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation((getClass().getResource("/fxml/console.fxml")));
+		Parent consoleView = loader.load();
+
 		w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+		w.getContentPane().getChildren().add(consoleView);
+
 		root.getChildren().add(w);
+
+		// Attach consoleController to SystemController
+		ConsoleController consoleController = loader.getController();
+		System.out.println(consoleController);
+		this.sysCon.attach(consoleController);
+		consoleController.build();
 	}
 
 	/**
