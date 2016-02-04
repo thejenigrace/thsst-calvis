@@ -1,7 +1,7 @@
 execute(registers, memory) {
 	//get contents of registers BX and AL
 
-	String BX = registers.get("BX");
+	String BX = registers.get("EBX");
 	String AL = registers.get("AL");
 
 	// Add BX and AL and store in temp variable result

@@ -12,11 +12,15 @@ import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -230,7 +234,25 @@ public class SystemController {
 		// 2. Parse currentLine to int @var value
 		int value = Integer.parseInt(currentLine, 16);
 		// 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
-		executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+		try {
+			executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+		} catch (Exception e){
+			System.out.println("INSTRUCTION EXECUTION ERROR" + e.getMessage());
+			e.printStackTrace();
+
+			Platform.runLater(
+					new Thread() {
+						@Override
+						public void run() {
+							try {
+								workspaceController.handleErrorWindow();
+							} catch (Exception ioexception) {
+								ioexception.printStackTrace();
+							}
+						}
+					}
+			);
+		}
 		// 4. Notify all observers that an instruction has been executed
 		notifyAllObservers(executionMap.get(currentLine), value);
 		// 5. Increment @var currentLine and store it to EIP register

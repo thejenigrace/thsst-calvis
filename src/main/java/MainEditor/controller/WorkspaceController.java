@@ -1,8 +1,8 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import EnvironmentConfiguration.model.engine.RegisterList;
 import SimulatorVisualizer.controller.SystemController;
-import SimulatorVisualizer.model.SimulationState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,9 +32,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.io.*;
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
@@ -63,6 +60,8 @@ public class WorkspaceController implements Initializable {
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
+	private static final String HEX_PATTERN = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})" +
+			"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
     private static String[] KEYWORDS;
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
@@ -152,9 +151,34 @@ public class WorkspaceController implements Initializable {
 		);
 
 		w.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		root.setBottom(w);
+		//root.getChildren().add(w);
+	}
 
-		//root.setBottom(w);
-		root.getChildren().add(w);
+	@FXML
+	public void handleErrorWindow() throws IOException {
+		Window w = initWindowProperties(
+				"Error Log",
+				root.getWidth()/2-10,
+				root.getHeight()/2-110,
+				root.getWidth()/2,
+				root.getHeight()/2+100
+		);
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation((getClass().getResource("/fxml/error_logger.fxml")));
+		Parent errorView = loader.load();
+
+		w.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		w.getContentPane().getChildren().add(errorView);
+
+		root.setBottom(w);
+		//root.getChildren().add(w);
+
+		// Attach registersController to SystemController
+		ErrorLoggerController errorLoggerController = loader.getController();
+		this.sysCon.attach(errorLoggerController);
+		errorLoggerController.build();
 	}
 
 	@FXML
@@ -614,14 +638,16 @@ public class WorkspaceController implements Initializable {
 				= new StyleSpansBuilder<>();
 		while(matcher.find()) {
 			String styleClass =
-					matcher.group("KEYWORD") != null ? "keyword" :
-							matcher.group("PAREN") != null ? "paren" :
-									matcher.group("BRACE") != null ? "brace" :
-											matcher.group("BRACKET") != null ? "bracket" :
-													matcher.group("SEMICOLON") != null ? "semicolon" :
-															matcher.group("STRING") != null ? "string" :
-																	matcher.group("COMMENT") != null ? "comment" :
-																			null; /* never happens */ assert styleClass != null;
+				matcher.group("KEYWORD") != null ? "keyword" :
+					matcher.group("HEX") != null ? "hex":
+						matcher.group("PAREN") != null ? "paren" :
+							matcher.group("BRACE") != null ? "brace" :
+								matcher.group("BRACKET") != null ? "bracket" :
+									matcher.group("SEMICOLON") != null ? "semicolon" :
+										matcher.group("STRING") != null ? "string" :
+											matcher.group("COMMENT") != null ? "comment" :
+												null; /* never happens */ assert styleClass != null;
+
 			spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 			spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 			lastKwEnd = matcher.end();
@@ -664,6 +690,7 @@ public class WorkspaceController implements Initializable {
 						+ "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
 						+ "|(?<STRING>" + STRING_PATTERN + ")"
 						+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+						+ "|(?<HEX>" + HEX_PATTERN + ")"
 		);
 	}
 

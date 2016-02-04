@@ -3,6 +3,10 @@
     -fx-font-weight: bold;
 }
 
+.hex {
+    -fx-fill: green;
+}
+
 .semicolon {
     -fx-font-weight: bold;
 }

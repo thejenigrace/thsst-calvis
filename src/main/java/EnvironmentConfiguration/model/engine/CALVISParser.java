@@ -4,28 +4,32 @@ import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CALVISParser {
-	
-	private Exe exe;
-	private HashMap<String, ArrayList<Element>> registerTokenMap;
-	private HashMap<String, Element> memoryTokenMap;
+
 	private InstructionList instructions;
 	private RegisterList registers;
 	private Memory memory;
-	private HashMap<String, CALVISInstruction> mappedInstruction;
+
+	private Exe exe;
 	private Lang lang;
+
+	private HashMap<String, ArrayList<Element>> registerTokenMap;
+	private HashMap<String, Element> memoryTokenMap;
+
+	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
+
+	private final String hexPattern = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})" +
+			"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
 		this.registers = registers;
 		this.memory = memory;
-		this.mappedInstruction = new HashMap<String, CALVISInstruction>();
+		this.mappedInstruction = new HashMap<>();
 		this.lineNumber = 0;		
 		this.lang = new Lang("CALVIS");
 
@@ -38,20 +42,14 @@ public class CALVISParser {
 
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
-//
-//		Grule sizeDirectiveAddressingMode = lang.newGrule();
+
+		Grule sizeDirectiveAddressingMode = lang.newGrule();
 		Grule memoryAddressingMode = lang.newGrule();
 		Grule memoryExpression = lang.newGrule();
 		Grule memoryBase = lang.newGrule();
 		Grule memoryIndex = lang.newGrule();
 		Grule memoryDisplacement = lang.newGrule();
 
-//		Grule memoryAddExpr = lang.newGrule();
-//		Grule memoryTimesExpr = lang.newGrule();
-		
-		TokenDef dbToken = lang.newToken("DB");
-		TokenDef dwToken = lang.newToken("DW");
-		TokenDef ddToken = lang.newToken("DD");
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
 		TokenDef lsb = lang.newToken("\\[");
@@ -59,14 +57,18 @@ public class CALVISParser {
 		TokenDef plus = lang.newToken("\\+");
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
-		TokenDef hex = lang.newToken("0x[0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}");
-		TokenDef dec = lang.newToken("\\b\\d+\\b");
-		//TokenDef ptr = lang.newToken("(?i)\\b(ptr)\\b");
 
-		// Prepare <List of Registers>
+		TokenDef hex = lang.newToken(hexPattern);
+		TokenDef dec = lang.newToken("\\b\\d+\\b");
+
+		/** The succeeding code now focuses on building the parser
+		  * by connecting the grammar rules (Grule) and tokens (TokenDef)
+		 */
+
+		// 1. Prepare <List of Registers>
 		prepareRegisterTokenMap();
 
-		// Prepare Memory Size Directives
+		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
 		
 		// start ::= assembly $
@@ -75,13 +77,25 @@ public class CALVISParser {
 		// assembly ::= variableDeclarations? mainProgram
 		assembly.define(CC.op(variableDeclarations), mainProgram);
 
-//		sizeDirectiveAddressingMode.define(getSizeDirectives(), ptr, memoryAddressingMode);
-//				.action((Action<Object[]>) matched -> {
-//					for ( Object obj : matched ){
-//
-//					}
-//					return null;
-//				});
+		sizeDirectiveAddressingMode.define(getSizeDirectives(), memoryAddressingMode)
+				.action((Action<Object[]>) matched -> {
+					ArrayList<Token> tokenArrayList = new ArrayList<>();
+					for ( Object obj : matched ){
+						if ( obj instanceof Token ){
+							Token sizeDirective = (Token) obj;
+							tokenArrayList.add(sizeDirective);
+						}
+						else if ( obj instanceof Token[] ){
+							Token[] tokens = (Token[]) obj;
+							for (int i = 0; i < tokens.length; i++) {
+								tokenArrayList.add(tokens[i]);
+							}
+						}
+					}
+					Token[] appendedTokens = new Token[tokenArrayList.size()];
+					appendedTokens = tokenArrayList.toArray(appendedTokens);
+					return appendedTokens;
+				});
 
 		// memory addressing mode constructs
 		// memory ::= [ memoryExpr ]
@@ -201,7 +215,12 @@ public class CALVISParser {
 		while (instructionProductionRules.hasNext()){
 			String[] prodRule = instructionProductionRules.next();
 
-			String insName = "\\b" + prodRule[0] + "\\b";
+			for (int i = 0; i < prodRule.length; i++) {
+				System.out.print(prodRule[i] + " ");
+			}
+			System.out.println("");
+
+			String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
 			TokenDef instructionName = lang.newToken(insName);
 
 			//System.out.println(insName);
@@ -211,11 +230,13 @@ public class CALVISParser {
 				numParameters += 1;
 			}
 
-			//System.out.println(numParameters);
+			System.out.println("number of parameters: " + numParameters);
 
 			Element[] elements = new Element[numParameters];
-			elements[0] = instructionName.or(lang.newToken(prodRule[0].toLowerCase()));
 
+			// 1. elements[0] = instruction name
+			elements[0] = instructionName;
+			// prodRuleCounter starts at index 3 because that's where the parameter specifications are
 			int prodRuleCounter = 3;
 			for (int i = 1; i < numParameters; i++){
 				if ( i % 2 == 0){
@@ -241,7 +262,7 @@ public class CALVISParser {
 						if (anAllowed.contains("m")) {
 							// Create condition for "word ptr" bla bla
 							orSubRuleList.add(memoryAddressingMode);
-							//orSubRuleList.add(sizeDirectiveAddressingMode);
+							orSubRuleList.add(sizeDirectiveAddressingMode);
 						}
 						if (anAllowed.contains("i")) {
 							orSubRuleList.add(hex);
@@ -332,28 +353,30 @@ public class CALVISParser {
 
 	private void prepareMemorySizeDirectives() {
 		this.memoryTokenMap = new HashMap<>();
-//		Iterator<String[]> memoryTokens = this.memory.getLookup();
-//
-//		while(memoryTokens.hasNext()){
-//			String[] memoryToken = memoryTokens.next();
-//			String sizeDirectiveName = memoryToken[Memory.SIZE_DIRECTIVE_NAME];
-//			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
-//			String sizeDirectivePattern = "(?i)\\b("+sizeDirectiveName+")\\b";
-//
-//			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
-//
-//			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
-//		}
+		Iterator<String[]> memoryTokens = this.memory.getLookup();
+
+		while(memoryTokens.hasNext()){
+			String[] memoryToken = memoryTokens.next();
+			String sizeDirectiveName = memoryToken[Memory.SIZE_DIRECTIVE_NAME];
+			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
+			String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)"
+					+ "|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
+
+			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
+
+			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
+		}
+		System.out.println(memoryTokenMap);
 	}
 
-//	private Element getSizeDirectives() {
-//		ArrayList<Element> elementArrayList =
-//				this.memoryTokenMap.entrySet().stream()
-//						.map(Map.Entry::getValue)
-//						.collect(Collectors.toCollection(ArrayList::new));
-//
-//		return concatenateOrSubRules(elementArrayList);
-//	}
+	private Element getSizeDirectives() {
+		ArrayList<Element> elementArrayList =
+				this.memoryTokenMap.entrySet().stream()
+						.map(Map.Entry::getValue)
+						.collect(Collectors.toCollection(ArrayList::new));
+
+		return concatenateOrSubRules(elementArrayList);
+	}
 	
 	private void prepareRegisterTokenMap() {
 		this.registerTokenMap = new HashMap<>();
@@ -429,10 +452,13 @@ public class CALVISParser {
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
 					producedList.get(i).setAction((Action<Object>) arg0 -> {
-                        if ( arg0 instanceof Token){
+						if ( arg0 instanceof Token){
                             return (Token) arg0;
                         }
-                        if ( arg0.toString().contains("0x")){
+						if ( memory.isExisting(arg0.toString())){
+							return new Token(Token.MEM, (String) arg0);
+						}
+                        if ( arg0.toString().matches(hexPattern)){
                             return new Token(Token.HEX, (String) arg0);
                         }
 						if ( arg0.toString().matches("\\b\\d+\\b")) {
