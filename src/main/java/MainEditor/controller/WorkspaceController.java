@@ -2,17 +2,13 @@ package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import SimulatorVisualizer.controller.SystemController;
-import SimulatorVisualizer.model.SimulationState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -26,21 +22,12 @@ import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.io.*;
-import java.math.BigInteger;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -49,13 +36,13 @@ import java.util.regex.Pattern;
 /**
  * Created by Jennica Alcalde on 10/1/2015.
  */
-public class WorkspaceController implements Initializable {
+public class WorkspaceController {
 
     private HashMap<Integer, int[]> findHighlightRanges;
     private int currentFindRangeIndex;
 
-    private CodeArea codeArea;
     private SystemController sysCon;
+	private CodeArea codeArea;
 
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
@@ -79,9 +66,62 @@ public class WorkspaceController implements Initializable {
     @FXML
     private BorderPane root;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+    private AnchorPane registerPane;
+    @FXML
+    private TabPane textEditorTabPane;
+    @FXML
+    private AnchorPane memoryPane;
 
+    private void showRegisterPane() throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
+        Parent registersView = (AnchorPane) loader.load();
+
+        registerPane.getChildren().add(registersView);
+
+        // Attach registersController to SystemController
+        RegistersController registersController = loader.getController();
+        this.sysCon.attach(registersController);
+        registersController.build();
+    }
+
+    private void showTextEditorPane() throws Exception {
+        System.out.println("Text Editor Pane");
+        // add some content
+        this.initializeCodeArea();
+
+        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
+
+        this.newTextEditorTab();
+    }
+
+    private void newTextEditorTab() {
+		CodeArea codeArea = new CodeArea();
+        Tab tab = new Tab();
+        tab.setText("Untitled");
+        tab.setContent(codeArea);
+        textEditorTabPane.getTabs().add(tab);
+        textEditorTabPane.getSelectionModel().select(tab);
+    }
+
+    private void showMemoryPane() throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
+        Parent memoryView = loader.load();
+
+//        w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+//        w.getContentPane().getChildren().add(memoryView);
+//
+//        root.setRight(w);
+        //root.getChildren().add(w);
+        memoryPane.getChildren().add(memoryView);
+
+        // Attach registersController to SystemController
+        MemoryController memoryController = loader.getController();
+        this.sysCon.attach(memoryController);
+        memoryController.build();
     }
 
     @FXML
@@ -237,21 +277,23 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleNewFile(ActionEvent event) {
-        if (codeArea != null && codeArea.isVisible()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Do you want to create a new file?");
-            alert.setContentText("Unsaved changes will be lost if you continue.");
+//        if (codeArea != null && codeArea.isVisible()) {
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Confirmation Dialog");
+//            alert.setHeaderText("Do you want to create a new file?");
+//            alert.setContentText("Unsaved changes will be lost if you continue.");
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.get() == ButtonType.OK){
+//                newFile();
+//                fileLocation = "";
+//                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
+//            } else {
+//                // ... user chose CANCEL or closed the dialog
+//            }
+//        }
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                newFile();
-                fileLocation = "";
-                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
-        }
+        this.newTextEditorTab();
     }
 
 	/**
@@ -452,9 +494,12 @@ public class WorkspaceController implements Initializable {
     public void displayDefaultWindows(){
         ActionEvent ae = new ActionEvent();
         try {
-            handleTextEditorWindow(ae);
-            handleMemoryWindow(ae);
-            handleRegistersWindow(ae);
+//            handleTextEditorWindow(ae);
+//            handleMemoryWindow(ae);
+//            handleRegistersWindow(ae);
+            showRegisterPane();
+            showTextEditorPane();
+            showMemoryPane();
         } catch (Exception e){
             e.printStackTrace();
         }

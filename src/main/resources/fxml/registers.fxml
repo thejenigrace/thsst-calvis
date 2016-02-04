@@ -4,46 +4,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.65" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.RegistersController">
-    <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
-            <children>
-                <TableView fx:id="tableViewRegister" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                        <TableColumn fx:id="registerName" maxWidth="70" minWidth="70" text="Register" />
-                        <TableColumn fx:id="registerValue" minWidth="0" text="Value" />
-                    </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-                </TableView>
-            </children>
-        </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
-            <children>
-                <SplitPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                        <!--<TableView fx:id="tableViewFlags2" prefHeight="75.0" prefWidth="124.0" stylesheets="@../css/register.css">-->
-                            <!--<columns>-->
-                                <!--<TableColumn fx:id="flagsName2" prefWidth="65.0" text="Flag" />-->
-                                <!--<TableColumn fx:id="flagsValue2" prefWidth="65.0" text="Value" />-->
-                          <!--</columns>-->
-                     <!--<columnResizePolicy>-->
-                        <!--<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />-->
-                     <!--</columnResizePolicy>-->
-                        <!--</TableView>-->
-                        <TableView fx:id="tableViewFlags1" prefHeight="75.0" prefWidth="124.0" stylesheets="@../css/register.css">
-                            <columns>
-                                <TableColumn fx:id="flagsName1" prefWidth="65.0" text="Flag" />
-                                <TableColumn fx:id="flagsValue1" prefWidth="65.0" text="Value" />
-                            </columns>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.RegistersController">
+   <children>
+      <SplitPane dividerPositions="0.65" orientation="VERTICAL" prefHeight="487.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <items>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                  <children>
+                      <TableView fx:id="tableViewRegister" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="registerName" minWidth="-1.0" prefWidth="-1.0" text="Register" />
+                              <TableColumn fx:id="registerValue" minWidth="-1.0" prefWidth="-1.0" text="Value" />
+                          </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
-                        </TableView>
-                    </items>
-                </SplitPane>
-            </children>
-        </AnchorPane>
-    </items>
-</SplitPane>
+                      </TableView>
+                  </children>
+              </AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                  <children>
+                      <SplitPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                              <TableView fx:id="tableViewFlags1" prefHeight="75.0" prefWidth="124.0" stylesheets="@../css/register.css">
+                                  <columns>
+                                      <TableColumn fx:id="flagsName1" minWidth="-1.0" prefWidth="-1.0" text="Flag" />
+                                      <TableColumn fx:id="flagsValue1" minWidth="-1.0" prefWidth="-1.0" text="Value" />
+                                  </columns>
+
+                                  <columnResizePolicy>
+                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                  </columnResizePolicy>
+                              </TableView>
+                          </items>
+                      </SplitPane>
+                  </children>
+              </AnchorPane>
+          </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
