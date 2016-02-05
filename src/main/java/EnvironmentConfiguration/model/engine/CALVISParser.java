@@ -22,8 +22,8 @@ public class CALVISParser {
 	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
-	private final String hexPattern = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})" +
-			"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
+	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})";
+	//+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -58,9 +58,6 @@ public class CALVISParser {
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
 
-		TokenDef hex = lang.newToken(hexPattern);
-		TokenDef dec = lang.newToken("\\b\\d+\\b");
-
 		/** The succeeding code now focuses on building the parser
 		  * by connecting the grammar rules (Grule) and tokens (TokenDef)
 		 */
@@ -70,7 +67,10 @@ public class CALVISParser {
 
 		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
-		
+
+		TokenDef hex = lang.newToken(hexPattern);
+		TokenDef dec = lang.newToken("\\b\\d+\\b");
+
 		// start ::= assembly $
 		lang.defineGrule(assembly, CC.EOF);
 
@@ -498,15 +498,10 @@ public class CALVISParser {
 		return concatenateOrSubRules(list);
 	}
 	
-	public HashMap<String, CALVISInstruction> parse(String code){
-		try {
-			this.mappedInstruction.clear();
-			this.lineNumber = 0;
-			this.exe.eval(code);
-		} catch(Exception e){
-			System.out.println("CALVIS Parsing error message: " + e.getMessage());
-			e.printStackTrace();
-		}
+	public HashMap<String, CALVISInstruction> parse(String code) throws DropinccException{
+		this.mappedInstruction.clear();
+		this.lineNumber = 0;
+		this.exe.eval(code);
 		return this.mappedInstruction;
 	}
 }

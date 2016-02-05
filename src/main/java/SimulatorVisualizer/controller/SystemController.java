@@ -245,7 +245,7 @@ public class SystemController {
 						@Override
 						public void run() {
 							try {
-								workspaceController.handleErrorWindow();
+								workspaceController.handleErrorWindow(e);
 							} catch (Exception ioexception) {
 								ioexception.printStackTrace();
 							}
@@ -263,7 +263,23 @@ public class SystemController {
 	}
 
     private void parse(String code){
-        this.executionMap = parser.parse(code);
+	    try {
+		    this.executionMap = parser.parse(code);
+	    } catch (Exception e){
+		    e.printStackTrace();
+		    Platform.runLater(
+				    new Thread() {
+					    @Override
+					    public void run() {
+						    try {
+							    workspaceController.handleErrorWindow(e);
+						    } catch (Exception viewException) {
+							    viewException.printStackTrace();
+						    }
+					    }
+				    }
+		    );
+	    }
 	    push();
     }
 

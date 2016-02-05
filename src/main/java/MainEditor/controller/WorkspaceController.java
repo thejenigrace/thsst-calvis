@@ -60,8 +60,8 @@ public class WorkspaceController implements Initializable {
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-	private static final String HEX_PATTERN = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})" +
-			"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
+	private static final String HEX_PATTERN = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})";
+	//+	"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
     private static String[] KEYWORDS;
     private static String KEYWORD_PATTERN;
     private static Pattern PATTERN;
@@ -156,7 +156,7 @@ public class WorkspaceController implements Initializable {
 	}
 
 	@FXML
-	public void handleErrorWindow() throws IOException {
+	public void handleErrorWindow(Exception e) throws IOException {
 		Window w = initWindowProperties(
 				"Error Log",
 				root.getWidth()/2-10,
@@ -169,8 +169,13 @@ public class WorkspaceController implements Initializable {
 		loader.setLocation((getClass().getResource("/fxml/error_logger.fxml")));
 		Parent errorView = loader.load();
 
+
 		w.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-		w.getContentPane().getChildren().add(errorView);
+
+		CodeArea errorLog = new CodeArea(e.getMessage());
+		w.getContentPane().getChildren().add(errorLog);
+
+		//w.getContentPane().getChildren().add(errorView);
 
 		root.setBottom(w);
 		//root.getChildren().add(w);
