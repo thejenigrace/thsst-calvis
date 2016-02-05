@@ -270,7 +270,7 @@ public class SystemController {
 					    @Override
 					    public void run() {
 						    try {
-							    workspaceController.handleErrorWindow(e);
+							    //workspaceController.handleErrorWindow(e);
 						    } catch (Exception viewException) {
 							    viewException.printStackTrace();
 						    }
