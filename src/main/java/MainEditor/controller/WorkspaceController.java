@@ -1,25 +1,22 @@
 package MainEditor.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
+import MainEditor.model.TextEditor;
 import SimulatorVisualizer.controller.SystemController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
-import org.fxmisc.richtext.CodeArea;
-import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
 
@@ -27,7 +24,6 @@ import java.io.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -42,7 +38,7 @@ public class WorkspaceController {
     private int currentFindRangeIndex;
 
     private SystemController sysCon;
-	private CodeArea codeArea;
+//	private CodeArea codeArea;
 
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
@@ -86,24 +82,25 @@ public class WorkspaceController {
         registersController.build();
     }
 
-    private void showTextEditorPane() throws Exception {
-        System.out.println("Text Editor Pane");
-        // add some content
-        this.initializeCodeArea();
-
-        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
-
-        this.newTextEditorTab();
-    }
+//    private void showTextEditorPane() throws Exception {
+//        System.out.println("Text Editor Pane");
+//        // add some content
+//
+//
+////        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+////        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
+//
+//        this.newTextEditorTab();
+//    }
 
     private void newTextEditorTab() {
-		CodeArea codeArea = new CodeArea();
-        Tab tab = new Tab();
-        tab.setText("Untitled");
-        tab.setContent(codeArea);
-        textEditorTabPane.getTabs().add(tab);
-        textEditorTabPane.getSelectionModel().select(tab);
+		TextEditor textEditor = new TextEditor(this);
+        textEditorTabPane.getTabs().add(textEditor.getTab());
+        textEditorTabPane.getSelectionModel().select(textEditor.getTab());
+
+        this.sysCon.attach(textEditor);
+        textEditor.build();
+        this.sysCon.clear();
     }
 
     private void showMemoryPane() throws Exception {
@@ -217,9 +214,9 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePlay(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-			this.sysCon.play(codeArea.getText());
-		}
+//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+//			this.sysCon.play(codeArea.getText());
+//		}
 	}
 
 	/**
@@ -229,9 +226,9 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleStop(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-			this.sysCon.end();
-		}
+//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+//			this.sysCon.end();
+//		}
 	}
 
 	/**
@@ -241,9 +238,9 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleNext(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-			this.sysCon.next();
-		}
+//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+//			this.sysCon.next();
+//		}
 	}
 
 	/**
@@ -253,9 +250,9 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePrevious(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-			this.sysCon.previous();
-		}
+//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+//			this.sysCon.previous();
+//		}
 	}
 
 	/**
@@ -265,9 +262,9 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleReset(ActionEvent event) {
-		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-			this.sysCon.reset(codeArea.getText());
-		}
+//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+//			this.sysCon.reset(codeArea.getText());
+//		}
 	}
 
     /**
@@ -303,33 +300,33 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleOpenFile(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-		// Show open file dialog
-		File file = fileChooser.showOpenDialog(MainApp.primaryStage);
-
-        if (codeArea != null && codeArea.isVisible() && file != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Do you want to open " + file.getName() + "?");
-            alert.setContentText("Unsaved changes will be lost if you continue.");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                if(file != null) {
-                    newFile();
-                    codeArea.replaceText(readFile(file));
-                    fileLocation = file.getAbsolutePath();
-                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-                }
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
-        }
+//		FileChooser fileChooser = new FileChooser();
+//
+//        // Set extension filter
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//
+//		// Show open file dialog
+//		File file = fileChooser.showOpenDialog(MainApp.primaryStage);
+//
+//        if (codeArea != null && codeArea.isVisible() && file != null) {
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Confirmation Dialog");
+//            alert.setHeaderText("Do you want to open " + file.getName() + "?");
+//            alert.setContentText("Unsaved changes will be lost if you continue.");
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.get() == ButtonType.OK){
+//                if(file != null) {
+//                    newFile();
+//                    codeArea.replaceText(readFile(file));
+//                    fileLocation = file.getAbsolutePath();
+//                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//                }
+//            } else {
+//                // ... user chose CANCEL or closed the dialog
+//            }
+//        }
     }
 
 	/**
@@ -339,28 +336,28 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleSaveFile(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        if( fileLocation.equals("") ) {
-            //Show save file dialog
-            File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-
-            if(file != null) {
-                writeFile(codeArea.getText(), file);
-                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-                fileLocation = file.getAbsolutePath();
-            }
-        }
-        else {
-            File file = new File(fileLocation);
-            writeFile(codeArea.getText(), file);
-            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-            fileLocation = file.getAbsolutePath();
-        }
+//		FileChooser fileChooser = new FileChooser();
+//
+//        //Set extension filter
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//
+//        if( fileLocation.equals("") ) {
+//            //Show save file dialog
+//            File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+//
+//            if(file != null) {
+//                writeFile(codeArea.getText(), file);
+//                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//                fileLocation = file.getAbsolutePath();
+//            }
+//        }
+//        else {
+//            File file = new File(fileLocation);
+//            writeFile(codeArea.getText(), file);
+//            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//            fileLocation = file.getAbsolutePath();
+//        }
     }
 
 	/**
@@ -370,20 +367,20 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleSaveAsFile(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-		//Show save file dialog
-		File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-
-        if(file != null) {
-            writeFile(codeArea.getText(), file);
-            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-            fileLocation = file.getAbsolutePath();
-        }
+//		FileChooser fileChooser = new FileChooser();
+//
+//        //Set extension filter
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//
+//		//Show save file dialog
+//		File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+//
+//        if(file != null) {
+//            writeFile(codeArea.getText(), file);
+//            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//            fileLocation = file.getAbsolutePath();
+//        }
     }
 
 	/**
@@ -392,7 +389,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleCut(ActionEvent event) {
-		codeArea.cut();
+
+//		codeArea.cut();
 	}
 
 	/**
@@ -401,7 +399,7 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleCopy(ActionEvent event) {
-		codeArea.copy();
+//        codeArea.copy();
 	}
 
 	/**
@@ -410,7 +408,7 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePaste(ActionEvent event) {
-		codeArea.paste();
+//        codeArea.paste();
 	}
 
 	/**
@@ -419,8 +417,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleUndo(ActionEvent event) {
-		codeArea.undo();
-	}
+//		codeArea.undo();
+    }
 
 	/**
 	 * Action for Redo; a MenuItem in File.
@@ -428,7 +426,7 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleRedo(ActionEvent event) {
-		codeArea.redo();
+//		codeArea.redo();
 	}
 
 	/**
@@ -444,51 +442,51 @@ public class WorkspaceController {
 	@FXML
 	private void handleFind(ActionEvent event) throws IOException {
 		// Load root layout from fxml file
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/find.fxml"));
-		Parent findView = (BorderPane) loader.load();
-
-		Stage findDialogStage = new Stage();
-		findDialogStage.initModality(Modality.APPLICATION_MODAL);
-		findDialogStage.setTitle("Find");
-		findDialogStage.setScene(new Scene(findView));
-		findDialogStage.setResizable(false);
-		findDialogStage.setX(root.getWidth() / 3);
-		findDialogStage.setY(root.getHeight() / 3);
-		findDialogStage.show();
-
-		// Pass the current code in the text editor to FindDialogController
-		FindDialogController findDialogController = loader.getController();
-		findDialogController.setWorkspaceController(this);
-		findDialogController.setDialogStage(findDialogStage);
-		findDialogController.setCode(codeArea.getText());
+//		FXMLLoader loader = new FXMLLoader();
+//		loader.setLocation(getClass().getResource("/fxml/find.fxml"));
+//		Parent findView = (BorderPane) loader.load();
+//
+//		Stage findDialogStage = new Stage();
+//		findDialogStage.initModality(Modality.APPLICATION_MODAL);
+//		findDialogStage.setTitle("Find");
+//		findDialogStage.setScene(new Scene(findView));
+//		findDialogStage.setResizable(false);
+//		findDialogStage.setX(root.getWidth() / 3);
+//		findDialogStage.setY(root.getHeight() / 3);
+//		findDialogStage.show();
+//
+//		// Pass the current code in the text editor to FindDialogController
+//		FindDialogController findDialogController = loader.getController();
+//		findDialogController.setWorkspaceController(this);
+//		findDialogController.setDialogStage(findDialogStage);
+//		findDialogController.setCode(codeArea.getText());
 	}
 
 	@FXML
 	private void handleFindAndReplace(ActionEvent event) throws IOException {
 		// Load root layout from fxml file
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
-		Parent findAndReplaceView = (BorderPane) loader.load();
-
-		Stage findAndReplaceDialogStage = new Stage();
-		findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
-		findAndReplaceDialogStage.setTitle("Find & Replace");
-		findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
-		findAndReplaceDialogStage.setResizable(false);
-		findAndReplaceDialogStage.setX(root.getWidth() / 3);
-		findAndReplaceDialogStage.setY(root.getHeight() / 3);
-		findAndReplaceDialogStage.show();
-
-		// Pass the current code in the text editor to FindDialogController
-		FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
-		findAndReplaceDialogController.setWorkspaceController(this);
-		findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
+//		FXMLLoader loader = new FXMLLoader();
+//		loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+//		Parent findAndReplaceView = (BorderPane) loader.load();
+//
+//		Stage findAndReplaceDialogStage = new Stage();
+//		findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
+//		findAndReplaceDialogStage.setTitle("Find & Replace");
+//		findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
+//		findAndReplaceDialogStage.setResizable(false);
+//		findAndReplaceDialogStage.setX(root.getWidth() / 3);
+//		findAndReplaceDialogStage.setY(root.getHeight() / 3);
+//		findAndReplaceDialogStage.show();
+//
+//		// Pass the current code in the text editor to FindDialogController
+//		FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
+//		findAndReplaceDialogController.setWorkspaceController(this);
+//		findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
 	}
 
     public void buildSystem(EnvironmentConfigurator env){
         this.sysCon = new SystemController(env, this);
-        setCodeEnvironment();
+//        setCodeEnvironment();
     }
 
     public void displayDefaultWindows(){
@@ -498,8 +496,8 @@ public class WorkspaceController {
 //            handleMemoryWindow(ae);
 //            handleRegistersWindow(ae);
             showRegisterPane();
-            showTextEditorPane();
             showMemoryPane();
+            newTextEditorTab();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -518,9 +516,9 @@ public class WorkspaceController {
 
         // add some content
         initializeCodeArea();
-        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
-        w.getContentPane().getChildren().add(codeArea);
+//        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+//        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
+//        w.getContentPane().getChildren().add(codeArea);
 
         // add the window to the canvas
         root.setCenter(w);
@@ -543,77 +541,77 @@ public class WorkspaceController {
 	}
 
 	public void enableCodeArea(boolean flag){
-		this.codeArea.setDisable(!flag);
+//		this.codeArea.setDisable(!flag);
 	}
 
     public void formatCodeArea(String codeBlock){
-	    String[] arr = this.sysCon.getInstructionKeywords();
-	    String expression =  String.join("|", arr) ;
-	    String pat = "[^\\S\\n]+(?=(" + expression + "))";
-        Pattern pattern = Pattern.compile(pat);
-	    Matcher matcher = pattern.matcher(codeBlock);
-	    String replacedCodeAreaText = matcher.replaceAll("\n");
-	    replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
-	    codeArea.replaceText(replacedCodeAreaText);
-	    codeArea.redo();
+//	    String[] arr = this.sysCon.getInstructionKeywords();
+//	    String expression =  String.join("|", arr) ;
+//	    String pat = "[^\\S\\n]+(?=(" + expression + "))";
+//        Pattern pattern = Pattern.compile(pat);
+//	    Matcher matcher = pattern.matcher(codeBlock);
+//	    String replacedCodeAreaText = matcher.replaceAll("\n");
+//	    replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
+//	    codeArea.replaceText(replacedCodeAreaText);
+//	    codeArea.redo();
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-        System.out.println("onActionFind");
-
-        this.findHighlightRanges = findHighlightRanges;
-        if (findHighlightRanges.size() != 0) {
-            currentFindRangeIndex = 0;
-            int[] range = findHighlightRanges.get(0);
-            codeArea.selectRange(range[0], range[1]);
-        }
+//        System.out.println("onActionFind");
+//
+//        this.findHighlightRanges = findHighlightRanges;
+//        if (findHighlightRanges.size() != 0) {
+//            currentFindRangeIndex = 0;
+//            int[] range = findHighlightRanges.get(0);
+//            codeArea.selectRange(range[0], range[1]);
+//        }
     }
 
     public void onActionUp() {
-        int[] range;
-        if(findHighlightRanges.size() != 0) {
-            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-            if(currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-                currentFindRangeIndex++;
-                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                range = findHighlightRanges.get(currentFindRangeIndex);
-                codeArea.selectRange(range[0], range[1]);
-            }
-        }
+//        int[] range;
+//        if(findHighlightRanges.size() != 0) {
+//            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//            if(currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
+//                currentFindRangeIndex++;
+//                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                range = findHighlightRanges.get(currentFindRangeIndex);
+//                codeArea.selectRange(range[0], range[1]);
+//            }
+//        }
     }
 
     public void onActionDown() {
-        int[] range;
-        if(findHighlightRanges.size() != 0) {
-            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-            if(currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-                currentFindRangeIndex--;
-                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                range = findHighlightRanges.get(currentFindRangeIndex);
-                codeArea.selectRange(range[0], range[1]);
-            }
-        }
+//        int[] range;
+//        if(findHighlightRanges.size() != 0) {
+//            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//            if(currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
+//                currentFindRangeIndex--;
+//                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                range = findHighlightRanges.get(currentFindRangeIndex);
+//                codeArea.selectRange(range[0], range[1]);
+//            }
+//        }
     }
 
     public void onActionFindAndReplace(String find, String replace) {
-        System.out.println("BTW find: " + find);
-        System.out.println("BTW replace: " + replace);
-
-        String text = codeArea.getText();
-        Pattern p = Pattern.compile(find);
-        Matcher m = p.matcher(text);
-
-        StringBuffer sb = new StringBuffer();
-        int c = 0;
-        while (m.find()) {
-            m.appendReplacement(sb, replace);
-            c++;
-        }
-
-        System.out.println("count: " + c);
-        m.appendTail(sb);
-        System.out.println("sb: " + sb);
-        codeArea.replaceText(sb.toString());
+//        System.out.println("BTW find: " + find);
+//        System.out.println("BTW replace: " + replace);
+//
+//        String text = codeArea.getText();
+//        Pattern p = Pattern.compile(find);
+//        Matcher m = p.matcher(text);
+//
+//        StringBuffer sb = new StringBuffer();
+//        int c = 0;
+//        while (m.find()) {
+//            m.appendReplacement(sb, replace);
+//            c++;
+//        }
+//
+//        System.out.println("count: " + c);
+//        m.appendTail(sb);
+//        System.out.println("sb: " + sb);
+//        codeArea.replaceText(sb.toString());
     }
 
 	private String readFile(File file){
@@ -688,28 +686,28 @@ public class WorkspaceController {
 	}
 
 	private void initializeCodeArea(){
-		this.codeArea = new CodeArea();
-		TextEditorController textEditorController = new TextEditorController(codeArea);
-		this.sysCon.attach(textEditorController);
-		textEditorController.build();
-		this.sysCon.clear();
+//		this.codeArea = new CodeArea();
+//		TextEditorController textEditorController = new TextEditorController(codeArea);
+//		this.sysCon.attach(textEditorController);
+//		textEditorController.build();
+//		this.sysCon.clear();
 	}
 
 	/** Method for configuring the highlighted
 	 *  keywords within the text editor
 	 */
-	private void setCodeEnvironment(){
-		this.KEYWORDS = this.sysCon.getKeywords();
-		this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
-		this.PATTERN = Pattern.compile(
-				"(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-						+ "|(?<PAREN>" + PAREN_PATTERN + ")"
-						+ "|(?<BRACE>" + BRACE_PATTERN + ")"
-						+ "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-						+ "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-						+ "|(?<STRING>" + STRING_PATTERN + ")"
-						+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
-		);
-	}
+//	private void setCodeEnvironment(){
+//		this.KEYWORDS = this.sysCon.getKeywords();
+//		this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+//		this.PATTERN = Pattern.compile(
+//				"(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+//						+ "|(?<PAREN>" + PAREN_PATTERN + ")"
+//						+ "|(?<BRACE>" + BRACE_PATTERN + ")"
+//						+ "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+//						+ "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
+//						+ "|(?<STRING>" + STRING_PATTERN + ")"
+//						+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+//		);
+//	}
 
 }
