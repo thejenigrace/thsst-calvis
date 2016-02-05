@@ -1,5 +1,8 @@
 package EnvironmentConfiguration.model.engine;
 
+import bsh.EvalError;
+import bsh.ParseException;
+
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
@@ -18,13 +21,12 @@ public class CALVISInstruction {
         this.memory = memory;
     }
 
-    public void execute(){
+    public void execute() throws NumberFormatException, EvalError {
         int numParameters = 0;
         if ( params != null ){
             numParameters = params.length;
         }
         Token[] tokens = evaluateParameters(numParameters);
-        try {
             switch(numParameters){
                 case 0:
                     this.ins.execute(registers, memory);
@@ -39,13 +41,9 @@ public class CALVISInstruction {
                     this.ins.execute(tokens[0], tokens[1], tokens[2], registers, memory);
                     break;
             }
-        } catch (Exception e){
-            System.out.println("Instruction Execution Error: " + e.getCause());
-            e.printStackTrace();
-        }
     }
 
-    private Token[] evaluateParameters(int size) {
+    private Token[] evaluateParameters(int size) throws  NumberFormatException, EvalError{
         Token[] tokens = new Token[size];
         for (int i = 0; i < size; i++) {
             if ( params[i] instanceof Token ) {

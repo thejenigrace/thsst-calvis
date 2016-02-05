@@ -13,8 +13,6 @@ import java.util.*;
 
 public class RegisterList {
 
-	static int MAX_SIZE = 32; //default is 32 bit registers
-
 	static final int NAME = 0;
 	static final int SOURCE = 1;
 	static final int SIZE = 2;
@@ -29,12 +27,14 @@ public class RegisterList {
 
 	public static String instructionPointerName = "EIP";
 	public static int instructionPointerSize = 32;
+	public static int MAX_SIZE = 32; //default is 32 bit registers
 
-	public RegisterList(String csvFile) {
+	public RegisterList(String csvFile, int maxSize) {
 		Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
 		this.flags = new EFlags("EFLAGS", 32);
 		this.map = new TreeMap<>(orderedComparator);
 		this.lookup = new ArrayList<>();
+		this.MAX_SIZE = maxSize;
 
 		BufferedReader br = null;
 		String line = "";
@@ -83,8 +83,6 @@ public class RegisterList {
 					if (lineCounter != 0) {
 
 						regSize = Integer.parseInt(reg[SIZE]);
-						if (MAX_SIZE < regSize)
-							MAX_SIZE = regSize;
 
 						int startIndex = Integer.parseInt(reg[START]);
 						int endIndex = Integer.parseInt(reg[END]);

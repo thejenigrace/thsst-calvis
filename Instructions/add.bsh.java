@@ -2,7 +2,6 @@ execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
         if ( src.isRegister() ){
  			System.out.println("ADD register to register");
-
             String x = registers.get(src);
             String y = registers.get(des);
 

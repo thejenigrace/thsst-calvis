@@ -36,8 +36,11 @@ public class Token {
 	private void formatValue(){
 		switch(this.type){
 			case Token.HEX: // remove 0x from HEX
-				if (this.value.contains("0x")){
+				if (this.value.contains("x") | this.value.contains("X") ){
 					this.value = this.value.substring(2).toUpperCase();
+				}
+				if (this.value.contains("h") | this.value.contains("H") ){
+					this.value = this.value.substring(0, this.value.length()-1).toUpperCase();
 				}
 				break;
 			case Token.DEC:

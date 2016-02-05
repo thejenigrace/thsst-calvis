@@ -1,5 +1,5 @@
-Prefix,Size
-byte,8
-word,16
-dword,32
-qword,64
+Name,Prefix,Size
+byte,db,8
+word,dw,16
+dword,dd,32
+qword,dq,64

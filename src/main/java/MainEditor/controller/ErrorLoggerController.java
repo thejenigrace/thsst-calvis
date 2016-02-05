@@ -16,39 +16,39 @@ import java.util.ResourceBundle;
 /**
  * Created by Jennica Alcalde on 10/4/2015.
  */
-public class MemoryController extends AssemblyComponent implements Initializable {
+public class ErrorLoggerController extends AssemblyComponent implements Initializable {
 
     @FXML
-    private TableView<Map.Entry<String,String>> tableViewMemory;
+    private TableView<Map.Entry<String,String>> tableViewErrorLogger;
     @FXML
-    private TableColumn<Map.Entry<String,String>, String> memoryAddress;
+    private TableColumn<Map.Entry<String,String>, String> errorType;
     @FXML
-    private TableColumn<Map.Entry<String,String>, String> memoryRepresentation;
+    private TableColumn<Map.Entry<String,String>, String> errorMessage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        memoryAddress.setCellValueFactory(
+        errorType.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
-        memoryRepresentation.setCellValueFactory(
+        errorMessage.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue()));
     }
 
 
     @Override
     public void update(String currentLine, int lineNumber) {
-        tableViewMemory.refresh();
+        tableViewErrorLogger.refresh();
     }
 
     @Override
     public void refresh() {
-        tableViewMemory.refresh();
+        tableViewErrorLogger.refresh();
     }
 
     @Override
     public void build() {
-        Map map = this.sysCon.getMemoryState().getMemoryMap();
-        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
-        tableViewMemory.setItems(items);
-	    tableViewMemory.scrollTo(tableViewMemory.getItems().size());
+//        Map map = this.sysCon.getMemoryState().getMemoryMap();
+//        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
+//        tableViewErrorLogger.setItems(items);
+//        tableViewErrorLogger.scrollTo(tableViewMemory.getItems().size());
     }
 }
