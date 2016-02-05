@@ -28,8 +28,12 @@ public class TextEditor extends AssemblyComponent {
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-    private static String[] KEYWORDS;
-    private static String KEYWORD_PATTERN;
+    private static String[] INSTRUCTION_KEYWORDS;
+    private static String[] REGISTER_KEYWORDS;
+    private static String[] MEMORY_KEYWORDS;
+    private static String INSTRUCTION_PATTERN;
+    private static String REGISTER_PATTERN;
+    private static String MEMORY_PATTERN;
     private static Pattern PATTERN;
 
     public TextEditor(WorkspaceController workspaceController) {
@@ -56,10 +60,16 @@ public class TextEditor extends AssemblyComponent {
      *  keywords within the text editor
      */
     private void setCodeEnvironment(){
-        this.KEYWORDS = sysCon.getKeywords();
-        this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
+        this.INSTRUCTION_KEYWORDS = sysCon.getInstructionKeywords();
+        this.INSTRUCTION_PATTERN = "\\b(" + String.join("|", INSTRUCTION_KEYWORDS) + ")\\b";
+        this.REGISTER_KEYWORDS = sysCon.getRegisterKeywords();
+        this.REGISTER_PATTERN = "\\b(" + String.join("|", REGISTER_KEYWORDS) + ")\\b";
+        this.MEMORY_KEYWORDS = sysCon.getMemoryKeywords();
+        this.MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
         this.PATTERN = Pattern.compile(
-                "(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+                "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
+                        + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
+                        + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
                         + "|(?<PAREN>" + PAREN_PATTERN + ")"
                         + "|(?<BRACE>" + BRACE_PATTERN + ")"
                         + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
@@ -76,14 +86,12 @@ public class TextEditor extends AssemblyComponent {
                 = new StyleSpansBuilder<>();
         while(matcher.find()) {
             String styleClass =
-                    matcher.group("KEYWORD") != null ? "keyword" :
-                            matcher.group("PAREN") != null ? "paren" :
-                                    matcher.group("BRACE") != null ? "brace" :
-                                            matcher.group("BRACKET") != null ? "bracket" :
-                                                    matcher.group("SEMICOLON") != null ? "semicolon" :
-                                                            matcher.group("STRING") != null ? "string" :
-                                                                    matcher.group("COMMENT") != null ? "comment" :
-                                                                            null; /* never happens */ assert styleClass != null;
+                    matcher.group("INSTRUCTIONPATTERN") != null ? "instruction" : matcher.group("REGISTERPATTERN") != null ? "register" :
+                            matcher.group("MEMORYPATTERN") != null ? "memory" : matcher.group("PAREN") != null ? "paren" :
+                                    matcher.group("BRACE") != null ? "brace" : matcher.group("BRACKET") != null ? "bracket" :
+                                            matcher.group("SEMICOLON") != null ? "semicolon" : matcher.group("STRING") != null ? "string" :
+                                                    matcher.group("COMMENT") != null ? "comment" :
+                                                            null; /* never happens */ assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
             lastKwEnd = matcher.end();

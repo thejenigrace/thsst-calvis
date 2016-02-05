@@ -22,8 +22,8 @@ public class CALVISParser {
 	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
-	private final String hexPattern = "(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})" +
-			"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
+	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
+	 //+"|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "}[hH])";
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;

@@ -1,10 +1,16 @@
-.keyword {
+.register {
+    -fx-fill: orange;
+    -fx-font-weight: bold;
+}
+
+.instruction {
     -fx-fill: purple;
     -fx-font-weight: bold;
 }
 
-.hex {
+.memory {
     -fx-fill: green;
+    -fx-font-weight: bold;
 }
 
 .semicolon {

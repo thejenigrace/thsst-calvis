@@ -17,12 +17,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
-import org.fxmisc.richtext.StyleSpans;
-import org.fxmisc.richtext.StyleSpansBuilder;
+import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -214,9 +211,11 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePlay(ActionEvent event) {
-//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-//			this.sysCon.play(codeArea.getText());
-//		}
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+
+        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+			this.sysCon.play(codeArea.getText());
+		}
 	}
 
 	/**
@@ -226,9 +225,11 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleStop(ActionEvent event) {
-//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-//			this.sysCon.end();
-//		}
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+
+		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+			this.sysCon.end();
+		}
 	}
 
 	/**
@@ -238,9 +239,11 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleNext(ActionEvent event) {
-//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-//			this.sysCon.next();
-//		}
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+
+		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+			this.sysCon.next();
+		}
 	}
 
 	/**
@@ -250,9 +253,11 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePrevious(ActionEvent event) {
-//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-//			this.sysCon.previous();
-//		}
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+
+		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+			this.sysCon.previous();
+		}
 	}
 
 	/**
@@ -262,9 +267,11 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleReset(ActionEvent event) {
-//		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
-//			this.sysCon.reset(codeArea.getText());
-//		}
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+
+		if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") ) {
+			this.sysCon.reset();
+		}
 	}
 
     /**
@@ -389,8 +396,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleCut(ActionEvent event) {
-
-//		codeArea.cut();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+		codeArea.cut();
 	}
 
 	/**
@@ -399,7 +406,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleCopy(ActionEvent event) {
-//        codeArea.copy();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.copy();
 	}
 
 	/**
@@ -408,7 +416,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handlePaste(ActionEvent event) {
-//        codeArea.paste();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.paste();
 	}
 
 	/**
@@ -417,7 +426,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleUndo(ActionEvent event) {
-//		codeArea.undo();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+		codeArea.undo();
     }
 
 	/**
@@ -426,7 +436,8 @@ public class WorkspaceController {
 	 */
 	@FXML
 	private void handleRedo(ActionEvent event) {
-//		codeArea.redo();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+		codeArea.redo();
 	}
 
 	/**
@@ -486,15 +497,10 @@ public class WorkspaceController {
 
     public void buildSystem(EnvironmentConfigurator env){
         this.sysCon = new SystemController(env, this);
-//        setCodeEnvironment();
     }
 
     public void displayDefaultWindows(){
-        ActionEvent ae = new ActionEvent();
         try {
-//            handleTextEditorWindow(ae);
-//            handleMemoryWindow(ae);
-//            handleRegistersWindow(ae);
             showRegisterPane();
             showMemoryPane();
             newTextEditorTab();
@@ -513,12 +519,6 @@ public class WorkspaceController {
                 10,
                 80
         );
-
-        // add some content
-        initializeCodeArea();
-//        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-//        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
-//        w.getContentPane().getChildren().add(codeArea);
 
         // add the window to the canvas
         root.setCenter(w);
@@ -541,19 +541,21 @@ public class WorkspaceController {
 	}
 
 	public void enableCodeArea(boolean flag){
-//		this.codeArea.setDisable(!flag);
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+		codeArea.setDisable(!flag);
 	}
 
     public void formatCodeArea(String codeBlock){
-//	    String[] arr = this.sysCon.getInstructionKeywords();
-//	    String expression =  String.join("|", arr) ;
-//	    String pat = "[^\\S\\n]+(?=(" + expression + "))";
-//        Pattern pattern = Pattern.compile(pat);
-//	    Matcher matcher = pattern.matcher(codeBlock);
-//	    String replacedCodeAreaText = matcher.replaceAll("\n");
-//	    replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
-//	    codeArea.replaceText(replacedCodeAreaText);
-//	    codeArea.redo();
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+	    String[] arr = this.sysCon.getInstructionKeywords();
+	    String expression =  String.join("|", arr) ;
+	    String pat = "[^\\S\\n]+(?=(" + expression + "))";
+        Pattern pattern = Pattern.compile(pat);
+	    Matcher matcher = pattern.matcher(codeBlock);
+	    String replacedCodeAreaText = matcher.replaceAll("\n");
+	    replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
+	    codeArea.replaceText(replacedCodeAreaText);
+	    codeArea.redo();
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
@@ -650,29 +652,6 @@ public class WorkspaceController {
 		}
 	}
 
-	private static StyleSpans<Collection<String>> computeHighlighting(String text) {
-		Matcher matcher = PATTERN.matcher(text);
-		int lastKwEnd = 0;
-		StyleSpansBuilder<Collection<String>> spansBuilder
-				= new StyleSpansBuilder<>();
-		while(matcher.find()) {
-			String styleClass =
-					matcher.group("KEYWORD") != null ? "keyword" :
-							matcher.group("PAREN") != null ? "paren" :
-									matcher.group("BRACE") != null ? "brace" :
-											matcher.group("BRACKET") != null ? "bracket" :
-													matcher.group("SEMICOLON") != null ? "semicolon" :
-															matcher.group("STRING") != null ? "string" :
-																	matcher.group("COMMENT") != null ? "comment" :
-																			null; /* never happens */ assert styleClass != null;
-			spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
-			spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
-			lastKwEnd = matcher.end();
-		}
-		spansBuilder.add(Collections.emptyList(), text.length() - lastKwEnd);
-		return spansBuilder.create();
-	}
-
 	private Window initWindowProperties(String title, double width, double height, double x, double y) {
 //        System.out.println("root width = " + root.getWidth());
 //        System.out.println("root height = " + root.getHeight());
@@ -684,30 +663,4 @@ public class WorkspaceController {
 
 		return window;
 	}
-
-	private void initializeCodeArea(){
-//		this.codeArea = new CodeArea();
-//		TextEditorController textEditorController = new TextEditorController(codeArea);
-//		this.sysCon.attach(textEditorController);
-//		textEditorController.build();
-//		this.sysCon.clear();
-	}
-
-	/** Method for configuring the highlighted
-	 *  keywords within the text editor
-	 */
-//	private void setCodeEnvironment(){
-//		this.KEYWORDS = this.sysCon.getKeywords();
-//		this.KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
-//		this.PATTERN = Pattern.compile(
-//				"(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-//						+ "|(?<PAREN>" + PAREN_PATTERN + ")"
-//						+ "|(?<BRACE>" + BRACE_PATTERN + ")"
-//						+ "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-//						+ "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-//						+ "|(?<STRING>" + STRING_PATTERN + ")"
-//						+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
-//		);
-//	}
-
 }

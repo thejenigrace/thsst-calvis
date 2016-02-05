@@ -216,5 +216,18 @@ public class Memory {
 	public Iterator<String[]> getLookup() {
 		return lookup.iterator();
 	}
+
+	/*
+		getRegisterKeys() is used for getting all register names to be highlighted
+	 */
+	public Iterator<String> getMemoryKeys(){
+		List memoryKeys = new ArrayList<>();
+		Iterator<String[]> iterator = getLookup();
+		while(iterator.hasNext()){
+			String sizeDirective = iterator.next()[Memory.SIZE_DIRECTIVE_NAME];
+			memoryKeys.add(sizeDirective);
+		}
+		return memoryKeys.iterator();
+	}
 	
 }

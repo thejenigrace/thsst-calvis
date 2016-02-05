@@ -1,26 +1,13 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.engine.CALVISInstruction;
-import EnvironmentConfiguration.model.engine.CALVISParser;
-import EnvironmentConfiguration.model.engine.EFlags;
-import EnvironmentConfiguration.model.engine.InstructionList;
-import EnvironmentConfiguration.model.engine.Memory;
-import EnvironmentConfiguration.model.engine.MemoryAddressCalculator;
-import EnvironmentConfiguration.model.engine.RegisterList;
+import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import java.util.*;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -111,7 +98,7 @@ public class SystemController {
                 parse(code);
                 this.state = SimulationState.PLAY;
                 workspaceController.formatCodeArea(code);
-                workspaceController.changeIconToPause();
+//                workspaceController.changeIconToPause();
                 beginSimulation();
                 break;
         }
@@ -131,16 +118,15 @@ public class SystemController {
                     }
                 }
         );
-        clear();
+//        clear();
     }
 
-    public void reset(String codeText){
+    public void reset(){
         this.state = SimulationState.STOP;
         if ( thread != null ){
             thread.interrupt();
         }
         clear();
-        play(codeText);
     }
 
 	public void clear(){
@@ -244,11 +230,11 @@ public class SystemController {
 					new Thread() {
 						@Override
 						public void run() {
-							try {
-								workspaceController.handleErrorWindow();
-							} catch (Exception ioexception) {
-								ioexception.printStackTrace();
-							}
+//							try {
+//								workspaceController.handleErrorWindow();
+//							} catch (Exception ioexception) {
+//								ioexception.printStackTrace();
+//							}
 						}
 					}
 			);
@@ -305,19 +291,44 @@ public class SystemController {
     /** Method used to get the keywords
      *  needed to be highlighted in the text editor
      */
-    public String[] getKeywords(){
+//    public String[] getKeywords(){
+//        List<String> keywordsList = new ArrayList<>();
+//
+//        Iterator<String> registerIterator = registerList.getRegisterKeys();
+//        Iterator<String> instructionIterator = instructionList.getInstructionKeys();
+//
+//        populateKeywords(keywordsList, registerIterator);
+//        populateKeywords(keywordsList, instructionIterator);
+//
+//        String[] keywordsArray = new String[keywordsList.size()];
+//        keywordsArray = keywordsList.toArray(keywordsArray);
+//        return keywordsArray;
+//    }
+
+    public String[] getRegisterKeywords(){
         List<String> keywordsList = new ArrayList<>();
 
         Iterator<String> registerIterator = registerList.getRegisterKeys();
-        Iterator<String> instructionIterator = instructionList.getInstructionKeys();
 
         populateKeywords(keywordsList, registerIterator);
-        populateKeywords(keywordsList, instructionIterator);
 
         String[] keywordsArray = new String[keywordsList.size()];
         keywordsArray = keywordsList.toArray(keywordsArray);
         return keywordsArray;
     }
+
+    public String[] getMemoryKeywords(){
+        List<String> keywordsList = new ArrayList<>();
+
+        Iterator<String> registerIterator = memory.getMemoryKeys();
+
+        populateKeywords(keywordsList, registerIterator);
+
+        String[] keywordsArray = new String[keywordsList.size()];
+        keywordsArray = keywordsList.toArray(keywordsArray);
+        return keywordsArray;
+    }
+
 
     public String[] getInstructionKeywords(){
 	    List<String> keywordsList = new ArrayList<>();
