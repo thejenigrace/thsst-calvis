@@ -1,13 +1,25 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.engine.*;
+import EnvironmentConfiguration.model.engine.CALVISInstruction;
+import EnvironmentConfiguration.model.engine.CALVISParser;
+import EnvironmentConfiguration.model.engine.EFlags;
+import EnvironmentConfiguration.model.engine.InstructionList;
+import EnvironmentConfiguration.model.engine.Memory;
+import EnvironmentConfiguration.model.engine.MemoryAddressCalculator;
+import EnvironmentConfiguration.model.engine.RegisterList;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 import javafx.application.Platform;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -98,7 +110,7 @@ public class SystemController {
                 parse(code);
                 this.state = SimulationState.PLAY;
                 workspaceController.formatCodeArea(code);
-//                workspaceController.changeIconToPause();
+                workspaceController.changeIconToPause();
                 beginSimulation();
                 break;
         }
@@ -249,7 +261,23 @@ public class SystemController {
 	}
 
     private void parse(String code){
-        this.executionMap = parser.parse(code);
+	    try {
+		    this.executionMap = parser.parse(code);
+	    } catch (Exception e){
+		    e.printStackTrace();
+		    Platform.runLater(
+				    new Thread() {
+					    @Override
+					    public void run() {
+						    try {
+							    workspaceController.handleErrorWindow(e);
+						    } catch (Exception viewException) {
+							    viewException.printStackTrace();
+						    }
+					    }
+				    }
+		    );
+	    }
 	    push();
     }
 

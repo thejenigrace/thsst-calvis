@@ -169,9 +169,13 @@ public class Memory {
 	public String read(String baseAddress, int offset) throws MemoryReadException{
 		String result = "";
 		Integer inc;
-		
+
+		String checkSizeDirective = baseAddress;
+		if ( checkSizeDirective.contains("/") ){
+			checkSizeDirective = baseAddress.split("/")[1];
+		}
 		//System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
-		inc = Integer.parseInt(baseAddress, 16);
+		inc = Integer.parseInt(checkSizeDirective, 16);
 		int offsetHex = offset/4;
 		for ( int i = 0; i < offsetHex / 2; i++ ){
 			result = read(reformatAddress(Integer.toHexString(inc))) + result;
