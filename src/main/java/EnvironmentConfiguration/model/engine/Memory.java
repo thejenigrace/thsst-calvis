@@ -233,5 +233,33 @@ public class Memory {
 		}
 		return memoryKeys.iterator();
 	}
-	
+
+	public int getBitSize(Token a){
+		String key = a.getValue();
+
+		String checkSizeDirective = key;
+		if ( checkSizeDirective.contains("/") ){
+			key = checkSizeDirective.split("/")[0];
+		}
+
+		String[] arr = find(key);
+		if ( arr != null ){
+			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
+		}
+		return 0;
+	}
+
+	public String[] find(String sizeDirective){
+		for (String[] x : this.lookup){
+			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
+				return x;
+			}
+		}
+		return null;
+	}
+
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
+	}
+
 }
