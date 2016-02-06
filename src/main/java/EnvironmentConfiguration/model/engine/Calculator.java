@@ -221,14 +221,27 @@ public class Calculator {
 	 * returns string (32-bit HEX)
 	 */
 	public String hexZeroExtend(String value, Token des) {
-		int missingZeroes = registers.getHexSize(des) - value.length();
+		if(des.isRegister()) {
+			int missingZeroes = registers.getHexSize(des) - value.length();
 
-		//zero extend
-		if(missingZeroes > 0) {
-			for(int k = 0; k < missingZeroes; k++) {
-				value = "0" + value;
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
 			}
 		}
+		else if(des.isMemory()) {
+			int missingZeroes = mem.getHexSize(des) - value.length();
+
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
+			}
+		}
+
 
 		return value;
 	}
@@ -239,12 +252,24 @@ public class Calculator {
 	 * returns string (32-bit hinary)
 	 */
 	public String binaryZeroExtend(String value, Token des) {
-		int missingZeroes = registers.getBitSize(des) - value.length();
+		if(des.isRegister()) {
+			int missingZeroes = registers.getBitSize(des) - value.length();
 
-		//zero extend
-		if(missingZeroes > 0) {
-			for(int k = 0; k < missingZeroes; k++) {
-				value = "0" + value;
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
+			}
+		}
+		else if(des.isMemory()) {
+			int missingZeroes = mem.getBitSize(des) - value.length();
+
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
 			}
 		}
 
