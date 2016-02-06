@@ -50,7 +50,7 @@
         String parity = calculator.checkParity(r, des);
         flags.setParityFlag(parity);
 
-        // flags.setAuxiliaryFlag(); undefined
+        flags.setAuxiliaryFlag("0"); //undefined
       }
     }
  		else if ( src.isMemory() ) {
@@ -91,7 +91,7 @@
       String parity = calculator.checkParity(r, des);
       flags.setParityFlag(parity);
 
-      // flags.setAuxiliaryFlag(); undefined
+      flags.setAuxiliaryFlag("0"); //undefined
  		}
     else if ( src.isHex() ) {
       System.out.println("OR register and immediate");
@@ -141,7 +141,7 @@
         String parity = calculator.checkParity(r, des);
         flags.setParityFlag(parity);
 
-        // flags.setAuxiliaryFlag(); undefined
+        flags.setAuxiliaryFlag("0"); //undefined
       }
     }
  	}
@@ -184,7 +184,7 @@
       String parity = calculator.checkParity(r, des);
       flags.setParityFlag(parity);
 
-      // flags.setAuxiliaryFlag(); undefined
+      flags.setAuxiliaryFlag("0"); //undefined
     }
     else if ( src.isHex() ) {
   		System.out.println("OR memory and immediate");
