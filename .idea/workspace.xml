@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix: binaryToHexString, hexToBinaryString, checkParity">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/and.bsh.java" afterPath="$PROJECT_DIR$/Instructions/and.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/not.bsh.java" afterPath="$PROJECT_DIR$/Instructions/not.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/or.bsh.java" afterPath="$PROJECT_DIR$/Instructions/or.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sal.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sal.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sar.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sar.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shl.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xor.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xor.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/test.bsh.java" afterPath="$PROJECT_DIR$/Instructions/test.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1093,7 +1090,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454751708909</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="DONE Logical Instructions">
+      <created>1454754389419</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1454754389419</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1109,7 +1112,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="865" height="745" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1118,7 +1121,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3416321" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3127572" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39203677" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.39203677" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32373112" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1194,7 +1197,8 @@
     <MESSAGE value="Fix New Tab for Text Editor" />
     <MESSAGE value="fix undefined" />
     <MESSAGE value="Fix: binaryToHexString, hexToBinaryString, checkParity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: binaryToHexString, hexToBinaryString, checkParity" />
+    <MESSAGE value="DONE Logical Instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="DONE Logical Instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
