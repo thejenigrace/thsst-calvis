@@ -229,14 +229,14 @@ public class InstructionList {
 
 	public ErrorLogger getErrorLogger(){
 		if(errorLogger.get(0).getSizeofErrorMessages() == 0)
-			return new ErrorLogger(new ArrayList<ErrorMessageList>());
+			return new ErrorLogger(new ArrayList<>());
 		else
 			return errorLogger;
 	}
 
 	private ArrayList<String> doParameterChecking(String[] inst){
-		ArrayList<String> instructionErrorCollection = new ArrayList<String>();
-		String[] acceptableInputs = {"r", "m", "i"};
+		ArrayList<String> instructionErrorCollection = new ArrayList<>();
+		String[] acceptableInputs = {"r", "m", "i", "c"};
 		int i =  3;
 		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
 			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');

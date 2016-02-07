@@ -58,9 +58,9 @@ public class Memory {
                 }
                 if ( lineCounter != 0 ) {
                     this.lookup.add(row);
-                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
-		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
-		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
+//                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
+//		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
+//		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
                 }
                 lineCounter++;
             }
@@ -97,7 +97,6 @@ public class Memory {
 		// des contains our offset.
 		String desValue = des.getValue();
 		String[] memoryArray = desValue.split("/");
-
 		String sizeDirective = memoryArray[0];
 		String baseAddress = memoryArray[1];
 
@@ -233,5 +232,28 @@ public class Memory {
 		}
 		return memoryKeys.iterator();
 	}
-	
+
+	public int getBitSize(Token a){
+		String key = a.getValue();
+
+		String checkSizeDirective = key;
+		if ( checkSizeDirective.contains("/") ){
+			key = checkSizeDirective.split("/")[0];
+		}
+
+		String[] arr = find(key);
+		if ( arr != null ){
+			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
+		}
+		return 0;
+	}
+
+	public String[] find(String sizeDirective){
+		for (String[] x : this.lookup){
+			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
+				return x;
+			}
+		}
+		return null;
+	}
 }

@@ -1,6 +1,7 @@
  execute(des, src, count, registers, memory) {
  	Calculator calculator = new Calculator(registers, memory);
 
+		 System.out.println("SHRD");
  	if ( des.isRegister() && src.isRegister() ) {
     //get size of des, src
     int desSize = registers.getBitSize(des);

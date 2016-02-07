@@ -46,7 +46,11 @@ public class CALVISInstruction {
     private Token[] evaluateParameters(int size) throws  NumberFormatException, EvalError{
         Token[] tokens = new Token[size];
         for (int i = 0; i < size; i++) {
-            if ( params[i] instanceof Token ) {
+	       // System.out.println(params[i] + " : " + params[i].getClass());
+			if ( params[i] instanceof String ){
+				tokens[i] = new Token(Token.REG, params[i].toString());
+			}
+	        else if ( params[i] instanceof Token ) {
                 tokens[i] = (Token) params[i];
             }
             else if (params[i] instanceof Token[]) {
