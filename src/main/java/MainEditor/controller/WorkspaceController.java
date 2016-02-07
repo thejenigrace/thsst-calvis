@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jfxtras.scene.control.window.CloseIcon;
@@ -73,6 +70,8 @@ public class WorkspaceController {
     private TabPane textEditorTabPane;
     @FXML
     private ToolBar hideToolbar;
+    @FXML
+    private TabPane otherWindowsTabPane;
 
     private void showRegisterPane() throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -102,9 +101,26 @@ public class WorkspaceController {
         memoryController.build();
     }
 
-
     private void showTextEditorPane() throws Exception {
         this.newTextEditorTab();
+
+        ConsoleController consoleController = new ConsoleController();
+        this.otherWindowsTabPane.getTabs().add(consoleController.getTab());
+        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab());
+    }
+
+    private Tab createErrorLoggerTab() throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/error_logger.fxml"));
+        SplitPane errorLoggerView = loader.load();
+
+        ErrorLoggerController registersController = loader.getController();
+
+        Tab tab = new Tab();
+        tab.setText("Error Logger");
+        tab.setContent(errorLoggerView);
+
+        return tab;
     }
 
     private void newTextEditorTab() {

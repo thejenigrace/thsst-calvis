@@ -2,8 +2,6 @@ package MainEditor.controller;
 
 import MainEditor.model.AssemblyComponent;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -17,7 +15,6 @@ import java.util.ResourceBundle;
  * Created by Jennica Alcalde on 10/4/2015.
  */
 public class ErrorLoggerController extends AssemblyComponent implements Initializable {
-
     @FXML
     private TableView<Map.Entry<String,String>> tableViewErrorLogger;
     @FXML
@@ -32,7 +29,6 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
         errorMessage.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue()));
     }
-
 
     @Override
     public void update(String currentLine, int lineNumber) {
