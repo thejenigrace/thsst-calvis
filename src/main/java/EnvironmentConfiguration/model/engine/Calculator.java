@@ -58,52 +58,64 @@ public class Calculator {
 		}	
 	}
 
-	/*
-	 * For 32-bit,
-	 * convert value from HEX to binary
-	 * returns string (32-bit binary)
-	 */
-	public String hexToBinaryString(String value, Token des) {
+	public String hexToBinaryString(String value, Token des){
         BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(2);
-		int missingZeroes = registers.getBitSize(des) - val.length();
 
-		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			val = "0" + val;
+		if(des.isRegister()){
+			int missingZeroes = registers.getBitSize(des) - val.length();
+
+			//zero extend
+			for(int k = 0; k < missingZeroes; k++){
+				val = "0" + val;
+			}
+		}
+		else if (des.isMemory()){
+			int missingZeroes = mem.getBitSize(des) - val.length();
+
+			//zero extend
+			for(int k = 0; k < missingZeroes; k++){
+				val = "0" + val;
+			}
 		}
 
 		return val;
 	}
 
-	/*
-	 * For 32-bit,
-	 * convert value from binary to HEX
-	 * returns string (32-bit HEX)
-	 */
-	public String binaryToHexString(String value, Token des) {
-        BigInteger bi = new BigInteger(value, 2);
-        String val = bi.toString(16);
-		int registerSize = registers.getHexSize(des);
-		int missingZeroes = registerSize - val.length();
+	public String binaryToHexString(String value, Token des){
+		BigInteger bi = new BigInteger(value, 2);
+		String val = bi.toString(16);
 
-		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			val = "0" + val;
+		if(des.isRegister()) {
+			int registerSize = registers.getHexSize(des);
+			int missingZeroes = registerSize - val.length();
+
+			//zero extend
+			for(int k = 0; k < missingZeroes; k++) {
+				val = "0" + val;
+			}
+
+			//remove carry flag
+			System.out.println("val.length() = " + val.length());
+			System.out.println("registerSize = " + registerSize);
+			if(val.length() > registerSize) {
+				System.out.println("REMOVE CARRY FLAG");
+				StringBuilder sb = new StringBuilder();
+
+				for(int i = 1; i < val.length(); i++)
+					sb.append(val.charAt(i));
+
+				val = sb.toString();
+				System.out.println("val = " + val);
+			}
 		}
+		else if (des.isMemory()){
+			int missingZeroes = mem.getBitSize(des) - val.length();
 
-		//remove carry flag
-        System.out.println("val.length() = " + val.length());
-        System.out.println("registerSize = " + registerSize);
-		if(val.length() > registerSize) {
-            System.out.println("REMOVE CARRY FLAG");
-			StringBuilder sb = new StringBuilder();
-
-			for(int i = 1; i < val.length(); i++)
-				sb.append(val.charAt(i));
-
-			val = sb.toString();
-            System.out.println("val = " + val);
+			//zero extend
+			for(int k = 0; k < missingZeroes; k++){
+				val = "0" + val;
+			}
 		}
 
 		return val;
@@ -209,14 +221,27 @@ public class Calculator {
 	 * returns string (32-bit HEX)
 	 */
 	public String hexZeroExtend(String value, Token des) {
-		int missingZeroes = registers.getHexSize(des) - value.length();
+		if(des.isRegister()) {
+			int missingZeroes = registers.getHexSize(des) - value.length();
 
-		//zero extend
-		if(missingZeroes > 0) {
-			for(int k = 0; k < missingZeroes; k++) {
-				value = "0" + value;
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
 			}
 		}
+		else if(des.isMemory()) {
+			int missingZeroes = mem.getHexSize(des) - value.length();
+
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
+			}
+		}
+
 
 		return value;
 	}
@@ -227,12 +252,24 @@ public class Calculator {
 	 * returns string (32-bit hinary)
 	 */
 	public String binaryZeroExtend(String value, Token des) {
-		int missingZeroes = registers.getBitSize(des) - value.length();
+		if(des.isRegister()) {
+			int missingZeroes = registers.getBitSize(des) - value.length();
 
-		//zero extend
-		if(missingZeroes > 0) {
-			for(int k = 0; k < missingZeroes; k++) {
-				value = "0" + value;
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
+			}
+		}
+		else if(des.isMemory()) {
+			int missingZeroes = mem.getBitSize(des) - value.length();
+
+			//zero extend
+			if(missingZeroes > 0) {
+				for(int k = 0; k < missingZeroes; k++) {
+					value = "0" + value;
+				}
 			}
 		}
 
@@ -256,9 +293,17 @@ public class Calculator {
         return "0";
     }
 
-	public String checkParity(String value, Token des) {
+	public String checkParity(String value) {
 		String parity = new StringBuffer(value).reverse().toString();
 		int count = 0;
+
+		if(parity.length() < 8) {
+			int missingZeroes = 8 - parity.length();
+
+			for(int k = 0; k < missingZeroes; k++) {
+				parity = parity + "0";
+			}
+		}
 
 		for(int i = 0; i < 8; i++) {
 			if(parity.charAt(i) == '1') {
