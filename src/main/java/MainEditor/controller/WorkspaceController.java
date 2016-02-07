@@ -10,10 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
@@ -60,19 +58,29 @@ public class WorkspaceController {
     @FXML
     private BorderPane root;
 
+    @FXML
+    private SplitPane wholeSplitPane;
 	@FXML
     private AnchorPane registerPane;
     @FXML
-    private TabPane textEditorTabPane;
+    private SplitPane editorSplitPane;
     @FXML
     private AnchorPane memoryPane;
+
+    @FXML
+    private AnchorPane otherWindowsPane;
+    @FXML
+    private TabPane textEditorTabPane;
+    @FXML
+    private ToolBar hideToolbar;
 
     private void showRegisterPane() throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
-        Parent registersView = (AnchorPane) loader.load();
-
+        SplitPane registersView = loader.load();
         registerPane.getChildren().add(registersView);
+		registersView.prefWidthProperty().bind(registerPane.widthProperty());
+		registersView.prefHeightProperty().bind(registerPane.heightProperty());
 
         // Attach registersController to SystemController
         RegistersController registersController = loader.getController();
@@ -80,43 +88,40 @@ public class WorkspaceController {
         registersController.build();
     }
 
-//    private void showTextEditorPane() throws Exception {
-//        System.out.println("Text Editor Pane");
-//        // add some content
-//
-//
-////        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-////        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
-//
-//        this.newTextEditorTab();
-//    }
+    private void showMemoryPane() throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
+        StackPane memoryView = loader.load();
+        memoryPane.getChildren().add(memoryView);
+        memoryView.prefWidthProperty().bind(memoryPane.widthProperty());
+        memoryView.prefHeightProperty().bind(memoryPane.heightProperty());
+
+        // Attach registersController to SystemController
+        MemoryController memoryController = loader.getController();
+        this.sysCon.attach(memoryController);
+        memoryController.build();
+    }
+
+
+    private void showTextEditorPane() throws Exception {
+        this.newTextEditorTab();
+    }
 
     private void newTextEditorTab() {
 		TextEditor textEditor = new TextEditor(this);
         textEditorTabPane.getTabs().add(textEditor.getTab());
         textEditorTabPane.getSelectionModel().select(textEditor.getTab());
+        textEditorTabPane.prefWidthProperty().bind(editorSplitPane.widthProperty());
+        textEditorTabPane.prefHeightProperty().bind(editorSplitPane.heightProperty());
 
         this.sysCon.attach(textEditor);
         textEditor.build();
         this.sysCon.clear();
     }
 
-    private void showMemoryPane() throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
-        Parent memoryView = loader.load();
-
-//        w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-//        w.getContentPane().getChildren().add(memoryView);
-//
-//        root.setRight(w);
-        //root.getChildren().add(w);
-        memoryPane.getChildren().add(memoryView);
-
-        // Attach registersController to SystemController
-        MemoryController memoryController = loader.getController();
-        this.sysCon.attach(memoryController);
-        memoryController.build();
+    @FXML
+    private void handleHide(ActionEvent event) {
+        this.editorSplitPane.setDividerPositions(1);
     }
 
     @FXML
@@ -504,7 +509,7 @@ public class WorkspaceController {
         try {
             showRegisterPane();
             showMemoryPane();
-            newTextEditorTab();
+            showTextEditorPane();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -528,13 +533,11 @@ public class WorkspaceController {
 
     public void changeIconToPause(){
 		btnPlay.setGraphic(new Glyph("FontAwesome", "PAUSE"));
-//        btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
 	    disableStepMode(true);
     }
 
     public void changeIconToPlay(){
         btnPlay.setGraphic(new Glyph("FontAwesome", "PLAY"));
-//        btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
 	    disableStepMode(false);
     }
 
