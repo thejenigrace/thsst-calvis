@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         primaryStage.setScene(new Scene(workspaceLayout));
         primaryStage.setTitle("CALVIS x86-32 Workspace");
-//        primaryStage.setMaximized(true);
-//        primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(true);
         primaryStage.show();
 
         WorkspaceController workspaceController = loader.getController();
