@@ -259,15 +259,19 @@
                 </AnchorPane>
                 <SplitPane fx:id="editorSplitPane" dividerPositions="0.75" orientation="VERTICAL">
                     <items>
-                        <AnchorPane fx:id="otherWindowsPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                        <AnchorPane fx:id="otherWindowsPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0"
+                                    prefWidth="160.0">
                             <children>
                                 <TabPane fx:id="textEditorTabPane" focusTraversable="false" prefHeight="730.0"
                                          prefWidth="886.0" tabClosingPolicy="ALL_TABS"/>
-                                <ToolBar fx:id="hideToolbar" prefHeight="30.0" prefWidth="880.0"
-                                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                <ToolBar fx:id="hideToolbar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0">
                                     <items>
-                                        <Button mnemonicParsing="false" onAction="#handleHide" text="Hide"/>
+                                        <Button mnemonicParsing="false" onAction="#handleHide">
+                                            <graphic>
+                                                <Glyph fontFamily="FontAwesome" icon="DOWNLOAD"/>
+                                            </graphic>
+                                        </Button>
                                     </items>
                                 </ToolBar>
                             </children>
@@ -280,16 +284,16 @@
                                          AnchorPane.topAnchor="0.0">
                                     <tabs>
                                         <!--<Tab text="Console">-->
-                                            <!--<content>-->
-                                                <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"-->
-                                                            <!--prefWidth="200.0"/>-->
-                                            <!--</content>-->
+                                        <!--<content>-->
+                                        <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"-->
+                                        <!--prefWidth="200.0"/>-->
+                                        <!--</content>-->
                                         <!--</Tab>-->
                                         <!--<Tab text="Error Logger">-->
-                                            <!--<content>-->
-                                                <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"-->
-                                                            <!--prefWidth="200.0"/>-->
-                                            <!--</content>-->
+                                        <!--<content>-->
+                                        <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"-->
+                                        <!--prefWidth="200.0"/>-->
+                                        <!--</content>-->
                                         <!--</Tab>-->
                                     </tabs>
                                 </TabPane>
