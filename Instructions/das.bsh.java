@@ -26,7 +26,7 @@ execute(registers, memory) {
     flags.setAuxiliaryFlag("1");
 
     //Flags
-    flags.setOverflowFlag("0");
+    flags.setOverflowFlag("0"); //undefined
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
     if(bi.equals(BigInteger.ZERO)) {
@@ -47,7 +47,7 @@ execute(registers, memory) {
     flags.setAuxiliaryFlag("0");
 
     //Flags
-    flags.setOverflowFlag("0");
+    flags.setOverflowFlag("0"); //undefined
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
     if(bi.equals(BigInteger.ZERO)) {
@@ -71,7 +71,7 @@ execute(registers, memory) {
     flags.setCarryFlag("1");
 
     //Flags
-    flags.setOverflowFlag("0");
+    flags.setOverflowFlag("0"); //undefined
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
     if(bi.equals(BigInteger.ZERO)) {
