@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
+import org.controlsfx.glyphfont.Glyph;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
@@ -526,12 +527,14 @@ public class WorkspaceController {
     }
 
     public void changeIconToPause(){
-        btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
+		btnPlay.setGraphic(new Glyph("FontAwesome", "PAUSE"));
+//        btnPlay.setStyle("-fx-graphic: url(/icon/pause.png);");
 	    disableStepMode(true);
     }
 
     public void changeIconToPlay(){
-        btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
+        btnPlay.setGraphic(new Glyph("FontAwesome", "PLAY"));
+//        btnPlay.setStyle("-fx-graphic: url(/icon/play.png);");
 	    disableStepMode(false);
     }
 
