@@ -29,8 +29,8 @@ public class Memory {
 	private ArrayList<String[]> lookup;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
-        this.MAX_ADDRESS_SIZE = bitSize;
-        this.mem = new TreeMap<>(Collections.reverseOrder());
+		this.MAX_ADDRESS_SIZE = bitSize;
+		this.mem = new TreeMap<>(Collections.reverseOrder());
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
@@ -42,45 +42,45 @@ public class Memory {
 
 		System.out.println("Loaded: Memory");
 
-        BufferedReader br = null;
-        String line;
-        String cvsSplitBy = ",";
-        int lineCounter = 0;
-        this.lookup = new ArrayList<>();
-        try {
-            br = new BufferedReader(new FileReader(new File(csvFile)));
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] row = line.split(cvsSplitBy);
-                // trim every row just in case
-                for (int i = 0; i < row.length; i++) {
-                    row[i] = row[i].trim();
-                }
-                if ( lineCounter != 0 ) {
-                    this.lookup.add(row);
+		BufferedReader br = null;
+		String line;
+		String cvsSplitBy = ",";
+		int lineCounter = 0;
+		this.lookup = new ArrayList<>();
+		try {
+			br = new BufferedReader(new FileReader(new File(csvFile)));
+			while ((line = br.readLine()) != null) {
+				// use comma as separator
+				String[] row = line.split(cvsSplitBy);
+				// trim every row just in case
+				for (int i = 0; i < row.length; i++) {
+					row[i] = row[i].trim();
+				}
+				if ( lineCounter != 0 ) {
+					this.lookup.add(row);
 //                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
 //		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
 //		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
-                }
-                lineCounter++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+				}
+				lineCounter++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public Map getMemoryMap(){
 		return this.mem;
 	}
-	
+
 	private static String reformatAddress(String add) {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
@@ -102,11 +102,11 @@ public class Memory {
 
 		int offset = 0; //default offset = 0;
 		for (String[] x : this.lookup){
-            if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ){
-                offset = Integer.valueOf(x[SIZE_DIRECTIVE_SIZE]);
-                break;
-            }
-        }
+			if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ){
+				offset = Integer.valueOf(x[SIZE_DIRECTIVE_SIZE]);
+				break;
+			}
+		}
 
 		String reformattedValue = MemoryAddressCalculator.extend(value,offset,"0");
 		write(baseAddress, reformattedValue, offset);
@@ -140,11 +140,11 @@ public class Memory {
 			throw new MemoryWriteException(memoryBaseAddress);
 		}
 	}
-	
+
 	public String read(String address){
 		return this.mem.get(address);
 	}
-	
+
 	public String read(Token baseAddressToken, Token src) throws MemoryReadException{
 		return read(baseAddressToken.getValue(), src);
 	}
@@ -200,13 +200,13 @@ public class Memory {
 		}
 		return false;
 	}
-	
+
 	public void print(String start, String end){
 		Map<String, String> map = new TreeMap<>(mem).descendingMap();
 		Iterator<Map.Entry<String, String>> ite = map.entrySet().iterator();
 		while (ite.hasNext()){
 			Map.Entry<String, String> x = ite.next();
-			if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16) 
+			if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16)
 					&& Integer.parseInt(x.getKey(), 16) <= Integer.parseInt(end, 16) )
 				System.out.println(x);
 		}
@@ -260,5 +260,8 @@ public class Memory {
 			}
 		}
 		return null;
+	}
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
 	}
 }

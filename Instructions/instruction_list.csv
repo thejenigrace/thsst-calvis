@@ -28,4 +28,8 @@ shr,Instructions/shr.bsh.java,2,r/m,c/i
 sar,Instructions/sar.bsh.java,2,r/m,c/i
 stc,Instructions/stc.bsh.java,0,,
 shrd,Instructions/shrd.bsh.java,3,r16/r32/m16/m32,r16/r32,c/i
-ror,Instructions/ror.bsh.java,2,r/m,r/i
+shld,Instructions/shld.bsh.java,3,r16/r32/m16/m32,r16/r32,c/i
+ror,Instructions/ror.bsh.java,2,r/m,c/i
+rol,Instructions/rol.bsh.java,2,r/m,c/i
+rcr,Instructions/rcr.bsh.java,2,r/m,c/i
+rcl,Instructions/rcl.bsh.java,2,r/m,c/i

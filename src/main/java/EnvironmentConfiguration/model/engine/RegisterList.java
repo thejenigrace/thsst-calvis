@@ -350,5 +350,6 @@ public class RegisterList {
 		}
 		Integer[] list = new Integer[available.size()];
 		return available.toArray(list);
+		
 	}
 }

@@ -29,14 +29,14 @@ execute(des, src, registers, memory) {
 		//proceed rotate
 		boolean bitSet = false;
 		for(int x = 0; x < limit; x++){
-		bitSet = biResult.testBit(0);
-		biResult = biResult.shiftRight(x + 1);
+		bitSet = biResult.testBit(desSize - 1);
+		biResult = biResult.shiftLeft(x + 1);
 		if(bitSet){
-		biResult = biResult.setBit(desSize - 1);
+		biResult = biResult.setBit(0);
 		carryFlagValue = "1";
 		}
 		else{
-		biResult = biResult.clearBit(desSize - 1);
+		biResult = biResult.clearBit(0);
 		carryFlagValue = "0";
 		}
 		}
@@ -107,15 +107,15 @@ execute(des, src, registers, memory) {
 		String carryFlagValue = flags.getCarryFlag();
 		boolean bitSet = false;
 		for(int x = 0; x < count.intValue(); x++){
-		biResult = biResult.shiftRight(x + 1);
-		bitSet = biDes.testBit(0);
+		biResult = biResult.shiftLeft(x + 1);
+		bitSet = biDes.testBit(desSize);
 
 		if(bitSet){
-		biResult = biResult.setBit(desSize - 1);
+		biResult = biResult.setBit(0);
 		carryFlagValue = "1";
 		}
 		else{
-		biResult = biResult.clearBit(desSize - 1);
+		biResult = biResult.clearBit(0);
 		carryFlagValue = "0";
 		}
 		}
@@ -165,6 +165,7 @@ execute(des, src, registers, memory) {
 		}
 		}
 		else if ( des.isMemory() ){
+		System.out.println(src.getValue().length() + "puta naman");
 		if( src.isRegister() && src.getValue().equals("CL") ) {
 		System.out.println("ROL memory and CL");
 		//get size of des
@@ -190,14 +191,14 @@ execute(des, src, registers, memory) {
 		//proceed rotate
 		boolean bitSet = false;
 		for(int x = 0; x < limit; x++){
-		bitSet = biResult.testBit(0);
-		biResult = biResult.shiftRight(x + 1);
+		bitSet = biResult.testBit(desSize - 1);
+		biResult = biResult.shiftLeft(x + 1);
 		if(bitSet){
-		biResult = biResult.setBit(desSize - 1);
+		biResult = biResult.setBit(0);
 		carryFlagValue = "1";
 		}
 		else{
-		biResult = biResult.clearBit(desSize - 1);
+		biResult = biResult.clearBit(0);
 		carryFlagValue = "0";
 		}
 		}
@@ -267,14 +268,14 @@ execute(des, src, registers, memory) {
 		//proceed rotate
 		boolean bitSet = false;
 		for(int x = 0; x < limit; x++){
-		bitSet = biResult.testBit(0);
-		biResult = biResult.shiftRight(x + 1);
+		bitSet = biResult.testBit(desSize - 1);
+		biResult = biResult.shiftLeft(x + 1);
 		if(bitSet){
-		biResult = biResult.setBit(desSize - 1);
+		biResult = biResult.setBit(0);
 		carryFlagValue = "1";
 		}
 		else{
-		biResult = biResult.clearBit(desSize - 1);
+		biResult = biResult.clearBit(0);
 		carryFlagValue = "0";
 		}
 		}

@@ -7,7 +7,7 @@ execute(des, src, count, registers, memory) {
 		//get size of des, src
 		int desSize = registers.getBitSize(des);
 		int srcSize = registers.getBitSize(src);
-		if( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16))  && count.getValue().equals("CL") ) {
+		if( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16) ) && count.getValue().equals("CL") ) {
 		System.out.println("SHLD register and CL");
 		//get size of des
 		String originalDes = calculator.hexToBinaryString(registers.get(des), des);
@@ -43,7 +43,7 @@ execute(des, src, count, registers, memory) {
 		System.out.println(desSize + "pota");
 		for (int x = 0; x < limit; x++) {
 		bitSet = biDes.testBit(desSize - 1);
-		biResult = biResult.shiftRight(x + 1);
+		biResult = biResult.shiftLeft(x + 1);
 
 		if (bitSet) {
 		carryFlagValue = "1";
@@ -52,13 +52,14 @@ execute(des, src, count, registers, memory) {
 		carryFlagValue = "0";
 		}
 		//check sign bit of source then transfer to lsb of destination
-		srcBitSet = biSrc.testBit(0);
+		srcBitSet = biSrc.testBit(desSize - 1 - x);
+		System.out.println("index ito:" + (desSize - 1 - x) + "boolean: " + srcBitSet);
 		switch (srcBitSet) {
 		case true:
-		biResult = biResult.setBit(desSize - 1 - x);
+		biResult = biResult.setBit(0);
 		break;
 		case false:
-		biResult = biResult.clearBit(desSize - 1 - x);
+		biResult = biResult.clearBit(0);
 		break;
 		}
 		}
@@ -105,7 +106,7 @@ execute(des, src, count, registers, memory) {
 		}
 		}
 		}
-		else if ( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16))  && count.getValue().length() <= 2 ) {
+		else if ( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16) ) && count.getValue().length() <= 2 ) {
 		System.out.println("SHL register and i8");
 
 		//get size of des
@@ -137,7 +138,7 @@ execute(des, src, count, registers, memory) {
 
 		for (int x = 0; x < limit; x++) {
 		bitSet = biDes.testBit(desSize - 1);
-		biResult = biResult.shiftRight(x + 1);
+		biResult = biResult.shiftLeft(x + 1);
 
 		if (bitSet) {
 		carryFlagValue = "1";
@@ -145,14 +146,14 @@ execute(des, src, count, registers, memory) {
 		carryFlagValue = "0";
 		}
 		//check sign bit of source then transfer to lsb of destination
-		srcBitSet = biSrc.testBit(0);
+		srcBitSet = biSrc.testBit(desSize - 1 - x);
 
 		switch (srcBitSet) {
 		case true:
-		biResult = biResult.setBit(desSize - 1 - x);
+		biResult = biResult.setBit(0);
 		break;
 		case false:
-		biResult = biResult.clearBit(desSize - 1 - x);
+		biResult = biResult.clearBit(0);
 		break;
 		}
 		}
@@ -211,7 +212,7 @@ execute(des, src, count, registers, memory) {
 
 		System.out.println(desSize);
 
-		if( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16))  && count.getValue().equals("CL") ) {
+		if(( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16) ) && count.getValue().equals("CL") ) {
 		System.out.println("woy puta");
 		//get size of des
 		String originalDes = calculator.hexToBinaryString(memory.read(des, desSize), des);
@@ -254,13 +255,13 @@ execute(des, src, count, registers, memory) {
 		carryFlagValue = "0";
 		}
 		//check sign bit of source then transfer to lsb of destination
-		srcBitSet = biSrc.testBit(0);
+		srcBitSet = biSrc.testBit(desSize - 1 - x);
 		switch (srcBitSet) {
 		case true:
-		biResult = biResult.setBit(desSize - 1 - x);
+		biResult = biResult.setBit(0);
 		break;
 		case false:
-		biResult = biResult.clearBit(desSize - 1 - x);
+		biResult = biResult.clearBit(0);
 		break;
 		}
 		}
@@ -302,7 +303,7 @@ execute(des, src, count, registers, memory) {
 		}
 		}
 		}
-		else if ( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16)) && count.getValue().length() <= 2 ) {
+		else if ( ( (desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16) ) && count.getValue().length() <= 2 ) {
 		System.out.println("woy puta");
 		//get size of des
 		String originalDes = calculator.hexToBinaryString(memory.read(des, desSize), des);
@@ -345,13 +346,13 @@ execute(des, src, count, registers, memory) {
 		carryFlagValue = "0";
 		}
 		//check sign bit of source then transfer to lsb of destination
-		srcBitSet = biSrc.testBit(0);
+		srcBitSet = biSrc.testBit(desSize - 1 - x);
 		switch (srcBitSet) {
 		case true:
-		biResult = biResult.setBit(desSize - 1 - x);
+		biResult = biResult.setBit(0);
 		break;
 		case false:
-		biResult = biResult.clearBit(desSize - 1 - x);
+		biResult = biResult.clearBit(0);
 		break;
 		}
 		}
