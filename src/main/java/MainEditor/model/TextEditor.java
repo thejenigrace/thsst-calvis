@@ -1,12 +1,22 @@
 package MainEditor.model;
 
 import MainEditor.controller.WorkspaceController;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Tooltip;
+import javafx.scene.text.Text;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
+import org.fxmisc.undo.UndoManager;
 
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,8 +29,13 @@ import java.util.regex.Pattern;
 public class TextEditor extends AssemblyComponent {
     private WorkspaceController workspaceController;
     private CodeArea codeArea;
-    private final Tab tab = new Tab();
+    private Tab tab;
     private Pattern lineByLinePattern;
+
+    // 'path' property
+    private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
+    // 'modified' property
+    private final ReadOnlyBooleanWrapper modified = new ReadOnlyBooleanWrapper();
 
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
@@ -39,12 +54,27 @@ public class TextEditor extends AssemblyComponent {
     public TextEditor(WorkspaceController workspaceController) {
         this.workspaceController = workspaceController;
         this.codeArea = new CodeArea();
-
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.richChanges().subscribe(change -> codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText())));
+        codeArea.richChanges().subscribe(change -> {
+//            this.tab.setGraphic(new Text("*"));
+//            this.workspaceController.disableSaveMode(false);
+            codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
+        });
 
-        this.tab.setText("Untitled");
+        this.tab = new Tab();
+//        this.tab.setText("Untitled");
+        this.tab.setUserData(this);
         this.tab.setContent(codeArea);
+
+        this.path.addListener((observable, oldPath, newPath) -> updateTab());
+        this.modified.addListener((observable, oldPath, newPath) -> updateTab());
+        updateTab();
+
+        tab.setOnSelectionChanged(e -> {
+            if(tab.isSelected())
+                Platform.runLater(() -> activated());
+        });
+//       activated();
     }
 
     public Tab getTab() {
@@ -55,11 +85,65 @@ public class TextEditor extends AssemblyComponent {
         return codeArea;
     }
 
+    public Path getPath() {
+        return path.get();
+    }
+
+    public void setPath(Path path) {
+        this.path.set(path);
+    }
+
+    public ObjectProperty<Path> pathProperty() {
+        return path;
+    }
+
+    public boolean isModified() {
+        return modified.get();
+    }
+
+    public ReadOnlyBooleanProperty modifiedProperty() {
+        return modified.getReadOnlyProperty();
+    }
+
+    private void updateTab() {
+        Path path = this.path.get();
+        tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
+        tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
+        tab.setGraphic(isModified() ? new Text("*") : null);
+
+        if(isModified())
+            workspaceController.disableSaveMode(false);
+        else
+            workspaceController.disableSaveMode(true);
+    }
+
+    private void activated() {
+        System.out.println("Tab Pane Activated");
+//        if( tab.getTabPane() == null || !tab.isSelected())
+//            return; // tab is already closed or no longer active
+//
+//        if (tab.getContent() != null) {
+//            codeArea.requestFocus();
+//            return;
+//        }
+
+        // bind the editor undo manager to the properties
+        UndoManager undoManager = codeArea.getUndoManager();
+        modified.bind(Bindings.not(undoManager.atMarkedPositionProperty()));
+
+        codeArea.requestFocus();
+
+        if(isModified())
+            workspaceController.disableSaveMode(false);
+        else
+            workspaceController.disableSaveMode(true);
+    }
+
     /**
      * Method for configuring the highlighted
-     *  keywords within the text editor
+     * keywords within the text editor
      */
-    private void setCodeEnvironment(){
+    private void setCodeEnvironment() {
         this.INSTRUCTION_KEYWORDS = sysCon.getInstructionKeywords();
         this.INSTRUCTION_PATTERN = "\\b(" + String.join("|", INSTRUCTION_KEYWORDS) + ")\\b";
         this.REGISTER_KEYWORDS = sysCon.getRegisterKeywords();
@@ -84,14 +168,18 @@ public class TextEditor extends AssemblyComponent {
         int lastKwEnd = 0;
         StyleSpansBuilder<Collection<String>> spansBuilder
                 = new StyleSpansBuilder<>();
-        while(matcher.find()) {
-            String styleClass =
-                    matcher.group("INSTRUCTIONPATTERN") != null ? "instruction" : matcher.group("REGISTERPATTERN") != null ? "register" :
-                            matcher.group("MEMORYPATTERN") != null ? "memory" : matcher.group("PAREN") != null ? "paren" :
-                                    matcher.group("BRACE") != null ? "brace" : matcher.group("BRACKET") != null ? "bracket" :
-                                            matcher.group("SEMICOLON") != null ? "semicolon" : matcher.group("STRING") != null ? "string" :
-                                                    matcher.group("COMMENT") != null ? "comment" :
-                                                            null; /* never happens */ assert styleClass != null;
+        while (matcher.find()) {
+            String styleClass = matcher.group("INSTRUCTIONPATTERN") != null ? "instruction" :
+                    matcher.group("REGISTERPATTERN") != null ? "register" :
+                            matcher.group("MEMORYPATTERN") != null ? "memory" :
+                                    matcher.group("PAREN") != null ? "paren" :
+                                            matcher.group("BRACE") != null ? "brace" :
+                                                    matcher.group("BRACKET") != null ? "bracket" :
+                                                            matcher.group("SEMICOLON") != null ? "semicolon" :
+                                                                    matcher.group("STRING") != null ? "string" :
+                                                                            matcher.group("COMMENT") != null ? "comment" :
+                                                                                    null; /* never happens */
+            assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
             lastKwEnd = matcher.end();
@@ -116,22 +204,21 @@ public class TextEditor extends AssemblyComponent {
                 c++;
             }
             int[] range = findHighlightRanges.get(lineNumber);
-            if ( range != null ) {
+            if (range != null) {
                 // System.out.println(range[0] + " to " + range[1]);
                 codeArea.selectRange(range[0], range[1]);
                 codeArea.redo();
             }
-        }
-        else {
+        } else {
             System.out.println("null currentLine");
-            codeArea.selectRange(0,0);
+            codeArea.selectRange(0, 0);
             codeArea.redo();
         }
     }
 
     @Override
     public void refresh() {
-        codeArea.selectRange(0,0);
+        codeArea.selectRange(0, 0);
         codeArea.redo();
     }
 
@@ -139,8 +226,8 @@ public class TextEditor extends AssemblyComponent {
     public void build() {
         this.setCodeEnvironment();
         String[] arr = this.sysCon.getInstructionKeywords();
-        String expression =  String.join("|", arr) ;
-        expression = "(" + expression +")(.*)";
+        String expression = String.join("|", arr);
+        expression = "(" + expression + ")(.*)";
         lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
     }
 }
