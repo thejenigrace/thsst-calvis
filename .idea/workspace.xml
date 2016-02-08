@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/FindDialogController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/FindDialogController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1052,7 +1049,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454925510858</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Added Find Feature">
+      <created>1454938644551</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1454938644551</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1131,7 +1134,8 @@
     <MESSAGE value="Fix Instructions" />
     <MESSAGE value="Change Icon for Hide" />
     <MESSAGE value="Added New File, Open File, Save File, &amp; Save As File" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added New File, Open File, Save File, &amp; Save As File" />
+    <MESSAGE value="Added Find Feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Find Feature" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
