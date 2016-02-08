@@ -9,11 +9,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
 import org.controlsfx.glyphfont.Glyph;
@@ -40,30 +44,47 @@ public class WorkspaceController {
 
     private final ReadOnlyObjectWrapper<TextEditor> activeFileEditor = new ReadOnlyObjectWrapper<>();
 
-    @FXML private BorderPane root;
+    @FXML
+    private BorderPane root;
 
-    @FXML private GridPane gridPaneFind;
+    @FXML
+    private GridPane gridPaneFind;
 
-    @FXML private AnchorPane registerPane;
-    @FXML private AnchorPane memoryPane;
-    @FXML private AnchorPane otherWindowsPane;
+    @FXML
+    private AnchorPane registerPane;
+    @FXML
+    private AnchorPane memoryPane;
+    @FXML
+    private AnchorPane otherWindowsPane;
 
-    @FXML private Button btnSave;
-    @FXML private Button btnPlay;
-    @FXML private Button btnNext;
-    @FXML private Button btnPrevious;
-    @FXML private Button btnFindUp;
-    @FXML private Button btnFindDown;
+    @FXML
+    private Button btnSave;
+    @FXML
+    private Button btnPlay;
+    @FXML
+    private Button btnNext;
+    @FXML
+    private Button btnPrevious;
+    @FXML
+    private Button btnFindUp;
+    @FXML
+    private Button btnFindDown;
 
-    @FXML private SplitPane rootSplitPane;
-    @FXML private SplitPane editorSplitPane;
+    @FXML
+    private SplitPane rootSplitPane;
+    @FXML
+    private SplitPane editorSplitPane;
 
-    @FXML private TabPane textEditorTabPane;
-    @FXML private TabPane otherWindowsTabPane;
+    @FXML
+    private TabPane textEditorTabPane;
+    @FXML
+    private TabPane otherWindowsTabPane;
 
-    @FXML private TextField textFieldFind;
+    @FXML
+    private TextField textFieldFind;
 
-    @FXML private ToolBar hideToolbar;
+    @FXML
+    private ToolBar hideToolbar;
 
     private void init() {
         // update activeFileEditor property
@@ -75,7 +96,7 @@ public class WorkspaceController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
-                if( !newValue.isEmpty() && tab != null ){
+                if (!newValue.isEmpty() && tab != null) {
                     CodeArea codeArea = (CodeArea) tab.getContent();
                     String find_pattern = "\\b(" + newValue + ")\\b";
                     Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
@@ -100,13 +121,13 @@ public class WorkspaceController {
                         c++;
                     }
 
-                    if ( c > 0 ){
+                    if (c > 0) {
                         onActionFind(findHighlightRanges);
                         disableFindButton(false);
-                    } else{
+                    } else {
                         disableFindButton(true);
                     }
-                } else{
+                } else {
                     disableFindButton(true);
                 }
             }
@@ -355,7 +376,7 @@ public class WorkspaceController {
     private void handleSaveFile(ActionEvent event) {
         Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
 
-        if(tab != null) {
+        if (tab != null) {
             TextEditor textEditor = (TextEditor) tab.getUserData();
             CodeArea codeArea = (CodeArea) tab.getContent();
 
@@ -489,23 +510,23 @@ public class WorkspaceController {
     @FXML
     private void handleFindAndReplace(ActionEvent event) throws IOException {
         // Load root layout from fxml file
-//		FXMLLoader loader = new FXMLLoader();
-//		loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
-//		Parent findAndReplaceView = (BorderPane) loader.load();
-//
-//		Stage findAndReplaceDialogStage = new Stage();
-//		findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
-//		findAndReplaceDialogStage.setTitle("Find & Replace");
-//		findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
-//		findAndReplaceDialogStage.setResizable(false);
-//		findAndReplaceDialogStage.setX(root.getWidth() / 3);
-//		findAndReplaceDialogStage.setY(root.getHeight() / 3);
-//		findAndReplaceDialogStage.show();
-//
-//		// Pass the current code in the text editor to FindDialogController
-//		FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
-//		findAndReplaceDialogController.setWorkspaceController(this);
-//		findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+        Parent findAndReplaceView = (BorderPane) loader.load();
+
+        Stage findAndReplaceDialogStage = new Stage();
+        findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
+        findAndReplaceDialogStage.setTitle("Find & Replace");
+        findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
+        findAndReplaceDialogStage.setResizable(false);
+        findAndReplaceDialogStage.setX(root.getWidth() / 3);
+        findAndReplaceDialogStage.setY(root.getHeight() / 3);
+        findAndReplaceDialogStage.show();
+
+        // Pass the current code in the text editor to FindDialogController
+        FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
+        findAndReplaceDialogController.setWorkspaceController(this);
+        findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
@@ -524,31 +545,31 @@ public class WorkspaceController {
     public void handleFindUp(ActionEvent event) {
         Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
 
-       if ( tab != null ){
-           CodeArea codeArea = (CodeArea) tab.getContent();
-           int[] range;
-           if ( findHighlightRanges.size() != 0 ){
-               System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-               if( currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size() ){
-                   currentFindRangeIndex--;
-                   System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                   range = findHighlightRanges.get(currentFindRangeIndex);
-                   codeArea.selectRange(range[0], range[1]);
-               }
-           }
-       }
+        if (tab != null) {
+            CodeArea codeArea = (CodeArea) tab.getContent();
+            int[] range;
+            if (findHighlightRanges.size() != 0) {
+                System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                if (currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
+                    currentFindRangeIndex--;
+                    System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                    range = findHighlightRanges.get(currentFindRangeIndex);
+                    codeArea.selectRange(range[0], range[1]);
+                }
+            }
+        }
     }
 
     @FXML
     public void handleFindDown(ActionEvent event) {
         Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
 
-        if ( tab != null ){
+        if (tab != null) {
             CodeArea codeArea = (CodeArea) tab.getContent();
             int[] range;
-            if ( findHighlightRanges.size() != 0){
+            if (findHighlightRanges.size() != 0) {
                 System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                if ( currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size() ){
+                if (currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
                     currentFindRangeIndex++;
                     System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
                     range = findHighlightRanges.get(currentFindRangeIndex);
@@ -559,24 +580,29 @@ public class WorkspaceController {
     }
 
     public void onActionFindAndReplace(String find, String replace) {
-//        System.out.println("BTW find: " + find);
-//        System.out.println("BTW replace: " + replace);
-//
-//        String text = codeArea.getText();
-//        Pattern p = Pattern.compile(find);
-//        Matcher m = p.matcher(text);
-//
-//        StringBuffer sb = new StringBuffer();
-//        int c = 0;
-//        while (m.find()) {
-//            m.appendReplacement(sb, replace);
-//            c++;
-//        }
-//
-//        System.out.println("count: " + c);
-//        m.appendTail(sb);
-//        System.out.println("sb: " + sb);
-//        codeArea.replaceText(sb.toString());
+        System.out.println("BTW find: " + find);
+        System.out.println("BTW replace: " + replace);
+
+        Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+
+        if (tab != null) {
+            CodeArea codeArea = (CodeArea) tab.getContent();
+            String text = codeArea.getText();
+            Pattern p = Pattern.compile(find);
+            Matcher m = p.matcher(text);
+
+            StringBuffer sb = new StringBuffer();
+            int c = 0;
+            while (m.find()) {
+                m.appendReplacement(sb, replace);
+                c++;
+            }
+
+            System.out.println("count: " + c);
+            m.appendTail(sb);
+            System.out.println("sb: " + sb);
+            codeArea.replaceText(sb.toString());
+        }
     }
 
     /**

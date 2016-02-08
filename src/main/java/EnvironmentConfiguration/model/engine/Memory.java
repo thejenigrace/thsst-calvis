@@ -261,18 +261,4 @@ public class Memory {
 	public int getHexSize(Token a){
 		return getBitSize(a) / 4;
 	}
-
-}
-
-	public String[] find(String sizeDirective){
-		for (String[] x : this.lookup){
-			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
-				return x;
-			}
-		}
-		return null;
-	}
-	public int getHexSize(Token a){
-		return getBitSize(a) / 4;
-	}
 }
