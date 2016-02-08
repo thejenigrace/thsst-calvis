@@ -55,11 +55,11 @@ public class FindDialogController implements Initializable {
 
     @FXML
     private void handleUp(ActionEvent event) {
-        workspaceController.onActionUp();
+//        workspaceController.onActionUp();
     }
 
     @FXML void handleDown(ActionEvent event) {
-        workspaceController.onActionDown();
+//        workspaceController.onActionDown();
     }
 
     @FXML

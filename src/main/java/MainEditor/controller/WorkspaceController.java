@@ -4,6 +4,8 @@ import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.model.TextEditor;
 import SimulatorVisualizer.controller.SystemController;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,40 +38,78 @@ public class WorkspaceController {
     private HashMap<Integer, int[]> findHighlightRanges;
     private int currentFindRangeIndex;
 
-//    private String fileLocation = "";
     private final ReadOnlyObjectWrapper<TextEditor> activeFileEditor = new ReadOnlyObjectWrapper<>();
 
-    @FXML
-    private BorderPane root;
-    @FXML
-    private AnchorPane registerPane;
-    @FXML
-    private AnchorPane memoryPane;
-    @FXML
-    private AnchorPane otherWindowsPane;
-    @FXML
-    private Button btnSave;
-    @FXML
-    private Button btnPlay;
-    @FXML
-    private Button btnNext;
-    @FXML
-    private Button btnPrevious;
-    @FXML
-    private SplitPane rootSplitPane;
-    @FXML
-    private SplitPane editorSplitPane;
-    @FXML
-    private TabPane textEditorTabPane;
-    @FXML
-    private TabPane otherWindowsTabPane;
-    @FXML
-    private ToolBar hideToolbar;
+    @FXML private BorderPane root;
+
+    @FXML private GridPane gridPaneFind;
+
+    @FXML private AnchorPane registerPane;
+    @FXML private AnchorPane memoryPane;
+    @FXML private AnchorPane otherWindowsPane;
+
+    @FXML private Button btnSave;
+    @FXML private Button btnPlay;
+    @FXML private Button btnNext;
+    @FXML private Button btnPrevious;
+    @FXML private Button btnFindUp;
+    @FXML private Button btnFindDown;
+
+    @FXML private SplitPane rootSplitPane;
+    @FXML private SplitPane editorSplitPane;
+
+    @FXML private TabPane textEditorTabPane;
+    @FXML private TabPane otherWindowsTabPane;
+
+    @FXML private TextField textFieldFind;
+
+    @FXML private ToolBar hideToolbar;
 
     private void init() {
         // update activeFileEditor property
         textEditorTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
             activeFileEditor.set((newTab != null) ? (TextEditor) newTab.getUserData() : null);
+        });
+
+        textFieldFind.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+                if( !newValue.isEmpty() && tab != null ){
+                    CodeArea codeArea = (CodeArea) tab.getContent();
+                    String find_pattern = "\\b(" + newValue + ")\\b";
+                    Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
+                    System.out.println("PATTERN: " + pattern.toString());
+
+                    Matcher matcher = pattern.matcher(codeArea.getText());
+
+                    findHighlightRanges = new HashMap<>();
+                    int c = 0;
+                    while (matcher.find()) {
+                        System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
+
+                        System.out.println("matcher.end() " + matcher.end());
+                        System.out.println("matcher.start() " + matcher.start());
+
+                        int[] arrRange = new int[2];
+                        arrRange[0] = matcher.start();
+                        arrRange[1] = matcher.end();
+
+                        findHighlightRanges.put(c, arrRange);
+
+                        c++;
+                    }
+
+                    if ( c > 0 ){
+                        onActionFind(findHighlightRanges);
+                        disableFindButton(false);
+                    } else{
+                        disableFindButton(true);
+                    }
+                } else{
+                    disableFindButton(true);
+                }
+            }
         });
     }
 
@@ -447,29 +487,6 @@ public class WorkspaceController {
     }
 
     @FXML
-    private void handleFind(ActionEvent event) throws IOException {
-        // Load root layout from fxml file
-//		FXMLLoader loader = new FXMLLoader();
-//		loader.setLocation(getClass().getResource("/fxml/find.fxml"));
-//		Parent findView = (BorderPane) loader.load();
-//
-//		Stage findDialogStage = new Stage();
-//		findDialogStage.initModality(Modality.APPLICATION_MODAL);
-//		findDialogStage.setTitle("Find");
-//		findDialogStage.setScene(new Scene(findView));
-//		findDialogStage.setResizable(false);
-//		findDialogStage.setX(root.getWidth() / 3);
-//		findDialogStage.setY(root.getHeight() / 3);
-//		findDialogStage.show();
-//
-//		// Pass the current code in the text editor to FindDialogController
-//		FindDialogController findDialogController = loader.getController();
-//		findDialogController.setWorkspaceController(this);
-//		findDialogController.setDialogStage(findDialogStage);
-//		findDialogController.setCode(codeArea.getText());
-    }
-
-    @FXML
     private void handleFindAndReplace(ActionEvent event) throws IOException {
         // Load root layout from fxml file
 //		FXMLLoader loader = new FXMLLoader();
@@ -492,40 +509,53 @@ public class WorkspaceController {
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-//        System.out.println("onActionFind");
-//
-//        this.findHighlightRanges = findHighlightRanges;
-//        if (findHighlightRanges.size() != 0) {
-//            currentFindRangeIndex = 0;
-//            int[] range = findHighlightRanges.get(0);
-//            codeArea.selectRange(range[0], range[1]);
-//        }
+        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+        System.out.println("onActionFind");
+
+        this.findHighlightRanges = findHighlightRanges;
+        if (findHighlightRanges.size() != 0) {
+            currentFindRangeIndex = 0;
+            int[] range = findHighlightRanges.get(0);
+            codeArea.selectRange(range[0], range[1]);
+        }
     }
 
-    public void onActionUp() {
-//        int[] range;
-//        if(findHighlightRanges.size() != 0) {
-//            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-//            if(currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-//                currentFindRangeIndex++;
-//                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-//                range = findHighlightRanges.get(currentFindRangeIndex);
-//                codeArea.selectRange(range[0], range[1]);
-//            }
-//        }
+    @FXML
+    public void handleFindUp(ActionEvent event) {
+        Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+
+       if ( tab != null ){
+           CodeArea codeArea = (CodeArea) tab.getContent();
+           int[] range;
+           if ( findHighlightRanges.size() != 0 ){
+               System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+               if( currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size() ){
+                   currentFindRangeIndex--;
+                   System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                   range = findHighlightRanges.get(currentFindRangeIndex);
+                   codeArea.selectRange(range[0], range[1]);
+               }
+           }
+       }
     }
 
-    public void onActionDown() {
-//        int[] range;
-//        if(findHighlightRanges.size() != 0) {
-//            System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-//            if(currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-//                currentFindRangeIndex--;
-//                System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-//                range = findHighlightRanges.get(currentFindRangeIndex);
-//                codeArea.selectRange(range[0], range[1]);
-//            }
-//        }
+    @FXML
+    public void handleFindDown(ActionEvent event) {
+        Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+
+        if ( tab != null ){
+            CodeArea codeArea = (CodeArea) tab.getContent();
+            int[] range;
+            if ( findHighlightRanges.size() != 0){
+                System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                if ( currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size() ){
+                    currentFindRangeIndex++;
+                    System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                    range = findHighlightRanges.get(currentFindRangeIndex);
+                    codeArea.selectRange(range[0], range[1]);
+                }
+            }
+        }
     }
 
     public void onActionFindAndReplace(String find, String replace) {
@@ -619,6 +649,7 @@ public class WorkspaceController {
             showMemoryPane();
             showTextEditorPane();
             disableSaveMode(true);
+            disableFindButton(true);
             init();
         } catch (Exception e) {
             e.printStackTrace();
@@ -643,6 +674,11 @@ public class WorkspaceController {
 
     public void disableSaveMode(boolean flag) {
         btnSave.setDisable(flag);
+    }
+
+    public void disableFindButton(boolean flag) {
+        btnFindUp.setDisable(flag);
+        btnFindDown.setDisable(flag);
     }
 
     public void enableCodeArea(boolean flag) {
