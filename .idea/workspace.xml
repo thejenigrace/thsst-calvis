@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shrd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shrd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1005,7 +1003,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454864455556</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Slight hotfix on memory write">
+      <created>1454903464555</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1454903464555</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1105,7 +1109,8 @@
     <MESSAGE value="New UI for CALVIS" />
     <MESSAGE value="Fix New Tab for Text Editor" />
     <MESSAGE value="Syntax Check is now enforced.&#10;Immediate can't be checked though" />
-    <option name="LAST_COMMIT_MESSAGE" value="Syntax Check is now enforced.&#10;Immediate can't be checked though" />
+    <MESSAGE value="Slight hotfix on memory write" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slight hotfix on memory write" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
