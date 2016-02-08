@@ -1,8 +1,5 @@
 package EnvironmentConfiguration.model.engine;
 
-import SimulatorVisualizer.model.MemoryReadException;
-import SimulatorVisualizer.model.MemoryWriteException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,18 +16,22 @@ import java.util.*;
 
 public class Memory {
 
-	static int MAX_ADDRESS_SIZE;
-
 	static final int SIZE_DIRECTIVE_NAME = 0;
 	static final int SIZE_DIRECTIVE_PREFIX = 1;
 	static final int SIZE_DIRECTIVE_SIZE = 2;
 
 	private TreeMap<String, String> mem;
 	private ArrayList<String[]> lookup;
+	private HashMap<String, String> labelMap;
+
+	public static int MAX_ADDRESS_SIZE;
+	public static int DEFAULT_RELATIVE_SIZE;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
         this.MAX_ADDRESS_SIZE = bitSize;
+		this.DEFAULT_RELATIVE_SIZE = bitEndLength;
         this.mem = new TreeMap<>(Collections.reverseOrder());
+		this.labelMap = new HashMap<>();
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
@@ -81,7 +82,7 @@ public class Memory {
 		return this.mem;
 	}
 	
-	private static String reformatAddress(String add) {
+	public static String reformatAddress(String add) {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
@@ -122,7 +123,8 @@ public class Memory {
 			Integer inc;
 			inc = Integer.parseInt(memoryBaseAddress, 16);
 			int offsetHex = offset/4;
-			System.out.println("writing value" + value);
+			//System.out.println("writing value: " + value);
+			value = value.toUpperCase();
 			for ( int i = 0; i < offsetHex / 2; i++ ){
 				String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
 				if (this.mem.containsKey(succeedingAddress)) {
@@ -225,8 +227,8 @@ public class Memory {
 		return lookup.iterator();
 	}
 
-	/*
-		getRegisterKeys() is used for getting all register names to be highlighted
+	/**
+	 * getRegisterKeys() is used for getting all register names to be highlighted
 	 */
 	public Iterator<String> getMemoryKeys(){
 		List memoryKeys = new ArrayList<>();
@@ -253,6 +255,10 @@ public class Memory {
 		return 0;
 	}
 
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
+	}
+
 	public String[] find(String sizeDirective){
 		for (String[] x : this.lookup){
 			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
@@ -261,4 +267,30 @@ public class Memory {
 		}
 		return null;
 	}
+
+	public String getFromLabelMap(String key) throws NullPointerException {
+		if ( labelMap.get(key) != null ){
+			return labelMap.get(key);
+		}
+		else {
+			throw new NullPointerException("Label " + key + " does not exist.");
+		}
+	}
+
+	public void putToLabelMap(String key, String address){
+		labelMap.put(key, address);
+	}
+
+	public static void setDefaultRelativeSize(int defaultRelativeSize) {
+		DEFAULT_RELATIVE_SIZE = defaultRelativeSize;
+	}
+
+	public String removeSizeDirectives(String memoryAddressingMode){
+		String result = memoryAddressingMode;
+		if ( result.contains("/") ){
+			result = result.split("/")[1];
+		}
+		return result;
+	}
+
 }

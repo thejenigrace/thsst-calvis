@@ -12,14 +12,11 @@ import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
 import javafx.application.Platform;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -225,13 +222,14 @@ public class SystemController {
 		// 1. Retrieve EIP value and store it to @var currentLine
 		String currentLine = registerList.getInstructionPointer();
 		//System.out.println(currentLine);
-		// 2. Parse currentLine to int @var value
-		int value = Integer.parseInt(currentLine, 16);
-		// 3. Retrieve and execute the CALVIS Instruction based on @var currentLine
+
+		// 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
+		boolean flag = true;
 		try {
-			executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+			flag = executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
 		} catch (Exception e){
-			System.out.println("INSTRUCTION EXECUTION ERROR" + e.getMessage());
+			System.out.println("INSTRUCTION EXECUTION ERROR: " + e.getMessage());
+			System.out.println("INSTRUCTION EXECUTION ERROR: " + e.getCause());
 			e.printStackTrace();
 
 			Platform.runLater(
@@ -247,11 +245,15 @@ public class SystemController {
 					}
 			);
 		}
+		// 3. Parse currentLine to int @var value
+		int value = Integer.parseInt(currentLine, 16);
 		// 4. Notify all observers that an instruction has been executed
 		notifyAllObservers(executionMap.get(currentLine), value);
 		// 5. Increment @var currentLine and store it to EIP register
-		value++;
-		registerList.setInstructionPointer(Integer.toHexString(value));
+		if ( flag ) {
+			value++;
+			registerList.setInstructionPointer(Integer.toHexString(value));
+		}
 		count++;
 		push();
 	}

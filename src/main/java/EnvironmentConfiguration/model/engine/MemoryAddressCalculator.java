@@ -19,7 +19,7 @@ public class MemoryAddressCalculator {
     public static Token evaluateExpression(Token[] matched, RegisterList registers, Memory memory)
 		    throws NumberFormatException, EvalError{
         Token t = matched[0];
-        //System.out.println(t.getValue() + t.getType());
+        //System.out.println(t.getValue() + " : " + t.getType());
         String baseAddress = "";
 	    int equationStartIndex = 1;
 

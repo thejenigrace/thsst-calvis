@@ -1,7 +1,6 @@
 package EnvironmentConfiguration.model.engine;
 
 import bsh.EvalError;
-import bsh.ParseException;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.
@@ -21,26 +20,38 @@ public class CALVISInstruction {
         this.memory = memory;
     }
 
-    public void execute() throws NumberFormatException, EvalError {
+    public boolean execute() throws Exception {
         int numParameters = 0;
         if ( params != null ){
             numParameters = params.length;
         }
+
         Token[] tokens = evaluateParameters(numParameters);
-            switch(numParameters){
-                case 0:
-                    this.ins.execute(registers, memory);
-                    break;
-                case 1:
-                    this.ins.execute(tokens[0], registers, memory);
-                    break;
-                case 2:
-                    this.ins.execute(tokens[0], tokens[1], registers, memory);
-                    break;
-                case 3:
-                    this.ins.execute(tokens[0], tokens[1], tokens[2], registers, memory);
-                    break;
-            }
+	    try {
+		    switch (numParameters) {
+			    case 0:
+				    this.ins.execute(registers, memory);
+				    break;
+			    case 1:
+				    this.ins.execute(tokens[0], registers, memory);
+				    break;
+			    case 2:
+				    this.ins.execute(tokens[0], tokens[1], registers, memory);
+				    break;
+			    case 3:
+				    this.ins.execute(tokens[0], tokens[1], tokens[2], registers, memory);
+				    break;
+		    }
+	    }
+	    catch (Exception e){
+		    throw e;
+	    }
+
+	    String nameCopy = name.toUpperCase();
+	    if ( nameCopy.matches("J.*|LOOP.*|CALL|RET") ){
+		    return false;
+	    }
+	    return true;
     }
 
     private Token[] evaluateParameters(int size) throws  NumberFormatException, EvalError{
