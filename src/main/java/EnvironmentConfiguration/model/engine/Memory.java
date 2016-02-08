@@ -113,9 +113,14 @@ public class Memory {
 	}
 
 	public void write(String baseAddress, String value, int offset) throws MemoryWriteException{
-		if ( this.mem.containsKey(baseAddress)){
+		String memoryBaseAddress = baseAddress;
+		if ( baseAddress.contains("/") ){
+			memoryBaseAddress = baseAddress.split("/")[1];
+		}
+
+		if ( this.mem.containsKey(memoryBaseAddress)){
 			Integer inc;
-			inc = Integer.parseInt(baseAddress, 16);
+			inc = Integer.parseInt(memoryBaseAddress, 16);
 			int offsetHex = offset/4;
 			System.out.println("writing value" + value);
 			for ( int i = 0; i < offsetHex / 2; i++ ){
@@ -132,7 +137,7 @@ public class Memory {
 			//System.out.println("Memory read in little endian starting at: " + baseAddr);
 		}
 		else {
-			throw new MemoryWriteException(baseAddress);
+			throw new MemoryWriteException(memoryBaseAddress);
 		}
 	}
 	
