@@ -80,4 +80,9 @@
                 System.out.println("finalize[0] = " + finalize[0]);
                 System.out.println("finalize[1] = " + finalize[1]);
             }
-        }}
+        }
+	}
+
+    execute(des, src, registers, memory){
+		System.out.println("imul 2 parameters");
+	}

@@ -130,15 +130,11 @@ public class SystemController {
                     }
                 }
         );
-//        clear();
     }
 
     public void reset(){
-        this.state = SimulationState.STOP;
-        if ( thread != null ){
-            thread.interrupt();
-        }
-        clear();
+	    end();
+	    clear();
     }
 
 	public void clear(){
@@ -176,7 +172,7 @@ public class SystemController {
 		            }
 
 		            // 2. Retrieve EIP value and store it to @var currentLine
-                    String currentLine = registerList.get("EIP");
+                    String currentLine = registerList.getInstructionPointer();
 		            // 3. Parse currentLine to int @var value
                     int value = Integer.parseInt(currentLine, 16);
 		            value--;
@@ -195,7 +191,7 @@ public class SystemController {
     public void next() {
         if ( executionMap != null ) {
             if ( state == SimulationState.PAUSE ){
-                if ( executionMap.containsKey(registerList.get("EIP")) ) {
+                if ( executionMap.containsKey(registerList.getInstructionPointer()) ) {
                     executeOneLine();
                 }
                 else {
@@ -209,7 +205,7 @@ public class SystemController {
 		workspaceController.enableCodeArea(false);
 		thread = new Thread(){
 			public void run(){
-				while ((state == SimulationState.PLAY) && executionMap.containsKey(registerList.get("EIP"))) {
+				while ((state == SimulationState.PLAY) && executionMap.containsKey(registerList.getInstructionPointer())) {
 					executeOneLine();
 					try {
 						Thread.sleep(SIMULATION_DELAY);
@@ -227,7 +223,7 @@ public class SystemController {
 
 	private void executeOneLine(){
 		// 1. Retrieve EIP value and store it to @var currentLine
-		String currentLine = registerList.get("EIP");
+		String currentLine = registerList.getInstructionPointer();
 		//System.out.println(currentLine);
 		// 2. Parse currentLine to int @var value
 		int value = Integer.parseInt(currentLine, 16);
@@ -255,7 +251,7 @@ public class SystemController {
 		notifyAllObservers(executionMap.get(currentLine), value);
 		// 5. Increment @var currentLine and store it to EIP register
 		value++;
-		registerList.set("EIP", Integer.toHexString(value));
+		registerList.setInstructionPointer(Integer.toHexString(value));
 		count++;
 		push();
 	}

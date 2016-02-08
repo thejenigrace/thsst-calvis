@@ -22,6 +22,7 @@ execute(des, src, registers, memory){
  			    System.out.println("Moving register to memory");
  			    String x = registers.get(src);
  			    int src_reg_size = registers.getBitSize(src);
+				System.out.println(x + "value pota");
  			    memory.write(des, x, src_reg_size);
  		    }
 	        else if ( src.isHex() ){

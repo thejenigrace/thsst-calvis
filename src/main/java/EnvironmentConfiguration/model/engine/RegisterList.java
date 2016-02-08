@@ -5,6 +5,7 @@ import EnvironmentConfiguration.model.error_logging.ErrorLogger;
 import EnvironmentConfiguration.model.error_logging.ErrorMessage;
 import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
 import EnvironmentConfiguration.model.error_logging.Types;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -222,7 +223,7 @@ public class RegisterList {
 	}
 
 	public String get(Token a){
-		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
 		// find the mother/source register
 		String key = a.getValue();
 		String[] register = find(key);
@@ -246,9 +247,6 @@ public class RegisterList {
 
 	public void set(String registerName, String hexString){
 		set(new Token(Token.REG, registerName), hexString);
-//		if ( registerName.equals(instructionPointerName) ){
-//			this.flags.buildFlagUIs();
-//		}
 	}
 
 	public void set(Token a, String hexString){
@@ -288,7 +286,8 @@ public class RegisterList {
 						+ register[0] + ":" + child + " and " + hexString);
 				errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
 						HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
-
+				throw new NullPointerException("Data type mismatch between "
+						+ register[0] + ":" + child + " and " + hexString);
 			}
 			errorLogger.get(0).add(errorMessages);
 		}
@@ -335,10 +334,6 @@ public class RegisterList {
 		return this.map;
 	}
 
-	public Map copyRegisterMap(){
-		return new TreeMap<>(this.map);
-	}
-
 	public ErrorLogger getErrorLogger(){
 		if(errorLogger.get(0).getSizeofErrorMessages() == 0)
 			return new ErrorLogger(new ArrayList<ErrorMessageList>());
@@ -355,5 +350,6 @@ public class RegisterList {
 		}
 		Integer[] list = new Integer[available.size()];
 		return available.toArray(list);
+		
 	}
 }

@@ -19,7 +19,7 @@ public class MemoryAddressCalculator {
     public static Token evaluateExpression(Token[] matched, RegisterList registers, Memory memory)
 		    throws NumberFormatException, EvalError{
         Token t = matched[0];
-        System.out.println(t.getValue() + t.getType());
+        //System.out.println(t.getValue() + t.getType());
         String baseAddress = "";
 	    int equationStartIndex = 1;
 
@@ -62,7 +62,7 @@ public class MemoryAddressCalculator {
 	        if ( matched[0].isMemory() ){
 		        result = matched[0].getValue() + "/" + result;
 	        }
-	        System.out.println(base + " " + result);
+	       // System.out.println(base + " " + result);
 
         } else {
 	        throw new NumberFormatException("Restricted Access on Base Address: " + baseAddress);

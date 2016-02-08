@@ -39,9 +39,9 @@ public class Token {
 				if (this.value.contains("x") | this.value.contains("X") ){
 					this.value = this.value.substring(2).toUpperCase();
 				}
-				if (this.value.contains("h") | this.value.contains("H") ){
-					this.value = this.value.substring(0, this.value.length()-1).toUpperCase();
-				}
+//				if (this.value.contains("h") | this.value.contains("H") ){
+//					this.value = this.value.substring(0, this.value.length()-1).toUpperCase();
+//				}
 				break;
 			case Token.DEC:
 				this.value = Integer.toHexString(Integer.parseInt(this.value));

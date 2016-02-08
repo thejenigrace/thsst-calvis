@@ -1,11 +1,23 @@
 package EnvironmentConfiguration.model.engine;
 
-import com.github.pfmiles.dropincc.*;
+import com.github.pfmiles.dropincc.Action;
+import com.github.pfmiles.dropincc.CC;
+import com.github.pfmiles.dropincc.DropinccException;
+import com.github.pfmiles.dropincc.Element;
+import com.github.pfmiles.dropincc.Exe;
+import com.github.pfmiles.dropincc.Grule;
+import com.github.pfmiles.dropincc.Lang;
+import com.github.pfmiles.dropincc.TokenDef;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 public class CALVISParser {
 
@@ -18,12 +30,18 @@ public class CALVISParser {
 
 	private HashMap<String, ArrayList<Element>> registerTokenMap;
 	private HashMap<String, Element> memoryTokenMap;
+	private HashMap<String, Grule> memorySizeDirectives;
 
 	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
-	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})";
+	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
+	//private final String hexPattern16 = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 8 + "})\\b";
 	//+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
+
+	private TokenDef hex;
+	private TokenDef dec;
+	private TokenDef cl;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -42,8 +60,6 @@ public class CALVISParser {
 
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
-
-		Grule sizeDirectiveAddressingMode = lang.newGrule();
 		Grule memoryAddressingMode = lang.newGrule();
 		Grule memoryExpression = lang.newGrule();
 		Grule memoryBase = lang.newGrule();
@@ -58,44 +74,23 @@ public class CALVISParser {
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
 
+		hex = lang.newToken(hexPattern);
+		dec = lang.newToken("\\b\\d+\\b");
+
 		/** The succeeding code now focuses on building the parser
 		  * by connecting the grammar rules (Grule) and tokens (TokenDef)
 		 */
 
 		// 1. Prepare <List of Registers>
 		prepareRegisterTokenMap();
-
 		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
-
-		TokenDef hex = lang.newToken(hexPattern);
-		TokenDef dec = lang.newToken("\\b\\d+\\b");
 
 		// start ::= assembly $
 		lang.defineGrule(assembly, CC.EOF);
 
 		// assembly ::= variableDeclarations? mainProgram
 		assembly.define(CC.op(variableDeclarations), mainProgram);
-
-		sizeDirectiveAddressingMode.define(getSizeDirectives(), memoryAddressingMode)
-				.action((Action<Object[]>) matched -> {
-					ArrayList<Token> tokenArrayList = new ArrayList<>();
-					for ( Object obj : matched ){
-						if ( obj instanceof Token ){
-							Token sizeDirective = (Token) obj;
-							tokenArrayList.add(sizeDirective);
-						}
-						else if ( obj instanceof Token[] ){
-							Token[] tokens = (Token[]) obj;
-							for (int i = 0; i < tokens.length; i++) {
-								tokenArrayList.add(tokens[i]);
-							}
-						}
-					}
-					Token[] appendedTokens = new Token[tokenArrayList.size()];
-					appendedTokens = tokenArrayList.toArray(appendedTokens);
-					return appendedTokens;
-				});
 
 		// memory addressing mode constructs
 		// memory ::= [ memoryExpr ]
@@ -207,14 +202,125 @@ public class CALVISParser {
 						return new Token(Token.DEC, matched.toString());
 					});
 
+		/**
+		 *  Prepare memory size directive addressing mode
+		 */
+		this.memorySizeDirectives = new HashMap<>();
 
-		
+		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
+			Double size = Math.pow(2, 2 + i);
+			String sizeInString = String.valueOf(size.intValue());
+			Grule sizeDirectiveInstance = lang.newGrule();
+			sizeDirectiveInstance.define(getMemoryElement(sizeInString), memoryAddressingMode)
+					.action((Action<Object[]>) matched -> {
+						ArrayList<Token> tokenArrayList = new ArrayList<>();
+						for ( Object obj : matched ){
+							if ( obj instanceof String ){
+								String sizeDirectiveName = (String) obj;
+								Token sizeDirective = new Token(Token.MEM, sizeDirectiveName);
+								tokenArrayList.add(sizeDirective);
+							}
+							else if ( obj instanceof Token[] ){
+								Token[] tokens = (Token[]) obj;
+								for (int k = 0; k < tokens.length; k++) {
+									tokenArrayList.add(tokens[k]);
+								}
+							}
+						}
+						Token[] appendedTokens = new Token[tokenArrayList.size()];
+						appendedTokens = tokenArrayList.toArray(appendedTokens);
+						return appendedTokens;
+					});
+
+			this.memorySizeDirectives.put(sizeInString, sizeDirectiveInstance);
+		}
+
+		/**
+		 * START of static definition of parameter rules
+		 */
+		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
+
+		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
+		hexOrDecimalList.add(hex);
+		hexOrDecimalList.add(dec);
+		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
+
+		for(int i = 1; i < RegisterList.MAX_SIZE / 8; i++){
+			Double size = Math.pow(2, 2 + i);
+			String sizeInString = String.valueOf(size.intValue());
+			System.out.println(sizeInString);
+
+			// Register to Register
+			Element[] registerToRegister = new Element[4];
+			//registerToRegister[0] = instructionName;
+			registerToRegister[1] = getRegisterElements(sizeInString);
+			registerToRegister[2] = comma;
+			registerToRegister[3] = getRegisterElements(sizeInString);
+			parameterSpecifications.put("r" + sizeInString + "r" + sizeInString, registerToRegister);
+
+			// Memory to Register
+			Element[] memoryToRegister = new Element[4];
+
+			ArrayList<Element> optionalSizeDirectiveList = new ArrayList<>();
+			optionalSizeDirectiveList.add(memorySizeDirectives.get(sizeInString));
+			optionalSizeDirectiveList.add(memoryAddressingMode);
+			Element optionalSizeDirective = concatenateOrSubRules(optionalSizeDirectiveList);
+
+			memoryToRegister[1] = getRegisterElements(sizeInString);
+			memoryToRegister[2] = comma;
+			memoryToRegister[3] = optionalSizeDirective;
+			parameterSpecifications.put("r" + sizeInString + "m" + sizeInString, memoryToRegister);
+
+			// Immediate to Register
+			Element[] immediateToRegister = new Element[4];
+			immediateToRegister[1] = getRegisterElements(sizeInString);
+			immediateToRegister[2] = comma;
+			immediateToRegister[3] = hexOrDecimal;
+			parameterSpecifications.put("r" + sizeInString + "i", immediateToRegister);
+
+			// CL to Register
+			Element[] clToRegister = new Element[4];
+			clToRegister[1] = getRegisterElements(sizeInString);
+			clToRegister[2] = comma;
+			clToRegister[3] = cl;
+			parameterSpecifications.put("r" + sizeInString + "c", clToRegister);
+
+			// Register to Memory
+			Element[] registerToMemory = new Element[4];
+			registerToMemory[1] = optionalSizeDirective;
+			registerToMemory[2] = comma;
+			registerToMemory[3] = getRegisterElements(sizeInString);
+			parameterSpecifications.put("m" + sizeInString + "r" + sizeInString, registerToMemory);
+
+			// Immediate to Memory
+			Element[] immediateToMemory = new Element[4];
+			immediateToMemory[1] = memorySizeDirectives.get(sizeInString);
+			immediateToMemory[2] = comma;
+			immediateToMemory[3] = hexOrDecimal;
+			parameterSpecifications.put("m" + sizeInString + "i", immediateToMemory);
+
+			// CL to Memory
+			Element[] clToMemory = new Element[4];
+			clToMemory[1] = memorySizeDirectives.get(sizeInString);
+			clToMemory[2] = comma;
+			clToMemory[3] = cl;
+			parameterSpecifications.put("m" + sizeInString + "c", clToMemory);
+
+		}
+		/**
+		 * END
+		 */
+		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
+		System.out.println(parameterSpecifications);
+
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
 		ArrayList<Alternative> altList = new ArrayList<>();
-		while (instructionProductionRules.hasNext()){
-			String[] prodRule = instructionProductionRules.next();
 
+		while (instructionProductionRules.hasNext()){
+			ArrayList<Element[]> instructionAlternatives = new ArrayList<>();
+
+			String[] prodRule = instructionProductionRules.next();
 			for (int i = 0; i < prodRule.length; i++) {
 				System.out.print(prodRule[i] + " ");
 			}
@@ -224,105 +330,130 @@ public class CALVISParser {
 			TokenDef instructionName = lang.newToken(insName);
 
 			//System.out.println(insName);
-			// add comma count to numParameters. * 2 includes the actual instruction name
-			int numParameters = Integer.parseInt(prodRule[2]) * 2;
+			// prodRule[2] * 2 includes the actual instruction name and the commas
+			int parameterCount = Integer.parseInt(prodRule[2]);
+			int numParameters = parameterCount * 2;
 			if ( numParameters == 0){
 				numParameters += 1;
 			}
 
+			System.out.println("actual count from csv: " + parameterCount);
 			System.out.println("number of parameters: " + numParameters);
 
-			Element[] elements = new Element[numParameters];
+			switch (parameterCount){
+				case 0:
+					Element[] elements0 = new Element[numParameters];
+					elements0[0] = instructionName;
+					instructionAlternatives.add(elements0);
+					break;
+				case 1:
+					Element[] elements1 = new Element[numParameters];
+					elements1[0] = instructionName;
+					String[] justOne = prodRule[3].split("/");
+					elements1[1] = parseOneParameter(justOne);
+					instructionAlternatives.add(elements1);
+					break;
+				case 2: // fall through
+				case 3:
+					String[] firstParameter = prodRule[3].split("/");
+					ArrayList<String[]> firstParameterList = new ArrayList<>();
+					for (int i = 0; i < firstParameter.length; i++) {
+						String[] reformatted = expandInstructionParameter(firstParameter[i]);
+						firstParameterList.add(reformatted);
+					}
+					ArrayList<String> specifications1 = new ArrayList<>();
+					for ( String[] entry : firstParameterList ){
+						for (int i = 0; i < entry.length; i++) {
+							specifications1.add(entry[i]);
+						}
+					}
+					System.out.println(specifications1);
 
-			// 1. elements[0] = instruction name
-			elements[0] = instructionName;
-			// prodRuleCounter starts at index 3 because that's where the parameter specifications are
-			int prodRuleCounter = 3;
-			for (int i = 1; i < numParameters; i++){
-				if ( i % 2 == 0){
-					elements[i] = comma;
-				}
-				else {
-					// get specific operand requirements
-					String[] allowed = prodRule[prodRuleCounter].split("/");
+					String[] secondParameter = prodRule[4].split("/");
+					ArrayList<String[]> secondParameterList = new ArrayList<>();
+					for (int i = 0; i < secondParameter.length; i++) {
+						String[] reformatted = expandInstructionParameter(secondParameter[i]);
+						secondParameterList.add(reformatted);
+					}
+					ArrayList<String> specifications2 = new ArrayList<>();
+					for ( String[] entry : secondParameterList ){
+						for (int i = 0; i < entry.length; i++) {
+							specifications2.add(entry[i]);
+						}
+					}
+					System.out.println(specifications2);
 
-					ArrayList<Element> orSubRuleList = new ArrayList<>();
-
-					for (String anAllowed : allowed) {
-						// instructions asks for a register as an operand
-						if (anAllowed.contains("r")) {
-							// get specific register sizes
-							String size = anAllowed.substring(1);
-							if (size.length() > 1) {
-								orSubRuleList.add(getRegisterElements(size));
-							} else {
-								orSubRuleList.add(getAllRegisterElements());
+					ArrayList<String> result = new ArrayList<>();
+					for ( String first : specifications1 ){
+						for ( String second : specifications2 ){
+							if ( !(first.contains("m") && second.contains("m")) &&
+									(first.substring(1).equals(second.substring(1)) ||
+										second.equals("i") || second.equals("c") )) {
+								String resultInstance = first + second;
+								result.add(resultInstance);
 							}
 						}
-						if (anAllowed.contains("m")) {
-							// Create condition for "word ptr" bla bla
-							orSubRuleList.add(memoryAddressingMode);
-							orSubRuleList.add(sizeDirectiveAddressingMode);
-						}
-						if (anAllowed.contains("i")) {
-							orSubRuleList.add(hex);
-							orSubRuleList.add(dec);
-						}
-						if (anAllowed.contains("LABEL")) { // not sure what labels should look like
-
-						}
-						elements[i] = concatenateOrSubRules(orSubRuleList);
 					}
-					prodRuleCounter++;
+					System.out.println(result);
+
+					for ( String resultInstance : result ){
+						Element[] elements2 = new Element[numParameters];
+						Element[] content = parameterSpecifications.get(resultInstance);
+						for (int i = 0; i < elements2.length; i++) {
+							if ( i < content.length ){
+								elements2[i] = content[i];
+							}
+						}
+						elements2[0] = instructionName;
+						if ( parameterCount == 3 ) {
+							elements2[4] = comma;
+							String[] thirdParameter = prodRule[5].split("/");
+							elements2[5] = parseOneParameter(thirdParameter);
+						}
+						instructionAlternatives.add(elements2);
+					}
+					break;
+			}
+
+			for ( Element[] elements: instructionAlternatives) {
+				// bind action from BSH files
+				Alternative instructionAlternative = new Alternative(elements);
+				if (numParameters == 1) {
+					instructionAlternative.setAction((Action<Object>) args -> {
+						String anInstruction = (String) args;
+						//System.out.println(anInstruction);
+						Instruction someInstruction = instructions.getInstruction(anInstruction);
+						CALVISInstruction calvisInstruction =
+								new CALVISInstruction(someInstruction, anInstruction, null, registers, memory);
+						String instructionAdd = Integer.toHexString(lineNumber);
+						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+								RegisterList.instructionPointerSize, "0"), calvisInstruction);
+						lineNumber++;
+						return null;
+					});
+				} else {
+					instructionAlternative.setAction((Action<Object[]>) args -> {
+						int numParameters1 = args.length / 2;
+						String anInstruction = args[0].toString();
+						Instruction someInstruction = instructions.getInstruction(anInstruction);
+						ArrayList<Object> tokenArr = new ArrayList<>();
+						for (int i = 0; i < numParameters1; i++) {
+							tokenArr.add(args[i * 2 + 1]);
+						}
+						Object[] tokens = new Object[tokenArr.size()];
+						tokens = tokenArr.toArray(tokens);
+						CALVISInstruction calvisInstruction =
+								new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
+						String instructionAdd = Integer.toHexString(lineNumber);
+						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+								Memory.MAX_ADDRESS_SIZE, "0"), calvisInstruction);
+						lineNumber++;
+						return null;
+					});
 				}
+				altList.add(instructionAlternative);
 			}
-
-			// bind action from BSH files
-			Alternative instructionAlternative = new Alternative(elements);
-
-			if ( numParameters == 1) {
-				instructionAlternative.setAction((Action<Object>) args -> {
-					String anInstruction = (String) args;
-					//System.out.println(anInstruction);
-
-					Instruction someInstruction = instructions.getInstruction(anInstruction);
-					CALVISInstruction calvisInstruction =
-							new CALVISInstruction(someInstruction, anInstruction, null, registers, memory);
-
-					String instructionAdd = Integer.toHexString(lineNumber);
-					mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-							RegisterList.instructionPointerSize, "0" ), calvisInstruction);
-					lineNumber++;
-					return null;
-				});
-			}
-			else {
-				instructionAlternative.setAction((Action<Object[]>) args -> {
-					int numParameters1 = args.length / 2;
-					String anInstruction = args[0].toString();
-
-					Instruction someInstruction = instructions.getInstruction(anInstruction);
-					ArrayList<Object> tokenArr = new ArrayList<>();
-
-					for (int i = 0; i < numParameters1; i++) {
-						tokenArr.add(args[i * 2 + 1]);
-					}
-					Object[] tokens = new Object[tokenArr.size()];
-					tokens = tokenArr.toArray(tokens);
-
-					CALVISInstruction calvisInstruction =
-							new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
-
-					String instructionAdd = Integer.toHexString(lineNumber);
-					mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-							Memory.MAX_ADDRESS_SIZE, "0"), calvisInstruction);
-					lineNumber++;
-					return null;
-				});
-			}
-			altList.add(instructionAlternative);
 		}
-
 
 		// instruction ::= <List of Instructions>
 		instruction.setAlts(altList);
@@ -348,7 +479,84 @@ public class CALVISParser {
 		mainProgram.define(CC.ks(CC.op(label), instruction));
 
 		// produce instruction rules
+		System.out.println("PARSER IS BEING COMPILED");
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Date dateobj = new Date();
+		System.out.println(df.format(dateobj));
+
 		exe = lang.compile();
+		dateobj = new Date();
+		System.out.println("PARSER IS BUILT");
+		System.out.println(df.format(dateobj));
+
+	}
+
+	/**
+	 * This function expands the "r" or "m" notation to cover all sizes
+	 * e.g. "r" would be expanded to {r8, r16, r32,...}
+	 * @param parameterSpecification
+	 * @return String[] of the reformatted parameter specifications
+	 */
+	private String[] expandInstructionParameter(String parameterSpecification){
+		ArrayList<String> parameterList = new ArrayList<>();
+		int maxSize = 0;
+		if ( parameterSpecification.equals("r") || parameterSpecification.equals("m") ) {
+			if (parameterSpecification.equals("r")) {
+				maxSize = RegisterList.MAX_SIZE / 8;
+			}
+			else if (parameterSpecification.equals("m")) {
+				maxSize = Memory.MAX_ADDRESS_SIZE / 8;
+			}
+			for (int i = 1; i < maxSize; i++) {
+				Double size = Math.pow(2, 2 + i);
+				String sizeInString = String.valueOf(size.intValue());
+				parameterList.add(parameterSpecification + sizeInString);
+			}
+		}
+		else {
+			parameterList.add(parameterSpecification);
+		}
+		String[] result = new String[parameterList.size()];
+		result = parameterList.toArray(result);
+		return result;
+	}
+
+	private Element parseOneParameter(String[] specification){
+		// get specific operand requirements
+		String[] allowed = specification;
+		ArrayList<Element> orSubRuleList = new ArrayList<>();
+		for ( String anAllowed : allowed ) {
+			// instructions asks for a register as an operand
+			if ( anAllowed.contains("r") ) {
+				// get specific register sizes
+				String size = anAllowed.substring(1);
+				if (size.length() > 1) {
+					orSubRuleList.add(getRegisterElements(size));
+				} else {
+					orSubRuleList.add(getAllRegisterElements());
+				}
+			}
+			if ( anAllowed.contains("m") ) {
+				String size = anAllowed.substring(1);
+				if (size.length() > 1) {
+					orSubRuleList.add(memorySizeDirectives.get(size));
+				} else {
+					orSubRuleList.add(getAllMemorySizeDirectiveElements());
+				}
+			}
+			if ( anAllowed.contains("i") ) {
+				orSubRuleList.add(hex);
+				orSubRuleList.add(dec);
+			}
+			if ( anAllowed.contains("c") ) {
+				orSubRuleList.add(cl);
+			}
+			if ( anAllowed.contains("LABEL") ) {
+				// not sure what labels should look like
+			}
+
+		}
+		return concatenateOrSubRules(orSubRuleList);
 	}
 
 	private void prepareMemorySizeDirectives() {
@@ -366,22 +574,13 @@ public class CALVISParser {
 
 			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
 		}
-		System.out.println(memoryTokenMap);
-	}
-
-	private Element getSizeDirectives() {
-		ArrayList<Element> elementArrayList =
-				this.memoryTokenMap.entrySet().stream()
-						.map(Map.Entry::getValue)
-						.collect(Collectors.toCollection(ArrayList::new));
-
-		return concatenateOrSubRules(elementArrayList);
+//		System.out.println(memoryTokenMap);
 	}
 	
 	private void prepareRegisterTokenMap() {
 		this.registerTokenMap = new HashMap<>();
 		Iterator<String[]> registerTokens = this.registers.getRegisterList();
-		
+		boolean flag = false;
 		while(registerTokens.hasNext()){
 			String[] registerToken = registerTokens.next();
 			String regName = "(\\b" + registerToken[RegisterList.NAME] + "\\b)"
@@ -389,11 +588,17 @@ public class CALVISParser {
 			String regSize = registerToken[RegisterList.SIZE];
 			String regType = registerToken[RegisterList.TYPE];
 
+			if ( !flag && registerToken[RegisterList.NAME].equalsIgnoreCase("cl")) {
+				System.out.println("CL was declared");
+				cl = lang.newToken(regName);
+				flag = true;
+			}
+
 			TokenDef registerName = lang.newToken(regName);
 			/*
 				 regType 1 = memory addressable
 				 regType 2 = not memory addressable
-				 regType 4 = flag
+				 regType 3 = instruction pointer
 			 */
 			if ( registerTokenMap.containsKey(regType) ){
 				ArrayList<Element> altExist = registerTokenMap.get(regType);
@@ -414,6 +619,17 @@ public class CALVISParser {
 				registerTokenMap.put(regSize, altNotExist);
 			}
 		}
+	}
+
+	private Element getAllMemorySizeDirectiveElements(){
+		Iterator<String> keys = memorySizeDirectives.keySet().iterator();
+		ArrayList<Element> list = new ArrayList<>();
+		while (keys.hasNext()){
+			String key = keys.next();
+			Element temp = memorySizeDirectives.get(key);
+			list.add(temp);
+		}
+		return concatenateOrSubRules(list);
 	}
 
 	private Element getAllRegisterElements(){
@@ -452,15 +668,16 @@ public class CALVISParser {
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
 					producedList.get(i).setAction((Action<Object>) arg0 -> {
+						//System.out.println(arg0 + " : " + arg0.getClass());
 						if ( arg0 instanceof Token){
-                            return (Token) arg0;
+							return (Token) arg0;
                         }
 						if ( memory.isExisting(arg0.toString())){
 							return new Token(Token.MEM, (String) arg0);
 						}
                         if ( arg0.toString().matches(hexPattern)){
-                            return new Token(Token.HEX, (String) arg0);
-                        }
+							return new Token(Token.HEX, (String) arg0);
+						}
 						if ( arg0.toString().matches("\\b\\d+\\b")) {
 							return new Token(Token.DEC, (String) arg0);
 						}
@@ -478,7 +695,7 @@ public class CALVISParser {
 	
 	private Element getMemoryIndexScalableElements(){
 		ArrayList<Element> list = registerTokenMap.get("1");
-		ArrayList<Element> result = new ArrayList<Element>();
+		ArrayList<Element> result = new ArrayList<>();
 		for(Element x: list){
 			TokenDef y = (TokenDef) x;
 			// we remove ESP and SP as index scalable registers for memory addressing mode
@@ -497,7 +714,11 @@ public class CALVISParser {
 		ArrayList<Element> list = registerTokenMap.get(string);
 		return concatenateOrSubRules(list);
 	}
-	
+
+	private Element getMemoryElement(String size) {
+		return memoryTokenMap.get(size);
+	}
+
 	public HashMap<String, CALVISInstruction> parse(String code) throws DropinccException{
 		this.mappedInstruction.clear();
 		this.lineNumber = 0;

@@ -29,8 +29,8 @@ public class Memory {
 	private ArrayList<String[]> lookup;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
-        this.MAX_ADDRESS_SIZE = bitSize;
-        this.mem = new TreeMap<>(Collections.reverseOrder());
+		this.MAX_ADDRESS_SIZE = bitSize;
+		this.mem = new TreeMap<>(Collections.reverseOrder());
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
@@ -42,45 +42,45 @@ public class Memory {
 
 		System.out.println("Loaded: Memory");
 
-        BufferedReader br = null;
-        String line;
-        String cvsSplitBy = ",";
-        int lineCounter = 0;
-        this.lookup = new ArrayList<>();
-        try {
-            br = new BufferedReader(new FileReader(new File(csvFile)));
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] row = line.split(cvsSplitBy);
-                // trim every row just in case
-                for (int i = 0; i < row.length; i++) {
-                    row[i] = row[i].trim();
-                }
-                if ( lineCounter != 0 ) {
-                    this.lookup.add(row);
-                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
-		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
-		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
-                }
-                lineCounter++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+		BufferedReader br = null;
+		String line;
+		String cvsSplitBy = ",";
+		int lineCounter = 0;
+		this.lookup = new ArrayList<>();
+		try {
+			br = new BufferedReader(new FileReader(new File(csvFile)));
+			while ((line = br.readLine()) != null) {
+				// use comma as separator
+				String[] row = line.split(cvsSplitBy);
+				// trim every row just in case
+				for (int i = 0; i < row.length; i++) {
+					row[i] = row[i].trim();
+				}
+				if ( lineCounter != 0 ) {
+					this.lookup.add(row);
+//                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
+//		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
+//		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
+				}
+				lineCounter++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public Map getMemoryMap(){
 		return this.mem;
 	}
-	
+
 	private static String reformatAddress(String add) {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
@@ -262,4 +262,17 @@ public class Memory {
 		return getBitSize(a) / 4;
 	}
 
+}
+
+	public String[] find(String sizeDirective){
+		for (String[] x : this.lookup){
+			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
+				return x;
+			}
+		}
+		return null;
+	}
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
+	}
 }
