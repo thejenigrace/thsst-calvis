@@ -96,6 +96,8 @@ clc,Instructions/clc.bsh.java,0,,
 cmc,Instructions/cmc.bsh.java,0,,
 cld,Instructions/cld.bsh.java,0,,
 std,Instructions/std.bsh.java,0,,
+lahf,Instructions/lahf.bsh.java,0,,
+sahf,Instructions/sahf.bsh.java,0,,
 shl,Instructions/shl.bsh.java,2,r/m,c/i
 sal,Instructions/sal.bsh.java,2,r/m,c/i
 shr,Instructions/shr.bsh.java,2,r/m,c/i
