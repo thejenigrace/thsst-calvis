@@ -99,13 +99,6 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Navigate">
                             <items>
-                                <!--<MenuItem accelerator="Shortcut + F" mnemonicParsing="false" onAction="#handleFind"-->
-                                          <!--text="Find">-->
-                                    <!--<accelerator>-->
-                                        <!--<KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP"-->
-                                                            <!--shortcut="UP"/>-->
-                                    <!--</accelerator>-->
-                                <!--</MenuItem>-->
                                 <MenuItem accelerator="Shortcut + R" mnemonicParsing="false"
                                           onAction="#handleFindAndReplace" text="Find &amp; Replace">
                                     <accelerator>
@@ -125,16 +118,15 @@
                                     </accelerator>
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="false" text="Pause"/>
-                                <MenuItem mnemonicParsing="false" text="Stop"/>
-                                <MenuItem mnemonicParsing="false" text="Reset"/>
-                                <MenuItem mnemonicParsing="false" text="Execute Next Line"/>
-                                <MenuItem mnemonicParsing="false" text="Execute Previous Line"/>
-                                <MenuItem mnemonicParsing="false" text="Jump To"/>
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Visualize">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Highlight"/>
+                                <MenuItem accelerator="Shortcut + S" mnemonicParsing="false" onAction="#handleStop" text="Stop">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                                            shortcut="UP"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#handleReset" text="Reset"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleNext" text="Execute Next Line"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious" text="Execute Previous Line"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Window">
@@ -193,11 +185,6 @@
                                 <Glyph fontFamily="FontAwesome" icon="CLIPBOARD"/>
                             </graphic>
                         </Button>
-                        <!--<Button mnemonicParsing="false" onAction="#handleFind">-->
-                        <!--<graphic>-->
-                        <!--<Glyph fontFamily="FontAwesome" icon="SEARCH"/>-->
-                        <!--</graphic>-->
-                        <!--</Button>-->
                         <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#handlePrevious">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="STEP_BACKWARD"/>
@@ -278,7 +265,7 @@
                     <children>
                     </children>
                 </AnchorPane>
-                <SplitPane fx:id="editorSplitPane" dividerPositions="0.75" orientation="VERTICAL">
+                <SplitPane fx:id="editorSplitPane" dividerPositions="0.65" orientation="VERTICAL">
                     <items>
                         <AnchorPane fx:id="otherWindowsPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0"
                                     prefWidth="160.0">
