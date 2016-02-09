@@ -26,14 +26,18 @@ public class CALVISParser {
 
 	private HashMap<String, ArrayList<Element>> registerTokenMap;
 	private HashMap<String, Element> memoryTokenMap;
+	private HashMap<String, Element> variableDeclarationTokenMap;
 	private HashMap<String, Grule> memorySizeDirectives;
 
 	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
 	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
-	//private final String hexPattern16 = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 8 + "})\\b";
-	//+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
+	private final String decPattern = "\\b\\d+\\b";
+	private final String commentPattern = "(;.*)";
+
+//	private final String hexPattern16 = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 8 + "})\\b";
+//	+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
 
 	private TokenDef hex;
 	private TokenDef dec;
@@ -41,6 +45,7 @@ public class CALVISParser {
 
 	private Grule justLabel;
 	private Grule label;
+//	private Grule hexOrDec;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -52,10 +57,6 @@ public class CALVISParser {
 
 		Grule assembly = lang.newGrule();
 		Grule variableDeclarations = lang.newGrule();
-		Grule variable = lang.newGrule();
-//		Grule dx = lang.newGrule();
-//		Grule value = lang.newGrule();
-
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
 		Grule memoryAddressingMode = lang.newGrule();
@@ -63,6 +64,10 @@ public class CALVISParser {
 		Grule memoryBase = lang.newGrule();
 		Grule memoryIndex = lang.newGrule();
 		Grule memoryDisplacement = lang.newGrule();
+
+		label = lang.newGrule();
+		justLabel = lang.newGrule();
+//		hexOrDec = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
@@ -72,11 +77,8 @@ public class CALVISParser {
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
 
-		label = lang.newGrule();
-		justLabel = lang.newGrule();
-
 		hex = lang.newToken(hexPattern);
-		dec = lang.newToken("\\b\\d+\\b");
+		dec = lang.newToken(decPattern);
 
 		/** The succeeding code now focuses on building the parser
 		  * by connecting the grammar rules (Grule) and tokens (TokenDef)
@@ -91,7 +93,7 @@ public class CALVISParser {
 		lang.defineGrule(assembly, CC.EOF);
 
 		// assembly ::= variableDeclarations? mainProgram
-		assembly.define(CC.op(variableDeclarations), mainProgram);
+		assembly.define(CC.op(variableDeclarations), CC.ks(commentPattern), mainProgram, CC.ks(commentPattern));
 
 		// memory addressing mode constructs
 		// memory ::= [ memoryExpr ]
@@ -205,10 +207,16 @@ public class CALVISParser {
 
 		/**
 		 *  Prepare memory size directive addressing mode
+		 *  and variable declaration types
 		 */
 		this.memorySizeDirectives = new HashMap<>();
 
+		ArrayList<Element> variableDeclarationList = new ArrayList<>();
+
 		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
+			/**
+			 * memory addressing mode with size directives
+			 */
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
 			Grule sizeDirectiveInstance = lang.newGrule();
@@ -234,12 +242,33 @@ public class CALVISParser {
 					});
 
 			this.memorySizeDirectives.put(sizeInString, sizeDirectiveInstance);
+
+			/**
+			 * variable declaration per variable type
+			 * db, dw, dd, ...
+			 */
+			// variable ::= <identifier> d<?> value
+//			Grule variableDeclaration = lang.newGrule();
+//			variableDeclaration.define(justLabel, getVariableElement(sizeInString)
+//					, "0[xX][0-9a-fA-F]{1," + size.intValue()/4 + "}|\\d+");
+//			variableDeclarationList.add(variableDeclaration);
 		}
+
+//		Element allPossibleVariableRules = concatenateOrSubRules(variableDeclarationList);
+		// variableDeclarations ::=  (variable)*
+//		variableDeclarations.define(CC.kc(allPossibleVariableRules));
+
+		variableDeclarations.define("blabla");
 
 		/**
 		 * START of static definition of 2 parameter rules
 		 */
 		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
+
+//		hexOrDec.define(hexPattern)
+//					.action((Action<Object>) args -> new Token(Token.HEX, args.toString()))
+//				.alt(decPattern)
+//					.action((Action<Object>) args -> new Token(Token.DEC, args.toString()));
 
 		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
 		hexOrDecimalList.add(hex);
@@ -254,6 +283,8 @@ public class CALVISParser {
 			// Register to Register
 			Element[] registerToRegister = new Element[4];
 			//registerToRegister[0] = instructionName;
+//			Grule hello = lang.newGrule();
+//			hello.define(getRegisterElements(sizeInString), comma, getRegisterElements(sizeInString));
 			registerToRegister[1] = getRegisterElements(sizeInString);
 			registerToRegister[2] = comma;
 			registerToRegister[3] = getRegisterElements(sizeInString);
@@ -458,29 +489,19 @@ public class CALVISParser {
 
 		// instruction ::= <List of Instructions>
 		instruction.setAlts(altList);
-
-		// variableDeclarations ::=  (variable)*
-		variableDeclarations.define(CC.ks(variable));
-
-		// variable ::= <identifier> dx value
-		//variable.define("[a-zA-Z_][a-zA-Z\\d_]*", dx, value);
-		variable.define("[a-zA-Z_][a-zA-Z\\d_]*");
+//
+//		// value ::= string | char | int | double
+//		value.define("\\d+(\\.\\d+)?").alt("\\d*\\.\\d*").alt("\"([^\\\"]+|\\.)*\"");
 
 		justLabel.define("[a-zA-Z_][a-zA-Z\\d_]*")
 				.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
 
 //		// LABEL ::= identifier ":"
 		label.define(justLabel, colon);
-//
-//		// dx ::= 'db' | 'dw' | 'dd'
-//		dx.define(dbToken).alt(dwToken).alt(ddToken);
-//
-//		// value ::= string | char | int | double
-//		value.define("\\d+(\\.\\d+)?").alt("\\d*\\.\\d*").alt("\"([^\\\"]+|\\.)*\"");
-//		//value.define("5");
+
 
 		// mainProgram ::= ( LABEL? instruction)*
-		mainProgram.define(CC.ks(CC.op(label), instruction))
+		mainProgram.define(CC.ks(CC.ks(commentPattern), CC.op(label), instruction ))
 				.action((Action<Object[]>) matched -> {
 					int labelValue = 0;
 					for (Object obj : matched){
@@ -489,7 +510,7 @@ public class CALVISParser {
 						for (int i = 0; i < objects.length ; i++) {
 //							System.out.println(i + " " + objects[i]);
 							if ( objects[i] != null ){
-								if ( i == 0 && objects[i] instanceof Object[] ){
+								if ( i == 1 && objects[i] instanceof Object[] ){
 //									System.out.println("we found an object array");
 									Object[] objects1 = (Object[]) objects[i];
 									/**
@@ -516,12 +537,12 @@ public class CALVISParser {
 		System.out.println("PARSER IS BEING COMPILED");
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 		Date dateobj = new Date();
-		System.out.println(df.format(dateobj));
+		System.out.println("STARTED AT: " + df.format(dateobj));
 
 		exe = lang.compile();
 		dateobj = new Date();
 		System.out.println("PARSER IS BUILT");
-		System.out.println(df.format(dateobj));
+		System.out.println("ENDED AT: " + df.format(dateobj));
 
 	}
 
@@ -594,19 +615,27 @@ public class CALVISParser {
 
 	private void prepareMemorySizeDirectives() {
 		this.memoryTokenMap = new HashMap<>();
+		this.variableDeclarationTokenMap = new HashMap<>();
+
 		Iterator<String[]> memoryTokens = this.memory.getLookup();
 
 		while(memoryTokens.hasNext()){
 			String[] memoryToken = memoryTokens.next();
 			String sizeDirectiveName = memoryToken[Memory.SIZE_DIRECTIVE_NAME];
 			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
+			String sizeDirectivePrefix = memoryToken[Memory.SIZE_DIRECTIVE_PREFIX];
+
 			String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)"
 					+ "|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
-
 			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
-
 			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
+
+			String variableTypePattern = "(\\b" + sizeDirectivePrefix + "\\b)"
+					+ "|(\\b" + sizeDirectivePrefix.toUpperCase() + "\\b)";
+			TokenDef variableType = lang.newToken(variableTypePattern);
+			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
 		}
+
 //		System.out.println(memoryTokenMap);
 	}
 	
@@ -756,6 +785,10 @@ public class CALVISParser {
 
 	private Element getMemoryElement(String size) {
 		return memoryTokenMap.get(size);
+	}
+
+	private Element getVariableElement(String size) {
+		return variableDeclarationTokenMap.get(size);
 	}
 
 	public HashMap<String, CALVISInstruction> parse(String code) throws DropinccException{

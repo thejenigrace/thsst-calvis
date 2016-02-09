@@ -167,22 +167,29 @@ public class WorkspaceController {
 
         ConsoleController consoleController = new ConsoleController();
         this.otherWindowsTabPane.getTabs().add(consoleController.getTab());
-        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab());
+        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab(null));
     }
 
-    private Tab createErrorLoggerTab() throws Exception {
+    private Tab createErrorLoggerTab(Exception e) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/error_logger.fxml"));
         SplitPane errorLoggerView = loader.load();
 
-        ErrorLoggerController registersController = loader.getController();
+        ErrorLoggerController errorLoggerController = loader.getController();
 
         Tab tab = new Tab();
         tab.setText("Error Logger");
         tab.setContent(errorLoggerView);
 
+        this.sysCon.attach(errorLoggerController);
+	    errorLoggerController.build(e);
         return tab;
     }
+
+	public void handleErrorLoggerTab(Exception e) throws Exception {
+		this.otherWindowsTabPane.getTabs().set(1, createErrorLoggerTab(e));
+		this.otherWindowsTabPane.getSelectionModel().select(1);
+	}
 
     public void newFile() {
         TextEditor textEditor = new TextEditor(this);

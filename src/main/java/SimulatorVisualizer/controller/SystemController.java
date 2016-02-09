@@ -11,6 +11,7 @@ import EnvironmentConfiguration.model.engine.RegisterList;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
+import bsh.EvalError;
 import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -236,11 +237,11 @@ public class SystemController {
 					new Thread() {
 						@Override
 						public void run() {
-//							try {
-//								workspaceController.handleErrorWindow();
-//							} catch (Exception ioexception) {
-//								ioexception.printStackTrace();
-//							}
+							try {
+								workspaceController.handleErrorLoggerTab(e);
+							} catch (Exception someOtherException) {
+								someOtherException.printStackTrace();
+							}
 						}
 					}
 			);
@@ -268,7 +269,7 @@ public class SystemController {
 					    @Override
 					    public void run() {
 						    try {
-							    //workspaceController.handleErrorWindow(e);
+							    workspaceController.handleErrorLoggerTab(e);
 						    } catch (Exception viewException) {
 							    viewException.printStackTrace();
 						    }

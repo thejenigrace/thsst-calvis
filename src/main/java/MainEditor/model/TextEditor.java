@@ -40,9 +40,8 @@ public class TextEditor extends AssemblyComponent {
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
     private static final String BRACKET_PATTERN = "\\[|\\]";
-    private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
-    private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
+    private static final String COMMENT_PATTERN = ";[^\n]*";
     private static String[] INSTRUCTION_KEYWORDS;
     private static String[] REGISTER_KEYWORDS;
     private static String[] MEMORY_KEYWORDS;
@@ -157,7 +156,6 @@ public class TextEditor extends AssemblyComponent {
                         + "|(?<PAREN>" + PAREN_PATTERN + ")"
                         + "|(?<BRACE>" + BRACE_PATTERN + ")"
                         + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                        + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
                         + "|(?<STRING>" + STRING_PATTERN + ")"
                         + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
         );
@@ -175,10 +173,9 @@ public class TextEditor extends AssemblyComponent {
                                     matcher.group("PAREN") != null ? "paren" :
                                             matcher.group("BRACE") != null ? "brace" :
                                                     matcher.group("BRACKET") != null ? "bracket" :
-                                                            matcher.group("SEMICOLON") != null ? "semicolon" :
-                                                                    matcher.group("STRING") != null ? "string" :
-                                                                            matcher.group("COMMENT") != null ? "comment" :
-                                                                                    null; /* never happens */
+                                                            matcher.group("STRING") != null ? "string" :
+                                                                    matcher.group("COMMENT") != null ? "comment" :
+                                                                            null; /* never happens */
             assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
@@ -227,7 +224,7 @@ public class TextEditor extends AssemblyComponent {
         this.setCodeEnvironment();
         String[] arr = this.sysCon.getInstructionKeywords();
         String expression = String.join("|", arr);
-        expression = "(" + expression + ")(.*)";
+        expression = "(" + expression + ")(.*?)(?=;)|(" + expression + ")(.*)";
         lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
     }
 }
