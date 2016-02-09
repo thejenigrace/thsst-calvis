@@ -147,4 +147,5 @@ public class EFlags extends Register {
 		setFlagIndex(10, value);
 		setFlagUI("Direction", value);
 	}
+
 }
