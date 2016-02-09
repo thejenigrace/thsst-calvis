@@ -13,10 +13,6 @@
     -fx-font-weight: bold;
 }
 
-.semicolon {
-    -fx-font-weight: bold;
-}
-
 .paren {
     -fx-fill: firebrick;
     -fx-font-weight: bold;
@@ -36,10 +32,9 @@
     -fx-fill: blue;
 }
 
-/*
 .comment {
 	-fx-fill: cadetblue;
-}*/
+}
 
 .find {
     -fx-fill: red;

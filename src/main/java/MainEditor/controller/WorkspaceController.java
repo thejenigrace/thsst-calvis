@@ -138,9 +138,12 @@ public class WorkspaceController {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
         SplitPane registersView = loader.load();
+        SplitPane.setResizableWithParent(registersView, Boolean.TRUE);
         registerPane.getChildren().add(registersView);
-        registersView.prefWidthProperty().bind(registerPane.widthProperty());
-        registersView.prefHeightProperty().bind(registerPane.heightProperty());
+        AnchorPane.setTopAnchor(registersView, 0.0);
+        AnchorPane.setBottomAnchor(registersView, 0.0);
+        AnchorPane.setLeftAnchor(registersView, 0.0);
+        AnchorPane.setRightAnchor(registersView, 0.0);
 
         // Attach registersController to SystemController
         RegistersController registersController = loader.getController();
@@ -151,10 +154,13 @@ public class WorkspaceController {
     private void showMemoryPane() throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
-        StackPane memoryView = loader.load();
+        TableView memoryView = loader.load();
+        SplitPane.setResizableWithParent(memoryView, Boolean.TRUE);
+        AnchorPane.setTopAnchor(memoryView, 0.0);
+        AnchorPane.setBottomAnchor(memoryView, 0.0);
+        AnchorPane.setLeftAnchor(memoryView, 0.0);
+        AnchorPane.setRightAnchor(memoryView, 0.0);
         memoryPane.getChildren().add(memoryView);
-        memoryView.prefWidthProperty().bind(memoryPane.widthProperty());
-        memoryView.prefHeightProperty().bind(memoryPane.heightProperty());
 
         // Attach memoryController to SystemController
         MemoryController memoryController = loader.getController();

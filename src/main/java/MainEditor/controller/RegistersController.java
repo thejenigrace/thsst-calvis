@@ -1,6 +1,5 @@
 package MainEditor.controller;
 
-import EnvironmentConfiguration.model.engine.EFlags;
 import EnvironmentConfiguration.model.engine.Register;
 import MainEditor.model.AssemblyComponent;
 import MainEditor.model.FlagUI;
@@ -9,12 +8,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.*;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 /**
  * Created by Jennica Alcalde on 10/3/2015.
@@ -53,6 +55,9 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
         flagsName1.setCellValueFactory(new PropertyValueFactory<FlagUI, String>("name"));
         flagsValue1.setCellValueFactory(new PropertyValueFactory<FlagUI, String>("flagValue"));
+
+        SplitPane.setResizableWithParent(tableViewRegister, Boolean.TRUE);
+        SplitPane.setResizableWithParent(tableViewFlags1, Boolean.TRUE);
     }
 
     @Override
