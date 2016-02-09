@@ -172,7 +172,7 @@ public class InstructionList {
 							Instruction com = (Instruction) scanner.eval(prepareImportStatements());
 							this.map.put(inst[0].toUpperCase(), com);
 							this.grammarDefinition.add(inst);
-							System.out.println("Loaded: " + inst[0]);
+//							System.out.println("Loaded: " + inst[0]);
 						}
 					}
 					lineCounter++;

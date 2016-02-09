@@ -249,7 +249,7 @@ public class CALVISParser {
 		for(int i = 1; i < RegisterList.MAX_SIZE / 8; i++){
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
-			System.out.println(sizeInString);
+//			System.out.println(sizeInString);
 
 			// Register to Register
 			Element[] registerToRegister = new Element[4];

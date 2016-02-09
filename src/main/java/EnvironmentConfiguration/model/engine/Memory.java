@@ -41,7 +41,7 @@ public class Memory {
 			mem.put(address, "" + address.charAt(address.length()-1) + address.charAt(address.length()-1) );
 		}
 
-		System.out.println("Loaded: Memory");
+//		System.out.println("Loaded: Memory");
 
         BufferedReader br = null;
         String line;
