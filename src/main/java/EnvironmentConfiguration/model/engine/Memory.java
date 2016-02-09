@@ -1,8 +1,5 @@
 package EnvironmentConfiguration.model.engine;
 
-import SimulatorVisualizer.model.MemoryReadException;
-import SimulatorVisualizer.model.MemoryWriteException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,18 +16,22 @@ import java.util.*;
 
 public class Memory {
 
-	static int MAX_ADDRESS_SIZE;
-
 	static final int SIZE_DIRECTIVE_NAME = 0;
 	static final int SIZE_DIRECTIVE_PREFIX = 1;
 	static final int SIZE_DIRECTIVE_SIZE = 2;
 
 	private TreeMap<String, String> mem;
 	private ArrayList<String[]> lookup;
+	private HashMap<String, String> labelMap;
+
+	public static int MAX_ADDRESS_SIZE;
+	public static int DEFAULT_RELATIVE_SIZE;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
-		this.MAX_ADDRESS_SIZE = bitSize;
-		this.mem = new TreeMap<>(Collections.reverseOrder());
+        this.MAX_ADDRESS_SIZE = bitSize;
+		this.DEFAULT_RELATIVE_SIZE = bitEndLength;
+        this.mem = new TreeMap<>(Collections.reverseOrder());
+		this.labelMap = new HashMap<>();
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
@@ -40,48 +41,48 @@ public class Memory {
 			mem.put(address, "" + address.charAt(address.length()-1) + address.charAt(address.length()-1) );
 		}
 
-		System.out.println("Loaded: Memory");
+//		System.out.println("Loaded: Memory");
 
-		BufferedReader br = null;
-		String line;
-		String cvsSplitBy = ",";
-		int lineCounter = 0;
-		this.lookup = new ArrayList<>();
-		try {
-			br = new BufferedReader(new FileReader(new File(csvFile)));
-			while ((line = br.readLine()) != null) {
-				// use comma as separator
-				String[] row = line.split(cvsSplitBy);
-				// trim every row just in case
-				for (int i = 0; i < row.length; i++) {
-					row[i] = row[i].trim();
-				}
-				if ( lineCounter != 0 ) {
-					this.lookup.add(row);
+        BufferedReader br = null;
+        String line;
+        String cvsSplitBy = ",";
+        int lineCounter = 0;
+        this.lookup = new ArrayList<>();
+        try {
+            br = new BufferedReader(new FileReader(new File(csvFile)));
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] row = line.split(cvsSplitBy);
+                // trim every row just in case
+                for (int i = 0; i < row.length; i++) {
+                    row[i] = row[i].trim();
+                }
+                if ( lineCounter != 0 ) {
+                    this.lookup.add(row);
 //                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
 //		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
 //		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
-				}
-				lineCounter++;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+                }
+                lineCounter++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 	}
 
 	public Map getMemoryMap(){
 		return this.mem;
 	}
-
-	private static String reformatAddress(String add) {
+	
+	public static String reformatAddress(String add) {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
@@ -97,7 +98,6 @@ public class Memory {
 		// des contains our offset.
 		String desValue = des.getValue();
 		String[] memoryArray = desValue.split("/");
-
 		String sizeDirective = memoryArray[0];
 		String baseAddress = memoryArray[1];
 
@@ -114,11 +114,17 @@ public class Memory {
 	}
 
 	public void write(String baseAddress, String value, int offset) throws MemoryWriteException{
-		if ( this.mem.containsKey(baseAddress)){
+		String memoryBaseAddress = baseAddress;
+		if ( baseAddress.contains("/") ){
+			memoryBaseAddress = baseAddress.split("/")[1];
+		}
+
+		if ( this.mem.containsKey(memoryBaseAddress)){
 			Integer inc;
-			inc = Integer.parseInt(baseAddress, 16);
+			inc = Integer.parseInt(memoryBaseAddress, 16);
 			int offsetHex = offset/4;
-			System.out.println("writing value" + value);
+			//System.out.println("writing value: " + value);
+			value = value.toUpperCase();
 			for ( int i = 0; i < offsetHex / 2; i++ ){
 				String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
 				if (this.mem.containsKey(succeedingAddress)) {
@@ -133,7 +139,7 @@ public class Memory {
 			//System.out.println("Memory read in little endian starting at: " + baseAddr);
 		}
 		else {
-			throw new MemoryWriteException(baseAddress);
+			throw new MemoryWriteException(memoryBaseAddress);
 		}
 	}
 	
@@ -221,8 +227,8 @@ public class Memory {
 		return lookup.iterator();
 	}
 
-	/*
-		getRegisterKeys() is used for getting all register names to be highlighted
+	/**
+	 * getRegisterKeys() is used for getting all register names to be highlighted
 	 */
 	public Iterator<String> getMemoryKeys(){
 		List memoryKeys = new ArrayList<>();
@@ -249,6 +255,10 @@ public class Memory {
 		return 0;
 	}
 
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
+	}
+
 	public String[] find(String sizeDirective){
 		for (String[] x : this.lookup){
 			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
@@ -258,7 +268,29 @@ public class Memory {
 		return null;
 	}
 
-	public int getHexSize(Token a){
-		return getBitSize(a) / 4;
+	public String getFromLabelMap(String key) throws NullPointerException {
+		if ( labelMap.get(key) != null ){
+			return labelMap.get(key);
+		}
+		else {
+			throw new NullPointerException("Label " + key + " does not exist.");
+		}
 	}
+
+	public void putToLabelMap(String key, String address){
+		labelMap.put(key, address);
+	}
+
+	public static void setDefaultRelativeSize(int defaultRelativeSize) {
+		DEFAULT_RELATIVE_SIZE = defaultRelativeSize;
+	}
+
+	public String removeSizeDirectives(String memoryAddressingMode){
+		String result = memoryAddressingMode;
+		if ( result.contains("/") ){
+			result = result.split("/")[1];
+		}
+		return result;
+	}
+
 }

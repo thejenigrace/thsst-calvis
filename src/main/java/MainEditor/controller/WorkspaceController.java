@@ -715,12 +715,13 @@ public class WorkspaceController {
     public void formatCodeArea(String codeBlock) {
         CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
         String[] arr = this.sysCon.getInstructionKeywords();
-        String expression = String.join("|", arr);
-        String pat = "[^\\S\\n]+(?=(" + expression + "))";
+        String expression =  String.join("|", arr) ;
+        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);
         String replacedCodeAreaText = matcher.replaceAll("\n");
         replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*:\\s*", ": ");
         codeArea.replaceText(replacedCodeAreaText);
         codeArea.redo();
     }

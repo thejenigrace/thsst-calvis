@@ -1,4 +1,4 @@
-package SimulatorVisualizer.model;
+package EnvironmentConfiguration.model.engine;
 
 /**
  * Created by Goodwin Chua on 2/4/2016.

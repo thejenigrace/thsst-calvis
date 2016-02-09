@@ -13,11 +13,7 @@ import com.github.pfmiles.dropincc.impl.OrSubRule;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CALVISParser {
 
@@ -43,6 +39,9 @@ public class CALVISParser {
 	private TokenDef dec;
 	private TokenDef cl;
 
+	private Grule justLabel;
+	private Grule label;
+
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
 		this.registers = registers;
@@ -54,7 +53,6 @@ public class CALVISParser {
 		Grule assembly = lang.newGrule();
 		Grule variableDeclarations = lang.newGrule();
 		Grule variable = lang.newGrule();
-		Grule label = lang.newGrule();
 //		Grule dx = lang.newGrule();
 //		Grule value = lang.newGrule();
 
@@ -73,6 +71,9 @@ public class CALVISParser {
 		TokenDef plus = lang.newToken("\\+");
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
+
+		label = lang.newGrule();
+		justLabel = lang.newGrule();
 
 		hex = lang.newToken(hexPattern);
 		dec = lang.newToken("\\b\\d+\\b");
@@ -236,7 +237,7 @@ public class CALVISParser {
 		}
 
 		/**
-		 * START of static definition of parameter rules
+		 * START of static definition of 2 parameter rules
 		 */
 		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
 
@@ -248,7 +249,7 @@ public class CALVISParser {
 		for(int i = 1; i < RegisterList.MAX_SIZE / 8; i++){
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
-			System.out.println(sizeInString);
+//			System.out.println(sizeInString);
 
 			// Register to Register
 			Element[] registerToRegister = new Element[4];
@@ -310,8 +311,8 @@ public class CALVISParser {
 		/**
 		 * END
 		 */
-		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
-		System.out.println(parameterSpecifications);
+//		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
+//		System.out.println(parameterSpecifications);
 
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
@@ -319,12 +320,12 @@ public class CALVISParser {
 
 		while (instructionProductionRules.hasNext()){
 			ArrayList<Element[]> instructionAlternatives = new ArrayList<>();
-
 			String[] prodRule = instructionProductionRules.next();
-			for (int i = 0; i < prodRule.length; i++) {
-				System.out.print(prodRule[i] + " ");
-			}
-			System.out.println("");
+
+//			for (int i = 0; i < prodRule.length; i++) {
+//				System.out.print(prodRule[i] + " ");
+//			}
+//			System.out.println("");
 
 			String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
 			TokenDef instructionName = lang.newToken(insName);
@@ -337,8 +338,8 @@ public class CALVISParser {
 				numParameters += 1;
 			}
 
-			System.out.println("actual count from csv: " + parameterCount);
-			System.out.println("number of parameters: " + numParameters);
+//			System.out.println("actual count from csv: " + parameterCount);
+//			System.out.println("number of parameters: " + numParameters);
 
 			switch (parameterCount){
 				case 0:
@@ -367,7 +368,7 @@ public class CALVISParser {
 							specifications1.add(entry[i]);
 						}
 					}
-					System.out.println(specifications1);
+//					System.out.println(specifications1);
 
 					String[] secondParameter = prodRule[4].split("/");
 					ArrayList<String[]> secondParameterList = new ArrayList<>();
@@ -381,7 +382,7 @@ public class CALVISParser {
 							specifications2.add(entry[i]);
 						}
 					}
-					System.out.println(specifications2);
+//					System.out.println(specifications2);
 
 					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
@@ -394,7 +395,7 @@ public class CALVISParser {
 							}
 						}
 					}
-					System.out.println(result);
+//					System.out.println(result);
 
 					for ( String resultInstance : result ){
 						Element[] elements2 = new Element[numParameters];
@@ -429,7 +430,7 @@ public class CALVISParser {
 						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
 								RegisterList.instructionPointerSize, "0"), calvisInstruction);
 						lineNumber++;
-						return null;
+						return calvisInstruction;
 					});
 				} else {
 					instructionAlternative.setAction((Action<Object[]>) args -> {
@@ -446,9 +447,9 @@ public class CALVISParser {
 								new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
 						String instructionAdd = Integer.toHexString(lineNumber);
 						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-								Memory.MAX_ADDRESS_SIZE, "0"), calvisInstruction);
+								RegisterList.instructionPointerSize, "0"), calvisInstruction);
 						lineNumber++;
-						return null;
+						return calvisInstruction;
 					});
 				}
 				altList.add(instructionAlternative);
@@ -465,8 +466,11 @@ public class CALVISParser {
 		//variable.define("[a-zA-Z_][a-zA-Z\\d_]*", dx, value);
 		variable.define("[a-zA-Z_][a-zA-Z\\d_]*");
 
+		justLabel.define("[a-zA-Z_][a-zA-Z\\d_]*")
+				.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
+
 //		// LABEL ::= identifier ":"
-		label.define("[a-zA-Z_][a-zA-Z\\d_]*", colon);
+		label.define(justLabel, colon);
 //
 //		// dx ::= 'db' | 'dw' | 'dd'
 //		dx.define(dbToken).alt(dwToken).alt(ddToken);
@@ -476,7 +480,37 @@ public class CALVISParser {
 //		//value.define("5");
 
 		// mainProgram ::= ( LABEL? instruction)*
-		mainProgram.define(CC.ks(CC.op(label), instruction));
+		mainProgram.define(CC.ks(CC.op(label), instruction))
+				.action((Action<Object[]>) matched -> {
+					int labelValue = 0;
+					for (Object obj : matched){
+//						System.out.println("LINE: " + labelValue);
+						Object[] objects = (Object[]) obj;
+						for (int i = 0; i < objects.length ; i++) {
+//							System.out.println(i + " " + objects[i]);
+							if ( objects[i] != null ){
+								if ( i == 0 && objects[i] instanceof Object[] ){
+//									System.out.println("we found an object array");
+									Object[] objects1 = (Object[]) objects[i];
+									/**
+									 * objects1[0] = contains label
+									 * objects1[1] = contains the colon
+									 */
+									String instructionAddress = Integer.toHexString(labelValue);
+									instructionAddress = Memory.reformatAddress(instructionAddress);
+									memory.putToLabelMap(((Token) objects1[0]).getValue(), instructionAddress);
+
+//									System.out.println(((Token) objects1[0]).getValue() + " -> " + instructionAddress );
+//									for (int j = 0; j < objects1.length; j++) {
+//										System.out.println(i + " " + j + " " + objects1[j]);
+//									}
+								}
+							}
+						}
+					labelValue++;
+					}
+					return null;
+				});
 
 		// produce instruction rules
 		System.out.println("PARSER IS BEING COMPILED");
@@ -551,10 +585,9 @@ public class CALVISParser {
 			if ( anAllowed.contains("c") ) {
 				orSubRuleList.add(cl);
 			}
-			if ( anAllowed.contains("LABEL") ) {
-				// not sure what labels should look like
+			if ( anAllowed.contains("l") ) {
+				orSubRuleList.add(justLabel);
 			}
-
 		}
 		return concatenateOrSubRules(orSubRuleList);
 	}
@@ -589,7 +622,7 @@ public class CALVISParser {
 			String regType = registerToken[RegisterList.TYPE];
 
 			if ( !flag && registerToken[RegisterList.NAME].equalsIgnoreCase("cl")) {
-				System.out.println("CL was declared");
+//				System.out.println("CL was declared");
 				cl = lang.newToken(regName);
 				flag = true;
 			}
@@ -668,18 +701,24 @@ public class CALVISParser {
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
 					producedList.get(i).setAction((Action<Object>) arg0 -> {
-						//System.out.println(arg0 + " : " + arg0.getClass());
-						if ( arg0 instanceof Token){
+//						System.out.println(arg0 + " : " + arg0.getClass());
+						if ( arg0 instanceof Token ){
 							return (Token) arg0;
                         }
-						if ( memory.isExisting(arg0.toString())){
+						if ( memory.isExisting(arg0.toString()) ){
 							return new Token(Token.MEM, (String) arg0);
 						}
-                        if ( arg0.toString().matches(hexPattern)){
+						if ( registers.isExisting(arg0.toString().toUpperCase()) ){
+							return new Token(Token.REG, (String) arg0);
+						}
+                        if ( arg0.toString().matches(hexPattern) ){
 							return new Token(Token.HEX, (String) arg0);
 						}
-						if ( arg0.toString().matches("\\b\\d+\\b")) {
+						if ( arg0.toString().matches("\\b\\d+\\b") ) {
 							return new Token(Token.DEC, (String) arg0);
+						}
+						if ( arg0.toString().matches("[a-zA-Z_][a-zA-Z\\d_]*") ){
+							return new Token(Token.LABEL, (String) arg0);
 						}
 						if ( arg0 instanceof Token[] ){
 							return arg0;

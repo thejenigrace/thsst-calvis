@@ -172,7 +172,7 @@ public class InstructionList {
 							Instruction com = (Instruction) scanner.eval(prepareImportStatements());
 							this.map.put(inst[0].toUpperCase(), com);
 							this.grammarDefinition.add(inst);
-							System.out.println("Loaded: " + inst[0]);
+//							System.out.println("Loaded: " + inst[0]);
 						}
 					}
 					lineCounter++;
@@ -204,6 +204,7 @@ public class InstructionList {
 		sb.append("import EnvironmentConfiguration.model.engine.Memory;");
 		sb.append("import EnvironmentConfiguration.model.engine.EFlags;");
 		sb.append("import EnvironmentConfiguration.model.engine.Calculator;");
+		sb.append("import EnvironmentConfiguration.model.engine.JumpOutOfBoundsException;");
 		sb.append("import java.math.BigInteger;");
 		sb.append("\n return (EnvironmentConfiguration.model.engine.Instruction) this");
 		return sb.toString();
@@ -236,7 +237,7 @@ public class InstructionList {
 
 	private ArrayList<String> doParameterChecking(String[] inst){
 		ArrayList<String> instructionErrorCollection = new ArrayList<>();
-		String[] acceptableInputs = {"r", "m", "i", "c"};
+		String[] acceptableInputs = {"r", "m", "i", "c", "l"};
 		int i =  3;
 		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
 			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');

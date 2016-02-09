@@ -11,7 +11,7 @@ public class Calculator {
 		this.registers = regs;
 		this.mem = m;
 	}
-
+	
 	public boolean evaluateCondition(String condition){
 		String con = condition.toUpperCase();
 		EFlags flags = registers.getEFlags();
@@ -21,7 +21,7 @@ public class Calculator {
 		//String AF = flags.getAuxiliaryFlag();
 		String PF = flags.getParityFlag();
 		String SF = flags.getSignFlag();
-
+		
 		switch(con){
 			case "A"	:
 			case "NBE"	: return ( CF.equals("0") || ZF.equals("0") );
@@ -53,9 +53,11 @@ public class Calculator {
 			case "NC"	: return CF.equals("0");
 			case "S"	: return SF.equals("1");
 			case "NS"	: return SF.equals("0");
+			case "CXZ"  : return registers.get("CX").equals("0000");
+			case "ECXZ" : return registers.get("ECX").equals("00000000");
 			default		: System.out.println("Condition not found");
-				return false;
-		}
+						  return false;	
+		}	
 	}
 
 	public String hexToBinaryString(String value, Token des){
@@ -315,4 +317,34 @@ public class Calculator {
 		}
 		return "0";
 	}
+
+	public boolean isWithinBounds(BigInteger difference, int size){
+		boolean flag = true;
+		BigInteger startBoundary = new BigInteger("0");
+
+		switch (size){
+			case 8: // rel8
+				startBoundary = new BigInteger("128");
+				break;
+			case 16: // rel16 32768
+				startBoundary = new BigInteger("32768");
+				break;
+		}
+
+		BigInteger endBoundary = new BigInteger("1");
+		endBoundary = startBoundary.subtract(endBoundary).negate();
+
+//		System.out.println(startBoundary + " < JMP > " + endBoundary);
+//		System.out.println("Difference is: " + difference);
+//		System.out.println(difference.compareTo(startBoundary));
+//		System.out.println(difference.compareTo(endBoundary));
+
+		int start = difference.compareTo(startBoundary);
+		int end = difference.compareTo(endBoundary);
+		flag = ( start == -1 || start == 0 ) && ( end == 1 || end == 0 );
+
+//		System.out.println(flag);
+		return flag;
+	}
+
 }
