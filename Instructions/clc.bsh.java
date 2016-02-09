@@ -1,7 +1,7 @@
  execute(registers, memory){
-   System.out.println("STC");
+   System.out.println("CLC");
 
    EFlags flags = registers.getEFlags();
 
-	 flags.setCarryFlag("1");
+	 flags.setCarryFlag("0");
  }
