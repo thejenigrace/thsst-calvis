@@ -19,7 +19,7 @@ public class EnvironmentConfigurator {
     private Memory memory;
     private RegisterList registers;
     private InstructionList instructions;
-    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
     public EnvironmentConfigurator(ArrayList<String> filePaths){
         // 1. Setup the environment

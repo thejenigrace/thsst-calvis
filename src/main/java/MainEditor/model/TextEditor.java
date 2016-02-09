@@ -224,7 +224,7 @@ public class TextEditor extends AssemblyComponent {
         this.setCodeEnvironment();
         String[] arr = this.sysCon.getInstructionKeywords();
         String expression = String.join("|", arr);
-        expression = "(" + expression + ")(.*)";
+        expression = "(" + expression + ")(.*?)(?=;)|(" + expression + ")(.*)";
         lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
     }
 }
