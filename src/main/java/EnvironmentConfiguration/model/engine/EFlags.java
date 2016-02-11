@@ -143,9 +143,9 @@ public class EFlags extends Register {
 		setFlagUI("Overflow", value);
 	}
 
-	public void setDirectionFlag(String value){
-		setFlagIndex(10, value);
-		setFlagUI("Direction", value);
+	public void setInterruptFlag(String value) {
+		setFlagIndex(9, value);
+//		setFlagUI("Overflow", value);
 	}
 
 }
