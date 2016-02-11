@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 <BorderPane fx:id="root" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../css/assembly-keywords.css"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
@@ -149,67 +150,80 @@
                     <items>
                         <Button mnemonicParsing="false" onAction="#handleNewFile">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="FILE_ALT"/>
+                                <FontAwesomeIconView glyphName="FILE_ALT"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="FILE_ALT"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleOpenFile">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="FOLDER_OPEN_ALT"/>
+                                <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="FOLDER_OPEN_ALT"/>-->
                             </graphic>
                         </Button>
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleSaveFile">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="FLOPPY_ALT"/>
+                                <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="FLOPPY_ALT"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleUndo">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="UNDO"/>
+                                <FontAwesomeIconView glyphName="UNDO"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="UNDO"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleRedo">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="REPEAT"/>
+                                <FontAwesomeIconView glyphName="REPEAT"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="REPEAT"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCut">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="SCISSORS"/>
+                                <FontAwesomeIconView glyphName="SCISSORS"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="SCISSORS"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCopy">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="FILES_ALT"/>
+                                <FontAwesomeIconView glyphName="FILES_ALT"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="FILES_ALT"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handlePaste">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="CLIPBOARD"/>
+                                <FontAwesomeIconView glyphName="CLIPBOARD"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="CLIPBOARD"/>-->
                             </graphic>
                         </Button>
                         <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#handlePrevious">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="STEP_BACKWARD"/>
+                                <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="STEP_BACKWARD"/>-->
                             </graphic>
                         </Button>
                         <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handlePlay">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="PLAY"/>
+                                <FontAwesomeIconView glyphName="PLAY"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="PLAY"/>-->
                             </graphic>
                         </Button>
                         <Button fx:id="btnNext" mnemonicParsing="false" onAction="#handleNext">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="STEP_FORWARD"/>
+                                <FontAwesomeIconView glyphName="STEP_FORWARD"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="STEP_FORWARD"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleStop">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="STOP"/>
+                                <FontAwesomeIconView glyphName="STOP"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="STOP"/>-->
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleReset">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="REFRESH"/>
+                                <FontAwesomeIconView glyphName="REFRESH"/>
+                                <!--<Glyph fontFamily="FontAwesome" icon="REFRESH"/>-->
                             </graphic>
                         </Button>
                         <GridPane fx:id="gridPaneFind" prefHeight="27.0" prefWidth="920.0">
@@ -233,7 +247,8 @@
                             <children>
                                 <Label GridPane.columnIndex="1">
                                     <graphic>
-                                        <Glyph fontFamily="FontAwesome" icon="SEARCH"/>
+                                        <FontAwesomeIconView glyphName="SEARCH"/>
+                                        <!--<Glyph fontFamily="FontAwesome" icon="SEARCH"/>-->
                                     </graphic>
                                 </Label>
                                 <TextField fx:id="textFieldFind" prefHeight="27.0" prefWidth="807.0"
@@ -241,13 +256,15 @@
                                 <Button fx:id="btnFindUp" alignment="CENTER" contentDisplay="CENTER"
                                         mnemonicParsing="false" onAction="#handleFindUp" GridPane.columnIndex="4">
                                     <graphic>
-                                        <Glyph fontFamily="FontAwesome" icon="ARROW_UP"/>
+                                        <FontAwesomeIconView glyphName="ARROW_UP"/>
+                                        <!--<Glyph fontFamily="FontAwesome" icon="ARROW_UP"/>-->
                                     </graphic>
                                 </Button>
                                 <Button fx:id="btnFindDown" contentDisplay="CENTER" layoutX="813.0" layoutY="10.0"
                                         mnemonicParsing="false" onAction="#handleFindDown" GridPane.columnIndex="5">
                                     <graphic>
-                                        <Glyph fontFamily="FontAwesome" icon="ARROW_DOWN"/>
+                                        <FontAwesomeIconView glyphName="ARROW_DOWN"/>
+                                        <!--<Glyph fontFamily="FontAwesome" icon="ARROW_DOWN"/>-->
                                     </graphic>
                                 </Button>
                             </children>
@@ -279,7 +296,8 @@
                                             <items>
                                                 <Button mnemonicParsing="false" onAction="#handleHide">
                                                     <graphic>
-                                                        <Glyph fontFamily="FontAwesome" icon="DOWNLOAD"/>
+                                                        <FontAwesomeIconView glyphName="DOWNLOAD"/>
+                                                        <!--<Glyph fontFamily="FontAwesome" icon="DOWNLOAD"/>-->
                                                     </graphic>
                                                 </Button>
                                             </items>

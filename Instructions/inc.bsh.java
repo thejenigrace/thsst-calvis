@@ -18,11 +18,11 @@ execute(des, registers, memory) {
 		System.out.println("x = " + biX.toString(16));
 		System.out.println("r = " + c.binaryToHexString(result.toString(2),des));
 
-		ef.setCarryFlag("0");
+//		ef.setCarryFlag("0");
 
-		ef.setParityFlag(c.checkParity(result.toString(2),des));
+		ef.setParityFlag(c.checkParity(result.toString(2)));
 
-		ef.setAuxiliaryFlag("0");
+//		ef.setAuxiliaryFlag("0");
 
 		String sign=""+result.toString(2).charAt(0);
 		ef.setSignFlag(sign);

@@ -3,6 +3,8 @@ package MainEditor.controller;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.model.TextEditor;
 import SimulatorVisualizer.controller.SystemController;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,7 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.scene.control.window.CloseIcon;
 import jfxtras.scene.control.window.Window;
-import org.controlsfx.glyphfont.Glyph;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
@@ -697,12 +698,12 @@ public class WorkspaceController {
     }
 
     public void changeIconToPause() {
-        btnPlay.setGraphic(new Glyph("FontAwesome", "PAUSE"));
+        btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
         disableStepMode(true);
     }
 
     public void changeIconToPlay() {
-        btnPlay.setGraphic(new Glyph("FontAwesome", "PLAY"));
+        btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PLAY));
         disableStepMode(false);
     }
 

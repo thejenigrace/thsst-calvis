@@ -1,6 +1,7 @@
 execute(des, src, registers, memory) {
  	if ( des.isRegister() ){
- 		if (src.isRegister() &&desSize==registers.getBitSize(src) ){
+		int desSize = registers.getBitSize(des);
+ 		if (src.isRegister() && desSize==registers.getBitSize(src) ){
  			System.out.println("ADC register to register");
 
             String x = registers.get(src);
@@ -17,8 +18,9 @@ execute(des, src, registers, memory) {
 
                 if(ef.getCarryFlag() == "1") {
                     System.out.println("Add Carry Flag");
-                    result.add(new BigInteger("1"));
+                    result.add(BigInteger.ONE);
                 }
+                System.out.println("result = " + result.toString());
 
 				registers.set(des,c.binaryToHexString(result.toString(2),des));
 
@@ -33,11 +35,11 @@ execute(des, src, registers, memory) {
 
 				BigInteger biC=new BigInteger("FFFFFFFF",16);
 				if(result.compareTo(biC)==1)
-				ef.setCarryFlag("1");
+					ef.setCarryFlag("1");
 				else
-				ef.setCarryFlag("0");
+					ef.setCarryFlag("0");
 
-				ef.setParityFlag(c.checkParity(result.toString(2),des));
+				ef.setParityFlag(c.checkParity(result.toString(2)));
 
 				ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
@@ -157,6 +159,8 @@ execute(des, src, registers, memory) {
 			System.out.println("Add Carry Flag");
 			result.add(new BigInteger("1"));
 			}
+
+//            result = new BigInteger(c.binaryToHexString(result.));
 
 			memory.write(des,c.binaryToHexString(result.toString(2), desSize));
 
