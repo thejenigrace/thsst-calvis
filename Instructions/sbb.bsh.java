@@ -1,9 +1,10 @@
 execute(des, src, registers, memory) {
   Calculator calculator = new Calculator(registers, memory);
+  EFlags flags = registers.getEFlags();
 
   if ( des.isRegister() ) {
     if ( src.isRegister() ) {
-      System.out.println("SUB register register");
+      System.out.println("SBB register register");
 
       //get size of des, src
       int desSize = registers.getBitSize(des);
@@ -21,6 +22,11 @@ execute(des, src, registers, memory) {
         //get hex value of des, src then convert to binary
         String source = calculator.hexToBinaryString(registers.get(src), src);
         String destination = calculator.hexToBinaryString(registers.get(des), des);
+
+        BigInteger biSrc = new BigInteger(source, 2);
+        BigInteger biCarry = new BigInteger(flags.getCarryFlag(), 2);
+        BigInteger biResult = biSrc.add(biCarry);
+        source = calculator.binaryZeroExtend(biResult.toString(2), src);
 
         String result = "";
         int r = 0;
@@ -55,7 +61,6 @@ execute(des, src, registers, memory) {
         registers.set(des, calculator.binaryToHexString(d, des));
 
         //FLAGS
-        EFlags flags = registers.getEFlags();
         String res = calculator.hexToBinaryString(registers.get(des), des);
         BigInteger biR = new BigInteger(res, 2);
 
@@ -86,7 +91,7 @@ execute(des, src, registers, memory) {
       }
     }
     else if ( src.isMemory() ){
-      System.out.println("SUB register memory");
+      System.out.println("SBB register memory");
 
       //get size of des, src
       int desSize = registers.getBitSize(des);
@@ -94,6 +99,11 @@ execute(des, src, registers, memory) {
       //get hex value of des, src then convert to binary
       String source = calculator.hexToBinaryString(memory.read(src, desSize), des);
       String destination = calculator.hexToBinaryString(registers.get(des), des);
+
+      BigInteger biSrc = new BigInteger(source, 2);
+      BigInteger biCarry = new BigInteger(flags.getCarryFlag(), 2);
+      BigInteger biResult = biSrc.add(biCarry);
+      source = calculator.binaryZeroExtend(biResult.toString(2), des);
 
       String result = "";
       int r = 0;
@@ -128,7 +138,6 @@ execute(des, src, registers, memory) {
       registers.set(des, calculator.binaryToHexString(d, des));
 
       //FLAGS
-      EFlags flags = registers.getEFlags();
       String res = calculator.hexToBinaryString(registers.get(des), des);
       BigInteger biR = new BigInteger(res, 2);
 
@@ -158,7 +167,7 @@ execute(des, src, registers, memory) {
       flags.setAuxiliaryFlag(auxiliary);
     }
     else if ( src.isHex() ) {
-      System.out.println("SUB register immediate");
+      System.out.println("SBB register immediate");
 
       //get size of des, src
       int desSize = registers.getBitSize(des);
@@ -176,6 +185,11 @@ execute(des, src, registers, memory) {
         //get hex value of des, src then convert to binary
         String source = calculator.hexToBinaryString(src.getValue(), des);
         String destination = calculator.hexToBinaryString(registers.get(des), des);
+
+        BigInteger biSrc = new BigInteger(source, 2);
+        BigInteger biCarry = new BigInteger(flags.getCarryFlag(), 2);
+        BigInteger biResult = biSrc.add(biCarry);
+        source = calculator.binaryZeroExtend(biResult.toString(2), des);
 
         String result = "";
         int r = 0;
@@ -210,7 +224,6 @@ execute(des, src, registers, memory) {
         registers.set(des, calculator.binaryToHexString(d, des));
 
         //FLAGS
-        EFlags flags = registers.getEFlags();
         String res = calculator.hexToBinaryString(registers.get(des), des);
         BigInteger biR = new BigInteger(res, 2);
 
@@ -243,7 +256,7 @@ execute(des, src, registers, memory) {
   }
   else if ( des.isMemory() ) {
     if ( src.isRegister() ){
-      System.out.println("SUB memory register");
+      System.out.println("SBB memory register");
 
       //get size of des, src
       int srcSize = registers.getBitSize(src);
@@ -251,6 +264,11 @@ execute(des, src, registers, memory) {
       //get hex value of des, src then convert to binary
       String source = calculator.hexToBinaryString(registers.get(src), src);
       String destination = calculator.hexToBinaryString(memory.read(des, srcSize), src);
+
+      BigInteger biSrc = new BigInteger(source, 2);
+      BigInteger biCarry = new BigInteger(flags.getCarryFlag(), 2);
+      BigInteger biResult = biSrc.add(biCarry);
+      source = calculator.binaryZeroExtend(biResult.toString(2), src);
 
       String result = "";
       int r = 0;
@@ -285,7 +303,6 @@ execute(des, src, registers, memory) {
       memory.write(des, calculator.binaryToHexString(d, src), srcSize);
 
       //FLAGS
-      EFlags flags = registers.getEFlags();
       String res = calculator.hexToBinaryString(memory.read(des, srcSize), src);
       BigInteger biR = new BigInteger(res, 2);
 
@@ -315,7 +332,7 @@ execute(des, src, registers, memory) {
       flags.setAuxiliaryFlag(auxiliary);
     }
     else if ( src.isHex() ){
-      System.out.println("SUB memory immediate");
+      System.out.println("SBB memory immediate");
 
       //get size of des, src
       int desSize = memory.getBitSize(des);
@@ -323,6 +340,11 @@ execute(des, src, registers, memory) {
       //get hex value of des, src then convert to binary
       String source = calculator.hexToBinaryString(src.getValue(), des);
       String destination = calculator.hexToBinaryString(memory.read(des, des), des);
+
+      BigInteger biSrc = new BigInteger(source, 2);
+      BigInteger biCarry = new BigInteger(flags.getCarryFlag(), 2);
+      BigInteger biResult = biSrc.add(biCarry);
+      source = calculator.binaryZeroExtend(biResult.toString(2), des);
 
       String result = "";
       int r = 0;
@@ -357,7 +379,6 @@ execute(des, src, registers, memory) {
       memory.write(des, calculator.binaryToHexString(d, des), des);
 
       //FLAGS
-      EFlags flags = registers.getEFlags();
       String res = calculator.hexToBinaryString(memory.read(des, des), des);
       BigInteger biR = new BigInteger(res, 2);
 
@@ -382,6 +403,9 @@ execute(des, src, registers, memory) {
 
       String parity = calculator.checkParity(res);
       flags.setParityFlag(parity);
+
+      String auxiliary = calculator.checkAuxiliarySub(source, destination);
+      flags.setAuxiliaryFlag(auxiliary);
     }
   }
 }
