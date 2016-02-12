@@ -4,11 +4,8 @@
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix Register &amp; Memory Window">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movsx.bsh.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movzx.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/sbb.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sub.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sub.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,21 +67,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.024">
+            <state vertical-scroll-proportion="0.0">
               <caret line="355" column="67" selection-start-line="355" selection-start-column="67" selection-end-line="355" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="false">
+      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            <state vertical-scroll-proportion="3.672">
+              <caret line="153" column="33" selection-start-line="153" selection-start-column="33" selection-end-line="153" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -485,8 +482,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" />
-        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
+        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
       </list>
     </option>
   </component>
@@ -837,12 +834,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00001" summary="Working Memory">
-      <created>1453789384009</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1453789384009</updated>
-    </task>
     <task id="LOCAL-00002" summary="Working Memory">
       <created>1453803146625</created>
       <option name="number" value="00002" />
@@ -1131,7 +1122,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455275030161</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="DONE sub, sbb">
+      <created>1455297580870</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1455297580875</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1213,7 +1210,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa&#10;- Fix File Format of Instructions" />
     <MESSAGE value="- Added ADD Instruction" />
     <MESSAGE value="Merge" />
     <MESSAGE value="Fix UI for EFLAGS &amp; Memory" />
@@ -1238,7 +1234,8 @@
     <MESSAGE value="DONE sti, cli" />
     <MESSAGE value="DONE Bit and Byte" />
     <MESSAGE value="DONE cbw, cdq, cwd, cwde" />
-    <option name="LAST_COMMIT_MESSAGE" value="DONE cbw, cdq, cwd, cwde" />
+    <MESSAGE value="DONE sub, sbb" />
+    <option name="LAST_COMMIT_MESSAGE" value="DONE sub, sbb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1678,18 +1675,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+          <caret line="355" column="67" selection-start-line="355" selection-start-column="67" selection-end-line="355" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.024">
-          <caret line="355" column="67" selection-start-line="355" selection-start-column="67" selection-end-line="355" selection-end-column="67" />
+        <state vertical-scroll-proportion="3.672">
+          <caret line="153" column="33" selection-start-line="153" selection-start-column="33" selection-end-line="153" selection-end-column="33" />
           <folding />
         </state>
       </provider>
