@@ -243,7 +243,6 @@ public class Calculator {
 			}
 		}
 
-
 		return value;
 	}
 
