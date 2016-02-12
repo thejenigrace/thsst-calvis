@@ -108,6 +108,12 @@ ror,Instructions/ror.bsh.java,2,r/m,c/i
 rol,Instructions/rol.bsh.java,2,r/m,c/i
 rcr,Instructions/rcr.bsh.java,2,r/m,c/i
 rcl,Instructions/rcl.bsh.java,2,r/m,c/i
+bt,Instructions/bt.bsh.java,2,r16/r32/m16/m32,r16/r32/i
+bts,Instructions/bts.bsh.java,2,r16/r32/m16/m32,r16/r32/i
+btr,Instructions/btr.bsh.java,2,r16/r32/m16/m32,r16/r32/i
+btc,Instructions/btc.bsh.java,2,r16/r32/m16/m32,r16/r32/i
+bsf,Instructions/bsf.bsh.java,2,r16/r32,r16/r32/m16/m32
+bsr,Instructions/bsr.bsh.java,2,r16/r32,r16/r32/m16/m32
 seta,Instructions/seta.bsh.java,1,r8/m8
 setnbe,Instructions/setnbe.bsh.java,1,r8/m8
 setae,Instructions/setae.bsh.java,1,r8/m8
