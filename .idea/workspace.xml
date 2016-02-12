@@ -2,13 +2,105 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_4.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/cmov.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/j.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/set.bsh.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmova.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmove.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovg.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovna.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovne.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovng.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovno.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovns.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovnz.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovo.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovpe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovpo.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovs.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/cmovz.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/ja.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/je.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jg.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jna.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jne.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jng.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jno.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jns.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jnz.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jo.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jpe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jpo.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/js.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/jz.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/seta.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/sete.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setg.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setna.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnae.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnb.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnbe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnc.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setne.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setng.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnge.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnl.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnle.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setno.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setns.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setnz.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/seto.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setp.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setpe.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setpo.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/sets.bsh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/setz.bsh.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/adc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/adc.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/inc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/inc.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -71,25 +163,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainApp.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java">
+      <file leaf-file-name="CALVISParser.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.3298538">
-              <caret line="71" column="7" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="7" />
+            <state vertical-scroll-proportion="3.303602">
+              <caret line="385" column="13" selection-start-line="385" selection-start-column="13" selection-end-line="385" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#expandInstructionParameter#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#parseOneParameter#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#prepareMemorySizeDirectives#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#prepareRegisterTokenMap#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#getAllMemorySizeDirectiveElements#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#getAllRegisterElements#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#concatenateOrSubRules#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#getMemoryIndexScalableElements#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#getRegisterElements#0;class#CALVISParser#0" expanded="false" />
+                <element signature="method#parse#0;class#CALVISParser#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CALVISInstruction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorkspaceController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
+      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="56" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
-              <folding>
-                <element signature="e#24057#24058#0" expanded="true" />
-                <element signature="e#24118#24119#0" expanded="true" />
-              </folding>
+              <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,7 +220,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="merge-master" />
+        <entry key="$PROJECT_DIR$" value="jeca-new-ui" />
       </map>
     </option>
   </component>
@@ -440,12 +551,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/ErrorMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/Instruction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/Comparable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/model/Comparable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/AssemblyComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/AssemblyComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/model/AssemblyComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/model/AssemblyComponent.java" />
@@ -462,7 +567,6 @@
         <option value="$PROJECT_DIR$/Instructions/neg.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/dec.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/sub.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java" />
         <option value="$PROJECT_DIR$/Instructions/imul.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/idiv.bsh.java" />
@@ -472,7 +576,6 @@
         <option value="$PROJECT_DIR$/Instructions/adcx.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/model/Icon.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditorTabePane.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/error-logger.css" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/ConsoleController.java" />
@@ -491,6 +594,14 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+        <option value="$PROJECT_DIR$/Instructions/ja.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" />
+        <option value="$PROJECT_DIR$/Instructions/j.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/set.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
+        <option value="$PROJECT_DIR$/Instructions/cmov.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
       </list>
     </option>
   </component>
@@ -502,9 +613,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="821" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -531,9 +643,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -552,8 +663,255 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimulatorVisualizer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimulatorVisualizer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainEditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainEditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EnvironmentConfiguration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EnvironmentConfiguration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EnvironmentConfiguration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -566,6 +924,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Goodwin Chua\Documents\Workspace\thsst-calvis\Instructions" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/Instructions" />
       <recent name="$PROJECT_DIR$/src/main/resources/icon" />
@@ -591,65 +950,6 @@
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -785,62 +1085,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <list size="1">
@@ -1154,32 +1398,32 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="821" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31423897" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34153005" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30642954" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34042552" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30605564" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33055976" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.319236" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20600858" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16414523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24248926" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31550068" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.38820302" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827586" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978052" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1306,7 +1550,7 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="32" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1315,59 +1559,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryAddressCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6947218">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/and.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4035609">
-          <caret line="87" column="22" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/mov.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/imul_two.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/neg.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20659971">
-          <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/dec.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54232424">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/sub.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.6527977">
           <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25824964">
-          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1396,13 +1591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.34289813">
           <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38020086">
-          <caret line="252" column="42" selection-start-line="252" selection-start-column="42" selection-end-line="252" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -1456,14 +1644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0652819">
-          <caret line="163" column="29" selection-start-line="163" selection-start-column="29" selection-end-line="163" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58915836">
@@ -1472,34 +1652,6 @@
             <element signature="e#553#554#0" expanded="false" />
             <element signature="e#572#573#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33238232">
-          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/util/regex/Pattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1019" column="6" selection-start-line="1019" selection-start-column="6" selection-end-line="1019" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1544,13 +1696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/scene/input/KeyCombination.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3328592">
-          <caret line="417" column="0" selection-start-line="417" selection-start-column="0" selection-end-line="417" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/find.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.58153844">
@@ -1575,24 +1720,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4110953">
-          <caret line="244" column="33" selection-start-line="244" selection-start-column="33" selection-end-line="244" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/FindAndReplaceDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0014224751">
           <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07988588">
-          <caret line="16" column="87" selection-start-line="16" selection-start-column="87" selection-end-line="16" selection-end-column="87" />
         </state>
       </provider>
     </entry>
@@ -1607,14 +1738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46022728">
           <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="58" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.1278409">
-          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1659,13 +1782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.051355205">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1388888">
@@ -1683,22 +1799,158 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/jmp.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="92" selection-start-line="146" selection-start-column="6" selection-end-line="146" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="56" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
-          <folding>
-            <element signature="e#24057#24058#0" expanded="true" />
-            <element signature="e#24118#24119#0" expanded="true" />
-          </folding>
+          <caret line="257" column="9" selection-start-line="257" selection-start-column="9" selection-end-line="257" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02915952">
+          <caret line="163" column="19" selection-start-line="163" selection-start-column="19" selection-end-line="163" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02915952">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3298538">
+        <state vertical-scroll-proportion="0.02915952">
           <caret line="71" column="7" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327616">
+          <caret line="275" column="0" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327616">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.348199">
+          <caret line="252" column="37" selection-start-line="252" selection-start-column="37" selection-end-line="252" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327616">
+          <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13379073">
+          <caret line="206" column="92" selection-start-line="206" selection-start-column="92" selection-end-line="206" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/jcxz.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/set.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11663808">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/j.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26243567">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/cmov.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26243567">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="59" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.303602">
+          <caret line="385" column="13" selection-start-line="385" selection-start-column="13" selection-end-line="385" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#expandInstructionParameter#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#parseOneParameter#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#prepareMemorySizeDirectives#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#prepareRegisterTokenMap#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#getAllMemorySizeDirectiveElements#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#getAllRegisterElements#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#concatenateOrSubRules#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#getMemoryIndexScalableElements#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#getRegisterElements#0;class#CALVISParser#0" expanded="false" />
+            <element signature="method#parse#0;class#CALVISParser#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

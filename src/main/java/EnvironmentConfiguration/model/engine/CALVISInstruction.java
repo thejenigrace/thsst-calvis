@@ -25,8 +25,8 @@ public class CALVISInstruction {
         if ( params != null ){
             numParameters = params.length;
         }
-
-        Token[] tokens = evaluateParameters(numParameters);
+//	    System.out.println(numParameters);
+	    Token[] tokens = evaluateParameters(numParameters);
 	    try {
 		    switch (numParameters) {
 			    case 0:
