@@ -1,23 +1,13 @@
 package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
-import EnvironmentConfiguration.model.engine.CALVISInstruction;
-import EnvironmentConfiguration.model.engine.CALVISParser;
-import EnvironmentConfiguration.model.engine.EFlags;
-import EnvironmentConfiguration.model.engine.InstructionList;
-import EnvironmentConfiguration.model.engine.Memory;
-import EnvironmentConfiguration.model.engine.MemoryAddressCalculator;
-import EnvironmentConfiguration.model.engine.RegisterList;
+import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
-import bsh.EvalError;
 import javafx.application.Platform;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * Created by Goodwin Chua on 12/11/2015.

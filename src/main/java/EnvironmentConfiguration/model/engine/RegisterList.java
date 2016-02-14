@@ -5,7 +5,6 @@ import EnvironmentConfiguration.model.error_logging.ErrorLogger;
 import EnvironmentConfiguration.model.error_logging.ErrorMessage;
 import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
 import EnvironmentConfiguration.model.error_logging.Types;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,6 +25,8 @@ public class RegisterList {
 	private EFlags flags;
 	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
+    private TreeMap<String, TreeMap<String, Register>> childMap;
+
 	public static String instructionPointerName = "EIP";
 	public static int instructionPointerSize = 32;
 	public static int MAX_SIZE = 32; //default is 32 bit registers
@@ -36,6 +37,8 @@ public class RegisterList {
 		this.map = new TreeMap<>(orderedComparator);
 		this.lookup = new ArrayList<>();
 		this.MAX_SIZE = maxSize;
+
+        this.childMap = new TreeMap<>(orderedComparator);
 
 		BufferedReader br = null;
 		String line = "";
@@ -117,6 +120,7 @@ public class RegisterList {
 							case "1":
 							case "2":
 								Register g = new Register(reg[NAME], regSize);
+								System.out.println("Case 1 & 2: " + reg[NAME]);
 								this.map.put(reg[NAME], g);
 								break;
 							case "3": // Instruction Pointer
@@ -137,7 +141,23 @@ public class RegisterList {
 												Integer.toString(lineCounter + 1)));
 								break;
 						}
-					}
+					} else if(reg[TYPE].equals("2")) {
+                        Register g = new Register(reg[NAME], regSize);
+                        if(childMap.get(reg[SOURCE]) == null) {
+                            TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
+
+                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
+                            group.put(reg[NAME], g);
+
+                            this.childMap.put(reg[SOURCE], group);
+                        } else {
+                            TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
+                            System.out.println("Type 2: " + reg[NAME]);
+                            group.put(reg[NAME], g);
+
+                            this.childMap.replace(reg[SOURCE], group);
+                        }
+                    }
 				}
 				lineCounter++;
 			}
@@ -334,6 +354,15 @@ public class RegisterList {
 		return this.map;
 	}
 
+    /**
+     *
+     * @param regName
+     * @return
+     */
+    public Map getChildRegisterMap(String regName){
+        return this.childMap.get(regName);
+    }
+
 	public ErrorLogger getErrorLogger(){
 		if(errorLogger.get(0).getSizeofErrorMessages() == 0)
 			return new ErrorLogger(new ArrayList<ErrorMessageList>());
@@ -349,7 +378,7 @@ public class RegisterList {
 			available.add(getBitSize(registerName));
 		}
 		Integer[] list = new Integer[available.size()];
+
 		return available.toArray(list);
-		
 	}
 }

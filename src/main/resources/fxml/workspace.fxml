@@ -128,8 +128,8 @@
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="false" onAction="#handleReset" text="Reset"/>
                                 <MenuItem mnemonicParsing="false" onAction="#handleNext" text="Execute Next Line"/>
-                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious"
-                                          text="Execute Previous Line"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious" text="Execute Previous Line"/>
+                                <MenuItem mnemonicParsing="false" text="Jump To"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Window">
