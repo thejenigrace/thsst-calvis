@@ -35,6 +35,13 @@ public class CALVISParser {
 	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
 	private final String decPattern = "\\b\\d+\\b";
 	private final String commentPattern = "(;.*)";
+	private final String[] conditionsArray = {  "A","NBE","AE","NB","B","NAE",
+												"BE","NA","G","NLE","GE","NL",
+												"L","NGE","LE","NG","E","Z",
+												"NE","NZ","P","PE","NP","PO",
+												"O","NO","C","NC","S","NS"};
+	private final String[] conditionalInstructions = {"j", "set", "cmov"};
+	private String conditionsRegEx;
 
 //	private final String hexPattern16 = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 8 + "})\\b";
 //	+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
@@ -89,8 +96,17 @@ public class CALVISParser {
 		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
 
+		conditionsRegEx = String.join("|", conditionsArray);
+		conditionsRegEx += "|" + String.join("|", conditionsArray).toLowerCase();
+
 		// start ::= assembly $
 		lang.defineGrule(assembly, CC.EOF);
+
+		justLabel.define("[a-zA-Z_][a-zA-Z\\d_]*")
+				.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
+
+//		// LABEL ::= identifier ":"
+		label.define(justLabel, colon);
 
 		// assembly ::= variableDeclarations? mainProgram
 		assembly.define(CC.op(variableDeclarations), CC.ks(commentPattern), mainProgram, CC.ks(commentPattern));
@@ -337,8 +353,12 @@ public class CALVISParser {
 			clToMemory[2] = comma;
 			clToMemory[3] = cl;
 			parameterSpecifications.put("m" + sizeInString + "c", clToMemory);
-
 		}
+		// CC, Label
+//		Element[] ccLabel = new Element[3];
+//		ccLabel[1] = condition;
+//		ccLabel[2] = justLabel;
+//		parameterSpecifications.put("xl", ccLabel);
 		/**
 		 * END
 		 */
@@ -353,12 +373,18 @@ public class CALVISParser {
 			ArrayList<Element[]> instructionAlternatives = new ArrayList<>();
 			String[] prodRule = instructionProductionRules.next();
 
-//			for (int i = 0; i < prodRule.length; i++) {
-//				System.out.print(prodRule[i] + " ");
-//			}
-//			System.out.println("");
+			for (int i = 0; i < prodRule.length; i++) {
+				System.out.print(prodRule[i] + " ");
+			}
+			System.out.println("");
 
 			String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
+
+			if ( isConditionalInstruction(prodRule[0]) ) {
+				insName = "(\\b((" + prodRule[0] + "|" + prodRule[0].toLowerCase()
+						+ ")(" + conditionsRegEx + "))\\b)";
+			}
+
 			TokenDef instructionName = lang.newToken(insName);
 
 			//System.out.println(insName);
@@ -454,6 +480,7 @@ public class CALVISParser {
 					instructionAlternative.setAction((Action<Object>) args -> {
 						String anInstruction = (String) args;
 						//System.out.println(anInstruction);
+						//////////////////////
 						Instruction someInstruction = instructions.getInstruction(anInstruction);
 						CALVISInstruction calvisInstruction =
 								new CALVISInstruction(someInstruction, anInstruction, null, registers, memory);
@@ -467,11 +494,21 @@ public class CALVISParser {
 					instructionAlternative.setAction((Action<Object[]>) args -> {
 						int numParameters1 = args.length / 2;
 						String anInstruction = args[0].toString();
-						Instruction someInstruction = instructions.getInstruction(anInstruction);
 						ArrayList<Object> tokenArr = new ArrayList<>();
+//						System.out.println(anInstruction);
+						String baseConditionalInstruction = getBaseConditionalInstruction(anInstruction);
+						if ( !anInstruction.equals(baseConditionalInstruction) ){
+							String replaced = anInstruction.replaceAll(baseConditionalInstruction,"");
+							tokenArr.add(replaced);
+							anInstruction = baseConditionalInstruction;
+						}
+						//////////////////////
+						Instruction someInstruction = instructions.getInstruction(anInstruction);
+
 						for (int i = 0; i < numParameters1; i++) {
 							tokenArr.add(args[i * 2 + 1]);
 						}
+
 						Object[] tokens = new Object[tokenArr.size()];
 						tokens = tokenArr.toArray(tokens);
 						CALVISInstruction calvisInstruction =
@@ -492,12 +529,6 @@ public class CALVISParser {
 //
 //		// value ::= string | char | int | double
 //		value.define("\\d+(\\.\\d+)?").alt("\\d*\\.\\d*").alt("\"([^\\\"]+|\\.)*\"");
-
-		justLabel.define("[a-zA-Z_][a-zA-Z\\d_]*")
-				.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
-
-//		// LABEL ::= identifier ":"
-		label.define(justLabel, colon);
 
 
 		// mainProgram ::= ( LABEL? instruction)*
@@ -774,6 +805,7 @@ public class CALVISParser {
 		}
 		return concatenateOrSubRules(result);
 	}
+
 	private Element getAllMemoryAddressableRegisters(){
 		return getRegisterElements("1");
 	}
@@ -791,10 +823,30 @@ public class CALVISParser {
 		return variableDeclarationTokenMap.get(size);
 	}
 
+	private boolean isConditionalInstruction(String instruction){
+		for ( String element : conditionalInstructions ){
+			if ( element.equalsIgnoreCase(instruction) ){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private String getBaseConditionalInstruction(String instruction){
+		for ( String element : conditionalInstructions ){
+			String pattern = "(" + element + "|" + element.toLowerCase() + ")(" + conditionsRegEx + ")";
+			if ( instruction.matches(pattern) ){
+				return element;
+			}
+		}
+		return instruction;
+	}
+
 	public HashMap<String, CALVISInstruction> parse(String code) throws DropinccException{
 		this.mappedInstruction.clear();
 		this.lineNumber = 0;
 		this.exe.eval(code);
 		return this.mappedInstruction;
 	}
+
 }

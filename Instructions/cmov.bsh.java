@@ -1,6 +1,6 @@
-execute(des, src, registers, memory){
+execute(cc, des, src, registers, memory){
 	Calculator cal = new Calculator(registers, memory);
-	boolean initialCondition = cal.evaluateCondition("NGE");
+	boolean initialCondition = cal.evaluateCondition(cc.getValue());
 	System.out.println("Should I move: " + initialCondition);
 
 	/**

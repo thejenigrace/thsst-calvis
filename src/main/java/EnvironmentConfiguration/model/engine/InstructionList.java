@@ -209,15 +209,19 @@ public class InstructionList {
 		sb.append("\n return (EnvironmentConfiguration.model.engine.Instruction) this");
 		return sb.toString();
 	}
-	public Instruction getInstruction(Token t){
-		return getInstruction(t.getValue());
-	}
+
+//	public Instruction getInstruction(Token t){
+//		return getInstruction(t.getValue());
+//	}
 	
-	public Instruction getInstruction(String instructionName){
+	public Instruction getInstruction(String instructionName) throws NullPointerException{
 		String key = instructionName.toUpperCase();
-		if ( this.map.containsKey(key) )
+		if ( this.map.containsKey(key) ) {
 			return this.map.get(key);
-		return null;
+		}
+		else{
+			throw new NullPointerException("Instruction does not exist: " + instructionName);
+		}
 	}
 	
 	public Iterator<String[]> getInstructionProductionRules(){
@@ -237,7 +241,7 @@ public class InstructionList {
 
 	private ArrayList<String> doParameterChecking(String[] inst){
 		ArrayList<String> instructionErrorCollection = new ArrayList<>();
-		String[] acceptableInputs = {"r", "m", "i", "c", "l"};
+		String[] acceptableInputs = {"r", "m", "i", "c", "l", "x"};
 		int i =  3;
 		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
 			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');

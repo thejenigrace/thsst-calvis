@@ -1,6 +1,6 @@
-execute(des, registers, memory){
+execute(cc, des, registers, memory){
 	Calculator cal = new Calculator(registers, memory);
-	boolean initialCondition = cal.evaluateCondition("L");
+	boolean initialCondition = cal.evaluateCondition(cc.getValue());
 	System.out.println("Should I set: " + initialCondition);
 
 	/**

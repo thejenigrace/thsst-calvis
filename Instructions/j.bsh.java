@@ -1,11 +1,11 @@
-execute(rel, registers, memory) throws Exception {
+execute(cc, rel, registers, memory) throws Exception {
 	Calculator cal = new Calculator(registers, memory);
-	boolean initialCondition = cal.evaluateCondition("C");
+	boolean initialCondition = cal.evaluateCondition(cc.getValue());
 	System.out.println("Should I jump: " + initialCondition);
 
 	/**
 	 * If condition is true, carry out the jump
- 	*/
+	 */
 	if ( initialCondition ){
 		String toAddress = "";
 		if( rel.isLabel() ){
@@ -31,7 +31,7 @@ execute(rel, registers, memory) throws Exception {
 	}
 	else {
 		/**
-		 * Else, incremet instruction pointer to proceed to next instruction;
+		 * Else, increment instruction pointer to proceed to next instruction;
 		 */
 		String currentLine = registers.getInstructionPointer();
 		BigInteger value = new BigInteger(currentLine, 16);
