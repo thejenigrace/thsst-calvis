@@ -120,7 +120,7 @@ public class RegisterList {
 							case "1":
 							case "2":
 								Register g = new Register(reg[NAME], regSize);
-								System.out.println("Case 1 & 2: " + reg[NAME]);
+//								System.out.println("Case 1 & 2: " + reg[NAME]);
 								this.map.put(reg[NAME], g);
 								break;
 							case "3": // Instruction Pointer
@@ -146,13 +146,13 @@ public class RegisterList {
                         if(childMap.get(reg[SOURCE]) == null) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
 
-                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
+//                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
                             group.put(reg[NAME], g);
 
                             this.childMap.put(reg[SOURCE], group);
                         } else {
                             TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
-                            System.out.println("Type 2: " + reg[NAME]);
+//                            System.out.println("Sibling-Type 2: " + reg[NAME]);
                             group.put(reg[NAME], g);
 
                             this.childMap.replace(reg[SOURCE], group);
@@ -295,10 +295,10 @@ public class RegisterList {
 			newValue = new String(val);
 			mother.setValue(newValue.toUpperCase());
 
-            System.out.println("register[SOURCE] = " + register[SOURCE]);
+//            System.out.println("register[SOURCE] = " + register[SOURCE]);
             if ( childMap.get(register[SOURCE]) != null ) {
-                System.out.println("key = " + key);
-				System.out.println("newValue = " + newValue.toUpperCase());
+//                System.out.println("key = " + key);
+//				System.out.println("newValue = " + newValue.toUpperCase());
 
                 TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
                 for(int i = 0; i < temp.size(); i++) {
