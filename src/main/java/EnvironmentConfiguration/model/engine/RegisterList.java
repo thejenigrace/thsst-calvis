@@ -294,6 +294,14 @@ public class RegisterList {
 			}
 			newValue = new String(val);
 			mother.setValue(newValue.toUpperCase());
+
+            System.out.println("register[SOURCE] = " + register[SOURCE]);
+            if ( childMap.get(register[SOURCE]) != null ) {
+				System.out.println("INSIDE!");
+				System.out.println("key = " + key);
+				System.out.println("register[TYPE] = " + register[TYPE]);
+//                childMap.get(register[SOURCE]).get(key).setValue(hexString);
+            }
 		}
 		else {
 			if ( hexString.equals("") ) {
