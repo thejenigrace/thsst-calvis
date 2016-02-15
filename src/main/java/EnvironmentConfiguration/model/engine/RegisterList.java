@@ -297,10 +297,31 @@ public class RegisterList {
 
             System.out.println("register[SOURCE] = " + register[SOURCE]);
             if ( childMap.get(register[SOURCE]) != null ) {
-				System.out.println("INSIDE!");
-				System.out.println("key = " + key);
-				System.out.println("register[TYPE] = " + register[TYPE]);
-//                childMap.get(register[SOURCE]).get(key).setValue(hexString);
+                System.out.println("key = " + key);
+				System.out.println("newValue = " + newValue.toUpperCase());
+
+                TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
+                for(int i = 0; i < temp.size(); i++) {
+                    switch (register[SOURCE]) {
+                        case "EAX": childMap.get(register[SOURCE]).get("AX").setValue(get16BitHexString(newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("AH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("AL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+                            break;
+                        case "EBX": childMap.get(register[SOURCE]).get("BX").setValue(get16BitHexString(newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("BH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("BL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+                            break;
+                        case "ECX": childMap.get(register[SOURCE]).get("CX").setValue(get16BitHexString(newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("CH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("CL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+                            break;
+                        case "EDX": childMap.get(register[SOURCE]).get("DX").setValue(get16BitHexString(newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("DH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+                            childMap.get(register[SOURCE]).get("DL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+                            break;
+                        default: System.out.println("NONE");
+                    }
+                }
             }
 		}
 		else {
@@ -320,6 +341,27 @@ public class RegisterList {
 			errorLogger.get(0).add(errorMessages);
 		}
 	}
+
+    public String get16BitHexString (String hexString) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = hexString.length()/2; i < hexString.length(); i++)
+            stringBuilder.append(hexString.charAt(i));
+
+        return  stringBuilder.toString();
+    }
+
+    public String get8BitHexString (char type, String hexString) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if(type == 'H') {
+            stringBuilder.append(hexString.charAt(4));
+            stringBuilder.append(hexString.charAt(5));
+        } else if(type == 'L') {
+            stringBuilder.append(hexString.charAt(6));
+            stringBuilder.append(hexString.charAt(7));
+        }
+
+        return  stringBuilder.toString();
+    }
 
 	public String getInstructionPointer(){
 		return get(instructionPointerName);

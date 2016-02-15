@@ -6,8 +6,6 @@ cbw,Instructions/cbw.bsh.java,0,,
 cwde,Instructions/cwde.bsh.java,0,,
 cwd,Instructions/cwd.bsh.java,0,,
 cdq,Instructions/cdq.bsh.java,0,,
-movsx,Instructions/movsx.bsh.java,2,r16/r32,r8/r16/m8/m16
-movzx,Instructions/movzx.bsh.java,2,r16/r32,r8/r16/m8/m16
 add,Instructions/add.bsh.java,2,r/m,r/m/i
 adc,Instructions/adc.bsh.java,2,r/m,r/m/i
 adcx,Instructions/adcx.bsh.java,2,r32,r32/m32

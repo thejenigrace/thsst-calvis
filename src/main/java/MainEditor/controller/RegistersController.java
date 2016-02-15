@@ -103,31 +103,6 @@ public class RegistersController extends AssemblyComponent implements Initializa
     public void update(java.lang.String currentLine, int lineNumber) {
         treeTableViewRegister.refresh();
 
-        Map map = this.sysCon.getRegisterState().getRegisterMap();
-        ObservableList<Register> registers = FXCollections.observableArrayList(map.values());
-        TreeItem<Register> dummyRoot = new TreeItem<>();
-
-        for (Register rMother : registers) {
-            TreeItem<Register> motherRegister = new TreeItem<>(rMother);
-            Map childMap = this.sysCon.getRegisterState().getChildRegisterMap(rMother.getName());
-
-            if(childMap != null) {
-                ObservableList<Register> childRegisters = FXCollections.observableArrayList(childMap.values());
-                for(Register rChild : childRegisters) {
-                    motherRegister.getChildren().add(new TreeItem<>(rChild));
-                }
-            }
-
-            dummyRoot.getChildren().add(motherRegister);
-        }
-
-        for(int i = 0; i < dummyRoot.getChildren().size(); i++) {
-            System.out.println("INSIDE DUMMY: " + dummyRoot.getChildren().get(i).getValue().getName());
-        }
-
-        this.treeTableViewRegister.setRoot(dummyRoot);
-        this.treeTableViewRegister.setShowRoot(false);
-
         flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
         tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
