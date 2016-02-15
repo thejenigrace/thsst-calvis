@@ -60,7 +60,7 @@ public class Calculator {
 		}	
 	}
 
-	public String hexToBinaryString(String value, Token des){
+	public String hexToBinaryString(String value, Token des) {
 		BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(2);
 
@@ -84,7 +84,7 @@ public class Calculator {
 		return val;
 	}
 
-	public String binaryToHexString(String value, Token des){
+	public String binaryToHexString(String value, Token des) {
 		BigInteger bi = new BigInteger(value, 2);
 		String val = bi.toString(16);
 
@@ -216,11 +216,6 @@ public class Calculator {
 		return result;
 	}
 
-	/*
-	 * For 32-bit,
-	 * zero extend HEX
-	 * returns string (32-bit HEX)
-	 */
 	public String hexZeroExtend(String value, Token des) {
 		if(des.isRegister()) {
 			int missingZeroes = registers.getHexSize(des) - value.length();
@@ -230,6 +225,10 @@ public class Calculator {
 				for(int k = 0; k < missingZeroes; k++) {
 					value = "0" + value;
 				}
+			}
+
+			if(value.length() > registers.getBitSize(des) ) {
+				value = value.substring(1);
 			}
 		}
 		else if(des.isMemory()) {
@@ -241,17 +240,15 @@ public class Calculator {
 					value = "0" + value;
 				}
 			}
-		}
 
+			if(value.length() > mem.getBitSize(des) ) {
+				value = value.substring(1);
+			}
+		}
 
 		return value;
 	}
 
-	/*
-	 * For 32-bit,
-	 * zero extend binary
-	 * returns string (32-bit hinary)
-	 */
 	public String binaryZeroExtend(String value, Token des) {
 		if(des.isRegister()) {
 			int missingZeroes = registers.getBitSize(des) - value.length();
@@ -262,6 +259,10 @@ public class Calculator {
 					value = "0" + value;
 				}
 			}
+
+			if(value.length() > registers.getBitSize(des) ) {
+				value = value.substring(1);
+			}
 		}
 		else if(des.isMemory()) {
 			int missingZeroes = mem.getBitSize(des) - value.length();
@@ -271,6 +272,10 @@ public class Calculator {
 				for(int k = 0; k < missingZeroes; k++) {
 					value = "0" + value;
 				}
+			}
+
+			if(value.length() > mem.getBitSize(des) ) {
+				value = value.substring(1);
 			}
 		}
 
@@ -291,6 +296,36 @@ public class Calculator {
 		if(result.toString(2).length() > 4)
 			return "1";
 
+		return "0";
+	}
+
+	public String checkAuxiliarySub(String src, String des) {
+		String s = new StringBuffer(src).reverse().toString();
+		String d = new StringBuffer(des).reverse().toString();
+
+		int r = 0;
+		int borrow = 0;
+
+		for(int i = 0; i < d.length(); i++) {
+			r = Integer.parseInt(String.valueOf(d.charAt(i)))
+					- Integer.parseInt(String.valueOf(s.charAt(i)))
+					- borrow;
+
+			if( r < 0 ) {
+				borrow = 1;
+
+				if( i == 3 ) {
+					return "1";
+				}
+			}
+			else {
+				borrow = 0;
+
+				if( i > 3 ) {
+					break;
+				}
+			}
+		}
 		return "0";
 	}
 
@@ -318,7 +353,7 @@ public class Calculator {
 		return "0";
 	}
 
-	public boolean isWithinBounds(BigInteger difference, int size){
+	public boolean isWithinBounds(BigInteger difference, int size) {
 		boolean flag = true;
 		BigInteger startBoundary = new BigInteger("0");
 
