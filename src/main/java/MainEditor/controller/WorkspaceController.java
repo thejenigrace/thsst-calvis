@@ -3,14 +3,18 @@ package MainEditor.controller;
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import MainEditor.model.TextEditor;
 import SimulatorVisualizer.controller.SystemController;
+import com.sun.tools.javadoc.ToolOption;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,10 +29,12 @@ import jfxtras.scene.control.window.Window;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -37,7 +43,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Jennica Alcalde on 10/1/2015.
  */
-public class WorkspaceController {
+public class WorkspaceController implements Initializable {
     private SystemController sysCon;
 
     private HashMap<Integer, int[]> findHighlightRanges;
@@ -70,6 +76,8 @@ public class WorkspaceController {
     private Button btnFindUp;
     @FXML
     private Button btnFindDown;
+    @FXML
+    private Button btnHide;
 
     @FXML
     private SplitPane rootSplitPane;
@@ -85,7 +93,16 @@ public class WorkspaceController {
     private TextField textFieldFind;
 
     @FXML
-    private ToolBar hideToolbar;
+    private ToolBar toolbarMain;
+    @FXML
+    private ToolBar toolbarHide;
+
+    private boolean hide = false;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     private void init() {
         // update activeFileEditor property
@@ -189,14 +206,14 @@ public class WorkspaceController {
         tab.setContent(errorLoggerView);
 
         this.sysCon.attach(errorLoggerController);
-	    errorLoggerController.build(e);
+        errorLoggerController.build(e);
         return tab;
     }
 
-	public void handleErrorLoggerTab(Exception e) throws Exception {
-		this.otherWindowsTabPane.getTabs().set(1, createErrorLoggerTab(e));
-		this.otherWindowsTabPane.getSelectionModel().select(1);
-	}
+    public void handleErrorLoggerTab(Exception e) throws Exception {
+        this.otherWindowsTabPane.getTabs().set(1, createErrorLoggerTab(e));
+        this.otherWindowsTabPane.getSelectionModel().select(1);
+    }
 
     public void newFile() {
         TextEditor textEditor = new TextEditor(this);
@@ -212,7 +229,15 @@ public class WorkspaceController {
 
     @FXML
     private void handleHide(ActionEvent event) {
-        this.editorSplitPane.setDividerPositions(1);
+        if (!hide) {
+            hide = true;
+            this.editorSplitPane.setDividerPositions(1);
+            this.changeIconToShow();
+        } else {
+            hide = false;
+            this.editorSplitPane.setDividerPositions(0.65);
+            this.changeIconToHide();
+        }
     }
 
     @FXML
@@ -557,39 +582,47 @@ public class WorkspaceController {
 
     @FXML
     public void handleFindUp(ActionEvent event) {
-        Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
-
-        if (tab != null) {
-            CodeArea codeArea = (CodeArea) tab.getContent();
-            int[] range;
-            if (findHighlightRanges.size() != 0) {
-                System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                if (currentFindRangeIndex > 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-                    currentFindRangeIndex--;
-                    System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                    range = findHighlightRanges.get(currentFindRangeIndex);
-                    codeArea.selectRange(range[0], range[1]);
+        try {
+            Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
+            if (tab != null) {
+                CodeArea codeArea = (CodeArea) tab.getContent();
+                int[] range;
+                if (findHighlightRanges.size() > 0) {
+                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                    if (currentFindRangeIndex > 0) {
+                        currentFindRangeIndex--;
+                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                        range = findHighlightRanges.get(currentFindRangeIndex);
+                        codeArea.selectRange(range[0], range[1]);
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @FXML
     public void handleFindDown(ActionEvent event) {
-        Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+        try {
+            Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
+            if (tab != null) {
+                CodeArea codeArea = (CodeArea) tab.getContent();
+                int[] range;
+                if (findHighlightRanges.size() > 1 ) {
+                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
 
-        if (tab != null) {
-            CodeArea codeArea = (CodeArea) tab.getContent();
-            int[] range;
-            if (findHighlightRanges.size() != 0) {
-                System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                if (currentFindRangeIndex >= 0 && currentFindRangeIndex < findHighlightRanges.size()) {
-                    currentFindRangeIndex++;
-                    System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                    range = findHighlightRanges.get(currentFindRangeIndex);
-                    codeArea.selectRange(range[0], range[1]);
+                    if (currentFindRangeIndex < findHighlightRanges.size()-1) {
+                        currentFindRangeIndex++;
+                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                        range = findHighlightRanges.get(currentFindRangeIndex);
+                        codeArea.selectRange(range[0], range[1]);
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -707,6 +740,14 @@ public class WorkspaceController {
         disableStepMode(false);
     }
 
+    public void changeIconToHide() {
+        btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.DOWNLOAD));
+    }
+
+    public void changeIconToShow() {
+        btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
+    }
+
     public void disableStepMode(boolean flag) {
         btnNext.setDisable(flag);
         btnPrevious.setDisable(flag);
@@ -729,7 +770,7 @@ public class WorkspaceController {
     public void formatCodeArea(String codeBlock) {
         CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
         String[] arr = this.sysCon.getInstructionKeywords();
-        String expression =  String.join("|", arr) ;
+        String expression = String.join("|", arr);
         String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);

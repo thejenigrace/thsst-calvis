@@ -22,49 +22,59 @@ public class MainApp extends Application {
     private ConfigurationEnvironmentController configController;
 
     /**
-     * Method implemented by extending the class to Application.
+     * Method implemented by extending the class to Application
      * @param primaryStage
-     * @throws Exception
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("CALVIS Instruction Set Configuration");
+    public void start(Stage primaryStage) {
+        try {
+            this.primaryStage = primaryStage;
+            this.primaryStage.setTitle("CALVIS Instruction Set Configuration");
 
-        initRootLayout();
+            initRootLayout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Initialize the root layout
-     * @throws IOException
      */
-    public void initRootLayout() throws IOException{
-        loadPrimaryStageController();
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+    public void initRootLayout() {
+        try {
+            loadPrimaryStageController();
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Opens a stage to show CALVIS workspace.
-     * @throws IOException
+     /**
+     * Opens a stage to show CALVIS workspace
+     * @param environmentConfigurator
      */
-    public void showWorkspace(EnvironmentConfigurator environmentConfigurator) throws IOException {
-        // Load root layout from fxml file
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
-        Parent workspaceLayout = (BorderPane) loader.load();
+    public void showWorkspace(EnvironmentConfigurator environmentConfigurator) {
+        try {
+            // Load root layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
+            Parent workspaceLayout = (BorderPane) loader.load();
 
-        primaryStage.setScene(new Scene(workspaceLayout));
-        primaryStage.setTitle("CALVIS x86-32 Workspace");
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(true);
-        primaryStage.show();
+            primaryStage.setScene(new Scene(workspaceLayout));
+            primaryStage.setTitle("CALVIS x86-32 Workspace");
+            primaryStage.setMaximized(true);
+            primaryStage.setResizable(true);
+            primaryStage.show();
 
-        WorkspaceController workspaceController = loader.getController();
-        EnvironmentConfigurator environment = environmentConfigurator;
-        workspaceController.buildSystem(environment);
-        workspaceController.displayDefaultWindows();
+            WorkspaceController workspaceController = loader.getController();
+            EnvironmentConfigurator environment = environmentConfigurator;
+            workspaceController.buildSystem(environment);
+            workspaceController.displayDefaultWindows();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -82,16 +92,19 @@ public class MainApp extends Application {
         return this.primaryStage;
     }
 
-    public void loadPrimaryStageController() throws IOException {
-        // Load root layout from fxml file
-        loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
-        root = (BorderPane) loader.load();
+    public void loadPrimaryStageController() {
+        try {
+            // Load root layout from fxml file
+            loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
+            root = (BorderPane) loader.load();
 
-        // Give the controller access to the main app
-        configController = loader.getController();
-        configController.setMainApp(this);
-
+            // Give the controller access to the main app
+            configController = loader.getController();
+            configController.setMainApp(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

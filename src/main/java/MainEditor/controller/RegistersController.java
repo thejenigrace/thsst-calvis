@@ -8,7 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
@@ -61,17 +65,17 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 TreeItem<Register> motherRegister = new TreeItem<>(rMother);
                 Map childMap = this.sysCon.getRegisterState().getChildRegisterMap(rMother.getName());
 
-                if(childMap != null) {
+                if (childMap != null) {
                     ObservableList<Register> childRegisters = FXCollections.observableArrayList(childMap.values());
-                    for(Register rChild : childRegisters) {
+                    for (Register rChild : childRegisters) {
                         motherRegister.getChildren().add(new TreeItem<>(rChild));
                     }
                 }
 
-               dummyRoot.getChildren().add(motherRegister);
+                dummyRoot.getChildren().add(motherRegister);
             }
 
-            for(int i = 0; i < dummyRoot.getChildren().size(); i++) {
+            for (int i = 0; i < dummyRoot.getChildren().size(); i++) {
                 System.out.println("INSIDE DUMMY: " + dummyRoot.getChildren().get(i).getValue().getName());
             }
 
@@ -86,17 +90,6 @@ public class RegistersController extends AssemblyComponent implements Initializa
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void createTreeTableView(Map map) {
-        TreeItem<Register> dummyRoot = createNode(map);
-
-        for (int i = 0; i < dummyRoot.getChildren().size(); i++) {
-            System.out.println(dummyRoot.getChildren().get(i).getValue().getName());
-        }
-
-        this.treeTableViewRegister.setRoot(dummyRoot);
-        this.treeTableViewRegister.setShowRoot(false);
     }
 
     @Override
@@ -115,6 +108,17 @@ public class RegistersController extends AssemblyComponent implements Initializa
         flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
         tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
+    }
+
+    private void createTreeTableView(Map map) {
+        TreeItem<Register> dummyRoot = createNode(map);
+
+        for (int i = 0; i < dummyRoot.getChildren().size(); i++) {
+            System.out.println(dummyRoot.getChildren().get(i).getValue().getName());
+        }
+
+        this.treeTableViewRegister.setRoot(dummyRoot);
+        this.treeTableViewRegister.setShowRoot(false);
     }
 
     private TreeItem<Register> createNode(Map map) {
