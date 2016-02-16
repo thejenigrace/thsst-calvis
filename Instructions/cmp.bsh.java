@@ -52,13 +52,13 @@ execute(des, src, registers, memory) {
         }
 
         String d = new StringBuffer(result).reverse().toString();
-        registers.set(des, calculator.binaryToHexString(d, des));
+        //registers.set(des, calculator.binaryToHexString(d, des));
 
         //FLAGS
         EFlags flags = registers.getEFlags();
         String res = calculator.hexToBinaryString(registers.get(des), des);
         BigInteger biR = new BigInteger(res, 2);
-
+		System.out.println(d + "wtf d");
         flags.setCarryFlag(carry.toString());
 
         if(overflow == 1) {
@@ -68,17 +68,18 @@ execute(des, src, registers, memory) {
           flags.setOverflowFlag("0");
         }
 
-        if(biR.equals(BigInteger.ZERO)) {
+		BigInteger compareToZero = new BigInteger(d, 2);
+        if(compareToZero.equals(BigInteger.ZERO)) {
           flags.setZeroFlag("1");
         }
         else {
           flags.setZeroFlag("0");
         }
 
-        String sign = "" + res.charAt(0);
+        String sign = "" + compareToZero.charAt(0);
         flags.setSignFlag(sign);
 
-        String parity = calculator.checkParity(res);
+        String parity = calculator.checkParity(compareToZero);
         flags.setParityFlag(parity);
 
         String auxiliary = calculator.checkAuxiliarySub(source, destination);
@@ -125,7 +126,7 @@ execute(des, src, registers, memory) {
       }
 
       String d = new StringBuffer(result).reverse().toString();
-      registers.set(des, calculator.binaryToHexString(d, des));
+      //registers.set(des, calculator.binaryToHexString(d, des));
 
       //FLAGS
       EFlags flags = registers.getEFlags();
@@ -141,7 +142,8 @@ execute(des, src, registers, memory) {
         flags.setOverflowFlag("0");
       }
 
-      if(biR.equals(BigInteger.ZERO)) {
+	  BigInteger compareToZero = new BigInteger(d, 2);
+      if(compareToZero.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
       }
       else {
@@ -207,7 +209,7 @@ execute(des, src, registers, memory) {
         }
 
         String d = new StringBuffer(result).reverse().toString();
-        registers.set(des, calculator.binaryToHexString(d, des));
+        //registers.set(des, calculator.binaryToHexString(d, des));
 
         //FLAGS
         EFlags flags = registers.getEFlags();
@@ -223,7 +225,8 @@ execute(des, src, registers, memory) {
           flags.setOverflowFlag("0");
         }
 
-        if(biR.equals(BigInteger.ZERO)) {
+		BigInteger compareToZero = new BigInteger(d, 2);
+        if(compareToZero.equals(BigInteger.ZERO)) {
           flags.setZeroFlag("1");
         }
         else {
@@ -282,7 +285,7 @@ execute(des, src, registers, memory) {
       }
 
       String d = new StringBuffer(result).reverse().toString();
-      memory.write(des, calculator.binaryToHexString(d, src), srcSize);
+      //memory.write(des, calculator.binaryToHexString(d, src), srcSize);
 
       //FLAGS
       EFlags flags = registers.getEFlags();
@@ -298,7 +301,8 @@ execute(des, src, registers, memory) {
         flags.setOverflowFlag("0");
       }
 
-      if(biR.equals(BigInteger.ZERO)) {
+	  BigInteger compareToZero = new BigInteger(d, 2);
+      if(compareToZero.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
       }
       else {
@@ -354,7 +358,7 @@ execute(des, src, registers, memory) {
       }
 
       String d = new StringBuffer(result).reverse().toString();
-      memory.write(des, calculator.binaryToHexString(d, des), des);
+      //memory.write(des, calculator.binaryToHexString(d, des), des);
 
       //FLAGS
       EFlags flags = registers.getEFlags();
@@ -370,7 +374,8 @@ execute(des, src, registers, memory) {
         flags.setOverflowFlag("0");
       }
 
-      if(biR.equals(BigInteger.ZERO)) {
+	  BigInteger compareToZero = new BigInteger(d, 2);
+      if(compareToZero.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
       }
       else {

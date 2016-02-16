@@ -17,7 +17,7 @@ execute(des, src, registers, memory) {
 
                 if(ef.getOverflowFlag() == "1") {
                     System.out.println("Add Overflow Flag");
-                    result.add(new BigInteger("1"));
+                    result = result.add(new BigInteger("1"));
                 }
 
 				registers.set(des,c.binaryToHexString(result.toString(2),des));
@@ -41,8 +41,11 @@ execute(des, src, registers, memory) {
 
 				ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
-				String sign=""+result.toString(2).charAt(0);
-				ef.setSignFlag(sign);
+				if(result.testBit(desSize - 1))
+				ef.setSignFlag("1");
+				else
+				ef.setSignFlag("0");
+
 
 				if(result.equals(BigInteger.ZERO))
 				ef.setZeroFlag("1");
@@ -74,7 +77,7 @@ execute(des, src, registers, memory) {
                 BigInteger result=biX.add(biY);
 
                 if(ef.getCarryFlag() == "1")
-                    result.add(new BigInteger("1"));
+                   result = result.add(new BigInteger("1"));
 
                 registers.set(des,c.binaryToHexString(result.toString(2),des));
 
@@ -97,10 +100,13 @@ execute(des, src, registers, memory) {
 
 				ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
-                String sign=""+result.toString(2).charAt(0);
-                ef.setSignFlag(sign);
+				if(result.testBit(desSize - 1))
+				ef.setSignFlag("1");
+				else
+				ef.setSignFlag("0");
 
-                if(result.equals(BigInteger.ZERO))
+
+		if(result.equals(BigInteger.ZERO))
                 ef.setZeroFlag("1");
                 else
                 ef.setZeroFlag("0");
@@ -130,7 +136,7 @@ execute(des, src, registers, memory) {
 			BigInteger result=biX.add(biY);
 
 			if(ef.getCarryFlag() == "1")
-				result.add(new BigInteger("1"));
+				result = result.add(new BigInteger("1"));
 
 			registers.set(des,c.binaryToHexString(result.toString(2),des));
 
@@ -152,9 +158,11 @@ execute(des, src, registers, memory) {
 			ef.setParityFlag(c.checkParity(result.toString(2)));
 
 			ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
+			if(result.testBit(desSize - 1))
+			ef.setSignFlag("1");
+			else
+			ef.setSignFlag("0");
 
-			String sign=""+result.toString(2).charAt(0);
-			ef.setSignFlag(sign);
 
 			if(result.equals(BigInteger.ZERO))
 			ef.setZeroFlag("1");
@@ -189,7 +197,7 @@ execute(des, src, registers, memory) {
 
 			if(ef.getOverflowFlag() == "1") {
 			System.out.println("Add Overflow Flag");
-			result.add(new BigInteger("1"));
+				result = result.add(new BigInteger("1"));
 			}
 
 			memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
@@ -213,8 +221,11 @@ execute(des, src, registers, memory) {
 
 			ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
-			String sign=""+result.toString(2).charAt(0);
-			ef.setSignFlag(sign);
+			if(result.testBit(desSize - 1))
+			ef.setSignFlag("1");
+			else
+			ef.setSignFlag("0");
+
 
 			if(result.equals(BigInteger.ZERO))
 			ef.setZeroFlag("1");
@@ -245,7 +256,7 @@ execute(des, src, registers, memory) {
 
 			if(ef.getOverflowFlag() == "1") {
 			System.out.println("Add Overflow Flag");
-			result.add(new BigInteger("1"));
+			result = result.add(new BigInteger("1"));
 			}
 
 			memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
@@ -269,8 +280,10 @@ execute(des, src, registers, memory) {
 
 			ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
 
-			String sign=""+result.toString(2).charAt(0);
-			ef.setSignFlag(sign);
+			if(result.testBit(desSize - 1))
+			ef.setSignFlag("1");
+			else
+			ef.setSignFlag("0");
 
 			if(result.equals(BigInteger.ZERO))
 			ef.setZeroFlag("1");
