@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/imul_two.bsh.java" afterPath="$PROJECT_DIR$/Instructions/imul_two.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,45 +64,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RegistersController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="95" selection-start-line="52" selection-start-column="95" selection-end-line="52" selection-end-column="95" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkspaceController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35825107">
-              <caret line="591" column="49" selection-start-line="591" selection-start-column="49" selection-end-line="591" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.735849">
-              <caret line="265" column="63" selection-start-line="265" selection-start-column="63" selection-end-line="265" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -453,7 +410,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/Instruction.java" />
         <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/Comparable.java" />
         <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/model/Comparable.java" />
@@ -504,6 +460,7 @@
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/Instructions/imul_two.bsh.java" />
       </list>
     </option>
   </component>
@@ -544,7 +501,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -580,14 +536,6 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fxml" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -599,40 +547,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="Instructions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -942,12 +865,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00003" summary="Working Memory">
-      <created>1453803150966</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1453803150966</updated>
-    </task>
     <task id="LOCAL-00004" summary="Trying to fix the parser for memory addressing mode">
       <created>1453806085798</created>
       <option name="number" value="00004" />
@@ -1236,7 +1153,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455549371852</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="FIX: Find UI (Up &amp; Down Button) &amp; resizing in different monitor sizes; Hide &amp; Show Other Windows TabPane">
+      <created>1455628808977</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1455628808978</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1260,7 +1183,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="829" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="829" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1270,10 +1193,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30727023" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.3880597" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3880597" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.319236" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2074392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20648968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24248926" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1327,7 +1250,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa&#10;- Fix File Format of Instructions" />
     <MESSAGE value="- Added ADD Instruction" />
     <MESSAGE value="Merge" />
     <MESSAGE value="Fix UI for EFLAGS &amp; Memory" />
@@ -1352,7 +1274,8 @@
     <MESSAGE value="Fix ADC Instruction &amp; Change Icons" />
     <MESSAGE value="Finally! Dropdown for Register TableView" />
     <MESSAGE value="Fix UI Error: Updating values in AX, AH, &amp; AL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix UI Error: Updating values in AX, AH, &amp; AL" />
+    <MESSAGE value="FIX: Find UI (Up &amp; Down Button) &amp; resizing in different monitor sizes; Hide &amp; Show Other Windows TabPane" />
+    <option name="LAST_COMMIT_MESSAGE" value="FIX: Find UI (Up &amp; Down Button) &amp; resizing in different monitor sizes; Hide &amp; Show Other Windows TabPane" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1421,13 +1344,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Instructions/adox.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.34289813">
-          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38020086">
@@ -1446,21 +1362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.025751073">
           <caret line="6" column="12" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/add.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2532375">
-          <caret line="87" column="16" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/mul.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2690648">
-          <caret line="50" column="50" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1763,7 +1664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33286318">
           <caret line="1773" column="0" selection-start-line="1773" selection-start-column="0" selection-end-line="1773" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1778,30 +1678,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.157969">
           <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
-          <folding>
-            <element signature="e#2685#2686#0" expanded="false" />
-            <element signature="e#2725#2726#0" expanded="false" />
-            <element signature="e#3381#3382#0" expanded="false" />
-            <element signature="e#3409#3410#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="95" selection-start-line="52" selection-start-column="95" selection-end-line="52" selection-end-column="95" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.735849">
+        <state vertical-scroll-proportion="7.2713413">
           <caret line="265" column="63" selection-start-line="265" selection-start-column="63" selection-end-line="265" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
@@ -1813,8 +1696,39 @@
         <state vertical-scroll-proportion="0.35825107">
           <caret line="591" column="49" selection-start-line="591" selection-start-column="49" selection-end-line="591" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6346968">
+          <caret line="52" column="95" selection-start-line="52" selection-start-column="95" selection-end-line="52" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/add.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2087448">
+          <caret line="87" column="16" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/imul_two.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26375178">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/mul.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.1932299">
+          <caret line="43" column="49" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -78,3 +78,8 @@
                 System.out.println("finalize[1] = " + finalize[1]);
             }
         }}
+
+    execute(des, src, registers, memory) {
+            if(src.isRegister()) {
+                System.out.println("Trial IMUL D,S");
+            }}
