@@ -1,4 +1,5 @@
 EnvironmentConfiguration.model.engine.Instruction,Location,Parameters,,
+bswap,Instructions/bswap.bsh.java,1,r
 mov,Instructions/mov.bsh.java,2,r/m,r/m/i
 lea,Instructions/lea.bsh.java,2,r16/r32,m16/m32
 xlat,Instructions/xlat.bsh.java,0,,
@@ -64,3 +65,8 @@ bsr,Instructions/bsr.bsh.java,2,r16/r32,r16/r32/m16/m32
 nop,Instructions/nop.bsh.java,0,,
 set,Instructions/set.bsh.java,1,r8/m8
 cmov,Instructions/cmov.bsh.java,2,r,r/m
+xchg,Instructions/xchg.bsh.java,2,r/m,r/m
+xadd,Instructions/xadd.bsh.java,2,r,r/m
+cmp,Instructions/cmp.bsh.java,2,r/m,r/m/i
+cmpxchg,Instructions/cmpxchg.bsh.java,2,r,r/m
+cmpxchgs8,Instructions/cmpxchgs8.bsh.java,1,m

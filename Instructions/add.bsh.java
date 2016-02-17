@@ -26,18 +26,21 @@ execute(des,src,registers,memory){
 		System.out.println("r = "+c.binaryToHexString(result.toString(2),des));
 
 		EFlags ef=registers.getEFlags();
-		BigInteger biC=new BigInteger("FFFFFFFF",16);
+		BigInteger biC = new BigInteger("FFFFFFFF",16);
 		if(result.compareTo(biC)==1)
-		ef.setCarryFlag("1");
+			ef.setCarryFlag("1");
 		else
-		ef.setCarryFlag("0");
+			ef.setCarryFlag("0");
 
 		ef.setParityFlag(c.checkParity(result.toString(2)));
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16),biY.toString(16)));
 
-		String sign=""+result.toString(2).charAt(0);
-		ef.setSignFlag(sign);
+		if(result.testBit(desSize - 1))
+		ef.setSignFlag("1");
+		else
+		ef.setSignFlag("0");
+
 
 		if(result.equals(BigInteger.ZERO))
 		ef.setZeroFlag("1");
@@ -76,14 +79,18 @@ execute(des,src,registers,memory){
 		ef.setParityFlag(c.checkParity(result.toString(2)));
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16),biY.toString(16)));
+		System.out.println(result.toString(2) + " :result");
 
-		String sign=""+result.toString(2).charAt(0);
-		ef.setSignFlag(sign);
+
+		if(result.testBit(desSize - 1))
+			ef.setSignFlag("1");
+		else
+			ef.setSignFlag("0");
 
 		if(result.equals(BigInteger.ZERO))
-		ef.setZeroFlag("1");
+			ef.setZeroFlag("1");
 		else
-		ef.setZeroFlag("0");
+			ef.setZeroFlag("0");
 
 		ef.setOverflowFlag("0");
 
@@ -118,8 +125,12 @@ execute(des,src,registers,memory){
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16),biY.toString(16)));
 
-		String sign=""+result.toString(2).charAt(0);
-		ef.setSignFlag(sign);
+
+		if(result.testBit(desSize - 1))
+		ef.setSignFlag("1");
+		else
+		ef.setSignFlag("0");
+
 
 		if(result.equals(BigInteger.ZERO))
 		ef.setZeroFlag("1");
@@ -147,18 +158,21 @@ execute(des,src,registers,memory){
 		memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
 
 		EFlags ef=registers.getEFlags();
-		BigInteger biC=new BigInteger("FFFFFFFF",16);
+		BigInteger biC = new BigInteger("FFFFFFFF",16);
 		if(result.compareTo(biC)==1)
-		ef.setCarryFlag("1");
+			ef.setCarryFlag("1");
 		else
-		ef.setCarryFlag("0");
+			ef.setCarryFlag("0");
 
 		ef.setParityFlag(c.checkParity(result.toString(2)));
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16),biY.toString(16)));
 
-		String sign=""+result.toString(2).charAt(0);
-		ef.setSignFlag(sign);
+		if(result.testBit(desSize - 1))
+			ef.setSignFlag("1");
+		else
+			ef.setSignFlag("0");
+
 
 		if(result.equals(BigInteger.ZERO))
 		ef.setZeroFlag("1");
@@ -199,8 +213,11 @@ execute(des,src,registers,memory){
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16),biY.toString(16)));
 
-		String sign=""+result.toString(2).charAt(0);
-		ef.setSignFlag(sign);
+		if(result.testBit(desSize - 1))
+		ef.setSignFlag("1");
+		else
+		ef.setSignFlag("0");
+
 
 		if(result.equals(BigInteger.ZERO))
 		ef.setZeroFlag("1");
