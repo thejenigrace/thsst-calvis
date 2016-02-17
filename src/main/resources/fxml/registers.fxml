@@ -19,17 +19,6 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <!--<TableView fx:id="tableViewRegister" stylesheets="@../css/register.css"-->
-                                   <!--AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"-->
-                                   <!--AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
-                            <!--<columns>-->
-                                <!--<TableColumn fx:id="registerName" text="Register"/>-->
-                                <!--<TableColumn fx:id="registerValue" text="Value"/>-->
-                            <!--</columns>-->
-                            <!--<columnResizePolicy>-->
-                                <!--<TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
-                            <!--</columnResizePolicy>-->
-                        <!--</TableView>-->
                         <TreeTableView fx:id="treeTableViewRegister" stylesheets="@../css/register.css"
                                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
