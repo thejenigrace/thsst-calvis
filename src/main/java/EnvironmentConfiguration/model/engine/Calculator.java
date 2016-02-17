@@ -241,7 +241,7 @@ public class Calculator {
 				}
 			}
 
-			if(value.length() > mem.getBitSize(des) ) {
+			if(value.length() > memory.getBitSize(des) ) {
 				value = value.substring(1);
 			}
 		}
@@ -274,7 +274,7 @@ public class Calculator {
 				}
 			}
 
-			if(value.length() > mem.getBitSize(des) ) {
+			if(value.length() > memory.getBitSize(des) ) {
 				value = value.substring(1);
 			}
 		}

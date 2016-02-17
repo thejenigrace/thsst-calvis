@@ -91,7 +91,8 @@ public class RegisterList {
 						int startIndex = Integer.parseInt(reg[START]);
 						int endIndex = Integer.parseInt(reg[END]);
 
-						if ((startIndex == 0 && endIndex + 1 != regSize) || (startIndex > 0 && endIndex - startIndex + 1 != regSize)) {
+						if ((startIndex == 0 && endIndex + 1 != regSize) ||
+								(startIndex > 0 && endIndex - startIndex + 1 != regSize)) {
 							errorMessages.add(new ErrorMessage(
 									Types.registerInvalidSizeFormat,
 									HandleConfigFunctions.generateArrayListString(reg[NAME]),
@@ -104,13 +105,19 @@ public class RegisterList {
 						startIndex = startIndex / 4;
 
 						// reverse order of indices
-						endIndex = ((RegisterList.MAX_SIZE / 4) - 1) - endIndex;
-						startIndex = ((RegisterList.MAX_SIZE / 4) - 1) - startIndex;
+						int dividedBy = RegisterList.MAX_SIZE / 4;
+						if ( reg[NAME].equals(reg[SOURCE]) ){
+							dividedBy = Integer.parseInt(reg[SIZE]) / 4;
+						}
+						endIndex = (dividedBy - 1) - endIndex;
+						startIndex = (dividedBy - 1) - startIndex;
+
 						reg[START] = String.valueOf(endIndex);
 						reg[END] = String.valueOf(startIndex);
 						reg[NAME] = reg[NAME].toUpperCase();
 						// add csv row to lookup table
-						//System.out.println(reg[0] + " " +reg[1] + " " +reg[2] + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
+//						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
+//						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
 						this.lookup.add(reg);
 					}
 
@@ -129,11 +136,6 @@ public class RegisterList {
 								instructionPointerSize = regSize;
 								this.map.put(reg[NAME], h);
 								break;
-//							case "4":
-//								EFlags e = new EFlags(reg[NAME], regSize);
-//								this.map.put(reg[NAME], e);
-//								break;
-//							/*to fix:*/
 							default:
 								errorMessages.add(
 										new ErrorMessage(Types.invalidRegister,
@@ -253,7 +255,6 @@ public class RegisterList {
 			Register mother = this.map.get(register[SOURCE]);
 			int startIndex = Integer.parseInt(register[START]);
 			int endIndex = Integer.parseInt(register[END]);
-			// System.out.println(source.getValue().substring(startIndex, endIndex + 1));
 			// return the indicated child register value
 			return mother.getValue().substring(startIndex, endIndex + 1);
 		} else {
