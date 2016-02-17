@@ -5,11 +5,11 @@ import java.math.BigInteger;
 public class Calculator {
 
 	private RegisterList registers;
-	private Memory mem;
+	private Memory memory;
 
-	public Calculator(RegisterList regs, Memory m){
-		this.registers = regs;
-		this.mem = m;
+	public Calculator(RegisterList registers, Memory memory){
+		this.registers = registers;
+		this.memory = memory;
 	}
 	
 	public boolean evaluateCondition(String condition){
@@ -23,7 +23,7 @@ public class Calculator {
 		String SF = flags.getSignFlag();
 		
 		switch(con){
-			case "A"	:
+			case "A"	: // fall through
 			case "NBE"	: return ( CF.equals("0") || ZF.equals("0") );
 			case "AE"	:
 			case "NB"	: return CF.equals("0");
@@ -73,7 +73,7 @@ public class Calculator {
 			}
 		}
 		else if (des.isMemory()){
-			int missingZeroes = mem.getBitSize(des) - val.length();
+			int missingZeroes = memory.getBitSize(des) - val.length();
 
 			//zero extend
 			for(int k = 0; k < missingZeroes; k++){
@@ -112,7 +112,7 @@ public class Calculator {
 			}
 		}
 		else if (des.isMemory()){
-			int missingZeroes = mem.getBitSize(des) - val.length();
+			int missingZeroes = memory.getBitSize(des) - val.length();
 
 			//zero extend
 			for(int k = 0; k < missingZeroes; k++){
@@ -233,7 +233,7 @@ public class Calculator {
 			}
 		}
 		else if(des.isMemory()) {
-			int missingZeroes = mem.getHexSize(des) - value.length();
+			int missingZeroes = memory.getHexSize(des) - value.length();
 
 			//zero extend
 			if(missingZeroes > 0) {
@@ -264,7 +264,7 @@ public class Calculator {
 			}
 		}
 		else if(des.isMemory()) {
-			int missingZeroes = mem.getBitSize(des) - value.length();
+			int missingZeroes = memory.getBitSize(des) - value.length();
 
 			//zero extend
 			if(missingZeroes > 0) {

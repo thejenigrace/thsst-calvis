@@ -36,21 +36,23 @@ public class Token {
 	private void formatValue(){
 		switch(this.type){
 			case Token.HEX: // remove 0x from HEX
-				if (this.value.contains("x") | this.value.contains("X") ){
-					this.value = this.value.substring(2).toUpperCase();
-				}
-//				if (this.value.contains("h") | this.value.contains("H") ){
-//					this.value = this.value.substring(0, this.value.length()-1).toUpperCase();
+//				if (this.value.contains("x") | this.value.contains("X") ){
+//					this.value = this.value.substring(2).toUpperCase();
 //				}
+				this.value = this.value.toUpperCase();
 				break;
 			case Token.DEC:
+				if (this.value.contains("_d") | this.value.contains("_D") ){
+					this.value = this.value.substring(0, this.value.length()-2).toUpperCase();
+				}
 				this.value = Integer.toHexString(Integer.parseInt(this.value));
 				this.value = this.value.toUpperCase();
 				this.type = Token.HEX;
 				break;
 			case Token.MEM:
 			case Token.REG:
-				this.value = this.value.toUpperCase(); break;
+				this.value = this.value.toUpperCase();
+				break;
 			case Token.LABEL:
 				break;
 		}

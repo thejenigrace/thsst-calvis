@@ -13,7 +13,11 @@ import com.github.pfmiles.dropincc.impl.OrSubRule;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 public class CALVISParser {
 
@@ -32,19 +36,16 @@ public class CALVISParser {
 	private HashMap<String, CALVISInstruction> mappedInstruction;
 	private int lineNumber;
 
-	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
-	private final String decPattern = "\\b\\d+\\b";
+	private final String hexPattern = "\\b([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
+	private final String decPattern = "\\b(\\d+_[dD])\\b";
 	private final String commentPattern = "(;.*)";
 	private final String[] conditionsArray = {  "A","NBE","AE","NB","B","NAE",
 												"BE","NA","G","NLE","GE","NL",
 												"L","NGE","LE","NG","E","Z",
 												"NE","NZ","P","PE","NP","PO",
-												"O","NO","C","NC","S","NS"};
+												"O","NO","C","NC","S","NS" };
 	private final String[] conditionalInstructions = {"j", "set", "cmov"};
 	private String conditionsRegEx;
-
-//	private final String hexPattern16 = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 8 + "})\\b";
-//	+ "|([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "} [hH])\\b";
 
 	private TokenDef hex;
 	private TokenDef dec;
@@ -52,7 +53,6 @@ public class CALVISParser {
 
 	private Grule justLabel;
 	private Grule label;
-//	private Grule hexOrDec;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -64,6 +64,7 @@ public class CALVISParser {
 
 		Grule assembly = lang.newGrule();
 		Grule variableDeclarations = lang.newGrule();
+		Grule sectionDataRule = lang.newGrule();
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
 		Grule memoryAddressingMode = lang.newGrule();
@@ -74,7 +75,6 @@ public class CALVISParser {
 
 		label = lang.newGrule();
 		justLabel = lang.newGrule();
-//		hexOrDec = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
@@ -83,6 +83,7 @@ public class CALVISParser {
 		TokenDef plus = lang.newToken("\\+");
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
+		TokenDef sectionData = lang.newToken("SECTION .DATA");
 
 		hex = lang.newToken(hexPattern);
 		dec = lang.newToken(decPattern);
@@ -107,9 +108,6 @@ public class CALVISParser {
 
 //		// LABEL ::= identifier ":"
 		label.define(justLabel, colon);
-
-		// assembly ::= variableDeclarations? mainProgram
-		assembly.define(CC.op(variableDeclarations), CC.ks(commentPattern), mainProgram, CC.ks(commentPattern));
 
 		// memory addressing mode constructs
 		// memory ::= [ memoryExpr ]
@@ -227,7 +225,7 @@ public class CALVISParser {
 		 */
 		this.memorySizeDirectives = new HashMap<>();
 
-		ArrayList<Element> variableDeclarationList = new ArrayList<>();
+		ArrayList<Element[]> variableDeclarationList = new ArrayList<>();
 
 		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
 			/**
@@ -264,27 +262,39 @@ public class CALVISParser {
 			 * db, dw, dd, ...
 			 */
 			// variable ::= <identifier> d<?> value
+			Element[] variableDeclaration = new Element[2];
+			variableDeclaration[0] = justLabel;
+			variableDeclaration[1] = getVariableElement(sizeInString);
+//			variableDeclaration[2] = differentHexRules;
+
+			variableDeclarationList.add(variableDeclaration);
+
 //			Grule variableDeclaration = lang.newGrule();
-//			variableDeclaration.define(justLabel, getVariableElement(sizeInString)
-//					, "0[xX][0-9a-fA-F]{1," + size.intValue()/4 + "}|\\d+");
+//			variableDeclaration.define(justLabel,
+//					getVariableElement(sizeInString), hex); //"[0-9a-fA-F]{1," + size.intValue()/4 + "}");
 //			variableDeclarationList.add(variableDeclaration);
+
+
 		}
 
-//		Element allPossibleVariableRules = concatenateOrSubRules(variableDeclarationList);
-		// variableDeclarations ::=  (variable)*
-//		variableDeclarations.define(CC.kc(allPossibleVariableRules));
+		ArrayList<Alternative> allPossibleVariableRules = new ArrayList<>();
+		for ( Element[] declaration : variableDeclarationList ){
+			Alternative alternative = new Alternative(declaration);
+			allPossibleVariableRules.add(alternative);
+		}
 
-		variableDeclarations.define("blabla");
+//		 variableDeclarations ::=  (variable)*
+		variableDeclarations.setAlts(allPossibleVariableRules);
+
+		sectionDataRule.define(sectionData, CC.ks(variableDeclarations));
+
+		// assembly ::= mainProgram variableDeclarations?
+		assembly.define(CC.ks(commentPattern), mainProgram, CC.ks(commentPattern), CC.op(sectionDataRule));
 
 		/**
 		 * START of static definition of 2 parameter rules
 		 */
 		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
-
-//		hexOrDec.define(hexPattern)
-//					.action((Action<Object>) args -> new Token(Token.HEX, args.toString()))
-//				.alt(decPattern)
-//					.action((Action<Object>) args -> new Token(Token.DEC, args.toString()));
 
 		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
 		hexOrDecimalList.add(hex);
@@ -299,8 +309,6 @@ public class CALVISParser {
 			// Register to Register
 			Element[] registerToRegister = new Element[4];
 			//registerToRegister[0] = instructionName;
-//			Grule hello = lang.newGrule();
-//			hello.define(getRegisterElements(sizeInString), comma, getRegisterElements(sizeInString));
 			registerToRegister[1] = getRegisterElements(sizeInString);
 			registerToRegister[2] = comma;
 			registerToRegister[3] = getRegisterElements(sizeInString);
@@ -354,16 +362,12 @@ public class CALVISParser {
 			clToMemory[3] = cl;
 			parameterSpecifications.put("m" + sizeInString + "c", clToMemory);
 		}
-		// CC, Label
-//		Element[] ccLabel = new Element[3];
-//		ccLabel[1] = condition;
-//		ccLabel[2] = justLabel;
-//		parameterSpecifications.put("xl", ccLabel);
+
 		/**
 		 * END
 		 */
-//		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
-//		System.out.println(parameterSpecifications);
+		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
+		System.out.println(parameterSpecifications);
 
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
@@ -444,15 +448,13 @@ public class CALVISParser {
 					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
 						for ( String second : specifications2 ){
-							if ( !(first.contains("m") && second.contains("m")) &&
-									(first.substring(1).equals(second.substring(1)) ||
-										second.equals("i") || second.equals("c") )) {
+							if ( isPermissible(first, second) ) {
 								String resultInstance = first + second;
 								result.add(resultInstance);
 							}
 						}
 					}
-//					System.out.println(result);
+					System.out.println(result);
 
 					for ( String resultInstance : result ){
 						Element[] elements2 = new Element[numParameters];
@@ -585,12 +587,9 @@ public class CALVISParser {
 	 */
 	private String[] expandInstructionParameter(String parameterSpecification){
 		ArrayList<String> parameterList = new ArrayList<>();
-		int maxSize = 0;
-		if ( parameterSpecification.equals("r") || parameterSpecification.equals("m") ) {
-			if (parameterSpecification.equals("r")) {
-				maxSize = RegisterList.MAX_SIZE / 8;
-			}
-			else if (parameterSpecification.equals("m")) {
+		int maxSize = RegisterList.MAX_SIZE / 8;
+		if ( parameterSpecification.matches("[rm]") ) {
+			if (parameterSpecification.equals("m")) {
 				maxSize = Memory.MAX_ADDRESS_SIZE / 8;
 			}
 			for (int i = 1; i < maxSize; i++) {
@@ -605,6 +604,19 @@ public class CALVISParser {
 		String[] result = new String[parameterList.size()];
 		result = parameterList.toArray(result);
 		return result;
+	}
+
+	private boolean isPermissible(String first, String second){
+		if ( first.contains("m") && second.contains("m") ){
+			return false;
+		}
+		if ( first.substring(1).equals(second.substring(1)) ){
+			return true;
+		}
+		if ( second.matches("[ci]") ){
+			return true;
+		}
+		return false;
 	}
 
 	private Element parseOneParameter(String[] specification){
@@ -661,8 +673,9 @@ public class CALVISParser {
 			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
 			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
 
-			String variableTypePattern = "(\\b" + sizeDirectivePrefix + "\\b)"
-					+ "|(\\b" + sizeDirectivePrefix.toUpperCase() + "\\b)";
+			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|"
+					+ sizeDirectivePrefix.toUpperCase() + ")\\b";
+//			System.out.println(variableTypePattern);
 			TokenDef variableType = lang.newToken(variableTypePattern);
 			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
 		}
@@ -761,28 +774,29 @@ public class CALVISParser {
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
 					producedList.get(i).setAction((Action<Object>) arg0 -> {
-//						System.out.println(arg0 + " : " + arg0.getClass());
+						System.out.println(arg0 + " : " + arg0.getClass());
 						if ( arg0 instanceof Token ){
 							return (Token) arg0;
                         }
-						if ( memory.isExisting(arg0.toString()) ){
-							return new Token(Token.MEM, (String) arg0);
-						}
 						if ( registers.isExisting(arg0.toString().toUpperCase()) ){
 							return new Token(Token.REG, (String) arg0);
+						}
+						if ( memory.isExisting(arg0.toString()) ){
+							return new Token(Token.MEM, (String) arg0);
 						}
                         if ( arg0.toString().matches(hexPattern) ){
 							return new Token(Token.HEX, (String) arg0);
 						}
-						if ( arg0.toString().matches("\\b\\d+\\b") ) {
+						if ( arg0.toString().matches(decPattern) ) {
 							return new Token(Token.DEC, (String) arg0);
-						}
-						if ( arg0.toString().matches("[a-zA-Z_][a-zA-Z\\d_]*") ){
-							return new Token(Token.LABEL, (String) arg0);
 						}
 						if ( arg0 instanceof Token[] ){
 							return arg0;
 						}
+//						if ( arg0.toString().matches("[a-zA-Z_][a-zA-Z\\d_]*") ){
+//							return new Token(Token.LABEL, (String) arg0);
+//						}
+
                         return new Token(Token.REG, (String) arg0);
                     });
 				}

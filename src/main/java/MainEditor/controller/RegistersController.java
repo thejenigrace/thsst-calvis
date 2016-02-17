@@ -67,6 +67,8 @@ public class RegistersController extends AssemblyComponent implements Initializa
         tableViewRegister.setItems(items);
         registerName.setComparator(map.comparator());
 
+        tableViewRegister.refresh();
+
         flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
         tableViewFlags1.setItems(flagList1);
     }
