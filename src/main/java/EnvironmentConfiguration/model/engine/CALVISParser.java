@@ -774,7 +774,7 @@ public class CALVISParser {
 				List<Alternative> producedList = osb.getAlts();
 				for (int i = 0; i < producedList.size(); i++){
 					producedList.get(i).setAction((Action<Object>) arg0 -> {
-						System.out.println(arg0 + " : " + arg0.getClass());
+//						System.out.println(arg0 + " : " + arg0.getClass());
 						if ( arg0 instanceof Token ){
 							return (Token) arg0;
                         }

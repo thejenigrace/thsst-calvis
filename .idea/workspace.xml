@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Registers/register_list.csv" afterPath="$PROJECT_DIR$/Registers/register_list.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/model/SimulationState.java" afterPath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/model/SimulationState.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,8 +68,8 @@
       <file leaf-file-name="CALVISParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24528302">
-              <caret line="410" column="23" selection-start-line="410" selection-start-column="23" selection-end-line="410" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.47855917">
+              <caret line="770" column="40" selection-start-line="770" selection-start-column="40" selection-end-line="770" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#prepareMemorySizeDirectives#0;class#CALVISParser#0" expanded="false" />
@@ -1238,7 +1230,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455291768664</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="finalized parser">
+      <created>1455715659112</created>
+      <option name="number" value="00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1455715659112</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1262,7 +1260,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34042552" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30605564" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.295764" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34493193" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.319236" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16717096" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1320,7 +1318,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix File Structure" />
     <MESSAGE value="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa" />
     <MESSAGE value="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa&#10;- Fix File Format of Instructions" />
     <MESSAGE value="- Added ADD Instruction" />
@@ -1345,7 +1342,8 @@
     <MESSAGE value="Remove MenuItem: Jump To, Visualize, &amp; Find" />
     <MESSAGE value="Fix Register &amp; Memory Window" />
     <MESSAGE value="optimize cc instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimize cc instructions" />
+    <MESSAGE value="finalized parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalized parser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1806,8 +1804,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24528302">
-          <caret line="410" column="23" selection-start-line="410" selection-start-column="23" selection-end-line="410" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.47855917">
+          <caret line="770" column="40" selection-start-line="770" selection-start-column="40" selection-end-line="770" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#prepareMemorySizeDirectives#0;class#CALVISParser#0" expanded="false" />
