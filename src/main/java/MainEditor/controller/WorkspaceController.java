@@ -774,7 +774,7 @@ public class WorkspaceController implements Initializable {
         String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);
-        String replacedCodeAreaText = matcher.replaceAll("\n");
+        String replacedCodeAreaText = matcher.replaceAll("\r\n");
         replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
         replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*:\\s*", ": ");
         codeArea.replaceText(replacedCodeAreaText);

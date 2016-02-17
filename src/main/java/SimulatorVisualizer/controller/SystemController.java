@@ -63,7 +63,7 @@ public class SystemController {
             }
         }
         else {
-            for (AssemblyComponent a : observerList) {
+	        for (AssemblyComponent a : observerList) {
                 a.update(null, lineNumber);
             }
         }
@@ -141,11 +141,11 @@ public class SystemController {
             if ( state == SimulationState.PAUSE ){
 	            //System.out.println("previous");
 	            count--;
-	            if ( count >= 0 ) {
+	            if ( count > 0 ) {
 		            //1. Revert Environment back by one pop
 		            String[][] registerStringArray = registerStackMap.get(count);
 		            for (int i = 0; i < registerStringArray.length; i++) {
-			            //System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
+//			            System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
 			            //1.2 Set registerList with values from pop
 			            this.registerList.set(registerStringArray[i][0], registerStringArray[i][1]);
 		            }
@@ -171,6 +171,7 @@ public class SystemController {
 	            }
 	            else {
 		            end();
+		            clear();
 	            }
             }
         }
@@ -193,10 +194,11 @@ public class SystemController {
 		workspaceController.enableCodeArea(false);
 		thread = new Thread(){
 			public void run(){
-				while ((state == SimulationState.PLAY) && executionMap.containsKey(registerList.getInstructionPointer())) {
-					executeOneLine();
+				while ((state == SimulationState.PLAY) &&
+						executionMap.containsKey(registerList.getInstructionPointer())) {
 					try {
 						Thread.sleep(SIMULATION_DELAY);
+						executeOneLine();
 					} catch (InterruptedException e) {
 						System.out.println("Simulation Thread interrupted");
 					}
@@ -267,7 +269,7 @@ public class SystemController {
 				    }
 		    );
 	    }
-	    push();
+//	    push();
     }
 
 	private void push(){
@@ -300,8 +302,8 @@ public class SystemController {
 		this.memoryStackMap.put(count, memoryArray);
 
 		//System.out.println(registerStringArray);
-//		for (int k = 0; k < registerStringArray.length; k++) {
-//			System.out.println(registerStringArray[k][0] + " : " + registerStringArray[k][1]);
+//		for (int n = 0; n < registerStringArray.length; n++) {
+//			System.out.println(registerStringArray[n][0] + " : " + registerStringArray[n][1]);
 //		}
 	}
 
