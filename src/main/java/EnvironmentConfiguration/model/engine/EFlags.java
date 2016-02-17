@@ -28,6 +28,7 @@ public class EFlags extends Register {
 		this.flagUIs.add(new FlagUI("Parity", getParityFlag()));
 		this.flagUIs.add(new FlagUI("Auxiliary", getAuxiliaryFlag()));
 		this.flagUIs.add(new FlagUI("Direction", getDirectionFlag()));
+		this.flagUIs.add(new FlagUI("Interrupt", getInterruptFlag()));
 	}
 
 	private void setFlagUI(String name, String value){
@@ -112,6 +113,8 @@ public class EFlags extends Register {
 	public String getDirectionFlag(){
 		return getFlagIndex(10) + "";
 	}
+
+	public String getInterruptFlag() { return getFlagIndex(9) + ""; }
 
 	public void setCarryFlag(String value) {
 		setFlagIndex(0, value);

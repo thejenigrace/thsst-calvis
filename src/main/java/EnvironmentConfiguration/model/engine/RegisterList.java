@@ -376,6 +376,13 @@ public class RegisterList {
 			this.map.get(s).initializeValue();
 		}
 		flags.initializeValue();
+
+        // initialize childMap
+		for(String s: this.childMap.keySet()) {
+            for(String t: this.childMap.get(s).keySet()) {
+                this.childMap.get(s).get(t).initializeValue();
+            }
+        }
 	}
 
 	public void print(){

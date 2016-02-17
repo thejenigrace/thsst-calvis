@@ -83,6 +83,10 @@
         }
 	}
 
-    execute(des, src, registers, memory){
+    execute(des, src, registers, memory) {
 		System.out.println("imul 2 parameters");
 	}
+
+	execute(des, src1, src2, registers, memory) {
+			System.out.println("imul 3 paraments");
+			}
