@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/imul.bsh.java" afterPath="$PROJECT_DIR$/Instructions/imul.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,125 +63,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="imul.bsh.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Instructions/imul.bsh.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6953456">
-                  <caret line="91" column="48" selection-start-line="91" selection-start-column="48" selection-end-line="91" selection-end-column="48" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="RegisterList.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="265" column="5" selection-start-line="265" selection-start-column="5" selection-end-line="265" selection-end-column="5" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="registers.fxml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/registers.fxml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-1.6603774">
-                  <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-                  <folding />
-                </state>
-              </provider>
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding>
-                    <marker date="1455715832000" expanded="true" signature="1551:1608" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1729:1827" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1769:1812" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1872:3340" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1897:3325" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1911:3311" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1935:3296" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1958:3271" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="1977:2739" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="2006:2217" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="2246:2446" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="2475:2719" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="2758:3247" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="2787:2998" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3027:3227" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3378:3436" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3475:4235" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3544:4235" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3564:4235" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3579:4235" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3672:4155" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3754:4137" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3824:4116" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="3881:4090" placeholder="..." />
-                    <marker date="1455715832000" expanded="true" signature="121254:121342" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="thsst-calvis.iml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/thsst-calvis.iml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="misc.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="mov.bsh.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Instructions/mov.bsh.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.13681242">
-                  <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -668,86 +546,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fxml" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Instructions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -1062,12 +860,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00007" summary="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa">
-      <created>1453866757168</created>
-      <option name="number" value="00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1453866757168</updated>
-    </task>
     <task id="LOCAL-00008" summary="- Fix Menu Buttons&#10;- Added ADD Instruction&#10;- Fix Converter for Binary to Hex vice versa&#10;- Fix File Format of Instructions">
       <created>1453867006540</created>
       <option name="number" value="00008" />
@@ -1356,7 +1148,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455703915887</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Fix IMUL Instruction">
+      <created>1455715867618</created>
+      <option name="number" value="00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1455715867618</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1381,7 +1179,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1393,7 +1191,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3880597" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.319236" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20457797" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20457797" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24248926" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1448,7 +1246,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Added MUL, IMUL, DIV Instructions" />
-    <MESSAGE value="Fix IMUL Instruction" />
     <MESSAGE value="Added IDIV Instruction" />
     <MESSAGE value="Added DEC &amp; NEG Instructions" />
     <MESSAGE value="Fix Instructions &amp; Calculator" />
@@ -1472,7 +1269,8 @@
     <MESSAGE value="Fix Issue: CodeArea &amp; HideToolbar Scrolling" />
     <MESSAGE value="FIX:&#10;- Reset for Register Dropdown UI&#10;- Create Interrupt Flag UI" />
     <MESSAGE value="Added Label Column into Memory Window" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Label Column into Memory Window" />
+    <MESSAGE value="Fix IMUL Instruction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix IMUL Instruction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1864,25 +1662,25 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+    <entry file="file://$PROJECT_DIR$/Instructions/imul.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+        <state vertical-scroll-proportion="2.3102963">
+          <caret line="91" column="48" selection-start-line="91" selection-start-column="48" selection-end-line="91" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/mov.bsh.java">
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13681242">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.060648803">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.53596616">
           <caret line="265" column="5" selection-start-line="265" selection-start-column="5" selection-end-line="265" selection-end-column="5" />
           <folding />
         </state>
@@ -1890,7 +1688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/registers.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6603774">
+        <state vertical-scroll-proportion="0.13414635">
           <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
           <folding />
         </state>
@@ -1903,33 +1701,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1455715832000" expanded="true" signature="1551:1608" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1729:1827" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1769:1812" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1872:3340" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1897:3325" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1911:3311" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1935:3296" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1958:3271" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="1977:2739" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="2006:2217" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="2246:2446" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="2475:2719" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="2758:3247" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="2787:2998" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3027:3227" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3378:3436" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3475:4235" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3544:4235" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3564:4235" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3579:4235" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3672:4155" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3754:4137" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3824:4116" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="3881:4090" placeholder="..." />
-            <marker date="1455715832000" expanded="true" signature="121254:121342" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1949,10 +1721,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/imul.bsh.java">
+    <entry file="file://$PROJECT_DIR$/Instructions/mov.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6953456">
-          <caret line="91" column="48" selection-start-line="91" selection-start-column="48" selection-end-line="91" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.13681242">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
           <folding />
         </state>
       </provider>
