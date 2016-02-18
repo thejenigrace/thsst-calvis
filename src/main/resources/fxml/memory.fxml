@@ -6,7 +6,7 @@
 
 <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.MemoryController">
     <columns>
-      <TableColumn prefWidth="75.0" text="Label" />
+        <!--<TableColumn prefWidth="75.0" text="Label" />-->
         <TableColumn fx:id="memoryAddress" maxWidth="100" minWidth="100" text="Address" />
         <TableColumn fx:id="memoryRepresentation" sortable="false" text="Value" />
     </columns>
