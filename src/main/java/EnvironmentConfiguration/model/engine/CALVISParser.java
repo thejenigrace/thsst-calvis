@@ -454,7 +454,7 @@ public class CALVISParser {
 							}
 						}
 					}
-//					System.out.println(result);
+					System.out.println(result);
 
 					for ( String resultInstance : result ){
 						Element[] elements2 = new Element[numParameters];

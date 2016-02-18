@@ -302,7 +302,7 @@ public class RegisterList {
 //				System.out.println("newValue = " + newValue.toUpperCase());
 
                 TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
-                for(int i = 0; i < temp.size(); i++) {
+//                for(int i = 0; i < temp.size(); i++) {
                     switch (register[SOURCE]) {
                         case "EAX": childMap.get(register[SOURCE]).get("AX").setValue(get16BitHexString(newValue.toUpperCase()));
                             childMap.get(register[SOURCE]).get("AH").setValue(get8BitHexString('H', newValue.toUpperCase()));
@@ -322,7 +322,7 @@ public class RegisterList {
                             break;
                         default: System.out.println("NONE");
                     }
-                }
+//                }
             }
 		}
 		else {

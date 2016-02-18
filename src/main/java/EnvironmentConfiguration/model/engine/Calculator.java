@@ -124,16 +124,24 @@ public class Calculator {
 
 	public long convertToSignedInteger(BigInteger value, int size) {
 		long result = Long.parseLong(value.toString());
-		String str = value.toString(2);
+		String strValue = value.toString(2);
 
-		int missingZeroes = size - str.length();
+		int missingZeroes = size - strValue.length();
+
+		System.out.println("size = " + size);
+		System.out.println("original strValue = " + strValue);
 
 		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
-			str = "0" + str;
+//			if(str.charAt(0) == '0')
+				strValue = "0" + strValue;
+//			else if(str.charAt(0) == '1')
+//				str = "1" + str;
 		}
 
-		if(str.charAt(0) == '1') {
+		System.out.println("zero extend strValue = " + strValue);
+
+		if(strValue.charAt(0) == '1') {
 			BigInteger ry = value.subtract(BigInteger.ONE);
 
 //            System.out.println("ry = " + ry.toString(2));
@@ -177,10 +185,9 @@ public class Calculator {
 		return sb.reverse().toString();
 	}
 
-	public String[] cutToCertainSize(String value, Token src) {
+	public String[] cutToCertainSize(String value, int size) {
 		BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(16);
-		int size = registers.getHexSize(src);
 		System.out.println("c.size = " + size);
 		int missingZeroes = size * 2 - val.length();
 
