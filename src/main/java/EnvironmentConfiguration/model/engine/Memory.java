@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -16,6 +17,9 @@ import java.util.*;
 
 public class Memory {
 
+	public static int MAX_ADDRESS_SIZE;
+	public static int DEFAULT_RELATIVE_SIZE;
+
 	static final int SIZE_DIRECTIVE_NAME = 0;
 	static final int SIZE_DIRECTIVE_PREFIX = 1;
 	static final int SIZE_DIRECTIVE_SIZE = 2;
@@ -23,15 +27,16 @@ public class Memory {
 	private TreeMap<String, String> mem;
 	private ArrayList<String[]> lookup;
 	private HashMap<String, String> labelMap;
-
-	public static int MAX_ADDRESS_SIZE;
-	public static int DEFAULT_RELATIVE_SIZE;
+	private HashMap<String, String> variableMap;
+	private String variablePointer;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
         this.MAX_ADDRESS_SIZE = bitSize;
 		this.DEFAULT_RELATIVE_SIZE = bitEndLength;
         this.mem = new TreeMap<>(Collections.reverseOrder());
 		this.labelMap = new HashMap<>();
+		this.variableMap = new HashMap<>();
+		resetVariablePointer();
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
@@ -78,8 +83,23 @@ public class Memory {
         }
 	}
 
+	private void resetVariablePointer() {
+		this.variablePointer = MemoryAddressCalculator.extend("4000", Memory.MAX_ADDRESS_SIZE, "0");
+	}
+
 	public Map getMemoryMap(){
 		return this.mem;
+	}
+
+	public String getVariablePointer() {
+		return variablePointer;
+	}
+
+	public void incrementVariablePointer(int prefixSize) {
+		int byteOffset = prefixSize / 8; // byte addressable memory
+		Integer startingAddress = Integer.parseInt(variablePointer, 16);
+		startingAddress += byteOffset;
+		variablePointer = reformatAddress(Integer.toHexString(startingAddress));
 	}
 	
 	public static String reformatAddress(String add) {
@@ -98,17 +118,10 @@ public class Memory {
 		// des contains our offset.
 		String desValue = des.getValue();
 		String[] memoryArray = desValue.split("/");
-		String sizeDirective = memoryArray[0];
+//		String sizeDirective = memoryArray[0];
 		String baseAddress = memoryArray[1];
 
-		int offset = 0; //default offset = 0;
-		for (String[] x : this.lookup){
-            if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ){
-                offset = Integer.valueOf(x[SIZE_DIRECTIVE_SIZE]);
-                break;
-            }
-        }
-
+		int offset = getBitSize(des);
 		String reformattedValue = MemoryAddressCalculator.extend(value,offset,"0");
 		write(baseAddress, reformattedValue, offset);
 	}
@@ -118,13 +131,14 @@ public class Memory {
 		if ( baseAddress.contains("/") ){
 			memoryBaseAddress = baseAddress.split("/")[1];
 		}
-
 		if ( this.mem.containsKey(memoryBaseAddress)){
 			Integer inc;
 			inc = Integer.parseInt(memoryBaseAddress, 16);
 			int offsetHex = offset/4;
-			//System.out.println("writing value: " + value);
 			value = value.toUpperCase();
+			if ( value.length() > offsetHex ){
+				throw new MemoryWriteException(baseAddress, value);
+			}
 			for ( int i = 0; i < offsetHex / 2; i++ ){
 				String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
 				if (this.mem.containsKey(succeedingAddress)) {
@@ -221,6 +235,9 @@ public class Memory {
 			String address = keys.next();
 			this.mem.put(address, "" + address.charAt(address.length()-1) + address.charAt(address.length()-1));
 		}
+		this.labelMap.clear();
+		this.variableMap.clear();
+		resetVariablePointer();
 	}
 
 	public Iterator<String[]> getLookup() {
@@ -248,7 +265,7 @@ public class Memory {
 			key = checkSizeDirective.split("/")[0];
 		}
 
-		String[] arr = find(key);
+		String[] arr = find(key, Memory.SIZE_DIRECTIVE_NAME);
 		if ( arr != null ){
 			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
 		}
@@ -259,13 +276,26 @@ public class Memory {
 		return getBitSize(a) / 4;
 	}
 
-	public String[] find(String sizeDirective){
+	public String[] find(String sizeDirective, int index){
 		for (String[] x : this.lookup){
-			if ( x[Memory.SIZE_DIRECTIVE_NAME].equalsIgnoreCase(sizeDirective) ){
+			if ( x[index].equalsIgnoreCase(sizeDirective) ){
 				return x;
 			}
 		}
 		return null;
+	}
+
+	public int getPrefixBitSize(Token prefix) {
+		String key = prefix.getValue();
+		String[] arr = find(key, Memory.SIZE_DIRECTIVE_PREFIX);
+		if ( arr != null ){
+			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
+		}
+		return 0;
+	}
+
+	public int getPrefixHexSize(Token prefix) {
+		return getPrefixBitSize(prefix) / 4;
 	}
 
 	public String getFromLabelMap(String key) throws NullPointerException {
@@ -281,6 +311,23 @@ public class Memory {
 		labelMap.put(key, address);
 	}
 
+	public String getFromVariableMap(String key) throws NullPointerException {
+		if ( variableMap.get(key) != null ){
+			return variableMap.get(key);
+		} else {
+			throw new NullPointerException("Variable " + key + " does not exist.");
+		}
+	}
+
+	public void putToVariableMap(String key, String size) throws DuplicateVariableException {
+		if ( variableMap.containsKey(key) ){
+			throw new DuplicateVariableException(key);
+		} else {
+			variableMap.put(key, variablePointer);
+//			variablePointer.
+		}
+	}
+
 	public static void setDefaultRelativeSize(int defaultRelativeSize) {
 		DEFAULT_RELATIVE_SIZE = defaultRelativeSize;
 	}
@@ -291,6 +338,10 @@ public class Memory {
 			result = result.split("/")[1];
 		}
 		return result;
+	}
+
+	public boolean containsLabel(String label) {
+		return labelMap.containsKey(label);
 	}
 
 }

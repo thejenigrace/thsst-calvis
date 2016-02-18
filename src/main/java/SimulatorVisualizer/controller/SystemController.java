@@ -5,6 +5,7 @@ import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
+import com.github.pfmiles.dropincc.DropinccException;
 import javafx.application.Platform;
 
 import java.util.*;
@@ -147,7 +148,15 @@ public class SystemController {
 		            for (int i = 0; i < registerStringArray.length; i++) {
 //			            System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
 			            //1.2 Set registerList with values from pop
-			            this.registerList.set(registerStringArray[i][0], registerStringArray[i][1]);
+			            try {
+				            this.registerList.set(registerStringArray[i][0], registerStringArray[i][1]);
+			            } catch (DataTypeMismatchException e) {
+				            try {
+					            workspaceController.handleErrorLoggerTab(e);
+				            } catch (Exception e1) {
+					            e1.printStackTrace();
+				            }
+			            }
 		            }
 		            EFlags flags = this.registerList.getEFlags();
 		            String flagsValue = flagsStackMap.get(count);
@@ -181,7 +190,15 @@ public class SystemController {
         if ( executionMap != null ) {
             if ( state == SimulationState.PAUSE ){
                 if ( executionMap.containsKey(registerList.getInstructionPointer()) ) {
-                    executeOneLine();
+	                try {
+		                executeOneLine();
+	                } catch (DataTypeMismatchException e) {
+		                try {
+			                workspaceController.handleErrorLoggerTab(e);
+		                } catch (Exception e1) {
+			                e1.printStackTrace();
+		                }
+	                }
                 }
                 else {
                     end();
@@ -201,6 +218,12 @@ public class SystemController {
 						executeOneLine();
 					} catch (InterruptedException e) {
 						System.out.println("Simulation Thread interrupted");
+					} catch (DataTypeMismatchException e) {
+						try {
+							workspaceController.handleErrorLoggerTab(e);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 				if (state == SimulationState.PLAY) {
@@ -211,7 +234,7 @@ public class SystemController {
 		thread.start();
 	}
 
-	private void executeOneLine(){
+	private void executeOneLine() throws DataTypeMismatchException {
 		// 1. Retrieve EIP value and store it to @var currentLine
 		String currentLine = registerList.getInstructionPointer();
 		//System.out.println(currentLine);
@@ -255,6 +278,26 @@ public class SystemController {
 	    try {
 		    this.executionMap = parser.parse(code);
 	    } catch (Exception e){
+		    if ( e instanceof DuplicateLabelException ){
+			    DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
+			    String[] codeLines = code.split("\n");
+			    int labelOccurrence = 0;
+			    for (int i = 0; i < codeLines.length; i++) {
+				    if ( codeLines[i].contains(duplicateLabelException.getLabel()) ){
+					    if ( !codeLines[i].matches("[;].*" + duplicateLabelException.getLabel()) ){
+						    labelOccurrence++;
+					    }
+				    }
+				    if ( labelOccurrence == 2 ){
+					    duplicateLabelException.setLineNumber(i+1);
+					    break;
+				    }
+			    }
+		    }
+//		    if ( e instanceof DropinccException ){
+//			    DropinccException dropException = (DropinccException) e;
+//		    }
+
 		    e.printStackTrace();
 		    Platform.runLater(
 				    new Thread() {
