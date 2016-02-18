@@ -1,11 +1,24 @@
 execute(src, registers, memory) {
-        if ( src.isRegister() ){
-            System.out.println("IDIV source register");
+//        if ( src.isRegister() ){
+//            System.out.println("IDIV source register");
 
-            String x = registers.get(src);
+//            String x = registers.get(src);
+            int srcBitSize;
+            String x = "";
+            EFlags ef=registers.getEFlags();
             Calculator c = new Calculator(registers, memory);
+            if ( src.isRegister() ){
+                System.out.println("DIV src = register");
+                srcBitSize = registers.getBitSize(src);
+                x = registers.get(src);
+            }else if( src.isMemory() ){
+                System.out.println("DIV src = memory");
+                srcBitSize = memory.getBitSize(src);
+                x = memory.read(src, srcBitSize);
+            }
 
-            if ( registers.getBitSize(src) == 8 ){
+
+            if ( srcBitSize == 8 ){
                 BigInteger biX = new BigInteger(x, 16);
                 BigInteger biY = new BigInteger(registers.get("AX"), 16);
 
@@ -32,7 +45,7 @@ execute(src, registers, memory) {
 
                 registers.set("AL", fix1);
                 registers.set("AH", fix2);
-            } else if ( registers.getBitSize(src) == 16 ){
+            } else if ( srcBitSize == 16 ){
                 BigInteger biX = new BigInteger(x, 16);
                 String y = registers.get("DX") + registers.get("AX");
                 BigInteger biY = new BigInteger(y, 16);
@@ -60,7 +73,7 @@ execute(src, registers, memory) {
 
                 registers.set("AX", fix1);
                 registers.set("DX", fix2);
-            } else if ( registers.getBitSize(src) == 32 ){
+            } else if ( srcBitSize == 32 ){
                 BigInteger biX = new BigInteger(x, 16);
                 String y = registers.get("EDX") + registers.get("EAX");
                 BigInteger biY = new BigInteger(y, 16);
@@ -89,5 +102,5 @@ execute(src, registers, memory) {
                 registers.set("EAX", fix1);
                 registers.set("EDX", fix2);
             }
-        }
+//        }
  }
