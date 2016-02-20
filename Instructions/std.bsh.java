@@ -1,7 +1,5 @@
 execute(registers, memory) {
-  System.out.println("STD");
+    EFlags flags = registers.getEFlags();
 
-  EFlags flags = registers.getEFlags();
-
-  flags.setDirectionFlag("1");
+    flags.setDirectionFlag("1");
 }

@@ -1,5 +1,4 @@
 execute(registers, memory) {
-  System.out.println("CWD");
   Calculator calculator = new Calculator(registers, memory);
 
   Token tokenAX = new Token(Token.REG, "AX");

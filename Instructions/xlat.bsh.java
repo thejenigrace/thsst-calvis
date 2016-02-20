@@ -18,7 +18,6 @@ execute(registers, memory) {
 
 	String hexStringResult = result.toString(16);
 	hexStringResult = memory.reformatAddress(hexStringResult);
-	System.out.println("XLAT result: " + hexStringResult);
 
 	// memory byte to AL
 	hexStringResult = memory.read(hexStringResult, 8);

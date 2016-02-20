@@ -1,5 +1,4 @@
 execute(registers, memory) {
-  System.out.println("CBW");
   Calculator calculator = new Calculator(registers, memory);
 
   Token tokenAL = new Token(Token.REG, "AL");
