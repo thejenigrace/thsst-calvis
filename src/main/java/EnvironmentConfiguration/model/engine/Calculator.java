@@ -113,7 +113,7 @@ public class Calculator {
 			}
 		}
 		else if (des.isMemory()){
-			int missingZeroes = memory.getBitSize(des) - val.length();
+			int missingZeroes = memory.getHexSize(des) - val.length();
 
 			//zero extend
 			for(int k = 0; k < missingZeroes; k++){

@@ -1,23 +1,13 @@
 package EnvironmentConfiguration.model.engine;
 
-import com.github.pfmiles.dropincc.Action;
-import com.github.pfmiles.dropincc.CC;
-import com.github.pfmiles.dropincc.DropinccException;
-import com.github.pfmiles.dropincc.Element;
-import com.github.pfmiles.dropincc.Exe;
-import com.github.pfmiles.dropincc.Grule;
-import com.github.pfmiles.dropincc.Lang;
-import com.github.pfmiles.dropincc.TokenDef;
+import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CALVISParser {
 
@@ -34,32 +24,31 @@ public class CALVISParser {
 	private HashMap<String, Grule> memorySizeDirectives;
 
 	private HashMap<String, CALVISInstruction> mappedInstruction;
+	private ArrayList<Exception> exceptions;
 	private int lineNumber;
 
-	private final String hexPattern = "\\b([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
-	private final String decPattern = "\\b(\\d+_[dD])\\b";
+	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
+	private final String decPattern = "\\b(\\d+)\\b";
 	private final String commentPattern = "(;.*)";
-	private final String[] conditionsArray = {  "A","NBE","AE","NB","B","NAE",
-												"BE","NA","G","NLE","GE","NL",
-												"L","NGE","LE","NG","E","Z",
-												"NE","NZ","P","PE","NP","PO",
-												"O","NO","C","NC","S","NS" };
-	private final String[] conditionalInstructions = {"j", "set", "cmov"};
-	private String conditionsRegEx;
+	private final String labelPattern = "[a-zA-Z_][a-zA-Z\\d_]*";
 
 	private TokenDef hex;
 	private TokenDef dec;
+
 	private TokenDef cl;
 
 	private Grule justLabel;
 	private Grule label;
+
+//	private Grule hexOrDecimal;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
 		this.registers = registers;
 		this.memory = memory;
 		this.mappedInstruction = new HashMap<>();
-		this.lineNumber = 0;		
+		this.exceptions = new ArrayList<>();
+		this.lineNumber = 0;
 		this.lang = new Lang("CALVIS");
 
 		Grule assembly = lang.newGrule();
@@ -75,6 +64,7 @@ public class CALVISParser {
 
 		label = lang.newGrule();
 		justLabel = lang.newGrule();
+//		hexOrDecimal = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
@@ -84,9 +74,7 @@ public class CALVISParser {
 		TokenDef minus = lang.newToken("\\-");
 		TokenDef times = lang.newToken("\\*");
 		TokenDef sectionData = lang.newToken("SECTION .DATA");
-
-		hex = lang.newToken(hexPattern);
-		dec = lang.newToken(decPattern);
+		TokenDef stringLiteral = lang.newToken("\"([^\"\\\\]|\\\\.)*\"");
 
 		/** The succeeding code now focuses on building the parser
 		  * by connecting the grammar rules (Grule) and tokens (TokenDef)
@@ -97,14 +85,14 @@ public class CALVISParser {
 		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
 
-		conditionsRegEx = String.join("|", conditionsArray);
-		conditionsRegEx += "|" + String.join("|", conditionsArray).toLowerCase();
+		hex = lang.newToken(hexPattern);
+		dec = lang.newToken(decPattern);
 
 		// start ::= assembly $
 		lang.defineGrule(assembly, CC.EOF);
 
-		justLabel.define("[a-zA-Z_][a-zA-Z\\d_]*")
-				.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
+		justLabel.define(labelPattern)
+			.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
 
 //		// LABEL ::= identifier ":"
 		label.define(justLabel, colon);
@@ -122,102 +110,108 @@ public class CALVISParser {
 
 		//memoryExpression ::= base + index * scale + displacement
 		memoryExpression.define(memoryBase, CC.op(plus, memoryIndex), CC.op(plus.or(minus), memoryDisplacement))
-		.action((Action<Object[]>) matched -> {
-			ArrayList<Token> tokenArrayList = new ArrayList<>();
-			for (Object obj : matched){
-				if ( obj != null){
-					System.out.println("memory expression rule: " + obj);
-					if ( obj instanceof Token ) {
-						tokenArrayList.add((Token) obj);
-					}
-					else if (obj instanceof Object[]){
-						Object[] objects = (Object[]) obj;
-						/** This object[] is always:
-						 * object[0] = "+" or "-"
-						 * object[1] = Token
-						*/
-						Token t = (Token) objects[1];
-						t.setValue(objects[0].toString() + " " + t.getValue());
-						tokenArrayList.add(t);
+			.action((Action<Object[]>) matched -> {
+				ArrayList<Token> tokenArrayList = new ArrayList<>();
+				for (Object obj : matched){
+					if ( obj != null){
+						System.out.println("memory expression rule: " + obj);
+						if ( obj instanceof Token ) {
+							tokenArrayList.add((Token) obj);
+						}
+						else if (obj instanceof Object[]){
+							Object[] objects = (Object[]) obj;
+							/** This object[] is always:
+							 * object[0] = "+" or "-"
+							 * object[1] = Token
+							*/
+							Token t = (Token) objects[1];
+							t.setValue(objects[0].toString() + " " + t.getValue());
+							tokenArrayList.add(t);
+						}
 					}
 				}
-			}
-			// Perform address computations within each element of the object[] matched
-			Token[] tokens = new Token[tokenArrayList.size()];
-			tokens = tokenArrayList.toArray(tokens);
-			return tokens;
-		});
+				// Perform address computations within each element of the object[] matched
+				Token[] tokens = new Token[tokenArrayList.size()];
+				tokens = tokenArrayList.toArray(tokens);
+				return tokens;
+			});
 
 		memoryBase.define(getAllMemoryAddressableRegisters())
-					.action((Action<Object>) matched -> {
-						Token t = (Token) matched;
-						System.out.println("memory base rule: " + t.getValue() + " :: " + t.getType());
-						return t;
-					})
-				.alt(hex)
-					.action((Action<Object>) matched -> {
-						System.out.println("memory base rule: " + matched);
-						return new Token(Token.HEX, matched.toString());
-					})
-				.alt(dec)
-					.action((Action<Object>) matched -> {
-						System.out.println("memory base rule: " + matched);
-						return new Token(Token.DEC, matched.toString());
-					});
+			.action((Action<Object>) matched -> {
+				Token t = (Token) matched;
+				System.out.println("memory base rule: " + t.getValue() + " :: " + t.getType());
+				return t;
+			})
+			.alt(hex)
+				.action((Action<Object>) matched -> {
+					System.out.println("memory base rule: " + matched);
+					return new Token(Token.HEX, matched.toString());
+				})
+			.alt(dec)
+				.action((Action<Object>) matched -> {
+					System.out.println("memory base rule: " + matched);
+					return new Token(Token.DEC, matched.toString());
+				})
+			.alt(justLabel)
+				.action((Action<Object>) matched -> {
+					Token label = (Token) matched;
+					System.out.println("memory base rule: " + label.getValue());
+					return matched;
+				});
 
 		memoryIndex.define(getMemoryIndexScalableElements(), CC.op(times, dec))
-						.action((Action<Object[]>) matched -> {
-							String result = "";
-							for (Object obj : matched){
-								if (obj != null){
-									System.out.println("memory index rule: " +obj);
-									if ( obj instanceof Token ){
-										result += ((Token) obj).getValue() + " ";
-									}
-									else if ( obj instanceof  Object[] ){
-										Object[] objects = (Object []) obj;
-										if ( !objects[1].toString().matches("[1248]") ){
-											throw new DropinccException("Invalid scale value");
-										}
-										String optionalTimes = objects[0] + " " + objects[1];
-										result += optionalTimes;
-									}
-								}
+			.action((Action<Object[]>) matched -> {
+				String result = "";
+				for (Object obj : matched){
+					if (obj != null){
+						System.out.println("memory index rule: " +obj);
+						if ( obj instanceof Token ){
+							result += ((Token) obj).getValue() + " ";
+						}
+						else if ( obj instanceof  Object[] ){
+							Object[] objects = (Object []) obj;
+							if ( !objects[1].toString().matches("[1248]") ){
+								throw new DropinccException("Invalid scale value");
 							}
-							return new Token(Token.REG, result);
-						})
-					.alt(CC.op(dec, times), getMemoryIndexScalableElements())
-						.action((Action<Object[]>) matched -> {
-							String result = "";
-							for (Object obj : matched){
-								if (obj != null){
-									System.out.println("memory index rule: " +obj);
-									if ( obj instanceof Token ){
-										result += ((Token) obj).getValue();
-									}
-									else if ( obj instanceof  Object[] ){
-										Object[] objects = (Object []) obj;
-										if ( !objects[0].toString().matches("[1248]") ){
-											throw new DropinccException("Invalid scale value");
-										}
-										String optionalTimes = objects[0] + " " + objects[1] + " ";
-										result += optionalTimes;
-									}
-								}
+							String optionalTimes = objects[0] + " " + objects[1];
+								result += optionalTimes;
+						}
+					}
+				}
+				return new Token(Token.REG, result);
+			})
+			.alt(CC.op(dec, times), getMemoryIndexScalableElements())
+				.action((Action<Object[]>) matched -> {
+					String result = "";
+					for (Object obj : matched){
+						if (obj != null){
+							System.out.println("memory index rule: " +obj);
+							if ( obj instanceof Token ){
+								result += ((Token) obj).getValue();
 							}
-							return new Token(Token.REG, result);
-                    	});
+							else if ( obj instanceof  Object[] ){
+								Object[] objects = (Object []) obj;
+								if ( !objects[0].toString().matches("[1248]") ){
+									throw new DropinccException("Invalid scale value");
+								}
+								String optionalTimes = objects[0] + " " + objects[1] + " ";
+								result += optionalTimes;
+							}
+						}
+					}
+					return new Token(Token.REG, result);
+                });
 
 		memoryDisplacement.define(hex)
-					.action((Action<Object>) matched -> {
-						System.out.println("memory displacement rule: " + matched);
-						return new Token(Token.HEX, matched.toString());
-					})
-				.alt(dec)
-					.action((Action<Object>) matched -> {
-						System.out.println("memory displacement rule: " + matched);
-						return new Token(Token.DEC, matched.toString());
-					});
+			.action((Action<Object>) matched -> {
+				System.out.println("memory displacement rule: " + matched);
+				return new Token(Token.HEX, matched.toString());
+			})
+			.alt(dec)
+				.action((Action<Object>) matched -> {
+					System.out.println("memory displacement rule: " + matched);
+					return new Token(Token.DEC, matched.toString());
+				});
 
 		/**
 		 *  Prepare memory size directive addressing mode
@@ -225,66 +219,98 @@ public class CALVISParser {
 		 */
 		this.memorySizeDirectives = new HashMap<>();
 
-		ArrayList<Element[]> variableDeclarationList = new ArrayList<>();
+//		hexOrDecimal.define(hexPattern)
+//			.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
+//			.alt(decPattern)
+//			.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
+
+		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
+		hexOrDecimalList.add(hex);
+		hexOrDecimalList.add(dec);
+		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
 
 		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
-			/**
-			 * memory addressing mode with size directives
-			 */
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
 			Grule sizeDirectiveInstance = lang.newGrule();
 			sizeDirectiveInstance.define(getMemoryElement(sizeInString), memoryAddressingMode)
-					.action((Action<Object[]>) matched -> {
-						ArrayList<Token> tokenArrayList = new ArrayList<>();
-						for ( Object obj : matched ){
-							if ( obj instanceof String ){
-								String sizeDirectiveName = (String) obj;
-								Token sizeDirective = new Token(Token.MEM, sizeDirectiveName);
-								tokenArrayList.add(sizeDirective);
-							}
-							else if ( obj instanceof Token[] ){
-								Token[] tokens = (Token[]) obj;
-								for (int k = 0; k < tokens.length; k++) {
-									tokenArrayList.add(tokens[k]);
-								}
+				.action((Action<Object[]>) matched -> {
+					ArrayList<Token> tokenArrayList = new ArrayList<>();
+					for ( Object obj : matched ){
+						if ( obj instanceof String ){
+							String sizeDirectiveName = (String) obj;
+							Token sizeDirective = new Token(Token.MEM, sizeDirectiveName);
+							tokenArrayList.add(sizeDirective);
+						}
+						else if ( obj instanceof Token[] ){
+							Token[] tokens = (Token[]) obj;
+							for (int k = 0; k < tokens.length; k++) {
+								tokenArrayList.add(tokens[k]);
 							}
 						}
-						Token[] appendedTokens = new Token[tokenArrayList.size()];
-						appendedTokens = tokenArrayList.toArray(appendedTokens);
-						return appendedTokens;
-					});
+					}
+					Token[] appendedTokens = new Token[tokenArrayList.size()];
+					appendedTokens = tokenArrayList.toArray(appendedTokens);
+					return appendedTokens;
+				});
 
 			this.memorySizeDirectives.put(sizeInString, sizeDirectiveInstance);
-
-			/**
-			 * variable declaration per variable type
-			 * db, dw, dd, ...
-			 */
-			// variable ::= <identifier> d<?> value
-			Element[] variableDeclaration = new Element[2];
-			variableDeclaration[0] = justLabel;
-			variableDeclaration[1] = getVariableElement(sizeInString);
-//			variableDeclaration[2] = differentHexRules;
-
-			variableDeclarationList.add(variableDeclaration);
-
-//			Grule variableDeclaration = lang.newGrule();
-//			variableDeclaration.define(justLabel,
-//					getVariableElement(sizeInString), hex); //"[0-9a-fA-F]{1," + size.intValue()/4 + "}");
-//			variableDeclarationList.add(variableDeclaration);
-
-
 		}
 
-		ArrayList<Alternative> allPossibleVariableRules = new ArrayList<>();
-		for ( Element[] declaration : variableDeclarationList ){
-			Alternative alternative = new Alternative(declaration);
-			allPossibleVariableRules.add(alternative);
-		}
+		/**
+		 * variable declaration per variable type
+		 * db, dw, dd, ...
+		 */
+//		variableDeclarations ::=  (variable)*
+		variableDeclarations.define(justLabel, getAllVariableElements(), hexOrDecimal, CC.ks(comma, hexOrDecimal))
+			.action((Action<Object[]>) matched -> {
+				Token labelName = (Token) matched[0];
+				Token dataType = (Token) matched[1];
+				Token value = (Token) matched[2];
+				Object[] moreValues = (Object[]) matched[3];
+//				System.out.println(labelName.getValue() + " " + dataType.getValue() + " " + value.getValue());
+//				System.out.println("with: " + moreValues.length);
+				ArrayList<Token> valuesList = new ArrayList<>();
+				valuesList.add(value);
 
-//		 variableDeclarations ::=  (variable)*
-		variableDeclarations.setAlts(allPossibleVariableRules);
+				for ( Object obj : moreValues ) {
+					Object[] objectGroup = (Object[]) obj;
+					/**
+					 * objectGroup[0] = comma
+					 * objectGroup[1] = actual value
+					 */
+					Token objectGroupValue = (Token) objectGroup[1];
+//					System.out.println(objectGroup[0] + " " + objectGroupValue.getValue());
+					valuesList.add(objectGroupValue);
+				}
+				try {
+					memory.putToVariableMap(labelName.getValue(), dataType.getValue());
+				} catch (DuplicateVariableException e) {
+					exceptions.add(e);
+				}
+
+				for( Token token : valuesList ) {
+					if ( token.isHex() ) {
+						int declaredSize = memory.getPrefixHexSize(dataType);
+						String tokenValue = token.getValue();
+						if ( tokenValue.length() > declaredSize ) {
+							exceptions.add(new DataTypeMismatchException(labelName.getValue(),
+									dataType.getValue(), tokenValue));
+						} else {
+							try {
+								int prefixSize = memory.getPrefixBitSize(dataType);
+								tokenValue = MemoryAddressCalculator.extend(tokenValue, prefixSize, "0");
+								memory.write(memory.getVariablePointer(), tokenValue, prefixSize);
+								memory.incrementVariablePointer(prefixSize);
+							} catch (MemoryWriteException e) {
+								exceptions.add(e);
+							}
+						}
+					}
+				}
+
+				return null;
+			});
 
 		sectionDataRule.define(sectionData, CC.ks(variableDeclarations));
 
@@ -295,11 +321,6 @@ public class CALVISParser {
 		 * START of static definition of 2 parameter rules
 		 */
 		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
-
-		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
-		hexOrDecimalList.add(hex);
-		hexOrDecimalList.add(dec);
-		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
 
 		for(int i = 1; i < RegisterList.MAX_SIZE / 8; i++){
 			Double size = Math.pow(2, 2 + i);
@@ -366,8 +387,8 @@ public class CALVISParser {
 		/**
 		 * END
 		 */
-		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
-		System.out.println(parameterSpecifications);
+//		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
+//		System.out.println(parameterSpecifications);
 
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
@@ -384,9 +405,9 @@ public class CALVISParser {
 
 			String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
 
-			if ( isConditionalInstruction(prodRule[0]) ) {
+			if ( instructions.isConditionalInstruction(prodRule[0]) ) {
 				insName = "(\\b((" + prodRule[0] + "|" + prodRule[0].toLowerCase()
-						+ ")(" + conditionsRegEx + "))\\b)";
+						+ ")(" + instructions.getConditionsRegEx() + "))\\b)";
 			}
 
 			TokenDef instructionName = lang.newToken(insName);
@@ -429,7 +450,7 @@ public class CALVISParser {
 							specifications1.add(entry[i]);
 						}
 					}
-//					System.out.println(specifications1);
+					System.out.println(specifications1);
 
 					String[] secondParameter = prodRule[4].split("/");
 					ArrayList<String[]> secondParameterList = new ArrayList<>();
@@ -443,7 +464,7 @@ public class CALVISParser {
 							specifications2.add(entry[i]);
 						}
 					}
-//					System.out.println(specifications2);
+					System.out.println(specifications2);
 
 					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
@@ -472,6 +493,18 @@ public class CALVISParser {
 						}
 						instructionAlternatives.add(elements2);
 					}
+
+//					Element[] elements2 = new Element[numParameters];
+//					elements2[0] = instructionName;
+//					elements2[1] = parseOneParameter(firstParameter);
+//					elements2[2] = comma;
+//					elements2[3] = parseOneParameter(secondParameter);
+//					if ( parameterCount == 3 ) {
+//							elements2[4] = comma;
+//							String[] thirdParameter = prodRule[5].split("/");
+//							elements2[5] = parseOneParameter(thirdParameter);
+//						}
+//					instructionAlternatives.add(elements2);
 					break;
 			}
 
@@ -498,7 +531,7 @@ public class CALVISParser {
 						String anInstruction = args[0].toString();
 						ArrayList<Object> tokenArr = new ArrayList<>();
 //						System.out.println(anInstruction);
-						String baseConditionalInstruction = getBaseConditionalInstruction(anInstruction);
+						String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
 						if ( !anInstruction.equals(baseConditionalInstruction) ){
 							String replaced = anInstruction.replaceAll(baseConditionalInstruction,"");
 							tokenArr.add(replaced);
@@ -522,49 +555,57 @@ public class CALVISParser {
 						return calvisInstruction;
 					});
 				}
+//				instruction.getAlts().add(instructionAlternative);
 				altList.add(instructionAlternative);
 			}
 		}
 
 		// instruction ::= <List of Instructions>
-		instruction.setAlts(altList);
-//
-//		// value ::= string | char | int | double
-//		value.define("\\d+(\\.\\d+)?").alt("\\d*\\.\\d*").alt("\"([^\\\"]+|\\.)*\"");
+		System.out.println("Total number of instructions loaded: " + altList.size());
 
+		instruction.setAlts(altList);
 
 		// mainProgram ::= ( LABEL? instruction)*
 		mainProgram.define(CC.ks(CC.ks(commentPattern), CC.op(label), instruction ))
-				.action((Action<Object[]>) matched -> {
-					int labelValue = 0;
-					for (Object obj : matched){
-//						System.out.println("LINE: " + labelValue);
-						Object[] objects = (Object[]) obj;
-						for (int i = 0; i < objects.length ; i++) {
-//							System.out.println(i + " " + objects[i]);
-							if ( objects[i] != null ){
-								if ( i == 1 && objects[i] instanceof Object[] ){
-//									System.out.println("we found an object array");
-									Object[] objects1 = (Object[]) objects[i];
-									/**
-									 * objects1[0] = contains label
-									 * objects1[1] = contains the colon
-									 */
-									String instructionAddress = Integer.toHexString(labelValue);
-									instructionAddress = Memory.reformatAddress(instructionAddress);
+			.action((Action<Object[]>) matched -> {
+				int labelValue = 0;
+				for (Object obj : matched){
+//					System.out.println("LINE: " + labelValue);
+					Object[] objects = (Object[]) obj;
+					for (int i = 0; i < objects.length ; i++) {
+//						System.out.println(i + " " + objects[i]);
+						if ( objects[i] != null ){
+							if ( i == 1 && objects[i] instanceof Object[] ){
+//								System.out.println("we found an object array");
+								Object[] objects1 = (Object[]) objects[i];
+								/**
+								 * objects1[0] = contains label
+								 * objects1[1] = contains the colon
+								 */
+								String instructionAddress = Integer.toHexString(labelValue);
+								instructionAddress = Memory.reformatAddress(instructionAddress);
+								String label = ((Token) objects1[0]).getValue();
+								if ( !memory.containsLabel(label) ) {
 									memory.putToLabelMap(((Token) objects1[0]).getValue(), instructionAddress);
-
-//									System.out.println(((Token) objects1[0]).getValue() + " -> " + instructionAddress );
-//									for (int j = 0; j < objects1.length; j++) {
-//										System.out.println(i + " " + j + " " + objects1[j]);
-//									}
 								}
+								else {
+									try {
+										throw new DuplicateLabelException(label);
+									} catch (DuplicateLabelException e) {
+										exceptions.add(e);
+									}
+								}
+//								System.out.println(((Token) objects1[0]).getValue() + " -> " + instructionAddress );
+//								for (int j = 0; j < objects1.length; j++) {
+//									System.out.println(i + " " + j + " " + objects1[j]);
+//								}
 							}
 						}
-					labelValue++;
 					}
-					return null;
-				});
+					labelValue++;
+				}
+				return null;
+			});
 
 		// produce instruction rules
 		System.out.println("PARSER IS BEING COMPILED");
@@ -645,6 +686,7 @@ public class CALVISParser {
 			if ( anAllowed.contains("i") ) {
 				orSubRuleList.add(hex);
 				orSubRuleList.add(dec);
+//				orSubRuleList.add(hexOrDecimal);
 			}
 			if ( anAllowed.contains("c") ) {
 				orSubRuleList.add(cl);
@@ -668,14 +710,13 @@ public class CALVISParser {
 			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
 			String sizeDirectivePrefix = memoryToken[Memory.SIZE_DIRECTIVE_PREFIX];
 
-			String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)"
-					+ "|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
+			String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)" +
+				"|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
 			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
 			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
 
-			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|"
-					+ sizeDirectivePrefix.toUpperCase() + ")\\b";
-//			System.out.println(variableTypePattern);
+			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|" +
+				sizeDirectivePrefix.toUpperCase() + ")\\b";
 			TokenDef variableType = lang.newToken(variableTypePattern);
 			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
 		}
@@ -793,9 +834,9 @@ public class CALVISParser {
 						if ( arg0 instanceof Token[] ){
 							return arg0;
 						}
-//						if ( arg0.toString().matches("[a-zA-Z_][a-zA-Z\\d_]*") ){
-//							return new Token(Token.LABEL, (String) arg0);
-//						}
+						if ( arg0.toString().matches("[a-zA-Z_][a-zA-Z\\d_]*") ){
+							return new Token(Token.LABEL, (String) arg0);
+						}
 
                         return new Token(Token.REG, (String) arg0);
                     });
@@ -833,33 +874,32 @@ public class CALVISParser {
 		return memoryTokenMap.get(size);
 	}
 
-	private Element getVariableElement(String size) {
-		return variableDeclarationTokenMap.get(size);
-	}
-
-	private boolean isConditionalInstruction(String instruction){
-		for ( String element : conditionalInstructions ){
-			if ( element.equalsIgnoreCase(instruction) ){
-				return true;
-			}
+	private Element getAllMemoryElements() {
+		ArrayList<Element> memoryElementsList = new ArrayList<>();
+		Iterator<Element> iterator = memoryTokenMap.values().iterator();
+		while ( iterator.hasNext() ){
+			memoryElementsList.add(iterator.next());
 		}
-		return false;
+		return concatenateOrSubRules(memoryElementsList);
 	}
 
-	private String getBaseConditionalInstruction(String instruction){
-		for ( String element : conditionalInstructions ){
-			String pattern = "(" + element + "|" + element.toLowerCase() + ")(" + conditionsRegEx + ")";
-			if ( instruction.matches(pattern) ){
-				return element;
-			}
+	private Element getAllVariableElements() {
+		Iterator<Element> keys = variableDeclarationTokenMap.values().iterator();
+		ArrayList<Element> list = new ArrayList<>();
+		while (keys.hasNext()){
+			list.add(keys.next());
 		}
-		return instruction;
+		return concatenateOrSubRules(list);
 	}
 
-	public HashMap<String, CALVISInstruction> parse(String code) throws DropinccException{
+	public HashMap<String, CALVISInstruction> parse(String code) throws Exception {
 		this.mappedInstruction.clear();
+		this.exceptions.clear();
 		this.lineNumber = 0;
 		this.exe.eval(code);
+		if ( !exceptions.isEmpty() ){
+			throw exceptions.get(0);
+		}
 		return this.mappedInstruction;
 	}
 

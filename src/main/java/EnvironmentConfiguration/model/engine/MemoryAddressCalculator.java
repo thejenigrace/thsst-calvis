@@ -28,11 +28,12 @@ public class MemoryAddressCalculator {
 		    equationStartIndex++;
 	    }
 
-        if ( t.isRegister() ){
+        if ( t.isRegister() ) {
             baseAddress = registers.get(t);
-        }
-        else if (t.isHex()){
+        } else if ( t.isHex() ) {
             baseAddress = extend(t.getValue(), Memory.MAX_ADDRESS_SIZE, "0");
+        } else if ( t.isLabel() ) {
+	        baseAddress = memory.getFromVariableMap(t.getValue());
         }
 
         String result = "";

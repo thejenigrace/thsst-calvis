@@ -266,11 +266,11 @@ public class RegisterList {
 		return null;
 	}
 
-	public void set(String registerName, String hexString){
+	public void set(String registerName, String hexString) throws DataTypeMismatchException {
 		set(new Token(Token.REG, registerName), hexString);
 	}
 
-	public void set(Token a, String hexString){
+	public void set(Token a, String hexString) throws DataTypeMismatchException {
 		String key = a.getValue();
 		String[] register = find(key);
 		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
@@ -332,12 +332,11 @@ public class RegisterList {
 						new ArrayList<String>(), ""));
 			}
 			else {
-				System.out.println("Data type mismatch between "
+				System.out.println("Size mismatch between "
 						+ register[0] + ":" + child + " and " + hexString);
 				errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
 						HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
-				throw new NullPointerException("Data type mismatch between "
-						+ register[0] + ":" + child + " and " + hexString);
+				throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
 			}
 			errorLogger.get(0).add(errorMessages);
 		}
@@ -368,7 +367,7 @@ public class RegisterList {
 		return get(instructionPointerName);
 	}
 
-	public void setInstructionPointer(String value){
+	public void setInstructionPointer(String value) throws DataTypeMismatchException {
 		set(instructionPointerName, value);
 	}
 

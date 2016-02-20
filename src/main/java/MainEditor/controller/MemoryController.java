@@ -1,5 +1,6 @@
 package MainEditor.controller;
 
+import EnvironmentConfiguration.model.engine.Memory;
 import MainEditor.model.AssemblyComponent;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -21,12 +23,18 @@ public class MemoryController extends AssemblyComponent implements Initializable
     @FXML
     private TableView<Map.Entry<String,String>> tableViewMemory;
     @FXML
+    private TableColumn<Map.Entry<String,String>, String> memoryLabel;
+    @FXML
     private TableColumn<Map.Entry<String,String>, String> memoryAddress;
     @FXML
     private TableColumn<Map.Entry<String,String>, String> memoryRepresentation;
 
+    private Memory memory;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        memoryLabel.setCellValueFactory(
+                p -> new SimpleStringProperty( this.memory.getCorrespondingLabel(p.getValue().getKey())));
         memoryAddress.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
         memoryRepresentation.setCellValueFactory(
@@ -46,7 +54,8 @@ public class MemoryController extends AssemblyComponent implements Initializable
 
     @Override
     public void build() {
-        Map map = this.sysCon.getMemoryState().getMemoryMap();
+        this.memory = this.sysCon.getMemoryState();
+        Map map = this.memory.getMemoryMap();
         ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
         tableViewMemory.setItems(items);
 	    tableViewMemory.scrollTo(tableViewMemory.getItems().size());

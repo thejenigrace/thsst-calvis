@@ -24,19 +24,29 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class InstructionList {
-	
+
+	private String conditionsRegEx;
 	private HashMap<String, Instruction> map;
 	private ArrayList<String[]> grammarDefinition;
-	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
+	private final String[] conditionalInstructions = {"j", "set", "cmov"};
+	private final String[] conditionsArray = {
+			"A","NBE","AE","NB","B","NAE",
+			"BE","NA","G","NLE","GE","NL",
+			"L","NGE","LE","NG","E","Z",
+			"NE","NZ","P","PE","NP","PO",
+			"O","NO","C","NC","S","NS" };
 
 	public InstructionList(String csvFile){
-		ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+		this.conditionsRegEx = String.join("|", conditionsArray);
+		this.conditionsRegEx += "|" + String.join("|", conditionsArray).toLowerCase();
+
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
 		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = ",";
+		String line;
 		FileHandlerController fileHandlerController = new FileHandlerController();
-		this.map = new HashMap<String, Instruction>();
-		this.grammarDefinition = new ArrayList<String[]>();
+		this.map = new HashMap<>();
+		this.grammarDefinition = new ArrayList<>();
 		int lineCounter = 1;
 		boolean containsError = false;
 			try {
@@ -210,10 +220,6 @@ public class InstructionList {
 		return sb.toString();
 	}
 
-//	public Instruction getInstruction(Token t){
-//		return getInstruction(t.getValue());
-//	}
-	
 	public Instruction getInstruction(String instructionName) throws NullPointerException{
 		String key = instructionName.toUpperCase();
 		if ( this.map.containsKey(key) ) {
@@ -229,7 +235,19 @@ public class InstructionList {
 	}
 
 	public Iterator<String> getInstructionKeys(){
-		return this.map.keySet().iterator();
+		ArrayList<String> highlightedWords = new ArrayList<>();
+		Iterator<String> iterator = this.map.keySet().iterator();
+		while ( iterator.hasNext() ){
+			String instruction = iterator.next();
+			if ( isConditionalInstruction(instruction) ){
+				for (int i = 0; i < conditionsArray.length; i++) {
+					highlightedWords.add(instruction + conditionsArray[i]);
+				}
+			} else {
+				highlightedWords.add(instruction);
+			}
+		}
+		return highlightedWords.iterator();
 	}
 
 	public ErrorLogger getErrorLogger(){
@@ -241,7 +259,7 @@ public class InstructionList {
 
 	private ArrayList<String> doParameterChecking(String[] inst){
 		ArrayList<String> instructionErrorCollection = new ArrayList<>();
-		String[] acceptableInputs = {"r", "m", "i", "c", "l", "x"};
+		String[] acceptableInputs = {"r", "m", "i", "c", "l"};
 		int i =  3;
 		for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
 			String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');
@@ -274,4 +292,28 @@ public class InstructionList {
 		}
 		return instructionErrorCollection;
 	}
+
+	public boolean isConditionalInstruction(String instruction){
+		for ( String element : conditionalInstructions ){
+			if ( element.equalsIgnoreCase(instruction) ){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getBaseConditionalInstruction(String instruction){
+		for ( String element : conditionalInstructions ){
+			String pattern = "(" + element + "|" + element.toLowerCase() + ")(" + conditionsRegEx + ")";
+			if ( instruction.matches(pattern) ){
+				return element;
+			}
+		}
+		return instruction;
+	}
+
+	public String getConditionsRegEx() {
+		return conditionsRegEx;
+	}
+
 }
