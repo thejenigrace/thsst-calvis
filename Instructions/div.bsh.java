@@ -37,17 +37,48 @@ execute(src, registers, memory) {
             BigInteger biDivisor = new BigInteger(divisor, 16);
             BigInteger[] biResult = biDividend.divideAndRemainder(biDivisor);
 
-            String quotient = calculator.cutToCertainHexSize("original", biResult[0].toString(16), resultHexSize);
-            String remainder = calculator.cutToCertainHexSize("original", biResult[1].toString(16), resultHexSize);
-
-            registers.set(registerForQuotient, quotient);
-            registers.set(registerForRemainder, remainder);
-
-            // debugging
             System.out.println("DECIMAL DIVIDEND = " + biDividend.toString()
-                + "\nDECIMAL DIVISOR = " + biDivisor.toString());
+            + "\nDECIMAL DIVISOR = " + biDivisor.toString());
             System.out.println("quotient = " + biResult[0].toString(16));
             System.out.println("remainder = " + biResult[1].toString(16));
-            System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
-            System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());
+
+            long longQuotient = Long.parseLong(biResult[0].toString());
+            long longRemainder = Long.parseLong(biResult[1].toString());
+
+            System.out.println("quotient = " + Long.toHexString(longQuotient));
+            System.out.println("remainder = " + Long.toHexString(longRemainder));
+
+            int resultBitSize = registers.getBitSize(registerForQuotient);
+            if(check(longQuotient, resultBitSize)) {
+                int resultHexSize = registers.getHexSize(registerForQuotient);
+                String quotient = calculator.cutToCertainHexSize("original", biResult[0].toString(16), resultHexSize);
+                String remainder = calculator.cutToCertainHexSize("original", biResult[1].toString(16), resultHexSize);
+
+                System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
+                System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());
+
+                registers.set(registerForQuotient, quotient);
+                registers.set(registerForRemainder, remainder);
+            } else {
+                throw new ArithmeticException("Divide Error");
+            }
+        }
+
+        boolean check(long quotient, int size){
+            boolean answer=false;
+            Long max8=Long.parseLong("255");
+            Long max16=Long.parseLong("65535");
+            Long max32=Long.parseLong("4294967295"); //2E+32 - 1
+            if( size==8 && max8>=quotient){
+                System.out.println("8!");
+                answer=true;
+            }else if( size==16 && max16>=quotient){
+                System.out.println("16!");
+                answer=true;
+            }else if( size==32 && max32>=quotient){
+                System.out.println("32!");
+                answer=true;
+            }
+
+            return answer;
         }
