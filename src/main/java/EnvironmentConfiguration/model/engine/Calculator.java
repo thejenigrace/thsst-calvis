@@ -112,7 +112,7 @@ public class Calculator {
 			}
 		}
 		else if (des.isMemory()){
-			int missingZeroes = memory.getBitSize(des) - val.length();
+			int missingZeroes = memory.getHexSize(des) - val.length();
 
 			//zero extend
 			for(int k = 0; k < missingZeroes; k++){
@@ -380,6 +380,32 @@ public class Calculator {
 
 //		System.out.println(flag);
 		return flag;
+	}
+
+	public String checkOverflowAdd(char src, char des, char res){
+		if((src == '0' && des == '0' && res == '1') ||
+			(src == '1' && des == '1' && res == '0'))
+			return "1";
+		return "0";
+	}
+
+	public String checkOverflowAddWithFlag(char src, char des, char res, String flag){
+		if((src == '0' && des == '0' && res == '1' && flag.charAt(0) == '1') ||
+				(src == '1' && des == '1' && res == '0' && flag.charAt(0) == '1'))
+			return "1";
+		return "0";
+	}
+
+
+	public String flipAllBits(String bInt){
+		StringBuilder  bits = new StringBuilder(bInt);
+		for(int x = 0; x < bInt.length(); x++){
+			if(bInt.charAt(x) == '0')
+				bits.setCharAt(x, '0');
+			else
+				bits.setCharAt(x, '1');
+		}
+		return bits.toString();
 	}
 
 }

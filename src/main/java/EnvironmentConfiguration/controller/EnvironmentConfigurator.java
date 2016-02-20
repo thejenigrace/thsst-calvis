@@ -32,9 +32,9 @@ public class EnvironmentConfigurator {
         // 2. Create the CALVISParser based on the environment
         if(errorLogger.size() == 0) {
             this.p = new CALVISParser(instructions, registers, memory);
-	        System.out.println("Memory available: " +
-			        Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
-	        );
+            System.out.println("Memory available: " +
+                    Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
+            );
         }
     }
 

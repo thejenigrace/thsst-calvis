@@ -49,37 +49,37 @@ public class InstructionList {
 		this.grammarDefinition = new ArrayList<>();
 		int lineCounter = 1;
 		boolean containsError = false;
-			try {
+		try {
 
-				br = new BufferedReader(new FileReader(csvFile));
-				br.readLine();
-				while ((line = br.readLine()) != null) {
+			br = new BufferedReader(new FileReader(csvFile));
+			br.readLine();
+			while ((line = br.readLine()) != null) {
 
-					String[] inst = HandleConfigFunctions.split(line, ',');
-					for (int i = 0; i < inst.length; i++) {
-						inst[i] = inst[i].trim();
-					}
-					inst[0] = inst[0].toUpperCase();
-	//				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
-					// debug printing
-	//				for (int i = 0; i < inst.length; i++){
-	//					inst[i] = inst[i].trim();
-	//					System.out.print(inst[i] + " ");
-	//				}
-	//				System.out.println("");
+				String[] inst = HandleConfigFunctions.split(line, ',');
+				for (int i = 0; i < inst.length; i++) {
+					inst[i] = inst[i].trim();
+				}
+				inst[0] = inst[0].toUpperCase();
+				//				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
+				// debug printing
+				//				for (int i = 0; i < inst.length; i++){
+				//					inst[i] = inst[i].trim();
+				//					System.out.print(inst[i] + " ");
+				//				}
+				//				System.out.println("");
 
-					// inst[0] contains instruction name
-					// inst[1] contains .bsh file location
+				// inst[0] contains instruction name
+				// inst[1] contains .bsh file location
 
-					if ( !inst[1].equals("Location") ){ // do not get first row
+				if ( !inst[1].equals("Location") ){ // do not get first row
 
-						//check here
-						ArrayList<String> missingParametersInstruction = HandleConfigFunctions.checkifMissing(inst);
+					//check here
+					ArrayList<String> missingParametersInstruction = HandleConfigFunctions.checkifMissing(inst);
 
-						ArrayList<String> instructionErrorCollection = new ArrayList<>();
-						ArrayList<String> instructionMissingCollection = new ArrayList<>();
-						boolean isInteger = HandleConfigFunctions.isInteger(inst[2], 10);
-						boolean hasNoParameter = Integer.parseInt(inst[2]) > 0;
+					ArrayList<String> instructionErrorCollection = new ArrayList<>();
+					ArrayList<String> instructionMissingCollection = new ArrayList<>();
+					boolean isInteger = HandleConfigFunctions.isInteger(inst[2], 10);
+					boolean hasNoParameter = Integer.parseInt(inst[2]) > 0;
 
 //						if(missingParametersInstruction.size() > 0){
 //	//						isSkipped = true;
@@ -88,54 +88,54 @@ public class InstructionList {
 //									missingParametersInstruction,
 //									Integer.toString(lineCounter)));
 //						}
-						if(inst[0].isEmpty())
-							instructionMissingCollection.add(
-									new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionName).
-											generateMessage()
-							);
-						if(inst[1].isEmpty())
-							instructionMissingCollection.add(
-									new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionFileName).
-											generateMessage()
-							);
+					if(inst[0].isEmpty())
+						instructionMissingCollection.add(
+								new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionName).
+										generateMessage()
+						);
+					if(inst[1].isEmpty())
+						instructionMissingCollection.add(
+								new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionFileName).
+										generateMessage()
+						);
 
-						if(inst[2].isEmpty())
-							instructionMissingCollection.add(
-									new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionParameterSize).
-											generateMessage()
-							);
+					if(inst[2].isEmpty())
+						instructionMissingCollection.add(
+								new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionParameterSize).
+										generateMessage()
+						);
 
-						if(!isInteger){
+					if(!isInteger){
+						instructionErrorCollection.add(
+								new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileParamterCount).
+										generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
+						);
+					}
+					else if(isInteger){
+						int parameterSize = Integer.parseInt(inst[2]);
+
+						//check if negative
+						if(Math.signum(parameterSize) == -1.0) {
 							instructionErrorCollection.add(
-									new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileParamterCount).
+									new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileNegativeCount).
 											generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
 							);
 						}
-						else if(isInteger){
-							int parameterSize = Integer.parseInt(inst[2]);
-
-							//check if negative
-							if(Math.signum(parameterSize) == -1.0) {
+						else {
+							//check if parameter size is equals to size of recieved parameters and if size > 0
+							int parameterReceivedCount = line.split(",").length - 3;
+							if(parameterSize != parameterReceivedCount && parameterSize > 0){
 								instructionErrorCollection.add(
-										new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileNegativeCount).
-												generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
+										new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileLackingParameterCount).
+												generateMessage(HandleConfigFunctions.generateArrayListString(inst[2],
+														Integer.toString(parameterReceivedCount)))
 								);
 							}
-							else {
-								//check if parameter size is equals to size of recieved parameters and if size > 0
-								int parameterReceivedCount = line.split(",").length - 3;
-								if(parameterSize != parameterReceivedCount && parameterSize > 0){
-									instructionErrorCollection.add(
-											new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileLackingParameterCount).
-													generateMessage(HandleConfigFunctions.generateArrayListString(inst[2],
-															Integer.toString(parameterReceivedCount)))
-									);
-								}
-								//check if contains more than 0 parameters
-								else if (hasNoParameter){
-									instructionErrorCollection = doParameterChecking(inst);
-								}
+							//check if contains more than 0 parameters
+							else if (hasNoParameter){
+								instructionErrorCollection = doParameterChecking(inst);
 							}
+						}
 //							for(int x = 3; x < inst.length - 1; x++) {
 //								int countOfVar = inst[x].split("/").length;
 //								int countOfSep = StringUtils.countMatches(inst[x], "/");
@@ -151,60 +151,60 @@ public class InstructionList {
 //								else
 //									errorParameters[x - 3] = false;
 //							}
-						}
+					}
 
-						//set missing path Error
-						String filePathInvalid = fileHandlerController.checkIfFileExists(inst[1]);
-						if(filePathInvalid.length() > 0){
-							instructionErrorCollection.add(filePathInvalid);
-						}
+					//set missing path Error
+					String filePathInvalid = fileHandlerController.checkIfFileExists(inst[1]);
+					if(filePathInvalid.length() > 0){
+						instructionErrorCollection.add(filePathInvalid);
+					}
 //							System.out.println(filePathInvalid.length());
-						//check for duplicates
+					//check for duplicates
 
 
-						if(instructionErrorCollection.size() > 0) {
-							errorMessages.add(new ErrorMessage(Types.instructionShouldNotBeInvalid,
-									instructionErrorCollection,
-									Integer.toString(lineCounter)));
-							containsError = true;
-						}
+					if(instructionErrorCollection.size() > 0) {
+						errorMessages.add(new ErrorMessage(Types.instructionShouldNotBeInvalid,
+								instructionErrorCollection,
+								Integer.toString(lineCounter)));
+						containsError = true;
+					}
 
-						if(instructionMissingCollection.size() > 0) {
-							errorMessages.add(new ErrorMessage(Types.instructionShouldNotBeEmpty,
-									instructionMissingCollection,
-									Integer.toString(lineCounter)));
-							containsError = true;
-						}
+					if(instructionMissingCollection.size() > 0) {
+						errorMessages.add(new ErrorMessage(Types.instructionShouldNotBeEmpty,
+								instructionMissingCollection,
+								Integer.toString(lineCounter)));
+						containsError = true;
+					}
 
-						if(!containsError) {
-							Interpreter scanner = new Interpreter();
-							scanner.source(inst[1]);
-							Instruction com = (Instruction) scanner.eval(prepareImportStatements());
-							this.map.put(inst[0].toUpperCase(), com);
-							this.grammarDefinition.add(inst);
+					if(!containsError) {
+						Interpreter scanner = new Interpreter();
+						scanner.source(inst[1]);
+						Instruction com = (Instruction) scanner.eval(prepareImportStatements());
+						this.map.put(inst[0].toUpperCase(), com);
+						this.grammarDefinition.add(inst);
 //							System.out.println("Loaded: " + inst[0]);
-						}
 					}
-					lineCounter++;
 				}
+				lineCounter++;
+			}
 
-				errorLogger.add(new ErrorMessageList(Types.instructionFile, errorMessages));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (EvalError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				if (br != null) {
-					try {
-						br.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			errorLogger.add(new ErrorMessageList(Types.instructionFile, errorMessages));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (EvalError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
+		}
 	}
 
 	private String prepareImportStatements(){
@@ -229,7 +229,7 @@ public class InstructionList {
 			throw new NullPointerException("Instruction does not exist: " + instructionName);
 		}
 	}
-	
+
 	public Iterator<String[]> getInstructionProductionRules(){
 		return this.grammarDefinition.iterator();
 	}

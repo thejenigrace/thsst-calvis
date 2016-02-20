@@ -49,30 +49,30 @@ public class FileHandlerController {
         return "";
     }
 
-    public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
-        Path filePath = Paths.get(filename);
-        ArrayList<String> writable = new ArrayList<>();
-        for(int x = 0; x < filePathListArrayList.size(); x++){
-            writable.add(filePathListArrayList.get(x).getCategory());
-            writable.add("/*StartOfFile*/");
-            for(int y = 0; y < filePathListArrayList.get(x).size(); y++){
-                writable.add(filePathListArrayList.get(x).get(y).getLocation());
-            }
-            writable.add("/*EndOfFile*/");
-
-        }
-        writable.add("/*StartOfIndex*/");
-        for(int x = 0; x < selectedIndexes.size(); x++){
-            writable.add(selectedIndexes.get(x));
-        }
-        writable.add("/*EndOfIndex*/");
-
-        try {
-            Files.write(filePath, writable, Charset.forName("UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
+//        Path filePath = Paths.get(filename);
+//        ArrayList<String> writable = new ArrayList<>();
+//        for(int x = 0; x < filePathListArrayList.size(); x++){
+//            writable.add(filePathListArrayList.get(x).getCategory());
+//            writable.add("/*StartOfFile*/");
+//            for(int y = 0; y < filePathListArrayList.get(x).size(); y++){
+//                writable.add(filePathListArrayList.get(x).get(y).getLocation());
+//            }
+//            writable.add("/*EndOfFile*/");
+//
+//        }
+//        writable.add("/*StartOfIndex*/");
+//        for(int x = 0; x < selectedIndexes.size(); x++){
+//            writable.add(selectedIndexes.get(x));
+//        }
+//        writable.add("/*EndOfIndex*/");
+//
+//        try {
+//            Files.write(filePath, writable, Charset.forName("UTF-8"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static FilePathHandler loadFilenames(String filename){
         ArrayList<ArrayList<String>> completeFileNames = new ArrayList<ArrayList<String>>();
@@ -80,7 +80,7 @@ public class FileHandlerController {
         ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
         //FilePathHandler fs = new FilePathHandler(completeFileNames, selectedIndexes);
 
-        try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(FileHandlerController.class.getResourceAsStream(filename)))) {
             String line = br.readLine();
 
             while (line != null) {

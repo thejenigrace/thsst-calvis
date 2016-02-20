@@ -25,7 +25,7 @@ public class RegisterList {
 	private EFlags flags;
 	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
-    private TreeMap<String, TreeMap<String, Register>> childMap;
+	private TreeMap<String, TreeMap<String, Register>> childMap;
 
 	public static String instructionPointerName = "EIP";
 	public static int instructionPointerSize = 32;
@@ -38,7 +38,7 @@ public class RegisterList {
 		this.lookup = new ArrayList<>();
 		this.MAX_SIZE = maxSize;
 
-        this.childMap = new TreeMap<>(orderedComparator);
+		this.childMap = new TreeMap<>(orderedComparator);
 
 		BufferedReader br = null;
 		String line = "";
@@ -144,22 +144,22 @@ public class RegisterList {
 								break;
 						}
 					} else if(reg[TYPE].equals("2")) {
-                        Register g = new Register(reg[NAME], regSize);
-                        if(childMap.get(reg[SOURCE]) == null) {
-                            TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
+						Register g = new Register(reg[NAME], regSize);
+						if(childMap.get(reg[SOURCE]) == null) {
+							TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
 
 //                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
+							group.put(reg[NAME], g);
 
-                            this.childMap.put(reg[SOURCE], group);
-                        } else {
-                            TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
+							this.childMap.put(reg[SOURCE], group);
+						} else {
+							TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
 //                            System.out.println("Sibling-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
+							group.put(reg[NAME], g);
 
-                            this.childMap.replace(reg[SOURCE], group);
-                        }
-                    }
+							this.childMap.replace(reg[SOURCE], group);
+						}
+					}
 				}
 				lineCounter++;
 			}
@@ -280,7 +280,7 @@ public class RegisterList {
 		int startIndex = Integer.parseInt(register[START]);
 		int endIndex = Integer.parseInt(register[END]);
 
-		//check for mismatch between parameter hexString and child register value		
+		//check for mismatch between parameter hexString and child register value
 		String child = mother.getValue().substring(startIndex, endIndex + 1);
 
 		if ( child.length() >= hexString.length() ){
@@ -297,33 +297,33 @@ public class RegisterList {
 			mother.setValue(newValue.toUpperCase());
 
 //            System.out.println("register[SOURCE] = " + register[SOURCE]);
-            if ( childMap.get(register[SOURCE]) != null ) {
+			if ( childMap.get(register[SOURCE]) != null ) {
 //                System.out.println("key = " + key);
 //				System.out.println("newValue = " + newValue.toUpperCase());
 
-                TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
-                for(int i = 0; i < temp.size(); i++) {
-                    switch (register[SOURCE]) {
-                        case "EAX": childMap.get(register[SOURCE]).get("AX").setValue(get16BitHexString(newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("AH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("AL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                            break;
-                        case "EBX": childMap.get(register[SOURCE]).get("BX").setValue(get16BitHexString(newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("BH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("BL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                            break;
-                        case "ECX": childMap.get(register[SOURCE]).get("CX").setValue(get16BitHexString(newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("CH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("CL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                            break;
-                        case "EDX": childMap.get(register[SOURCE]).get("DX").setValue(get16BitHexString(newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("DH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                            childMap.get(register[SOURCE]).get("DL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                            break;
-                        default: System.out.println("NONE");
-                    }
-                }
-            }
+				TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
+				for(int i = 0; i < temp.size(); i++) {
+					switch (register[SOURCE]) {
+						case "EAX": childMap.get(register[SOURCE]).get("AX").setValue(get16BitHexString(newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("AH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("AL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+							break;
+						case "EBX": childMap.get(register[SOURCE]).get("BX").setValue(get16BitHexString(newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("BH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("BL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+							break;
+						case "ECX": childMap.get(register[SOURCE]).get("CX").setValue(get16BitHexString(newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("CH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("CL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+							break;
+						case "EDX": childMap.get(register[SOURCE]).get("DX").setValue(get16BitHexString(newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("DH").setValue(get8BitHexString('H', newValue.toUpperCase()));
+							childMap.get(register[SOURCE]).get("DL").setValue(get8BitHexString('L', newValue.toUpperCase()));
+							break;
+						default: System.out.println("NONE");
+					}
+				}
+			}
 		}
 		else {
 			if ( hexString.equals("") ) {
@@ -342,26 +342,26 @@ public class RegisterList {
 		}
 	}
 
-    public String get16BitHexString (String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(int i = hexString.length()/2; i < hexString.length(); i++)
-            stringBuilder.append(hexString.charAt(i));
+	public String get16BitHexString (String hexString) {
+		StringBuilder stringBuilder = new StringBuilder();
+		for(int i = hexString.length()/2; i < hexString.length(); i++)
+			stringBuilder.append(hexString.charAt(i));
 
-        return  stringBuilder.toString();
-    }
+		return  stringBuilder.toString();
+	}
 
-    public String get8BitHexString (char type, String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        if(type == 'H') {
-            stringBuilder.append(hexString.charAt(4));
-            stringBuilder.append(hexString.charAt(5));
-        } else if(type == 'L') {
-            stringBuilder.append(hexString.charAt(6));
-            stringBuilder.append(hexString.charAt(7));
-        }
+	public String get8BitHexString (char type, String hexString) {
+		StringBuilder stringBuilder = new StringBuilder();
+		if(type == 'H') {
+			stringBuilder.append(hexString.charAt(4));
+			stringBuilder.append(hexString.charAt(5));
+		} else if(type == 'L') {
+			stringBuilder.append(hexString.charAt(6));
+			stringBuilder.append(hexString.charAt(7));
+		}
 
-        return  stringBuilder.toString();
-    }
+		return  stringBuilder.toString();
+	}
 
 	public String getInstructionPointer(){
 		return get(instructionPointerName);
@@ -377,12 +377,12 @@ public class RegisterList {
 		}
 		flags.initializeValue();
 
-        // initialize childMap
+		// initialize childMap
 		for(String s: this.childMap.keySet()) {
-            for(String t: this.childMap.get(s).keySet()) {
-                this.childMap.get(s).get(t).initializeValue();
-            }
-        }
+			for(String t: this.childMap.get(s).keySet()) {
+				this.childMap.get(s).get(t).initializeValue();
+			}
+		}
 	}
 
 	public void print(){
@@ -411,14 +411,14 @@ public class RegisterList {
 		return this.map;
 	}
 
-    /**
-     *
-     * @param regName
-     * @return
-     */
-    public Map getChildRegisterMap(String regName){
-        return this.childMap.get(regName);
-    }
+	/**
+	 *
+	 * @param regName
+	 * @return
+	 */
+	public Map getChildRegisterMap(String regName){
+		return this.childMap.get(regName);
+	}
 
 	public ErrorLogger getErrorLogger(){
 		if(errorLogger.get(0).getSizeofErrorMessages() == 0)

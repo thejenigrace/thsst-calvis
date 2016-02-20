@@ -31,9 +31,9 @@ public class Memory {
 	private String variablePointer;
 
 	public Memory(int bitSize, int bitEndLength, String csvFile){
-        this.MAX_ADDRESS_SIZE = bitSize;
+		this.MAX_ADDRESS_SIZE = bitSize;
 		this.DEFAULT_RELATIVE_SIZE = bitEndLength;
-        this.mem = new TreeMap<>(Collections.reverseOrder());
+		this.mem = new TreeMap<>(Collections.reverseOrder());
 		this.labelMap = new HashMap<>();
 		this.variableMap = new HashMap<>();
 		resetVariablePointer();
@@ -48,39 +48,39 @@ public class Memory {
 
 //		System.out.println("Loaded: Memory");
 
-        BufferedReader br = null;
-        String line;
-        String cvsSplitBy = ",";
-        int lineCounter = 0;
-        this.lookup = new ArrayList<>();
-        try {
-            br = new BufferedReader(new FileReader(new File(csvFile)));
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] row = line.split(cvsSplitBy);
-                // trim every row just in case
-                for (int i = 0; i < row.length; i++) {
-                    row[i] = row[i].trim();
-                }
-                if ( lineCounter != 0 ) {
-                    this.lookup.add(row);
+		BufferedReader br = null;
+		String line;
+		String cvsSplitBy = ",";
+		int lineCounter = 0;
+		this.lookup = new ArrayList<>();
+		try {
+			br = new BufferedReader(new FileReader(new File(csvFile)));
+			while ((line = br.readLine()) != null) {
+				// use comma as separator
+				String[] row = line.split(cvsSplitBy);
+				// trim every row just in case
+				for (int i = 0; i < row.length; i++) {
+					row[i] = row[i].trim();
+				}
+				if ( lineCounter != 0 ) {
+					this.lookup.add(row);
 //                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
 //		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
 //		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
-                }
-                lineCounter++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+				}
+				lineCounter++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private void resetVariablePointer() {
@@ -101,7 +101,7 @@ public class Memory {
 		startingAddress += byteOffset;
 		variablePointer = reformatAddress(Integer.toHexString(startingAddress));
 	}
-	
+
 	public static String reformatAddress(String add) {
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
@@ -156,11 +156,11 @@ public class Memory {
 			throw new MemoryWriteException(memoryBaseAddress);
 		}
 	}
-	
+
 	public String read(String address){
 		return this.mem.get(address);
 	}
-	
+
 	public String read(Token baseAddressToken, Token src) throws MemoryReadException{
 		return read(baseAddressToken.getValue(), src);
 	}
@@ -216,13 +216,13 @@ public class Memory {
 		}
 		return false;
 	}
-	
+
 	public void print(String start, String end){
 		Map<String, String> map = new TreeMap<>(mem).descendingMap();
 		Iterator<Map.Entry<String, String>> ite = map.entrySet().iterator();
 		while (ite.hasNext()){
 			Map.Entry<String, String> x = ite.next();
-			if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16) 
+			if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16)
 					&& Integer.parseInt(x.getKey(), 16) <= Integer.parseInt(end, 16) )
 				System.out.println(x);
 		}
