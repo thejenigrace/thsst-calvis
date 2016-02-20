@@ -252,8 +252,11 @@ public class Memory {
 		List memoryKeys = new ArrayList<>();
 		Iterator<String[]> iterator = getLookup();
 		while(iterator.hasNext()){
-			String sizeDirective = iterator.next()[Memory.SIZE_DIRECTIVE_NAME];
+			String[] arr = iterator.next();
+			String sizeDirective = arr[Memory.SIZE_DIRECTIVE_NAME];
+			String sizePrefix = arr[Memory.SIZE_DIRECTIVE_PREFIX];
 			memoryKeys.add(sizeDirective);
+			memoryKeys.add(sizePrefix);
 		}
 		return memoryKeys.iterator();
 	}
@@ -310,7 +313,7 @@ public class Memory {
 			return labelMap.get(key);
 		}
 		else {
-			throw new NullPointerException("Label " + key + " does not exist.");
+			throw new NullPointerException("Label: " + key + " does not exist.");
 		}
 	}
 

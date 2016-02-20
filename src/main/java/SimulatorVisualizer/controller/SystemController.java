@@ -5,8 +5,10 @@ import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
+import com.github.pfmiles.dropincc.DropinccException;
 import javafx.application.Platform;
 
+import java.io.SyncFailedException;
 import java.util.*;
 
 /**
@@ -26,6 +28,7 @@ public class SystemController {
     private SimulationState state;
 	private Thread thread;
     private WorkspaceController workspaceController;
+	private String parsedCode;
 
 	private HashMap<String, CALVISInstruction> executionMap;
 	private HashMap<Integer, String[][]> registerStackMap;
@@ -93,11 +96,15 @@ public class SystemController {
                 break;
             case STOP: // System is not running, so we start playing
                 clear();
-                parse(code);
+                boolean isSuccessful = parse(code);
                 this.state = SimulationState.PLAY;
                 workspaceController.formatCodeArea(code);
                 workspaceController.changeIconToPause();
-                beginSimulation();
+	            if ( isSuccessful ) {
+		            beginSimulation();
+	            } else {
+		            end();
+	            }
                 break;
         }
     }
@@ -131,6 +138,7 @@ public class SystemController {
 		this.flagsStackMap = new HashMap<>();
 		this.memoryStackMap = new HashMap<>();
 		this.stackCount = 0;
+		this.parsedCode = "";
 		refreshAllObservers();
 	}
 
@@ -272,9 +280,14 @@ public class SystemController {
 		push();
 	}
 
-    private void parse(String code){
+    private boolean parse(String code){
+	    boolean isSuccessful = true;
 	    try {
 		    this.executionMap = parser.parse(code);
+		    for (String lineNumber : this.executionMap.keySet()) {
+			    CALVISInstruction calvisInstruction = this.executionMap.get(lineNumber);
+			    calvisInstruction.verifyParameters(lineNumber);
+		    }
 	    } catch (Exception e){
 		    if ( e instanceof DuplicateLabelException ){
 			    DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
@@ -292,10 +305,7 @@ public class SystemController {
 				    }
 			    }
 		    }
-//		    if ( e instanceof DropinccException ){
-//			    DropinccException dropException = (DropinccException) e;
-//		    }
-
+		    isSuccessful = false;
 		    e.printStackTrace();
 		    Platform.runLater(
 				    new Thread() {
@@ -310,6 +320,8 @@ public class SystemController {
 				    }
 		    );
 	    }
+	    this.parsedCode = code;
+	    return isSuccessful;
 //	    push();
     }
 
@@ -365,7 +377,11 @@ public class SystemController {
 //        return keywordsArray;
 //    }
 
-    public String[] getRegisterKeywords(){
+    public String getParsedCode() {
+	    return this.parsedCode;
+    }
+
+    public String[] getRegisterKeywords() {
         List<String> keywordsList = new ArrayList<>();
 
         Iterator<String> registerIterator = registerList.getRegisterKeys();

@@ -2,8 +2,8 @@ execute(des, src, registers, memory){
 	if ( src.isMemory() && des.isRegister() ){
 		String effectiveAddress = src.getValue();
 		// remove size directives if found
-		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
-//		System.out.println(effectiveAddress);
+//		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
+		System.out.println(effectiveAddress);
 
 		int des_reg_size = registers.getBitSize(des);
 		// r32, m32 ; r16, m16

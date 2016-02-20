@@ -9,6 +9,11 @@ public class DataTypeMismatchException extends Exception {
 		super("Size mismatch between " + first + " and " + second);
 	}
 
+	public DataTypeMismatchException(String first, String second, int line){
+		super("Size mismatch between " + first + " and " + second + " at line number: " + line);
+	}
+
+
 	public DataTypeMismatchException(String variableName, String type, String value){
 		super("Data type mismatch on " + variableName +
 			" type: " + type + " value: " + value);

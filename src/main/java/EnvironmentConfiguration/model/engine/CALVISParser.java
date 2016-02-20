@@ -39,6 +39,7 @@ public class CALVISParser {
 
 	private Grule justLabel;
 	private Grule label;
+	private Grule memoryAddressingMode;
 
 //	private Grule hexOrDecimal;
 
@@ -56,14 +57,15 @@ public class CALVISParser {
 		Grule sectionDataRule = lang.newGrule();
 		Grule mainProgram = lang.newGrule();
 		Grule instruction = lang.newGrule();
-		Grule memoryAddressingMode = lang.newGrule();
 		Grule memoryExpression = lang.newGrule();
 		Grule memoryBase = lang.newGrule();
 		Grule memoryIndex = lang.newGrule();
 		Grule memoryDisplacement = lang.newGrule();
 
-		label = lang.newGrule();
 		justLabel = lang.newGrule();
+		label = lang.newGrule();
+		memoryAddressingMode = lang.newGrule();
+
 //		hexOrDecimal = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
@@ -433,7 +435,7 @@ public class CALVISParser {
 					Element[] elements1 = new Element[numParameters];
 					elements1[0] = instructionName;
 					String[] justOne = prodRule[3].split("/");
-					elements1[1] = parseOneParameter(justOne);
+					elements1[1] = parseOneParameter(justOne, true);
 					instructionAlternatives.add(elements1);
 					break;
 				case 2: // fall through
@@ -450,7 +452,7 @@ public class CALVISParser {
 							specifications1.add(entry[i]);
 						}
 					}
-					System.out.println(specifications1);
+//					System.out.println(specifications1);
 
 					String[] secondParameter = prodRule[4].split("/");
 					ArrayList<String[]> secondParameterList = new ArrayList<>();
@@ -464,7 +466,7 @@ public class CALVISParser {
 							specifications2.add(entry[i]);
 						}
 					}
-					System.out.println(specifications2);
+//					System.out.println(specifications2);
 
 					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
@@ -475,36 +477,36 @@ public class CALVISParser {
 							}
 						}
 					}
-					System.out.println(result);
+//					System.out.println(result);
 
-					for ( String resultInstance : result ){
-						Element[] elements2 = new Element[numParameters];
-						Element[] content = parameterSpecifications.get(resultInstance);
-						for (int i = 0; i < elements2.length; i++) {
-							if ( i < content.length ){
-								elements2[i] = content[i];
-							}
-						}
-						elements2[0] = instructionName;
-						if ( parameterCount == 3 ) {
-							elements2[4] = comma;
-							String[] thirdParameter = prodRule[5].split("/");
-							elements2[5] = parseOneParameter(thirdParameter);
-						}
-						instructionAlternatives.add(elements2);
-					}
-
-//					Element[] elements2 = new Element[numParameters];
-//					elements2[0] = instructionName;
-//					elements2[1] = parseOneParameter(firstParameter);
-//					elements2[2] = comma;
-//					elements2[3] = parseOneParameter(secondParameter);
-//					if ( parameterCount == 3 ) {
+//					for ( String resultInstance : result ){
+//						Element[] elements2 = new Element[numParameters];
+//						Element[] content = parameterSpecifications.get(resultInstance);
+//						for (int i = 0; i < elements2.length; i++) {
+//							if ( i < content.length ){
+//								elements2[i] = content[i];
+//							}
+//						}
+//						elements2[0] = instructionName;
+//						if ( parameterCount == 3 ) {
 //							elements2[4] = comma;
 //							String[] thirdParameter = prodRule[5].split("/");
 //							elements2[5] = parseOneParameter(thirdParameter);
 //						}
-//					instructionAlternatives.add(elements2);
+//						instructionAlternatives.add(elements2);
+//					}
+
+					Element[] elements2 = new Element[numParameters];
+					elements2[0] = instructionName;
+					elements2[1] = parseOneParameter(firstParameter, false);
+					elements2[2] = comma;
+					elements2[3] = parseOneParameter(secondParameter, false);
+					if ( parameterCount == 3 ) {
+							elements2[4] = comma;
+							String[] thirdParameter = prodRule[5].split("/");
+							elements2[5] = parseOneParameter(thirdParameter, true);
+						}
+					instructionAlternatives.add(elements2);
 					break;
 			}
 
@@ -518,7 +520,7 @@ public class CALVISParser {
 						//////////////////////
 						Instruction someInstruction = instructions.getInstruction(anInstruction);
 						CALVISInstruction calvisInstruction =
-								new CALVISInstruction(someInstruction, anInstruction, null, registers, memory);
+								new CALVISInstruction(someInstruction, anInstruction, registers, memory);
 						String instructionAdd = Integer.toHexString(lineNumber);
 						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
 								RegisterList.instructionPointerSize, "0"), calvisInstruction);
@@ -530,12 +532,14 @@ public class CALVISParser {
 						int numParameters1 = args.length / 2;
 						String anInstruction = args[0].toString();
 						ArrayList<Object> tokenArr = new ArrayList<>();
+						boolean isConditionalInstruction = false;
 //						System.out.println(anInstruction);
 						String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
 						if ( !anInstruction.equals(baseConditionalInstruction) ){
 							String replaced = anInstruction.replaceAll(baseConditionalInstruction,"");
 							tokenArr.add(replaced);
 							anInstruction = baseConditionalInstruction;
+							isConditionalInstruction = true;
 						}
 						//////////////////////
 						Instruction someInstruction = instructions.getInstruction(anInstruction);
@@ -547,7 +551,8 @@ public class CALVISParser {
 						Object[] tokens = new Object[tokenArr.size()];
 						tokens = tokenArr.toArray(tokens);
 						CALVISInstruction calvisInstruction =
-								new CALVISInstruction(someInstruction, anInstruction, tokens, registers, memory);
+								new CALVISInstruction(someInstruction, anInstruction,
+										tokens, registers, memory, isConditionalInstruction);
 						String instructionAdd = Integer.toHexString(lineNumber);
 						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
 								RegisterList.instructionPointerSize, "0"), calvisInstruction);
@@ -660,7 +665,7 @@ public class CALVISParser {
 		return false;
 	}
 
-	private Element parseOneParameter(String[] specification){
+	private Element parseOneParameter(String[] specification, boolean isOneParameter){
 		// get specific operand requirements
 		String[] allowed = specification;
 		ArrayList<Element> orSubRuleList = new ArrayList<>();
@@ -676,10 +681,15 @@ public class CALVISParser {
 				}
 			}
 			if ( anAllowed.contains("m") ) {
-				String size = anAllowed.substring(1);
-				if (size.length() > 1) {
-					orSubRuleList.add(memorySizeDirectives.get(size));
+				if ( isOneParameter ) {
+					String size = anAllowed.substring(1);
+					if (size.length() > 1) {
+						orSubRuleList.add(memorySizeDirectives.get(size));
+					} else {
+						orSubRuleList.add(getAllMemorySizeDirectiveElements());
+					}
 				} else {
+					orSubRuleList.add(memoryAddressingMode);
 					orSubRuleList.add(getAllMemorySizeDirectiveElements());
 				}
 			}
