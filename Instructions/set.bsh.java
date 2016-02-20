@@ -1,7 +1,6 @@
 execute(cc, des, registers, memory){
 	Calculator cal = new Calculator(registers, memory);
 	boolean initialCondition = cal.evaluateCondition(cc.getValue());
-	System.out.println("Should I set: " + initialCondition);
 
 	/**
 	 * If condition is true, carry out the move
