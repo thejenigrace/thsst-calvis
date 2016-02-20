@@ -1,5 +1,6 @@
 package EnvironmentConfiguration.model.engine;
 
+import javax.sound.midi.SysexMessage;
 import java.math.BigInteger;
 
 public class Calculator {
@@ -123,67 +124,82 @@ public class Calculator {
 	}
 
 	public long convertToSignedInteger(BigInteger value, int size) {
+        System.out.println("--Convert to Signed Integer--");
 		long result = Long.parseLong(value.toString());
-		String strValue = value.toString(2);
+		String twosComplement = value.toString(2);
 
-		int missingZeroes = size - strValue.length();
+		int missingZeroes = size - twosComplement.length();
 
 		System.out.println("size = " + size);
-		System.out.println("original strValue = " + strValue);
+        System.out.println("original hex = " + value.toString(16));
+        System.out.println("original decimal = " + value.toString());
+		System.out.println("original twosComplement = " + twosComplement);
 
-		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-//			if(str.charAt(0) == '0')
-				strValue = "0" + strValue;
-//			else if(str.charAt(0) == '1')
-//				str = "1" + str;
-		}
+		// Zero extend
+		for(int k = 0; k < missingZeroes; k++)
+            twosComplement = "0" + twosComplement;
 
-		System.out.println("zero extend strValue = " + strValue);
+		System.out.println("twosComplement = " + twosComplement);
 
-		if(strValue.charAt(0) == '1') {
-			BigInteger ry = value.subtract(BigInteger.ONE);
+        // Negative Two's Complement
+		if(twosComplement.charAt(0) == '1') {
+			BigInteger biOnesComplement = value.subtract(BigInteger.ONE);
+            System.out.println("onesComplement = " + biOnesComplement.toString(2));
 
-//            System.out.println("ry = " + ry.toString(2));
+			String onesComplement = biOnesComplement.toString(2);
 
-			String temp = ry.toString(2);
+            // Convert 1's Complement to Normal Binary
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < temp.length(); i++) {
-				if (temp.charAt(i) == '1')
+			for (int i = 0; i < onesComplement.length(); i++) {
+				if (onesComplement.charAt(i) == '1')
 					sb.append("0");
-				else if (temp.charAt(i) == '0')
+				else if (onesComplement.charAt(i) == '0')
 					sb.append("1");
 			}
 
-//            System.out.println("sb = " + sb.toString());
+            System.out.println("decimalBinaryF = " + sb.toString());
 
-			BigInteger z = new BigInteger(sb.toString(), 2);
-//            System.out.println("b = " + z.toString());
+			BigInteger decimal = new BigInteger(sb.toString(), 2);
+            System.out.println("decimal = " + decimal.toString());
 
-			String f = "-" + z.toString();
-			System.out.println("parse = " + Long.parseLong(f));
+			String signedDecimal = "-" + decimal.toString();
+			System.out.println("signedDecimal = " + Long.parseLong(signedDecimal));
 
-			result = Long.parseLong(f);
-			System.out.println(Long.toHexString(result));
+			result = Long.parseLong(signedDecimal);
 		}
 
 		return result;
 	}
 
-	public String cutToCertainHexSize(String value, int size) {
-		StringBuilder sb = new StringBuilder();
-//        int i = value.length()-1;
-//        while(sb.length() != size) {
-//            sb.append(value.charAt(i));
-//            i--;
-//        }
+    public String cutToCertainHexSize(String type, String value, int size) {
+        String str = "";
+        StringBuilder sb = new StringBuilder();
+        int missingZeroes = size - value.length();
+        // zero extend
+        for (int i = 0; i < missingZeroes; i++)
+            value = "0" + value;
 
-		for(int i = value.length()-1; i >= 0; i--) {
-			if(sb.length() < size)
-				sb.append(value.charAt(i));
-		}
-		return sb.reverse().toString();
-	}
+        if (type.equals("original")) {
+            // cut the hex to a certain size
+            for (int i = 0; i < size; i++)
+                sb.append(value.charAt(i));
+
+            str = sb.toString();
+        } else if (type.equals("reverse")) {
+            for (int i = value.length()-1; i >= value.length()-size; i--)
+                sb.append(value.charAt(i));
+
+            str = sb.reverse().toString();
+        }
+
+        System.out.println("--Cut To Certain Hex Size");
+        System.out.println("size = " + size);
+
+
+        return str;
+    }
+
+
 
 	public String[] cutToCertainSize(String value, int size) {
 		BigInteger bi = new BigInteger(value, 16);

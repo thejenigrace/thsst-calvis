@@ -1,75 +1,53 @@
 execute(src, registers, memory) {
-        int srcBitSize;
-        String x = "";
-        EFlags ef=registers.getEFlags();
-        Calculator c=new Calculator(registers, memory);
-        if ( src.isRegister() ){
-            System.out.println("DIV src = register");
-            srcBitSize = registers.getBitSize(src);
-            x = registers.get(src);
-        }else if( src.isMemory() ){
-            System.out.println("DIV src = memory");
-            srcBitSize = memory.getBitSize(src);
-            x = memory.read(src, srcBitSize);
-        }
-//        if ( src.isRegister() )
+            int srcBitSize;
+            String divisor;
+            EFlags ef = registers.getEFlags();
+            Calculator calculator = new Calculator(registers, memory);
 
-//            String x = registers.get(src);
+            if ( src.isRegister() ){
+                System.out.println("DIV: src == register");
+                srcBitSize = registers.getBitSize(src);
+                divisor = registers.get(src);
+            }else if( src.isMemory() ){
+                System.out.println("DIV: src == memory");
+                srcBitSize = memory.getBitSize(src);
+                divisor = memory.read(src, srcBitSize);
+            }
 
             if ( srcBitSize == 8 ){
-                BigInteger biX = new BigInteger(x, 16);
-                BigInteger biY = new BigInteger(registers.get("AX"), 16);
-                BigInteger[] result = biY.divideAndRemainder(biX);
-                String quotient = c.cutToCertainHexSize(result[0].toString(16), 2);
-                String remainder = c.cutToCertainHexSize(result[1].toString(16), 2);
-                registers.set("AL", quotient);
-                registers.set("AH", remainder);
-
-                // debugging
-                System.out.println("AX = " + biY.toString(16));
-                System.out.println("src (byte) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
-                System.out.println("quotient = " + quotient);
-                System.out.println("remainder = " + remainder);
+                String dividend = registers.get("AX");
+                divide(registers, calculator, dividend, divisor, "AL", "AH");
             } else if ( srcBitSize == 16 ){
-                BigInteger biX = new BigInteger(x, 16);
-                String y = registers.get("DX") + registers.get("AX");
-                BigInteger biY = new BigInteger(y, 16);
-                BigInteger[] result = biY.divideAndRemainder(biX);
-//                registers.set("AX", result[0].toString(16));
-//                registers.set("DX", result[1].toString(16));
-                String quotient = c.cutToCertainHexSize(result[0].toString(16), 4);
-                String remainder = c.cutToCertainHexSize(result[1].toString(16), 4);
-                registers.set("AX", quotient);
-                registers.set("DX", remainder);
-
-                // debugging
-                System.out.println("DX, AX = " + y);
-                System.out.println("src (word) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
-                System.out.println("quotient = " + quotient);
-                System.out.println("remainder = " + remainder);
+                String dividend = registers.get("DX") + registers.get("AX");
+                divide(registers, calculator, dividend, divisor, "AX", "DX");
             } else if ( srcBitSize == 32 ){
-                BigInteger biX = new BigInteger(x, 16);
-                String y = registers.get("EDX") + registers.get("EAX");
-                BigInteger biY = new BigInteger(y, 16);
-                BigInteger[] result = biY.divideAndRemainder(biX);
-//                registers.set("EAX", result[0].toString(16));
-//                registers.set("EDX", result[1].toString(16));
-                String quotient = c.cutToCertainHexSize(result[0].toString(16), 8);
-                String remainder = c.cutToCertainHexSize(result[1].toString(16), 8);
-                registers.set("EAX", quotient);
-                registers.set("EDX", remainder);
-
-                // debugging
-                System.out.println("EDX, EAX = " + y);
-                System.out.println("src (dword) = " + biX.toString(16));
-                System.out.println("quotient = " + result[0].toString(16));
-                System.out.println("remainder = " + result[1].toString(16));
-                System.out.println("quotient = " + quotient);
-                System.out.println("remainder = " + remainder);
+                String dividend = registers.get("EDX") + registers.get("EAX");
+                divide(registers, calculator, dividend, divisor, "EAX", "EDX");
             }
-//        }
- }
+        }
+
+        divide(registers, calculator, dividend, divisor, registerForQuotient, registerForRemainder) {
+            // debugging
+            System.out.println("DIVIDEND = " + dividend
+                + "\nDIVISOR = " + divisor
+                + "\nregisterForQuotient = " + registerForQuotient
+                + "\nregisterForRemainder = " + registerForRemainder);
+
+            BigInteger biDividend = new BigInteger(dividend, 16);
+            BigInteger biDivisor = new BigInteger(divisor, 16);
+            BigInteger[] biResult = biDividend.divideAndRemainder(biDivisor);
+
+            String quotient = calculator.cutToCertainHexSize("original", biResult[0].toString(16), resultHexSize);
+            String remainder = calculator.cutToCertainHexSize("original", biResult[1].toString(16), resultHexSize);
+
+            registers.set(registerForQuotient, quotient);
+            registers.set(registerForRemainder, remainder);
+
+            // debugging
+            System.out.println("DECIMAL DIVIDEND = " + biDividend.toString()
+                + "\nDECIMAL DIVISOR = " + biDivisor.toString());
+            System.out.println("quotient = " + biResult[0].toString(16));
+            System.out.println("remainder = " + biResult[1].toString(16));
+            System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
+            System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());
+        }
