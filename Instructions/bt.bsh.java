@@ -1,168 +1,126 @@
- execute(des, src, registers, memory){
-   Calculator calculator = new Calculator(registers, memory);
+execute(des, src, registers, memory){
+    Calculator calculator = new Calculator(registers, memory);
+    EFlags flags = registers.getEFlags();
 
-   if( des.isRegister() && registers.getBitSize(des) == 16 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 16 ) {
-      System.out.println("BT r16, r16");
+    if( des.isRegister() && registers.getBitSize(des) == 16 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 16 ) {
+            String destination = getDestinationRegister(registers, calculator, des);
+            String s = calculator.hexToBinaryString(registers.get(src), src);
+            BigInteger source = new BigInteger(s, 2);
+            BigInteger mod = new BigInteger("00010000", 2);
+            BigInteger[] r = source.divideAndRemainder(mod);
 
-      String d = calculator.hexToBinaryString(registers.get(des), des);
-      String destination = new StringBuffer(d).reverse().toString();
+            //Flags
+            setFlags(flags, destination.charAt(r[1].intValue()));
+        }
+        else if( src.isHex() && src.getValue().length() <= 2 ) {
+            BigInteger l = new BigInteger(src.getValue(), 16);
+            int limit = l.intValue();
 
-      String s = calculator.hexToBinaryString(registers.get(src), src);
-      BigInteger source = new BigInteger(s, 2);
+            if( limit >= 0 && limit <= 15 ) {
+                String destination = getDestinationRegister(registers, calculator, des);
+                String s = calculator.hexToBinaryString(src.getValue(), src);
+                BigInteger source = new BigInteger(s, 2);
 
-      EFlags flags = registers.getEFlags();
-   	  flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-      flags.setOverflowFlag("0"); //undefined
-      flags.setSignFlag("0"); //undefined
-      flags.setParityFlag("0"); //undefined
-      flags.setAuxiliaryFlag("0"); //undefined
-      //Zero flag no change
-     }
-     else if( src.isHex() && src.getValue().length() <= 2 ) {
-       BigInteger l = new BigInteger(src.getValue(), 16);
-       int limit = l.intValue();
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
+            }
+        }
+    }
+    else if( des.isRegister() && registers.getBitSize(des) == 32 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 32 ) {
+            String destination = getDestinationRegister(registers, calculator, des);
+            String s = calculator.hexToBinaryString(registers.get(src), src);
+            BigInteger source = new BigInteger(s, 2);
+            BigInteger mod = new BigInteger("00100000", 2);
+            BigInteger[] r = source.divideAndRemainder(mod);
 
-       if( limit >= 0 && limit <= 15 ) {
-        System.out.println("BT r16, i8");
+            //Flags
+            setFlags(flags, destination.charAt(r[1].intValue()));
+        }
+        else if( src.isHex() && src.getValue().length() <= 2 ) {
+            BigInteger l = new BigInteger(src.getValue(), 16);
+            int limit = l.intValue();
 
-        String d = calculator.hexToBinaryString(registers.get(des), des);
-        String destination = new StringBuffer(d).reverse().toString();
+            if( limit >= 0 && limit <= 31 ) {
+                String destination = getDestinationRegister(registers, calculator, des);
+                String s = calculator.hexToBinaryString(src.getValue(), src);
+                BigInteger source = new BigInteger(s, 2);
 
-        String s = calculator.hexToBinaryString(src.getValue(), src);
-        BigInteger source = new BigInteger(s, 2);
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
+            }
+        }
+    }
+    else if( des.isMemory() && memory.getBitSize(des) == 16 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 16 ) {
+            String destination = getDestinationMemory(memory, calculator, des);
+            String s = calculator.hexToBinaryString(registers.get(src), src);
+            BigInteger source = new BigInteger(s, 2);
 
-        EFlags flags = registers.getEFlags();
-     	  flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-        //Zero flag no change
-       }
-     }
-   }
-   else if( des.isRegister() && registers.getBitSize(des) == 32 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 32 ) {
-      System.out.println("BT r32, r32");
+            //Flags
+            setFlags(flags, destination.charAt(source.intValue()));
+        }
+        else if( src.isHex() && src.getValue().length() <= 2 ) {
+            BigInteger l = new BigInteger(src.getValue(), 16);
+            int limit = l.intValue();
 
-      String d = calculator.hexToBinaryString(registers.get(des), des);
-      String destination = new StringBuffer(d).reverse().toString();
+            if( limit >= 0 && limit <= 16 ) {
+                String destination = getDestinationMemory(memory, calculator, des);
+                String s = calculator.hexToBinaryString(src.getValue(), src);
+                BigInteger source = new BigInteger(s, 2);
 
-      String s = calculator.hexToBinaryString(registers.get(src), src);
-      BigInteger source = new BigInteger(s, 2);
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
+            }
+        }
+    }
+    else if( des.isMemory() && memory.getBitSize(des) == 32 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 32 ) {
+            String destination = getDestinationMemory(memory, calculator, des);
+            String s = calculator.hexToBinaryString(registers.get(src), src);
+            BigInteger source = new BigInteger(s, 2);
 
-      EFlags flags = registers.getEFlags();
-   	  flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-      flags.setOverflowFlag("0"); //undefined
-      flags.setSignFlag("0"); //undefined
-      flags.setParityFlag("0"); //undefined
-      flags.setAuxiliaryFlag("0"); //undefined
-      //Zero flag no change
-     }
-     else if( src.isHex() && src.getValue().length() <= 2 ) {
-      BigInteger l = new BigInteger(src.getValue(), 16);
-      int limit = l.intValue();
+            //Flags
+            setFlags(flags, destination.charAt(source.intValue()));
+        }
+        else if( src.isHex() && src.getValue().length() <= 2 ) {
+            BigInteger l = new BigInteger(src.getValue(), 16);
+            int limit = l.intValue();
 
-      if( limit >= 0 && limit <= 31 ) {
-       System.out.println("BT r32, i8");
+            if( limit >= 0 && limit <= 31 ) {
+                String destination = getDestinationMemory(memory, calculator, des);
+                String s = calculator.hexToBinaryString(src.getValue(), src);
+                BigInteger source = new BigInteger(s, 2);
 
-       String d = calculator.hexToBinaryString(registers.get(des), des);
-       String destination = new StringBuffer(d).reverse().toString();
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
+            }
+        }
+    }
+}
 
-       String s = calculator.hexToBinaryString(src.getValue(), src);
-       BigInteger source = new BigInteger(s, 2);
+String getDestinationRegister(registers, calculator, des) {
+    String d = calculator.hexToBinaryString(registers.get(des), des);
+    String dest = new StringBuffer(d).reverse().toString();
 
-       EFlags flags = registers.getEFlags();
-       flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-       flags.setOverflowFlag("0"); //undefined
-       flags.setSignFlag("0"); //undefined
-       flags.setParityFlag("0"); //undefined
-       flags.setAuxiliaryFlag("0"); //undefined
-       //Zero flag no change
-      }
-     }
-   }
-   else if( des.isMemory() && memory.getBitSize(des) == 16 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 16 ) {
-      System.out.println("BT m16, r16");
+    return dest;
+}
 
-      String d = calculator.hexToBinaryString(memory.read(des, des), des);
-      String destination = new StringBuffer(d).reverse().toString();
+String getDestinationMemory(memory, calculator, des) {
+    String d = calculator.hexToBinaryString(memory.read(des, des), des);
+    String dest = new StringBuffer(d).reverse().toString();
 
-      String s = calculator.hexToBinaryString(registers.get(src), src);
-      BigInteger source = new BigInteger(s, 2);
+    return dest;
+}
 
-      EFlags flags = registers.getEFlags();
-   	  flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-      flags.setOverflowFlag("0"); //undefined
-      flags.setSignFlag("0"); //undefined
-      flags.setParityFlag("0"); //undefined
-      flags.setAuxiliaryFlag("0"); //undefined
-      //Zero flag no change
-     }
-     else if( src.isHex() && src.getValue().length() <= 2 ) {
-       BigInteger l = new BigInteger(src.getValue(), 16);
-       int limit = l.intValue();
+setFlags(flags, cf) {
+    flags.setCarryFlag(cf + "");
 
-       if( limit >= 0 && limit <= 16 ) {
-        System.out.println("BT m16, i8");
-
-        String d = calculator.hexToBinaryString(memory.read(des, des), des);
-        String destination = new StringBuffer(d).reverse().toString();
-
-        String s = calculator.hexToBinaryString(src.getValue(), src);
-        BigInteger source = new BigInteger(s, 2);
-
-        EFlags flags = registers.getEFlags();
-        flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-        //Zero flag no change
-       }
-     }
-   }
-   else if( des.isMemory() && memory.getBitSize(des) == 32 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 32 ) {
-      System.out.println("BT m32, r32");
-
-      String d = calculator.hexToBinaryString(memory.read(des, des), des);
-      String destination = new StringBuffer(d).reverse().toString();
-
-      String s = calculator.hexToBinaryString(registers.get(src), src);
-      BigInteger source = new BigInteger(s, 2);
-
-      EFlags flags = registers.getEFlags();
-   	  flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-      flags.setOverflowFlag("0"); //undefined
-      flags.setSignFlag("0"); //undefined
-      flags.setParityFlag("0"); //undefined
-      flags.setAuxiliaryFlag("0"); //undefined
-      //Zero flag no change
-     }
-     else if( src.isHex() && src.getValue().length() <= 2 ) {
-       BigInteger l = new BigInteger(src.getValue(), 16);
-       int limit = l.intValue();
-
-       if( limit >= 0 && limit <= 31 ) {
-        System.out.println("BT m32, i8");
-
-        String d = calculator.hexToBinaryString(memory.read(des, des), des);
-        String destination = new StringBuffer(d).reverse().toString();
-
-        String s = calculator.hexToBinaryString(src.getValue(), src);
-        BigInteger source = new BigInteger(s, 2);
-
-        EFlags flags = registers.getEFlags();
-        flags.setCarryFlag(destination.charAt(source.intValue()) + "");
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-        //Zero flag no change
-       }
-     }
-   }
- }
+    //OF, SF, PF, AF are undefined
+    flags.setOverflowFlag("0");
+    flags.setSignFlag("0");
+    flags.setParityFlag("0");
+    flags.setAuxiliaryFlag("0");
+    //Zero flag no change
+}
