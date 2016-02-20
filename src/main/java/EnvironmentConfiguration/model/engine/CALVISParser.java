@@ -26,18 +26,20 @@ public class CALVISParser {
 	private ArrayList<Exception> exceptions;
 	private int lineNumber;
 
-	private final String hexPattern = "\\b([0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
-	private final String decPattern = "\\b(\\d+_[dD])\\b";
+	private final String hexPattern = "\\b(0[xX][0-9a-fA-F]{1," + RegisterList.MAX_SIZE / 4 + "})\\b";
+	private final String decPattern = "\\b(\\d+)\\b";
 	private final String commentPattern = "(;.*)";
+	private final String labelPattern = "[a-zA-Z_][a-zA-Z\\d_]*";
 
-//	private TokenDef hex;
-//	private TokenDef dec;
+	private TokenDef hex;
+	private TokenDef dec;
 
 	private TokenDef cl;
 
 	private Grule justLabel;
 	private Grule label;
-	private Grule hexOrDecimal;
+
+//	private Grule hexOrDecimal;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -61,7 +63,7 @@ public class CALVISParser {
 
 		label = lang.newGrule();
 		justLabel = lang.newGrule();
-		hexOrDecimal = lang.newGrule();
+//		hexOrDecimal = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
@@ -82,13 +84,13 @@ public class CALVISParser {
 		// 2. Prepare Memory Size Directives
 		prepareMemorySizeDirectives();
 
-//		hex = lang.newToken(hexPattern);
-//		dec = lang.newToken(decPattern);
+		hex = lang.newToken(hexPattern);
+		dec = lang.newToken(decPattern);
 
 		// start ::= assembly $
 		lang.defineGrule(assembly, CC.EOF);
 
-		justLabel.define("[a-zA-Z_]+[g-zG-Z]+[a-zA-Z\\d_]*")
+		justLabel.define(labelPattern)
 			.action((Action<Object>) args -> new Token(Token.LABEL, args.toString()));
 
 //		// LABEL ::= identifier ":"
@@ -139,12 +141,12 @@ public class CALVISParser {
 				System.out.println("memory base rule: " + t.getValue() + " :: " + t.getType());
 				return t;
 			})
-			.alt(hexPattern)
+			.alt(hex)
 				.action((Action<Object>) matched -> {
 					System.out.println("memory base rule: " + matched);
 					return new Token(Token.HEX, matched.toString());
 				})
-			.alt(decPattern)
+			.alt(dec)
 				.action((Action<Object>) matched -> {
 					System.out.println("memory base rule: " + matched);
 					return new Token(Token.DEC, matched.toString());
@@ -155,7 +157,7 @@ public class CALVISParser {
 					return new Token(Token.DEC, matched.toString());
 				});
 
-		memoryIndex.define(getMemoryIndexScalableElements(), CC.op(times, decPattern))
+		memoryIndex.define(getMemoryIndexScalableElements(), CC.op(times, dec))
 			.action((Action<Object[]>) matched -> {
 				String result = "";
 				for (Object obj : matched){
@@ -176,7 +178,7 @@ public class CALVISParser {
 				}
 				return new Token(Token.REG, result);
 			})
-			.alt(CC.op(decPattern, times), getMemoryIndexScalableElements())
+			.alt(CC.op(dec, times), getMemoryIndexScalableElements())
 				.action((Action<Object[]>) matched -> {
 					String result = "";
 					for (Object obj : matched){
@@ -198,12 +200,12 @@ public class CALVISParser {
 					return new Token(Token.REG, result);
                 });
 
-		memoryDisplacement.define(hexPattern)
+		memoryDisplacement.define(hex)
 			.action((Action<Object>) matched -> {
 				System.out.println("memory displacement rule: " + matched);
 				return new Token(Token.HEX, matched.toString());
 			})
-			.alt(decPattern)
+			.alt(dec)
 				.action((Action<Object>) matched -> {
 					System.out.println("memory displacement rule: " + matched);
 					return new Token(Token.DEC, matched.toString());
@@ -215,15 +217,15 @@ public class CALVISParser {
 		 */
 		this.memorySizeDirectives = new HashMap<>();
 
-		hexOrDecimal.define(hexPattern)
-			.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
-			.alt(decPattern)
-			.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
+//		hexOrDecimal.define(hexPattern)
+//			.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
+//			.alt(decPattern)
+//			.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
 
-//		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
-//		hexOrDecimalList.add(hex);
-//		hexOrDecimalList.add(dec);
-//		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
+		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
+		hexOrDecimalList.add(hex);
+		hexOrDecimalList.add(dec);
+		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
 
 		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
 			Double size = Math.pow(2, 2 + i);
@@ -258,7 +260,7 @@ public class CALVISParser {
 		 * db, dw, dd, ...
 		 */
 //		variableDeclarations ::=  (variable)*
-		variableDeclarations.define(justLabel, getAllMemoryElements(), hexOrDecimal, CC.ks(comma, hexOrDecimal))
+		variableDeclarations.define(justLabel, getAllVariableElements(), hexOrDecimal, CC.ks(comma, hexOrDecimal))
 			.action((Action<Object[]>) matched -> {
 				Token labelName = (Token) matched[0];
 				Token dataType = (Token) matched[1];
@@ -282,14 +284,14 @@ public class CALVISParser {
 
 				for( Token token : valuesList ) {
 					if ( token.isHex() ) {
-						int declaredSize = memory.getHexSize(dataType);
+						int declaredSize = memory.getPrefixHexSize(dataType);
 						String tokenValue = token.getValue();
 						if ( tokenValue.length() > declaredSize ) {
 							exceptions.add(new DataTypeMismatchException(labelName.getValue(),
 									dataType.getValue(), tokenValue));
 						} else {
 							try {
-								int prefixSize = memory.getBitSize(dataType);
+								int prefixSize = memory.getPrefixBitSize(dataType);
 								tokenValue = MemoryAddressCalculator.extend(tokenValue, prefixSize, "0");
 								memory.write(memory.getVariablePointer(), tokenValue, prefixSize);
 								memory.incrementVariablePointer(prefixSize);
@@ -669,9 +671,9 @@ public class CALVISParser {
 				}
 			}
 			if ( anAllowed.contains("i") ) {
-//				orSubRuleList.add(hex);
-//				orSubRuleList.add(dec);
-				orSubRuleList.add(hexOrDecimal);
+				orSubRuleList.add(hex);
+				orSubRuleList.add(dec);
+//				orSubRuleList.add(hexOrDecimal);
 			}
 			if ( anAllowed.contains("c") ) {
 				orSubRuleList.add(cl);
@@ -702,9 +704,9 @@ public class CALVISParser {
 
 			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|" +
 				sizeDirectivePrefix.toUpperCase() + ")\\b";
-//			System.out.println(variableTypePattern);
-//			TokenDef variableType = lang.newToken(variableTypePattern);
-//			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
+			System.out.println(variableTypePattern);
+			TokenDef variableType = lang.newToken(variableTypePattern);
+			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
 		}
 
 //		System.out.println(memoryTokenMap);
