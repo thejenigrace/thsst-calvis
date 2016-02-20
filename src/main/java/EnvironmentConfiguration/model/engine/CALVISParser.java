@@ -4,6 +4,7 @@ import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -47,7 +48,7 @@ public class CALVISParser {
 		this.memory = memory;
 		this.mappedInstruction = new HashMap<>();
 		this.exceptions = new ArrayList<>();
-		this.lineNumber = 0;		
+		this.lineNumber = 0;
 		this.lang = new Lang("CALVIS");
 
 		Grule assembly = lang.newGrule();
@@ -449,7 +450,7 @@ public class CALVISParser {
 							specifications1.add(entry[i]);
 						}
 					}
-//					System.out.println(specifications1);
+					System.out.println(specifications1);
 
 					String[] secondParameter = prodRule[4].split("/");
 					ArrayList<String[]> secondParameterList = new ArrayList<>();
@@ -463,7 +464,7 @@ public class CALVISParser {
 							specifications2.add(entry[i]);
 						}
 					}
-//					System.out.println(specifications2);
+					System.out.println(specifications2);
 
 					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
@@ -492,6 +493,18 @@ public class CALVISParser {
 						}
 						instructionAlternatives.add(elements2);
 					}
+
+//					Element[] elements2 = new Element[numParameters];
+//					elements2[0] = instructionName;
+//					elements2[1] = parseOneParameter(firstParameter);
+//					elements2[2] = comma;
+//					elements2[3] = parseOneParameter(secondParameter);
+//					if ( parameterCount == 3 ) {
+//							elements2[4] = comma;
+//							String[] thirdParameter = prodRule[5].split("/");
+//							elements2[5] = parseOneParameter(thirdParameter);
+//						}
+//					instructionAlternatives.add(elements2);
 					break;
 			}
 
@@ -542,16 +555,15 @@ public class CALVISParser {
 						return calvisInstruction;
 					});
 				}
+//				instruction.getAlts().add(instructionAlternative);
 				altList.add(instructionAlternative);
 			}
 		}
 
 		// instruction ::= <List of Instructions>
-		instruction.setAlts(altList);
-//
-//		// value ::= string | char | int | double
-//		value.define("\\d+(\\.\\d+)?").alt("\\d*\\.\\d*").alt("\"([^\\\"]+|\\.)*\"");
+		System.out.println("Total number of instructions loaded: " + altList.size());
 
+		instruction.setAlts(altList);
 
 		// mainProgram ::= ( LABEL? instruction)*
 		mainProgram.define(CC.ks(CC.ks(commentPattern), CC.op(label), instruction ))
@@ -871,7 +883,7 @@ public class CALVISParser {
 		return concatenateOrSubRules(memoryElementsList);
 	}
 
-	private Element getAllVariableElements(){
+	private Element getAllVariableElements() {
 		Iterator<Element> keys = variableDeclarationTokenMap.values().iterator();
 		ArrayList<Element> list = new ArrayList<>();
 		while (keys.hasNext()){
