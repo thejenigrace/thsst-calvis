@@ -188,17 +188,20 @@ public class TextEditor extends AssemblyComponent {
     @Override
     public void update(String currentLine, int lineNumber) {
         if (currentLine != null) {
-            Matcher matcher = lineByLinePattern.matcher(this.codeArea.getText());
+            String codeAreaText = this.codeArea.getText();
+            Matcher matcher = lineByLinePattern.matcher(codeAreaText);
             HashMap<Integer, int[]> findHighlightRanges = new HashMap<>();
             // c represents matched
             int c = 0;
 
             while (matcher.find()) {
-                int[] arrRange = new int[2];
-                arrRange[0] = matcher.start();
-                arrRange[1] = matcher.end();
-                findHighlightRanges.put(c, arrRange);
-                c++;
+                if ( !matcher.toMatchResult().group().contains(";") ) {
+                    int[] arrRange = new int[2];
+                    arrRange[0] = matcher.start();
+                    arrRange[1] = matcher.end();
+                    findHighlightRanges.put(c, arrRange);
+                    c++;
+                }
             }
             int[] range = findHighlightRanges.get(lineNumber);
             if (range != null) {
@@ -207,7 +210,7 @@ public class TextEditor extends AssemblyComponent {
                 codeArea.redo();
             }
         } else {
-            System.out.println("null currentLine");
+            System.out.println("null highlight currentLine");
             codeArea.selectRange(0, 0);
             codeArea.redo();
         }
@@ -224,7 +227,8 @@ public class TextEditor extends AssemblyComponent {
         this.setCodeEnvironment();
         String[] arr = this.sysCon.getInstructionKeywords();
         String expression = String.join("|", arr);
-        expression = "\\b(" + expression + ")\\b(.*?)(?=;)|\\b(" + expression + ")\\b(.*)";
+        expression = "((.*)\\b(" + expression + ")\\b(.*)(?=;))|((.*)\\b(" + expression + ")\\b(.*))";
+//        expression = "[^;]\\b(" + expression + ")\\b(.*)"; //?)(?=;)|\\b(" + expression + ")\\b(.*)";
         lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
     }
 }

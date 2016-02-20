@@ -5,7 +5,6 @@ import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
-import com.github.pfmiles.dropincc.DropinccException;
 import javafx.application.Platform;
 
 import java.util.*;
@@ -24,17 +23,15 @@ public class SystemController {
     private CALVISParser parser;
 
     private List<AssemblyComponent> observerList;
-
     private SimulationState state;
 	private Thread thread;
-
     private WorkspaceController workspaceController;
 
 	private HashMap<String, CALVISInstruction> executionMap;
 	private HashMap<Integer, String[][]> registerStackMap;
 	private HashMap<Integer, String> flagsStackMap;
 	private HashMap<Integer, String[][]> memoryStackMap;
-	private Integer count;
+	private Integer stackCount;
 
     public SystemController(EnvironmentConfigurator ec, WorkspaceController wc){
         this.environment = ec;
@@ -49,7 +46,7 @@ public class SystemController {
 	    this.registerStackMap = new HashMap<>();
 	    this.flagsStackMap = new HashMap<>();
 	    this.memoryStackMap = new HashMap<>();
-	    this.count = 0;
+	    this.stackCount = 0;
     }
 
     public void attach(AssemblyComponent observer){
@@ -133,7 +130,7 @@ public class SystemController {
 		this.registerStackMap = new HashMap<>();
 		this.flagsStackMap = new HashMap<>();
 		this.memoryStackMap = new HashMap<>();
-		this.count = 0;
+		this.stackCount = 0;
 		refreshAllObservers();
 	}
 
@@ -141,10 +138,10 @@ public class SystemController {
         if ( executionMap != null ) {
             if ( state == SimulationState.PAUSE ){
 	            //System.out.println("previous");
-	            count--;
-	            if ( count > 0 ) {
+	            stackCount--;
+	            if ( stackCount > 0 ) {
 		            //1. Revert Environment back by one pop
-		            String[][] registerStringArray = registerStackMap.get(count);
+		            String[][] registerStringArray = registerStackMap.get(stackCount);
 		            for (int i = 0; i < registerStringArray.length; i++) {
 //			            System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
 			            //1.2 Set registerList with values from pop
@@ -159,10 +156,10 @@ public class SystemController {
 			            }
 		            }
 		            EFlags flags = this.registerList.getEFlags();
-		            String flagsValue = flagsStackMap.get(count);
+		            String flagsValue = flagsStackMap.get(stackCount);
 		            flags.setValue(flagsValue);
 
-		            String[][] memoryArray = memoryStackMap.get(count);
+		            String[][] memoryArray = memoryStackMap.get(stackCount);
 		            Map memoryMap = this.memory.getMemoryMap();
 		            for (int i = 0; i < memoryArray.length; i++) {
 			            memoryMap.put(memoryArray[i][0], memoryArray[i][1]);
@@ -244,8 +241,8 @@ public class SystemController {
 		try {
 			flag = executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
 		} catch (Exception e){
-			System.out.println("INSTRUCTION EXECUTION ERROR: " + e.getMessage());
-			System.out.println("INSTRUCTION EXECUTION ERROR: " + e.getCause());
+			System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
+			System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());
 			e.printStackTrace();
 
 			Platform.runLater(
@@ -254,6 +251,7 @@ public class SystemController {
 						public void run() {
 							try {
 								workspaceController.handleErrorLoggerTab(e);
+								end();
 							} catch (Exception someOtherException) {
 								someOtherException.printStackTrace();
 							}
@@ -270,7 +268,7 @@ public class SystemController {
 			value++;
 			registerList.setInstructionPointer(Integer.toHexString(value));
 		}
-		count++;
+		stackCount++;
 		push();
 	}
 
@@ -326,11 +324,11 @@ public class SystemController {
 			registerStringArray[i][1] = registerList.get(registerName);
 			i++;
 		}
-		this.registerStackMap.put(count, registerStringArray);
+		this.registerStackMap.put(stackCount, registerStringArray);
 
 		EFlags flags = registerList.getEFlags();
 		String flagsValue = flags.getValue();
-		this.flagsStackMap.put(count, flagsValue);
+		this.flagsStackMap.put(stackCount, flagsValue);
 
 		Map<String, String> memoryMap = memory.getMemoryMap();
 		Iterator<String> iterator2 = memoryMap.keySet().iterator();
@@ -342,7 +340,7 @@ public class SystemController {
 			memoryArray[k][1] = memoryMap.get(memoryAddress);
 			k++;
 		}
-		this.memoryStackMap.put(count, memoryArray);
+		this.memoryStackMap.put(stackCount, memoryArray);
 
 		//System.out.println(registerStringArray);
 //		for (int n = 0; n < registerStringArray.length; n++) {

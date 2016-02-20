@@ -236,7 +236,7 @@
         </VBox>
     </top>
     <center>
-        <SplitPane fx:id="rootSplitPane" dividerPositions="0.165, 0.86" BorderPane.alignment="CENTER">
+        <SplitPane fx:id="rootSplitPane" dividerPositions="0.165, 0.80" BorderPane.alignment="CENTER">
             <items>
                 <AnchorPane fx:id="registerPane">
                 </AnchorPane>

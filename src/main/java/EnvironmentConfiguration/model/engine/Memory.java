@@ -245,7 +245,8 @@ public class Memory {
 	}
 
 	/**
-	 * getRegisterKeys() is used for getting all register names to be highlighted
+	 * getMemoryKeys() is used for getting all size directives to be highlighted
+	 * @return
 	 */
 	public Iterator<String> getMemoryKeys(){
 		List memoryKeys = new ArrayList<>();
@@ -298,6 +299,12 @@ public class Memory {
 		return getPrefixBitSize(prefix) / 4;
 	}
 
+	/**
+	 * getFromLabelMap(String) is used by control transfer instructions indicated in the BSH files
+	 * @param key is the name of the label
+	 * @return the address pointed to by the label
+	 * @throws NullPointerException, in case the label does not exist
+	 */
 	public String getFromLabelMap(String key) throws NullPointerException {
 		if ( labelMap.get(key) != null ){
 			return labelMap.get(key);
@@ -319,25 +326,29 @@ public class Memory {
 		}
 	}
 
+	public HashMap getVariableMap() {
+		return this.variableMap;
+	}
+
+	public String getCorrespondingLabel(String addressKey) {
+		for (Map.Entry<String, String> entry : variableMap.entrySet()) {
+			if (Objects.equals(addressKey, entry.getValue())) {
+				return entry.getKey();
+			}
+		}
+		return "";
+	}
+
 	public void putToVariableMap(String key, String size) throws DuplicateVariableException {
 		if ( variableMap.containsKey(key) ){
 			throw new DuplicateVariableException(key);
 		} else {
 			variableMap.put(key, variablePointer);
-//			variablePointer.
 		}
 	}
 
 	public static void setDefaultRelativeSize(int defaultRelativeSize) {
 		DEFAULT_RELATIVE_SIZE = defaultRelativeSize;
-	}
-
-	public String removeSizeDirectives(String memoryAddressingMode){
-		String result = memoryAddressingMode;
-		if ( result.contains("/") ){
-			result = result.split("/")[1];
-		}
-		return result;
 	}
 
 	public boolean containsLabel(String label) {

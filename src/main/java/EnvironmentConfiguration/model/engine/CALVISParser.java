@@ -153,8 +153,9 @@ public class CALVISParser {
 				})
 			.alt(justLabel)
 				.action((Action<Object>) matched -> {
-					System.out.println("memory base rule: " + matched);
-					return new Token(Token.DEC, matched.toString());
+					Token label = (Token) matched;
+					System.out.println("memory base rule: " + label.getValue());
+					return matched;
 				});
 
 		memoryIndex.define(getMemoryIndexScalableElements(), CC.op(times, dec))
@@ -281,6 +282,11 @@ public class CALVISParser {
 //					System.out.println(objectGroup[0] + " " + objectGroupValue.getValue());
 					valuesList.add(objectGroupValue);
 				}
+				try {
+					memory.putToVariableMap(labelName.getValue(), dataType.getValue());
+				} catch (DuplicateVariableException e) {
+					exceptions.add(e);
+				}
 
 				for( Token token : valuesList ) {
 					if ( token.isHex() ) {
@@ -300,11 +306,6 @@ public class CALVISParser {
 							}
 						}
 					}
-				}
-				try {
-					memory.putToVariableMap(labelName.getValue(), dataType.getValue());
-				} catch (DuplicateVariableException e) {
-					exceptions.add(e);
 				}
 
 				return null;
@@ -704,7 +705,6 @@ public class CALVISParser {
 
 			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|" +
 				sizeDirectivePrefix.toUpperCase() + ")\\b";
-			System.out.println(variableTypePattern);
 			TokenDef variableType = lang.newToken(variableTypePattern);
 			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
 		}
