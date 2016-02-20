@@ -66,10 +66,13 @@ execute(des, src, registers, memory){
             String s = calculator.hexToBinaryString(registers.get(src), src);
             BigInteger source = new BigInteger(s, 2);
 
-            //Flags
-            setFlags(flags, destination.charAt(source.intValue()));
+            if( source.intValue() >= 0 && source.intValue() <= 15 ) {
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
 
-            storeResultToDesMemory(memory, calculator, des, destination, source)
+                storeResultToDesMemory(memory, calculator, des, destination, source);
+            }
+
         }
         else if( src.isHex() && src.getValue().length() <= 2 ) {
             BigInteger l = new BigInteger(src.getValue(), 16);
@@ -83,7 +86,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source)
+                storeResultToDesMemory(memory, calculator, des, destination, source);
             }
         }
     }
@@ -93,10 +96,12 @@ execute(des, src, registers, memory){
             String s = calculator.hexToBinaryString(registers.get(src), src);
             BigInteger source = new BigInteger(s, 2);
 
-            //Flags
-            setFlags(flags, destination.charAt(source.intValue()));
+            if( source.intValue() >= 0 && source.intValue() <= 15 ) {
+                //Flags
+                setFlags(flags, destination.charAt(source.intValue()));
 
-            storeResultToDesMemory(memory, calculator, des, destination, source)
+                storeResultToDesMemory(memory, calculator, des, destination, source);
+            }
         }
         else if( src.isHex() && src.getValue().length() <= 2 ) {
             BigInteger l = new BigInteger(src.getValue(), 16);
@@ -110,7 +115,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source) 
+                storeResultToDesMemory(memory, calculator, des, destination, source);
             }
         }
     }

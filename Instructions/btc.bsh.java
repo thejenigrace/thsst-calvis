@@ -159,7 +159,6 @@ storeResultToDesMemory(memory, calculator, des, destination, source) {
 }
 
 setFlags(flags, cf) {
-    System.out.println("cf: " + cf);
     flags.setCarryFlag(cf + "");
 
     //OF, SF, PF, AF are undefined

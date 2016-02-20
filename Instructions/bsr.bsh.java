@@ -4,8 +4,6 @@
 
    if( des.isRegister() && registers.getBitSize(des) == 16 ) {
      if( src.isRegister() && registers.getBitSize(src) == 16 ) {
-      System.out.println("BSR r16, r16");
-
       String source = calculator.hexToBinaryString(registers.get(src), src);
       String destination = calculator.hexToBinaryString(registers.get(des), des);
 
@@ -18,11 +16,8 @@
         String result = calculator.binaryToHexString("0", des);
         registers.set(des, result); //des undefined
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
       else {
         flags.setZeroFlag("0");
@@ -38,11 +33,8 @@
           }
         }
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
      }
      else if( src.isMemory() && memory.getBitSize(src) == 16 ) {
@@ -60,11 +52,8 @@
         String result = calculator.binaryToHexString("0", des);
         registers.set(des, result); //des undefined
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
       else {
         flags.setZeroFlag("0");
@@ -80,11 +69,8 @@
           }
         }
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
      }
    }
@@ -104,11 +90,8 @@
         String result = calculator.binaryToHexString("0", des);
         registers.set(des, result); //des undefined
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
       else {
         flags.setZeroFlag("0");
@@ -124,11 +107,8 @@
           }
         }
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
      }
      else if( src.isMemory() && memory.getBitSize(src) == 32 ) {
@@ -146,11 +126,8 @@
         String result = calculator.binaryToHexString("0", des);
         registers.set(des, result); //des undefined
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
       else {
         flags.setZeroFlag("0");
@@ -165,13 +142,18 @@
             break;
           }
         }
-
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
+        //Flags
+        setFlags(flags);
       }
      }
    }
  }
+
+setFlags(flags) {
+    //CF, OF,  SF, PF, AF are undefined
+    flags.setCarryFlag("0");
+    flags.setOverflowFlag("0");
+    flags.setSignFlag("0");
+    flags.setParityFlag("0");
+    flags.setAuxiliaryFlag("0");
+}
