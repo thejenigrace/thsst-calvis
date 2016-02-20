@@ -98,27 +98,25 @@ public class Calculator {
 			}
 
 			//remove carry flag
-			System.out.println("val.length() = " + val.length());
-			System.out.println("registerSize = " + registerSize);
 			if(val.length() > registerSize) {
-				System.out.println("REMOVE CARRY FLAG");
 				StringBuilder sb = new StringBuilder();
 
 				for(int i = 1; i < val.length(); i++)
 					sb.append(val.charAt(i));
 
 				val = sb.toString();
-				System.out.println("val = " + val);
 			}
 		}
 		else if (des.isMemory()){
-			int missingZeroes = memory.getBitSize(des) - val.length();
+			int missingZeroes = memory.getHexSize(des) - val.length();
 
 			//zero extend
 			for(int k = 0; k < missingZeroes; k++){
 				val = "0" + val;
 			}
 		}
+
+		System.out.println("val: " + val);
 		return val;
 	}
 
@@ -227,7 +225,7 @@ public class Calculator {
 				}
 			}
 
-			if(value.length() > registers.getBitSize(des) ) {
+			if(value.length() > registers.getHexSize(des) ) {
 				value = value.substring(1);
 			}
 		}
@@ -241,7 +239,7 @@ public class Calculator {
 				}
 			}
 
-			if(value.length() > memory.getBitSize(des) ) {
+			if(value.length() > memory.getHexSize(des) ) {
 				value = value.substring(1);
 			}
 		}

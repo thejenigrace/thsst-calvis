@@ -1,7 +1,5 @@
- execute(registers, memory){
-   System.out.println("CLI");
+execute(registers, memory){
+    EFlags flags = registers.getEFlags();
 
-   EFlags flags = registers.getEFlags();
-
-	 flags.setInterruptFlag("0");
- }
+    flags.setInterruptFlag("0");
+}

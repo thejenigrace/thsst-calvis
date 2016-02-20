@@ -1,7 +1,5 @@
- execute(registers, memory){
-   System.out.println("CLC");
+execute(registers, memory){
+    EFlags flags = registers.getEFlags();
 
-   EFlags flags = registers.getEFlags();
-
-	 flags.setCarryFlag("0");
- }
+    flags.setCarryFlag("0");
+}

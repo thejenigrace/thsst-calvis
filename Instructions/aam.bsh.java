@@ -1,68 +1,55 @@
 execute(registers, memory) {
-  System.out.println("AAM");
+    Calculator calculator = new Calculator(registers, memory);
+    EFlags flags = registers.getEFlags();
 
-  Calculator calculator = new Calculator(registers, memory);
-  EFlags flags = registers.getEFlags();
-  Token tokenAL = new Token(Token.REG, "AL");
+    Token tokenAL = new Token(Token.REG, "AL");
 
-  String sAL = registers.get("AL");
+    String sAL = registers.get("AL");
 
-  BigInteger biAL = new BigInteger(sAL, 16);
-  BigInteger biImm8 = new BigInteger("0A", 16);
+    BigInteger biAL = new BigInteger(sAL, 16);
+    BigInteger biImm8 = new BigInteger("0A", 16);
 
-  BigInteger[] result = biAL.divideAndRemainder(biImm8);
+    BigInteger[] result = biAL.divideAndRemainder(biImm8);
+    storeResultInDes(registers, result);
 
-  registers.set("AH", result[0].toString(16));
-  registers.set("AL", result[1].toString(16));
-
-  //Flags
-  flags.setCarryFlag("0"); //undefined
-  flags.setAuxiliaryFlag("0"); //undefined
-  flags.setOverflowFlag("0"); //undefined
-
-  BigInteger bi = new BigInteger(registers.get("AL"), 16);
-  if(bi.equals(BigInteger.ZERO)) {
-    flags.setZeroFlag("1");
-  }
-  else {
-    flags.setZeroFlag("0");
-  }
-
-  String r = calculator.hexToBinaryString(registers.get("AL"), tokenAL);
-  String sign = "" + r.charAt(0);
-  flags.setSignFlag(sign);
-
-  String parity = calculator.checkParity(r);
-  flags.setParityFlag(parity);
+    //Flags
+    setFlags(registers, flags, calculator, tokenAL);
 }
 
 execute(des, registers, memory) {
-  System.out.println("AAM i8");
+    Calculator calculator = new Calculator(registers, memory);
+    EFlags flags = registers.getEFlags();
+    
+    Token tokenAL = new Token(Token.REG, "AL");
 
-  Calculator calculator = new Calculator(registers, memory);
-  EFlags flags = registers.getEFlags();
-  Token tokenAL = new Token(Token.REG, "AL");
+    if( des.getValue().length() <= 2 ) {
+        BigInteger biAL = new BigInteger(registers.get("AL"), 16);
+        BigInteger biImm8 = new BigInteger(des.getValue(), 16);
 
-  if( des.getValue().length() <= 2 ) {
-    BigInteger biAL = new BigInteger(registers.get("AL"), 16);
-    BigInteger biImm8 = new BigInteger(des.getValue(), 16);
+        BigInteger[] result = biAL.divideAndRemainder(biImm8);
+        storeResultInDes(registers, result);
 
-    BigInteger[] result = biAL.divideAndRemainder(biImm8);
+        //Flags
+        setFlags(registers, flags, calculator, tokenAL);
+    }
+}
 
+storeResultInDes(registers, result) {
     registers.set("AH", result[0].toString(16));
     registers.set("AL", result[1].toString(16));
+}
 
-    //Flags
+setFlags(registers, flags, calculator, tokenAL) {
     flags.setCarryFlag("0"); //undefined
     flags.setAuxiliaryFlag("0"); //undefined
     flags.setOverflowFlag("0"); //undefined
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
     if(bi.equals(BigInteger.ZERO)) {
-      flags.setZeroFlag("1");
+        flags.setZeroFlag("1");
     }
     else {
-      flags.setZeroFlag("0");
+        flags.setZeroFlag("0");
     }
 
     String r = calculator.hexToBinaryString(registers.get("AL"), tokenAL);
@@ -71,5 +58,4 @@ execute(des, registers, memory) {
 
     String parity = calculator.checkParity(r);
     flags.setParityFlag(parity);
-  }
 }

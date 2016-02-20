@@ -1,7 +1,5 @@
 execute(registers, memory) {
-  System.out.println("CLD");
+    EFlags flags = registers.getEFlags();
 
-  EFlags flags = registers.getEFlags();
-
-  flags.setDirectionFlag("0");
+    flags.setDirectionFlag("0");
 }

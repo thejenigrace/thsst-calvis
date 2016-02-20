@@ -1,5 +1,4 @@
 execute(registers, memory) {
-  System.out.println("CDQ");
   Calculator calculator = new Calculator(registers, memory);
 
   Token tokenEAX = new Token(Token.REG, "EAX");

@@ -1,7 +1,5 @@
- execute(registers, memory){
-   System.out.println("STI");
+execute(registers, memory){
+    EFlags flags = registers.getEFlags();
 
-   EFlags flags = registers.getEFlags();
-
-	 flags.setInterruptFlag("1");
- }
+    flags.setInterruptFlag("1");
+}
