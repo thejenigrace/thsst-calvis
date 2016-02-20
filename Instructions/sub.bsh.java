@@ -8,7 +8,7 @@ execute(des, src, registers, memory) {
             int desSize = registers.getBitSize(des);
             int srcSize = registers.getBitSize(src);
 
-            if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize)) {
+            if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize) ) {
                 //get hex value of des, src then convert to binary
                 String source = calculator.hexToBinaryString(registers.get(src), src);
                 String destination = calculator.hexToBinaryString(registers.get(des), des);

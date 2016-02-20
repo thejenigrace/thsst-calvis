@@ -8,6 +8,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/bt.bsh.java" afterPath="$PROJECT_DIR$/Instructions/bt.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/btc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/btc.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sbb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sbb.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sub.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sub.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -113,8 +114,8 @@
       <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7329377">
-              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.77744806">
+              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -927,12 +928,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00011" summary="Fix UI for EFLAGS &amp; Memory">
-      <created>1453905140049</created>
-      <option name="number" value="00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1453905140049</updated>
-    </task>
     <task id="LOCAL-00012" summary="Fix Instructions">
       <created>1454070560091</created>
       <option name="number" value="00012" />
@@ -1221,7 +1216,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455978135671</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="ok">
+      <created>1455979907753</created>
+      <option name="number" value="00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1455979907753</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1793,8 +1794,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7329377">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.77744806">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding />
         </state>
       </provider>
