@@ -32,7 +32,7 @@ execute(src,registers,memory){
             System.out.println("src (byte) = "+biX.toString(2));
             System.out.println("result = "+Long.toHexString(r));
 
-            String finalize=c.cutToCertainHexSize(Long.toHexString(r), srcSize/2);
+            String finalize=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
             //                System.out.println("finalize[0] = " + finalize[0]);
             //                System.out.println("finalize[1] = " + finalize[1]);
 
@@ -55,7 +55,7 @@ execute(src,registers,memory){
             System.out.println("src (byte) = "+biX.toString(2));
             System.out.println("result = "+Long.toHexString(r));
 
-            String fix=c.cutToCertainHexSize(Long.toHexString(r), srcSize/2);
+            String fix=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
             String[]finalize=c.cutToCertainSize(fix, srcSize/4);
             registers.set("DX",finalize[0]);
             registers.set("AX",finalize[1]);
@@ -82,7 +82,7 @@ execute(src,registers,memory){
             System.out.println("src (byte) = "+biX.toString(2));
             System.out.println("result = "+Long.toHexString(r));
 
-            String fix=c.cutToCertainHexSize(Long.toHexString(r), srcSize/2);
+            String fix=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
             String[]finalize=c.cutToCertainSize(fix, srcSize/4);
             registers.set("EDX",finalize[0]);
             registers.set("EAX",finalize[1]);
@@ -122,7 +122,7 @@ execute(src,registers,memory){
                     System.out.println("src (word) = "+biX.toString(2));
                     System.out.println("result = "+Long.toHexString(r));
 
-                    String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                     String[]finalize=c.cutToCertainSize(fix, desHexSize);
                     registers.set(des,finalize[0]);
 
@@ -148,7 +148,7 @@ execute(src,registers,memory){
                     System.out.println("src (word) = "+biX.toString(2));
                     System.out.println("result = "+Long.toHexString(r));
 
-                    String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                     String[]finalize=c.cutToCertainSize(fix, desHexSize);
                     registers.set(des,finalize[0]);
 
@@ -177,7 +177,7 @@ execute(src,registers,memory){
                         System.out.println("src (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix, desHexSize);
                         registers.set(des,finalize[0]);
 
@@ -208,7 +208,7 @@ execute(src,registers,memory){
                     System.out.println("src (word) = "+biX.toString(2));
                     System.out.println("result = "+Long.toHexString(r));
 
-                    String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                     String[]finalize=c.cutToCertainSize(fix, desHexSize);
                     registers.set(des,finalize[0]);
 
@@ -234,7 +234,7 @@ execute(src,registers,memory){
                     System.out.println("src (word) = "+biX.toString(2));
                     System.out.println("result = "+Long.toHexString(r));
 
-                    String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                     String[]finalize=c.cutToCertainSize(fix, desHexSize);
                     registers.set(des,finalize[0]);
 
@@ -263,7 +263,7 @@ execute(src,registers,memory){
                         System.out.println("src (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r), desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix, desHexSize);
                         registers.set(des,finalize[0]);
 
@@ -306,7 +306,7 @@ execute(src,registers,memory){
                         System.out.println("src1 (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r),desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix,desHexSize);
                         registers.set(des,finalize[0]);
 
@@ -332,7 +332,7 @@ execute(src,registers,memory){
                         System.out.println("src1 (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r),desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix,desHexSize);
                         registers.set(des,finalize[0]);
 
@@ -360,7 +360,7 @@ execute(src,registers,memory){
                         System.out.println("src1 (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r),desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix,desHexSize);
                         registers.set(des,finalize[0]);
 
@@ -386,7 +386,7 @@ execute(src,registers,memory){
                         System.out.println("src1 (word) = "+biX.toString(2));
                         System.out.println("result = "+Long.toHexString(r));
 
-                        String fix=c.cutToCertainHexSize(Long.toHexString(r),desBitSize/2);
+                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
                         String[]finalize=c.cutToCertainSize(fix,desHexSize);
                         registers.set(des,finalize[0]);
 

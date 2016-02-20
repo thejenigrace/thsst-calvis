@@ -54,8 +54,8 @@ execute(src, registers, memory) throws Exception {
 
             if(check(longQuotient, resultBitSize)) {
                 int resultHexSize = registers.getHexSize(registerForQuotient);
-                String quotient = calculator.cutToCertainHexSize("reverse", Long.toHexString(longQuotient), resultHexSize);
-                String remainder = calculator.cutToCertainHexSize("reverse", Long.toHexString(longRemainder), resultHexSize);
+                String quotient = calculator.cutToCertainHexSize("original", Long.toHexString(longQuotient), resultHexSize);
+                String remainder = calculator.cutToCertainHexSize("original", Long.toHexString(longRemainder), resultHexSize);
 
                 System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
                 System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());
