@@ -17,7 +17,7 @@ public class MemoryAddressCalculator {
     }
 
     public static Token evaluateExpression(Token[] matched, RegisterList registers, Memory memory)
-		    throws NumberFormatException, EvalError{
+		    throws NumberFormatException, EvalError, MemoryRestrictedAccessException {
         Token t = matched[0];
         //System.out.println(t.getValue() + " : " + t.getType());
         String baseAddress = "";
@@ -28,11 +28,12 @@ public class MemoryAddressCalculator {
 		    equationStartIndex++;
 	    }
 
-        if ( t.isRegister() ){
+        if ( t.isRegister() ) {
             baseAddress = registers.get(t);
-        }
-        else if (t.isHex()){
+        } else if ( t.isHex() ) {
             baseAddress = extend(t.getValue(), Memory.MAX_ADDRESS_SIZE, "0");
+        } else if ( t.isLabel() ) {
+	        baseAddress = memory.getFromVariableMap(t.getValue());
         }
 
         String result = "";
@@ -65,7 +66,7 @@ public class MemoryAddressCalculator {
 	       // System.out.println(base + " " + result);
 
         } else {
-	        throw new NumberFormatException("Restricted Access on Base Address: " + baseAddress);
+	        throw new MemoryRestrictedAccessException(baseAddress);
         }
 
 	    return new Token(Token.MEM, result);

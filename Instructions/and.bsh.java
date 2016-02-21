@@ -92,7 +92,7 @@ setFlagsRegister(registers, flags, calculator, des) {
     flags.setCarryFlag("0");
     flags.setOverflowFlag("0");
     flags.setAuxiliaryFlag("0"); //undefined
-    
+
     BigInteger bi = new BigInteger(registers.get(des), 16);
     if(bi.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
