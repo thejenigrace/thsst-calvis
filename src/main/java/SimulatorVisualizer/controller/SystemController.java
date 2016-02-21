@@ -251,7 +251,7 @@ public class SystemController {
 		} catch (Exception e){
 			System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
 			System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());
-			e.printStackTrace();
+//			e.printStackTrace();
 
 			Platform.runLater(
 					new Thread() {
@@ -282,16 +282,31 @@ public class SystemController {
 
     private boolean parse(String code){
 	    boolean isSuccessful = true;
+	    String[] codeLines = code.split("\n");
 	    try {
 		    this.executionMap = parser.parse(code);
 		    for (String lineNumber : this.executionMap.keySet()) {
 			    CALVISInstruction calvisInstruction = this.executionMap.get(lineNumber);
-			    calvisInstruction.verifyParameters(lineNumber);
+			    /**
+			     * Compute for the equivalent linenumber in textEditor of the calvis instructions
+			     */
+		        int lineCounter = 0;
+			    int mappedLine = Integer.parseInt(lineNumber, 16);
+			    for (int i = 0; i < codeLines.length; i++) {
+				    if ( !codeLines[i].matches("[;].*") && !codeLines[i].trim().equals("") ){
+					    if ( mappedLine == lineCounter ) {
+						    lineCounter = i;
+						    break;
+					    } else {
+						    lineCounter++;
+					    }
+				    }
+			    }
+			    calvisInstruction.verifyParameters(lineCounter);
 		    }
 	    } catch (Exception e){
 		    if ( e instanceof DuplicateLabelException ){
 			    DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
-			    String[] codeLines = code.split("\n");
 			    int labelOccurrence = 0;
 			    for (int i = 0; i < codeLines.length; i++) {
 				    if ( codeLines[i].contains(duplicateLabelException.getLabel()) ){

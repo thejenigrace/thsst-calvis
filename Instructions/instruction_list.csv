@@ -1,5 +1,5 @@
 EnvironmentConfiguration.model.engine.Instruction,Location,Parameters,,
-bswap,Instructions/bswap.bsh.java,1,r
+bswap,Instructions/bswap.bsh.java,1,r32
 mov,Instructions/mov.bsh.java,2,r/m,r/m/i
 lea,Instructions/lea.bsh.java,2,r16/r32,m16/m32
 xlat,Instructions/xlat.bsh.java,0,,
@@ -17,7 +17,7 @@ dec,Instructions/dec.bsh.java,1,r/m
 neg,Instructions/neg.bsh.java,1,r/m
 mul,Instructions/mul.bsh.java,1,r/m
 imul,Instructions/imul.bsh.java,1,r/m
-imul,Instructions/imul.bsh.java,2,r/m,r/m/i
+imul,Instructions/imul.bsh.java,2,r16/r32,r16/r32/m16/m32
 imul,Instructions/imul.bsh.java,3,r16/r32,r16/r32/m16/m32,i
 div,Instructions/div.bsh.java,1,r/m
 idiv,Instructions/idiv.bsh.java,1,r/m
@@ -64,9 +64,9 @@ bsf,Instructions/bsf.bsh.java,2,r16/r32,r16/r32/m16/m32
 bsr,Instructions/bsr.bsh.java,2,r16/r32,r16/r32/m16/m32
 nop,Instructions/nop.bsh.java,0,,
 set,Instructions/set.bsh.java,1,r8/m8
-cmov,Instructions/cmov.bsh.java,2,r,r/m
+cmov,Instructions/cmov.bsh.java,2,r16/r32,r16/r32/m16/m32
 xchg,Instructions/xchg.bsh.java,2,r/m,r/m
-xadd,Instructions/xadd.bsh.java,2,r,r/m
+xadd,Instructions/xadd.bsh.java,2,r/m,r/m
 cmp,Instructions/cmp.bsh.java,2,r/m,r/m/i
-cmpxchg,Instructions/cmpxchg.bsh.java,2,r,r/m
-cmpxchgs8,Instructions/cmpxchgs8.bsh.java,1,m
+cmpxchg,Instructions/cmpxchg.bsh.java,2,r/m,r
+cmpxchgs8,Instructions/cmpxchgs8.bsh.java,1,m64

@@ -244,6 +244,10 @@ public class Memory {
 		return lookup.iterator();
 	}
 
+	public int getlookupPower() {
+		return this.lookup.size();
+	}
+
 	/**
 	 * getMemoryKeys() is used for getting all size directives to be highlighted
 	 * @return
@@ -356,6 +360,19 @@ public class Memory {
 
 	public boolean containsLabel(String label) {
 		return labelMap.containsKey(label);
+	}
+
+	/**
+	 * Used by LEA instruction
+	 * @param memoryAddressingMode
+	 * @return
+	 */
+	public String removeSizeDirectives(String memoryAddressingMode){
+		String result = memoryAddressingMode;
+		if ( result.contains("/") ){
+			result = result.split("/")[1];
+		}
+		return result;
 	}
 
 }

@@ -34,14 +34,11 @@ public class CALVISParser {
 
 	private TokenDef hex;
 	private TokenDef dec;
-
 	private TokenDef cl;
 
 	private Grule justLabel;
 	private Grule label;
 	private Grule memoryAddressingMode;
-
-//	private Grule hexOrDecimal;
 
 	public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory){
 		this.instructions = instructions;
@@ -65,8 +62,6 @@ public class CALVISParser {
 		justLabel = lang.newGrule();
 		label = lang.newGrule();
 		memoryAddressingMode = lang.newGrule();
-
-//		hexOrDecimal = lang.newGrule();
 
 		TokenDef colon = lang.newToken(":");
 		TokenDef comma = lang.newToken(",");
@@ -103,9 +98,6 @@ public class CALVISParser {
 		// memory ::= [ memoryExpr ]
 		memoryAddressingMode.define(lsb, memoryExpression, rsb)
 				.action((Action<Object[]>) matched -> {
-					for (Object obj : matched){
-						System.out.println("memory addressing mode rule: " + obj);
-					}
 					Token[] mem = (Token[]) matched[1];
 					return mem;
 				});
@@ -116,7 +108,6 @@ public class CALVISParser {
 				ArrayList<Token> tokenArrayList = new ArrayList<>();
 				for (Object obj : matched){
 					if ( obj != null){
-						System.out.println("memory expression rule: " + obj);
 						if ( obj instanceof Token ) {
 							tokenArrayList.add((Token) obj);
 						}
@@ -141,32 +132,20 @@ public class CALVISParser {
 		memoryBase.define(getAllMemoryAddressableRegisters())
 			.action((Action<Object>) matched -> {
 				Token t = (Token) matched;
-				System.out.println("memory base rule: " + t.getValue() + " :: " + t.getType());
 				return t;
 			})
 			.alt(hex)
-				.action((Action<Object>) matched -> {
-					System.out.println("memory base rule: " + matched);
-					return new Token(Token.HEX, matched.toString());
-				})
+				.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
 			.alt(dec)
-				.action((Action<Object>) matched -> {
-					System.out.println("memory base rule: " + matched);
-					return new Token(Token.DEC, matched.toString());
-				})
+				.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()))
 			.alt(justLabel)
-				.action((Action<Object>) matched -> {
-					Token label = (Token) matched;
-					System.out.println("memory base rule: " + label.getValue());
-					return matched;
-				});
+				.action((Action<Object>) matched -> (Token) matched);
 
 		memoryIndex.define(getMemoryIndexScalableElements(), CC.op(times, dec))
 			.action((Action<Object[]>) matched -> {
 				String result = "";
 				for (Object obj : matched){
 					if (obj != null){
-						System.out.println("memory index rule: " +obj);
 						if ( obj instanceof Token ){
 							result += ((Token) obj).getValue() + " ";
 						}
@@ -187,7 +166,6 @@ public class CALVISParser {
 					String result = "";
 					for (Object obj : matched){
 						if (obj != null){
-							System.out.println("memory index rule: " +obj);
 							if ( obj instanceof Token ){
 								result += ((Token) obj).getValue();
 							}
@@ -205,15 +183,9 @@ public class CALVISParser {
                 });
 
 		memoryDisplacement.define(hex)
-			.action((Action<Object>) matched -> {
-				System.out.println("memory displacement rule: " + matched);
-				return new Token(Token.HEX, matched.toString());
-			})
+			.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
 			.alt(dec)
-				.action((Action<Object>) matched -> {
-					System.out.println("memory displacement rule: " + matched);
-					return new Token(Token.DEC, matched.toString());
-				});
+				.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
 
 		/**
 		 *  Prepare memory size directive addressing mode
@@ -221,17 +193,13 @@ public class CALVISParser {
 		 */
 		this.memorySizeDirectives = new HashMap<>();
 
-//		hexOrDecimal.define(hexPattern)
-//			.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
-//			.alt(decPattern)
-//			.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
-
 		ArrayList<Element> hexOrDecimalList = new ArrayList<>();
 		hexOrDecimalList.add(hex);
 		hexOrDecimalList.add(dec);
 		Element hexOrDecimal = concatenateOrSubRules(hexOrDecimalList);
 
-		for(int i = 1; i < Memory.MAX_ADDRESS_SIZE / 8; i++){
+		int maxMemorySize = memory.getlookupPower() + 1;
+		for(int i = 1; i < maxMemorySize; i++){
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
 			Grule sizeDirectiveInstance = lang.newGrule();
@@ -270,8 +238,6 @@ public class CALVISParser {
 				Token dataType = (Token) matched[1];
 				Token value = (Token) matched[2];
 				Object[] moreValues = (Object[]) matched[3];
-//				System.out.println(labelName.getValue() + " " + dataType.getValue() + " " + value.getValue());
-//				System.out.println("with: " + moreValues.length);
 				ArrayList<Token> valuesList = new ArrayList<>();
 				valuesList.add(value);
 
@@ -282,7 +248,6 @@ public class CALVISParser {
 					 * objectGroup[1] = actual value
 					 */
 					Token objectGroupValue = (Token) objectGroup[1];
-//					System.out.println(objectGroup[0] + " " + objectGroupValue.getValue());
 					valuesList.add(objectGroupValue);
 				}
 				try {
@@ -321,13 +286,12 @@ public class CALVISParser {
 
 		/**
 		 * START of static definition of 2 parameter rules
-		 */
+
 		HashMap<String, Element[]> parameterSpecifications = new HashMap<>();
 
 		for(int i = 1; i < RegisterList.MAX_SIZE / 8; i++){
 			Double size = Math.pow(2, 2 + i);
 			String sizeInString = String.valueOf(size.intValue());
-//			System.out.println(sizeInString);
 
 			// Register to Register
 			Element[] registerToRegister = new Element[4];
@@ -386,11 +350,8 @@ public class CALVISParser {
 			parameterSpecifications.put("m" + sizeInString + "c", clToMemory);
 		}
 
-		/**
 		 * END
 		 */
-//		System.out.println("PARAMETER SPECIFICATIONS HAVE: " + parameterSpecifications.size());
-//		System.out.println(parameterSpecifications);
 
 		// Prepare <List of Instructions>
 		Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
@@ -424,6 +385,7 @@ public class CALVISParser {
 
 //			System.out.println("actual count from csv: " + parameterCount);
 //			System.out.println("number of parameters: " + numParameters);
+			ArrayList<String> result = new ArrayList<>();
 
 			switch (parameterCount){
 				case 0:
@@ -435,7 +397,7 @@ public class CALVISParser {
 					Element[] elements1 = new Element[numParameters];
 					elements1[0] = instructionName;
 					String[] justOne = prodRule[3].split("/");
-					elements1[1] = parseOneParameter(justOne, true);
+					elements1[1] = parseOneParameter(justOne, true); // true - size directive is required
 					instructionAlternatives.add(elements1);
 					break;
 				case 2: // fall through
@@ -468,11 +430,10 @@ public class CALVISParser {
 					}
 //					System.out.println(specifications2);
 
-					ArrayList<String> result = new ArrayList<>();
 					for ( String first : specifications1 ){
 						for ( String second : specifications2 ){
 							if ( isPermissible(first, second) ) {
-								String resultInstance = first + second;
+								String resultInstance = first + "/" + second;
 								result.add(resultInstance);
 							}
 						}
@@ -498,14 +459,14 @@ public class CALVISParser {
 
 					Element[] elements2 = new Element[numParameters];
 					elements2[0] = instructionName;
-					elements2[1] = parseOneParameter(firstParameter, false);
+					elements2[1] = parseOneParameter(firstParameter, false); // false = size directive is not required
 					elements2[2] = comma;
 					elements2[3] = parseOneParameter(secondParameter, false);
 					if ( parameterCount == 3 ) {
-							elements2[4] = comma;
-							String[] thirdParameter = prodRule[5].split("/");
-							elements2[5] = parseOneParameter(thirdParameter, true);
-						}
+						elements2[4] = comma;
+						String[] thirdParameter = prodRule[5].split("/");
+						elements2[5] = parseOneParameter(thirdParameter, true);
+					}
 					instructionAlternatives.add(elements2);
 					break;
 			}
@@ -516,7 +477,6 @@ public class CALVISParser {
 				if (numParameters == 1) {
 					instructionAlternative.setAction((Action<Object>) args -> {
 						String anInstruction = (String) args;
-						//System.out.println(anInstruction);
 						//////////////////////
 						Instruction someInstruction = instructions.getInstruction(anInstruction);
 						CALVISInstruction calvisInstruction =
@@ -533,7 +493,6 @@ public class CALVISParser {
 						String anInstruction = args[0].toString();
 						ArrayList<Object> tokenArr = new ArrayList<>();
 						boolean isConditionalInstruction = false;
-//						System.out.println(anInstruction);
 						String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
 						if ( !anInstruction.equals(baseConditionalInstruction) ){
 							String replaced = anInstruction.replaceAll(baseConditionalInstruction,"");
@@ -552,7 +511,12 @@ public class CALVISParser {
 						tokens = tokenArr.toArray(tokens);
 						CALVISInstruction calvisInstruction =
 								new CALVISInstruction(someInstruction, anInstruction,
-										tokens, registers, memory, isConditionalInstruction);
+										tokens, registers, memory, isConditionalInstruction, result);
+						/**
+						 * Insert special check if instruction should be verified
+						 */
+						calvisInstruction.setVerifiable(true);
+
 						String instructionAdd = Integer.toHexString(lineNumber);
 						mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
 								RegisterList.instructionPointerSize, "0"), calvisInstruction);
@@ -560,7 +524,6 @@ public class CALVISParser {
 						return calvisInstruction;
 					});
 				}
-//				instruction.getAlts().add(instructionAlternative);
 				altList.add(instructionAlternative);
 			}
 		}
