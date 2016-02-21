@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="ok">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cbw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cbw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cdq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cdq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/clc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/clc.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cli.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cli.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmc.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmov.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmov.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cwd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cwd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cwde.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cwde.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/j.bsh.java" afterPath="$PROJECT_DIR$/Instructions/j.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/jcxz.bsh.java" afterPath="$PROJECT_DIR$/Instructions/jcxz.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/jecxz.bsh.java" afterPath="$PROJECT_DIR$/Instructions/jecxz.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/jmp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/jmp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lahf.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lahf.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lea.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lea.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/mov.bsh.java" afterPath="$PROJECT_DIR$/Instructions/mov.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/not.bsh.java" afterPath="$PROJECT_DIR$/Instructions/not.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sahf.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sahf.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sbb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sbb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/stc.bsh.java" afterPath="$PROJECT_DIR$/Instructions/stc.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sti.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sti.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sub.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sub.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xlat.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xlat.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sal.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sal.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sar.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sar.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shl.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shr.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -130,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.20689656">
-              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+              <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -925,12 +905,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00014" summary="Fix Instructions">
-      <created>1454115339912</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1454115339912</updated>
-    </task>
     <task id="LOCAL-00015" summary="Added MUL, IMUL, DIV Instructions">
       <created>1454221907893</created>
       <option name="number" value="00015" />
@@ -1219,7 +1193,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455985322757</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="ok">
+      <created>1456033713524</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1456033713526</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1794,7 +1774,7 @@
     <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20689656">
-          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
           <folding />
         </state>
       </provider>
