@@ -13,12 +13,7 @@ execute(des, src, registers, memory) {
             int limit = count.intValue();
             if( checkSizeOfRegister(registers, desSize) && (limit >= 0 && limit <= 31) ) {
                 String destination = calculator.hexToBinaryString(registers.get(des), des);
-
-                BigInteger biDes = new BigInteger(destination, 2);
-                BigInteger biResult = biDes.shiftRight(count.intValue());
-
-                String result = calculator.binaryToHexString(biResult.toString(2), des);
-                registers.set(des, result);
+                registers.set(des, performShr(calculator, des, destination, count));
 
                 //Flags
                 String r = calculator.hexToBinaryString(registers.get(des), des);
@@ -35,12 +30,7 @@ execute(des, src, registers, memory) {
             int limit = count.intValue();
             if( checkSizeOfRegister(registers, desSize) && (limit >= 0 && limit <= 31) ) {
                 String destination = calculator.hexToBinaryString(registers.get(des), des);
-
-                BigInteger biDes = new BigInteger(destination, 2);
-                BigInteger biResult = biDes.shiftRight(count.intValue());
-
-                String result = calculator.binaryToHexString(biResult.toString(2), des);
-                registers.set(des, result);
+                registers.set(des, performShr(calculator, des, destination, count));
 
                 //Flags
                 String r = calculator.hexToBinaryString(registers.get(des), des);
@@ -60,12 +50,7 @@ execute(des, src, registers, memory) {
 
             if( limit >= 0 && limit <= 31 ) {
                 String destination = calculator.hexToBinaryString(memory.read(des, des), des);
-
-                BigInteger biDes = new BigInteger(destination, 2);
-                BigInteger biResult = biDes.shiftRight(count.intValue());
-
-                String result = calculator.binaryToHexString(biResult.toString(2), des);
-                memory.write(des, result, des);
+                memory.write(des, performShr(calculator, des, destination, count), des);
 
                 //FLAGS
                 String r = calculator.hexToBinaryString(memory.read(des, des), des);
@@ -83,12 +68,7 @@ execute(des, src, registers, memory) {
 
             if( limit >= 0 && limit <= 31 ) {
                 String destination = calculator.hexToBinaryString(memory.read(des, des), des);
-
-                BigInteger biDes = new BigInteger(destination, 2);
-                BigInteger biResult = biDes.shiftRight(count.intValue());
-
-                String result = calculator.binaryToHexString(biResult.toString(2), des);
-                memory.write(des, result, des);
+                memory.write(des, performShr(calculator, des, destination, count), des);
 
                 //Flags
                 String r = calculator.hexToBinaryString(memory.read(des, des), des);
@@ -96,6 +76,15 @@ execute(des, src, registers, memory) {
             }
         }
     }
+}
+
+String performShr(calculator, des, destination, count) {
+    BigInteger biDes = new BigInteger(destination, 2);
+    BigInteger biResult = biDes.shiftRight(count.intValue());
+
+    String result = calculator.binaryToHexString(biResult.toString(2), des);
+
+    return result;
 }
 
 setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize) {

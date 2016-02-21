@@ -112,7 +112,6 @@ execute(des, src, registers, memory) {
                 BigInteger biResult = biDes.shiftLeft(count.intValue());
 
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-                System.out.println("Result: " + result);
                 if( result.length() > 8 ) {
                     int cut = result.length() - 8;
                     String t = result.substring(cut);
