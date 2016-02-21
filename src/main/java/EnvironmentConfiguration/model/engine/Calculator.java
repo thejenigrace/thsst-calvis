@@ -1,5 +1,6 @@
 package EnvironmentConfiguration.model.engine;
 
+import javax.sound.midi.SysexMessage;
 import java.math.BigInteger;
 
 public class Calculator {
@@ -105,6 +106,7 @@ public class Calculator {
 					sb.append(val.charAt(i));
 
 				val = sb.toString();
+				System.out.println("val = " + val);
 			}
 		}
 		else if ( des.isMemory() ) {
@@ -121,58 +123,90 @@ public class Calculator {
 
 	public long convertToSignedInteger(BigInteger value, int size) {
 		long result = Long.parseLong(value.toString());
-		String str = value.toString(2);
+		String twosComplement = value.toString(2);
 
-		int missingZeroes = size - str.length();
+		int missingZeroes = size - twosComplement.length();
 
-		//zero extend
-		for(int k = 0; k < missingZeroes; k++) {
-			str = "0" + str;
-		}
+		System.out.println("size = " + size);
+        System.out.println("original hex = " + value.toString(16));
+        System.out.println("original decimal = " + value.toString());
+		System.out.println("original twosComplement = " + twosComplement);
 
-		if( str.charAt(0) == '1' ) {
-			BigInteger ry = value.subtract(BigInteger.ONE);
+		// Zero extend
+		for(int k = 0; k < missingZeroes; k++)
+            twosComplement = "0" + twosComplement;
 
-			String temp = ry.toString(2);
+        // Negative Two's Complement
+		if(twosComplement.charAt(0) == '1') {
+			BigInteger biOnesComplement = value.subtract(BigInteger.ONE);
+
+			String onesComplement = biOnesComplement.toString(2);
+
+            // Convert 1's Complement to Normal Binary
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < temp.length(); i++) {
-				if ( temp.charAt(i) == '1' )
+			for (int i = 0; i < onesComplement.length(); i++) {
+				if (onesComplement.charAt(i) == '1')
 					sb.append("0");
-				else if ( temp.charAt(i) == '0' )
+				else if (onesComplement.charAt(i) == '0')
 					sb.append("1");
 			}
 
-			BigInteger z = new BigInteger(sb.toString(), 2);
+            System.out.println("decimalBinaryF = " + sb.toString());
 
-			String f = "-" + z.toString();
+			BigInteger decimal = new BigInteger(sb.toString(), 2);
+            System.out.println("decimal = " + decimal.toString());
 
-			result = Long.parseLong(f);
+			String signedDecimal = "-" + decimal.toString();
+			System.out.println("signedDecimal = " + Long.parseLong(signedDecimal));
+
+			result = Long.parseLong(signedDecimal);
 		}
 
 		return result;
 	}
 
-	public String cutToCertainHexSize(String value, int size) {
-		StringBuilder sb = new StringBuilder();
+    public String cutToCertainHexSize(String type, String value, int size) {
+        String str = "";
+        StringBuilder sb = new StringBuilder();
+        int missingZeroes = size - value.length();
+        // zero extend
+        for (int i = 0; i < missingZeroes; i++)
+            value = "0" + value;
 
-		for(int i = value.length()-1; i >= 0; i--) {
-			if( sb.length() < size )
-				sb.append(value.charAt(i));
-		}
-		return sb.reverse().toString();
-	}
+        if (type.equals("original")) {
+            // cut the hex to a certain size
+            for (int i = 0; i < size; i++)
+                sb.append(value.charAt(i));
 
-	public String[] cutToCertainSize(String value, Token src) {
+            str = sb.toString();
+        } else if (type.equals("reverse")) {
+            for (int i = value.length()-1; i >= value.length()-size; i--)
+                sb.append(value.charAt(i));
+
+            str = sb.reverse().toString();
+        }
+
+        System.out.println("--Cut To Certain Hex Size");
+        System.out.println("size = " + size);
+
+
+        return str;
+    }
+
+
+
+	public String[] cutToCertainSize(String value, int size) {
 		BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(16);
-
-		int size = registers.getHexSize(src);
+		System.out.println("c.size = " + size);
 		int missingZeroes = size * 2 - val.length();
 
 		//zero extend
 		for(int k = 0; k < missingZeroes; k++) {
 			val = "0" + val;
 		}
+
+		System.out.println("c.val = " + val);
 
 		StringBuilder sb0 = new StringBuilder();
 		StringBuilder sb1 = new StringBuilder();
@@ -347,11 +381,42 @@ public class Calculator {
 		BigInteger endBoundary = new BigInteger("1");
 		endBoundary = startBoundary.subtract(endBoundary).negate();
 
+//		System.out.println(startBoundary + " < JMP > " + endBoundary);
+//		System.out.println("Difference is: " + difference);
+//		System.out.println(difference.compareTo(startBoundary));
+//		System.out.println(difference.compareTo(endBoundary));
+
 		int start = difference.compareTo(startBoundary);
 		int end = difference.compareTo(endBoundary);
 		flag = ( start == -1 || start == 0 ) && ( end == 1 || end == 0 );
 
+//		System.out.println(flag);
 		return flag;
+	}
+	public String checkOverflowAdd(char src, char des, char res){
+		if((src == '0' && des == '0' && res == '1') ||
+				(src == '1' && des == '1' && res == '0'))
+			return "1";
+		return "0";
+	}
+
+	public String checkOverflowAddWithFlag(char src, char des, char res, String flag){
+		if((src == '0' && des == '0' && res == '1' && flag.charAt(0) == '1') ||
+				(src == '1' && des == '1' && res == '0' && flag.charAt(0) == '1'))
+			return "1";
+		return "0";
+	}
+
+
+	public String flipAllBits(String bInt){
+		StringBuilder  bits = new StringBuilder(bInt);
+		for(int x = 0; x < bInt.length(); x++){
+			if(bInt.charAt(x) == '0')
+				bits.setCharAt(x, '0');
+			else
+				bits.setCharAt(x, '1');
+		}
+		return bits.toString();
 	}
 
 }

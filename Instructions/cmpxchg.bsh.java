@@ -1,7 +1,9 @@
 execute(des, src, registers, memory) {
-	if(des.isRegister()){
+	System.out.println("wtf");
+	if(src.isRegister()){
 		String EAXRegister;
-		switch(registers.getBitSize(des)){
+		int size = registers.getBitSize(src);
+		switch(size){
 			case 8:
 				EAXRegister = registers.get("AL");
 			break;
@@ -12,28 +14,49 @@ execute(des, src, registers, memory) {
 				EAXRegister = registers.get("EAX");
 			break;
 		}
-		if ( src.isRegister() ){
-			if(src.isRegister() && registers.getBitSize(src) == registers.getBitSize(des)){
+		if ( des.isRegister() ){
+			if(des.isRegister() && registers.getBitSize(des) == size){
 				if(isEqual(des, src, registers, memory, EAXRegister)){
-
 					registers.set(des, registers.get(src));
 				}
 				else{
-					registers.set(des, EAXRegister);
-
+					switch(size){
+						case 8:
+							EAXRegister = registers.get("AL");
+							registers.set("AL", registers.get(des));
+						break;
+						case 16:
+							EAXRegister = registers.get("AX");
+							registers.set("AX", registers.get(des));
+						break;
+						case 32:
+							EAXRegister = registers.get("EAX");
+							registers.set("EAX", registers.get(des));
+						break;
+					}
 				}
 			}
 		}
-		if ( src.isMemory() ){
-			System.out.println("Memory Mode");
-			if(src.isMemory() ){
+		if ( des.isMemory() ){
+			if(des.isMemory() ){
 				if(isEqual(des, src, registers, memory, EAXRegister)){
-					System.out.println("pasok rinto");
-					registers.set(des, memory.read(src, registers.getBitSize(des)));
+					memory.write(des, registers.get(src), size);
 				}
 				else{
-		System.out.println("pasok asdasdasds");
-					registers.set(des, EAXRegister);
+					switch(size){
+					case 8:
+						EAXRegister = registers.get("AL");
+						registers.set("AL", memory.read(des, size));
+					break;
+					case 16:
+						EAXRegister = registers.get("AX");
+						registers.set("AX", memory.read(des, size));
+					break;
+					case 32:
+						EAXRegister = registers.get("EAX");
+						registers.set("EAX", memory.read(des, size));
+					break;
+					}
 				}
 			}
 		}
@@ -41,25 +64,27 @@ execute(des, src, registers, memory) {
 }
 
 
+
 boolean isEqual(des, src, registers, memory, eaxReg){
-	int desSize = registers.getBitSize(des);
-
+	int desSize = registers.getBitSize(src);
+	
 	Calculator calculator = new Calculator(registers, memory);
-	int i = Integer.parseInt(eaxReg, 16);
-	String EAXRegister = Integer.toBinaryString(i);
-	int missingZeroes = desSize - EAXRegister.length();
-	for(int x = 0; x < missingZeroes; x++){
-		EAXRegister = "0" + EAXRegister;
-	}
-	String source;
-	System.out.println(source = calculator.hexToBinaryString(memory.read(src, desSize), src) + " wtf . . ");
-	if(src.isMemory())
-		source = calculator.hexToBinaryString(memory.read(src, desSize), src);
-	else
-		source = calculator.hexToBinaryString(registers.get(src), src);
-	String destination = calculator.hexToBinaryString(registers.get(des), des);
-	String result = "";
+	BigInteger i = new BigInteger(eaxReg, 16);
+	String EAXRegister = i.toString(2);
+	int missingZeroesEAX = desSize - EAXRegister.length();
+	String destination = "";
 
+	if(des.isRegister())
+		destination = calculator.hexToBinaryString(registers.get(des), des);
+	else
+		destination = calculator.hexToBinaryString(memory.read(des, desSize), des);
+
+
+	destination = zeroExtend(destination, desSize);
+	EAXRegister = zeroExtend(EAXRegister, desSize);
+		System.out.println(destination);
+		System.out.println(EAXRegister);
+	String result = "";
 	int r = 0;
 	int borrow = 0;
 	int carry = 0;
@@ -67,7 +92,7 @@ boolean isEqual(des, src, registers, memory, eaxReg){
 
 	for(int i = desSize - 1; i >= 0; i--) {
 		r = Integer.parseInt(String.valueOf(destination.charAt(i))) - Integer.parseInt(String.valueOf(EAXRegister.charAt(i))) - borrow;
-
+		System.out.println(EAXRegister);
 		if( r < 0 ) {
 			borrow = 1;
 			r += 2;
@@ -99,16 +124,13 @@ boolean isEqual(des, src, registers, memory, eaxReg){
 	else {
 		flags.setOverflowFlag("0");
 	}
-		System.out.println("123123");
 	String sign = "" + compareToZero.toString(2).charAt(0);
 	flags.setSignFlag(sign);
-		System.out.println("asswooo");
 	String parity = calculator.checkParity(compareToZero.toString(2));
 	flags.setParityFlag(parity);
 
 	String auxiliary = calculator.checkAuxiliarySub(destination, EAXRegister);
 	flags.setAuxiliaryFlag(auxiliary);
-		System.out.println("awooo");
 	if(d.matches("[0]+")) {
 		flags.setZeroFlag("1");
 		return true;
@@ -117,6 +139,14 @@ boolean isEqual(des, src, registers, memory, eaxReg){
 		flags.setZeroFlag("0");
 		return false;
 	}
+}
+
+String zeroExtend(str, size){
+	int missingZeroes = size - str.length();
+	for(int x = 0; x < missingZeroes; x++){
+		str = "0" + str;
+	}
+	return str;
 }
  /*
  	CONCERN: Where do we put the logic for CC
