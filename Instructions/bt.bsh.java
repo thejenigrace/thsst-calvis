@@ -65,7 +65,7 @@ execute(des, src, registers, memory){
             BigInteger l = new BigInteger(src.getValue(), 16);
             int limit = l.intValue();
 
-            if( limit >= 0 && limit <= 16 ) {
+            if( limit >= 0 && limit <= 15 ) {
                 String destination = getDestinationMemory(memory, calculator, des);
                 String s = calculator.hexToBinaryString(src.getValue(), src);
                 BigInteger source = new BigInteger(s, 2);

@@ -1,177 +1,154 @@
- execute(des, src, registers, memory){
-   Calculator calculator = new Calculator(registers, memory);
-   EFlags flags = registers.getEFlags();
+execute(des, src, registers, memory){
+    Calculator calculator = new Calculator(registers, memory);
+    EFlags flags = registers.getEFlags();
 
-   if( des.isRegister() && registers.getBitSize(des) == 16 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 16 ) {
-      System.out.println("BSF r16, r16");
+    if( des.isRegister() && registers.getBitSize(des) == 16 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 16 ) {
+            String source = calculator.hexToBinaryString(registers.get(src), src);
+            String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-      String source = calculator.hexToBinaryString(registers.get(src), src);
-      String destination = calculator.hexToBinaryString(registers.get(des), des);
+            BigInteger biSrc = new BigInteger(source, 2);
+            BigInteger biDes = new BigInteger(destination, 2);
 
-      BigInteger biSrc = new BigInteger(source, 2);
-      BigInteger biDes = new BigInteger(destination, 2);
+            if( biSrc.equals(BigInteger.ZERO) ) {
+                flags.setZeroFlag("1");
 
-      if( biSrc.equals(BigInteger.ZERO) ) {
-        flags.setZeroFlag("1");
+                String result = calculator.binaryToHexString("0", des);
+                registers.set(des, result); //des undefined
 
-        String result = calculator.binaryToHexString("0", des);
-        registers.set(des, result); //des undefined
+                //Flags
+                setFlags(flags);
+            }
+            else {
+                flags.setZeroFlag("0");
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-      else {
-        flags.setZeroFlag("0");
+                String check = new StringBuffer(source).reverse().toString();
+                for(int i = 0; i < check.length(); i++) {
+                    if( check.charAt(i) == '1' ) {
+                        String index = Integer.toHexString(i);
+                        index = calculator.hexZeroExtend(index, des);
+                        registers.set(des, index);
 
-        String check = new StringBuffer(source).reverse().toString();
-        for(int i = 0; i < check.length(); i++) {
-          if( check.charAt(i) == '1' ) {
-            String index = Integer.toHexString(i);
-            index = calculator.hexZeroExtend(index, des);
-            registers.set(des, index);
+                        break;
+                    }
+                }
 
-            break;
-          }
+                //Flags
+                setFlags(flags);
+            }
         }
+        else if( src.isMemory() && memory.getBitSize(src) == 16 ) {
+            String source = calculator.hexToBinaryString(memory.read(src, src), src);
+            String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-     }
-     else if( src.isMemory() && memory.getBitSize(src) == 16 ) {
-      System.out.println("BSF r16, m16");
+            BigInteger biSrc = new BigInteger(source, 2);
+            BigInteger biDes = new BigInteger(destination, 2);
 
-      String source = calculator.hexToBinaryString(memory.read(src, src), src);
-      String destination = calculator.hexToBinaryString(registers.get(des), des);
+            if( biSrc.equals(BigInteger.ZERO) ) {
+                flags.setZeroFlag("1");
 
-      BigInteger biSrc = new BigInteger(source, 2);
-      BigInteger biDes = new BigInteger(destination, 2);
+                String result = calculator.binaryToHexString("0", des);
+                registers.set(des, result);
 
-      if( biSrc.equals(BigInteger.ZERO) ) {
-        flags.setZeroFlag("1");
+                //Flags
+                setFlags(flags);
+            }
+            else {
+                flags.setZeroFlag("0");
 
-        String result = calculator.binaryToHexString("0", des);
-        registers.set(des, result);
+                String check = new StringBuffer(source).reverse().toString();
+                for(int i = 0; i < check.length(); i++) {
+                    if( check.charAt(i) == '1' ) {
+                        String index = Integer.toHexString(i);
+                        index = calculator.hexZeroExtend(index, des);
+                        registers.set(des, index);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-      else {
-        flags.setZeroFlag("0");
+                        break;
+                    }
+                }
 
-        String check = new StringBuffer(source).reverse().toString();
-        for(int i = 0; i < check.length(); i++) {
-          if( check.charAt(i) == '1' ) {
-            String index = Integer.toHexString(i);
-            index = calculator.hexZeroExtend(index, des);
-            registers.set(des, index);
-
-            break;
-          }
+                //Flags
+                setFlags(flags);
+            }
         }
+    }
+    else if( des.isRegister() && registers.getBitSize(des) == 32 ) {
+        if( src.isRegister() && registers.getBitSize(src) == 32 ) {
+            String source = calculator.hexToBinaryString(registers.get(src), src);
+            String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-     }
-   }
-   else if( des.isRegister() && registers.getBitSize(des) == 32 ) {
-     if( src.isRegister() && registers.getBitSize(src) == 32 ) {
-      System.out.println("BSF r32, r32");
+            BigInteger biSrc = new BigInteger(source, 2);
+            BigInteger biDes = new BigInteger(destination, 2);
 
-      String source = calculator.hexToBinaryString(registers.get(src), src);
-      String destination = calculator.hexToBinaryString(registers.get(des), des);
+            if( biSrc.equals(BigInteger.ZERO) ) {
+                flags.setZeroFlag("1");
 
-      BigInteger biSrc = new BigInteger(source, 2);
-      BigInteger biDes = new BigInteger(destination, 2);
+                String result = calculator.binaryToHexString("0", des);
+                registers.set(des, result); //des undefined
 
-      if( biSrc.equals(BigInteger.ZERO) ) {
-        flags.setZeroFlag("1");
+                //Flags
+                setFlags(flags);
+            }
+            else {
+                flags.setZeroFlag("0");
 
-        String result = calculator.binaryToHexString("0", des);
-        registers.set(des, result); //des undefined
+                String check = new StringBuffer(source).reverse().toString();
+                for(int i = 0; i < check.length(); i++) {
+                    if( check.charAt(i) == '1' ) {
+                        String index = Integer.toHexString(i);
+                        index = calculator.hexZeroExtend(index, des);
+                        registers.set(des, index);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-      else {
-        flags.setZeroFlag("0");
+                        break;
+                    }
+                }
 
-        String check = new StringBuffer(source).reverse().toString();
-        for(int i = 0; i < check.length(); i++) {
-          if( check.charAt(i) == '1' ) {
-            String index = Integer.toHexString(i);
-            index = calculator.hexZeroExtend(index, des);
-            registers.set(des, index);
-
-            break;
-          }
+                //Flags
+                setFlags(flags);
+            }
         }
+        else if( src.isMemory() && memory.getBitSize(src) == 32 ) {
+            String source = calculator.hexToBinaryString(memory.read(src, src), src);
+            String destination = calculator.hexToBinaryString(registers.get(des), des);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-     }
-     else if( src.isMemory() && memory.getBitSize(src) == 32 ) {
-      System.out.println("BSF r32, m32");
+            BigInteger biSrc = new BigInteger(source, 2);
+            BigInteger biDes = new BigInteger(destination, 2);
 
-      String source = calculator.hexToBinaryString(memory.read(src, src), src);
-      String destination = calculator.hexToBinaryString(registers.get(des), des);
+            if( biSrc.equals(BigInteger.ZERO) ) {
+                flags.setZeroFlag("1");
 
-      BigInteger biSrc = new BigInteger(source, 2);
-      BigInteger biDes = new BigInteger(destination, 2);
+                String result = calculator.binaryToHexString("0", des);
+                registers.set(des, result); //des undefined
 
-      if( biSrc.equals(BigInteger.ZERO) ) {
-        flags.setZeroFlag("1");
+                //Flags
+                setFlags(flags);
+            }
+            else {
+                flags.setZeroFlag("0");
 
-        String result = calculator.binaryToHexString("0", des);
-        registers.set(des, result); //des undefined
+                String check = new StringBuffer(source).reverse().toString();
+                for(int i = 0; i < check.length(); i++) {
+                    if( check.charAt(i) == '1' ) {
+                        String index = Integer.toHexString(i);
+                        index = calculator.hexZeroExtend(index, des);
+                        registers.set(des, index);
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-      else {
-        flags.setZeroFlag("0");
+                        break;
+                    }
+                }
 
-        String check = new StringBuffer(source).reverse().toString();
-        for(int i = 0; i < check.length(); i++) {
-          if( check.charAt(i) == '1' ) {
-            String index = Integer.toHexString(i);
-            index = calculator.hexZeroExtend(index, des);
-            registers.set(des, index);
-
-            break;
-          }
+                //Flags
+                setFlags(flags);
+            }
         }
+    }
+}
 
-        flags.setCarryFlag("0"); //udnefined
-        flags.setOverflowFlag("0"); //undefined
-        flags.setSignFlag("0"); //undefined
-        flags.setParityFlag("0"); //undefined
-        flags.setAuxiliaryFlag("0"); //undefined
-      }
-     }
-   }
- }
+setFlags(flags) {
+    //CF, OF,  SF, PF, AF are undefined
+    flags.setCarryFlag("0");
+    flags.setOverflowFlag("0");
+    flags.setSignFlag("0");
+    flags.setParityFlag("0");
+    flags.setAuxiliaryFlag("0");
+}
