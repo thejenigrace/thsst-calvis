@@ -1,4 +1,4 @@
-execute(registers, memory){
+execute(registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
 

@@ -16,7 +16,7 @@ execute(des, src, registers, memory) {
                 performSubRegister(source, destination, registers, calculator, flags, des, desSize);
             }
         }
-        else if ( src.isMemory() ){
+        else if ( src.isMemory() ) {
             //get size of des, src
             int desSize = registers.getBitSize(des);
 
@@ -41,7 +41,7 @@ execute(des, src, registers, memory) {
         }
     }
     else if ( des.isMemory() ) {
-        if ( src.isRegister() ){
+        if ( src.isRegister() ) {
             //get size of des, src
             int srcSize = registers.getBitSize(src);
 
@@ -68,7 +68,7 @@ execute(des, src, registers, memory) {
                     if( i == 0 ) {
                         carry = 1;
                     }
-                    if( i == 0 || i == 1) {
+                    if( i == 0 || i == 1 ) {
                         overflow++;
                     }
                 }
@@ -86,7 +86,7 @@ execute(des, src, registers, memory) {
             BigInteger biR = new BigInteger(res, 2);
             setFlags(flags, calculator, source, destination, carry, overflow, res, biR);
         }
-        else if ( src.isHex() ){
+        else if ( src.isHex() ) {
             //get size of des, src
             int desSize = memory.getBitSize(des);
 
@@ -113,7 +113,7 @@ execute(des, src, registers, memory) {
                     if( i == 0 ) {
                         carry = 1;
                     }
-                    if( i == 0 || i == 1) {
+                    if( i == 0 || i == 1 ) {
                         overflow++;
                     }
                 }
@@ -154,7 +154,7 @@ performSubRegister(source, destination, registers, calculator, flags, des, desSi
             if( i == 0 ) {
                 carry = 1;
             }
-            if( i == 0 || i == 1) {
+            if( i == 0 || i == 1 ) {
                 overflow++;
             }
         }
@@ -176,14 +176,14 @@ performSubRegister(source, destination, registers, calculator, flags, des, desSi
 setFlags(flags, calculator, source, destination, carry, overflow, res, biR) {
     flags.setCarryFlag(carry.toString());
 
-    if(overflow == 1) {
+    if( overflow == 1 ) {
         flags.setOverflowFlag("1");
     }
     else {
         flags.setOverflowFlag("0");
     }
 
-    if(biR.equals(BigInteger.ZERO)) {
+    if( biR.equals(BigInteger.ZERO) ) {
         flags.setZeroFlag("1");
     }
     else {
@@ -203,7 +203,7 @@ setFlags(flags, calculator, source, destination, carry, overflow, res, biR) {
 boolean checkSizeOfRegister(registers, desSize) {
     boolean checkSize = false;
     for(int a : registers.getAvailableSizes()) {
-        if(a == desSize) {
+        if( a == desSize ) {
             checkSize = true;
         }
     }

@@ -24,5 +24,4 @@ execute(registers, memory) {
 
 	// finally set the new value of AL
 	registers.set("AL", hexStringResult);
-
 }

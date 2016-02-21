@@ -110,11 +110,13 @@ public class EFlags extends Register {
 		return getFlagIndex(11) + "";
 	}
 
-	public String getDirectionFlag(){
+	public String getDirectionFlag() {
 		return getFlagIndex(10) + "";
 	}
 
-	public String getInterruptFlag() { return getFlagIndex(9) + ""; }
+	public String getInterruptFlag() {
+		return getFlagIndex(9) + "";
+	}
 
 	public void setCarryFlag(String value) {
 		setFlagIndex(0, value);
@@ -146,9 +148,14 @@ public class EFlags extends Register {
 		setFlagUI("Overflow", value);
 	}
 
+	public void setDirectionFlag(String value) {
+		setFlagIndex(10, value);
+		setFlagUI("Direction", value);
+	}
+
 	public void setInterruptFlag(String value) {
 		setFlagIndex(9, value);
-//		setFlagUI("Overflow", value);
+		setFlagUI("Interrupt", value);
 	}
 
 }

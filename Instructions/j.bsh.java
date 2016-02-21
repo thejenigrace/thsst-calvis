@@ -1,15 +1,13 @@
 execute(cc, rel, registers, memory) throws Exception {
 	Calculator cal = new Calculator(registers, memory);
 	boolean initialCondition = cal.evaluateCondition(cc.getValue());
-	System.out.println("Should I jump: " + initialCondition);
 
 	/**
-	 * If condition is true, carry out the jump
-	 */
-	if ( initialCondition ){
+	* If condition is true, carry out the jump
+	*/
+	if ( initialCondition ) {
 		String toAddress = "";
-		if( rel.isLabel() ){
-			System.out.println("Finding: " + rel.getValue());
+		if( rel.isLabel() ) {
 			toAddress = memory.getFromLabelMap(rel.getValue());
 		}
 
@@ -21,8 +19,7 @@ execute(cc, rel, registers, memory) throws Exception {
 
 
 		// default is rel 16
-		if ( cal.isWithinBounds(result,Memory.DEFAULT_RELATIVE_SIZE) ){
-			System.out.println("Jumping from: " + fromAddress + " to " + toAddress);
+		if ( cal.isWithinBounds(result,Memory.DEFAULT_RELATIVE_SIZE) ) {
 			registers.setInstructionPointer(toAddress);
 		}
 		else {
@@ -31,8 +28,8 @@ execute(cc, rel, registers, memory) throws Exception {
 	}
 	else {
 		/**
-		 * Else, increment instruction pointer to proceed to next instruction;
-		 */
+		* Else, increment instruction pointer to proceed to next instruction;
+		*/
 		String currentLine = registers.getInstructionPointer();
 		BigInteger value = new BigInteger(currentLine, 16);
 		value = value.add(new BigInteger("1"));

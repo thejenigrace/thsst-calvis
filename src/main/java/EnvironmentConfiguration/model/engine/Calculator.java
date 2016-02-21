@@ -7,12 +7,12 @@ public class Calculator {
 	private RegisterList registers;
 	private Memory memory;
 
-	public Calculator(RegisterList registers, Memory memory){
+	public Calculator(RegisterList registers, Memory memory) {
 		this.registers = registers;
 		this.memory = memory;
 	}
 	
-	public boolean evaluateCondition(String condition){
+	public boolean evaluateCondition(String condition) {
 		String con = condition.toUpperCase();
 		EFlags flags = registers.getEFlags();
 		String CF = flags.getCarryFlag();
@@ -22,7 +22,7 @@ public class Calculator {
 		String PF = flags.getParityFlag();
 		String SF = flags.getSignFlag();
 		
-		switch(con){
+		switch(con) {
 			case "A"	: // fall through
 			case "NBE"	: return ( CF.equals("0") || ZF.equals("0") );
 			case "AE"	:
@@ -64,7 +64,7 @@ public class Calculator {
 		BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(2);
 
-		if(des.isRegister()){
+		if( des.isRegister() ) {
 			int missingZeroes = registers.getBitSize(des) - val.length();
 
 			//zero extend
@@ -72,7 +72,7 @@ public class Calculator {
 				val = "0" + val;
 			}
 		}
-		else if (des.isMemory()){
+		else if ( des.isMemory() ) {
 			int missingZeroes = memory.getBitSize(des) - val.length();
 
 			//zero extend
@@ -88,7 +88,7 @@ public class Calculator {
 		BigInteger bi = new BigInteger(value, 2);
 		String val = bi.toString(16);
 
-		if(des.isRegister()) {
+		if( des.isRegister() ) {
 			int registerSize = registers.getHexSize(des);
 			int missingZeroes = registerSize - val.length();
 
@@ -98,7 +98,7 @@ public class Calculator {
 			}
 
 			//remove carry flag
-			if(val.length() > registerSize) {
+			if( val.length() > registerSize ) {
 				StringBuilder sb = new StringBuilder();
 
 				for(int i = 1; i < val.length(); i++)
@@ -107,7 +107,7 @@ public class Calculator {
 				val = sb.toString();
 			}
 		}
-		else if (des.isMemory()){
+		else if ( des.isMemory() ) {
 			int missingZeroes = memory.getHexSize(des) - val.length();
 
 			//zero extend
@@ -116,7 +116,6 @@ public class Calculator {
 			}
 		}
 
-		System.out.println("val: " + val);
 		return val;
 	}
 
@@ -131,30 +130,23 @@ public class Calculator {
 			str = "0" + str;
 		}
 
-		if(str.charAt(0) == '1') {
+		if( str.charAt(0) == '1' ) {
 			BigInteger ry = value.subtract(BigInteger.ONE);
-
-//            System.out.println("ry = " + ry.toString(2));
 
 			String temp = ry.toString(2);
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < temp.length(); i++) {
-				if (temp.charAt(i) == '1')
+				if ( temp.charAt(i) == '1' )
 					sb.append("0");
-				else if (temp.charAt(i) == '0')
+				else if ( temp.charAt(i) == '0' )
 					sb.append("1");
 			}
 
-//            System.out.println("sb = " + sb.toString());
-
 			BigInteger z = new BigInteger(sb.toString(), 2);
-//            System.out.println("b = " + z.toString());
 
 			String f = "-" + z.toString();
-			System.out.println("parse = " + Long.parseLong(f));
 
 			result = Long.parseLong(f);
-			System.out.println(Long.toHexString(result));
 		}
 
 		return result;
@@ -162,14 +154,9 @@ public class Calculator {
 
 	public String cutToCertainHexSize(String value, int size) {
 		StringBuilder sb = new StringBuilder();
-//        int i = value.length()-1;
-//        while(sb.length() != size) {
-//            sb.append(value.charAt(i));
-//            i--;
-//        }
 
 		for(int i = value.length()-1; i >= 0; i--) {
-			if(sb.length() < size)
+			if( sb.length() < size )
 				sb.append(value.charAt(i));
 		}
 		return sb.reverse().toString();
@@ -178,8 +165,8 @@ public class Calculator {
 	public String[] cutToCertainSize(String value, Token src) {
 		BigInteger bi = new BigInteger(value, 16);
 		String val = bi.toString(16);
+
 		int size = registers.getHexSize(src);
-		System.out.println("c.size = " + size);
 		int missingZeroes = size * 2 - val.length();
 
 		//zero extend
@@ -187,26 +174,22 @@ public class Calculator {
 			val = "0" + val;
 		}
 
-		System.out.println("c.val = " + val);
-
 		StringBuilder sb0 = new StringBuilder();
 		StringBuilder sb1 = new StringBuilder();
 		String[] result = new String[2];
 		for(int i = 0; i < val.length(); i++){
-			if(i < size)
+			if( i < size ) {
 				sb0.append(val.charAt(i));
-			else
+			}
+			else {
 				sb1.append(val.charAt(i));
+			}
 
-//            System.out.println("i-size == size-1 : " + (i-size) + " == " + (size-1));
-
-			if(i-size-1 == 0){
-				System.out.println("Initialize result[0]");
+			if( i-size-1 == 0 ) {
 				result[0] = sb0.toString();
 			}
 
-			if (i-size == size-1){
-				System.out.println("Initialize result[1]");
+			if ( i-size == size-1 ) {
 				result[1]=sb1.toString();
 			}
 		}
@@ -219,17 +202,17 @@ public class Calculator {
 			int missingZeroes = registers.getHexSize(des) - value.length();
 
 			//zero extend
-			if(missingZeroes > 0) {
+			if( missingZeroes > 0 ) {
 				for(int k = 0; k < missingZeroes; k++) {
 					value = "0" + value;
 				}
 			}
 
-			if(value.length() > registers.getHexSize(des) ) {
+			if( value.length() > registers.getHexSize(des) ) {
 				value = value.substring(1);
 			}
 		}
-		else if(des.isMemory()) {
+		else if( des.isMemory() ) {
 			int missingZeroes = memory.getHexSize(des) - value.length();
 
 			//zero extend
@@ -239,7 +222,7 @@ public class Calculator {
 				}
 			}
 
-			if(value.length() > memory.getHexSize(des) ) {
+			if( value.length() > memory.getHexSize(des) ) {
 				value = value.substring(1);
 			}
 		}
@@ -248,31 +231,31 @@ public class Calculator {
 	}
 
 	public String binaryZeroExtend(String value, Token des) {
-		if(des.isRegister()) {
+		if( des.isRegister() ) {
 			int missingZeroes = registers.getBitSize(des) - value.length();
 
 			//zero extend
-			if(missingZeroes > 0) {
+			if( missingZeroes > 0 ) {
 				for(int k = 0; k < missingZeroes; k++) {
 					value = "0" + value;
 				}
 			}
 
-			if(value.length() > registers.getBitSize(des) ) {
+			if( value.length() > registers.getBitSize(des) ) {
 				value = value.substring(1);
 			}
 		}
-		else if(des.isMemory()) {
+		else if( des.isMemory() ) {
 			int missingZeroes = memory.getBitSize(des) - value.length();
 
 			//zero extend
-			if(missingZeroes > 0) {
+			if( missingZeroes > 0 ) {
 				for(int k = 0; k < missingZeroes; k++) {
 					value = "0" + value;
 				}
 			}
 
-			if(value.length() > memory.getBitSize(des) ) {
+			if( value.length() > memory.getBitSize(des) ) {
 				value = value.substring(1);
 			}
 		}
@@ -287,12 +270,9 @@ public class Calculator {
 		BigInteger y = new BigInteger(sy, 16);
 		BigInteger result = y.add(x);
 
-		System.out.println("AF result = " + result.toString(2));
-		System.out.println("result.toString(2).length() = " + result.toString(2).length());
-		System.out.println("y.toString(2).length() = " + y.toString(2).length());
-
-		if(result.toString(2).length() > 4)
+		if( result.toString(2).length() > 4 ) {
 			return "1";
+		}
 
 		return "0";
 	}
@@ -331,7 +311,7 @@ public class Calculator {
 		String parity = new StringBuffer(value).reverse().toString();
 		int count = 0;
 
-		if(parity.length() < 8) {
+		if( parity.length() < 8 ) {
 			int missingZeroes = 8 - parity.length();
 
 			for(int k = 0; k < missingZeroes; k++) {
@@ -340,12 +320,12 @@ public class Calculator {
 		}
 
 		for(int i = 0; i < 8; i++) {
-			if(parity.charAt(i) == '1') {
+			if( parity.charAt(i) == '1' ) {
 				count++;
 			}
 		}
 
-		if(count % 2 == 0 && count != 0) {
+		if( count % 2 == 0 && count != 0 ) {
 			return "1";
 		}
 		return "0";
@@ -367,16 +347,10 @@ public class Calculator {
 		BigInteger endBoundary = new BigInteger("1");
 		endBoundary = startBoundary.subtract(endBoundary).negate();
 
-//		System.out.println(startBoundary + " < JMP > " + endBoundary);
-//		System.out.println("Difference is: " + difference);
-//		System.out.println(difference.compareTo(startBoundary));
-//		System.out.println(difference.compareTo(endBoundary));
-
 		int start = difference.compareTo(startBoundary);
 		int end = difference.compareTo(endBoundary);
 		flag = ( start == -1 || start == 0 ) && ( end == 1 || end == 0 );
 
-//		System.out.println(flag);
 		return flag;
 	}
 
