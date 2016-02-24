@@ -21,8 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jfxtras.scene.control.window.CloseIcon;
-import jfxtras.scene.control.window.Window;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
@@ -41,6 +39,7 @@ import java.util.regex.Pattern;
  * Created by Jennica Alcalde on 10/1/2015.
  */
 public class WorkspaceController implements Initializable {
+
     private SystemController sysCon;
 
     private HashMap<Integer, int[]> findHighlightRanges;
@@ -237,35 +236,6 @@ public class WorkspaceController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleWindowConsole(ActionEvent event) {
-        Window w = initWindowProperties(
-                "Console",
-                root.getWidth() / 2 - 20,
-                root.getHeight() / 2 - 110,
-                10,
-                root.getHeight() / 2 + 100
-        );
-        w.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-        root.getChildren().add(w);
-    }
-
-    @FXML
-    private void handleWindowVisualizer(ActionEvent event) throws Exception {
-        Window w = initWindowProperties(
-                "Visualizer",
-                root.getWidth() / 2 - 10,
-                root.getHeight() / 2 - 110,
-                root.getWidth() / 2,
-                root.getHeight() / 2 + 100
-        );
-
-        w.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-
-        //root.setBottom(w);
-        root.getChildren().add(w);
-    }
-
     /**
      * Action for Play Simulation; a MenuItem in Execute.
      *
@@ -382,7 +352,7 @@ public class WorkspaceController implements Initializable {
         File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
         if (codeArea != null && file != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Do you want to open " + file.getName() + "?");
             alert.setContentText("Unsaved changes will be lost if you continue.");
@@ -442,7 +412,6 @@ public class WorkspaceController implements Initializable {
                 disableSaveMode(true);
 //                fileLocation = file.getAbsolutePath();
             }
-
 
             tab.setGraphic(null);
         }
@@ -606,11 +575,11 @@ public class WorkspaceController implements Initializable {
             if (tab != null) {
                 CodeArea codeArea = (CodeArea) tab.getContent();
                 int[] range;
-                if (findHighlightRanges.size() > 1 ) {
+                if (findHighlightRanges.size() > 1) {
                     System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
                     System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
 
-                    if (currentFindRangeIndex < findHighlightRanges.size()-1) {
+                    if (currentFindRangeIndex < findHighlightRanges.size() - 1) {
                         currentFindRangeIndex++;
                         System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
                         range = findHighlightRanges.get(currentFindRangeIndex);
@@ -697,16 +666,6 @@ public class WorkspaceController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private Window initWindowProperties(String title, double width, double height, double x, double y) {
-        Window window = new Window(title);
-        window.setPrefSize(width, height);
-        window.setLayoutX(x);
-        window.setLayoutY(y);
-        window.getLeftIcons().add(new CloseIcon(window));
-
-        return window;
     }
 
     public void buildSystem(EnvironmentConfigurator env) {

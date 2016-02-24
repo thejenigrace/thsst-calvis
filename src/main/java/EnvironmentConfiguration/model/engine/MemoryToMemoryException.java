@@ -5,8 +5,8 @@ package EnvironmentConfiguration.model.engine;
  */
 public class MemoryToMemoryException extends Exception {
 
-	public MemoryToMemoryException(String first, String second, int line){
-		super("No memory to memory: " + first + " " + second + " at line number: " + line);
-	}
+    public MemoryToMemoryException(String first, String second, int line) {
+        super("No memory to memory: " + first + " " + second + " at line number: " + line);
+    }
 
 }

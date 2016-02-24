@@ -15,7 +15,7 @@ public abstract class AssemblyComponent {
 
     public abstract void build();
 
-    public void setSysCon(SystemController sysCon){
+    public void setSysCon(SystemController sysCon) {
         this.sysCon = sysCon;
     }
 

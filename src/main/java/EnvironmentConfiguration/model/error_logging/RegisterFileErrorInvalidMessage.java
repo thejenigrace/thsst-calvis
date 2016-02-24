@@ -4,14 +4,16 @@ package EnvironmentConfiguration.model.error_logging;
  * Created by Ivan on 1/29/2016.
  */
 public class RegisterFileErrorInvalidMessage {
+
     private RegisterInvalid type;
-    public RegisterFileErrorInvalidMessage(RegisterInvalid type){
+
+    public RegisterFileErrorInvalidMessage(RegisterInvalid type) {
         this.type = type;
     }
 
-    public String generateMessage(){
+    public String generateMessage() {
         String returnMessage = "";
-        switch(type){
+        switch (type) {
             case invalidSourceRegister:
                 returnMessage = "Invalid Source Register Name";
                 break;
@@ -31,6 +33,6 @@ public class RegisterFileErrorInvalidMessage {
                 returnMessage = "Invalid New Register Type";
                 break;
         }
-        return  returnMessage;
+        return returnMessage;
     }
 }

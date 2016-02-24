@@ -5,12 +5,12 @@ package EnvironmentConfiguration.model.engine;
  */
 public class MemoryWriteException extends Exception {
 
-	public MemoryWriteException(String writingAddress){
-		super("Invalid memory address access at: " + writingAddress);
-	}
+    public MemoryWriteException(String writingAddress) {
+        super("Invalid memory address access at: " + writingAddress);
+    }
 
-	public MemoryWriteException(String baseAddress, String value){
-		super("Memory write failed because of size mismatch between [" + baseAddress + "] and value: " + value);
-	}
+    public MemoryWriteException(String baseAddress, String value) {
+        super("Memory write failed because of size mismatch between [" + baseAddress + "] and value: " + value);
+    }
 
 }

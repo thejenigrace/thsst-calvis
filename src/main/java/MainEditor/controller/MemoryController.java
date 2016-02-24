@@ -21,26 +21,25 @@ import java.util.ResourceBundle;
 public class MemoryController extends AssemblyComponent implements Initializable {
 
     @FXML
-    private TableView<Map.Entry<String,String>> tableViewMemory;
+    private TableView<Map.Entry<String, String>> tableViewMemory;
     @FXML
-    private TableColumn<Map.Entry<String,String>, String> memoryLabel;
+    private TableColumn<Map.Entry<String, String>, String> memoryLabel;
     @FXML
-    private TableColumn<Map.Entry<String,String>, String> memoryAddress;
+    private TableColumn<Map.Entry<String, String>, String> memoryAddress;
     @FXML
-    private TableColumn<Map.Entry<String,String>, String> memoryRepresentation;
+    private TableColumn<Map.Entry<String, String>, String> memoryRepresentation;
 
     private Memory memory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         memoryLabel.setCellValueFactory(
-                p -> new SimpleStringProperty( this.memory.getCorrespondingLabel(p.getValue().getKey())));
+                p -> new SimpleStringProperty(this.memory.getCorrespondingLabel(p.getValue().getKey())));
         memoryAddress.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
         memoryRepresentation.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue()));
     }
-
 
     @Override
     public void update(String currentLine, int lineNumber) {
@@ -58,6 +57,6 @@ public class MemoryController extends AssemblyComponent implements Initializable
         Map map = this.memory.getMemoryMap();
         ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
         tableViewMemory.setItems(items);
-	    tableViewMemory.scrollTo(tableViewMemory.getItems().size());
+        tableViewMemory.scrollTo(tableViewMemory.getItems().size());
     }
 }

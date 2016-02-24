@@ -5,8 +5,8 @@ package EnvironmentConfiguration.model.engine;
  */
 public class MemoryRestrictedAccessException extends Exception {
 
-	public MemoryRestrictedAccessException(String baseAddress){
-		super("Restricted Memory Access on Base Address: " + baseAddress);
-	}
+    public MemoryRestrictedAccessException(String baseAddress) {
+        super("Restricted Memory Access on Base Address: " + baseAddress);
+    }
 
 }

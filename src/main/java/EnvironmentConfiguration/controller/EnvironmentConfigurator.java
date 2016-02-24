@@ -21,7 +21,7 @@ public class EnvironmentConfigurator {
     private InstructionList instructions;
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
-    public EnvironmentConfigurator(ArrayList<String> filePaths){
+    public EnvironmentConfigurator(ArrayList<String> filePaths) {
         // 1. Setup the environment
         this.memory = new Memory(32, 16, filePaths.get(0));
         this.registers = new RegisterList(filePaths.get(1), 32);
@@ -30,15 +30,15 @@ public class EnvironmentConfigurator {
         //1.5 check for errors
         errorLogger.combineErrorLogger(registers.getErrorLogger(), instructions.getErrorLogger());
         // 2. Create the CALVISParser based on the environment
-        if(errorLogger.size() == 0) {
+        if (errorLogger.size() == 0) {
             this.p = new CALVISParser(instructions, registers, memory);
-	        System.out.println("Memory available: " +
-			        Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
-	        );
+            System.out.println("Memory available: "
+                    + Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
+            );
         }
     }
 
-    public CALVISParser getParser(){
+    public CALVISParser getParser() {
         return this.p;
     }
 
@@ -50,11 +50,11 @@ public class EnvironmentConfigurator {
         return this.registers;
     }
 
-    public InstructionList getInstructions(){
+    public InstructionList getInstructions() {
         return this.instructions;
     }
 
-    public ErrorLogger getMessageLists(){
+    public ErrorLogger getMessageLists() {
         return errorLogger;
     }
 

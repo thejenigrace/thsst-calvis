@@ -7,8 +7,8 @@ import java.math.BigInteger;
  */
 public class JumpOutOfBoundsException extends Exception {
 
-	public JumpOutOfBoundsException(BigInteger fromAddress, BigInteger toAddress){
-		super("Jumping from [" + fromAddress + "] to [" + toAddress + "] failed.");
-	}
+    public JumpOutOfBoundsException(BigInteger fromAddress, BigInteger toAddress) {
+        super("Jumping from [" + fromAddress + "] to [" + toAddress + "] failed.");
+    }
 
 }

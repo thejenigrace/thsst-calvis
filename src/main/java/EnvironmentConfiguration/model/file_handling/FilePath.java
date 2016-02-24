@@ -4,11 +4,12 @@ package EnvironmentConfiguration.model.file_handling;
  * Created by Ivan on 1/27/2016.
  */
 public class FilePath {
+
     private String extension;
     private String name;
     private String location;
 
-    public FilePath(String location, String name, String extension){
+    public FilePath(String location, String name, String extension) {
         this.location = location;
         this.name = name;
         this.extension = extension;

@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
  * Created by Ivan on 1/28/2016.
  */
 public class HandleConfigFunctions {
-    public static ArrayList<String> generateArrayListString(String... stringList){
+
+    public static ArrayList<String> generateArrayListString(String... stringList) {
         ArrayList<String> stringArrayList = new ArrayList<String>();
-        for(int i = 0; i < stringList.length; i++){
+        for (int i = 0; i < stringList.length; i++) {
             stringArrayList.add(stringList[i]);
         }
 
@@ -30,30 +31,36 @@ public class HandleConfigFunctions {
 //
 //        return enumLists;
 //    }
-
     public static boolean isInteger(String s, int radix) {
-        if(s.isEmpty()) return false;
-        for(int i = 0; i < s.length(); i++) {
-            if(i == 0 && s.charAt(i) == '-') {
-                if(s.length() == 1) return false;
-                else continue;
+        if (s.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (i == 0 && s.charAt(i) == '-') {
+                if (s.length() == 1) {
+                    return false;
+                } else {
+                    continue;
+                }
             }
-            if(Character.digit(s.charAt(i),radix) < 0) return false;
+            if (Character.digit(s.charAt(i), radix) < 0) {
+                return false;
+            }
         }
         return true;
     }
 
-    public static String[] adjustAnArray(String[] reg, int offSet){
+    public static String[] adjustAnArray(String[] reg, int offSet) {
         String[] adjustArray = new String[reg.length + offSet];
         System.arraycopy(reg, 0, adjustArray, 0, reg.length);
         reg = adjustArray;
         return reg;
     }
 
-    public static ArrayList<String> checkifMissing(String[] strArr){
+    public static ArrayList<String> checkifMissing(String[] strArr) {
         ArrayList<String> missingArr = new ArrayList<String>();
-        for(int x = 0; x < strArr.length; x++){
-            if(strArr[x].isEmpty()) {
+        for (int x = 0; x < strArr.length; x++) {
+            if (strArr[x].isEmpty()) {
                 switch (x) {
                     case 0:
                         missingArr.add(new RegisterFileErrorMissingMessage(RegisterMissing.missingSourceRegister).generateMessage());
@@ -79,11 +86,10 @@ public class HandleConfigFunctions {
         return missingArr;
     }
 
-
-    public static ArrayList<String> checkForInvalidInput(String[] strArr){
+    public static ArrayList<String> checkForInvalidInput(String[] strArr) {
         ArrayList<String> invalidArr = new ArrayList<String>();
-        for(int x = 0; x < strArr.length; x++){
-            if(!strArr[x].matches("[0-9]+")) {
+        for (int x = 0; x < strArr.length; x++) {
+            if (!strArr[x].matches("[0-9]+")) {
                 switch (x) {
 //                    case 0:
 //                        invalidArr.add(new RegisterFileErrorInvalidMessage(RegisterInvalid.invalidSourceRegister).generateMessage());
@@ -112,52 +118,53 @@ public class HandleConfigFunctions {
     public static String[] split(String line, char characterToSplit) {
         char[] charArr = line.toCharArray();
         int numberOfCommas = 0;
-        for ( char x : charArr ){
-            if ( x == characterToSplit ){
+        for (char x : charArr) {
+            if (x == characterToSplit) {
                 numberOfCommas++;
             }
         }
         String charSplit = "";
         charSplit += characterToSplit;
-        String[] array = new String[numberOfCommas+1];
+        String[] array = new String[numberOfCommas + 1];
         String[] lineArray = line.split(charSplit);
         for (int i = 0; i < array.length; i++) {
-            if ( i <= lineArray.length - 1){
+            if (i <= lineArray.length - 1) {
                 array[i] = lineArray[i];
-            }
-            else {
+            } else {
                 array[i] = "";
             }
         }
         return array;
     }
 
-    public static boolean StringSearchInstruction (String[] a, String key) {
-        for(int x = 0; x < a.length; x++){
-            if(key.equals(a[x])){
+    public static boolean StringSearchInstruction(String[] a, String key) {
+        for (int x = 0; x < a.length; x++) {
+            if (key.equals(a[x])) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean StringSearchContains (String[] a, String key) {
+    public static boolean StringSearchContains(String[] a, String key) {
         String tempo = key.substring(1);
-        for(int x = 0; x < a.length; x++) {
+        for (int x = 0; x < a.length; x++) {
             if ((a[x].charAt(0) == key.charAt(0))) {
-                if (tempo.length() == 0)
+                if (tempo.length() == 0) {
                     return true;
-                else if (!Pattern.matches("[a-zA-Z]+", tempo))
+                } else if (!Pattern.matches("[a-zA-Z]+", tempo)) {
                     return true;
+                }
             }
         }
         return false;
     }
 
-    public static String[] removeAllSpecificElements(String[] array, String key){
-        for(int x = 0; x < array.length; x++){
-            if(array[x].equals(key))
+    public static String[] removeAllSpecificElements(String[] array, String key) {
+        for (int x = 0; x < array.length; x++) {
+            if (array[x].equals(key)) {
                 array = ArrayUtils.remove(array, x);
+            }
         }
         return array;
     }

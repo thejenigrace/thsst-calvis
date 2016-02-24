@@ -4,9 +4,11 @@ package EnvironmentConfiguration.model.error_logging;
  * Created by Ivan on 1/28/2016.
  */
 public class ErrorMessageListWithSize {
+
     private int size;
     private ErrorMessageList errorMessageList;
-    public ErrorMessageListWithSize(int size, ErrorMessageList errorMessageList){
+
+    public ErrorMessageListWithSize(int size, ErrorMessageList errorMessageList) {
         this.size = size;
         this.errorMessageList = errorMessageList;
     }

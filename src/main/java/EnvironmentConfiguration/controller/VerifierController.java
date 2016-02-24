@@ -13,6 +13,7 @@ import java.io.File;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.Label;
+
 /**
  * Created by Ivan on 12/29/2015.
  */
@@ -24,7 +25,7 @@ public class VerifierController {
         for (int x = 0; x < ConfigurationFilePaths.size(); x++) {
             file = new File(ConfigurationFilePaths.get(x));
             if (!file.exists()) {
-                switch(x){
+                switch (x) {
                     case 0:
                         ErrorMessagesList.add(new ErrorMessage(Types.missingConfigFile,
                                 HandleConfigFunctions.generateArrayListString(file.getAbsolutePath()), ""));
@@ -40,13 +41,14 @@ public class VerifierController {
                 }
             }
         }
-        if(ErrorMessagesList.size() == 0 )
+        if (ErrorMessagesList.size() == 0) {
             return new ErrorMessageListWithSize(0, new ErrorMessageList(Types.generalMissingFile, ErrorMessagesList));
-        else
+        } else {
             return new ErrorMessageListWithSize(ErrorMessagesList.size(), new ErrorMessageList(Types.generalMissingFile, ErrorMessagesList));
+        }
     }
 
-    public void showErrorList(ErrorLogger errorLogger){
+    public void showErrorList(ErrorLogger errorLogger) {
         ArrayList<ErrorMessageList> errorList = errorLogger.getAll();
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Configuration Exception");
@@ -54,14 +56,14 @@ public class VerifierController {
         //create an expandable shit
         Label label = new Label("The exception list are as of follows:");
         String Error = "";
-        for(int x = 0; x < errorList.size(); x++) {
-            Error = Error + new ErrorType(errorList.get(x).getType()).generateType(new ArrayList<String>(),"");
-            for(int y = 0; y < errorList.get(x).getSizeofErrorMessages(); y++){
+        for (int x = 0; x < errorList.size(); x++) {
+            Error = Error + new ErrorType(errorList.get(x).getType()).generateType(new ArrayList<String>(), "");
+            for (int y = 0; y < errorList.get(x).getSizeofErrorMessages(); y++) {
                 Error = Error + new ErrorType(
                         errorList.get(x).getListOfErrorMessages().get(y).getType()).generateType(
                         errorList.get(x).getListOfErrorMessages().get(y).getVariables(),
                         errorList.get(x).getListOfErrorMessages().get(y).getErrorLine()
-                        );
+                );
 
             }
         }
@@ -69,7 +71,6 @@ public class VerifierController {
         TextArea textArea = new TextArea(Error);
         textArea.setEditable(false);
         textArea.setWrapText(true);
-
 
         textArea.setMaxWidth(Double.MAX_VALUE);
         textArea.setMaxHeight(Double.MAX_VALUE);

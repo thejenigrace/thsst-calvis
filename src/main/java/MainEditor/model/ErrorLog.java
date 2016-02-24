@@ -8,50 +8,50 @@ import javafx.beans.property.StringProperty;
  */
 public class ErrorLog {
 
-	private final StringProperty errorType;
-	private final StringProperty errorCause;
-	private final StringProperty errorMessage;
+    private final StringProperty errorType;
+    private final StringProperty errorCause;
+    private final StringProperty errorMessage;
 
-	public ErrorLog(String errorType, String errorCause, String errorMessage) {
-		this.errorType = new SimpleStringProperty(errorType);
-		this.errorCause = new SimpleStringProperty(errorCause);
-		this.errorMessage = new SimpleStringProperty(errorMessage);
-	}
+    public ErrorLog(String errorType, String errorCause, String errorMessage) {
+        this.errorType = new SimpleStringProperty(errorType);
+        this.errorCause = new SimpleStringProperty(errorCause);
+        this.errorMessage = new SimpleStringProperty(errorMessage);
+    }
 
-	public String getErrorType() {
-		return errorType.get();
-	}
+    public String getErrorType() {
+        return errorType.get();
+    }
 
-	public StringProperty errorTypeProperty() {
-		return errorType;
-	}
+    public StringProperty errorTypeProperty() {
+        return errorType;
+    }
 
-	public void setErrorType(String errorType) {
-		this.errorType.set(errorType);
-	}
+    public void setErrorType(String errorType) {
+        this.errorType.set(errorType);
+    }
 
-	public String getErrorCause() {
-		return errorCause.get();
-	}
+    public String getErrorCause() {
+        return errorCause.get();
+    }
 
-	public StringProperty errorCauseProperty() {
-		return errorCause;
-	}
+    public StringProperty errorCauseProperty() {
+        return errorCause;
+    }
 
-	public void setErrorCause(String errorCause) {
-		this.errorCause.set(errorCause);
-	}
+    public void setErrorCause(String errorCause) {
+        this.errorCause.set(errorCause);
+    }
 
-	public String getErrorMessage() {
-		return errorMessage.get();
-	}
+    public String getErrorMessage() {
+        return errorMessage.get();
+    }
 
-	public StringProperty errorMessageProperty() {
-		return errorMessage;
-	}
+    public StringProperty errorMessageProperty() {
+        return errorMessage;
+    }
 
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage.set(errorMessage);
-	}
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage.set(errorMessage);
+    }
 
 }

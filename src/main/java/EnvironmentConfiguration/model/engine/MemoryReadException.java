@@ -5,8 +5,8 @@ package EnvironmentConfiguration.model.engine;
  */
 public class MemoryReadException extends Exception {
 
-	public MemoryReadException(String baseAddress, int offset){
-		super("Memory read failed at base address: " + baseAddress + " with offset: " + offset);
-	}
+    public MemoryReadException(String baseAddress, int offset) {
+        super("Memory read failed at base address: " + baseAddress + " with offset: " + offset);
+    }
 
 }

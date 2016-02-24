@@ -6,16 +6,18 @@ import java.util.ArrayList;
  * Created by Ivan on 1/27/2016.
  */
 public class ErrorType {
+
     private Types type;
-    public ErrorType(Types type){
+
+    public ErrorType(Types type) {
         this.type = type;
     }
 
-    public String generateType(ArrayList<String> variables, String lineNumber){
+    public String generateType(ArrayList<String> variables, String lineNumber) {
         String returningType = "";
-        switch(type){
+        switch (type) {
             case registerFile:
-                returningType =  "Register CSV File Error:\n";
+                returningType = "Register CSV File Error:\n";
                 break;
             case instructionFile:
                 returningType = "Instruction CSV File Error:\n";
@@ -32,13 +34,13 @@ public class ErrorType {
                 returningType = "File not found for Config CSV file:" + variables.get(0) + "\n";
                 break;
             case missingInstructionFile:
-                returningType = "File not found for Instruction List CSV file: At path " + variables.get(0) + "\n" ;
+                returningType = "File not found for Instruction List CSV file: At path " + variables.get(0) + "\n";
                 break;
             case missingRegisterFile:
                 returningType = "File not found for Register List CSV file:" + variables.get(0) + "\n";
                 break;
             case invalidRegister:
-                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\n Invalid Register Type: " + variables.get(0)+ " at line " + lineNumber + ".\n";
+                returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\n Invalid Register Type: " + variables.get(0) + " at line " + lineNumber + ".\n";
                 break;
             case doesNotExist:
                 returningType = "ERROR: EnvironmentConfiguration.model.engine.Register :\n" + variables.get(0) + " Register does not exist at line " + lineNumber + ". \n";
@@ -51,15 +53,17 @@ public class ErrorType {
                 break;
             case instructionShouldNotBeEmpty:
                 returningType = "ERROR: EnvironmentConfiguration.model.engine.Instruction :\nThere are lacking parameters in line " + lineNumber + ":\n";
-                for(int x = 0; x < variables.size(); x++)
+                for (int x = 0; x < variables.size(); x++) {
                     returningType += variables.get(x) + "\n";
+                }
                 break;
-           case instructionShouldNotBeInvalid:
+            case instructionShouldNotBeInvalid:
                 returningType = "ERROR: EnvironmentConfiguration.model.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
-                for(int x = 0; x < variables.size(); x++)
+                for (int x = 0; x < variables.size(); x++) {
                     returningType += variables.get(x) + "\n";
+                }
                 break;
-            }
+        }
 
         return returningType;
     }

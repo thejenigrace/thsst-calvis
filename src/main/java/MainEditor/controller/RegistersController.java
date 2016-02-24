@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
  * Created by Jennica Alcalde on 10/3/2015.
  */
 public class RegistersController extends AssemblyComponent implements Initializable {
+
     @FXML
     private GridPane gridPaneRegister;
     @FXML
@@ -79,12 +80,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 System.out.println("INSIDE DUMMY: " + dummyRoot.getChildren().get(i).getValue().getName());
             }
 
-
             this.treeTableViewRegister.setRoot(dummyRoot);
             this.treeTableViewRegister.setShowRoot(false);
 
 //            createTreeTableView(map);
-
             flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
             tableViewFlags1.setItems(flagList1);
         } catch (Exception e) {
@@ -93,7 +92,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     }
 
     @Override
-    public void update(java.lang.String currentLine, int lineNumber) {
+    public void update(String currentLine, int lineNumber) {
         treeTableViewRegister.refresh();
 
         flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());

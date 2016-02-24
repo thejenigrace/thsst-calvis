@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -20,16 +19,18 @@ public class MainApp extends Application {
     private FXMLLoader loader;
     private Parent root;
     private ConfigurationEnvironmentController configController;
-
+    
     /**
      * Method implemented by extending the class to Application
+     *
      * @param primaryStage
      */
     @Override
     public void start(Stage primaryStage) {
+        
         try {
-            this.primaryStage = primaryStage;
-            this.primaryStage.setTitle("CALVIS Instruction Set Configuration");
+            MainApp.primaryStage = primaryStage;
+            MainApp.primaryStage.setTitle("CALVIS Instruction Set Configuration");
 
             initRootLayout();
         } catch (Exception e) {
@@ -51,24 +52,25 @@ public class MainApp extends Application {
         }
     }
 
-     /**
+    /**
      * Opens a stage to show CALVIS workspace
+     *
      * @param environmentConfigurator
      */
     public void showWorkspace(EnvironmentConfigurator environmentConfigurator) {
         try {
             // Load root layout from fxml file
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/workspace.fxml"));
-            Parent workspaceLayout = (BorderPane) loader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(MainApp.class.getResource("/fxml/workspace.fxml"));
+            Parent workspaceLayout = (BorderPane) fxmlLoader.load();
 
             primaryStage.setScene(new Scene(workspaceLayout));
             primaryStage.setTitle("CALVIS x86-32 Workspace");
-//            primaryStage.setMaximized(true);
-//            primaryStage.setResizable(true);
+            primaryStage.setMaximized(true);
+            primaryStage.setResizable(true);
             primaryStage.show();
 
-            WorkspaceController workspaceController = loader.getController();
+            WorkspaceController workspaceController = fxmlLoader.getController();
             EnvironmentConfigurator environment = environmentConfigurator;
             workspaceController.buildSystem(environment);
             workspaceController.displayDefaultWindows();
@@ -81,22 +83,23 @@ public class MainApp extends Application {
      * Hide the main stage.
      */
     public void hidePrimaryStage() {
-        this.primaryStage.hide();
+        MainApp.primaryStage.hide();
     }
 
     /**
      * Returns the main stage.
+     *
      * @return
      */
     public Stage getPrimaryStage() {
-        return this.primaryStage;
+        return MainApp.primaryStage;
     }
 
     public void loadPrimaryStageController() {
         try {
             // Load root layout from fxml file
             loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/configurationEnvironment.fxml"));
+            loader.setLocation(MainApp.class.getResource("/fxml/configurationEnvironment.fxml"));
             root = (BorderPane) loader.load();
 
             // Give the controller access to the main app
@@ -109,9 +112,19 @@ public class MainApp extends Application {
 
     /**
      * Main method to run the application.
+     *
      * @param args
      */
     public static void main(String[] args) {
+//        System.setProperty("java.home", "C:\\Program Files\\Java\\jdk1.8.0_65");
+    	String OS = System.getProperty("os.name").toLowerCase();
+        if( OS.contains("win")){
+            System.out.println("windows");
+            System.setProperty("java.home", "C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
+        }   
+        else if (OS.contains("mac")){
+            System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") +".jdk/Contents/Home");
+        }///jdk1.8.0_66.jdk/Contents/Home/jre
         launch(args);
     }
 

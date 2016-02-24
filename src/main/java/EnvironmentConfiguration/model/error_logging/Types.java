@@ -3,7 +3,7 @@ package EnvironmentConfiguration.model.error_logging;
 /**
  * Created by Ivan on 1/27/2016.
  */
-public enum Types{
+public enum Types {
     registerFile,
     instructionFile,
     configFile,

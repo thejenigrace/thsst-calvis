@@ -58,7 +58,8 @@ public class FindDialogController implements Initializable {
 //        workspaceController.onActionUp();
     }
 
-    @FXML void handleDown(ActionEvent event) {
+    @FXML
+    void handleDown(ActionEvent event) {
 //        workspaceController.onActionDown();
     }
 
@@ -79,7 +80,7 @@ public class FindDialogController implements Initializable {
 
         this.findHighlightRanges = new HashMap<>();
         int c = 0;
-        while(matcher.find()) {
+        while (matcher.find()) {
             System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
 
             System.out.println("matcher.end() " + matcher.end());
@@ -94,7 +95,7 @@ public class FindDialogController implements Initializable {
             c++;
         }
 
-        if(c > 0) {
+        if (c > 0) {
             workspaceController.onActionFind(findHighlightRanges);
             btnUp.setVisible(true);
             btnDown.setVisible(true);

@@ -10,7 +10,7 @@ public class FilePathHandler {
     private ArrayList<ArrayList<String>> filePaths;
     private ArrayList<Integer> selectedIndexes;
 
-    public FilePathHandler(ArrayList<ArrayList<String>> filePaths, ArrayList<Integer> selectedIndexes){
+    public FilePathHandler(ArrayList<ArrayList<String>> filePaths, ArrayList<Integer> selectedIndexes) {
         this.filePaths = filePaths;
         this.selectedIndexes = selectedIndexes;
     }

@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
 /**
  * Created by Ivan on 12/29/2015.
  */
-public class ConfigurationEnvironmentController implements Initializable{
+public class ConfigurationEnvironmentController implements Initializable {
+
     // Reference to the main application
     private MainApp mainApp;
     private VerifierController verifierController = new VerifierController();
@@ -39,15 +39,18 @@ public class ConfigurationEnvironmentController implements Initializable{
     private FilePathLogger filePathLogger = new FilePathLogger(new ArrayList<FilePathList>());
     private ChoiceBoxLogger choiceBoxLogger = new ChoiceBoxLogger(new ArrayList<ArrayList<String>>());
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<ErrorMessageList>());
+
     /**
      * Is called by the main application to give a reference back to itself.
+     *
      * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-    public ConfigurationEnvironmentController(){
-        extensionFilter =  new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+
+    public ConfigurationEnvironmentController() {
+        extensionFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extensionFilter);
     }
     /**
@@ -69,11 +72,12 @@ public class ConfigurationEnvironmentController implements Initializable{
         // Show open file dialog
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
-        if(file != null) {
-            if(!memoryChoiceBox.getItems().contains(file.getAbsolutePath()))
+        if (file != null) {
+            if (!memoryChoiceBox.getItems().contains(file.getAbsolutePath())) {
                 memoryChoiceBox.getItems().add(file.getAbsolutePath());
-            for(int x = 0; x < memoryChoiceBox.getItems().size(); x++){
-                if(memoryChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
+            }
+            for (int x = 0; x < memoryChoiceBox.getItems().size(); x++) {
+                if (memoryChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
                     memoryChoiceBox.getSelectionModel().select(x);
                 }
             }
@@ -86,11 +90,12 @@ public class ConfigurationEnvironmentController implements Initializable{
         // Show open file dialog
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
-        if(file != null) {
-            if(!registerChoiceBox.getItems().contains(file.getAbsolutePath()))
+        if (file != null) {
+            if (!registerChoiceBox.getItems().contains(file.getAbsolutePath())) {
                 registerChoiceBox.getItems().add(file.getAbsolutePath());
-            for(int x = 0; x < registerChoiceBox.getItems().size(); x++){
-                if(registerChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
+            }
+            for (int x = 0; x < registerChoiceBox.getItems().size(); x++) {
+                if (registerChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
                     registerChoiceBox.getSelectionModel().select(x);
                 }
             }
@@ -103,11 +108,12 @@ public class ConfigurationEnvironmentController implements Initializable{
         // Show open file dialog
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
-        if(file != null) {
-            if(!instructionChoiceBox.getItems().contains(file.getAbsolutePath()))
+        if (file != null) {
+            if (!instructionChoiceBox.getItems().contains(file.getAbsolutePath())) {
                 instructionChoiceBox.getItems().add(file.getAbsolutePath());
-            for(int x = 0; x < instructionChoiceBox.getItems().size(); x++){
-                if(instructionChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
+            }
+            for (int x = 0; x < instructionChoiceBox.getItems().size(); x++) {
+                if (instructionChoiceBox.getItems().get(x).equals(file.getAbsolutePath())) {
                     instructionChoiceBox.getSelectionModel().select(x);
                 }
             }
@@ -118,10 +124,11 @@ public class ConfigurationEnvironmentController implements Initializable{
     public void handleProceedWorkSpace(ActionEvent event) throws IOException {
         EnvironmentConfigurator environmentConfigurator = new EnvironmentConfigurator(getConfigurationFilePath());
         ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
-        if(errorMessageListWithSize.getSize() > 0)
+        if (errorMessageListWithSize.getSize() > 0) {
             errorLogger.add(errorMessageListWithSize.getErrorMessageList());
+        }
         errorLogger.combineErrorLogger(environmentConfigurator.getMessageLists());
-        if(verifyErrorConfigurationFiles(errorLogger)) {
+        if (verifyErrorConfigurationFiles(errorLogger)) {
             mainApp.hidePrimaryStage();
             mainApp.showWorkspace(environmentConfigurator);
         }
@@ -133,8 +140,8 @@ public class ConfigurationEnvironmentController implements Initializable{
         exitAlert.setTitle("Exit CALVIS?");
         exitAlert.setHeaderText("Are you sure you want to exit CALVIS?");
         Optional<ButtonType> result = exitAlert.showAndWait();
-        if (result.get() == ButtonType.OK){
-           System.exit(0);
+        if (result.get() == ButtonType.OK) {
+            System.exit(0);
         } else {
 
         }
@@ -145,8 +152,10 @@ public class ConfigurationEnvironmentController implements Initializable{
         initializeDefaultChoiceBoxes();
     }
 
-    private void initializeDefaultChoiceBoxes(){
+    private void initializeDefaultChoiceBoxes() {
         FilePathHandler readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
+//        FileHandlerController fhc = new FileHandlerController();
+//        System.out.println(fhc.checkIfFileExists("SaveFile/savelist.txt"));
         AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
         AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
         AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));
@@ -156,19 +165,19 @@ public class ConfigurationEnvironmentController implements Initializable{
         instructionChoiceBox.getSelectionModel().select(instructionChoiceBox.getItems().get(readSaveFile.getSelectedIndexes().get(2)));
     }
 
-    public ArrayList<String> getConfigurationFilePath(){
+    public ArrayList<String> getConfigurationFilePath() {
         ArrayList<String> ConfigurationFilePaths = new ArrayList<String>();
-        ConfigurationFilePaths.add((String)memoryChoiceBox.getSelectionModel().getSelectedItem());
-        ConfigurationFilePaths.add((String)registerChoiceBox.getSelectionModel().getSelectedItem());
-        ConfigurationFilePaths.add((String)instructionChoiceBox.getSelectionModel().getSelectedItem());
+        ConfigurationFilePaths.add((String) memoryChoiceBox.getSelectionModel().getSelectedItem());
+        ConfigurationFilePaths.add((String) registerChoiceBox.getSelectionModel().getSelectedItem());
+        ConfigurationFilePaths.add((String) instructionChoiceBox.getSelectionModel().getSelectedItem());
 
         return ConfigurationFilePaths;
     }
 
-    private boolean verifyErrorConfigurationFiles(ErrorLogger errorLogger){
+    private boolean verifyErrorConfigurationFiles(ErrorLogger errorLogger) {
         ArrayList<FilePathList> filePathLists = new ArrayList<FilePathList>();
 
-        if(errorLogger.getAll().size() <= 0) {
+        if (errorLogger.getAll().size() <= 0) {
             ArrayList<String> memoryArrayList = new ArrayList<String>(memoryChoiceBox.getItems());
             ArrayList<String> registerArrayList = new ArrayList<String>(registerChoiceBox.getItems());
             ArrayList<String> instructionArrayList = new ArrayList<String>(instructionChoiceBox.getItems());
@@ -180,13 +189,15 @@ public class ConfigurationEnvironmentController implements Initializable{
 
             ArrayList<ArrayList<FilePath>> filepathContentList = new ArrayList<ArrayList<FilePath>>();
 
-            for(int x = 0; x < choiceArrayList.size(); x++)
-            choiceBoxLogger.add(choiceArrayList.get(x));
+            for (int x = 0; x < choiceArrayList.size(); x++) {
+                choiceBoxLogger.add(choiceArrayList.get(x));
+            }
 
-            for(int x = 0; x < choiceBoxLogger.size(); x++)
+            for (int x = 0; x < choiceBoxLogger.size(); x++) {
                 filepathContentList.add(getFilePathList(choiceBoxLogger.get(x)));
+            }
 
-            filePathLists.add(new FilePathList("Memory File", filepathContentList.get(0) ));
+            filePathLists.add(new FilePathList("Memory File", filepathContentList.get(0)));
             filePathLists.add(new FilePathList("Register File", filepathContentList.get(1)));
             filePathLists.add(new FilePathList("Instruction File", filepathContentList.get(2)));
 
@@ -196,24 +207,24 @@ public class ConfigurationEnvironmentController implements Initializable{
                             Integer.toString(registerChoiceBox.getSelectionModel().getSelectedIndex()),
                             Integer.toString(instructionChoiceBox.getSelectionModel().getSelectedIndex())).getStrArray());
             return true;
-        }
-        else{
+        } else {
             verifierController.showErrorList(errorLogger);
             errorLogger.clearContents();
         }
         return false;
     }
 
-    private void AddToChoiceBoxes(ChoiceBox choiceBox, ArrayList<String> choices){
-        for(int x = 0; x < choices.size(); x++)
+    private void AddToChoiceBoxes(ChoiceBox choiceBox, ArrayList<String> choices) {
+        for (int x = 0; x < choices.size(); x++) {
             choiceBox.getItems().add(choices.get(x));
+        }
     }
 
-    public ArrayList<FilePath> getFilePathList(ArrayList<String> filePathsOfChoiceBox){
+    public ArrayList<FilePath> getFilePathList(ArrayList<String> filePathsOfChoiceBox) {
         ArrayList<FilePath> filePaths = new ArrayList<FilePath>();
-        for(int x = 0; x < filePathsOfChoiceBox.size(); x++){
-            Path path = Paths.get((String)filePathsOfChoiceBox.get(x));
-            FilePath filePath = new FilePath((String)filePathsOfChoiceBox.get(x), path.getFileName().toString(), FileHandlerController.getExtension(filePathsOfChoiceBox.get(x)));
+        for (int x = 0; x < filePathsOfChoiceBox.size(); x++) {
+            Path path = Paths.get((String) filePathsOfChoiceBox.get(x));
+            FilePath filePath = new FilePath((String) filePathsOfChoiceBox.get(x), path.getFileName().toString(), FileHandlerController.getExtension(filePathsOfChoiceBox.get(x)));
             filePaths.add(filePath);
         }
         return filePaths;

@@ -15,7 +15,7 @@ public class Register {
 
     /*	populates register value with HEX value
         of 0s depending on size
-      */
+     */
     public void initializeValue() {
         String regInitialValue = "";
         for (int i = 0; i < this.size / 4; i++) {

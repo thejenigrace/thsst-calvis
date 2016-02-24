@@ -12,26 +12,27 @@ public class FilePathLogger {
 
     private ArrayList<FilePathList> filePathListArrayList;
 
-    public FilePathLogger(ArrayList<FilePathList> filePathListArrayList){
+    public FilePathLogger(ArrayList<FilePathList> filePathListArrayList) {
         this.filePathListArrayList = filePathListArrayList;
     }
 
-    public void add(FilePathList filePathList){
+    public void add(FilePathList filePathList) {
         this.filePathListArrayList.add(filePathList);
     }
 
-    public void add(String category, ArrayList<FilePath> filePathArrayList){
+    public void add(String category, ArrayList<FilePath> filePathArrayList) {
         this.filePathListArrayList.add(new FilePathList(category, filePathArrayList));
     }
 
-    public void addAll(ArrayList<FilePathList> arrayPathList){
+    public void addAll(ArrayList<FilePathList> arrayPathList) {
         this.filePathListArrayList.addAll(arrayPathList);
     }
 
-    public ArrayList<FilePathList> getAll(){
+    public ArrayList<FilePathList> getAll() {
         return this.filePathListArrayList;
     }
-    public FilePathList get(int index){
+
+    public FilePathList get(int index) {
         return filePathListArrayList.get(index);
     }
 }

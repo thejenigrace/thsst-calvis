@@ -11,7 +11,7 @@ public class ErrorMessage {
     private ArrayList<String> variables;
     private String errorLine;
 
-    public ErrorMessage(Types type, ArrayList<String> variables, String errorLine){
+    public ErrorMessage(Types type, ArrayList<String> variables, String errorLine) {
         this.type = type;
         this.variables = variables;
         this.errorLine = errorLine;
@@ -32,7 +32,6 @@ public class ErrorMessage {
 //    public void setMessage(String message) {
 //        this.message = message;
 //    }
-
     public String getErrorLine() {
         return errorLine;
     }

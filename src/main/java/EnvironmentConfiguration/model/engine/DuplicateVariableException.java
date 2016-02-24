@@ -5,33 +5,33 @@ package EnvironmentConfiguration.model.engine;
  */
 public class DuplicateVariableException extends Exception {
 
-	private String label;
-	private int lineNumber;
+    private String label;
+    private int lineNumber;
 
-	public DuplicateVariableException(String label){
-		super("Invalid duplicate variable name: " + label);
-		this.label = label;
-	}
+    public DuplicateVariableException(String label) {
+        super("Invalid duplicate variable name: " + label);
+        this.label = label;
+    }
 
-	public int getLineNumber() {
-		return lineNumber;
-	}
+    public int getLineNumber() {
+        return lineNumber;
+    }
 
-	public void setLineNumber(int lineNumber) {
-		this.lineNumber = lineNumber;
-	}
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 
-	public String getLabel() {
-		return label + ":";
-	}
+    public String getLabel() {
+        return label + ":";
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	@Override
-	public String getMessage() {
-		return super.getMessage() + " at line number: " + lineNumber;
-	}
+    @Override
+    public String getMessage() {
+        return super.getMessage() + " at line number: " + lineNumber;
+    }
 
 }

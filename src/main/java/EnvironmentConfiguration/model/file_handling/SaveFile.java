@@ -6,10 +6,11 @@ import java.util.ArrayList;
  * Created by Ivan on 1/26/2016.
  */
 public class SaveFile {
-    private String name;
-    private ArrayList<String>  location;
 
-    public SaveFile(String name, ArrayList<String> location){
+    private String name;
+    private ArrayList<String> location;
+
+    public SaveFile(String name, ArrayList<String> location) {
         this.name = name;
         this.location = location;
     }

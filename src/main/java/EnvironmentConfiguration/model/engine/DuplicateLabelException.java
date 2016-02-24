@@ -5,33 +5,33 @@ package EnvironmentConfiguration.model.engine;
  */
 public class DuplicateLabelException extends Exception {
 
-	private String label;
-	private int lineNumber;
+    private String label;
+    private int lineNumber;
 
-	public DuplicateLabelException(String label){
-		super("Invalid duplicate label name: " + label);
-		this.label = label;
-	}
+    public DuplicateLabelException(String label) {
+        super("Invalid duplicate label name: " + label);
+        this.label = label;
+    }
 
-	public int getLineNumber() {
-		return lineNumber;
-	}
+    public int getLineNumber() {
+        return lineNumber;
+    }
 
-	public void setLineNumber(int lineNumber) {
-		this.lineNumber = lineNumber;
-	}
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 
-	public String getLabel() {
-		return label + ":";
-	}
+    public String getLabel() {
+        return label + ":";
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	@Override
-	public String getMessage() {
-		return super.getMessage() + " at line number: " + lineNumber;
-	}
+    @Override
+    public String getMessage() {
+        return super.getMessage() + " at line number: " + lineNumber;
+    }
 
 }

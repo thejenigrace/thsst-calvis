@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  * Created by Jennica on 04/02/2016.
  */
 public class TextEditor extends AssemblyComponent {
+
     private WorkspaceController workspaceController;
     private CodeArea codeArea;
     private Tab tab;
@@ -70,8 +71,9 @@ public class TextEditor extends AssemblyComponent {
         updateTab();
 
         tab.setOnSelectionChanged(e -> {
-            if (tab.isSelected())
+            if (tab.isSelected()) {
                 Platform.runLater(() -> activated());
+            }
         });
 //       activated();
     }
@@ -110,10 +112,11 @@ public class TextEditor extends AssemblyComponent {
         tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
         tab.setGraphic(isModified() ? new Text("*") : null);
 
-        if (isModified())
+        if (isModified()) {
             workspaceController.disableSaveMode(false);
-        else
+        } else {
             workspaceController.disableSaveMode(true);
+        }
     }
 
     private void activated() {
@@ -132,15 +135,15 @@ public class TextEditor extends AssemblyComponent {
 
         codeArea.requestFocus();
 
-        if (isModified())
+        if (isModified()) {
             workspaceController.disableSaveMode(false);
-        else
+        } else {
             workspaceController.disableSaveMode(true);
+        }
     }
 
     /**
-     * Method for configuring the highlighted
-     * keywords within the text editor
+     * Method for configuring the highlighted keywords within the text editor
      */
     private void setCodeEnvironment() {
         this.INSTRUCTION_KEYWORDS = sysCon.getInstructionKeywords();
@@ -151,13 +154,13 @@ public class TextEditor extends AssemblyComponent {
         this.MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
         this.PATTERN = Pattern.compile(
                 "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
-                        + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
-                        + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
-                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                        + "|(?<STRING>" + STRING_PATTERN + ")"
-                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+                + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
+                + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
+                + "|(?<PAREN>" + PAREN_PATTERN + ")"
+                + "|(?<BRACE>" + BRACE_PATTERN + ")"
+                + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+                + "|(?<STRING>" + STRING_PATTERN + ")"
+                + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
         );
     }
 
@@ -167,15 +170,16 @@ public class TextEditor extends AssemblyComponent {
         StyleSpansBuilder<Collection<String>> spansBuilder
                 = new StyleSpansBuilder<>();
         while (matcher.find()) {
-            String styleClass = matcher.group("INSTRUCTIONPATTERN") != null ? "instruction" :
-                    matcher.group("REGISTERPATTERN") != null ? "register" :
-                            matcher.group("MEMORYPATTERN") != null ? "memory" :
-                                    matcher.group("PAREN") != null ? "paren" :
-                                            matcher.group("BRACE") != null ? "brace" :
-                                                    matcher.group("BRACKET") != null ? "bracket" :
-                                                            matcher.group("STRING") != null ? "string" :
-                                                                    matcher.group("COMMENT") != null ? "comment" :
-                                                                            null; /* never happens */
+            String styleClass = matcher.group("INSTRUCTIONPATTERN") != null ? "instruction"
+                    : matcher.group("REGISTERPATTERN") != null ? "register"
+                    : matcher.group("MEMORYPATTERN") != null ? "memory"
+                    : matcher.group("PAREN") != null ? "paren"
+                    : matcher.group("BRACE") != null ? "brace"
+                    : matcher.group("BRACKET") != null ? "bracket"
+                    : matcher.group("STRING") != null ? "string"
+                    : matcher.group("COMMENT") != null ? "comment"
+                    : null;
+            /* never happens */
             assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
@@ -195,7 +199,7 @@ public class TextEditor extends AssemblyComponent {
             int c = 0;
 
             while (matcher.find()) {
-                if ( !matcher.toMatchResult().group().contains(";") ) {
+                if (!matcher.toMatchResult().group().contains(";")) {
                     int[] arrRange = new int[2];
                     arrRange[0] = matcher.start();
                     arrRange[1] = matcher.end();

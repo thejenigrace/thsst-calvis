@@ -47,5 +47,4 @@ public class FindAndReplaceDialogController {
         workspaceController.onActionFindAndReplace(getFindField(), getReplaceField());
     }
 
-
 }
