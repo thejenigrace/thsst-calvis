@@ -22,7 +22,7 @@ execute(des, src, registers, memory) {
 
 				registers.set(des,c.binaryToHexString(result.toString(2),des));
 
-				ef.setOverflowFlag("0");
+				ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
 
 			}
  		}

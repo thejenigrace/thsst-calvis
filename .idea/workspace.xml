@@ -8,7 +8,23 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/adox.bsh.java" afterPath="$PROJECT_DIR$/Instructions/adox.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/bswap.bsh.java" afterPath="$PROJECT_DIR$/Instructions/bswap.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lds.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lds.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lea.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lea.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/les.bsh.java" afterPath="$PROJECT_DIR$/Instructions/les.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lfs.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lfs.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lgs.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lgs.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/mov.bsh.java" afterPath="$PROJECT_DIR$/Instructions/mov.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/nop.bsh.java" afterPath="$PROJECT_DIR$/Instructions/nop.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcl.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcr.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rol.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rol.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ror.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ror.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xchg.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xchg.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xlat.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xlat.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,18 +88,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -588,9 +593,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine" />
       <recent name="$PROJECT_DIR$/lib" />
     </key>
@@ -923,12 +928,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00017" summary="Added MUL, IMUL, DIV Instructions">
-      <created>1454233336017</created>
-      <option name="number" value="00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1454233336017</updated>
-    </task>
     <task id="LOCAL-00018" summary="Fix IMUL Instruction">
       <created>1454249931539</created>
       <option name="number" value="00018" />
@@ -1217,7 +1216,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456309956743</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Fix build.gradle &amp; OS Compatibility of Jar">
+      <created>1456310466254</created>
+      <option name="number" value="00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1456310466254</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1255,7 +1260,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3175034" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19456366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12947068" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12947068" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1308,7 +1313,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="New UI for CALVIS" />
     <MESSAGE value="Fix New Tab for Text Editor" />
     <MESSAGE value="Fix Play &amp; Pause Icon" />
     <MESSAGE value="Added Console &amp; Error Logger Window" />
@@ -1333,7 +1337,8 @@
     <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix build.gradle &amp; OS Compatibility of jar." />
+    <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix build.gradle &amp; OS Compatibility of Jar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1456,6 +1461,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5">
           <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/j.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

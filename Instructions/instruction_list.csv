@@ -70,3 +70,8 @@ xadd,Instructions/xadd.bsh.java,2,r/m,r/m
 cmp,Instructions/cmp.bsh.java,2,r/m,r/m/i
 cmpxchg,Instructions/cmpxchg.bsh.java,2,r/m,r
 cmpxchgs8,Instructions/cmpxchgs8.bsh.java,1,m64
+lgs,Instructions/lgs.bsh.java,2,r16/r32,m32/m64
+les,Instructions/les.bsh.java,2,r16/r32,m32/m64
+lfs,Instructions/lfs.bsh.java,2,r16/r32,m32/m64
+lds,Instructions/lds.bsh.java,2,r16/r32,m32/m64
+lss,Instructions/lss.bsh.java,2,r16/r32,m32/m64

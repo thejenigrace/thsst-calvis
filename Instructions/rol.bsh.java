@@ -73,7 +73,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		// flags.setOverflowFlag(undefined);
+		flags.setOverflowFlag("0");
 		}
 
 //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
@@ -235,7 +235,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		// flags.setOverflowFlag(undefined);
+		flags.setOverflowFlag("0");
 		}
 
 //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
@@ -312,7 +312,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		// flags.setOverflowFlag(undefined);
+		flags.setOverflowFlag("0");
 		}
 
 //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
