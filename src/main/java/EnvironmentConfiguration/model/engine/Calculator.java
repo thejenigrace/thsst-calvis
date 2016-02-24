@@ -222,15 +222,15 @@ public class Calculator {
     public String[] cutToCertainSize(String value, int size) {
         BigInteger bi = new BigInteger(value, 16);
         String val = bi.toString(16);
-        System.out.println("c.size = " + size);
-        int missingZeroes = size * 2 - val.length();
+        System.out.println("cut.size = " + size);
 
+        int missingZeroes = size * 2 - val.length();
         //zero extend
         for (int k = 0; k < missingZeroes; k++) {
             val = "0" + val;
         }
 
-        System.out.println("c.val = " + val);
+        System.out.println("cut.value = " + val);
 
         StringBuilder sb0 = new StringBuilder();
         StringBuilder sb1 = new StringBuilder();
@@ -242,14 +242,13 @@ public class Calculator {
                 sb1.append(val.charAt(i));
             }
 
-//            System.out.println("i-size == size-1 : " + (i-size) + " == " + (size-1));
             if (i - size - 1 == 0) {
-                System.out.println("Initialize result[0]");
+                System.out.println("Initialize result[0] = " + sb0.toString());
                 result[0] = sb0.toString();
             }
 
             if (i - size == size - 1) {
-                System.out.println("Initialize result[1]");
+                System.out.println("Initialize result[1] = " + sb1.toString());
                 result[1] = sb1.toString();
             }
         }

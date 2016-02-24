@@ -22,8 +22,7 @@ execute(des, src, registers, memory) {
 
 				registers.set(des,c.binaryToHexString(result.toString(2),des));
 
-				ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
-
+				ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getOverflowFlag()));
 			}
  		}
 
@@ -46,8 +45,7 @@ execute(des, src, registers, memory) {
 				result = result.add(new BigInteger("1"));
 
 			registers.set(des,c.binaryToHexString(result.toString(2),des));
-			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
-			c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getOverflowFlag()));
+			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getOverflowFlag()));
 			}
  		}
  	}
@@ -72,8 +70,7 @@ execute(des, src, registers, memory) {
 			}
 
 			memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
-			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
-			c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getOverflowFlag()));
+			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getOverflowFlag()));
 			}
  		}
  	}

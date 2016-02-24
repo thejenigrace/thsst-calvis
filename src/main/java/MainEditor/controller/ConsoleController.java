@@ -21,7 +21,7 @@ public class ConsoleController {
         this.textArea = new StyleClassedTextArea(false);
         this.textArea.setWrapText(true);
         this.textArea.getStyleClass().add("console");
-        this.textArea.getStylesheets().add("/resources/css/console.css");
+        this.textArea.getStylesheets().add("/css/console.css");
         this.textArea.richChanges().subscribe(change -> textArea.setStyleSpans(0, changeTextColor(textArea.getText())));
         this.tab = new Tab();
         this.tab.setText("Console");

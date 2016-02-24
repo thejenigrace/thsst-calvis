@@ -1,89 +1,65 @@
 execute(src, registers, memory) {
-        int srcSize;
-        String x = "";
-        EFlags ef=registers.getEFlags();
+        int srcBitSize;
+        String multiplier;
+        Calculator calculator = new Calculator(registers, memory);
         if ( src.isRegister() ){
-            System.out.println("MUL src = register");
-            srcSize = registers.getBitSize(src);
-            x = registers.get(src);
+            System.out.println("MUL: src == register");
+            srcBitSize = registers.getBitSize(src);
+            multiplier = registers.get(src);
         }else if( src.isMemory() ){
-            System.out.println("MUL src = memory");
-            srcSize = memory.getBitSize(src);
-            x = memory.read(src, srcSize);
+            System.out.println("MUL: src == memory");
+            srcBitSize = memory.getBitSize(src);
+            multiplier = memory.read(src, srcBitSize);
         }
 
-        if ( srcSize == 8 ){
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(registers.get("AL"), 16);
-            BigInteger result = biY.multiply(biX);
-
-            System.out.println("AL = " + biY.toString(16));
-            System.out.println("src (byte) = " + biX.toString(16));
-            System.out.println("result = " + result.toString(16));
-
-            Calculator c = new Calculator(registers, memory);
-            String[] finalize = c.cutToCertainSize(result.toString(16), srcSize/4);
-            registers.set("AX", result.toString(16));
-
-            System.out.println("finalize[0] = " + finalize[0]);
-            System.out.println("finalize[1] = " + finalize[1]);
-
-            BigInteger check = new BigInteger(finalize[0], 16);
-            if( check.equals(BigInteger.ZERO) ){
-                ef.setCarryFlag("0");
-                ef.setOverflowFlag("0");
-            } else{
-                ef.setCarryFlag("1");
-                ef.setOverflowFlag("1");
-            }
-        } else if ( srcSize == 16 ){
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(registers.get("AX"), 16);
-            BigInteger result = biY.multiply(biX);
-
-            System.out.println("AX = " + biY.toString(16));
-            System.out.println("src (word) = " + biX.toString(16));
-            System.out.println("result = " + result.toString(16));
-
-            Calculator c = new Calculator(registers, memory);
-            String[] finalize = c.cutToCertainSize(result.toString(16), srcSize/4);
-            registers.set("DX", finalize[0]);
-            registers.set("AX", finalize[1]);
-
-            System.out.println("finalize[0] = " + finalize[0]);
-            System.out.println("finalize[1] = " + finalize[1]);
-
-            BigInteger check = new BigInteger(finalize[0], 16);
-            if( check.equals(BigInteger.ZERO) ){
-                ef.setCarryFlag("0");
-                ef.setOverflowFlag("0");
-            } else{
-                ef.setCarryFlag("1");
-                ef.setOverflowFlag("1");
-            }
-        } else if ( srcSize == 32 ){
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(registers.get("EAX"), 16);
-            BigInteger result = biY.multiply(biX);
-
-            System.out.println("EAX = " + biY.toString(16));
-            System.out.println("src (dword) = " + biX.toString(16));
-            System.out.println("result = " + result.toString(16));
-
-            Calculator c = new Calculator(registers, memory);
-            String[] finalize = c.cutToCertainSize(result.toString(16), srcSize/4);
-            registers.set("EDX", finalize[0]);
-            registers.set("EAX", finalize[1]);
-
-            System.out.println("finalize[0] = " + finalize[0]);
-            System.out.println("finalize[1] = " + finalize[1]);
-
-            BigInteger check = new BigInteger(finalize[0], 16);
-            if( check.equals(BigInteger.ZERO) ){
-                ef.setCarryFlag("0");
-                ef.setOverflowFlag("0");
-            } else{
-                ef.setCarryFlag("1");
-                ef.setOverflowFlag("1");
-            }
+        if ( srcBitSize == 8 ){
+            String multiplicand = registers.get("AL");
+            multiply(registers, calculator, multiplicand, multiplier, null, "AX");
+        } else if ( srcBitSize == 16 ){
+            String multiplicand = registers.get("AX");
+            multiply(registers, calculator, multiplicand, multiplier, "DX", "AX");
+        } else if ( srcBitSize == 32 ){
+            String multiplicand = registers.get("EAX");
+            multiply(registers, calculator, multiplicand, multiplier, "EDX", "EAX");
         }}
+
+        multiply(registers, calculator, multiplicand, multiplier, registerUpperHalf, registerLowerHalf) {
+            // debugging
+            System.out.println("MULTIPLICAND = " + multiplicand
+                + "\nMULTIPLIER = " + multiplier
+                + "\nregisterLowerHalf = " + registerLowerHalf
+                + "\nregisterUpperHalf = " + registerUpperHalf);
+
+            BigInteger biMultiplicand = new BigInteger(multiplicand, 16);
+            BigInteger biMultiplier = new BigInteger(multiplier, 16);
+            BigInteger biResult = biMultiplicand.multiply(biMultiplier);
+
+            int registerLowerHalfHexSize = registers.getHexSize(registerLowerHalf);
+            System.out.println("registerLowerHalfHexSize = " + registerLowerHalfHexSize);
+            String[] results = calculator.cutToCertainSize(biResult.toString(16), registerLowerHalfHexSize);
+            registers.set(registerLowerHalf, results[1]);
+
+            EFlags ef = registers.getEFlags();
+            BigInteger checkUpperHalf;
+            if ( registerUpperHalf != null ){
+                registers.set(registerUpperHalf,results[0]);
+                checkUpperHalf = new BigInteger(results[0], 16);
+
+                System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
+            } else {
+                String ah = registers.get("AH");
+                checkUpperHalf = new BigInteger(ah, 16);
+            }
+
+            System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());
+
+            if( checkUpperHalf.equals(BigInteger.ZERO) ){
+                System.out.println("CF = 0; OF = 0");
+                ef.setCarryFlag("0");
+                ef.setOverflowFlag("0");
+            } else{
+            System.out.println("CF = 1; OF = 1");
+                ef.setCarryFlag("1");
+                ef.setOverflowFlag("1");
+            }
+        }
