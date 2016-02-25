@@ -313,22 +313,6 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleNewFile(ActionEvent event) {
-//        if (codeArea != null && codeArea.isVisible()) {
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Confirmation Dialog");
-//            alert.setHeaderText("Do you want to create a new file?");
-//            alert.setContentText("Unsaved changes will be lost if you continue.");
-//
-//            Optional<ButtonType> result = alert.showAndWait();
-//            if (result.get() == ButtonType.OK){
-//                newFile();
-//                fileLocation = "";
-//                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace");
-//            } else {
-//                // ... user chose CANCEL or closed the dialog
-//            }
-//        }
-
         this.newFile();
     }
 

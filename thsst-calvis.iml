@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="thsst-calvis" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="org.thsst.calvis" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="thsst-calvis" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="org.thsst.calvis" external.system.module.version="1.0.4" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
@@ -14,13 +14,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-common:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-fxml:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-controls:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-agenda:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-window:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-menu:8.0-r4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jfxtras:jfxtras-labs:8.0-r4" level="project" />
     <orderEntry type="library" name="Gradle: org.fxmisc.richtext:richtextfx:0.6.10" level="project" />
     <orderEntry type="library" name="Gradle: org.reactfx:reactfx:2.0-M4u1" level="project" />
     <orderEntry type="library" name="Gradle: org.fxmisc.undo:undofx:1.2" level="project" />
