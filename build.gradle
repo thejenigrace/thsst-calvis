@@ -1,5 +1,5 @@
 group 'org.thsst.calvis'
-version '1.0.1'
+version '1.0.3'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -16,18 +16,6 @@ task fatJar(type: Jar) {
     }
 
     baseName = "CALVIS"
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-task fatJarMarielle(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'CALVIS x86-32',
-                'Implementation-Version': version,
-                'Main-Class': 'MainEditor.controller.MainApp'
-    }
-
-    baseName = "marielle"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
