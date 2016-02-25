@@ -132,12 +132,12 @@
                                 <MenuItem mnemonicParsing="false" text="Jump To"/>
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Window">
-                            <items>
-                                <!--                                <MenuItem mnemonicParsing="false" onAction="#handleWindowConsole" text="Console"/>
-                                <MenuItem mnemonicParsing="false" onAction="#handleWindowVisualizer" text="Visualizer"/>-->
-                            </items>
-                        </Menu>
+                        <!--<Menu mnemonicParsing="false" text="Window">-->
+                            <!--<items>-->
+                                <!--<MenuItem mnemonicParsing="false" onAction="#handleWindowConsole" text="Console"/>-->
+                                <!--<MenuItem mnemonicParsing="false" onAction="#handleWindowVisualizer" text="Visualizer"/>-->
+                            <!--</items>-->
+                        <!--</Menu>-->
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Documentation"/>

@@ -47,8 +47,7 @@ execute(src, registers, memory) {
 
                 System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
             } else {
-                String ah = registers.get("AH");
-                checkUpperHalf = new BigInteger(ah, 16);
+                checkUpperHalf = new BigInteger(registers.get("AH"), 16);
             }
 
             System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());

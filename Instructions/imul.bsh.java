@@ -1,402 +1,235 @@
-execute(src,registers,memory){
-        int srcSize;
-        String x = "";
-        EFlags ef=registers.getEFlags();
-        if(src.isRegister()) {
-            System.out.println("(1) IMUL src = register");
-            srcSize = registers.getBitSize(src);
-            x = registers.get(src);
-        }else if(src.isMemory()) {
-            System.out.println("(1) IMUL src = memory");
-            srcSize = memory.getBitSize(src);
-            x = memory.read(src, srcSize);
+execute(src,registers,memory) {
+        int srcBitSize;
+        String multiplier;
+        Calculator calculator = new Calculator(registers, memory);
+        if( src.isRegister() ){
+            System.out.println("IMUL (1): src == register");
+            srcBitSize = registers.getBitSize(src);
+            multiplier = registers.get(src);
+        }else if ( src.isMemory() ){
+            System.out.println("IMUL (1): src == memory");
+            srcBitSize = memory.getBitSize(src);
+            multiplier = memory.read(src,srcBitSize);
         }
 
-        System.out.println("srcSize = " + srcSize);
-        System.out.println("x = " + x);
+        System.out.println("srcBitSize = " + srcBitSize);
 
-        if(srcSize==8){
-            BigInteger biY=new BigInteger(registers.get("AL"),16);
-            BigInteger biX=new BigInteger(x,16);
+        if ( srcBitSize==8 ){
+            String multiplicand = registers.get("AL");
+            multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,null,"AX");
+        }else if ( srcBitSize==16 ){
+            String multiplicand = registers.get("AX");
+            multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,"DX","AX");
+        }else if( srcBitSize==32 ){
+            String multiplicand = registers.get("EAX");
+            multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,"EDX","EAX");
+        }
+}
 
-            Calculator c=new Calculator(registers,memory);
-            long a=c.convertToSignedInteger(biY,8);
-            long b=c.convertToSignedInteger(biX,8);
-            long r=a*b;
+multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,registerUpperHalf,registerLowerHalf) {
+    // debugging
+    System.out.println("MULTIPLICAND = " + multiplicand
+    + "\nMULTIPLIER = " + multiplier
+    + "\nregisterLowerHalf = " + registerLowerHalf
+    + "\nregisterUpperHalf = " + registerUpperHalf);
 
-            System.out.println("a = "+a);
-            System.out.println("b = "+b);
-            System.out.println("rr = "+r);
+    BigInteger biMultiplicand = new BigInteger(multiplicand, 16);
+    BigInteger biMultiplier = new BigInteger(multiplier, 16);
 
-            System.out.println("AL = "+biY.toString(2));
-            System.out.println("src (byte) = "+biX.toString(2));
-            System.out.println("result = "+Long.toHexString(r));
+    int registerLowerHalfBitSize = registers.getBitSize(registerLowerHalf);
+    long longMultiplicand = calculator.convertToSignedInteger(biMultiplicand, srcBitSize);
+    long longMultiplier = calculator.convertToSignedInteger(biMultiplier,  srcBitSize);
+    long longResult = longMultiplicand * longMultiplier;
 
-            String finalize=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
-            //                System.out.println("finalize[0] = " + finalize[0]);
-            //                System.out.println("finalize[1] = " + finalize[1]);
+    System.out.println("longMultiplicand = "+longMultiplicand);
+    System.out.println("longMultiplier = "+longMultiplier);
+    System.out.println("longResult = "+longResult);
 
-            registers.set("AX",finalize);
+    int registerLowerHalfHexSize = registers.getHexSize(registerLowerHalf);
+    String[] results=calculator.cutToCertainSize(Long.toHexString(longResult), registerLowerHalfHexSize);
 
-        }else if(srcSize==16){
-            BigInteger biY=new BigInteger(registers.get("AX"),16);
-            BigInteger biX=new BigInteger(x,16);
+    registers.set(registerLowerHalf, results[1]);
 
-            Calculator c=new Calculator(registers,memory);
-            long a=c.convertToSignedInteger(biY,16);
-            long b=c.convertToSignedInteger(biX,16);
-            long r=a*b;
+    EFlags ef = registers.getEFlags();
+    BigInteger checkUpperHalf;
+    if ( registerUpperHalf != null ){
+        registers.set(registerUpperHalf,results[0]);
+        checkUpperHalf = new BigInteger(results[0], 16);
 
-            System.out.println("a = "+a);
-            System.out.println("b = "+b);
-            System.out.println("rr = "+r);
+        System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
+    } else {
+        checkUpperHalf = new BigInteger(registers.get("AH"), 16);
+    }
 
-            System.out.println("AX = "+biY.toString(2));
-            System.out.println("src (byte) = "+biX.toString(2));
-            System.out.println("result = "+Long.toHexString(r));
+    System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());
 
-            String fix=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
-            String[]finalize=c.cutToCertainSize(fix, srcSize/4);
-            registers.set("DX",finalize[0]);
-            registers.set("AX",finalize[1]);
+    if( checkUpperHalf.equals(BigInteger.ZERO) ){
+        System.out.println("CF = 0; OF = 0");
+        ef.setCarryFlag("0");
+        ef.setOverflowFlag("0");
+    } else{
+        System.out.println("CF = 1; OF = 1");
+        ef.setCarryFlag("1");
+        ef.setOverflowFlag("1");
+    }
+}
 
-            System.out.println("finalize[0] = "+finalize[0]);
-            System.out.println("finalize[1] = "+finalize[1]);
+execute(des,src,registers,memory) {
+        int BYTE = 8;
+        int WORD = 16;
+        int DWORD = 32;
 
-        }else if(srcSize==32){
-            BigInteger biY=new BigInteger(registers.get("EAX"),16);
-            BigInteger biX=new BigInteger(x,16);
+        System.out.println("IMUL (2) Parameters");
 
-            Calculator c=new Calculator(registers,memory);
-            long a=c.convertToSignedInteger(biY,32);
-            long b=c.convertToSignedInteger(biX,32);
-            long r=a*b;
+        int desBitSize = registers.getBitSize(des);
+        Calculator calculator = new Calculator(registers,memory);
 
-            System.out.println("a = "+a);
-            System.out.println("b = "+b);
-            System.out.println("rr = "+r);
+        if ( desBitSize == WORD ){
+            System.out.println("IMUL (2): des == register 16");
+            if ( src.isRegister() && registers.getBitSize(src) == WORD ) {
+                System.out.println("IMUL (2): src == register 16");
+                String multiplier = registers.get(src);
+                multiplyForTwoOperand(des,registers,calculator,multiplier);
+            } else if ( src.isMemory() ){
+                System.out.println("IMUL (2): src == memory 16");
+                String multiplier = memory.read(src,desBitSize);
+                multiplyForTwoOperand(des,registers,calculator,multiplier);
+            } else if ( src.isHex() ){
+                System.out.println("IMUL (2): src == immediate 8/16");
+                String multiplier = src.getValue();
 
-            BigInteger result=new BigInteger(r.toString());
+                if ( multiplier.length() <= WORD/4 )
+                    multiplyForTwoOperand(des,registers,calculator,multiplier);
+            }
+        } else if ( desBitSize == DWORD ){
+            System.out.println("IMUL (2): des == register 32");
+            if ( src.isRegister() && registers.getBitSize(src) == DWORD ) {
+                System.out.println("IMUL (2): src == register 32");
+                String multiplier = registers.get(src);
+                multiplyForTwoOperand(des,registers,calculator,multiplier);
+            } else if ( src.isMemory() ){
+                System.out.println("IMUL (2): src == memory 32");
+                String multiplier = memory.read(src,desBitSize);
+                multiplyForTwoOperand(des,registers,calculator,multiplier);
+            } else if ( src.isHex() ){
+                System.out.println("IMUL (2): src == immediate 8/16/32");
+                String multiplier = src.getValue();
 
-            System.out.println("EAX = "+biY.toString(2));
-            System.out.println("src (byte) = "+biX.toString(2));
-            System.out.println("result = "+Long.toHexString(r));
-
-            String fix=c.cutToCertainHexSize("original", Long.toHexString(r), srcSize/2);
-            String[]finalize=c.cutToCertainSize(fix, srcSize/4);
-            registers.set("EDX",finalize[0]);
-            registers.set("EAX",finalize[1]);
-
-            System.out.println("finalize[0] = "+finalize[0]);
-            System.out.println("finalize[1] = "+finalize[1]);
-        }}
-
-        execute(des,src,registers,memory){
-            System.out.println("IMUL 2 parameters");
-
-            int desBitSize = registers.getBitSize(des);
-            int desHexSize = registers.getHexSize(des);
-            String y = registers.get(des);
-            EFlags ef=registers.getEFlags();
-
-            if(desBitSize == 16) {
-                System.out.println("(2) IMUL des = register 16");
-
-                if( src.isRegister() && registers.getBitSize(src) == 16 ) {
-                    System.out.println("(2) IMUL src = register 16");
-                    BigInteger biY=new BigInteger(y,16);
-                    BigInteger biX=new BigInteger(registers.get(src),16);
-
-                    Calculator c=new Calculator(registers,memory);
-                    long a=c.convertToSignedInteger(biY, desBitSize);
-                    long b=c.convertToSignedInteger(biX, desBitSize);
-                    long r=a*b;
-
-                    System.out.println("a = "+a);
-                    System.out.println("b = "+b);
-                    System.out.println("r = "+r);
-
-                    BigInteger result=new BigInteger(r.toString());
-
-                    System.out.println("des (word) = "+biY.toString(2));
-                    System.out.println("src (word) = "+biX.toString(2));
-                    System.out.println("result = "+Long.toHexString(r));
-
-                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                    String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                    registers.set(des,finalize[0]);
-
-                    System.out.println("finalize[0] = "+finalize[0]);
-                    System.out.println("finalize[1] = "+finalize[1]);
-                } else if( src.isMemory() ) {
-                    System.out.println("(2) IMUL src = memory 16");
-                    BigInteger biY=new BigInteger(y,16);
-                    BigInteger biX=new BigInteger(memory.read(src,desBitSize),16);
-
-                    Calculator c=new Calculator(registers,memory);
-                    long a=c.convertToSignedInteger(biY, desBitSize);
-                    long b=c.convertToSignedInteger(biX, desBitSize);
-                    long r=a*b;
-
-                    System.out.println("a = "+a);
-                    System.out.println("b = "+b);
-                    System.out.println("r = "+r);
-
-                    BigInteger result=new BigInteger(r.toString());
-
-                    System.out.println("des (word) = "+biY.toString(2));
-                    System.out.println("src (word) = "+biX.toString(2));
-                    System.out.println("result = "+Long.toHexString(r));
-
-                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                    String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                    registers.set(des,finalize[0]);
-
-                    System.out.println("finalize[0] = "+finalize[0]);
-                    System.out.println("finalize[1] = "+finalize[1]);
-                } else if( src.isHex()) {
-                    System.out.println("(2) IMUL src = immediate 8 or 16");
-                    String x = src.getValue();
-
-                    if(x.length() == desHexSize/2 || x.length() == desHexSize) {
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(x,16);
-
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY, desBitSize);
-                        long b=c.convertToSignedInteger(biX, desBitSize);
-                        long r=a*b;
-
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("des (word) = "+biY.toString(2));
-                        System.out.println("src (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    }
-                }
-            } else if(desBitSize == 32) {
-                System.out.println("(2) IMUL des = register 32");
-
-                if( src.isRegister() && registers.getBitSize(src) == 32 ) {
-                    System.out.println("(2) IMUL src = register 32");
-                    BigInteger biY=new BigInteger(y,16);
-                    BigInteger biX=new BigInteger(registers.get(src),16);
-
-                    Calculator c=new Calculator(registers,memory);
-                    long a=c.convertToSignedInteger(biY, desBitSize);
-                    long b=c.convertToSignedInteger(biX, desBitSize);
-                    long r=a*b;
-
-                    System.out.println("a = "+a);
-                    System.out.println("b = "+b);
-                    System.out.println("r = "+r);
-
-                    BigInteger result=new BigInteger(r.toString());
-
-                    System.out.println("des (word) = "+biY.toString(2));
-                    System.out.println("src (word) = "+biX.toString(2));
-                    System.out.println("result = "+Long.toHexString(r));
-
-                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                    String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                    registers.set(des,finalize[0]);
-
-                    System.out.println("finalize[0] = "+finalize[0]);
-                    System.out.println("finalize[1] = "+finalize[1]);
-                } else if( src.isMemory() ) {
-                    System.out.println("(2) IMUL src = memory 32");
-                    BigInteger biY=new BigInteger(y,16);
-                    BigInteger biX=new BigInteger(memory.read(src,desBitSize),16);
-
-                    Calculator c=new Calculator(registers,memory);
-                    long a=c.convertToSignedInteger(biY, desBitSize);
-                    long b=c.convertToSignedInteger(biX, desBitSize);
-                    long r=a*b;
-
-                    System.out.println("a = "+a);
-                    System.out.println("b = "+b);
-                    System.out.println("r = "+r);
-
-                    BigInteger result=new BigInteger(r.toString());
-
-                    System.out.println("des (word) = "+biY.toString(2));
-                    System.out.println("src (word) = "+biX.toString(2));
-                    System.out.println("result = "+Long.toHexString(r));
-
-                    String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                    String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                    registers.set(des,finalize[0]);
-
-                    System.out.println("finalize[0] = "+finalize[0]);
-                    System.out.println("finalize[1] = "+finalize[1]);
-                } else if( src.isHex()) {
-                    System.out.println("(2) IMUL src = immediate 8/16/32");
-                    String x = src.getValue();
-
-                    if(x.length() == desHexSize/4 || x.length() == desHexSize/2 || x.length() == desHexSize) {
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(x,16);
-
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY, desBitSize);
-                        long b=c.convertToSignedInteger(biX, desBitSize);
-                        long r=a*b;
-
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("des (word) = "+biY.toString(2));
-                        System.out.println("src (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r), desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix, desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    }
-                }
+                if ( multiplier.length() <= DWORD/4 )
+                    multiplyForTwoOperand(des,registers,calculator,multiplier);
             }
         }
+}
 
-        execute(des,src1,src2,registers,memory){
-            System.out.println("IMUL 3 parameters");
+multiplyForTwoOperand(des,registers,calculator,multiplier) {
+        String multiplicand = registers.get(des);
 
-            int desBitSize = registers.getBitSize(des);
-            int desHexSize = registers.getHexSize(des);
-            String y = src2.getValue();
-            EFlags ef=registers.getEFlags();
+        // debugging
+        System.out.println("MULTIPLICAND = " + multiplicand
+        + "\nMULTIPLIER = " + multiplier
+        + "\nregisterLowerHalf = " + registerLowerHalf
+        + "\nregisterUpperHalf = " + registerUpperHalf);
 
-//            if(desBitSize == 16 || desBitSize == 32) {
-//                System.out.println("(3) IMUL des = register 16");
+        BigInteger biMultiplicand=new BigInteger(multiplicand,16);
+        BigInteger biMultiplier=new BigInteger(multiplier,16);
 
-                if( src1.isRegister() && src2.isHex() ){
-                    if ( desBitSize == 16 && y.length() == desHexSize/2 || y.length() == desHexSize ){
-                        System.out.println("(3) IMUL src1 = register, src2 = i8/16");
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(registers.get(src1),16);
+        int desBitSize = registers.getBitSize(des);
+        int desHexSize = registers.getHexSize(des);
+        long longMultiplicand=calculator.convertToSignedInteger(biMultiplicand, desBitSize);
+        long longMultiplier=calculator.convertToSignedInteger(biMultiplier, desBitSize);
+        long longResult=longMultiplicand*longMultiplier;
 
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY,desBitSize);
-                        long b=c.convertToSignedInteger(biX,desBitSize);
-                        long r=a*b;
+        // debugging
+        System.out.println("longMultiplicand = "+longMultiplicand);
+        System.out.println("longMultiplier = "+longMultiplier);
+        System.out.println("longResult = "+longResult);
 
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("src2 (word) = "+biY.toString(2));
-                        System.out.println("src1 (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix,desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    } else if ( desBitSize == 32 ){
-                        System.out.println("(3) IMUL src1 = register, src2 = i");
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(registers.get(src1),16);
-
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY,desBitSize);
-                        long b=c.convertToSignedInteger(biX,desBitSize);
-                        long r=a*b;
-
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("src2 (word) = "+biY.toString(2));
-                        System.out.println("src1 (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix,desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    }
-                } else if( src1.isMemory() && src2.isHex() ){
-                    if ( desBitSize == 16 && y.length() == desHexSize/2 || y.length() == desHexSize ){
-                        System.out.println("(3) IMUL src1 = m16, src2 = i8/i16");
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(memory.read(src1,desBitSize),16);
-
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY,desBitSize);
-                        long b=c.convertToSignedInteger(biX,desBitSize);
-                        long r=a*b;
-
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("src2 (word) = "+biY.toString(2));
-                        System.out.println("src1 (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix,desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    } else  if( desBitSize == 32 ){
-                        System.out.println("(3) IMUL src1 = m16, src2 = i");
-                        BigInteger biY=new BigInteger(y,16);
-                        BigInteger biX=new BigInteger(memory.read(src1,desBitSize),16);
-
-                        Calculator c=new Calculator(registers,memory);
-                        long a=c.convertToSignedInteger(biY,desBitSize);
-                        long b=c.convertToSignedInteger(biX,desBitSize);
-                        long r=a*b;
-
-                        System.out.println("a = "+a);
-                        System.out.println("b = "+b);
-                        System.out.println("r = "+r);
-
-                        BigInteger result=new BigInteger(r.toString());
-
-                        System.out.println("src2 (word) = "+biY.toString(2));
-                        System.out.println("src1 (word) = "+biX.toString(2));
-                        System.out.println("result = "+Long.toHexString(r));
-
-                        String fix=c.cutToCertainHexSize("original", Long.toHexString(r),desBitSize/2);
-                        String[]finalize=c.cutToCertainSize(fix,desHexSize);
-                        registers.set(des,finalize[0]);
-
-                        System.out.println("finalize[0] = "+finalize[0]);
-                        System.out.println("finalize[1] = "+finalize[1]);
-                    }
-                }
-
-//            }
+        BigInteger checkTruncatedResult;
+        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
+        if ( results[0].equals("0000") || results[0].equals("00000000") ){
+            registers.set(des,results[1]);
+            checkTruncatedResult = new BigInteger(results[1], 16);
+        }else {
+            registers.set(des,results[0]);
+            checkTruncatedResult = new BigInteger(results[0], 16);
         }
 
+        EFlags ef = registers.getEFlags();
+        if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
+            System.out.println("CF = 1; OF = 1"); // debugging
+            ef.setCarryFlag("1");
+            ef.setOverflowFlag("1");
+        } else{
+            System.out.println("CF = 0; OF = 0"); // debugging
+            ef.setCarryFlag("0");
+            ef.setOverflowFlag("0");
+        }
+}
 
 
+execute(des,src1,src2,registers,memory) {
+    int BYTE = 8;
+    int WORD = 16;
+    int DWORD = 32;
+    System.out.println("IMUL (3) Parameters");
+
+    int desBitSize = registers.getBitSize(des);
+    int desHexSize = registers.getHexSize(des);
+    String multiplier = src2.getValue();
+    Calculator calculator =  new Calculator(registers,memory);
+
+    if ( src1.isRegister() && src2.isHex() ){
+        if ( (desBitSize == WORD && multiplier.length() <= WORD) || desBitSize == DWORD ){
+            String multiplicand = registers.get(src1);
+            multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier);
+        }
+    }else if ( src1.isMemory() && src2.isHex() ){
+        if ( (desBitSize == WORD && multiplier.length() <= WORD) || desBitSize == DWORD ){
+            String multiplicand = memory.read(src1,desBitSize);
+            multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier);
+        }
+    }
+}
+
+multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier) {
+        // debugging
+        System.out.println("MULTIPLICAND = " + multiplicand
+        + "\nMULTIPLIER = " + multiplier
+        + "\nregisterLowerHalf = " + registerLowerHalf
+        + "\nregisterUpperHalf = " + registerUpperHalf);
+
+        BigInteger biMultiplicand=new BigInteger(multiplicand,16);
+        BigInteger biMultiplier=new BigInteger(multiplier,16);
+
+        int desBitSize = registers.getBitSize(des);
+        int desHexSize = registers.getHexSize(des);
+        long longMultiplicand=calculator.convertToSignedInteger(biMultiplicand, desBitSize);
+        long longMultiplier=calculator.convertToSignedInteger(biMultiplier, desBitSize);
+        long longResult=longMultiplicand*longMultiplier;
+
+        // debugging
+        System.out.println("longMultiplicand = "+longMultiplicand);
+        System.out.println("longMultiplier = "+longMultiplier);
+        System.out.println("longResult = "+longResult);
+
+        BigInteger checkTruncatedResult;
+        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
+        if ( results[0].equals("0000") || results[0].equals("00000000") ){
+            registers.set(des,results[1]);
+            checkTruncatedResult = new BigInteger(results[1], 16);
+        }else {
+            registers.set(des,results[0]);
+            checkTruncatedResult = new BigInteger(results[0], 16);
+        }
+
+        EFlags ef = registers.getEFlags();
+        if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
+            System.out.println("CF = 1; OF = 1"); // debugging
+            ef.setCarryFlag("1");
+            ef.setOverflowFlag("1");
+        } else{
+            System.out.println("CF = 0; OF = 0"); // debugging
+            ef.setCarryFlag("0");
+            ef.setOverflowFlag("0");
+        }
+}

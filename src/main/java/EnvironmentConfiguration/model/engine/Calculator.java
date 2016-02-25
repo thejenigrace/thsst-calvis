@@ -151,7 +151,7 @@ public class Calculator {
         System.out.println("original decimal = " + value.toString());
         System.out.println("original twosComplement = " + twosComplement);
 
-        // Zero extend
+        // zero extend
         for (int k = 0; k < missingZeroes; k++) {
             twosComplement = "0" + twosComplement;
         }
