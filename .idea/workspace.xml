@@ -6,17 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_agenda_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_common_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_controls_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_fxml_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_labs_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_menu_8_0_r4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jfxtras_jfxtras_window_8_0_r4.xml" afterPath="" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Remove unused dependencies in build.gradle">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -945,12 +936,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00022" summary="Fix Instructions &amp; Calculator">
-      <created>1454318255416</created>
-      <option name="number" value="00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1454318255416</updated>
-    </task>
     <task id="LOCAL-00023" summary="Fix Instructions &amp; Calculator">
       <created>1454319541913</created>
       <option name="number" value="00023" />
@@ -1239,7 +1224,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456412055598</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Remove unused dependencies in build.gradle">
+      <created>1456412747534</created>
+      <option name="number" value="00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1456412747535</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1330,7 +1321,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix Console &amp; Error Logger Window" />
     <MESSAGE value="Fix Instructions" />
     <MESSAGE value="Change Icon for Hide" />
     <MESSAGE value="Added New File, Open File, Save File, &amp; Save As File" />
@@ -1355,7 +1345,8 @@
     <MESSAGE value="Fix MUL &amp; ADOX Instructions" />
     <MESSAGE value="Fix MUL &amp; IMUL Instructions" />
     <MESSAGE value="Fixed issue regarding OSX Compatibility. Updated  build.gradle file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue regarding OSX Compatibility. Updated  build.gradle file." />
+    <MESSAGE value="Remove unused dependencies in build.gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unused dependencies in build.gradle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
