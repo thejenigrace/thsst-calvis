@@ -7,6 +7,7 @@ public class Token {
     public static final String MEM = "type_MEM";
     public static final String DEC = "type_DEC";
     public static final String LABEL = "type_LBL";
+    public static final String STRING = "type_STRING";
 
     private String value;
     private String type;
@@ -49,11 +50,14 @@ public class Token {
                 this.value = this.value.toUpperCase();
                 this.type = Token.HEX;
                 break;
-            case Token.MEM:
+            case Token.MEM: //fall through
             case Token.REG:
                 this.value = this.value.toUpperCase();
                 break;
             case Token.LABEL:
+                break;
+            case Token.STRING:
+                this.value = this.value.substring(1, this.value.length()-1);
                 break;
         }
     }
@@ -72,5 +76,9 @@ public class Token {
 
     public boolean isLabel() {
         return this.type.equals(Token.LABEL);
+    }
+
+    public boolean isStringLiteral() {
+        return this.type.equals(Token.STRING);
     }
 }

@@ -731,8 +731,8 @@ public class WorkspaceController implements Initializable {
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);
         String replacedCodeAreaText = matcher.replaceAll("\r\n");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*:\\s*", ": ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
         codeArea.replaceText(replacedCodeAreaText);
         codeArea.redo();
     }
