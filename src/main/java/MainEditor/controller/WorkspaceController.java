@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -320,6 +320,40 @@ public class Calculator {
         return value;
     }
 
+    public String binarySignExtend(String value, Token des) {
+        if ( des.isRegister() ) {
+            int missingZeroes = registers.getBitSize(des) - value.length();
+            String sign = value.charAt(0) + "";
+
+            //sign extend
+            if ( missingZeroes > 0 ) {
+                for (int k = 0; k < missingZeroes; k++) {
+                    value = sign + value;
+                }
+            }
+
+            if ( value.length() > registers.getBitSize(des) ) {
+                value = value.substring(1);
+            }
+        } else if ( des.isMemory() ) {
+            int missingZeroes = memory.getBitSize(des) - value.length();
+            String sign = value.charAt(0) + "";
+
+            //sign extend
+            if ( missingZeroes >  0) {
+                for (int k = 0; k < missingZeroes; k++) {
+                    value = sign + value;
+                }
+            }
+
+            if ( value.length() > memory.getBitSize(des) ) {
+                value = value.substring(1);
+            }
+        }
+
+        return value;
+    }
+
     public String checkAuxiliary(String a, String b) {
         String sx = "" + a.charAt(a.length() - 1);
         String sy = "" + b.charAt(b.length() - 1);
