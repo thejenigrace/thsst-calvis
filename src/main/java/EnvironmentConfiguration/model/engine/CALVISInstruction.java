@@ -157,6 +157,10 @@ public class CALVISInstruction {
                             throw new InvalidSourceOperandException(name, first.getValue(), second.getValue(), line);
                         }
                     }
+                } else {
+                    if (!isVerifiable) { // for movsx, movzx
+                        throw new MissingSizeDirectiveException(second.getValue(), line);
+                    }
                 }
             } else if (second.isHex()) {
                 int secondSize = second.getValue().length();

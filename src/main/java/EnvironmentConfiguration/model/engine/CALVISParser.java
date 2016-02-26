@@ -4,7 +4,6 @@ import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -343,6 +342,9 @@ public class CALVISParser {
                         if (parameterCount == 3 && k == numParameters - 1) {
                             enforceSizeDirectives = true;
                         }
+//                        else if (prodRule[2].equals("0")) { // for movsx / movzx
+//                            enforceSizeDirectives = true;
+//                        }
                     }
                     elements[k] = parseOneParameter(parameterSpecifications, enforceSizeDirectives);
                     specificationsCounter++;
@@ -412,7 +414,6 @@ public class CALVISParser {
                     boolean isConditionalInstruction = false;
                     String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
 
-                    System.out.println(anInstruction + " =?" + baseConditionalInstruction);
                     if (!anInstruction.equals(baseConditionalInstruction)) {
                         String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
                         replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");

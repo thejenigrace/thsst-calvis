@@ -209,6 +209,7 @@ public class InstructionList {
         sb.append("import EnvironmentConfiguration.model.engine.EFlags;");
         sb.append("import EnvironmentConfiguration.model.engine.Calculator;");
         sb.append("import EnvironmentConfiguration.model.engine.JumpOutOfBoundsException;");
+        sb.append("import EnvironmentConfiguration.model.engine.StackPopException;");
         sb.append("import java.math.BigInteger;");
         sb.append("\n return (EnvironmentConfiguration.model.engine.Instruction) this");
         return sb.toString();

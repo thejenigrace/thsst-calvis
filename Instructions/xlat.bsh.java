@@ -1,6 +1,6 @@
 execute(registers, memory) {
 	//get contents of registers BX and AL
-	int maxSize = RegisterList.MAX_SIZE;
+	int maxSize = Memory.MAX_ADDRESS_SIZE;
 
 	String BX = registers.get("BX");
 	String AL = registers.get("AL");

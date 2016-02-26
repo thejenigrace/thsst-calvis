@@ -22,6 +22,9 @@ public class Register {
             regInitialValue += "0";
         }
         this.value = regInitialValue;
+        if (this.name.equals("ESP")){
+            this.value = "0000FFFE";
+        }
     }
 
     public String getValue() {

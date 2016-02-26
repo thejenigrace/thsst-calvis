@@ -6,19 +6,28 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/thsst_calvis_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="can now declare strings">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pop.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/popa.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/popad.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/popf.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/popfd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/push.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pusha.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pushad.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pushf.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pushfd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPopException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPushException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xlat.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xlat.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java" afterPath="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,95 +91,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CALVISParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="789" column="0" selection-start-line="789" selection-start-column="0" selection-end-line="789" selection-end-column="0" />
-              <folding>
-                <element signature="e#34602#34603#0" expanded="true" />
-                <element signature="e#34649#34650#0" expanded="true" />
-                <element signature="e#34874#34875#0" expanded="true" />
-                <element signature="e#34921#34922#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstructionList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="273" column="17" selection-start-line="273" selection-start-column="17" selection-end-line="273" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="movsx.bsh.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Instructions/movsx.bsh.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CALVISInstruction.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8321678">
-              <caret line="158" column="21" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SystemController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="281" column="0" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InvalidSourceOperandException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ErrorLoggerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -185,7 +106,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="declare-strings" />
       </map>
     </option>
   </component>
@@ -558,17 +479,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/MainEditor/model/AssemblyComponent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/Token.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/model/Comparable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/Memory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/model/State.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/RegisterList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/InstructionList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/Calculator.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/configurationEnvironment.fxml" />
-        <option value="$PROJECT_DIR$/Instructions/neg.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/dec.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/sub.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/add.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/adcx.bsh.java" />
@@ -577,12 +487,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/css/error-logger.css" />
         <option value="$PROJECT_DIR$/src/main/resources/css/console.css" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/FindDialogController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/assembly-keywords.css" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java" />
         <option value="$PROJECT_DIR$/Instructions/inc.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/adc.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
@@ -598,17 +506,30 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/Instructions/adox.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/ConsoleController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
         <option value="$PROJECT_DIR$/Instructions/mul.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java" />
-        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java" />
+        <option value="$PROJECT_DIR$/Instructions/xlat.bsh.java" />
+        <option value="$PROJECT_DIR$/Registers/register_list.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPopException.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPushException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java" />
+        <option value="$PROJECT_DIR$/Instructions/pop.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/pushad.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/pushfd.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/push.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/pusha.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
+        <option value="$PROJECT_DIR$/Instructions/popa.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+        <option value="$PROJECT_DIR$/Instructions/pushf.bsh.java" />
       </list>
     </option>
   </component>
@@ -620,10 +541,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="y" value="2" />
-    <option name="width" value="1372" />
-    <option name="height" value="733" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -678,6 +599,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -758,58 +680,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="engine" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -824,27 +694,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="Registers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
+              <option name="myItemId" value="Instructions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -864,11 +735,11 @@
       <recent name="EnvironmentConfiguration.model.engine" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Goodwin Chua\Documents\Workspace\thsst-calvis\Instructions" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine" />
-      <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
@@ -1083,12 +954,6 @@
       <created>1453789344795</created>
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Added IDIV Instruction">
-      <created>1454251243855</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1454251243855</updated>
     </task>
     <task id="LOCAL-00020" summary="Added DEC &amp; NEG Instructions">
       <created>1454252335314</created>
@@ -1378,7 +1243,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456311037883</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="can now declare strings">
+      <created>1456388225899</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1456388225931</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1402,19 +1273,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="2" width="1372" height="733" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24833333" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33878887" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30257803" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2690549" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24810892" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3175034" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13338415" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19894099" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28658536" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1469,7 +1340,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix Play &amp; Pause Icon" />
     <MESSAGE value="Added Console &amp; Error Logger Window" />
     <MESSAGE value="Fix Console &amp; Error Logger Window" />
     <MESSAGE value="Fix Instructions" />
@@ -1494,7 +1364,8 @@
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
     <MESSAGE value="Added latest Instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added latest Instructions" />
+    <MESSAGE value="can now declare strings" />
+    <option name="LAST_COMMIT_MESSAGE" value="can now declare strings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1515,55 +1386,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thsst-calvis.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SaveFile/savelist.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/css/console.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradlew">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1575,14 +1397,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5">
           <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/j.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1643,19 +1457,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19755244">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.fxmisc.richtext/richtextfx/0.6.10/685390b2c59097ec0eb3283058928c5db06e5b92/richtextfx-0.6.10-sources.jar!/org/fxmisc/richtext/CodeArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23776224">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1667,34 +1472,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37587413">
-          <caret line="718" column="5" selection-start-line="718" selection-start-column="5" selection-end-line="718" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4965035">
-          <caret line="129" column="54" selection-start-line="129" selection-start-column="54" selection-end-line="129" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7027972">
           <caret line="59" column="76" selection-start-line="59" selection-start-column="76" selection-end-line="59" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1711,7 +1492,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1719,7 +1499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1739,41 +1518,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.5314684">
-          <caret line="240" column="20" selection-start-line="240" selection-start-column="20" selection-end-line="240" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="281" column="0" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/movsx.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/jmp.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1781,32 +1541,260 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19897084">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38765007">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#757#758#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/xlat.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05831904">
+          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88447654">
+          <caret line="106" column="61" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Registers/register_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49571183">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/mov.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="789" column="0" selection-start-line="789" selection-start-column="0" selection-end-line="789" selection-end-column="0" />
-          <folding>
-            <element signature="e#34602#34603#0" expanded="true" />
-            <element signature="e#34649#34650#0" expanded="true" />
-            <element signature="e#34874#34875#0" expanded="true" />
-            <element signature="e#34921#34922#0" expanded="true" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="391" column="55" selection-start-line="391" selection-start-column="55" selection-end-line="391" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/j.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75814754">
+          <caret line="26" column="9" selection-start-line="21" selection-start-column="8" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPopException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23327616">
+          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="273" column="17" selection-start-line="273" selection-start-column="17" selection-end-line="273" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.44596913">
+          <caret line="211" column="81" selection-start-line="211" selection-start-column="81" selection-end-line="211" selection-end-column="81" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20411664">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MissingSizeDirectiveException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="204" column="33" selection-start-line="204" selection-start-column="33" selection-end-line="204" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPushException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23327616">
+          <caret line="8" column="70" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
+          <folding>
+            <element signature="e#181#182#0" expanded="false" />
+            <element signature="e#259#260#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24185249">
+          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8250429">
+          <caret line="325" column="49" selection-start-line="325" selection-start-column="49" selection-end-line="325" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8321678">
-          <caret line="158" column="21" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
+        <state vertical-scroll-proportion="1.3413379">
+          <caret line="163" column="17" selection-start-line="163" selection-start-column="17" selection-end-line="163" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/push.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5831904">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pusha.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pushad.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3207547">
+          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pop.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/popf.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/popfd.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/popa.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47512865">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pushfd.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pushf.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/popad.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8953688">
+          <caret line="149" column="62" selection-start-line="149" selection-start-column="62" selection-end-line="149" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49571183">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
