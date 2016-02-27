@@ -93,11 +93,11 @@ public class SystemController {
                 break;
             case STOP: // System is not running, so we start playing
                 clear();
-                boolean isSuccessful = parse(code);
-                this.state = SimulationState.PLAY;
                 workspaceController.formatCodeArea(code);
                 workspaceController.changeIconToPause();
+                boolean isSuccessful = parse(code);
                 if (isSuccessful) {
+                    this.state = SimulationState.PLAY;
                     beginSimulation();
                 } else {
                     end();

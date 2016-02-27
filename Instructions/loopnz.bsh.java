@@ -1,5 +1,6 @@
 execute(rel, registers, memory) throws Exception {
 	Calculator cal = new Calculator(registers, memory);
+	EFlags flags = registers.getEFlags();
 
 	String c = "";
 	switch(Memory.MAX_ADDRESS_SIZE) {
@@ -23,7 +24,7 @@ execute(rel, registers, memory) throws Exception {
 		registers.set(token, cal.hexZeroExtend(count.toString(16), token));
 	}
 
-	if( count.intValue() != 0 ) {
+	if( count.intValue() != 0 && flags.getZeroFlag().equals("0") ) {
 		String toAddress = "";
 		if ( rel.isLabel() ) {
 			toAddress = memory.getFromLabelMap(rel.getValue());

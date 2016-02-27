@@ -71,31 +71,33 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
             }
             if (e instanceof DropinccException) {
                 type = "SyntaxError";
-                cause = message.substring(message.indexOf("position:"));
-                cause = cause.replaceAll(",.*", "");
-                cause = cause.replaceAll(".*: ", "");
-                String parsedCode = this.sysCon.getParsedCode();
-                String[] lines = parsedCode.split("\n");
-                int causePosition = Integer.parseInt(cause);
-                int linesRead = 0;
-                System.out.println("Total lines: " + lines.length);
-                for (int i = 0; i < lines.length; i++) {
-                    if (lines[i].length() + linesRead < causePosition) {
-                        linesRead += lines[i].length();
-                    } else {
-                        if (parsedCode.charAt(causePosition - 1) == '\n') {
-                            cause = "Line number: " + i;
+                if (message.contains("position")) {
+                    cause = message.substring(message.indexOf("position:"));
+                    cause = cause.replaceAll(",.*", "");
+                    cause = cause.replaceAll(".*: ", "");
+                    String parsedCode = this.sysCon.getParsedCode();
+                    String[] lines = parsedCode.split("\n");
+                    int causePosition = Integer.parseInt(cause);
+                    int linesRead = 0;
+                    System.out.println("Total lines: " + lines.length);
+                    for (int i = 0; i < lines.length; i++) {
+                        if (lines[i].length() + linesRead < causePosition) {
+                            linesRead += lines[i].length();
                         } else {
-                            cause = "Line number: " + (i + 1);
+                            if (parsedCode.charAt(causePosition - 1) == '\n') {
+                                cause = "Line number: " + i;
+                            } else {
+                                cause = "Line number: " + (i + 1);
+                            }
+                            break;
                         }
-                        break;
                     }
-                }
-                if (!cause.contains("number")) {
-                    cause = "position: " + cause;
-                }
-                if (message.indexOf("upcoming sequence:") != -1) {
-                    message = "Unknown " + message.substring(message.indexOf("upcoming sequence:"));
+                    if (!cause.contains("number")) {
+                        cause = "position: " + cause;
+                    }
+                    if (message.indexOf("upcoming sequence:") != -1) {
+                        message = "Unknown " + message.substring(message.indexOf("upcoming sequence:"));
+                    }
                 }
             }
             items.add(new ErrorLog(type, cause, message));

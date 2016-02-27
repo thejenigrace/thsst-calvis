@@ -81,7 +81,8 @@ public class CALVISInstruction {
     }
 
     public void verifyParameters(int lineNumber) throws MemoryRestrictedAccessException, EvalError,
-            MemoryToMemoryException, DataTypeMismatchException, MissingSizeDirectiveException {
+            MemoryToMemoryException, DataTypeMismatchException,
+            MissingSizeDirectiveException, InvalidSourceOperandException {
         int numParameters = 0;
         if (params != null) {
             numParameters = params.length;
@@ -123,7 +124,7 @@ public class CALVISInstruction {
 
     private void enforce2ParameterValidation(Token first, Token second, int line, int clIndex)
             throws MemoryRestrictedAccessException, EvalError, MemoryToMemoryException,
-            DataTypeMismatchException, MissingSizeDirectiveException {
+            DataTypeMismatchException, MissingSizeDirectiveException, InvalidSourceOperandException {
 
         if (first.isMemory() && second.isMemory()) {
             throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
@@ -134,15 +135,27 @@ public class CALVISInstruction {
             if (second.isRegister()) {
                 int secondSize = registers.getBitSize(second);
                 if (clIndex == 0) {
-                    if (firstSize != secondSize) {
-                        throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
+                    if (isVerifiable) {
+                        if (firstSize != secondSize) {
+                            throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
+                        }
+                    } else { // for movsx, movzx
+                        if (firstSize <= secondSize ) {
+                            throw new InvalidSourceOperandException(name, first.getValue(), second.getValue(), line);
+                        }
                     }
                 }
             } else if (second.isMemory()) {
                 int secondSize = memory.getBitSize(second);
                 if (secondSize != 0) { // this memory has a size directive
-                    if (firstSize != secondSize) {
-                        throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
+                    if (isVerifiable) {
+                        if (firstSize != secondSize) {
+                            throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
+                        }
+                    } else { // for movsx, movzx
+                        if (firstSize <= secondSize ) {
+                            throw new InvalidSourceOperandException(name, first.getValue(), second.getValue(), line);
+                        }
                     }
                 }
             } else if (second.isHex()) {

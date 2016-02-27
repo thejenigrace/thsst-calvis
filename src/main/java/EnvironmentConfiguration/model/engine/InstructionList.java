@@ -2,23 +2,14 @@ package EnvironmentConfiguration.model.engine;
 
 import EnvironmentConfiguration.controller.FileHandlerController;
 import EnvironmentConfiguration.controller.HandleConfigFunctions;
-
-import EnvironmentConfiguration.model.error_logging.ErrorLogger;
-import EnvironmentConfiguration.model.error_logging.ErrorMessage;
-import EnvironmentConfiguration.model.error_logging.ErrorMessageList;
-import EnvironmentConfiguration.model.error_logging.InstructionFileErrorInvalidMessage;
-import EnvironmentConfiguration.model.error_logging.InstructionFileErrorMissingMessage;
-import EnvironmentConfiguration.model.error_logging.InstructionInvalid;
-import EnvironmentConfiguration.model.error_logging.InstructionMissing;
-import EnvironmentConfiguration.model.error_logging.Types;
-
-import bsh.Interpreter;
+import EnvironmentConfiguration.model.error_logging.*;
 import bsh.EvalError;
+import bsh.Interpreter;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +20,7 @@ public class InstructionList {
     private HashMap<String, Instruction> map;
     private ArrayList<String[]> grammarDefinition;
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
-    private final String[] conditionalInstructions = {"j", "set", "cmov"};
+    private ArrayList<String> conditionalInstructions;
     private final String[] conditionsArray = {
         "A", "NBE", "AE", "NB", "B", "NAE",
         "BE", "NA", "G", "NLE", "GE", "NL",
@@ -40,6 +31,8 @@ public class InstructionList {
     public InstructionList(String csvFile) {
         this.conditionsRegEx = String.join("|", conditionsArray);
         this.conditionsRegEx += "|" + String.join("|", conditionsArray).toLowerCase();
+
+        this.conditionalInstructions = new ArrayList<>();
 
         ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
         BufferedReader br = null;
@@ -60,7 +53,7 @@ public class InstructionList {
                     inst[i] = inst[i].trim();
                 }
                 inst[0] = inst[0].toUpperCase();
-                //				?System.out.println(inst[0] + " 0to " +inst[1] + " 1to " +inst[2] + " 2to "+inst[3] + " 3to "+inst[4] + " 4to ") ;
+
                 // debug printing
                 //				for (int i = 0; i < inst.length; i++){
                 //					inst[i] = inst[i].trim();
@@ -77,8 +70,8 @@ public class InstructionList {
 
                     ArrayList<String> instructionErrorCollection = new ArrayList<>();
                     ArrayList<String> instructionMissingCollection = new ArrayList<>();
-                    boolean isInteger = HandleConfigFunctions.isInteger(inst[2], 10);
-                    boolean hasNoParameter = Integer.parseInt(inst[2]) > 0;
+                    boolean isInteger = HandleConfigFunctions.isInteger(inst[4], 10);
+                    boolean hasNoParameter = Integer.parseInt(inst[4]) > 0;
 
 //						if(missingParametersInstruction.size() > 0){
 //	//						isSkipped = true;
@@ -100,7 +93,7 @@ public class InstructionList {
                         );
                     }
 
-                    if (inst[2].isEmpty()) {
+                    if (inst[4].isEmpty()) {
                         instructionMissingCollection.add(
                                 new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionParameterSize).
                                 generateMessage()
@@ -110,24 +103,24 @@ public class InstructionList {
                     if (!isInteger) {
                         instructionErrorCollection.add(
                                 new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileParamterCount).
-                                generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
+                                generateMessage(HandleConfigFunctions.generateArrayListString(inst[4]))
                         );
                     } else if (isInteger) {
-                        int parameterSize = Integer.parseInt(inst[2]);
+                        int parameterSize = Integer.parseInt(inst[4]);
 
                         //check if negative
                         if (Math.signum(parameterSize) == -1.0) {
                             instructionErrorCollection.add(
                                     new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileNegativeCount).
-                                    generateMessage(HandleConfigFunctions.generateArrayListString(inst[2]))
+                                    generateMessage(HandleConfigFunctions.generateArrayListString(inst[4]))
                             );
                         } else {
                             //check if parameter size is equals to size of recieved parameters and if size > 0
-                            int parameterReceivedCount = line.split(",").length - 3;
+                            int parameterReceivedCount = line.split(",").length - 5;
                             if (parameterSize != parameterReceivedCount && parameterSize > 0) {
                                 instructionErrorCollection.add(
                                         new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFileLackingParameterCount).
-                                        generateMessage(HandleConfigFunctions.generateArrayListString(inst[2],
+                                        generateMessage(HandleConfigFunctions.generateArrayListString(inst[4],
                                                 Integer.toString(parameterReceivedCount)))
                                 );
                             } //check if contains more than 0 parameters
@@ -180,6 +173,9 @@ public class InstructionList {
                         Instruction com = (Instruction) scanner.eval(prepareImportStatements());
                         this.map.put(inst[0].toUpperCase(), com);
                         this.grammarDefinition.add(inst);
+                        if ( inst[3].equals("1") ) {
+                            this.conditionalInstructions.add(inst[0].toLowerCase());
+                        }
 //							System.out.println("Loaded: " + inst[0]);
                     }
                 }
@@ -258,8 +254,8 @@ public class InstructionList {
     private ArrayList<String> doParameterChecking(String[] inst) {
         ArrayList<String> instructionErrorCollection = new ArrayList<>();
         String[] acceptableInputs = {"r", "m", "i", "c", "l"};
-        int i = 3;
-        for (int x = 0; x < Integer.parseInt(inst[2]); x++) {
+        int i = 5;
+        for (int x = 0; x < Integer.parseInt(inst[4]); x++) {
             String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');
             String[] tempContainers = new String[addressingArray.length];
             ArrayList<String> parameterNonExistent = new ArrayList<>();
@@ -279,11 +275,14 @@ public class InstructionList {
             }
             if (parameterDuplicate.size() > 0) {
                 parameterDuplicate.add(0, Integer.toString(i + 1));
-                instructionErrorCollection.add(new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidDuplicateFileRegisterDestinationParameter).generateMessage(parameterDuplicate));
+                instructionErrorCollection.add(new InstructionFileErrorInvalidMessage
+                        (InstructionInvalid.invalidDuplicateFileRegisterDestinationParameter)
+                        .generateMessage(parameterDuplicate));
             }
             if (parameterNonExistent.size() > 0) {
                 parameterNonExistent.add(0, Integer.toString(i + 1));
-                instructionErrorCollection.add(new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidParameterFormat).generateMessage(parameterNonExistent));
+                instructionErrorCollection.add(new InstructionFileErrorInvalidMessage
+                        (InstructionInvalid.invalidParameterFormat).generateMessage(parameterNonExistent));
             }
             i++;
         }
@@ -301,7 +300,7 @@ public class InstructionList {
 
     public String getBaseConditionalInstruction(String instruction) {
         for (String element : conditionalInstructions) {
-            String pattern = "(" + element + "|" + element.toLowerCase() + ")(" + conditionsRegEx + ")";
+            String pattern = "(" + element + "|" + element.toUpperCase() + ")(" + conditionsRegEx + ")";
             if (instruction.matches(pattern)) {
                 return element;
             }

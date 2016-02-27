@@ -24,6 +24,7 @@ import org.controlsfx.control.textfield.TextFields;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -740,8 +741,8 @@ public class WorkspaceController implements Initializable {
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);
         String replacedCodeAreaText = matcher.replaceAll("\r\n");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*,\\s*", ", ");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("\\s*:\\s*", ": ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
         codeArea.replaceText(replacedCodeAreaText);
         codeArea.redo();
     }
