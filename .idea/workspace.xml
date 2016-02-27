@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -468,7 +469,6 @@
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java" />
         <option value="$PROJECT_DIR$/Instructions/imul_two.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
         <option value="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" />
         <option value="$PROJECT_DIR$/Instructions/imul.java" />
@@ -489,6 +489,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/memory.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/MainEditor/controller/MemoryController.java" />
+        <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
       </list>
     </option>
   </component>
@@ -935,12 +936,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00026" summary="Fix New Tab for Text Editor">
-      <created>1454654155206</created>
-      <option name="number" value="00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1454654155206</updated>
-    </task>
     <task id="LOCAL-00027" summary="Fix New Tab for Text Editor">
       <created>1454658642328</created>
       <option name="number" value="00027" />
@@ -1229,7 +1224,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456542863655</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;">
+      <created>1456542952635</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1456542952635</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1561,13 +1562,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/imul.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.331453">
@@ -1698,6 +1692,14 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38081804">
+          <caret line="43" column="55" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

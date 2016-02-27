@@ -35,7 +35,7 @@ dec,Instructions/dec.bsh.java,1,0,1,r/m,,
 div,Instructions/div.bsh.java,1,0,1,r/m,,
 idiv,Instructions/idiv.bsh.java,1,0,1,r/m,,
 imul,Instructions/imul.bsh.java,1,0,1,r/m,,
-imul,Instructions/imul.bsh.java,1,0,2,r16/r32,r16/r32/m16/m32,
+imul,Instructions/imul.bsh.java,1,0,2,r16/r32,r16/r32/m16/m32/i,
 imul,Instructions/imul.bsh.java,1,0,3,r16/r32,r16/r32/m16/m32,i
 inc,Instructions/inc.bsh.java,1,0,1,r/m,,
 j,Instructions/j.bsh.java,1,1,1,l,,
