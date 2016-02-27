@@ -4,6 +4,7 @@ import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 import com.github.pfmiles.dropincc.impl.OrSubRule;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -495,14 +496,12 @@ public class CALVISParser {
 
         // produce instruction rules
 //        System.out.println("PARSER IS BEING COMPILED");
-//        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-//        Date dateobj = new Date();
-//        System.out.println("STARTED AT: " + df.format(dateobj));
-//
+//        LocalDateTime timePoint = LocalDateTime.now();     // The current date and time
+//        System.out.println(timePoint);
         exe = lang.compile();
-//        dateobj = new Date();
-//        System.out.println("PARSER IS BUILT");
-//        System.out.println("ENDED AT: " + df.format(dateobj));
+
+//        LocalDateTime endPoint = LocalDateTime.now();     // The current date and time
+//        System.out.println(endPoint);
 
     }
 
