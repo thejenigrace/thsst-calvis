@@ -11,6 +11,8 @@ execute(src, registers, memory) {
 		size = memory.getBitSize(src);
 	} else if ( src.isHex() ) {
 		val = src.getValue();
+	} else if ( src.isLabel() ) {
+		val = memory.getFromVariableMap(src.getValue());
 	}
 
 	BigInteger stackAddress = new BigInteger(stackPointer, 16);
