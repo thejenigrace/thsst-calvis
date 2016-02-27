@@ -912,12 +912,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00028" summary="Fix Play &amp; Pause Icon">
-      <created>1454816825562</created>
-      <option name="number" value="00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1454816825562</updated>
-    </task>
     <task id="LOCAL-00029" summary="Added Console &amp; Error Logger Window">
       <created>1454839592789</created>
       <option name="number" value="00029" />
@@ -1206,7 +1200,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456543152088</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="with stack instructions">
+      <created>1456548501481</created>
+      <option name="number" value="00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1456548501484</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1297,7 +1297,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added Find &amp; Replace Feature" />
     <MESSAGE value="Remove MenuItem: Jump To, Visualize, &amp; Find" />
     <MESSAGE value="Fix Register &amp; Memory Window" />
     <MESSAGE value="Fix ADC Instruction &amp; Change Icons" />
@@ -1322,7 +1321,8 @@
     <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;" />
     <MESSAGE value="Fix Instructions List" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Instructions List" />
+    <MESSAGE value="with stack instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="with stack instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
