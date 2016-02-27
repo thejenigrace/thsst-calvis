@@ -30,7 +30,7 @@ public class MainApp extends Application {
         
         try {
             MainApp.primaryStage = primaryStage;
-            MainApp.primaryStage.setTitle("CALVIS Instruction Set Configuration");
+            MainApp.primaryStage.setTitle("CALVIS Configuration");
 
             initRootLayout();
         } catch (Exception e) {

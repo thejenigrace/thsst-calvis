@@ -17,10 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.*;
@@ -56,7 +56,9 @@ public class WorkspaceController implements Initializable {
     @FXML
     private AnchorPane registerPane;
     @FXML
-    private AnchorPane memoryPane;
+    private AnchorPane paneMemory;
+    @FXML
+    private AnchorPane memoryTableViewPane;
     @FXML
     private AnchorPane otherWindowsPane;
 
@@ -75,6 +77,9 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnHide;
 
+//    @FXML
+//    private AnchorPane memoryFilterPane;
+
     @FXML
     private SplitPane rootSplitPane;
     @FXML
@@ -86,18 +91,24 @@ public class WorkspaceController implements Initializable {
     private TabPane otherWindowsTabPane;
 
     @FXML
-    private TextField textFieldFind;
-
-    @FXML
     private ToolBar toolbarMain;
     @FXML
     private ToolBar toolbarHide;
+
+//    @FXML
+//    private VBox vBoxMemoryPane;
+
+    private TextField textFieldFind;
+//    private TextField textFieldFilter;
 
     private boolean hide = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // initialize find textfield
+        textFieldFind = TextFields.createClearableTextField();
+        textFieldFind.setPrefWidth(250.0);
+        toolbarMain.getItems().add(15, textFieldFind);
     }
 
     private void init() {
@@ -109,7 +120,7 @@ public class WorkspaceController implements Initializable {
         textFieldFind.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                Tab tab = (Tab) textEditorTabPane.getSelectionModel().getSelectedItem();
+                Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
                 if (!newValue.isEmpty() && tab != null) {
                     CodeArea codeArea = (CodeArea) tab.getContent();
                     String find_pattern = "\\b(" + newValue + ")\\b";
@@ -165,21 +176,35 @@ public class WorkspaceController implements Initializable {
         registersController.build();
     }
 
-    private void showMemoryPane() throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
-        TableView memoryView = loader.load();
-        SplitPane.setResizableWithParent(memoryView, Boolean.TRUE);
-        AnchorPane.setTopAnchor(memoryView, 0.0);
-        AnchorPane.setBottomAnchor(memoryView, 0.0);
-        AnchorPane.setLeftAnchor(memoryView, 0.0);
-        AnchorPane.setRightAnchor(memoryView, 0.0);
-        memoryPane.getChildren().add(memoryView);
+    private void showMemoryPane() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((getClass().getResource("/fxml/memory.fxml")));
+            VBox memoryView = loader.load();
+            SplitPane.setResizableWithParent(memoryView, Boolean.TRUE);
+            AnchorPane.setTopAnchor(memoryView, 0.0);
+            AnchorPane.setBottomAnchor(memoryView, 0.0);
+            AnchorPane.setLeftAnchor(memoryView, 0.0);
+            AnchorPane.setRightAnchor(memoryView, 0.0);
+//            memoryTableViewPane.getChildren().add(memoryView);
+//
+//            textFieldFilter = TextFields.createClearableTextField();
+//            textFieldFilter.setPromptText("Memory Filter");
+//            AnchorPane.setTopAnchor(textFieldFilter, 0.0);
+//            AnchorPane.setBottomAnchor(textFieldFilter, 0.0);
+//            AnchorPane.setLeftAnchor(textFieldFilter, 0.0);
+//            AnchorPane.setRightAnchor(textFieldFilter, 0.0);
+//            memoryFilterPane.getChildren().add(textFieldFilter);
 
-        // Attach memoryController to SystemController
-        MemoryController memoryController = loader.getController();
-        this.sysCon.attach(memoryController);
-        memoryController.build();
+            paneMemory.getChildren().add(memoryView);
+
+            // Attach memoryController to SystemController
+            MemoryController memoryController = loader.getController();
+            this.sysCon.attach(memoryController);
+            memoryController.build();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showTextEditorPane() throws Exception {

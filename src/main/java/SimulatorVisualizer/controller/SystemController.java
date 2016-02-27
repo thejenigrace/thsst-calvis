@@ -5,10 +5,8 @@ import EnvironmentConfiguration.model.engine.*;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
-import com.github.pfmiles.dropincc.DropinccException;
 import javafx.application.Platform;
 
-import java.io.SyncFailedException;
 import java.util.*;
 
 /**

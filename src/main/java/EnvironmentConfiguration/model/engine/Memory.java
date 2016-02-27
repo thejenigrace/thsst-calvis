@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -39,8 +37,8 @@ public class Memory {
         int end = Integer.parseInt(lastAddress, 16);
         for (int i = 0x0; i <= end; i++) {
             String address = MemoryAddressCalculator.extend(Integer.toHexString(i), bitSize, "0");
-            mem.put(address, "00");
-//            mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+//            mem.put(address, "00");
+            mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
         }
 
 //		System.out.println("Loaded: Memory");
@@ -226,9 +224,9 @@ public class Memory {
     public void clear() {
         Iterator<String> keys = this.mem.keySet().iterator();
         while (keys.hasNext()) {
-            this.mem.put((keys.next()), "00" );
-//            String address = keys.next();
-//            this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+//            this.mem.put((keys.next()), "00" );
+            String address = keys.next();
+            this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
         }
         this.labelMap.clear();
         this.variableMap.clear();
