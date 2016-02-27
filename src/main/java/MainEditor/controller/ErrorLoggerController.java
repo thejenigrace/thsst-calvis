@@ -79,7 +79,6 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                     String[] lines = parsedCode.split("\n");
                     int causePosition = Integer.parseInt(cause);
                     int linesRead = 0;
-                    System.out.println("Total lines: " + lines.length);
                     for (int i = 0; i < lines.length; i++) {
                         if (lines[i].length() + linesRead < causePosition) {
                             linesRead += lines[i].length();
@@ -97,6 +96,9 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                     }
                     if (message.indexOf("upcoming sequence:") != -1) {
                         message = "Unknown " + message.substring(message.indexOf("upcoming sequence:"));
+                        if (message.contains("'['") && message.contains("']'")) {
+                            message += " ; Missing size directive ";
+                        }
                     }
                 }
             }

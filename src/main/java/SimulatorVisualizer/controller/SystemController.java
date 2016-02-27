@@ -246,7 +246,7 @@ public class SystemController {
         } catch (Exception e) {
             System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
             System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());
-//			e.printStackTrace();
+			e.printStackTrace();
 
             Platform.runLater(
                     new Thread() {
@@ -333,7 +333,6 @@ public class SystemController {
         }
         this.parsedCode = code;
         return isSuccessful;
-//	    push();
     }
 
     private void push() {
@@ -371,23 +370,6 @@ public class SystemController {
 //		}
     }
 
-    /**
-     * Method used to get the keywords needed to be highlighted in the text
-     * editor
-     */
-//    public String[] getKeywords(){
-//        List<String> keywordsList = new ArrayList<>();
-//
-//        Iterator<String> registerIterator = registerList.getRegisterKeys();
-//        Iterator<String> instructionIterator = instructionList.getInstructionKeys();
-//
-//        populateKeywords(keywordsList, registerIterator);
-//        populateKeywords(keywordsList, instructionIterator);
-//
-//        String[] keywordsArray = new String[keywordsList.size()];
-//        keywordsArray = keywordsList.toArray(keywordsArray);
-//        return keywordsArray;
-//    }
     public String getParsedCode() {
         return this.parsedCode;
     }

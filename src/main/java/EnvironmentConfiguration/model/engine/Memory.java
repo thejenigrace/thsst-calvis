@@ -130,6 +130,7 @@ public class Memory {
             inc = Integer.parseInt(memoryBaseAddress, 16);
             int offsetHex = offset / 4;
             value = value.toUpperCase();
+            value = MemoryAddressCalculator.extend(value, offset, "0");
             if (value.length() > offsetHex) {
                 throw new MemoryWriteException(baseAddress, value);
             }
