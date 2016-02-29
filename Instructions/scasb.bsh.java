@@ -5,34 +5,19 @@ execute(registers, memory) {
     Token tokenEDI = new Token(Token.REG, "EDI");
     Token tokenAL = new Token(Token.REG, "AL");
 
-    BigInteger compare1 = new BigInteger("10000", 16);
-    BigInteger compare2 = new BigInteger("0000", 16);
-
     cmp(registers, memory, flags, calculator, tokenEDI, tokenAL);
 
     if( flags.getDirectionFlag().equals("0") ) {
         BigInteger x = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.add(new BigInteger("1"));
 
-        if( result.toString(16).equals("10000") || result.compareTo(compare1) == 1 ) {
-            result = new BigInteger("00000000", 16);
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-        }
-        else {
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-        }
+        registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
     }
     else if( flags.getDirectionFlag().equals("1") ) {
         BigInteger x = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.subtract(new BigInteger("1"));
 
-        if( result.toString(16).equals("-1") || result.compareTo(compare2) == -1 ) {
-            result = new BigInteger("FFFF", 16);
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-        }
-        else {
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-        }
+        registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
     }
 }
 
@@ -47,26 +32,26 @@ cmp(registers, memory, flags, calculator, tokenEDI, tokenAL) {
     int overflow = 0;
 
     for(int i = 7; i >= 0; i--) {
-      r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-      - Integer.parseInt(String.valueOf(source.charAt(i)))
-      - borrow;
+        r = Integer.parseInt(String.valueOf(destination.charAt(i)))
+        - Integer.parseInt(String.valueOf(source.charAt(i)))
+        - borrow;
 
-      if( r < 0 ) {
-        borrow = 1;
-        r += 2;
-        result = result.concat(r.toString());
+        if( r < 0 ) {
+            borrow = 1;
+            r += 2;
+            result = result.concat(r.toString());
 
-        if( i == 0 ) {
-          carry = 1;
+            if( i == 0 ) {
+                carry = 1;
+            }
+            if( i == 0 || i == 1) {
+                overflow++;
+            }
         }
-        if( i == 0 || i == 1) {
-          overflow++;
+        else {
+            borrow = 0;
+            result = result.concat(r.toString());
         }
-      }
-      else {
-        borrow = 0;
-        result = result.concat(r.toString());
-      }
     }
 
     String d = new StringBuffer(result).reverse().toString();
@@ -78,18 +63,18 @@ cmp(registers, memory, flags, calculator, tokenEDI, tokenAL) {
     flags.setCarryFlag(carry.toString());
 
     if(overflow == 1) {
-      flags.setOverflowFlag("1");
+        flags.setOverflowFlag("1");
     }
     else {
-      flags.setOverflowFlag("0");
+        flags.setOverflowFlag("0");
     }
 
     BigInteger compareToZero = new BigInteger(d, 2);
     if(compareToZero.equals(BigInteger.ZERO)) {
-      flags.setZeroFlag("1");
+        flags.setZeroFlag("1");
     }
     else {
-      flags.setZeroFlag("0");
+        flags.setZeroFlag("0");
     }
 
     String sign = "" + res.charAt(0);

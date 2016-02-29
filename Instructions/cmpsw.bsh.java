@@ -6,9 +6,6 @@ execute(registers, memory) {
     Token tokenESI = new Token(Token.REG, "ESI");
     Token tokenAX = new Token(Token.REG, "AX");
 
-    BigInteger compare1 = new BigInteger("10000", 16);
-    BigInteger compare2 = new BigInteger("0000", 16);
-
     cmp(registers, memory, flags, calculator, tokenAX);
 
     if( flags.getDirectionFlag().equals("0") ) {
@@ -17,15 +14,8 @@ execute(registers, memory) {
         BigInteger result = x.add(new BigInteger("2"));
         BigInteger result1 = y.add(new BigInteger("2"));
 
-        if( result.toString(16).equals("10000") || result.compareTo(compare1) == 1 ) {
-            result = new BigInteger("00000000", 16);
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-            registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
-        }
-        else {
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-            registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
-        }
+        registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
+        registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
     }
     else if( flags.getDirectionFlag().equals("1") ) {
         BigInteger x = new BigInteger(registers.get("EDI"), 16);
@@ -33,15 +23,8 @@ execute(registers, memory) {
         BigInteger result = x.subtract(new BigInteger("2"));
         BigInteger result1 = y.subtract(new BigInteger("2"));
 
-        if( result.toString(16).equals("-1") || result.compareTo(compare2) == -1 ) {
-            result = new BigInteger("FFFF", 16);
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-            registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
-        }
-        else {
-            registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
-            registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
-        }
+        registers.set(tokenEDI, calculator.binaryToHexString(result.toString(2), tokenEDI));
+        registers.set(tokenESI, calculator.binaryToHexString(result1.toString(2), tokenESI));
     }
 }
 
@@ -56,26 +39,26 @@ cmp(registers, memory, flags, calculator, tokenAX) {
     int overflow = 0;
 
     for(int i = 15; i >= 0; i--) {
-      r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-      - Integer.parseInt(String.valueOf(source.charAt(i)))
-      - borrow;
+        r = Integer.parseInt(String.valueOf(destination.charAt(i)))
+        - Integer.parseInt(String.valueOf(source.charAt(i)))
+        - borrow;
 
-      if( r < 0 ) {
-        borrow = 1;
-        r += 2;
-        result = result.concat(r.toString());
+        if( r < 0 ) {
+            borrow = 1;
+            r += 2;
+            result = result.concat(r.toString());
 
-        if( i == 0 ) {
-          carry = 1;
+            if( i == 0 ) {
+                carry = 1;
+            }
+            if( i == 0 || i == 1) {
+                overflow++;
+            }
         }
-        if( i == 0 || i == 1) {
-          overflow++;
+        else {
+            borrow = 0;
+            result = result.concat(r.toString());
         }
-      }
-      else {
-        borrow = 0;
-        result = result.concat(r.toString());
-      }
     }
 
     String d = new StringBuffer(result).reverse().toString();
@@ -87,18 +70,18 @@ cmp(registers, memory, flags, calculator, tokenAX) {
     flags.setCarryFlag(carry.toString());
 
     if(overflow == 1) {
-      flags.setOverflowFlag("1");
+        flags.setOverflowFlag("1");
     }
     else {
-      flags.setOverflowFlag("0");
+        flags.setOverflowFlag("0");
     }
 
     BigInteger compareToZero = new BigInteger(d, 2);
     if(compareToZero.equals(BigInteger.ZERO)) {
-      flags.setZeroFlag("1");
+        flags.setZeroFlag("1");
     }
     else {
-      flags.setZeroFlag("0");
+        flags.setZeroFlag("0");
     }
 
     String sign = "" + res.charAt(0);
