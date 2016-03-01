@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.math.BigInteger;
+
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -117,9 +119,12 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
 //        System.setProperty("java.home", "C:\\Program Files\\Java\\jdk1.8.0_65");
-    	String OS = System.getProperty("os.name").toLowerCase();
+        //System.out.println(new BigInteger("5", 16).subtract(new BigInteger("22", 16)).toString(16));
+        System.out.println(new BigInteger("FF", 16).multiply(new BigInteger("F", 16)).toString(16));
+        String OS = System.getProperty("os.name").toLowerCase();
         if( OS.contains("win")){
             System.out.println("windows");
+            System.out.println("C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
             System.setProperty("java.home", "C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
         }   
         else if (OS.contains("mac")){
