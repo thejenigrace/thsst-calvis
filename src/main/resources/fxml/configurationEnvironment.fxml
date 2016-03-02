@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,29 +12,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnvironmentConfiguration.controller.ConfigurationEnvironmentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="configuration.controller.ConfigurationEnvironmentController">
     <top>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
-                <VBox prefHeight="93.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox fx:id="vBoxDetails" prefHeight="93.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                          <Pane prefHeight="10.0" prefWidth="600.0" />
+                        <Pane prefHeight="10.0" prefWidth="600.0"/>
                         <HBox>
                             <children>
-                                <Pane prefWidth="10.0" />
+                                <Pane prefWidth="10.0"/>
                                 <Label alignment="CENTER" text="Select a custom configuration" textAlignment="CENTER">
                                     <font>
-                                        <Font name="Trebuchet MS Bold" size="15.0" />
+                                        <Font name="Trebuchet MS Bold" size="15.0"/>
                                     </font>
                                 </Label>
                             </children>
                         </HBox>
-                  <Pane prefHeight="10.0" prefWidth="600.0" />
+                        <Pane prefHeight="10.0" prefWidth="600.0"/>
                         <HBox layoutX="10.0" layoutY="10.0">
                             <children>
-                                <TextArea editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0" prefWidth="600.0" text="The CALVIS sytem requires you to define your environment configuration file paths for CALVIS to work based on your preference." wrapText="true">
+                                <TextArea editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0"
+                                          prefWidth="600.0"
+                                          text="The CALVIS sytem requires you to define your environment configuration file paths for CALVIS to work based on your preference."
+                                          wrapText="true">
                                     <font>
-                                        <Font name="Trebuchet MS" size="13.0" />
+                                        <Font name="Trebuchet MS" size="13.0"/>
                                     </font>
                                 </TextArea>
                             </children>
@@ -45,45 +52,66 @@
     </top>
     <center>
         <AnchorPane BorderPane.alignment="CENTER">
-            <VBox prefHeight="454.0" prefWidth="1013.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox prefHeight="240.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
-                    <Pane prefHeight="85.0" prefWidth="600.0" />
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <VBox>
+                        <children>
+                            <Pane VBox.vgrow="ALWAYS"/>
+                            <ProgressBar fx:id="progressBarWorkspace" prefWidth="400.0" progress="0.0"/>
+                            <Pane VBox.vgrow="ALWAYS"/>
+                        </children>
+                    </VBox>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                </children>
+            </HBox>
+            <VBox fx:id="vBoxConfiguration" prefHeight="454.0" prefWidth="1013.0" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <Pane prefHeight="85.0" prefWidth="600.0"/>
                     <HBox>
                         <children>
-                            <Pane prefWidth="20.0" />
-                            <Label alignment="CENTER" prefWidth="180.0" text="Memory Configuration File" textAlignment="CENTER" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <ChoiceBox fx:id="memoryChoiceBox" prefWidth="300.0" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLocateMemory" text="Locate" />
-                            <Pane prefWidth="20.0" />
+                            <Pane prefWidth="20.0"/>
+                            <Label alignment="CENTER" prefWidth="180.0" text="Memory Configuration File"
+                                   textAlignment="CENTER"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <ChoiceBox fx:id="memoryChoiceBox" prefWidth="300.0"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                    onAction="#handleLocateMemory" text="Locate"/>
+                            <Pane prefWidth="20.0"/>
                         </children>
                     </HBox>
-                    <Pane layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="600.0" />
+                    <Pane layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="600.0"/>
                     <HBox layoutX="10.0" layoutY="10.0">
                         <children>
-                            <Pane prefWidth="20.0" />
-                            <Label alignment="CENTER" prefWidth="180.0" text="Registers Configuration File" textAlignment="CENTER" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <ChoiceBox fx:id="registerChoiceBox" prefWidth="300.0" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLocateRegister" text="Locate" />
-                            <Pane prefWidth="20.0" />
+                            <Pane prefWidth="20.0"/>
+                            <Label alignment="CENTER" prefWidth="180.0" text="Registers Configuration File"
+                                   textAlignment="CENTER"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <ChoiceBox fx:id="registerChoiceBox" prefWidth="300.0"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                    onAction="#handleLocateRegister" text="Locate"/>
+                            <Pane prefWidth="20.0"/>
                         </children>
                     </HBox>
-                    <Pane layoutX="10.0" layoutY="188.0" prefHeight="75.0" prefWidth="600.0" />
+                    <Pane layoutX="10.0" layoutY="188.0" prefHeight="75.0" prefWidth="600.0"/>
                     <HBox layoutX="10.0" layoutY="110.0">
                         <children>
-                            <Pane prefWidth="20.0" />
-                            <Label alignment="CENTER" prefWidth="180.0" text="Instruction Configuration File" textAlignment="CENTER" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <ChoiceBox fx:id="instructionChoiceBox" prefWidth="300.0" />
-                            <Pane HBox.hgrow="ALWAYS" />
-                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLocateInstruction" text="Locate" />
-                            <Pane layoutX="10.0" layoutY="10.0" prefWidth="20.0" />
+                            <Pane prefWidth="20.0"/>
+                            <Label alignment="CENTER" prefWidth="180.0" text="Instruction Configuration File"
+                                   textAlignment="CENTER"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <ChoiceBox fx:id="instructionChoiceBox" prefWidth="300.0"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                    onAction="#handleLocateInstruction" text="Locate"/>
+                            <Pane layoutX="10.0" layoutY="10.0" prefWidth="20.0"/>
                         </children>
                     </HBox>
-                    <Pane layoutX="10.0" layoutY="10.0" prefHeight="85.0" prefWidth="600.0" />
+                    <Pane layoutX="10.0" layoutY="10.0" prefHeight="85.0" prefWidth="600.0"/>
                 </children>
             </VBox>
         </AnchorPane>
@@ -91,18 +119,21 @@
     <bottom>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
-                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox fx:id="vBoxButtons" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <HBox>
                             <children>
-                                <Pane HBox.hgrow="ALWAYS" />
-                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-                                <Pane prefWidth="20.0" />
-                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleProceedWorkSpace" text="Finish" />
-                                <Pane layoutX="40.0" layoutY="10.0" prefWidth="20.0" />
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                        onAction="#handleCancel" text="Cancel"/>
+                                <Pane prefWidth="20.0"/>
+                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                        onAction="#handleFinish" text="Finish"/>
+                                <Pane layoutX="40.0" layoutY="10.0" prefWidth="20.0"/>
                             </children>
                         </HBox>
-                        <Pane prefHeight="40.0" prefWidth="600.0" />
+                        <Pane prefHeight="40.0" prefWidth="600.0"/>
                     </children>
                 </VBox>
             </children>

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" stylesheets="@../css/assembly-keywords.css" xmlns="http://javafx.com/javafx/8.0.65"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.WorkspaceController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.WorkspaceController">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -55,7 +55,7 @@
                                     </accelerator>
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem accelerator="Shortcut + ," mnemonicParsing="false" text="Settings">
+                                <MenuItem accelerator="Shortcut + ," mnemonicParsing="false" onAction="#handleSettings" text="Settings">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP"
                                                             shortcut="UP"/>

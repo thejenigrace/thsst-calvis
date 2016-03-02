@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <SplitPane dividerPositions="0.65" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainEditor.controller.RegistersController">
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.RegistersController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0">
             <children>
