@@ -1,9 +1,15 @@
 package editor.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,24 +24,59 @@ import java.util.ResourceBundle;
 public class SettingsController implements Initializable {
 
     @FXML
-    private TreeView treeViewSettings;
+    private AnchorPane anchorPaneSettingsView;
+
+    @FXML
+    private TreeView<String> treeViewSettings;
 
     private WorkspaceController workspaceController;
     private Stage dialogStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        TreeItem appearanceItem = new TreeItem("Appearance");
+        try {
+            TreeItem<String> appearanceItem = new TreeItem("Appearance");
 
-        TreeItem editorItem = new TreeItem("Editor");
-        editorItem.getChildren().addAll(getEditorItems());
+            TreeItem<String> editorItem = new TreeItem("Editor");
+            editorItem.getChildren().addAll(getEditorItems());
 
-        TreeItem dummyRoot = new TreeItem();
-        dummyRoot.getChildren().addAll(editorItem);
-        treeViewSettings.setRoot(dummyRoot);
-        treeViewSettings.setShowRoot(false);
+            TreeItem<String> dummyRoot = new TreeItem();
+            dummyRoot.getChildren().addAll(editorItem);
+            treeViewSettings.setRoot(dummyRoot);
+            treeViewSettings.setShowRoot(false);
 
-//        treeViewSettings.
+            treeViewSettings.getSelectionModel().selectedItemProperty()
+                    .addListener(new ChangeListener<TreeItem<String>>() {
+                        @Override
+                        public void changed(ObservableValue<? extends TreeItem<String>> observable, TreeItem<String> oldValue, TreeItem<String> newValue) {
+                            if(newValue == null) {
+                                return;
+                            } else {
+                                try {
+                                    changeView(newValue.getValue());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeView(String settings) throws Exception {
+       if(settings.equals("Play Speed")) {
+           System.out.println("Selected Play Speed");
+           FXMLLoader loader = new FXMLLoader();
+           loader.setLocation(getClass().getResource("/fxml/settings_play_speed.fxml"));
+           Parent settingsPlaySpeedView = (VBox) loader.load();
+
+           anchorPaneSettingsView.getChildren().add(settingsPlaySpeedView);
+
+       } else if(settings.equals("Byte Addressable")) {
+           System.out.println("Selected Byte Addressable");
+       }
     }
 
     public void setWorkspaceController(WorkspaceController workspaceController) {
@@ -46,11 +87,11 @@ public class SettingsController implements Initializable {
         this.dialogStage = dialogStage;
     }
 
-    public ArrayList<TreeItem> getEditorItems() {
-        ArrayList<TreeItem> items = new ArrayList<>();
+    public ArrayList<TreeItem<String>> getEditorItems() {
+        ArrayList<TreeItem<String>> items = new ArrayList<>();
 
-        TreeItem playItem = new TreeItem("Play Speed");
-        TreeItem byteAddressableItem = new TreeItem("Byte Addressable");
+        TreeItem<String> playItem = new TreeItem("Play Speed");
+        TreeItem<String> byteAddressableItem = new TreeItem("Byte Addressable");
 
         items.add(playItem);
         items.add(byteAddressableItem);

@@ -88,7 +88,7 @@ public class ConfigurationEnvironmentController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.initializeDefaultChoiceBoxes();
         this.progressBarWorkspace.setVisible(false);
-     }
+    }
 
     @FXML
     public void handleLocateMemory(ActionEvent event) {
@@ -152,7 +152,11 @@ public class ConfigurationEnvironmentController implements Initializable {
         vBoxDetails.setVisible(false);
         vBoxConfiguration.setVisible(false);
         vBoxButtons.setVisible(false);
-        new Thread(task).start();
+//        new Thread(task).start();
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
 
 //        ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
 //        ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
@@ -168,9 +172,6 @@ public class ConfigurationEnvironmentController implements Initializable {
 
     private Task<Void> createTaskWorkspace() {
         return new Task<Void>() {
-
-
-
             @Override
             protected Void call() throws Exception {
                 ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
@@ -179,7 +180,7 @@ public class ConfigurationEnvironmentController implements Initializable {
                         break;
                     }
                     updateProgress(i, 3);
-                    updateMessage("Please wait...");
+//                    updateMessage("Please wait...");
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ex) {
@@ -201,7 +202,7 @@ public class ConfigurationEnvironmentController implements Initializable {
                 });
 
                 progressBarWorkspace.setVisible(false);
-                updateMessage(0 + "");
+//                updateMessage(0 + "");
                 updateProgress(3, 3);
 
                 return null;

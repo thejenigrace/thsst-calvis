@@ -9,35 +9,39 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.SettingsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="editor.controller.SettingsController">
     <center>
-        <SplitPane dividerPositions="0.3" BorderPane.alignment="CENTER">
+        <SplitPane dividerPositions="0.25" BorderPane.alignment="CENTER">
             <items>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
-                        <TreeView fx:id="treeViewSettings" prefHeight="398.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TreeView fx:id="treeViewSettings" prefHeight="398.0" prefWidth="200.0"
+                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                  AnchorPane.topAnchor="0.0"/>
                     </children>
                 </AnchorPane>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane fx:id="anchorPaneSettingsView"/>
             </items>
         </SplitPane>
     </center>
     <bottom>
         <VBox prefHeight="65.0" BorderPane.alignment="CENTER">
             <children>
-                <Pane VBox.vgrow="ALWAYS" />
+                <Pane VBox.vgrow="ALWAYS"/>
                 <HBox>
                     <children>
-                        <Pane HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="Cancel" />
-                        <Pane prefWidth="20" />
-                        <Button mnemonicParsing="false" prefWidth="61.0" text="Apply" />
-                        <Pane prefWidth="20" />
-                        <Button mnemonicParsing="false" prefWidth="61.0" text="Ok" />
-                        <Pane prefWidth="20" />
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel"/>
+                        <Pane prefWidth="20"/>
+                        <Button fx:id="btnApply" mnemonicParsing="false" prefWidth="61.0" text="Apply"/>
+                        <Pane prefWidth="20"/>
+                        <Button fx:id="btnOk" mnemonicParsing="false" prefWidth="61.0" text="Ok"/>
+                        <Pane prefWidth="20"/>
                     </children>
                 </HBox>
-                <Pane VBox.vgrow="ALWAYS" />
+                <Pane VBox.vgrow="ALWAYS"/>
             </children>
         </VBox>
     </bottom>
