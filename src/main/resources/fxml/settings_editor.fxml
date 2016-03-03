@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.ToggleSwitch?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.SettingsEditor">
+    <children>
+        <Pane prefHeight="40.0" />
+        <HBox>
+            <children>
+                <Pane prefWidth="20.0" />
+                <Label text="Play Speed" />
+            </children>
+        </HBox>
+        <Slider fx:id="sliderPlaySpeed" />
+        <Pane layoutX="10.0" layoutY="184.0" prefHeight="20.0" />
+      <HBox layoutX="10.0" layoutY="50.0">
+         <children>
+            <Pane prefWidth="20.0" />
+            <Label text="Byte Addressable" />
+         </children>
+      </HBox>
+        <HBox>
+            <children>
+                <ToggleSwitch />
+                <Pane HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+        <Pane VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>

@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Jennica on 03/03/2016.
  */
-public class SettingsPlaySpeedController implements Initializable{
+public class SettingsEditor implements Initializable{
 
     @FXML
     private Slider sliderPlaySpeed;

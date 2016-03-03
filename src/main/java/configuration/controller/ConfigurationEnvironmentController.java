@@ -6,7 +6,6 @@ import configuration.model.error_logging.ErrorMessageListWithSize;
 import configuration.model.error_logging.FilePathLogger;
 import configuration.model.file_handling.*;
 import editor.MainApp;
-import editor.PreloaderApp;
 import editor.controller.StringCollectionContainer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -35,7 +34,6 @@ public class ConfigurationEnvironmentController implements Initializable {
 
     // Reference to the main application
     private MainApp mainApp;
-    private PreloaderApp preloaderApp;
 
     private VerifierController verifierController = new VerifierController();
     private FileChooser fileChooser = new FileChooser();
@@ -52,10 +50,6 @@ public class ConfigurationEnvironmentController implements Initializable {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-    }
-
-    public void setPreloaderApp(PreloaderApp preloaderApp) {
-        this.preloaderApp = preloaderApp;
     }
 
     public ConfigurationEnvironmentController() {

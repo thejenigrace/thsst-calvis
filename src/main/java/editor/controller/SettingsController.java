@@ -38,7 +38,7 @@ public class SettingsController implements Initializable {
             TreeItem<String> appearanceItem = new TreeItem("Appearance");
 
             TreeItem<String> editorItem = new TreeItem("Editor");
-            editorItem.getChildren().addAll(getEditorItems());
+//            editorItem.getChildren().addAll(getEditorItems());
 
             TreeItem<String> dummyRoot = new TreeItem();
             dummyRoot.getChildren().addAll(editorItem);
@@ -66,16 +66,13 @@ public class SettingsController implements Initializable {
     }
 
     public void changeView(String settings) throws Exception {
-       if(settings.equals("Play Speed")) {
-           System.out.println("Selected Play Speed");
+       if(settings.equals("Editor")) {
+           System.out.println("Selected Editor");
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/fxml/settings_play_speed.fxml"));
-           Parent settingsPlaySpeedView = (VBox) loader.load();
+           loader.setLocation(getClass().getResource("/fxml/settings_editor.fxml"));
+           Parent settingsEditorView = (VBox) loader.load();
 
-           anchorPaneSettingsView.getChildren().add(settingsPlaySpeedView);
-
-       } else if(settings.equals("Byte Addressable")) {
-           System.out.println("Selected Byte Addressable");
+           anchorPaneSettingsView.getChildren().add(settingsEditorView);
        }
     }
 
