@@ -191,7 +191,7 @@ public class CALVISParser {
          * declaration types
          */
         this.memorySizeDirectives = new HashMap<>();
-        int maxMemorySize = memory.getlookupPower() + 1;
+        int maxMemorySize = memory.getLookupPower() + 1;
 
         for (int i = 1; i < maxMemorySize; i++) {
             Double size = Math.pow(2, 2 + i);

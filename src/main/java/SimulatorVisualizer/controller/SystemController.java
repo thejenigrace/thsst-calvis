@@ -2,6 +2,7 @@ package SimulatorVisualizer.controller;
 
 import EnvironmentConfiguration.controller.EnvironmentConfigurator;
 import EnvironmentConfiguration.model.engine.*;
+import MainEditor.controller.ConsoleController;
 import MainEditor.controller.WorkspaceController;
 import MainEditor.model.AssemblyComponent;
 import SimulatorVisualizer.model.SimulationState;
@@ -23,6 +24,7 @@ public class SystemController {
     private CALVISParser parser;
 
     private List<AssemblyComponent> observerList;
+    private ConsoleController console;
     private SimulationState state;
     private Thread thread;
     private WorkspaceController workspaceController;
@@ -53,6 +55,9 @@ public class SystemController {
     public void attach(AssemblyComponent observer) {
         observer.setSysCon(this);
         observerList.add(observer);
+        if ( observer instanceof ConsoleController ) {
+            this.console = (ConsoleController) observer;
+        }
     }
 
     public void notifyAllObservers(CALVISInstruction currentLine, int lineNumber) {
@@ -77,6 +82,16 @@ public class SystemController {
 
     public Memory getMemoryState() {
         return this.memory;
+    }
+
+    public void pauseFromConsole() {
+        this.state = SimulationState.PAUSE;
+        thread.interrupt();
+    }
+
+    public void resumeFromConsole() {
+        this.state = SimulationState.PLAY;
+        beginSimulation();
     }
 
     public void play(String code) {
@@ -113,12 +128,12 @@ public class SystemController {
         }
         Platform.runLater(
                 new Thread() {
-            public void run() {
-                workspaceController.changeIconToPlay();
-                workspaceController.disableStepMode(true);
-                workspaceController.enableCodeArea(true);
-            }
-        }
+                    public void run() {
+                        workspaceController.changeIconToPlay();
+                        workspaceController.disableStepMode(true);
+                        workspaceController.enableCodeArea(true);
+                    }
+                }
         );
     }
 
@@ -242,7 +257,7 @@ public class SystemController {
         // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
         boolean flag = true;
         try {
-            flag = executionMap.get(currentLine).execute(); // EXECUTE THE CALVIS INSTRUCTION
+            flag = executionMap.get(currentLine).execute(console); // EXECUTE THE CALVIS INSTRUCTION
         } catch (Exception e) {
             System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
             System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());

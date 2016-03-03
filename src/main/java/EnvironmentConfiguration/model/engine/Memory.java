@@ -24,6 +24,7 @@ public class Memory {
     private HashMap<String, String> labelMap;
     private HashMap<String, String> variableMap;
     private String variablePointer;
+    private ArrayList<Integer> stackType;
 
     public Memory(int bitSize, int bitEndLength, String csvFile) {
         this.MAX_ADDRESS_SIZE = bitSize;
@@ -31,17 +32,17 @@ public class Memory {
         this.mem = new TreeMap<>(Collections.reverseOrder());
         this.labelMap = new HashMap<>();
         this.variableMap = new HashMap<>();
+        this.stackType = new ArrayList<>();
         resetVariablePointer();
 
         String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
         int end = Integer.parseInt(lastAddress, 16);
         for (int i = 0x0; i <= end; i++) {
             String address = MemoryAddressCalculator.extend(Integer.toHexString(i), bitSize, "0");
-//            mem.put(address, "00");
-            mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            mem.put(address, "00");
+//            mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
         }
 
-//		System.out.println("Loaded: Memory");
         BufferedReader br = null;
         String line;
         String cvsSplitBy = ",";
@@ -194,7 +195,7 @@ public class Memory {
             result = read(reformatAddress(Integer.toHexString(inc))) + result;
             inc++;
         }
-        System.out.println("Memory read in little endian: " + result);
+//        System.out.println("Memory read in little endian: " + result);
         if (result.contains("null")) {
             throw new MemoryReadException(baseAddress, offset);
         }
@@ -222,23 +223,33 @@ public class Memory {
         }
     }
 
+    public void push(int type) {
+        stackType.add(type);
+    }
+
+    public int pop() {
+        System.out.println("what" + stackType.size());
+        return stackType.remove(0);
+    }
+
     public void clear() {
         Iterator<String> keys = this.mem.keySet().iterator();
         while (keys.hasNext()) {
-//            this.mem.put((keys.next()), "00" );
-            String address = keys.next();
-            this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            this.mem.put((keys.next()), "00" );
+//            String address = keys.next();
+//            this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
         }
         this.labelMap.clear();
         this.variableMap.clear();
         resetVariablePointer();
+        stackType.clear();
     }
 
     public Iterator<String[]> getLookup() {
         return lookup.iterator();
     }
 
-    public int getlookupPower() {
+    public int getLookupPower() {
         return this.lookup.size();
     }
 
