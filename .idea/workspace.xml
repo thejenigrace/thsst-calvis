@@ -6,13 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="- Rename File Structure&#10;- Added Settings &amp; Loader Features">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsPlaySpeedController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/fxml/settings_play_speed.fxml" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix Play Speed Settings">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -562,8 +559,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -584,6 +579,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -928,12 +925,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00030" summary="Fix Console &amp; Error Logger Window">
-      <created>1454851565607</created>
-      <option name="number" value="00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1454851565607</updated>
-    </task>
     <task id="LOCAL-00031" summary="Fix Console &amp; Error Logger Window">
       <created>1454851717990</created>
       <option name="number" value="00031" />
@@ -1222,7 +1213,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456929032814</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Fix Play Speed Settings">
+      <created>1456970615537</created>
+      <option name="number" value="00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1456970615538</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1288,7 +1285,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Remove MenuItem: Jump To, Visualize, &amp; Find" />
     <MESSAGE value="Fix Register &amp; Memory Window" />
     <MESSAGE value="Fix ADC Instruction &amp; Change Icons" />
     <MESSAGE value="Finally! Dropdown for Register TableView" />
@@ -1313,7 +1309,8 @@
     <MESSAGE value="Fix Instructions List" />
     <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
+    <MESSAGE value="Fix Play Speed Settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Play Speed Settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1340,13 +1337,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/thsst-calvis.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1628,7 +1618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1733,6 +1722,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
