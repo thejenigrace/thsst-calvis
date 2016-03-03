@@ -104,6 +104,18 @@ public class Calculator {
         return val;
     }
 
+    public String hexToBinaryString(String value, int count) {
+        BigInteger bi = new BigInteger(value, 16);
+        String val = bi.toString(2);
+        int missingZeroes = count  - val.length();
+            //zero extend
+        for (int k = 0; k < missingZeroes; k++) {
+            val = "0" + val;
+        }
+
+        return val;
+    }
+
     public String binaryToHexString(String value, Token des) {
         BigInteger bi = new BigInteger(value, 2);
         String val = bi.toString(16);
@@ -470,5 +482,16 @@ public class Calculator {
             }
         }
         return bits.toString();
+    }
+
+    public String binaryZeroExtend(String value, int count) {
+        if(value.length() > count)
+            return value.substring(1);
+        else {
+            for (int x = 0; x < count - value.length(); x++) {
+                value = "0" + value;
+            }
+        }
+        return value;
     }
 }

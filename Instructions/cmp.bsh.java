@@ -76,10 +76,10 @@ execute(des, src, registers, memory) {
           flags.setZeroFlag("0");
         }
 
-        String sign = "" + compareToZero.charAt(0);
+        String sign = "" + compareToZero.toString(16).charAt(0);
         flags.setSignFlag(sign);
 
-        String parity = calculator.checkParity(compareToZero);
+        String parity = calculator.checkParity(compareToZero.toString(16));
         flags.setParityFlag(parity);
 
         String auxiliary = calculator.checkAuxiliarySub(source, destination);
