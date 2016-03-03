@@ -111,3 +111,6 @@ cmpsb,Instructions/cmpsb.bsh.java,1,0,0,,,
 cmpsw,Instructions/cmpsw.bsh.java,1,0,0,,,
 cmpsd,Instructions/cmpsd.bsh.java,1,0,0,,,
 pand,Instructions/pand.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+pandn,Instructions/pandn.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+por,Instructions/por.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+pxor,Instructions/pxor.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
