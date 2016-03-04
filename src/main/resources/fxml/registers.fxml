@@ -23,7 +23,7 @@
                                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TreeTableColumn fx:id="colRegisterName" text="Register"/>
+                                <TreeTableColumn fx:id="colRegisterName" minWidth="80" maxWidth="80" text="Register"/>
                                 <TreeTableColumn fx:id="colRegisterValue" text="Value"/>
                             </columns>
                             <columnResizePolicy>

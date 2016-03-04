@@ -124,7 +124,11 @@ public class CALVISInstruction {
         if (tokens.length > 1 & !isConditional) {
             Token first = tokens[0];
             Token second = tokens[1];
-            enforce2ParameterValidation(first, second, line, clIndex);
+            if ( isVerifiable ) {
+                enforce2ParameterValidation(first, second, line, clIndex);
+            } else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ){
+                enforce2ParameterValidation(first, second, line, clIndex);
+            }
         } else if (tokens.length > 2 && isConditional) { //for cmov
             Token first = tokens[1];
             Token second = tokens[2];
