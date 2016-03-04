@@ -104,9 +104,11 @@ public class RegisterList {
                         startIndex = startIndex / 4;
 
                         // reverse order of indices
-                        int dividedBy = RegisterList.MAX_SIZE / 4;
+                        int dividedBy = 0; //RegisterList.MAX_SIZE / 4;
                         if (reg[NAME].equals(reg[SOURCE])) {
                             dividedBy = Integer.parseInt(reg[SIZE]) / 4;
+                        } else {
+                            dividedBy = getBitSize(reg[SOURCE]) / 4;
                         }
                         endIndex = (dividedBy - 1) - endIndex;
                         startIndex = (dividedBy - 1) - startIndex;
@@ -115,18 +117,18 @@ public class RegisterList {
                         reg[END] = String.valueOf(startIndex);
                         reg[NAME] = reg[NAME].toUpperCase();
                         // add csv row to lookup table
-//						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
-//						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
+						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
+						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
                         this.lookup.add(reg);
                     }
 
                     // if a register is the source register itself
                     if (reg[NAME].equals(reg[SOURCE])) {
                         switch (reg[TYPE]) {
-                            case "1":
-                            case "2":
+                            case "1": // fall through
+                            case "2": // fall through
+                            case "4":
                                 Register g = new Register(reg[NAME], regSize);
-//								System.out.println("Case 1 & 2: " + reg[NAME]);
                                 this.map.put(reg[NAME], g);
                                 break;
                             case "3": // Instruction Pointer
@@ -142,20 +144,17 @@ public class RegisterList {
                                                 Integer.toString(lineCounter + 1)));
                                 break;
                         }
-                    } else if (reg[TYPE].equals("2")) {
+                    } else if ( reg[TYPE].equals("2") ) {
                         Register g = new Register(reg[NAME], regSize);
                         if (childMap.get(reg[SOURCE]) == null) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
-
 //                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
                             group.put(reg[NAME], g);
-
                             this.childMap.put(reg[SOURCE], group);
                         } else {
                             TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
 //                            System.out.println("Sibling-Type 2: " + reg[NAME]);
                             group.put(reg[NAME], g);
-
                             this.childMap.replace(reg[SOURCE], group);
                         }
                     }
@@ -257,7 +256,7 @@ public class RegisterList {
             // return the indicated child register value
             return mother.getValue().substring(startIndex, endIndex + 1);
         } else {
-//            System.out.println("ERROR: configuration.model.engine.Register " + key + " does not exist.");
+            System.out.println("ERROR: Register " + key + " does not exist.");
             errorMessages.add(new ErrorMessage(Types.doesNotExist,
                     HandleConfigFunctions.generateArrayListString(key), ""));
             errorLogger.get(0).add(errorMessages);
@@ -272,7 +271,7 @@ public class RegisterList {
     public void set(Token a, String hexString) throws DataTypeMismatchException {
         String key = a.getValue();
         String[] register = find(key);
-        ArrayList<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+        ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
         // get the mother register
 
         Register mother = this.map.get(register[SOURCE]);
@@ -293,46 +292,34 @@ public class RegisterList {
                 val[i] = hexString.charAt(i - startIndex);
             }
             newValue = new String(val);
-            mother.setValue(newValue.toUpperCase());
+            newValue = newValue.toUpperCase();
+            mother.setValue(newValue);
 
 //            System.out.println("register[SOURCE] = " + register[SOURCE]);
             if (childMap.get(register[SOURCE]) != null) {
 //                System.out.println("key = " + key);
 //				System.out.println("newValue = " + newValue.toUpperCase());
-
-                TreeMap<String, Register> temp = childMap.get(register[SOURCE]);
-//                for(int i = 0; i < temp.size(); i++) {
-                switch (register[SOURCE]) {
-                    case "EAX":
-                        childMap.get(register[SOURCE]).get("AX").setValue(get16BitHexString(newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("AH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("AL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                        break;
-                    case "EBX":
-                        childMap.get(register[SOURCE]).get("BX").setValue(get16BitHexString(newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("BH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("BL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                        break;
-                    case "ECX":
-                        childMap.get(register[SOURCE]).get("CX").setValue(get16BitHexString(newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("CH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("CL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                        break;
-                    case "EDX":
-                        childMap.get(register[SOURCE]).get("DX").setValue(get16BitHexString(newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("DH").setValue(get8BitHexString('H', newValue.toUpperCase()));
-                        childMap.get(register[SOURCE]).get("DL").setValue(get8BitHexString('L', newValue.toUpperCase()));
-                        break;
-                    default:
-                        System.out.println("NONE");
+                int registerType = Integer.parseInt(register[TYPE]);
+                if ( registerType == 2 || registerType == 1) {
+                    String registerCategory = register[SOURCE].charAt(1) + "";
+                    childMap.get(register[SOURCE]).get(registerCategory + "X")
+                            .setValue(get16BitHexString(newValue));
+                    childMap.get(register[SOURCE]).get(registerCategory + "H")
+                            .setValue(get8BitHexString('H', newValue));
+                    childMap.get(register[SOURCE]).get(registerCategory + "L")
+                            .setValue(get8BitHexString('L', newValue));
+                } else if ( registerType == 4 ) { // only for STX and MMX registers
+                    String registerNumber = register[SOURCE].charAt(2) + "";
+                    System.out.println(newValue.substring(4, 19 + 1));
+                    childMap.get(register[SOURCE]).get("MM" + registerNumber)
+                            .setValue(newValue.substring(4, 20));
                 }
-//                }
             }
         } else {
             if (hexString.equals("")) {
                 System.out.println("Writing to register failed.");
                 errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
-                        new ArrayList<String>(), ""));
+                        new ArrayList<>(), ""));
             } else {
                 System.out.println("Size mismatch between "
                         + register[0] + ":" + child + " and " + hexString);

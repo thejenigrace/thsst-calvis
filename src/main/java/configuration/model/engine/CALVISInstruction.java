@@ -1,5 +1,6 @@
 package configuration.model.engine;
 
+import MainEditor.controller.ConsoleController;
 import bsh.EvalError;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CALVISInstruction {
     private boolean isConditional;
     private boolean isVerifiable = true;
     private ArrayList<String> allowable;
+    private ConsoleController console;
 
     public CALVISInstruction(Instruction ins, String name, RegisterList registers, Memory memory) {
         this.ins = ins;
@@ -37,11 +39,18 @@ public class CALVISInstruction {
         this.allowable = allowable;
     }
 
-    public boolean execute() throws Exception {
+    public boolean execute(ConsoleController consoleController) throws Exception {
         try {
             switch (tokens.length) {
                 case 0:
-                    this.ins.execute(registers, memory);
+                    if ( name.equalsIgnoreCase("printf") ||
+                            name.equalsIgnoreCase("scanf") || name.equalsIgnoreCase("cls")) {
+                        consoleController.attachCALVISInstruction(this);
+                        this.console = consoleController;
+                        this.ins.consoleExecute(registers, memory, consoleController);
+                    } else {
+                        this.ins.execute(registers, memory);
+                    }
                     break;
                 case 1:
                     this.ins.execute(tokens[0], registers, memory);
@@ -77,6 +86,11 @@ public class CALVISInstruction {
         return tokens;
     }
 
+    public void executeScan() {
+        String text = console.retrieveScanned();
+        System.out.println(text);
+    }
+
     public void verifyParameters(int lineNumber) throws MemoryRestrictedAccessException, EvalError,
             MemoryToMemoryException, DataTypeMismatchException,
             MissingSizeDirectiveException, InvalidSourceOperandException {
@@ -107,7 +121,11 @@ public class CALVISInstruction {
         if (tokens.length > 1 & !isConditional) {
             Token first = tokens[0];
             Token second = tokens[1];
-            enforce2ParameterValidation(first, second, line, clIndex);
+            if ( isVerifiable ) {
+                enforce2ParameterValidation(first, second, line, clIndex);
+            } else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ){
+                enforce2ParameterValidation(first, second, line, clIndex);
+            }
         } else if (tokens.length > 2 && isConditional) { //for cmov
             Token first = tokens[1];
             Token second = tokens[2];
