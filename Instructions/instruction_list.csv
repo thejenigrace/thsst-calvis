@@ -114,3 +114,9 @@ pand,Instructions/pand.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 pandn,Instructions/pandn.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 por,Instructions/por.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 pxor,Instructions/pxor.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpckhbw,Instructions/punpckhbw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpckhwd,Instructions/punpckhwd.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpckhdq,Instructions/punpckhdq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpcklbw,Instructions/punpcklbw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpcklwd,Instructions/punpcklwd.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+punpckldq,Instructions/punpckldq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
