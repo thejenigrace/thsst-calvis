@@ -1,8 +1,7 @@
 package editor.controller;
 
-import EnvironmentConfiguration.model.engine.CALVISInstruction;
-import MainEditor.model.AssemblyComponent;
-import javafx.application.Platform;
+import configuration.model.engine.CALVISInstruction;
+import editor.model.AssemblyComponent;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import org.fxmisc.richtext.StyleClassedTextArea;

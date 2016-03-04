@@ -1,6 +1,6 @@
 package configuration.model.engine;
 
-import MainEditor.controller.ConsoleController;
+import editor.controller.ConsoleController;
 
 public interface Instruction {
 

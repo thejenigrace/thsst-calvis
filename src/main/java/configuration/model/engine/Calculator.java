@@ -495,7 +495,7 @@ public class Calculator {
         return value;
     }
 
-    public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize) {
+    public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize, char operation) {
         int desMissingZeroes = hexSize - desValue.length();
         int srcMissingZeroes = hexSize - srcValue.length();
         // zero extend
@@ -510,20 +510,62 @@ public class Calculator {
         String[] arrSrc = new String[hexSize / cutSize];
 
         int index = 0;
-        for (int i = 0; i < hexSize; i += 2) {
-            arrDes[index] = "" + desValue.charAt(i) + desValue.charAt(i + 1);
-            arrSrc[index] = "" + srcValue.charAt(i) + srcValue.charAt(i + 1);
+        for (int i = 0; i < hexSize; i += cutSize) {
+
+            if (cutSize == 2) {
+                arrDes[index] = desValue.substring(i, i + 2);
+                arrSrc[index] = srcValue.substring(i, i + 2);
+            } else if (cutSize == 4) {
+                arrDes[index] = desValue.substring(i, i + 4);
+                arrSrc[index] = srcValue.substring(i, i + 4);
+            } else if (cutSize == 8) {
+                arrDes[index] = desValue.substring(i, i + 8);
+                arrSrc[index] = srcValue.substring(i, i + 8);
+            }
             index++;
+            System.out.println("Created an Array " + i);
         }
 
         StringBuilder sbResult = new StringBuilder();
         for (int i = 0; i < hexSize / cutSize; i++) {
-            if (arrDes[i].equals(arrSrc[i]))
+            System.out.println("arrDes[" + i + "] = " + arrDes[i]);
+            System.out.println("arrSrc[" + i + "] = " + arrSrc[i]);
+
+            if (arrDes[i].equals(arrSrc[i]) && cutSize == 2 && operation == 'e')
                 sbResult.append("FF");
-            else
+            else if (!arrDes[1].equals(arrSrc[i]) && cutSize == 2 && operation == 'e')
                 sbResult.append("00");
+
+            if (arrDes[i].equals(arrSrc[i]) && cutSize == 4 && operation == 'e')
+                sbResult.append("FFFF");
+            else if (!arrDes[1].equals(arrSrc[i]) && cutSize == 4 && operation == 'e')
+                sbResult.append("0000");
+
+            if (arrDes[i].equals(arrSrc[i]) && cutSize == 8 && operation == 'e')
+                sbResult.append("FFFFFFFF");
+            else if (!arrDes[1].equals(arrSrc[i]) && cutSize == 8 && operation == 'e')
+                sbResult.append("00000000");
+
+            if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) > 0 && cutSize == 2 && operation == 'g')
+                sbResult.append("FF");
+            else if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) <= 0 && cutSize == 2 && operation == 'g')
+                sbResult.append("00");
+
+            if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) > 0 && cutSize == 4 && operation == 'g')
+                sbResult.append("FFFF");
+            else if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) <= 0 && cutSize == 4 && operation == 'g')
+                sbResult.append("0000");
+
+            if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) > 0 && cutSize == 8 && operation == 'g')
+                sbResult.append("FFFFFFFF");
+            else if (Long.compare(Long.parseLong(arrDes[i], 16), Long.parseLong(arrSrc[i], 16)) <= 0 && cutSize == 8 && operation == 'g')
+                sbResult.append("00000000");
         }
 
+        System.out.println("hexSize = " + hexSize);
+        System.out.println("desValue = " + desValue);
+        System.out.println("srcValue = " + srcValue);
+        System.out.println("resValue = " + sbResult.toString());
         return sbResult.toString();
     }
 }

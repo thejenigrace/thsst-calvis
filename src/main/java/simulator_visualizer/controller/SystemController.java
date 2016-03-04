@@ -2,10 +2,11 @@ package simulator_visualizer.controller;
 
 import configuration.controller.ConfiguratorEnvironment;
 import configuration.model.engine.*;
+import editor.controller.ConsoleController;
 import editor.controller.WorkspaceController;
 import editor.model.AssemblyComponent;
-import simulator_visualizer.model.SimulationState;
 import javafx.application.Platform;
+import simulator_visualizer.model.SimulationState;
 
 import java.util.*;
 

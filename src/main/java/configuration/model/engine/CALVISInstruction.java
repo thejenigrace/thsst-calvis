@@ -1,7 +1,7 @@
 package configuration.model.engine;
 
-import MainEditor.controller.ConsoleController;
 import bsh.EvalError;
+import editor.controller.ConsoleController;
 
 import java.util.ArrayList;
 
