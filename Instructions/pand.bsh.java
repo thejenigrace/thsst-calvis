@@ -15,7 +15,7 @@ execute(des, src, registers, memory) {
 	}
 
     if( des.isRegister() ) {
-        if( des.isRegister() ) {
+        if( src.isRegister() ) {
             if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize) ) {
                 String source = calculator.hexToBinaryString(registers.get(src), src);
                 String destination = calculator.hexToBinaryString(registers.get(des), des);

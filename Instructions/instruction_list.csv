@@ -120,3 +120,8 @@ punpckhdq,Instructions/punpckhdq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 punpcklbw,Instructions/punpcklbw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 punpcklwd,Instructions/punpcklwd.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 punpckldq,Instructions/punpckldq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+psllw,Instructions/psllw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
+pslld,Instructions/pslld.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
+psllq,Instructions/psllq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
+psraw,Instructions/psraw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
+psrad,Instructions/psrad.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i

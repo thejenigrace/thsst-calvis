@@ -15,7 +15,7 @@ execute(des, src, registers, memory) {
 	}
 
     if( des.isRegister() ) {
-        if( des.isRegister() ) {
+        if( src.isRegister() ) {
             if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize) ) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
@@ -43,13 +43,26 @@ execute(des, src, registers, memory) {
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
     String result = "";
+    int limit = 0;
+    int start = 0;
 
-    for(int j = 8; j < 16; j++) {
-        result += source.charAt(j) + "";
+    if( desSize == 64 ) {
+        start = 8;
+        limit = 16;
+    }
+    else if( desSize == 128 ) {
+        start = 16;
+        limit = 32;
     }
 
-    for(int j = 8; j < 16; j++) {
-        result += destination.charAt(j) + "";
+    for(int i = start; i < limit; i += 8) {
+        for(int j = 0; j < 8; j++) {
+            result += source.charAt(i + j) + "";
+        }
+
+        for(int j = 0; j < 8; j++) {
+            result += destination.charAt(i + j) + "";
+        }
     }
 
     registers.set(des, result);
