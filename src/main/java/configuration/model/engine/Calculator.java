@@ -107,8 +107,8 @@ public class Calculator {
     public String hexToBinaryString(String value, int count) {
         BigInteger bi = new BigInteger(value, 16);
         String val = bi.toString(2);
-        int missingZeroes = count  - val.length();
-            //zero extend
+        int missingZeroes = count - val.length();
+        //zero extend
         for (int k = 0; k < missingZeroes; k++) {
             val = "0" + val;
         }
@@ -333,32 +333,32 @@ public class Calculator {
     }
 
     public String binarySignExtend(String value, Token des) {
-        if ( des.isRegister() ) {
+        if (des.isRegister()) {
             int missingZeroes = registers.getBitSize(des) - value.length();
             String sign = value.charAt(0) + "";
 
             //sign extend
-            if ( missingZeroes > 0 ) {
+            if (missingZeroes > 0) {
                 for (int k = 0; k < missingZeroes; k++) {
                     value = sign + value;
                 }
             }
 
-            if ( value.length() > registers.getBitSize(des) ) {
+            if (value.length() > registers.getBitSize(des)) {
                 value = value.substring(1);
             }
-        } else if ( des.isMemory() ) {
+        } else if (des.isMemory()) {
             int missingZeroes = memory.getBitSize(des) - value.length();
             String sign = value.charAt(0) + "";
 
             //sign extend
-            if ( missingZeroes >  0) {
+            if (missingZeroes > 0) {
                 for (int k = 0; k < missingZeroes; k++) {
                     value = sign + value;
                 }
             }
 
-            if ( value.length() > memory.getBitSize(des) ) {
+            if (value.length() > memory.getBitSize(des)) {
                 value = value.substring(1);
             }
         }
@@ -485,7 +485,7 @@ public class Calculator {
     }
 
     public String binaryZeroExtend(String value, int count) {
-        if(value.length() > count)
+        if (value.length() > count)
             return value.substring(1);
         else {
             for (int x = 0; x < count - value.length(); x++) {
@@ -493,5 +493,37 @@ public class Calculator {
             }
         }
         return value;
+    }
+
+    public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize) {
+        int desMissingZeroes = hexSize - desValue.length();
+        int srcMissingZeroes = hexSize - srcValue.length();
+        // zero extend
+        for (int i = 0; i < desMissingZeroes; i++) {
+            desValue = "0" + desValue;
+        }
+        for (int i = 0; i < srcMissingZeroes; i++) {
+            srcValue = "0" + srcValue;
+        }
+
+        String[] arrDes = new String[hexSize / cutSize];
+        String[] arrSrc = new String[hexSize / cutSize];
+
+        int index = 0;
+        for (int i = 0; i < hexSize; i += 2) {
+            arrDes[index] = "" + desValue.charAt(i) + desValue.charAt(i + 1);
+            arrSrc[index] = "" + srcValue.charAt(i) + srcValue.charAt(i + 1);
+            index++;
+        }
+
+        StringBuilder sbResult = new StringBuilder();
+        for (int i = 0; i < hexSize / cutSize; i++) {
+            if (arrDes[i].equals(arrSrc[i]))
+                sbResult.append("FF");
+            else
+                sbResult.append("00");
+        }
+
+        return sbResult.toString();
     }
 }

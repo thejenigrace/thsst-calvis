@@ -72,6 +72,7 @@ pusha,Instructions/pusha.bsh.java,1,0,0
 pushad,Instructions/pushad.bsh.java,1,0,0
 pushf,Instructions/pushf.bsh.java,1,0,0
 pushfd,Instructions/pushfd.bsh.java,1,0,0
+pcmpeqb,Instructions/pcmpeqb.bsh.java,0,0,2,r,r/m64/m128
 rcl,Instructions/rcl.bsh.java,1,0,2,r/m,c/i,
 rcr,Instructions/rcr.bsh.java,1,0,2,r/m,c/i,
 rol,Instructions/rol.bsh.java,1,0,2,r/m,c/i,
