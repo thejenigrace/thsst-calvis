@@ -6,12 +6,16 @@ import configuration.model.error_logging.ErrorMessageListWithSize;
 import configuration.model.error_logging.FilePathLogger;
 import configuration.model.file_handling.*;
 import editor.MainApp;
+import editor.controller.LoaderController;
 import editor.controller.StringCollectionContainer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -140,12 +144,23 @@ public class ConfigurationEnvironmentController implements Initializable {
 
     @FXML
     public void handleFinish(ActionEvent event) throws Exception {
-        progressBarWorkspace.setVisible(true);
+//        progressBarWorkspace.setVisible(true);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/loader.fxml"));
+        Parent loaderView = (VBox) loader.load();
+
+        MainApp.primaryStage.setScene(new Scene(loaderView));
+        MainApp.primaryStage.setTitle("CALVIS");
+
+        LoaderController loaderController = loader.getController();
         Task task = createTaskWorkspace();
-        progressBarWorkspace.progressProperty().bind(task.progressProperty());
-        vBoxDetails.setVisible(false);
-        vBoxConfiguration.setVisible(false);
-        vBoxButtons.setVisible(false);
+        loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
+
+//        progressBarWorkspace.progressProperty().bind(task.progressProperty());
+//        vBoxDetails.setVisible(false);
+//        vBoxConfiguration.setVisible(false);
+//        vBoxButtons.setVisible(false);
 //        new Thread(task).start();
 
         Thread thread = new Thread(task);

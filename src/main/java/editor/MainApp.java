@@ -50,9 +50,10 @@ public class MainApp extends Application {
      */
     public void initRootLayout() {
         try {
-            loadPrimaryStageController();
+            loadConfigurationEnvironmentScene();
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
+            primaryStage.centerOnScreen();
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +103,7 @@ public class MainApp extends Application {
         return MainApp.primaryStage;
     }
 
-    public void loadPrimaryStageController() {
+    public void loadConfigurationEnvironmentScene() {
         try {
             // Load root layout from fxml file
             loader = new FXMLLoader();
