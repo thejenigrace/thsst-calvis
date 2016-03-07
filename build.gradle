@@ -1,20 +1,18 @@
 group 'org.thsst.calvis'
-version '1.0.4'
+version '1.0.5'
 
-apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-mainClassName = "editor.controller.MainApp"
 
 // Create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'CALVIS x86-32',
                 'Implementation-Version': version,
-                'Main-Class': 'editor.controller.MainApp'
+                'Main-Class': 'editor.MainApp'
     }
 
     baseName = "CALVIS"
