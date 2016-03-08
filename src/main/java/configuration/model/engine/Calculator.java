@@ -495,6 +495,17 @@ public class Calculator {
         return value;
     }
 
+//    public boolean checkIfSinglePrecisionFloatingPoint(String value) {
+//
+//        String myString = "BF800000";
+//        Long i = Long.parseLong(myString, 16);
+//        Float f = Float.intBitsToFloat(i.intValue());
+//        System.out.println(f);
+//        System.out.println(Integer.toHexString(Float.floatToIntBits(f)));
+//
+//        return false;
+//    }
+
     public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize, char operation) {
         int desMissingZeroes = hexSize - desValue.length();
         int srcMissingZeroes = hexSize - srcValue.length();
@@ -523,7 +534,7 @@ public class Calculator {
                 arrSrc[index] = srcValue.substring(i, i + 8);
             }
             index++;
-            System.out.println("Created an Array " + i);
+//            System.out.println("Created an Array " + i);
         }
 
         StringBuilder sbResult = new StringBuilder();

@@ -1,23 +1,20 @@
 execute(des,src,registers,memory) {
-    int srcBitSize;
-    int srcHexSize;
-    String srcValue;
+    int desBitSize = registers.getBitSize(des);
+    int desHexSize = registers.getHexSize(des);
     String desValue = registers.get(des);
+    String srcValue;
     Calculator calculator = new Calculator(registers,memory);
 
     if (src.isRegister()) {
-        srcBitSize = registers.getBitSize(src);
-        srcHexSize = registers.getHexSize(src);
         srcValue = registers.get(src);
     } else if (src.isMemory()) {
-        srcBitSize = memory.getBitSize(src);
-        srcHexSize = memory.getHexSize(src);
-        srcValue = memory.read(src,srcBitSize);
+        srcValue = memory.read(src,desBitSize);
     }
 
-    // src == mm || src == xmm
-    if (srcBitSize == 64 || srcBitSize == 128) {
-        String result = calculator.cutBySizeAndCompare(desValue, srcValue, srcHexSize, 2, 'e');
+
+    if (desBitSize == 64 || desBitSize == 128) {
+        // e == equal
+        String result = calculator.cutBySizeAndCompare(desValue, srcValue, desHexSize, 2, 'e');
         registers.set(des, result);
     }
 }
