@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class CALVISParser {
+public class CalvisParser {
 
     private InstructionList instructions;
     private RegisterList registers;
@@ -23,7 +23,7 @@ public class CALVISParser {
     private HashMap<String, Element> variableDeclarationTokenMap;
     private HashMap<String, Grule> memorySizeDirectives;
 
-    private HashMap<String, CALVISInstruction> mappedInstruction;
+    private HashMap<String, CalvisInstruction> mappedInstruction;
     private ArrayList<Exception> exceptions;
     private int lineNumber;
 
@@ -41,7 +41,7 @@ public class CALVISParser {
     private Grule label;
     private Grule memoryAddressingMode;
 
-    public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory) {
+    public CalvisParser(InstructionList instructions, RegisterList registers, Memory memory) {
         this.instructions = instructions;
         this.registers = registers;
         this.memory = memory;
@@ -54,7 +54,13 @@ public class CALVISParser {
         Grule variableDeclarations = lang.newGrule();
         Grule sectionDataRule = lang.newGrule();
         Grule mainProgram = lang.newGrule();
+
         Grule instruction = lang.newGrule();
+        Grule noParameterInstruction = lang.newGrule();
+        Grule oneParameterInstruction = lang.newGrule();
+        Grule twoParameterInstruction = lang.newGrule();
+        Grule threeParameterInstruction = lang.newGrule();
+
         Grule memoryExpression = lang.newGrule();
         Grule memoryBase = lang.newGrule();
         Grule memoryIndex = lang.newGrule();
@@ -295,10 +301,13 @@ public class CALVISParser {
         // assembly ::= mainProgram variableDeclarations?
         assembly.define(CC.ks(commentPattern), mainProgram, CC.ks(commentPattern), CC.op(sectionDataRule));
 
-        // Prepare <List of Instructions>
-        Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
-        ArrayList<Alternative> altList = new ArrayList<>();
+        // Prepare different types of instruction tokens
+        ArrayList<Element> noParameterTokens = new ArrayList<>();
+        ArrayList<Element> oneParameterTokens = new ArrayList<>();
+        ArrayList<Element> twoParameterTokens = new ArrayList<>();
+        ArrayList<Element> threeParameterTokens = new ArrayList<>();
 
+        Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
         while (instructionProductionRules.hasNext()) {
             String[] prodRule = instructionProductionRules.next();
 
@@ -308,146 +317,56 @@ public class CALVISParser {
             System.out.println("");
 
             String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
-
             if (instructions.isConditionalInstruction(prodRule[0])) {
                 insName = "(\\b((" + prodRule[0] + "|" + prodRule[0].toLowerCase()
                         + ")(" + instructions.getConditionsRegEx() + "))\\b)";
             }
 
             TokenDef instructionName = lang.newToken(insName);
-
-            //System.out.println(insName);
-            // prodRule[2] * 2 includes the actual instruction name and the commas
             int parameterCount = Integer.parseInt(prodRule[4]);
-            int numParameters = parameterCount * 2;
-            if (numParameters == 0) {
-                numParameters += 1;
+
+            switch (parameterCount) {
+                case 0:
+                    noParameterTokens.add(instructionName);
+                    break;
+                case 1:
+                    oneParameterTokens.add(instructionName);
+                    break;
+                case 2:
+                    twoParameterTokens.add(instructionName);
+                    break;
+                case 3:
+                    threeParameterTokens.add(instructionName);
+                    break;
             }
-
-//			System.out.println("actual count from csv: " + parameterCount);
-//			System.out.println("number of parameters: " + numParameters);
-            ArrayList<String> result = new ArrayList<>();
-
-            Element[] elements = new Element[numParameters];
-            elements[0] = instructionName;
-            int specificationsCounter = 5; // csv index starts at 5
-            for (int k = 1; k < numParameters; k++) {
-                if (k % 2 == 0) {
-                    elements[k] = comma;
-                } else {
-                    String[] parameterSpecifications = prodRule[specificationsCounter].split("/");
-                    boolean enforceSizeDirectives = true;
-                    if (parameterCount >= 2) {
-                        enforceSizeDirectives = parameterCount == 3 && k == numParameters - 1;
-//                        else if (prodRule[2].equals("0")) { // for movsx / movzx
-//                            enforceSizeDirectives = true;
-//                        }
-                    }
-                    elements[k] = parseOneParameter(parameterSpecifications, enforceSizeDirectives);
-                    specificationsCounter++;
-                }
-            }
-
-            if (parameterCount >= 2) {
-                String[] firstParameter = prodRule[5].split("/");
-                ArrayList<String[]> firstParameterList = new ArrayList<>();
-                for (int i = 0; i < firstParameter.length; i++) {
-                    String[] reformatted = expandInstructionParameter(firstParameter[i]);
-                    firstParameterList.add(reformatted);
-                }
-                ArrayList<String> specifications1 = new ArrayList<>();
-                for (String[] entry : firstParameterList) {
-                    for (int i = 0; i < entry.length; i++) {
-                        specifications1.add(entry[i]);
-                    }
-                }
-//				System.out.println(specifications1);
-
-                String[] secondParameter = prodRule[6].split("/");
-                ArrayList<String[]> secondParameterList = new ArrayList<>();
-                for (int i = 0; i < secondParameter.length; i++) {
-                    String[] reformatted = expandInstructionParameter(secondParameter[i]);
-                    secondParameterList.add(reformatted);
-                }
-                ArrayList<String> specifications2 = new ArrayList<>();
-                for (String[] entry : secondParameterList) {
-                    for (int i = 0; i < entry.length; i++) {
-                        specifications2.add(entry[i]);
-                    }
-                }
-//				System.out.println(specifications2);
-
-                for (String first : specifications1) {
-                    for (String second : specifications2) {
-                        if (isPermissible(first, second)) {
-                            String resultInstance = first + "/" + second;
-                            result.add(resultInstance);
-                        }
-                    }
-                }
-//				System.out.println(result);
-            }
-
-            // bind action from BSH files
-            Alternative instructionAlternative = new Alternative(elements);
-            if (numParameters == 1) {
-                instructionAlternative.setAction((Action<Object>) args -> {
-                    String anInstruction = (String) args;
-                    //////////////////////
-                    Instruction someInstruction = instructions.getInstruction(anInstruction);
-                    CALVISInstruction calvisInstruction
-                            = new CALVISInstruction(someInstruction, anInstruction, registers, memory);
-                    String instructionAdd = Integer.toHexString(lineNumber);
-                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-                            RegisterList.instructionPointerSize, "0"), calvisInstruction);
-                    lineNumber++;
-                    return calvisInstruction;
-                });
-            } else {
-                instructionAlternative.setAction((Action<Object[]>) args -> {
-                    int numParameters1 = args.length / 2;
-                    String anInstruction = args[0].toString();
-                    ArrayList<Object> tokenArr = new ArrayList<>();
-                    boolean isConditionalInstruction = false;
-                    String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
-
-                    if (!anInstruction.equals(baseConditionalInstruction)) {
-                        String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
-                        replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");
-                        tokenArr.add(replaced);
-                        anInstruction = baseConditionalInstruction;
-                        isConditionalInstruction = true;
-                    }
-                    //////////////////////
-                    Instruction someInstruction = instructions.getInstruction(anInstruction);
-                    for (int i = 0; i < numParameters1; i++) {
-                        tokenArr.add(args[i * 2 + 1]);
-                    }
-                    Object[] tokens = new Object[tokenArr.size()];
-                    tokens = tokenArr.toArray(tokens);
-                    CALVISInstruction calvisInstruction
-                                = new CALVISInstruction(someInstruction, anInstruction,
-                                        tokens, registers, memory, isConditionalInstruction, result);
-
-                    // Insert special check if instruction should be verified
-                    if (prodRule[2].equals("1")) {
-                        calvisInstruction.setVerifiable(true);
-                    } else {
-                        calvisInstruction.setVerifiable(false);
-                    }
-                    String instructionAdd = Integer.toHexString(lineNumber);
-                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-                            RegisterList.instructionPointerSize, "0"), calvisInstruction);
-                    lineNumber++;
-                    return calvisInstruction;
-                });
-            }
-            altList.add(instructionAlternative);
         }
 
-        // instruction ::= <List of Instructions>
-        System.out.println("Total number of instructions loaded: " + altList.size());
-        instruction.setAlts(altList);
+        noParameterInstruction.define(concatenateOrSubRules(noParameterTokens))
+                .action((Action<Object>) args -> {
+                    String anInstruction = ((Token) args).getValue();
+                    Instruction someInstruction = instructions.getInstruction(anInstruction);
+                    CalvisInstruction calvisInstruction
+                            = new CalvisInstruction(someInstruction, anInstruction, registers, memory);
+                    String instructionAdd = Integer.toHexString(lineNumber);
+                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+                            RegisterList.instructionPointerSize, "0"), calvisInstruction);
+                    lineNumber++;
+                    return calvisInstruction;
+                });
+
+        oneParameterInstruction.define(concatenateOrSubRules(oneParameterTokens), getAllParameters(true))
+                .action((Action<Object[]>) args -> prepareCalvisInstruction(args));
+        twoParameterInstruction.define(concatenateOrSubRules(twoParameterTokens), getAllParameters(false),
+            comma, getAllParameters(false))
+                .action((Action<Object[]>) args -> prepareCalvisInstruction(args));
+        threeParameterInstruction.define(concatenateOrSubRules(threeParameterTokens), getAllParameters(false),
+            comma, getAllParameters(false), comma, getAllParameters(true))
+                .action((Action<Object[]>) args -> prepareCalvisInstruction(args));
+
+        instruction.define(noParameterInstruction)
+            .alt(oneParameterInstruction)
+            .alt(twoParameterInstruction)
+            .alt(threeParameterInstruction);
 
         // mainProgram ::= ( LABEL? instruction)*
         mainProgram.define(CC.ks(CC.ks(commentPattern), CC.op(label), instruction))
@@ -490,15 +409,84 @@ public class CALVISParser {
                     return null;
                 });
 
-        // produce instruction rules
-//        System.out.println("PARSER IS BEING COMPILED");
-//        LocalDateTime timePoint = LocalDateTime.now();     // The current date and time
-//        System.out.println(timePoint);
         exe = lang.compile();
+    }
 
-//        LocalDateTime endPoint = LocalDateTime.now();     // The current date and time
-//        System.out.println(endPoint);
+    private CalvisInstruction prepareCalvisInstruction(Object[] args) {
+        int numParameters = args.length / 2;
+        String anInstruction = ((Token) args[0]).getValue();
+        ArrayList<Object> tokenArr = new ArrayList<>();
+        boolean isConditionalInstruction = false;
+        String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
 
+        if (!anInstruction.equals(baseConditionalInstruction)) {
+            String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
+            replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");
+            tokenArr.add(replaced);
+            anInstruction = baseConditionalInstruction;
+            isConditionalInstruction = true;
+        }
+
+        Instruction someInstruction = instructions.getInstruction(anInstruction);
+        for (int i = 0; i < numParameters; i++) {
+            tokenArr.add(args[i * 2 + 1]);
+        }
+        Object[] tokens = new Object[tokenArr.size()];
+        tokens = tokenArr.toArray(tokens);
+
+        ArrayList<String> result = new ArrayList<>();
+        String[] prodRule = instructions.find(anInstruction);
+
+        if (numParameters >= 2) {
+            String[] firstParameter = prodRule[5].split("/");
+        ArrayList<String[]> firstParameterList = new ArrayList<>();
+        for (int i = 0; i < firstParameter.length; i++) {
+            String[] reformatted = expandInstructionParameter(firstParameter[i]);
+            firstParameterList.add(reformatted);
+        }
+        ArrayList<String> specifications1 = new ArrayList<>();
+        for (String[] entry : firstParameterList) {
+            for (int i = 0; i < entry.length; i++) {
+                specifications1.add(entry[i]);
+            }
+        }
+//			System.out.println(specifications1);
+
+        String[] secondParameter = prodRule[6].split("/");
+        ArrayList<String[]> secondParameterList = new ArrayList<>();
+        for (int i = 0; i < secondParameter.length; i++) {
+            String[] reformatted = expandInstructionParameter(secondParameter[i]);
+            secondParameterList.add(reformatted);
+        }
+        ArrayList<String> specifications2 = new ArrayList<>();
+        for (String[] entry : secondParameterList) {
+            for (int i = 0; i < entry.length; i++) {
+                specifications2.add(entry[i]);
+            }
+        }
+//			System.out.println(specifications2);
+
+        for (String first : specifications1) {
+            for (String second : specifications2) {
+                String resultInstance = first + "/" + second;
+                result.add(resultInstance);
+                }
+            }
+//				System.out.println(result);
+        }
+
+        CalvisInstruction calvisInstruction
+                = new CalvisInstruction(someInstruction, anInstruction,
+                tokens, registers, memory, isConditionalInstruction, result);
+
+        // Insert special check if instruction should be verified
+        calvisInstruction.setVerifiable(instructions.isVerifiable(anInstruction));
+
+        String instructionAdd = Integer.toHexString(lineNumber);
+        mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+                RegisterList.instructionPointerSize, "0"), calvisInstruction);
+        lineNumber++;
+        return calvisInstruction;
     }
 
     /**
@@ -528,56 +516,20 @@ public class CALVISParser {
         return result;
     }
 
-    private boolean isPermissible(String first, String second) {
-        if (first.contains("m") && second.contains("m")) {
-            return false;
-        }
-        if (first.substring(1).equals(second.substring(1))) {
-            return true;
-        }
-        return second.matches("[ci]");
-    }
-
-    private Element parseOneParameter(String[] specification, boolean isOneParameter) {
-        // get specific operand requirements
-        String[] allowed = specification;
+    private Element getAllParameters(boolean isOneParameter) {
         ArrayList<Element> orSubRuleList = new ArrayList<>();
-        for (String anAllowed : allowed) {
-            // instructions asks for a register as an operand
-            if (anAllowed.contains("r")) {
-                // get specific register sizes
-                String size = anAllowed.substring(1);
-                if (size.length() > 1) {
-                    orSubRuleList.add(getRegisterElements(size));
-                } else {
-                    orSubRuleList.add(getAllRegisterElements());
-                }
-            }
-            if (anAllowed.contains("m")) {
-                if (isOneParameter) {
-                    String size = anAllowed.substring(1);
-                    if (size.length() > 1) {
-                        orSubRuleList.add(memorySizeDirectives.get(size));
-                    } else {
-                        orSubRuleList.add(getAllMemorySizeDirectiveElements());
-                    }
-                } else {
-                    orSubRuleList.add(memoryAddressingMode);
-                    orSubRuleList.add(getAllMemorySizeDirectiveElements());
-                }
-            }
-            if (anAllowed.contains("i")) {
-                orSubRuleList.add(hex);
-                orSubRuleList.add(dec);
-//				orSubRuleList.add(hexOrDecimal);
-            }
-            if (anAllowed.contains("c")) {
-                orSubRuleList.add(cl);
-            }
-            if (anAllowed.contains("l")) {
-                orSubRuleList.add(justLabel);
-            }
+        orSubRuleList.add(getAllRegisterElements());
+        if (isOneParameter) {
+            orSubRuleList.add(getAllMemorySizeDirectiveElements());
+        } else {
+            orSubRuleList.add(memoryAddressingMode);
+            orSubRuleList.add(getAllMemorySizeDirectiveElements());
         }
+        orSubRuleList.add(hex);
+        orSubRuleList.add(dec);
+        orSubRuleList.add(cl);
+        orSubRuleList.add(justLabel);
+
         return concatenateOrSubRules(orSubRuleList);
     }
 
@@ -603,8 +555,6 @@ public class CALVISParser {
             TokenDef variableType = lang.newToken(variableTypePattern);
             this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
         }
-
-//		System.out.println(memoryTokenMap);
     }
 
     private void prepareRegisterTokenMap() {
@@ -619,7 +569,6 @@ public class CALVISParser {
             String regType = registerToken[RegisterList.TYPE];
 
             if (!flag && registerToken[RegisterList.NAME].equalsIgnoreCase("cl")) {
-//				System.out.println("CL was declared");
                 cl = lang.newToken(regName);
                 flag = true;
             }
@@ -700,7 +649,7 @@ public class CALVISParser {
                         if (arg0 instanceof Token) {
                             return (Token) arg0;
                         }
-                        if (registers.isExisting(arg0.toString().toUpperCase())) {
+                        if (registers.isExisting(arg0.toString())) {
                             return new Token(Token.REG, (String) arg0);
                         }
                         if (memory.isExisting(arg0.toString())) {
@@ -740,7 +689,6 @@ public class CALVISParser {
             if (!y.getRegexp().contains("SP")) {
                 result.add(x);
             }
-            //System.out.println(y.getRegexp());
         }
         return concatenateOrSubRules(result);
     }
@@ -758,15 +706,6 @@ public class CALVISParser {
         return memoryTokenMap.get(size);
     }
 
-    private Element getAllMemoryElements() {
-        ArrayList<Element> memoryElementsList = new ArrayList<>();
-        Iterator<Element> iterator = memoryTokenMap.values().iterator();
-        while (iterator.hasNext()) {
-            memoryElementsList.add(iterator.next());
-        }
-        return concatenateOrSubRules(memoryElementsList);
-    }
-
     private Element getAllVariableElements() {
         Iterator<Element> keys = variableDeclarationTokenMap.values().iterator();
         ArrayList<Element> list = new ArrayList<>();
@@ -776,7 +715,7 @@ public class CALVISParser {
         return concatenateOrSubRules(list);
     }
 
-    public HashMap<String, CALVISInstruction> parse(String code) throws Exception {
+    public HashMap<String, CalvisInstruction> parse(String code) throws Exception {
         this.mappedInstruction.clear();
         this.exceptions.clear();
         this.lineNumber = 0;

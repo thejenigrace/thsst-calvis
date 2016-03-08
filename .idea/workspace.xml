@@ -6,17 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Merge with marielle-mmx">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Goodwin_Chua.xml" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="still needs to check the result">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Registers/register_list.csv" afterPath="$PROJECT_DIR$/Registers/register_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -922,12 +914,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00037" summary="Added Find &amp; Replace Feature">
-      <created>1454944047876</created>
-      <option name="number" value="00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1454944047876</updated>
-    </task>
     <task id="LOCAL-00038" summary="Added Find &amp; Replace Feature">
       <created>1454944072459</created>
       <option name="number" value="00038" />
@@ -1216,7 +1202,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457108847088</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="still needs to check the result">
+      <created>1457423901929</created>
+      <option name="number" value="00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1457423901960</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1307,7 +1299,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="FIX: Find UI (Up &amp; Down Button) &amp; resizing in different monitor sizes; Hide &amp; Show Other Windows TabPane" />
     <MESSAGE value="Fix Issue: CodeArea &amp; HideToolbar Scrolling" />
     <MESSAGE value="FIX:&#10;- Reset for Register Dropdown UI&#10;- Create Interrupt Flag UI" />
     <MESSAGE value="Added Label Column into Memory Window" />
@@ -1332,7 +1323,8 @@
     <MESSAGE value="Added MMX Comparison Instructions" />
     <MESSAGE value="Added PCMPGT(B/W/D) Instructions" />
     <MESSAGE value="Merge with marielle-mmx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge with marielle-mmx" />
+    <MESSAGE value="still needs to check the result" />
+    <option name="LAST_COMMIT_MESSAGE" value="still needs to check the result" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
