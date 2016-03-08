@@ -20,10 +20,11 @@ execute(des,src,registers,memory) {
     }
 
     if(des.isRegister()) {
+        System.out.println("srcValue = " + srcValue);
         registers.set(des, srcValue);
     } else if(des.isMemory()) {
         // System.out.println("desBaseAddress = " + memory.removeSizeDirectives());
-
+        System.out.println("srcValue = " + srcValue);
         memory.write(des, srcValue, des);
     }
 }
