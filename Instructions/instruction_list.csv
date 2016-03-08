@@ -134,3 +134,7 @@ psrad,Instructions/psrad.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
 packsswb,Instructions/packsswb.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 packssdw,Instructions/packssdw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
 packuswb,Instructions/packuswb.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128
+andps,Instructions/andps.bsh.java,1,0,2,r128,r128/m128
+andnps,Instructions/andnps.bsh.java,1,0,2,r128,r128/m128
+orps,Instructions/orps.bsh.java,1,0,2,r128,r128/m128
+xorps,Instructions/xorps.bsh.java,1,0,2,r128,r128/m128
