@@ -6,16 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Update the Main-Class in build.gradle">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix (MMX) PCMPEQ(B/W/D) &amp; PCMPGT(B/W/D);&#10;Added (SSE) MOVAPS &amp; MOVUPS Instructions">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movaps.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movups.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpeqb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpeqb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpeqd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpeqd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpeqw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpeqw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpgtb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpgtb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpgtd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpgtd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pcmpgtw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pcmpgtw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -951,18 +945,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00039" summary="Added Find &amp; Replace Feature">
-      <created>1454944115240</created>
-      <option name="number" value="00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1454944115240</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Remove MenuItem: Jump To, Visualize, &amp; Find">
-      <created>1454982225758</created>
-      <option name="number" value="00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1454982225758</updated>
-    </task>
     <task id="LOCAL-00041" summary="Remove MenuItem: Jump To, Visualize, &amp; Find">
       <created>1454982419913</created>
       <option name="number" value="00041" />
@@ -1245,7 +1227,19 @@
       <option name="project" value="LOCAL" />
       <updated>1457351883711</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Fix (MMX) PCMPEQ(B/W/D) &amp; PCMPGT(B/W/D);&#10;Added (SSE) MOVAPS &amp; MOVUPS Instructions">
+      <created>1457404507306</created>
+      <option name="number" value="00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1457404507306</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Added (SSE) MOVAPS &amp; MOVUPS Instructions">
+      <created>1457404662327</created>
+      <option name="number" value="00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1457404662327</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1278,11 +1272,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29499322" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2944369" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.24151967" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3166441" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20457797" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20457797" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43657818" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1311,8 +1305,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="FIX:&#10;- Reset for Register Dropdown UI&#10;- Create Interrupt Flag UI" />
-    <MESSAGE value="Added Label Column into Memory Window" />
     <MESSAGE value="Fix IMUL Instruction" />
     <MESSAGE value="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator" />
     <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
@@ -1336,7 +1328,9 @@
     <MESSAGE value="Merge with marielle-mmx" />
     <MESSAGE value="Updated Loader UI" />
     <MESSAGE value="Update the Main-Class in build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update the Main-Class in build.gradle" />
+    <MESSAGE value="Fix (MMX) PCMPEQ(B/W/D) &amp; PCMPGT(B/W/D);&#10;Added (SSE) MOVAPS &amp; MOVUPS Instructions" />
+    <MESSAGE value="Added (SSE) MOVAPS &amp; MOVUPS Instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added (SSE) MOVAPS &amp; MOVUPS Instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
