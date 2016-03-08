@@ -16,21 +16,29 @@ import java.util.Iterator;
 
 public class InstructionList {
 
-    private String conditionsRegEx;
     private HashMap<String, Instruction> map;
     private ArrayList<String[]> grammarDefinition;
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
     private ArrayList<String> conditionalInstructions;
+    private String conditionsRegEx;
+    private String equalityRegEx;
+    private String sizeRelatedRegEx;
     private final String[] conditionsArray = {
         "A", "NBE", "AE", "NB", "B", "NAE",
         "BE", "NA", "G", "NLE", "GE", "NL",
         "L", "NGE", "LE", "NG", "E", "Z",
         "NE", "NZ", "P", "PE", "NP", "PO",
         "O", "NO", "C", "NC", "S", "NS"};
+    private final String[] equalityConditionsArray = {"E", "Z", "NE", "NZ"};
+    private final String[] sizeRelatedConditionsArray = {"B", "W", "D"};
 
     public InstructionList(String csvFile) {
         this.conditionsRegEx = String.join("|", conditionsArray);
         this.conditionsRegEx += "|" + String.join("|", conditionsArray).toLowerCase();
+        this.equalityRegEx = String.join("|", equalityConditionsArray);
+        this.equalityRegEx += "|" + String.join("|", equalityConditionsArray).toLowerCase();
+        this.sizeRelatedRegEx = String.join("|", sizeRelatedConditionsArray);
+        this.sizeRelatedRegEx += "|" + String.join("|", sizeRelatedConditionsArray).toLowerCase();
 
         this.conditionalInstructions = new ArrayList<>();
 
@@ -223,6 +231,20 @@ public class InstructionList {
         } else {
             throw new NullPointerException("Instruction does not exist: " + instructionName);
         }
+    }
+
+    public String[] find(String instructionName) {
+        for (String[] x : this.grammarDefinition) {
+            if (x[0].equalsIgnoreCase(instructionName)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    public boolean isVerifiable(String instructionName){
+        String[] definition = find(instructionName);
+        return definition[2].equals("1");
     }
 
     public Iterator<String[]> getInstructionProductionRules() {

@@ -21,7 +21,7 @@ public class SystemController {
     private RegisterList registerList;
     private InstructionList instructionList;
     private Memory memory;
-    private CALVISParser parser;
+    private CalvisParser parser;
 
     private List<AssemblyComponent> observerList;
     private ConsoleController console;
@@ -30,7 +30,7 @@ public class SystemController {
     private WorkspaceController workspaceController;
     private String parsedCode;
 
-    private HashMap<String, CALVISInstruction> executionMap;
+    private HashMap<String, CalvisInstruction> executionMap;
     private HashMap<Integer, String[][]> registerStackMap;
     private HashMap<Integer, String> flagsStackMap;
     private HashMap<Integer, String[][]> memoryStackMap;
@@ -60,7 +60,7 @@ public class SystemController {
         }
     }
 
-    public void notifyAllObservers(CALVISInstruction currentLine, int lineNumber) {
+    public void notifyAllObservers(CalvisInstruction currentLine, int lineNumber) {
         if (currentLine != null) {
             for (AssemblyComponent a : observerList) {
                 a.update(currentLine.toString(), lineNumber);
@@ -296,7 +296,7 @@ public class SystemController {
         try {
             this.executionMap = parser.parse(code);
             for (String lineNumber : this.executionMap.keySet()) {
-                CALVISInstruction calvisInstruction = this.executionMap.get(lineNumber);
+                CalvisInstruction calvisInstruction = this.executionMap.get(lineNumber);
                 /**
                  * Compute for the equivalent linenumber in textEditor of the
                  * calvis instructions
