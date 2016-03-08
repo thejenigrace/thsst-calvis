@@ -117,8 +117,8 @@ public class RegisterList {
                         reg[END] = String.valueOf(startIndex);
                         reg[NAME] = reg[NAME].toUpperCase();
                         // add csv row to lookup table
-						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
-						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
+//						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
+//						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
                         this.lookup.add(reg);
                     }
 
@@ -310,7 +310,7 @@ public class RegisterList {
                             .setValue(get8BitHexString('L', newValue));
                 } else if ( registerType == 4 ) { // only for STX and MMX registers
                     String registerNumber = register[SOURCE].charAt(2) + "";
-                    System.out.println(newValue.substring(4, 19 + 1));
+//                    System.out.println(newValue.substring(4, 19 + 1));
                     childMap.get(register[SOURCE]).get("MM" + registerNumber)
                             .setValue(newValue.substring(4, 20));
                 }
@@ -381,7 +381,7 @@ public class RegisterList {
 
     public String[] find(String registerName) {
         for (String[] x : this.lookup) {
-            if (x[0].equals(registerName)) {
+            if (x[0].equalsIgnoreCase(registerName)) {
                 return x;
             }
         }
