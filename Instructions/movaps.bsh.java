@@ -7,9 +7,11 @@ execute(des,src,registers,memory) {
     if(des.isRegister()) {
         desBitSize = registers.getBitSize(des);
         desHexSize = registers.getHexSize(des);
+        desValue = registers.get(des);
     } else if(des.isMemory()) {
         desBitSize = memory.getBitSize(des);
         desHexSize = memory.getHexSize(des);
+        desValue = memory.read(des,desBitSize);
     }
 
     if(src.isRegister()) {
@@ -23,8 +25,12 @@ execute(des,src,registers,memory) {
         System.out.println("srcValue = " + srcValue);
         registers.set(des, srcValue);
     } else if(des.isMemory()) {
-        // System.out.println("desBaseAddress = " + memory.removeSizeDirectives());
-        System.out.println("srcValue = " + srcValue);
-        memory.write(des, srcValue, des);
+        // System.out.println("desBaseAddress = " + memory.removeSizeDirectives(des.getValue()));
+        String desBaseAddress = memory.removeSizeDirectives(des.getValue());
+        System.out.println("desBaseAddress = " + desBaseAddress);
+        if(desBaseAddress.equals("00000000")) {
+            System.out.println("srcValue = " + srcValue);
+            memory.write(des, srcValue, des);
+        }
     }
 }
