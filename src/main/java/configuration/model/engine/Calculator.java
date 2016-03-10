@@ -225,8 +225,9 @@ public class Calculator {
             str = sb.reverse().toString();
         }
 
-        System.out.println("--Cut To Certain Hex Size");
+        System.out.println("--Cut To Certain Hex Size--");
         System.out.println("size = " + size);
+        System.out.println("new str = " + str);
 
         return str;
     }

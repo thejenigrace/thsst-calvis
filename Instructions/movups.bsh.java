@@ -1,7 +1,6 @@
 execute(des,src,registers,memory) {
     int desBitSize;
     int desHexSize;
-    String desValue;
     String srcValue;
 
     if(des.isRegister()) {
@@ -15,7 +14,6 @@ execute(des,src,registers,memory) {
     if(src.isRegister()) {
         srcValue = registers.get(src);
     } else if(src.isMemory()) {
-        // System.out.println("srcBaseAddress = " + memory.getBaseAddress(src));
         srcValue = memory.read(src,desBitSize);
     }
 
