@@ -61,6 +61,10 @@ movaps,Instructions/movaps.bsh.java,0,0,2,r128/m128,r128/m128,
 movups,Instructions/movups.bsh.java,0,0,2,r128/m128,r128/m128,
 movss,Instructions/movss.bsh.java,0,0,2,r128/m32,r128/m32,
 movlps,Instructions/movlps.bsh.java,0,0,2,r128/m64,r128/m64,
+movhps,Instructions/movhps.bsh.java,0,0,2,r128/m64,r128/m64,
+movlhps,Instructions/movlhps.bsh.java,0,0,2,r128,r128
+movhlps,Instructions/movhlps.bsh.java,0,0,2,r128,r128
+movmskps,Instructions/movmskps.bsh.java,0,0,2,r32,r128
 mul,Instructions/mul.bsh.java,1,0,1,r/m,,
 neg,Instructions/neg.bsh.java,1,0,1,r/m,,
 nop,Instructions/nop.bsh.java,1,0,0,,,

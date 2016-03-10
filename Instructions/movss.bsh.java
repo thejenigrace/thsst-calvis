@@ -6,18 +6,25 @@ execute(des,src,registers,memory) {
     if(src.isRegister()) {
         srcValue = registers.get(src);
 
-        // Get the lov double-word of the register
-        srcValue = calculator.cutToCertainHexSize("reverse", srcValue, DWORD/4);
-    } else if(src.isMemory()) {
-        srcValue = memory.read(src, DWORD);
+        // Get the low double-word of the register
+        srcValue = calculator.cutToCertainHexSize("getLower", srcValue, DWORD/4);
     }
 
     //TODO Need to set value into lower 32-bit of XMM Register
-    //TODO XMM to XMM: Destination-High DWORD should NOT changed
-    //Memory to XMM: Destination-High DWORD cleared to 0
-    //XMM to Memory: Destination-High DWORD should NOT changed
-    if(des.isRegister()) {
+    //XMM to XMM: Destination-High DWORD should NOT changed
+    if(des.isRegister() && src.isRegister()) {
+        String desValue = registers.get(des);
+        int desHexSize = registers.getHexSize(des);
+
+        desValue = calculator.cutToCertainHexSize("getUpper", desValue, desHexSize-8);
+
+        srcValue = desValue.concat(srcValue);
         registers.set(des, srcValue);
+    //Memory to XMM: Destination-High DWORD cleared to 0
+    } else if(des.isRegister() && src.isMemory()) {
+        srcValue = memory.read(src, DWORD);
+        registers.set(des, srcValue);
+    //XMM to Memory: Destination-High DWORD should NOT changed
     } else if(des.isMemory() && src.isRegister()) {
         memory.write(des, srcValue, DWORD);
     }

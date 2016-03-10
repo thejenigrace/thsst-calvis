@@ -202,34 +202,39 @@ public class Calculator {
     }
 
     public String cutToCertainHexSize(String type, String value, int size) {
-        String str = "";
-        StringBuilder sb = new StringBuilder();
+        String newValue = "";
+//        StringBuilder sb = new StringBuilder();
         int missingZeroes = size - value.length();
         // zero extend
         for (int i = 0; i < missingZeroes; i++) {
             value = "0" + value;
         }
 
-        if (type.equals("original")) {
+        if (type.equals("getUpper")) {
             // cut the hex to a certain size
-            for (int i = 0; i < size; i++) {
-                sb.append(value.charAt(i));
-            }
+//            for (int i = 0; i < size; i++) {
+//                sb.append(value.charAt(i));
+//            }
+//            str = sb.toString();
+//            System.out.println("original = " + sb.toString());
 
-            str = sb.toString();
-        } else if (type.equals("reverse")) {
-            for (int i = value.length() - 1; i >= value.length() - size; i--) {
-                sb.append(value.charAt(i));
-            }
+            newValue = value.substring(0, size);
+        } else if (type.equals("getLower")) {
+//            for (int i = value.length() - 1; i >= value.length() - size; i--) {
+//                sb.append(value.charAt(i));
+//            }
+//            str = sb.reverse().toString();
+//            System.out.println("reverse = " + sb.reverse().toString());
 
-            str = sb.reverse().toString();
+            newValue = value.substring(value.length()-size, value.length());
         }
 
         System.out.println("--Cut To Certain Hex Size--");
         System.out.println("size = " + size);
-        System.out.println("new str = " + str);
+        System.out.println("oldValue = " + value);
+        System.out.println("newValue = " + newValue);
 
-        return str;
+        return newValue;
     }
 
     public String[] cutToCertainSize(String value, int size) {
@@ -506,6 +511,8 @@ public class Calculator {
 //
 //        return false;
 //    }
+
+//    public String concatHex
 
     public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize, char operation) {
         int desMissingZeroes = hexSize - desValue.length();
