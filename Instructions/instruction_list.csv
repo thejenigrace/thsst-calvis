@@ -27,6 +27,10 @@ cmov,Instructions/cmov.bsh.java,1,1,2,r16/r32,r16/r32/m16/m32,
 cmp,Instructions/cmp.bsh.java,1,0,2,r/m,r/m/i,
 cmpxchg,Instructions/cmpxchg.bsh.java,1,0,2,r/m,r,
 cmpxchgs8,Instructions/cmpxchgs8.bsh.java,1,0,1,m64,,
+cmpps,Instructions/cmpps.bsh.java,0,0,3,r128,r128/m128,i
+cmpss,Instructions/cmpss.bsh.java,0,0,3,r128,r128/m32,i
+comiss,Instructions/comiss.bsh.java,0,0,2,r128,r128/m32,
+ucomiss,Instructions/ucomiss.bsh.java,0,0,2,r128,r128/m32,
 cwd,Instructions/cwd.bsh.java,1,0,0,,,
 cwde,Instructions/cwde.bsh.java,1,0,0,,,
 daa,Instructions/daa.bsh.java,1,0,0,,,

@@ -151,16 +151,16 @@ public class Calculator {
         return val;
     }
 
-    public long convertToSignedInteger(BigInteger value, int size) {
+    public static long convertToSignedInteger(BigInteger hexValue, int bitSize) {
         System.out.println("--Convert to Signed Integer--");
-        long result = Long.parseLong(value.toString());
-        String twosComplement = value.toString(2);
+        long result = Long.parseLong(hexValue.toString());
+        String twosComplement = hexValue.toString(2);
 
-        int missingZeroes = size - twosComplement.length();
+        int missingZeroes = bitSize - twosComplement.length();
 
-        System.out.println("size = " + size);
-        System.out.println("original hex = " + value.toString(16));
-        System.out.println("original decimal = " + value.toString());
+        System.out.println("bitSize = " + bitSize);
+        System.out.println("original hex = " + hexValue.toString(16));
+        System.out.println("original decimal = " + hexValue.toString());
         System.out.println("original twosComplement = " + twosComplement);
 
         // zero extend
@@ -172,10 +172,18 @@ public class Calculator {
 
         // Negative Two's Complement
         if (twosComplement.charAt(0) == '1') {
-            BigInteger biOnesComplement = value.subtract(BigInteger.ONE);
-            System.out.println("onesComplement = " + biOnesComplement.toString(2));
+            BigInteger biOnesComplement = hexValue.subtract(BigInteger.ONE);
 
             String onesComplement = biOnesComplement.toString(2);
+            System.out.println("onesComplement = " + onesComplement);
+
+            missingZeroes = bitSize - onesComplement.length();
+            // zero extend
+            for (int k = 0; k < missingZeroes; k++) {
+                onesComplement = "0" + onesComplement;
+            }
+
+            System.out.println("zero-extend onesComplement = " + onesComplement);
 
             // Convert 1's Complement to Normal Binary
             StringBuilder sb = new StringBuilder();
@@ -501,16 +509,15 @@ public class Calculator {
         return value;
     }
 
-//    public boolean checkIfSinglePrecisionFloatingPoint(String value) {
-//
+    public float convertToSinglePrecisionFloatingPoint(String hexValue) {
 //        String myString = "BF800000";
-//        Long i = Long.parseLong(myString, 16);
-//        Float f = Float.intBitsToFloat(i.intValue());
-//        System.out.println(f);
-//        System.out.println(Integer.toHexString(Float.floatToIntBits(f)));
-//
-//        return false;
-//    }
+        Long l = Long.parseLong(hexValue, 16);
+        Float f = Float.intBitsToFloat(l.intValue());
+        System.out.println("hex = " + Integer.toHexString(Float.floatToIntBits(f)));
+        System.out.println("float = " + f);
+
+        return f;
+    }
 
 //    public String concatHex
 
