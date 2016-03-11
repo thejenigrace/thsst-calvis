@@ -145,38 +145,38 @@ public class ConfigurationEnvironmentController implements Initializable {
     @FXML
     public void handleFinish(ActionEvent event) throws Exception {
 //        progressBarWorkspace.setVisible(true);
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/loader.fxml"));
-        Parent loaderView = (VBox) loader.load();
-
-        MainApp.primaryStage.setScene(new Scene(loaderView));
-        MainApp.primaryStage.setTitle("CALVIS");
-
-        LoaderController loaderController = loader.getController();
-        Task task = createTaskWorkspace();
-        loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
+//
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/fxml/loader.fxml"));
+//        Parent loaderView = (VBox) loader.load();
+//
+//        MainApp.primaryStage.setScene(new Scene(loaderView));
+//        MainApp.primaryStage.setTitle("CALVIS");
+//
+//        LoaderController loaderController = loader.getController();
+//        Task task = createTaskWorkspace();
+//        loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
 
 //        progressBarWorkspace.progressProperty().bind(task.progressProperty());
 //        vBoxDetails.setVisible(false);
 //        vBoxConfiguration.setVisible(false);
 //        vBoxButtons.setVisible(false);
 //        new Thread(task).start();
+//
+//        Thread thread = new Thread(task);
+//        thread.setDaemon(true);
+//        thread.start();
 
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-
-//        ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
-//        ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
-//        if (errorMessageListWithSize.getSize() > 0) {
-//            errorLogger.add(errorMessageListWithSize.getErrorMessageList());
-//        }
-//        errorLogger.combineErrorLogger(configuratorEnvironment.getMessageLists());
-//        if (verifyErrorConfigurationFiles(errorLogger)) {
-//            MainApp.hidePrimaryStage();
-//            MainApp.showWorkspace(configuratorEnvironment);
-//        }
+        ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
+        ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
+        if (errorMessageListWithSize.getSize() > 0) {
+            errorLogger.add(errorMessageListWithSize.getErrorMessageList());
+        }
+        errorLogger.combineErrorLogger(configuratorEnvironment.getMessageLists());
+        if (verifyErrorConfigurationFiles(errorLogger)) {
+            MainApp.hidePrimaryStage();
+            MainApp.showWorkspace(configuratorEnvironment);
+        }
     }
 
     private Task<Void> createTaskWorkspace() {
