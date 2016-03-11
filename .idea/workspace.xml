@@ -10,6 +10,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/packssdw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/packssdw.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/packsswb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/packsswb.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,8 +64,8 @@
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3658147">
-              <caret line="197" column="51" selection-start-line="197" selection-start-column="51" selection-end-line="197" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.30511183">
+              <caret line="177" column="43" selection-start-line="177" selection-start-column="43" selection-end-line="177" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -513,8 +514,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="251" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
+    <option name="width" value="1029" />
     <option name="height" value="746" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -934,30 +936,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00046" summary="Fix Register &amp; Memory Window">
-      <created>1455004785401</created>
-      <option name="number" value="00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004785401</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Fix ADC Instruction &amp; Change Icons">
-      <created>1455158019395</created>
-      <option name="number" value="00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1455158019395</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Finally! Dropdown for Register TableView">
-      <created>1455454325271</created>
-      <option name="number" value="00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1455454325271</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Finally! Dropdown for Register TableView">
-      <created>1455521262400</created>
-      <option name="number" value="00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1455521262400</updated>
-    </task>
     <task id="LOCAL-00050" summary="Fix UI Error: Updating values in AX, AH, &amp; AL">
       <created>1455549129174</created>
       <option name="number" value="00050" />
@@ -1228,7 +1206,31 @@
       <option name="project" value="LOCAL" />
       <updated>1457661860568</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="mmx conversion">
+      <created>1457675292653</created>
+      <option name="number" value="00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1457675292653</updated>
+    </task>
+    <task id="LOCAL-00096" summary="sse unpacked done">
+      <created>1457682634120</created>
+      <option name="number" value="00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1457682634120</updated>
+    </task>
+    <task id="LOCAL-00097" summary="mmx conversion">
+      <created>1457682681129</created>
+      <option name="number" value="00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1457682681129</updated>
+    </task>
+    <task id="LOCAL-00098" summary="sse and sse2 done">
+      <created>1457684986385</created>
+      <option name="number" value="00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1457684986386</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1252,7 +1254,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="746" extended-state="6" />
+    <frame x="251" y="23" width="1029" height="746" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1261,11 +1263,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2293578" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.5045872" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.235474" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.21559633" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3166441" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1365105" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17122594" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4361874" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1294,8 +1296,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
-    <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
     <MESSAGE value="Added latest Instructions" />
     <MESSAGE value="Fix MUL &amp; ADOX Instructions" />
     <MESSAGE value="Fix MUL &amp; IMUL Instructions" />
@@ -1318,8 +1318,10 @@
     <MESSAGE value="Fixed MOVAPS &amp; MOVUPS Instructions" />
     <MESSAGE value="Added MOVSS Instruction" />
     <MESSAGE value="fixed" />
+    <MESSAGE value="sse unpacked done" />
     <MESSAGE value="mmx conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="mmx conversion" />
+    <MESSAGE value="sse and sse2 done" />
+    <option name="LAST_COMMIT_MESSAGE" value="sse and sse2 done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1709,8 +1711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3658147">
-          <caret line="197" column="51" selection-start-line="197" selection-start-column="51" selection-end-line="197" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.30511183">
+          <caret line="177" column="43" selection-start-line="177" selection-start-column="43" selection-end-line="177" selection-end-column="43" />
           <folding />
         </state>
       </provider>

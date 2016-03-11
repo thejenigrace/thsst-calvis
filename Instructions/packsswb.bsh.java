@@ -48,7 +48,9 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
 
     BigInteger biDes = new BigInteger("0", 16);
     BigInteger wordpos = new BigInteger("7F", 16);
-    Long wordneg = -128;
+
+    BigInteger neg = new BigInteger("80", 16);
+    Long wordneg = calculator.convertToSignedInteger(neg, 8);
 
     if( desSize == 64 ) {
         for(int i = 0; i <= 12; i+=4) {
