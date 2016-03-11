@@ -41,13 +41,13 @@ execute(des, src, registers, memory) {
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, desSize) {
+storeResultToRegister(registers, calculator, des, source, destination, desSize) {    
     String result = "";
 
-    result = result + source.substring(16, 24);
-    result = result + destination.substring(16, 24);
-    result = result + source.substring(24);
-    result = result + destination.substring(24);
+    result += source.substring(16, 24);
+    result += destination.substring(16, 24);
+    result += source.substring(24);
+    result += destination.substring(24);
 
     registers.set(des, result);
 }

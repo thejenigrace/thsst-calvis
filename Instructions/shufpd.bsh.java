@@ -1,4 +1,4 @@
-execute(des, src, registers, memory) {
+execute(des, src, immediate, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
 
     int desSize = 0;
@@ -19,7 +19,8 @@ execute(des, src, registers, memory) {
             if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize) ) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
+                String i8 = calculator.hexToBinaryString(immediate.getValue(), 8);
+                storeResultToRegister(registers, calculator, des, source, destination, i8, desSize);
             }
             else {
                 //throw exception
@@ -29,7 +30,8 @@ execute(des, src, registers, memory) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = memory.read(src, desSize);
                 String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
+                String i8 = calculator.hexToBinaryString(immediate.getValue(), 8);
+                storeResultToRegister(registers, calculator, des, source, destination, i8, desSize);
             }
             else {
                 //throw exception
@@ -41,13 +43,24 @@ execute(des, src, registers, memory) {
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, desSize) {    
+storeResultToRegister(registers, calculator, des, source, destination, i8, desSize) {
+    String i0 = i8.charAt(7) + "";
+    String i1 = i8.charAt(6) + "";
     String result = "";
 
-    result += source.substring(0, 8);
-    result += destination.substring(0, 8);
-    result += source.substring(8, 16);
-    result += destination.substring(8, 16);
+    if( i0.equals("0") ) {
+        result += destination.substring(16);
+    }
+    else {
+        result += destination.substring(0, 16);
+    }
+
+    if( i1.equals("0") ) {
+        result += source.substring(16);
+    }
+    else {
+        result += source.substring(0, 16);
+    }
 
     registers.set(des, result);
 }

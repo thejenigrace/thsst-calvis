@@ -44,10 +44,8 @@ execute(des, src, registers, memory) {
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {    
     String result = "";
 
-    result += source.substring(0, 8);
-    result += destination.substring(0, 8);
-    result += source.substring(8, 16);
-    result += destination.substring(8, 16);
+    result += source.substring(0, 16);
+    result += destination.substring(0, 16);
 
     registers.set(des, result);
 }

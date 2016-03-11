@@ -43,17 +43,17 @@ execute(des, src, immediate, registers, memory) {
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, i8, desSize) {
+storeResultToRegister(registers, calculator, des, source, destination, i8, desSize) {    
     String i76 = i8.substring(0, 2);
     String i54 = i8.substring(2, 4);
     String i32 = i8.substring(4, 6);
     String i10 = i8.substring(6);
     String result = "";
 
-    result = result + returnStringChoice(i76, source);
-    result = result + returnStringChoice(i54, source);
-    result = result + returnStringChoice(i32, destination);
-    result = result + returnStringChoice(i10, destination);
+    result += returnStringChoice(i76, source);
+    result += returnStringChoice(i54, source);
+    result += returnStringChoice(i32, destination);
+    result += returnStringChoice(i10, destination);
 
     registers.set(des, result);
 }

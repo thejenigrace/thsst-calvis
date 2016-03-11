@@ -141,3 +141,10 @@ xorps,Instructions/xorps.bsh.java,1,0,2,r128,r128/m128
 shufps,Instructions/shufps.bsh.java,1,0,3,r128,r128/m128,i
 unpckhps,Instructions/unpckhps.bsh.java,1,0,2,r128,r128/m128
 unpcklps,Instructions/unpcklps.bsh.java,1,0,2,r128,r128/m128
+andpd,Instructions/andpd.bsh.java,1,0,2,r128,r128/m128
+andnpd,Instructions/andnpd.bsh.java,1,0,2,r128,r128/m128
+orpd,Instructions/orpd.bsh.java,1,0,2,r128,r128/m128
+xorpd,Instructions/xorpd.bsh.java,1,0,2,r128,r128/m128
+shufpd,Instructions/shufpd.bsh.java,1,0,3,r128,r128/m128,i
+unpckhpd,Instructions/unpckhpd.bsh.java,1,0,2,r128,r128/m128
+unpcklpd,Instructions/unpcklpd.bsh.java,1,0,2,r128,r128/m128

@@ -25,7 +25,6 @@ execute(des, src, registers, memory) {
         else if( src.isMemory() ) {
             String source = calculator.hexToBinaryString(memory.read(src, desSize), src);
             String destination = calculator.hexToBinaryString(registers.get(des), des);
-            storeResultToRegister(registers, calculator, des, source, destination);
         }
     }
     else {
@@ -36,7 +35,7 @@ execute(des, src, registers, memory) {
 storeResultToRegister(registers, calculator, des, source, destination) {
     BigInteger biSrc = new BigInteger(source, 2);
     BigInteger biDes = new BigInteger(destination, 2);
-    BigInteger biResult = biDes.or(biSrc);
+    BigInteger biResult = biDes.and(biSrc);
 
     registers.set(des, calculator.binaryToHexString(biResult.toString(2), des));
 }
