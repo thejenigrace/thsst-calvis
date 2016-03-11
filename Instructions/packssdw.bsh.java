@@ -48,10 +48,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
 
     BigInteger biDes = new BigInteger("0", 16);
     BigInteger dwordpos = new BigInteger("7FFF", 16);
-
-    int intVal = Integer.parseInt("80", 16);
-    String neg = Integer.toHexString((-1 * intVal));
-    BigInteger dwordneg = new BigInteger(neg, 16);
+    Long dwordneg = -32768;
 
     if( desSize == 64 ) {
         for(int i = 0; i <= 8; i+=8) {
@@ -63,7 +60,6 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             }
 
             String temp = calculator.hexToBinaryString(biDes.toString(16), token);
-            System.out.println(temp);
             String sign = temp.charAt(0) + "";
 
             if( sign.equals("0") ) {
@@ -79,11 +75,9 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                     }
                 }
             } else if( sign.equals("1") ) {
-                int intVal = Integer.parseInt(biDes.toString(16), 16);
-                String twosComplement = Integer.toHexString((-1 * intVal));
-                biDes = new BigInteger(twosComplement, 16);
+                Long signedInt = calculator.convertToSignedInteger(biDes, 16);
 
-                if( biDes.compareTo(dwordneg) == -1 ) {
+                if( signedInt < dwordneg ) {
                     result += "8000";
                 }
                 else {
@@ -106,7 +100,6 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             }
 
             String temp = calculator.hexToBinaryString(biDes.toString(16), token);
-            System.out.println(temp);
             String sign = temp.charAt(0) + "";
 
             if( sign.equals("0") ) {
@@ -122,11 +115,9 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                     }
                 }
             } else if( sign.equals("1") ) {
-                int intVal = Integer.parseInt(biDes.toString(16), 16);
-                String twosComplement = Integer.toHexString((-1 * intVal));
-                biDes = new BigInteger(twosComplement, 16);
+                Long signedInt = calculator.convertToSignedInteger(biDes, 16);
 
-                if( biDes.compareTo(dwordneg) == -1 ) {
+                if( signedInt < dwordneg ) {
                     result += "8000";
                 }
                 else {
@@ -165,11 +156,9 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                     }
                 }
             } else if( sign.equals("1") ) {
-                int intVal = Integer.parseInt(biDes.toString(16), 16);
-                String twosComplement = Integer.toHexString((-1 * intVal));
-                biDes = new BigInteger(twosComplement, 16);
+                Long signedInt = calculator.convertToSignedInteger(biDes, 16);
 
-                if( biDes.compareTo(dwordneg) == -1 ) {
+                if( signedInt < dwordneg ) {
                     result += "8000";
                 }
                 else {
@@ -207,11 +196,9 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                     }
                 }
             } else if( sign.equals("1") ) {
-                int intVal = Integer.parseInt(biDes.toString(16), 16);
-                String twosComplement = Integer.toHexString((-1 * intVal));
-                biDes = new BigInteger(twosComplement, 16);
+                Long signedInt = calculator.convertToSignedInteger(biDes, 16);
 
-                if( biDes.compareTo(dwordneg) == -1 ) {
+                if( signedInt < dwordneg ) {
                     result += "8000";
                 }
                 else {

@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added MOVSS Instruction">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="mmx conversion">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/packssdw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/packssdw.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/packsswb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/packsswb.bsh.java" />
@@ -63,8 +63,8 @@
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15015975">
-              <caret line="551" column="78" selection-start-line="551" selection-start-column="78" selection-end-line="551" selection-end-column="78" />
+            <state vertical-scroll-proportion="0.3658147">
+              <caret line="197" column="51" selection-start-line="197" selection-start-column="51" selection-end-line="197" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -934,12 +934,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00045" summary="Fix Register &amp; Memory Window">
-      <created>1455004532717</created>
-      <option name="number" value="00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004532717</updated>
-    </task>
     <task id="LOCAL-00046" summary="Fix Register &amp; Memory Window">
       <created>1455004785401</created>
       <option name="number" value="00046" />
@@ -1228,7 +1222,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457576836067</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="mmx conversion">
+      <created>1457661860563</created>
+      <option name="number" value="00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1457661860568</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1294,7 +1294,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
     <MESSAGE value="Added latest Instructions" />
@@ -1319,7 +1318,8 @@
     <MESSAGE value="Fixed MOVAPS &amp; MOVUPS Instructions" />
     <MESSAGE value="Added MOVSS Instruction" />
     <MESSAGE value="fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
+    <MESSAGE value="mmx conversion" />
+    <option name="LAST_COMMIT_MESSAGE" value="mmx conversion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1709,8 +1709,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15015975">
-          <caret line="551" column="78" selection-start-line="551" selection-start-column="78" selection-end-line="551" selection-end-column="78" />
+        <state vertical-scroll-proportion="0.3658147">
+          <caret line="197" column="51" selection-start-line="197" selection-start-column="51" selection-end-line="197" selection-end-column="51" />
           <folding />
         </state>
       </provider>
