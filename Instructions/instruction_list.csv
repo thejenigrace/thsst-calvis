@@ -57,9 +57,6 @@ lss,Instructions/lss.bsh.java,1,0,2,r16/r32,m32/m64,
 mov,Instructions/mov.bsh.java,1,0,2,r/m,r/m/i,
 movsx,Instructions/movsx.bsh.java,0,0,2,r16/r32,r/m,
 movzx,Instructions/movzx.bsh.java,0,0,2,r16/r32,r/m,
-movaps,Instructions/movaps.bsh.java,0,0,2,r128/m128,r128/m128,
-movups,Instructions/movups.bsh.java,0,0,2,r128/m128,r128/m128,
-movss,Instructions/movss.bsh.java,0,0,2,r128/m32,r128/m32,
 mul,Instructions/mul.bsh.java,1,0,1,r/m,,
 neg,Instructions/neg.bsh.java,1,0,1,r/m,,
 nop,Instructions/nop.bsh.java,1,0,0,,,
@@ -141,3 +138,6 @@ andps,Instructions/andps.bsh.java,1,0,2,r128,r128/m128
 andnps,Instructions/andnps.bsh.java,1,0,2,r128,r128/m128
 orps,Instructions/orps.bsh.java,1,0,2,r128,r128/m128
 xorps,Instructions/xorps.bsh.java,1,0,2,r128,r128/m128
+shufps,Instructions/shufps.bsh.java,1,0,3,r128,r128/m128,i
+unpckhps,Instructions/unpckhps.bsh.java,1,0,2,r128,r128/m128
+unpcklps,Instructions/unpcklps.bsh.java,1,0,2,r128,r128/m128
