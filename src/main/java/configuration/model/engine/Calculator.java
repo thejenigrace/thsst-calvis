@@ -588,4 +588,64 @@ public class Calculator {
         System.out.println("resValue = " + sbResult.toString());
         return sbResult.toString();
     }
+
+    public String convertIntegerToSp(long decimalValue) {
+        String sign = "0";
+        String exponent = "";
+        String mantissa = "";
+        String checkSign = Long.toString(decimalValue);
+        String value = "";
+        int exp = 0;
+
+        //check for sign bit
+        if ( checkSign.charAt(0) == '-' ) {
+            sign = "1";
+            value = Long.toBinaryString(Long.valueOf(checkSign.substring(1)));
+        }
+        value = Long.toBinaryString(decimalValue);
+
+        //solving of exponent and mantissa
+        if( decimalValue == 0 ) {
+            sign = "0";
+            exponent = "00000000";
+            mantissa = "00000000000000000000000";
+        }
+        else {
+            mantissa = value.substring(1);
+            int e = mantissa.length();
+            exp = e + 127;
+            exponent = Integer.toBinaryString(exp);
+
+            //exponent format to 8-bit
+            if( exponent.length() < 8 ) {
+                for(int i = 0; i < 8 - e; i++) {
+                    exponent = "0" + exponent;
+                }
+            }
+
+            //exponent format to 23-bit
+            if( mantissa.length() < 23 ) {
+                for(int i = 0; i < 23 - e; i++) {
+                    mantissa = mantissa + "0";
+                }
+            }
+        }
+
+        Token token = new Token(Token.REG, "EAX");
+        String result = sign + exponent + mantissa;
+        return binaryToHexString(result, token);
+    }
+
+    public String convertSpToInteger(String binaryValue) {
+        String sign = binaryValue.charAt(0) + "";
+        String exponent = binaryValue.substring(1, 9);
+
+        int exp = Integer.parseInt(exponent) - 127;
+
+        String mantissa = "1" + binaryValue.substring(9, 9 + exp);
+
+        Token token = new Token(Token.REG, "EAX");
+        String result = mantissa;
+        return binaryToHexString(result, token);
+    }
 }
