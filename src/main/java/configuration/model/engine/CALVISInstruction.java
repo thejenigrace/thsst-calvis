@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
-public class CalvisInstruction {
+public class CALVISInstruction {
 
     private Instruction ins;
     private String name;
@@ -21,14 +21,14 @@ public class CalvisInstruction {
     private ArrayList<String> allowable;
     private ConsoleController console;
 
-    public CalvisInstruction(Instruction ins, String name, RegisterList registers, Memory memory) {
+    public CALVISInstruction(Instruction ins, String name, RegisterList registers, Memory memory) {
         this.ins = ins;
         this.name = name;
         this.registers = registers;
         this.memory = memory;
     }
 
-    public CalvisInstruction(Instruction ins, String name, Object[] params,
+    public CALVISInstruction(Instruction ins, String name, Object[] params,
                              RegisterList registers, Memory memory, boolean isConditional, ArrayList<String> allowable) {
         this.ins = ins;
         this.name = name;

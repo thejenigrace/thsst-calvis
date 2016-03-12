@@ -124,6 +124,11 @@ public class MainApp extends Application {
      * @param args
      */
     public static void main(String[] args) {
+        String myString = "BF800000";
+        int a = 0;
+        Long i = Long.parseLong("BFC00000", 16);
+        Float f = Float.intBitsToFloat(i.intValue());
+        System.out.println(f);
 //        System.setProperty("java.home", "C:\\Program Files\\Java\\jdk1.8.0_65");
         //System.out.println(new BigInteger("5", 16).subtract(new BigInteger("22", 16)).toString(16));
         System.out.println(new BigInteger("FF", 16).multiply(new BigInteger("F", 16)).toString(16));
@@ -136,7 +141,8 @@ public class MainApp extends Application {
         else if (OS.contains("mac")){
             System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") +".jdk/Contents/Home");
         }///jdk1.8.0_66.jdk/Contents/Home/jre
-
+        String x = "FFFFEEEEHHHHGGGG";
+        System.out.println(x.substring(x.length() - 1));
 //        LauncherImpl.launchApplication(MainApp.class, PreloaderApp.class, args);
         launch(args);
     }

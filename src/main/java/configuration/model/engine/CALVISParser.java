@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class CalvisParser {
+public class CALVISParser {
 
     private InstructionList instructions;
     private RegisterList registers;
@@ -23,7 +23,7 @@ public class CalvisParser {
     private HashMap<String, Element> variableDeclarationTokenMap;
     private HashMap<String, Grule> memorySizeDirectives;
 
-    private HashMap<String, CalvisInstruction> mappedInstruction;
+    private HashMap<String, CALVISInstruction> mappedInstruction;
     private ArrayList<Exception> exceptions;
     private int lineNumber;
 
@@ -41,7 +41,7 @@ public class CalvisParser {
     private Grule label;
     private Grule memoryAddressingMode;
 
-    public CalvisParser(InstructionList instructions, RegisterList registers, Memory memory) {
+    public CALVISParser(InstructionList instructions, RegisterList registers, Memory memory) {
         this.instructions = instructions;
         this.registers = registers;
         this.memory = memory;
@@ -345,8 +345,8 @@ public class CalvisParser {
                 .action((Action<Object>) args -> {
                     String anInstruction = ((Token) args).getValue();
                     Instruction someInstruction = instructions.getInstruction(anInstruction);
-                    CalvisInstruction calvisInstruction
-                            = new CalvisInstruction(someInstruction, anInstruction, registers, memory);
+                    CALVISInstruction calvisInstruction
+                            = new CALVISInstruction(someInstruction, anInstruction, registers, memory);
                     String instructionAdd = Integer.toHexString(lineNumber);
                     mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
                             RegisterList.instructionPointerSize, "0"), calvisInstruction);
@@ -412,7 +412,7 @@ public class CalvisParser {
         exe = lang.compile();
     }
 
-    private CalvisInstruction prepareCalvisInstruction(Object[] args) {
+    private CALVISInstruction prepareCalvisInstruction(Object[] args) {
         int numParameters = args.length / 2;
         String anInstruction = ((Token) args[0]).getValue();
         ArrayList<Object> tokenArr = new ArrayList<>();
@@ -475,8 +475,8 @@ public class CalvisParser {
 //				System.out.println(result);
         }
 
-        CalvisInstruction calvisInstruction
-                = new CalvisInstruction(someInstruction, anInstruction,
+        CALVISInstruction calvisInstruction
+                = new CALVISInstruction(someInstruction, anInstruction,
                 tokens, registers, memory, isConditionalInstruction, result);
 
         // Insert special check if instruction should be verified
@@ -715,7 +715,7 @@ public class CalvisParser {
         return concatenateOrSubRules(list);
     }
 
-    public HashMap<String, CalvisInstruction> parse(String code) throws Exception {
+    public HashMap<String, CALVISInstruction> parse(String code) throws Exception {
         this.mappedInstruction.clear();
         this.exceptions.clear();
         this.lineNumber = 0;

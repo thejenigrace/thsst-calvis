@@ -220,6 +220,7 @@ public class InstructionList {
         sb.append("import configuration.model.engine.StackPopException;");
         sb.append("import java.math.BigInteger;");
         sb.append("import javafx.application.Platform;");
+        sb.append("import java.util.ArrayList;");
         sb.append("\n return (configuration.model.engine.Instruction) this");
         return sb.toString();
     }
