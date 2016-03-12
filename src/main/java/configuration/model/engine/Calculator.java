@@ -509,7 +509,7 @@ public class Calculator {
         return value;
     }
 
-    public float convertToSinglePrecisionFloatingPoint(String hexValue) {
+    public float hexToSinglePrecisionFloatingPoint(String hexValue) {
 //        String myString = "BF800000";
         Long l = Long.parseLong(hexValue, 16);
         Float f = Float.intBitsToFloat(l.intValue());
@@ -517,6 +517,16 @@ public class Calculator {
         System.out.println("float = " + f);
 
         return f;
+    }
+
+    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
+//        String myString = "BF800000";
+        Long l = Long.parseLong(hexValue, 16);
+        Double d = Double.longBitsToDouble(l);
+        System.out.println("hex = " + Long.toHexString(Double.doubleToLongBits(d)));
+        System.out.println("double = " + d);
+
+        return d;
     }
 
 //    public String concatHex

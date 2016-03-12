@@ -7,16 +7,16 @@ execute(des,src,registers,memory) {
         srcValue = registers.get(src);
 
         // Get the low double-word of the register
-        srcValue = calculator.cutToCertainHexSize("getLower", srcValue, DWORD/4);
+        srcValue = calculator.cutToCertainHexSize("getLower",srcValue,DWORD/4);
     }
 
     //TODO Need to set value into lower 32-bit of XMM Register
     //XMM to XMM: Destination-High DWORD should NOT changed
     if(des.isRegister() && src.isRegister()) {
         String desValue = registers.get(des);
-        int desHexSize = registers.getHexSize(des);
+        // int desHexSize = registers.getHexSize(des);
 
-        desValue = calculator.cutToCertainHexSize("getUpper", desValue, desHexSize-8);
+        desValue = calculator.cutToCertainHexSize("getUpper",desValue,DWORD*3/4);
 
         srcValue = desValue.concat(srcValue);
         registers.set(des, srcValue);

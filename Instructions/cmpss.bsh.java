@@ -15,10 +15,8 @@ execute(des,src,op3,registers,memory) {
   // Get the desValue from 0 to 31 bit
   desValue = calculator.cutToCertainHexSize("getLower",desValue,DWORD/4);
 
-  // BigInteger biDes = new BigInteger(desValue,16);
-  // BigInteger biSrc = new BigInteger(srcValue,16);
-  float floatDes = calculator.convertToSinglePrecisionFloatingPoint(desValue);
-  float floatSrc = calculator.convertToSinglePrecisionFloatingPoint(srcValue);
+  float floatDes = calculator.hexToSinglePrecisionFloatingPoint(desValue);
+  float floatSrc = calculator.hexToSinglePrecisionFloatingPoint(srcValue);
 
   String operand = op3.getValue();
   int intOperand = Integer.parseInt(operand,16);

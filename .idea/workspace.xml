@@ -6,9 +6,25 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Sort instruction_list.csv">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix UI for Configuration Environment">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/cmppd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/comisd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movapd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movhpd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movlpd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movmskpd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movupd.bsh.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/ucomisd.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/configurationEnvironment.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/configurationEnvironment.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpsd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpsd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/comiss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/comiss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movsd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movsd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ucomiss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ucomiss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,7 +89,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="jeca-mmx" />
+        <entry key="$PROJECT_DIR$" value="jeca-sse" />
       </map>
     </option>
   </component>
@@ -488,8 +504,8 @@
         <option value="$PROJECT_DIR$/Instructions/idiv.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/movss.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/movlps.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/configurationEnvironment.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
       </list>
     </option>
   </component>
@@ -558,9 +574,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -581,6 +595,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -944,12 +960,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00049" summary="Finally! Dropdown for Register TableView">
-      <created>1455521262400</created>
-      <option name="number" value="00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1455521262400</updated>
-    </task>
     <task id="LOCAL-00050" summary="Fix UI Error: Updating values in AX, AH, &amp; AL">
       <created>1455549129174</created>
       <option name="number" value="00050" />
@@ -1238,7 +1248,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457712632818</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Fix UI for Configuration Environment">
+      <created>1457746595884</created>
+      <option name="number" value="00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1457746595885</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1271,11 +1287,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2890095" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2890095" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.339213" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3166441" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2074392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20386267" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43657818" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1311,7 +1327,6 @@
     <MESSAGE value="Added build directory" />
     <MESSAGE value="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;" />
     <MESSAGE value="Fix Instructions List" />
-    <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
     <MESSAGE value="Fix Play Speed Settings" />
     <MESSAGE value="Fix Settings &amp; Loader" />
@@ -1329,7 +1344,8 @@
     <MESSAGE value="Added MOVLPS, MOVHPS, MOVLHPS, MOVHLPS, &amp; MOVMSKPS Instructions" />
     <MESSAGE value="Added CMPPS, CMPSS, COMISS, &amp; UCOMISS Instructions" />
     <MESSAGE value="Sort instruction_list.csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sort instruction_list.csv" />
+    <MESSAGE value="Fix UI for Configuration Environment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix UI for Configuration Environment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1342,7 +1358,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java</url>
-          <line>545</line>
+          <line>555</line>
           <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
@@ -1686,21 +1702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Memory/config.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12693936">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7959596">
-          <caret line="581" column="63" selection-start-line="581" selection-start-column="63" selection-end-line="581" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.05077574">
@@ -1716,7 +1717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.0335364">
           <caret line="253" column="64" selection-start-line="253" selection-start-column="64" selection-end-line="253" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1727,6 +1727,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.63109756">
           <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Memory/config.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12658228">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7721519">
+          <caret line="529" column="5" selection-start-line="529" selection-start-column="5" selection-end-line="529" selection-end-column="5" />
           <folding />
         </state>
       </provider>

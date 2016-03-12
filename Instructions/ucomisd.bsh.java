@@ -14,8 +14,8 @@ execute(s,t,registers,memory) {
   // Get the sValue from 0 to 31 bit
   sValue = calculator.cutToCertainHexSize("getLower",sValue,DWORD/4);
 
-  float floatS = calculator.hexToSinglePrecisionFloatingPoint(sValue);
-  float floatT = calculator.hexToSinglePrecisionFloatingPoint(tValue);
+  float floatS = calculator.hexToDoublePrecisionFloatingPoint(sValue);
+  float floatT = calculator.hexToDoublePrecisionFloatingPoint(tValue);
 
   if(Float.isNaN(floatS) || Float.isNaN(floatT)) {
     eFlags.setZeroFlag("1");
