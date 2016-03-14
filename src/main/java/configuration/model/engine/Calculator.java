@@ -648,4 +648,31 @@ public class Calculator {
         String result = mantissa;
         return binaryToHexString(result, token);
     }
+
+    public float hexToSinglePrecisionFloatingPoint(String hexValue) {
+        Long l = Long.parseLong(hexValue, 16);
+        Float f = Float.intBitsToFloat(l.intValue());
+        System.out.println("hex = " + Integer.toHexString(Float.floatToIntBits(f)));
+        System.out.println("float = " + f);
+
+        return f;
+    }
+
+    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
+        Long l = Long.parseLong(hexValue, 16);
+        Double d = Double.longBitsToDouble(l);
+        System.out.println("hex = " + Long.toHexString(Double.doubleToLongBits(d)));
+        System.out.println("double = " + d);
+
+        return d;
+    }
+
+    public String singlePrecisionFloatingPointToHex(Float fValue) {
+        return Integer.toHexString(Float.floatToIntBits(fValue));
+    }
+
+    public String doublePrecisionFloatingPointToHex(Double dValue) {
+        return Long.toHexString(Double.doubleToLongBits(dValue));
+    }
+
 }
