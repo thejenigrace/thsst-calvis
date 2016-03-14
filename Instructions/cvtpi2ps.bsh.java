@@ -34,13 +34,11 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    String result = "";
+    float fLower = calculator.hexToSinglePrecisionFloatingPoint(source.substring(8));
+    float fUpper = calculator.hexToSinglePrecisionFloatingPoint(source.substring(0, 8));
 
-    long dLower = calculator.convertToSignedInteger(new BigInteger(source.substring(8), 16), 32);
-    long dUpper = calculator.convertToSignedInteger(new BigInteger(source.substring(0, 8), 16), 32);
-
-    String sLower = calculator.convertIntegerToSp(dlower);
-    String sUpper = calculator.convertIntegerToSp(dUpper);
+    String sLower = calculator.singlePrecisionFloatingPointToHex(fLower);
+    String sUpper = calculator.singlePrecisionFloatingPointToHex(fUpper);
 
     registers.set(des, sUpper + sLower);
 }
