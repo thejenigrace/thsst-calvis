@@ -698,4 +698,36 @@ public class Calculator {
         return Long.toHexString(Double.doubleToLongBits(dValue));
     }
 
+    public String convertSPToDP(String hexValue) {
+        Float singlePrecision = hexToSinglePrecisionFloatingPoint(hexValue);
+        Double doublePrecision = singlePrecision.doubleValue();
+
+        return doublePrecisionFloatingPointToHex(doublePrecision);
+    }
+
+    public String convertDPToSP(String hexValue) {
+        Double doublePrecision = hexToDoublePrecisionFloatingPoint(hexValue);
+        Float singlePrecision = doublePrecision.floatValue();
+
+        return singlePrecisionFloatingPointToHex(singlePrecision);
+    }
+
+    public String hexSinglePrecisionFPToHexInteger(String hexValue) {
+        Float f = hexToSinglePrecisionFloatingPoint(hexValue);
+
+        System.out.println("int = " + f.intValue());
+        System.out.println("int hex = " + Integer.toHexString(f.intValue()));
+
+        return Integer.toHexString(f.intValue());
+    }
+
+    public String hexDoublePrecisionFPToHexInteger(String hexValue) {
+        Double d = hexToDoublePrecisionFloatingPoint(hexValue);
+
+        System.out.println("int = " + d.longValue());
+        System.out.println("int hex = " + Long.toHexString(d.longValue()));
+
+        return Long.toHexString(d.longValue());
+    }
+
 }
