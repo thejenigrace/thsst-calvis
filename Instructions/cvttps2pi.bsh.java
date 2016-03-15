@@ -34,11 +34,8 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    float fLower = calculator.hexToSinglePrecisionFloatingPoint(source.substring(8));
-    float fUpper = calculator.hexToSinglePrecisionFloatingPoint(source.substring(0, 8));
-
-    String sLower = calculator.singlePrecisionFloatingPointToHex(fLower);
-    String sUpper = calculator.singlePrecisionFloatingPointToHex(fUpper);
+    String sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(8));
+    String sUpper = calculator.singlePrecisionFloatingPointToHex(source.substring(0, 8));
 
     registers.set(des, sUpper + sLower);
 }
