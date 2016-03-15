@@ -148,3 +148,9 @@ xorpd,Instructions/xorpd.bsh.java,1,0,2,r128,r128/m128
 shufpd,Instructions/shufpd.bsh.java,1,0,3,r128,r128/m128,i
 unpckhpd,Instructions/unpckhpd.bsh.java,1,0,2,r128,r128/m128
 unpcklpd,Instructions/unpcklpd.bsh.java,1,0,2,r128,r128/m128
+cvtpi2ps,Instructions/cvtpi2ps.bsh.java,0,0,2,r128,r64/m64
+cvtsi2ss,Instructions/cvtsi2ss.bsh.java,0,0,2,r128,r32/r64/m32/m64
+cvtps2pi,Instructions/cvtps2pi.bsh.java,0,0,2,r64,r128/m64
+cvttps2pi,Instructions/cvttps2pi.bsh.java,0,0,2,r64,r128/m64
+cvtss2si,Instructions/cvtss2si.bsh.java,0,0,2,r32,r128/m32
+cvttss2si,Instructions/cvttss2si.bsh.java,0,0,2,r32,r128/m32

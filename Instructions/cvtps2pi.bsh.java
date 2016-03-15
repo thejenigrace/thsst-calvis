@@ -16,7 +16,7 @@ execute(des, src, registers, memory) {
             if( checkSizeOfSource(registers, srcSize) ) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
+                storeResultToRegister(registers, calculator, des, source, destination, src);
             }
             else {
                 //throw exception
@@ -25,7 +25,7 @@ execute(des, src, registers, memory) {
         else if( src.isMemory() ) {
             String source = memory.read(src, 64);
             String destination = registers.get(des);
-            storeResultToRegister(registers, calculator, des, source, destination, desSize);
+            storeResultToRegister(registers, calculator, des, source, destination, src);
         }
     }
     else {
@@ -33,9 +33,18 @@ execute(des, src, registers, memory) {
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    String sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(8));
-    String sUpper = calculator.singlePrecisionFloatingPointToHex(source.substring(0, 8));
+storeResultToRegister(registers, calculator, des, source, destination, src) {
+    String sLower = "";
+    String sUpper = "";
+
+    if( src.isMemory() ) {
+        sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(8));
+        sUpper = calculator.hexSinglePrecisionFPToHexInteger(source.substring(0, 8));
+    }
+    else if( src.isRegister() ) {
+        sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(24));
+        sUpper = calculator.hexSinglePrecisionFPToHexInteger(source.substring(16, 24));
+    }
 
     registers.set(des, sUpper + sLower);
 }
@@ -53,7 +62,7 @@ boolean checkSizeOfDestination(registers, desSize) {
 boolean checkSizeOfSource(registers, srcSize) {
     boolean checkSize = false;
 
-    if( 128 == srcSize || 64 == srcSize ) {
+    if( 128 == srcSize ) {
         checkSize = true;
     }
 
