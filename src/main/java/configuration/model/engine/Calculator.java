@@ -1,8 +1,6 @@
 package configuration.model.engine;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 public class Calculator {
 
@@ -179,8 +177,7 @@ public class Calculator {
         return convertedString.toUpperCase();
     }
 
-    public long convertToSignedInteger(BigInteger value, int size) {
-    public static long convertToSignedInteger(BigInteger hexValue, int bitSize) {
+    public long convertToSignedInteger(BigInteger hexValue, int bitSize) {
         System.out.println("--Convert to Signed Integer--");
         long result = Long.parseLong(hexValue.toString());
         String twosComplement = hexValue.toString(2);
