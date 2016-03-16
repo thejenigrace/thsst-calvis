@@ -4,7 +4,7 @@ consoleExecute(registers, memory, console) {
 	String pointingTo = memory.read(stackPointer, 32);
 	BigInteger pointer = new BigInteger(pointingTo, 16);
 
-	System.out.println(memory.pop());
+//	System.out.println(memory.pop());
 
 	String printed = "";
 	System.out.println("start at" + memory.read(pointer.toString(16), 8));

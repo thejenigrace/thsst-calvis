@@ -8,6 +8,7 @@ public class Token {
     public static final String DEC = "type_DEC";
     public static final String LABEL = "type_LBL";
     public static final String STRING = "type_STRING";
+    public static final String FLOAT = "type_FLOAT";
 
     private String value;
     private String type;
@@ -80,5 +81,9 @@ public class Token {
 
     public boolean isStringLiteral() {
         return this.type.equals(Token.STRING);
+    }
+
+    public boolean isFloatLiteral() {
+        return this.type.equals(Token.FLOAT);
     }
 }

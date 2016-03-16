@@ -40,6 +40,11 @@ public class CalvisInstruction {
     }
 
     public boolean execute(ConsoleController consoleController) throws Exception {
+        int numParameters = 0;
+        if (params != null) {
+            numParameters = params.length;
+        }
+        this.tokens = evaluateParameters(numParameters);
         try {
             switch (tokens.length) {
                 case 0:
@@ -94,6 +99,15 @@ public class CalvisInstruction {
     public void verifyParameters(int lineNumber) throws MemoryRestrictedAccessException, EvalError,
             MemoryToMemoryException, DataTypeMismatchException,
             MissingSizeDirectiveException, InvalidSourceOperandException {
+
+        System.out.println("SPECIFICATIONS OF: " + name);
+        // instruction must have parameters if we want to verify it
+        if (allowable != null) {
+            for (String specification : allowable) {
+                System.out.println(specification + " ");
+            }
+        }
+
         int numParameters = 0;
         if (params != null) {
             numParameters = params.length;

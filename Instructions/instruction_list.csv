@@ -131,3 +131,6 @@ pslld,Instructions/pslld.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
 psllq,Instructions/psllq.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
 psraw,Instructions/psraw.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
 psrad,Instructions/psrad.bsh.java,1,0,2,r64/r128,r64/r128/m64/m128/i
+printf,Instructions/printf.bsh.java,1,0,0
+scanf,Instructions/scanf.bsh.java,1,0,0
+cls,Instructions/cls.bsh.java,1,0,0
