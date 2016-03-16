@@ -1,6 +1,8 @@
 package configuration.model.engine;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Calculator {
 
@@ -81,6 +83,10 @@ public class Calculator {
         }
     }
 
+    public boolean checkIfInGPRegisterLow(String register){
+        return register.equals("AX") || register.equals("BX") || register.equals("CX") || register.equals("DX");
+    }
+
     public String hexToBinaryString(String value, Token des) {
         BigInteger bi = new BigInteger(value, 16);
         String val = bi.toString(2);
@@ -151,6 +157,29 @@ public class Calculator {
         return val;
     }
 
+    public String computeAveragePackedHex(String destination, String source, int count){
+        String convertedString = "";
+        String desBit = "";
+        String srcBit = "";
+        BigInteger des = new BigInteger(destination, 16);
+        BigInteger src = new BigInteger(source, 16);
+        srcBit = binaryZeroExtend(src.toString(2), 128);
+        desBit = binaryZeroExtend(des.toString(2), 128);
+
+        int a = 0;
+        BigInteger addPlusOne = BigInteger.valueOf(new Integer(1).intValue());
+        for(int x = 0; x < 16; x++){
+            BigInteger desBitBigInt = new BigInteger(desBit.substring(a, a + 8), 2);
+            BigInteger srcBitBigInt = new BigInteger(srcBit.substring(a, a + 8), 2);
+            String miniResult = binaryZeroExtend(new BigInteger(binaryZeroExtend(desBitBigInt.add(srcBitBigInt).add(addPlusOne).toString(2), 8), 2).shiftRight(1).toString(2), 8);
+            a += count;
+
+            convertedString += binaryZeroExtend(new BigInteger(miniResult, 2).toString(16), count/4);
+        }
+        return convertedString.toUpperCase();
+    }
+
+    public long convertToSignedInteger(BigInteger value, int size) {
     public static long convertToSignedInteger(BigInteger hexValue, int bitSize) {
         System.out.println("--Convert to Signed Integer--");
         long result = Long.parseLong(hexValue.toString());
@@ -503,12 +532,48 @@ public class Calculator {
         if (value.length() > count)
             return value.substring(1);
         else {
-            for (int x = 0; x < count - value.length(); x++) {
+            int y = count - value.length();
+            for (int x = 0; x < y; x++) {
                 value = "0" + value;
             }
         }
         return value;
     }
+    //temporary something
+    public Float[] HexToSinglePrecisionFloatingPoint(String value) {
+        Float[] floatingValues = new Float[4];
+        int a = 0;
+        for(int x = 0; x < 4; x++) {
+            String doubleWordHex = value.substring(a, a + 8);
+            floatingValues[x] = HexToSinglePrecisionFloatingPointSingle(doubleWordHex);
+            a += 8;
+        }
+        return floatingValues;
+    }
+
+    public Float HexToSinglePrecisionFloatingPointSingle(String value) {
+
+        int a = 0;
+        Long i = Long.parseLong(value, 16);
+        Float f = Float.intBitsToFloat(i.intValue());
+        System.out.println(f);
+        return f;
+    }
+
+    public String SinglePrecisionFloatingPointToHexSingle(Float floatValues) {
+        return Integer.toHexString(Float.floatToIntBits(floatValues)).toUpperCase();
+    }
+
+    public String SinglePrecisionFloatingPointToHex(Float[] floatValues){
+
+        String hexConverted = "";
+        for(int x = 0; x < floatValues.length; x++) {
+//            System.out.println("result:" + floatValues[x]);
+            hexConverted += SinglePrecisionFloatingPointToHexSingle(floatValues[x]);
+        }
+        return hexConverted;
+    }
+//    public String concatHex
 
     public String cutBySizeAndCompare(String desValue, String srcValue, int hexSize, int cutSize, char operation) {
         int desMissingZeroes = hexSize - desValue.length();

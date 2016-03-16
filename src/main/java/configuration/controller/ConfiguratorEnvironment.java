@@ -1,6 +1,6 @@
 package configuration.controller;
 
-import configuration.model.engine.CalvisParser;
+import configuration.model.engine.CALVISParser;
 import configuration.model.engine.InstructionList;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ConfiguratorEnvironment {
 
-    private CalvisParser p;
+    private CALVISParser p;
     private Memory memory;
     private RegisterList registers;
     private InstructionList instructions;
@@ -29,14 +29,14 @@ public class ConfiguratorEnvironment {
         errorLogger.combineErrorLogger(registers.getErrorLogger(), instructions.getErrorLogger());
         // 2. Create the CalvisParser based on the environment
         if (errorLogger.size() == 0) {
-            this.p = new CalvisParser(instructions, registers, memory);
+            this.p = new CALVISParser(instructions, registers, memory);
             System.out.println("Memory available: "
                     + Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
             );
         }
     }
 
-    public CalvisParser getParser() {
+    public CALVISParser getParser() {
         return this.p;
     }
 
