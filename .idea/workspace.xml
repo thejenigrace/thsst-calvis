@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added SSE2 Conversion Instructions">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed Calculator &amp; Instruction List">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,18 +57,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.864598">
-              <caret line="646" column="5" selection-start-line="646" selection-start-column="5" selection-end-line="646" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -956,12 +943,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00057" summary="Fix IMUL Instruction">
-      <created>1455715943016</created>
-      <option name="number" value="00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1455715943016</updated>
-    </task>
     <task id="LOCAL-00058" summary="Fix MUL &amp; IMUL Instructions">
       <created>1455763066164</created>
       <option name="number" value="00058" />
@@ -1250,7 +1231,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458136768568</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="Fixed Calculator &amp; Instruction List">
+      <created>1458137107838</created>
+      <option name="number" value="00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1458137107838</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1275,7 +1262,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1287,7 +1274,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.339213" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3166441" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43657818" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1316,8 +1303,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed issue regarding OSX Compatibility. Updated  build.gradle file." />
-    <MESSAGE value="Remove unused dependencies in build.gradle" />
     <MESSAGE value="Added build directory" />
     <MESSAGE value="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;" />
     <MESSAGE value="Fix Instructions List" />
@@ -1341,7 +1326,9 @@
     <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="Added SSE2 Data &amp; Comparison Instructions" />
     <MESSAGE value="Added SSE2 Conversion Instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added SSE2 Conversion Instructions" />
+    <MESSAGE value="Fixed Calculator" />
+    <MESSAGE value="Fixed Calculator &amp; Instruction List" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Calculator &amp; Instruction List" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
