@@ -672,50 +672,6 @@ public class Calculator {
         return Long.toHexString(Double.doubleToLongBits(dValue));
     }
 
-    public String hexSinglePrecisionFPToHexInteger(String hexValue) {
-        Float f = hexToSinglePrecisionFloatingPoint(hexValue);
-
-        System.out.println("int = " + f.intValue());
-        System.out.println("int hex = " + Integer.toHexString(f.intValue()));
-
-        return Integer.toHexString(f.intValue());
-    }
-
-    public String hexDoublePrecisionFPToHexInteger(String hexValue) {
-        Double d = hexToDoublePrecisionFloatingPoint(hexValue);
-
-        System.out.println("int = " + d.longValue());
-        System.out.println("int hex = " + Long.toHexString(d.longValue()));
-
-        return Long.toHexString(d.longValue());
-    }
-
-    public float hexToSinglePrecisionFloatingPoint(String hexValue) {
-        Long l = Long.parseLong(hexValue, 16);
-        Float f = Float.intBitsToFloat(l.intValue());
-        System.out.println("hex = " + Integer.toHexString(Float.floatToIntBits(f)));
-        System.out.println("float = " + f);
-
-        return f;
-    }
-
-    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
-        Long l = Long.parseLong(hexValue, 16);
-        Double d = Double.longBitsToDouble(l);
-        System.out.println("hex = " + Long.toHexString(Double.doubleToLongBits(d)));
-        System.out.println("double = " + d);
-
-        return d;
-    }
-
-    public String singlePrecisionFloatingPointToHex(Float fValue) {
-        return Integer.toHexString(Float.floatToIntBits(fValue));
-    }
-
-    public String doublePrecisionFloatingPointToHex(Double dValue) {
-        return Long.toHexString(Double.doubleToLongBits(dValue));
-    }
-
     public String convertSPToDP(String hexValue) {
         Float singlePrecision = hexToSinglePrecisionFloatingPoint(hexValue);
         Double doublePrecision = singlePrecision.doubleValue();
