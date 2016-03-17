@@ -33,11 +33,13 @@
                 <HBox>
                     <children>
                         <Pane HBox.hgrow="ALWAYS"/>
-                        <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel"/>
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleCancel" prefWidth="61.0"
+                                text="Cancel"/>
                         <Pane prefWidth="20"/>
-                        <Button fx:id="btnApply" mnemonicParsing="false" prefWidth="61.0" text="Apply"/>
+                        <Button fx:id="btnApply" mnemonicParsing="false" onAction="#handleApply" prefWidth="61.0"
+                                text="Apply"/>
                         <Pane prefWidth="20"/>
-                        <Button fx:id="btnOk" mnemonicParsing="false" prefWidth="61.0" text="Ok"/>
+                        <Button fx:id="btnOk" mnemonicParsing="false" onAction="#handleOk" prefWidth="61.0" text="Ok"/>
                         <Pane prefWidth="20"/>
                     </children>
                 </HBox>

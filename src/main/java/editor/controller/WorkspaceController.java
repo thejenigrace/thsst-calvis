@@ -472,8 +472,7 @@ public class WorkspaceController implements Initializable {
             settingsDialogStage.setTitle("Settings");
             settingsDialogStage.setScene(new Scene(settingsView));
             settingsDialogStage.setResizable(false);
-            settingsDialogStage.setX(root.getWidth() / 3);
-            settingsDialogStage.setY(root.getHeight() / 3);
+            settingsDialogStage.centerOnScreen();
             settingsDialogStage.show();
 
             SettingsController settingsController = loader.getController();

@@ -2,10 +2,12 @@ package editor.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
@@ -25,12 +27,25 @@ public class SettingsController implements Initializable {
 
     @FXML
     private AnchorPane anchorPaneSettingsView;
-
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Button btnApply;
+    @FXML
+    private Button btnOk;
     @FXML
     private TreeView<String> treeViewSettings;
 
     private WorkspaceController workspaceController;
     private Stage dialogStage;
+
+    public void setWorkspaceController(WorkspaceController workspaceController) {
+        this.workspaceController = workspaceController;
+    }
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +75,8 @@ public class SettingsController implements Initializable {
                             }
                         }
                     });
+
+            btnApply.setDisable(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,14 +93,6 @@ public class SettingsController implements Initializable {
        }
     }
 
-    public void setWorkspaceController(WorkspaceController workspaceController) {
-        this.workspaceController = workspaceController;
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
     public ArrayList<TreeItem<String>> getEditorItems() {
         ArrayList<TreeItem<String>> items = new ArrayList<>();
 
@@ -94,5 +103,19 @@ public class SettingsController implements Initializable {
         items.add(byteAddressableItem);
 
         return items;
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        dialogStage.close();
+    }
+
+    @FXML
+    private void handleApply(ActionEvent event) {
+        btnApply.setDisable(true);
+    }
+    @FXML
+    private void handleOk(ActionEvent event) {
+        dialogStage.close();
     }
 }

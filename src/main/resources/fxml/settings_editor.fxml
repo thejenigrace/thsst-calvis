@@ -7,29 +7,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.SettingsEditor">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
+      prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="editor.controller.SettingsEditor">
     <children>
-        <Pane prefHeight="40.0" />
+        <Pane prefHeight="40.0"/>
         <HBox>
             <children>
-                <Pane prefWidth="20.0" />
-                <Label text="Play Speed" />
+                <Pane prefWidth="20.0"/>
+                <Label text="Play Speed"/>
             </children>
         </HBox>
-        <Slider fx:id="sliderPlaySpeed" />
-        <Pane layoutX="10.0" layoutY="184.0" prefHeight="20.0" />
-      <HBox layoutX="10.0" layoutY="50.0">
-         <children>
-            <Pane prefWidth="20.0" />
-            <Label text="Byte Addressable" />
-         </children>
-      </HBox>
-        <HBox>
+        <Slider fx:id="sliderPlaySpeed"/>
+        <Pane layoutX="10.0" layoutY="184.0" prefHeight="20.0"/>
+        <HBox layoutX="10.0" layoutY="50.0">
             <children>
-                <ToggleSwitch />
-                <Pane HBox.hgrow="ALWAYS" />
+                <Pane prefWidth="20.0"/>
+                <Label prefWidth="115.0" text="Byte Addressable"/>
+                <ToggleSwitch fx:id="toggleSwitchByteAddressable"/>
             </children>
         </HBox>
-        <Pane VBox.vgrow="ALWAYS" />
+        <Pane layoutX="10.0" layoutY="83.0" prefHeight="20.0"/>
+        <HBox layoutX="10.0" layoutY="103.0">
+            <children>
+                <Pane prefWidth="20.0"/>
+                <Label prefWidth="115.0" text="Register Content"/>
+                <ToggleSwitch fx:id="toggleSwitchRegisterContent"/>
+            </children>
+        </HBox>
+        <Pane layoutX="10.0" layoutY="140.0" prefHeight="20.0"/>
+        <HBox layoutX="10.0" layoutY="160.0">
+            <children>
+                <Pane prefWidth="20.0"/>
+                <Label prefWidth="115.0" text="Memory Content"/>
+                <ToggleSwitch fx:id="toggleSwitchMemoryContent"/>
+            </children>
+        </HBox>
+        <Pane VBox.vgrow="ALWAYS"/>
     </children>
 </VBox>
