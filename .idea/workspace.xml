@@ -10,9 +10,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pandn.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pandn.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/por.bsh.java" afterPath="$PROJECT_DIR$/Instructions/por.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pslld.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pslld.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psllq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psllq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psllw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psllw.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psrad.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psrad.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psraw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psraw.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pxor.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pxor.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -67,8 +66,8 @@
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45527157">
-              <caret line="43" column="3" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.33222038">
+              <caret line="343" column="59" selection-start-line="343" selection-start-column="18" selection-end-line="343" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -939,12 +938,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00056" summary="Fix IMUL Instruction">
-      <created>1455715867618</created>
-      <option name="number" value="00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1455715867618</updated>
-    </task>
     <task id="LOCAL-00057" summary="Fix IMUL Instruction">
       <created>1455715943016</created>
       <option name="number" value="00057" />
@@ -1233,7 +1226,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458053153951</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="pslld/llq/llw fixed">
+      <created>1458372456742</created>
+      <option name="number" value="00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1458372456743</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1299,7 +1298,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed issue regarding OSX Compatibility. Updated  build.gradle file." />
     <MESSAGE value="Remove unused dependencies in build.gradle" />
     <MESSAGE value="Added build directory" />
     <MESSAGE value="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;" />
@@ -1324,7 +1322,8 @@
     <MESSAGE value="help" />
     <MESSAGE value="ok&#10;" />
     <MESSAGE value="sse convert" />
-    <option name="LAST_COMMIT_MESSAGE" value="sse convert" />
+    <MESSAGE value="pslld/llq/llw fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="pslld/llq/llw fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1714,8 +1713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45527157">
-          <caret line="43" column="3" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.33222038">
+          <caret line="343" column="59" selection-start-line="343" selection-start-column="18" selection-end-line="343" selection-end-column="59" />
           <folding />
         </state>
       </provider>
