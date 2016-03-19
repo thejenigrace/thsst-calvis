@@ -51,25 +51,41 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
     String result = "";
 
     if( source >= 0 && source <= 15 ) {
-        String binaryDes = calculator.hexToBinaryString(destination, des);
+        Token token = new Token(Token.REG, "MM0");
+        String temp = "";
+        String binaryDes = "";
+        BigInteger biDes;
+        BigInteger biResult;
+
         if( desSize == 64 ) {
-            BigInteger biDes = new BigInteger(binaryDes.substring(i, i + 16), 16);
-            BigInteger biResult = biDes.shiftLeft(source);
-            result = biResult.toString(16);
+            binaryDes = calculator.hexToBinaryString(destination, token);
+            biDes = new BigInteger(binaryDes, 2);
+            biResult = biDes.shiftLeft(source);
+            temp = calculator.binaryToHexString(biResult.toString(2), token);
+            result += temp;
         }
         else if( desSize == 128 ) {
             for(int i = 0; i <= 16; i+=16) {
-                BigInteger biDes = new BigInteger(binaryDes.substring(i, i + 16), 16);
-                BigInteger biResult = biDes.shiftLeft(source);
-                result += biResult.toString(16);
+                if( i == 16 ) {
+                    binaryDes = calculator.hexToBinaryString(destination.substring(i), token);
+                    biDes = new BigInteger(binaryDes, 2);
+                    biResult = biDes.shiftLeft(source);
+                    temp = calculator.binaryToHexString(biResult.toString(2), token);
+                    result += temp;
+                }
+                else {
+                    binaryDes = calculator.hexToBinaryString(destination.substring(i, i + 16), token);
+                    biDes = new BigInteger(binaryDes, 2);
+                    biResult = biDes.shiftLeft(source);
+                    temp = calculator.binaryToHexString(biResult.toString(2), token);
+                    result += temp;
+                }
             }
         }
     }
     else {
         result = calculator.hexZeroExtend("0", des);
     }
-
-    System.out.println("Result: " + result);
 
     registers.set(des, result);
 }
