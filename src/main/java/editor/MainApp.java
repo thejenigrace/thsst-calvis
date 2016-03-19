@@ -107,7 +107,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file
             loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/fxml/configurationEnvironment.fxml"));
+            loader.setLocation(MainApp.class.getResource("/fxml/configuratio_environment.fxml"));
             root = (BorderPane) loader.load();
 
             // Give the controller access to the main app
@@ -124,11 +124,11 @@ public class MainApp extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        String myString = "BF800000";
-        int a = 0;
-        Long i = Long.parseLong("BFC00000", 16);
-        Float f = Float.intBitsToFloat(i.intValue());
-        System.out.println(f);
+//        String myString = "BF800000";
+//        int a = 0;
+//        Long i = Long.parseLong("BFC00000", 16);
+//        Float f = Float.intBitsToFloat(i.intValue());
+//        System.out.println(f);
 //        System.setProperty("java.home", "C:\\Program Files\\Java\\jdk1.8.0_65");
         //System.out.println(new BigInteger("5", 16).subtract(new BigInteger("22", 16)).toString(16));
         System.out.println(new BigInteger("FF", 16).multiply(new BigInteger("F", 16)).toString(16));
