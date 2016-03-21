@@ -2,7 +2,7 @@ package editor.controller;
 
 import configuration.model.engine.Register;
 import editor.model.AssemblyComponent;
-import editor.model.FlagUI;
+import editor.model.Flag;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,9 +35,9 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @FXML
     private TreeTableColumn<Register, String> colRegisterValue;
 
-    private ObservableList<FlagUI> flagList1;
+    private ObservableList<Flag> flagList1;
     @FXML
-    private TableView<FlagUI> tableViewFlags1;
+    private TableView<Flag> tableViewFlags1;
     @FXML
     private TableColumn flagsName1;
     @FXML
@@ -50,8 +50,8 @@ public class RegistersController extends AssemblyComponent implements Initializa
         colRegisterValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
                 p.getValue().getValue().getValue().toString()));
 
-        flagsName1.setCellValueFactory(new PropertyValueFactory<FlagUI, String>("name"));
-        flagsValue1.setCellValueFactory(new PropertyValueFactory<FlagUI, String>("flagValue"));
+        flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        flagsValue1.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
     }
 
     @Override
@@ -84,7 +84,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
             this.treeTableViewRegister.setShowRoot(false);
 
 //            createTreeTableView(map);
-            flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
+            flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
             tableViewFlags1.setItems(flagList1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     public void update(String currentLine, int lineNumber) {
         treeTableViewRegister.refresh();
 
-        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
+        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
         tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
     }
@@ -104,7 +104,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     public void refresh() {
         treeTableViewRegister.refresh();
 
-        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagUIList());
+        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
         tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
     }

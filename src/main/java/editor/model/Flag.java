@@ -5,12 +5,12 @@ import javafx.beans.property.SimpleStringProperty;
 /**
  * Created by Goodwin Chua on 1/30/2016.
  */
-public class FlagUI {
+public class Flag {
 
     private SimpleStringProperty name;
     private SimpleStringProperty flagValue;
 
-    public FlagUI(String name, String flagValue) {
+    public Flag(String name, String flagValue) {
         this.name = new SimpleStringProperty(name);
         this.flagValue = new SimpleStringProperty(flagValue);
     }

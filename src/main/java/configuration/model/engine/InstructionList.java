@@ -278,7 +278,7 @@ public class InstructionList {
 
     private ArrayList<String> doParameterChecking(String[] inst) {
         ArrayList<String> instructionErrorCollection = new ArrayList<>();
-        String[] acceptableInputs = {"r", "m", "i", "c", "l"};
+        String[] acceptableInputs = {"r", "m", "i", "c", "l", "x", "s", "d"};
         int i = 5;
         for (int x = 0; x < Integer.parseInt(inst[4]); x++) {
             String addressingArray[] = HandleConfigFunctions.split(inst[i], '/');

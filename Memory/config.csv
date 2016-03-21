@@ -3,4 +3,5 @@ byte,db,8
 word,dw,16
 dword,dd,32
 qword,dq,64
-dqword,dqw,128
+tword,dt,80
+oword,do,128
