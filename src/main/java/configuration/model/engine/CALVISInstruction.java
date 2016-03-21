@@ -162,6 +162,7 @@ public class CalvisInstruction {
 					for ( int i = 0; i < instance.length; i++ ) {
 						if ( instance[i].equals("c") ) {
 							clIndex = i;
+							System.out.println("found CL");
 							break;
 						}
 					}
