@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
-public class CalvisInstruction {
+public class CalvisInstruction2 {
 
 	private Instruction ins;
 	private String name;
@@ -21,15 +21,15 @@ public class CalvisInstruction {
 	private ArrayList<String> allowable;
 	private ConsoleController console;
 
-	public CalvisInstruction(Instruction ins, String name, RegisterList registers, Memory memory) {
+	public CalvisInstruction2(Instruction ins, String name, RegisterList registers, Memory memory) {
 		this.ins = ins;
 		this.name = name;
 		this.registers = registers;
 		this.memory = memory;
 	}
 
-	public CalvisInstruction(Instruction ins, String name, Object[] params,
-	                         RegisterList registers, Memory memory, boolean isConditional, ArrayList<String> allowable) {
+	public CalvisInstruction2(Instruction ins, String name, Object[] params,
+	                          RegisterList registers, Memory memory, boolean isConditional, ArrayList<String> allowable) {
 		this.ins = ins;
 		this.name = name;
 		this.params = params;
@@ -50,7 +50,7 @@ public class CalvisInstruction {
 				case 0:
 					if ( name.equalsIgnoreCase("printf") ||
 							name.equalsIgnoreCase("scanf") || name.equalsIgnoreCase("cls") ) {
-						consoleController.attachCALVISInstruction(this);
+//						consoleController.attachCALVISInstruction(this);
 						this.console = consoleController;
 						this.ins.consoleExecute(registers, memory, consoleController);
 					} else {

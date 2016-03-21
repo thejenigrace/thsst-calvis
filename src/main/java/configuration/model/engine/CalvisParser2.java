@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class CalvisParser {
+public class CalvisParser2 {
 
 	private InstructionList instructions;
 	private RegisterList registers;
@@ -26,7 +26,7 @@ public class CalvisParser {
 	private Grule memoryAddressingMode;
 	private Element allMemorySizeDirectives;
 
-	public CalvisParser(InstructionList instructions, RegisterList registers, Memory memory) {
+	public CalvisParser2(InstructionList instructions, RegisterList registers, Memory memory) {
 		this.instructions = instructions;
 		this.registers = registers;
 		this.memory = memory;
