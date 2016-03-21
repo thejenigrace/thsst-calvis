@@ -26,7 +26,7 @@ execute(des, src, registers, memory) {
 			}
 		}
 		else if(desSize == 64){
-			else if( srcSize == 128 && src.isRegister() ){
+			if( srcSize == 128 && src.isRegister() ){
 				int midpoint = str.length() / 2;
 				sourceReg = c.hexZeroExtend(registers.get(src).substring(midpoint), des);
 			}
@@ -44,7 +44,7 @@ execute(des, src, registers, memory) {
 			}
 		}
 		else if(desSize == 64){
-			else if( srcSize == 128 && src.isRegister() ){
+			if( srcSize == 128 && src.isRegister() ){
 				int midpoint = str.length() / 2;
 				sourceReg = c.hexZeroExtend(registers.get(src).substring(midpoint), des);
 			}
