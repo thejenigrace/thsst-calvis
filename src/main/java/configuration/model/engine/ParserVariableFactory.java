@@ -58,7 +58,7 @@ public class ParserVariableFactory {
 					ArrayList<Token> valuesList = new ArrayList<>();
 					valuesList.add(value);
 
-					for (Object obj : moreValues) {
+					for ( Object obj : moreValues ) {
 						Object[] objectGroup = (Object[]) obj;
 						/**
 						 * objectGroup[0] = comma objectGroup[1] = actual value
@@ -68,16 +68,16 @@ public class ParserVariableFactory {
 					}
 					try {
 						memory.putToVariableMap(labelName.getValue(), dataType.getValue());
-					} catch (DuplicateVariableException e) {
+					} catch ( DuplicateVariableException e ) {
 						exceptions.add(e);
 					}
 
-					for (Token token : valuesList) {
+					for ( Token token : valuesList ) {
 						int declaredSize = memory.getPrefixHexSize(dataType);
 						int prefixSize = memory.getPrefixBitSize(dataType);
 						String tokenValue = token.getValue();
-						if (token.isHex()) {
-							if (tokenValue.length() > declaredSize) {
+						if ( token.isHex() ) {
+							if ( tokenValue.length() > declaredSize ) {
 								exceptions.add(new DataTypeMismatchException(labelName.getValue(),
 										dataType.getValue(), tokenValue));
 							} else {
@@ -85,21 +85,21 @@ public class ParserVariableFactory {
 									tokenValue = MemoryAddressCalculator.extend(tokenValue, prefixSize, "0");
 									memory.write(memory.getVariablePointer(), tokenValue, prefixSize);
 									memory.incrementVariablePointer(prefixSize);
-								} catch (MemoryWriteException e) {
+								} catch ( MemoryWriteException e ) {
 									exceptions.add(e);
 								}
 							}
-						} else if (token.isStringLiteral()) {
+						} else if ( token.isStringLiteral() ) {
 //                            System.out.println(token.getValue() + " " + token.getType());
 							try {
 								byte[] bytes = tokenValue.getBytes("US-ASCII");
-								for (int i = 0; i < bytes.length; i++) {
+								for ( int i = 0; i < bytes.length; i++ ) {
 									String asciiHexValue = String.format("%0" + declaredSize + "X", bytes[i]);
 //                                    System.out.println(tokenValue.charAt(i) + " " + asciiHexValue);
 									memory.write(memory.getVariablePointer(), asciiHexValue, prefixSize);
 									memory.incrementVariablePointer(prefixSize);
 								}
-							} catch (Exception e) {
+							} catch ( Exception e ) {
 								exceptions.add(e);
 							}
 
@@ -113,7 +113,7 @@ public class ParserVariableFactory {
 	private Element getAllVariableElements() {
 		Iterator<Element> keys = variableDeclarationTokenMap.values().iterator();
 		ArrayList<Element> list = new ArrayList<>();
-		while (keys.hasNext()) {
+		while ( keys.hasNext() ) {
 			list.add(keys.next());
 		}
 		return elementConcatenator.concatenateOrSubRules(list);

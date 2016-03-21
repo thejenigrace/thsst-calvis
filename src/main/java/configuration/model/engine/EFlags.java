@@ -1,12 +1,12 @@
 package configuration.model.engine;
 
-import editor.model.FlagUI;
+import editor.model.Flag;
 
 import java.util.ArrayList;
 
 public class EFlags extends Register {
 
-    private ArrayList<FlagUI> flagUIs;
+    private ArrayList<Flag> flags;
 
     public EFlags(String name, int size) {
         super(name, size);
@@ -16,33 +16,33 @@ public class EFlags extends Register {
     public void initializeValue() {
         super.initializeValue();
         this.value = this.value.substring(1) + "2";
-        buildFlagUIs();
+        buildFlags();
     }
 
-    public void buildFlagUIs() {
-        this.flagUIs = new ArrayList<>();
-        this.flagUIs.add(new FlagUI("Carry", getCarryFlag()));
-        this.flagUIs.add(new FlagUI("Sign", getSignFlag()));
-        this.flagUIs.add(new FlagUI("Overflow", getOverflowFlag()));
-        this.flagUIs.add(new FlagUI("Zero", getZeroFlag()));
-        this.flagUIs.add(new FlagUI("Parity", getParityFlag()));
-        this.flagUIs.add(new FlagUI("Auxiliary", getAuxiliaryFlag()));
-        this.flagUIs.add(new FlagUI("Direction", getDirectionFlag()));
-        this.flagUIs.add(new FlagUI("Interrupt", getInterruptFlag()));
+    public void buildFlags() {
+        this.flags = new ArrayList<>();
+        this.flags.add(new Flag("Carry", getCarryFlag()));
+        this.flags.add(new Flag("Sign", getSignFlag()));
+        this.flags.add(new Flag("Overflow", getOverflowFlag()));
+        this.flags.add(new Flag("Zero", getZeroFlag()));
+        this.flags.add(new Flag("Parity", getParityFlag()));
+        this.flags.add(new Flag("Auxiliary", getAuxiliaryFlag()));
+        this.flags.add(new Flag("Direction", getDirectionFlag()));
+        this.flags.add(new Flag("Interrupt", getInterruptFlag()));
     }
 
-    private void setFlagUI(String name, String value) {
-        for (int i = 0; i < flagUIs.size(); i++) {
-            if (flagUIs.get(i).getName().equals(name)) {
-                flagUIs.set(i, new FlagUI(name, value));
+    private void setFlag(String name, String value) {
+        for ( int i = 0; i < flags.size(); i++) {
+            if ( flags.get(i).getName().equals(name)) {
+                flags.set(i, new Flag(name, value));
                 break;
             }
         }
     }
 
-    public ArrayList<FlagUI> getFlagUIList() {
-        buildFlagUIs();
-        return this.flagUIs;
+    public ArrayList<Flag> getFlagList() {
+        buildFlags();
+        return this.flags;
     }
 
     public char getFlagIndex(int index) {
@@ -72,14 +72,14 @@ public class EFlags extends Register {
             char[] extended = val.toCharArray();
             extended[32 - 1 - index] = a.charAt(0);
             val = new String(extended);
-            String hexvalue = Integer.toHexString(Integer.parseInt(val, 2));
-            int zeroExtendHexValue = 8 - hexvalue.length();
+            String hexValue = Integer.toHexString(Integer.parseInt(val, 2));
+            int zeroExtendHexValue = 8 - hexValue.length();
 
             //zero extend
             for (int k = 0; k < zeroExtendHexValue; k++) {
-                hexvalue = "0" + hexvalue;
+                hexValue = "0" + hexValue;
             }
-            this.value = hexvalue.toUpperCase();
+            this.value = hexValue.toUpperCase();
         } else {
             System.out.println("Invalid flag value");
         }
@@ -119,42 +119,42 @@ public class EFlags extends Register {
 
     public void setCarryFlag(String value) {
         setFlagIndex(0, value);
-        setFlagUI("Carry", value);
+        setFlag("Carry", value);
     }
 
     public void setParityFlag(String value) {
         setFlagIndex(2, value);
-        setFlagUI("Parity", value);
+        setFlag("Parity", value);
     }
 
     public void setAuxiliaryFlag(String value) {
         setFlagIndex(4, value);
-        setFlagUI("Auxiliary", value);
+        setFlag("Auxiliary", value);
     }
 
     public void setZeroFlag(String value) {
         setFlagIndex(6, value);
-        setFlagUI("Zero", value);
+        setFlag("Zero", value);
     }
 
     public void setSignFlag(String value) {
         setFlagIndex(7, value);
-        setFlagUI("Sign", value);
+        setFlag("Sign", value);
     }
 
     public void setOverflowFlag(String value) {
         setFlagIndex(11, value);
-        setFlagUI("Overflow", value);
+        setFlag("Overflow", value);
     }
 
     public void setDirectionFlag(String value) {
         setFlagIndex(10, value);
-        setFlagUI("Direction", value);
+        setFlag("Direction", value);
     }
 
     public void setInterruptFlag(String value) {
         setFlagIndex(9, value);
-        setFlagUI("Interrupt", value);
+        setFlag("Interrupt", value);
     }
 
 }

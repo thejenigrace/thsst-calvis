@@ -23,6 +23,7 @@ public class RegisterList {
     private TreeMap<String, Register> map;
     private ArrayList<String[]> lookup;
     private EFlags flags;
+    private Mxscr mxscr;
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
 
     private TreeMap<String, TreeMap<String, Register>> childMap;
@@ -34,6 +35,7 @@ public class RegisterList {
     public RegisterList(String csvFile, int maxSize) {
         Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
         this.flags = new EFlags("EFLAGS", 32);
+        this.mxscr = new Mxscr("MXSCR", 32);
         this.map = new TreeMap<>(orderedComparator);
         this.lookup = new ArrayList<>();
         MAX_SIZE = maxSize;
@@ -128,6 +130,8 @@ public class RegisterList {
                             case "1": // fall through
                             case "2": // fall through
                             case "4":
+                            case "5":
+                            case "6":
                                 Register g = new Register(reg[NAME], regSize);
                                 this.map.put(reg[NAME], g);
                                 break;
@@ -213,6 +217,10 @@ public class RegisterList {
 
     public EFlags getEFlags() {
         return this.flags;
+    }
+
+    public Mxscr getMxscr() {
+        return this.mxscr;
     }
 
     public boolean isExisting(String registerName) {
