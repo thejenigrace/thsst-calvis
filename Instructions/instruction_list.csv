@@ -146,7 +146,13 @@ andps,Instructions/andps.bsh.java,1,0,2,r128,r128/m128
 addps,Instructions/addps.bsh.java,1,0,2,r128,r128/m128
 pavgb,Instructions/pavgb.bsh.java,1,0,2,r128/r64,r128/m128/r64/m64
 pavgw,Instructions/pavgw.bsh.java,1,0,2,r128/r64,r128/m128/r64/m64
-pextrw,Instructions/pextrw.bsh.java,0,0,3,r16/m16,r128/r64,i
+pextrw,Instructions/pextrw.bsh.java,0,0,3,r16/m32,r128/r64,i
+pinsrw,Instructions/pinsrw.bsh.java,0,0,3,r128/r64,r16/m32,i
+pminsw,Instructions/pminsw.bsh.java,1,0,2,r128/r64,r128/m128/r64/m64
+rcpps,Instructions/rcpps.bsh.java,1,0,2,r128,r128/m128
+rcpss,Instructions/rcpss.bsh.java,1,0,2,r128,r128/m128
+sqrtps,Instructions/sqrtps.bsh.java,1,0,2,r128,r128/m128
+pmovmskb,Instructions/pmovmskb.bsh.java,0,0,2,r32,r128/r64
 addss,Instructions/addss.bsh.java,1,0,2,r128,r128/m32
 andnps,Instructions/andnps.bsh.java,1,0,2,r128,r128/m128
 orps,Instructions/orps.bsh.java,1,0,2,r128,r128/m128

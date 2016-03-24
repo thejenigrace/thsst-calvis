@@ -8,7 +8,7 @@ execute(des,src,ctr,registers,memory) {
     String effectiveAddress = des.getValue();
     effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
     Calculator c = new Calculator(registers, memory);
-    if( des.isRegister() && registers.getBitSize(des) == 16) {
+    if( des.isRegister() && registers.getBitSize(des) == 32) {
         desBitSize = registers.getBitSize(des);
         desHexSize = registers.getHexSize(des);
         desValue = registers.get(des);
@@ -24,7 +24,7 @@ execute(des,src,ctr,registers,memory) {
         srcBitSize = registers.getBitSize(src);
         srcHexSize = registers.getHexSize(src);
     }
-    if(desBitSize == 16){
+    if((desBitSize == 32 && des.isRegister()) || (des.isMemory() && desBitSize == 16)){
         int count = 0 ;
 
         if(src.isRegister()){
@@ -35,9 +35,10 @@ execute(des,src,ctr,registers,memory) {
                 count = new BigInteger(ctr.getValue(), 16).intValue() % 8;
             }
         }
+        System.out.println(c.checkIfInGPRegisterLow(effectiveAddress) + " EA");
         if(c.checkIfInGPRegisterLow(effectiveAddress)){
             if( des.isRegister()){
-                registers.set(des, srcValue.substring(count * 4, count * 4 + 4));
+                registers.set(des, "0000" + srcValue.substring(count * 4, count * 4 + 4));
             }
         }
         else if(des.isMemory() && desBitSize == 16){

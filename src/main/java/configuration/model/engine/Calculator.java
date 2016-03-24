@@ -84,7 +84,7 @@ public class Calculator {
     }
 
     public boolean checkIfInGPRegisterLow(String register){
-        return register.equals("AX") || register.equals("BX") || register.equals("CX") || register.equals("DX");
+        return register.equals("EAX") || register.equals("EBX") || register.equals("ECX") || register.equals("EDX");
     }
 
     public String hexToBinaryString(String value, Token des) {

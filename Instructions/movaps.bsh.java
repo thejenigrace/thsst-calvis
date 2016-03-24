@@ -11,7 +11,6 @@ execute(des,src,registers,memory) {
         desHexSize = registers.getHexSize(des);
 		desValue = registers.get(des);
     } else if(des.isMemory() && (memory.getBitSize(des) == 0 || memory.getBitSize(des) == 128) ) {
-		System.out.println(memory.getBitSize(des) + "wtf size");
         desBitSize = 128;
         desHexSize = 32;
 		desValue = memory.read(des, desBitSize);
@@ -28,9 +27,9 @@ execute(des,src,registers,memory) {
     if(des.isRegister() && desBitSize == 128) {
 		String effectiveAddress = src.getValue();
 		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
-		System.out.println(effectiveAddress);
-		System.out.println(isDesSizeNotNull);
-		System.out.println(src.isMemory());
+//		System.out.println(effectiveAddress);
+//		System.out.println(isDesSizeNotNull);
+//		System.out.println(src.isMemory());
 		if((isDesSizeNotNull && src.isMemory() &&  effectiveAddress.substring(effectiveAddress.length() - 1).equals("0"))
 		|| (src.isRegister() && srcHexSize == 128 )){
 			registers.set(des, srcValue);

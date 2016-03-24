@@ -141,9 +141,11 @@ public class MainApp extends Application {
         else if (OS.contains("mac")){
             System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") +".jdk/Contents/Home");
         }///jdk1.8.0_66.jdk/Contents/Home/jre
-        String x = "FFFFEEEEHHHHGGGG";
-        System.out.println(x.substring(x.length() - 1));
-//        LauncherImpl.launchApplication(MainApp.class, PreloaderApp.class, args);
+        String x = "ABCD";
+        String y = "FFFF";
+        System.out.println(new BigInteger(x, 16).subtract(new BigInteger(y, 16)).multiply(new BigInteger("-1", 10)));
+        //System.out.println(bigint + "woa");
+
         launch(args);
     }
 
