@@ -1,5 +1,7 @@
 package configuration.model.engine;
 
+import api.DoubleDouble;
+
 import java.math.BigInteger;
 
 public class Calculator {
@@ -702,6 +704,27 @@ public class Calculator {
         System.out.println("int hex = " + Long.toHexString(d.longValue()));
 
         return Long.toHexString(d.longValue());
+    }
+
+    /**
+     * IEEE Extended Precision (80-bit) for 0x87 FPU
+     */
+    public DoubleDouble convertSPtoExtendedPrecision(float f) {
+        Float fValue = f;
+        DoubleDouble ddValue = new DoubleDouble(fValue.doubleValue());
+
+        return ddValue;
+    }
+
+    public DoubleDouble convertDPtoExtendedPrecision(double d) {
+        Double dValue = d;
+        DoubleDouble ddValue = new DoubleDouble(dValue);
+
+        return ddValue;
+    }
+
+    public String extendedPrecisionToIntegerString(DoubleDouble dd) {
+        return new Integer(dd.intValue()).toString();
     }
 
 }
