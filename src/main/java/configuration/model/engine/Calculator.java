@@ -709,22 +709,48 @@ public class Calculator {
     /**
      * IEEE Extended Precision (80-bit) for 0x87 FPU
      */
-    public DoubleDouble convertToExtendedPrecision(float f) {
+    public String convertToExtendedPrecision(float f) {
         Float fValue = f;
         DoubleDouble ddValue = new DoubleDouble(fValue.doubleValue());
 
-        return ddValue;
+        if(ddValue.isNaN())
+            return "NaN";
+
+        return ddValue.toString();
     }
 
-    public DoubleDouble convertToExtendedPrecision(double d) {
+    public String convertToExtendedPrecision(double d) {
         Double dValue = d;
         DoubleDouble ddValue = new DoubleDouble(dValue);
 
-        return ddValue;
+        if(ddValue.isNaN())
+            return "NaN";
+
+        return ddValue.toString();
     }
 
     public String extendedPrecisionToIntegerString(DoubleDouble dd) {
+        if(dd.isNaN())
+            return "NaN";
+
         return new Integer(dd.intValue()).toString();
     }
 
+    public String extendedPrecisionToBCDString(DoubleDouble dd) {
+        if(dd.isNaN())
+            return "NaN";
+
+        Integer iValue = dd.intValue();
+        System.out.println("iValue = " + iValue);
+
+        StringBuilder sbBCDValue = new StringBuilder();
+        for(int i = 0; i < iValue.toString().length(); i++) {
+            Integer oneDigit = Integer.parseInt("" + iValue.toString().charAt(i));
+            String bcd = Integer.toBinaryString(oneDigit);
+            bcd = binaryZeroExtend(bcd, 4);
+            sbBCDValue.append(bcd);
+        }
+
+        return sbBCDValue.toString();
+    }
 }
