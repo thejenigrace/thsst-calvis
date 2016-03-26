@@ -821,10 +821,6 @@ public class Calculator {
             sbBCD.append(iBCD.toString());
         }
 
-//        BigInteger sss = new BigInteger(bcd, 2);
-//        bcd = sss.toString();
-
-
         return bcd;
     }
 }
