@@ -709,14 +709,14 @@ public class Calculator {
     /**
      * IEEE Extended Precision (80-bit) for 0x87 FPU
      */
-    public DoubleDouble convertSPtoExtendedPrecision(float f) {
+    public DoubleDouble convertToExtendedPrecision(float f) {
         Float fValue = f;
         DoubleDouble ddValue = new DoubleDouble(fValue.doubleValue());
 
         return ddValue;
     }
 
-    public DoubleDouble convertDPtoExtendedPrecision(double d) {
+    public DoubleDouble convertToExtendedPrecision(double d) {
         Double dValue = d;
         DoubleDouble ddValue = new DoubleDouble(dValue);
 
