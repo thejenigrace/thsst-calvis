@@ -6,12 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed sse2 logical &amp; unpacked instructions">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed sse logical instructions">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/andnps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/andnps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/andps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/andps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/orps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/orps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xorps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xorps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shufps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shufps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/unpckhps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/unpckhps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/unpcklps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/unpcklps.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1346,12 +1345,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00060" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455763689491</created>
-      <option name="number" value="00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1455763689491</updated>
-    </task>
     <task id="LOCAL-00061" summary="Fix DIV &amp; IDIV Instructions">
       <created>1455768983388</created>
       <option name="number" value="00061" />
@@ -1640,7 +1633,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459174920987</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="fixed sse logical instructions">
+      <created>1459175621028</created>
+      <option name="number" value="00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1459175621028</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1706,7 +1705,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;" />
     <MESSAGE value="Fix Instructions List" />
     <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
@@ -1731,7 +1729,8 @@
     <MESSAGE value="pslld/llq/llw fixed" />
     <MESSAGE value="ok" />
     <MESSAGE value="fixed sse2 logical &amp; unpacked instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sse2 logical &amp; unpacked instructions" />
+    <MESSAGE value="fixed sse logical instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed sse logical instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
