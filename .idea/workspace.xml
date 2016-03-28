@@ -8,6 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="formatted">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pand.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pand.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pandn.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pandn.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/por.bsh.java" afterPath="$PROJECT_DIR$/Instructions/por.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pxor.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pxor.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1342,12 +1346,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00063" summary="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator">
-      <created>1455973719936</created>
-      <option name="number" value="00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1455973719937</updated>
-    </task>
     <task id="LOCAL-00064" summary="Fix DIV &amp; IDIV Instructions">
       <created>1455974811899</created>
       <option name="number" value="00064" />
@@ -1636,7 +1634,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459177274931</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="formatted">
+      <created>1459178506659</created>
+      <option name="number" value="00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1459178506660</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TestHistory">

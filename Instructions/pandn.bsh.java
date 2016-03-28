@@ -9,10 +9,10 @@ execute(des, src, registers, memory) {
 		desSize = registers.getBitSize(des);
         destination = calculator.hexToBinaryString(registers.get(des), des);
 	}
+    
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
-	}
-	else {
+	} else {
 		srcSize = memory.getBitSize(src);
 	}
 
@@ -23,22 +23,18 @@ execute(des, src, registers, memory) {
             if( (desSize == srcSize) && checkSizeOfRegister(registers, desSize) ) {
                 String source = calculator.hexToBinaryString(registers.get(src), src);
                 storeResultToRegister(registers, calculator, des, source, destination);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = calculator.hexToBinaryString(memory.read(src, desSize), src);
                 storeResultToRegister(registers, calculator, des, source, destination);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
@@ -57,8 +53,7 @@ String performNot(calculator, des, destination, desSize) {
     for (int i = 0; i < desSize; i++) {
         if (destination.charAt(i) == '1') {
             result = result.concat("0");
-        }
-        else if (destination.charAt(i) == '0') {
+        } else if (destination.charAt(i) == '0') {
             result = result.concat("1");
         }
     }
