@@ -6,11 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed sse logical instructions">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed sse unpacked instructions">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shufps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shufps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/unpckhps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/unpckhps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/unpcklps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/unpcklps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpi2ps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpi2ps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtps2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtps2pi.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtsi2ss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtsi2ss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtss2si.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtss2si.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttps2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttps2pi.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttss2si.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttss2si.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1345,12 +1348,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00061" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455768983388</created>
-      <option name="number" value="00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1455768983389</updated>
-    </task>
     <task id="LOCAL-00062" summary="Fix DIV &amp; IDIV Instructions">
       <created>1455770877493</created>
       <option name="number" value="00062" />
@@ -1639,7 +1636,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459175621028</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="fixed sse unpacked instructions">
+      <created>1459177006596</created>
+      <option name="number" value="00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1459177006596</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1705,7 +1708,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix Instructions List" />
     <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
     <MESSAGE value="Fix Play Speed Settings" />
@@ -1730,7 +1732,8 @@
     <MESSAGE value="ok" />
     <MESSAGE value="fixed sse2 logical &amp; unpacked instructions" />
     <MESSAGE value="fixed sse logical instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sse logical instructions" />
+    <MESSAGE value="fixed sse unpacked instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed sse unpacked instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
