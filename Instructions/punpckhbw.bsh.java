@@ -38,10 +38,6 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    registers.set("XMM0", "112233445566778899AABBCCDDEEFF00");
-    registers.set("XMM1", "112233445566778899AABBCCDDEEFF00");
-    destination = registers.get("XMM1");
-
     String result = "";
     int limit = 0;
 
