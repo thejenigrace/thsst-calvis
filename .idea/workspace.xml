@@ -8,10 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="formatted">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pand.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pand.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pandn.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pandn.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/por.bsh.java" afterPath="$PROJECT_DIR$/Instructions/por.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pxor.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pxor.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpckhbw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpckhbw.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpckhdq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpckhdq.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpckhwd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpckhwd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpcklbw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpcklbw.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpckldq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpckldq.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpcklwd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpcklwd.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,7 +63,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -561,8 +563,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -583,7 +583,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -612,417 +614,6 @@
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/gradle.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmp.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/idiv.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/instruction_list.csv</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/push.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Memory/config.csv</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Registers/register_list.csv</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/build.gradle</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/css/console.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/css/register.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/error_logger.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/find.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/find_and_replace.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/memory.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/registers.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/thsst-calvis.iml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/dictionaries/Goodwin_Chua.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/addps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/addss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/andnpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/andnps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/andpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/andps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cls.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmppd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmpps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmpsb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmpsd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmpss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cmpsw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/comisd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/comiss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtdq2pd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtdq2ps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtpd2dq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtpd2pi.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtpd2ps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtpi2pd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtpi2ps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtps2dq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtps2pd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtps2pi.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtsd2si.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtsd2ss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtsi2sd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtsi2ss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtss2sd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvtss2si.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttpd2dq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttpd2pi.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttps2dq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttps2pi.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttsd2si.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/cvttss2si.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/divps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/divss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/lodsb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/lodsd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/lodsw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/maxps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/maxss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/minps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/minss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movapd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movaps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movhlps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movhpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movhps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movlhps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movlpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movlps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movmskpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movmskps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movsb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movsd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movsw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movupd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/movups.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/mulps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/mulss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/orpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/orps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/packssdw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/packsswb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/packuswb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddsb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddsw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddusb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddusw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/paddw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pand.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pandn.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pavgb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pavgw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpeqb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpeqd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpeqw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpgtb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpgtd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pcmpgtw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pextrw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pmaddwd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pmulhw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pmullw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/por.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/printf.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pslld.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psllq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psllw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psrad.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psraw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubsb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubsw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubusb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubusw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/psubw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpckhbw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpckhdq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpckhwd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpcklbw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpckldq.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/punpcklwd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/pxor.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/scanf.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/scasb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/scasd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/scasw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/shufpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/shufps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/stosb.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/stosd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/stosw.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/subps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/subss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/ucomisd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/ucomiss.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/unpckhpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/unpckhps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/unpcklpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/unpcklps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/xorpd.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Instructions/xorps.bsh.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/controller/FileHandlerController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/controller/HandleConfigFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/controller/VerifierController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/DataTypeMismatchException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/DuplicateLabelException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/DuplicateVariableException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/EFlags.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/ElementConcatenator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/IncorrectParameterException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Instruction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/InvalidSourceOperandException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/JumpOutOfBoundsException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryAddressCalculator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryReadException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryRestrictedAccessException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryToMemoryException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryWriteException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/MissingSizeDirectiveException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Mxscr.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserLabelFactory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserMemoryFactory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserRegisterFactory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/PatternList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Register.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/StackPopException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/StackPushException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessageList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessageListWithSize.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/FilePathLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionFileErrorInvalidMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionFileErrorMissingMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionInvalid.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionMissing.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterFileErrorInvalidMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterFileErrorMissingMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterInvalid.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterMissing.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/error_logging/Types.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/file_handling/ChoiceBoxLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePath.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePathHandler.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePathList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/configuration/model/file_handling/SaveFile.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/MainApp.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/PreloaderApp.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/FindAndReplaceDialogController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/FindDialogController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/LoaderController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/MemoryController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/SettingsController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/SettingsEditor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/StringCollectionContainer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/model/ErrorLog.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/model/Flag.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/editor/model/TextEditor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/ConsoleEngine.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/VisualizationEngine.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/simulator_visualizer/model/SimulationState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/configuratio_environment.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/loader.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/settings.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/settings_editor.fxml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/img/splash_screen.png</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/artifacts/thsst_calvis_jar.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/ConfigurationEnvironmentController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/EnvironmentConfigurator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/FileHandlerController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/HandleConfigFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/controller/VerifierController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISInstruction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/CALVISParser.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Calculator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/DataTypeMismatchException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/DuplicateLabelException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/DuplicateVariableException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/EFlags.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Instruction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InstructionList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/InvalidSourceOperandException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/JumpOutOfBoundsException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Memory.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryAddressCalculator.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryReadException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryRestrictedAccessException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryToMemoryException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MemoryWriteException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/MissingSizeDirectiveException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Register.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/RegisterList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPopException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/StackPushException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/engine/Token.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorMessageList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorMessageListWithSize.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/ErrorType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/FilePathLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/InstructionFileErrorInvalidMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/InstructionFileErrorMissingMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/InstructionInvalid.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/InstructionMissing.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/RegisterFileErrorInvalidMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/RegisterFileErrorMissingMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/RegisterInvalid.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/RegisterMissing.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/error_logging/Types.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/file_handling/ChoiceBoxLogger.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/file_handling/FilePath.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/file_handling/FilePathHandler.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/file_handling/FilePathList.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/EnvironmentConfiguration/model/file_handling/SaveFile.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/ConsoleController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/ErrorLoggerController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/FindAndReplaceDialogController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/FindDialogController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/MainApp.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/MemoryController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/RegistersController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/StringCollectionContainer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/controller/WorkspaceController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/model/AssemblyComponent.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/model/ErrorLog.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/model/FlagUI.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/MainEditor/model/TextEditor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/ConsoleEngine.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/SystemController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/SimulatorVisualizer/controller/VisualizationEngine.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/SimulatorVisualizer/model/SimulationState.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/fxml/configurationEnvironment.fxml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration default="false" name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -1346,12 +937,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00064" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455974811899</created>
-      <option name="number" value="00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1455974811899</updated>
-    </task>
     <task id="LOCAL-00065" summary="Fix build.gradle &amp; OS Compatibility of jar.">
       <created>1456309956742</created>
       <option name="number" value="00065" />
@@ -1640,7 +1225,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459178506660</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="formatted">
+      <created>1459178629142</created>
+      <option name="number" value="00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1459178629142</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1673,11 +1264,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3149847" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3149847" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.411315" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="392" y="134" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31651375" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18739903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18739903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4361874" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1753,13 +1344,13 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/find_and_replace.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Registers/register_list.csv">
@@ -1798,13 +1389,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/registers.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
@@ -1829,20 +1420,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24695122">
           <caret line="253" column="64" selection-start-line="253" selection-start-column="64" selection-end-line="253" selection-end-column="64" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7076677">
           <caret line="380" column="0" selection-start-line="380" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1850,7 +1440,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1858,7 +1447,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.1629393">
           <caret line="163" column="34" selection-start-line="163" selection-start-column="34" selection-end-line="163" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
