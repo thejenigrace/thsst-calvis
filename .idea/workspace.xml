@@ -6,14 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed sse unpacked instructions">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="formatted">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpi2ps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpi2ps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtps2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtps2pi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtsi2ss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtsi2ss.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtss2si.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtss2si.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttps2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttps2pi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttss2si.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttss2si.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1348,12 +1342,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00062" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455770877493</created>
-      <option name="number" value="00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1455770877493</updated>
-    </task>
     <task id="LOCAL-00063" summary="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator">
       <created>1455973719936</created>
       <option name="number" value="00063" />
@@ -1642,7 +1630,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459177006596</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="formatted">
+      <created>1459177274931</created>
+      <option name="number" value="00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1459177274931</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1708,7 +1702,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix UI for Configuration Environment" />
     <MESSAGE value="- Rename File Structure&#10;- Added Settings &amp; Loader Features" />
     <MESSAGE value="Fix Play Speed Settings" />
     <MESSAGE value="Fix Settings &amp; Loader" />
@@ -1733,7 +1726,8 @@
     <MESSAGE value="fixed sse2 logical &amp; unpacked instructions" />
     <MESSAGE value="fixed sse logical instructions" />
     <MESSAGE value="fixed sse unpacked instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sse unpacked instructions" />
+    <MESSAGE value="formatted" />
+    <option name="LAST_COMMIT_MESSAGE" value="formatted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
