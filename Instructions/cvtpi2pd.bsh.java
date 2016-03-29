@@ -16,7 +16,7 @@ execute(des, src, registers, memory) {
             if( checkSizeOfSource(registers, srcSize) ) {
                 String srcValue = registers.get(src);
                 String desValue = registers.get(des);
-
+                storeResultToRegister(registers,calculator,des,srcValue,desValue,desSize);
             }
             else {
                 //throw exception
@@ -34,11 +34,11 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers,calculator,des,srcValue,desValue,desSize) {
-    long dUpper = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(0,8), 16), 32);
-    long dLower = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(8), 16), 32);
+    long lsUpper = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(0,8),16), 32); //63:32
+    long lsLower = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(8,16),16), 32); //31:0
 
-    String sUpper = calculator.convertIntegerToDoublePrecisionFP(dUpper);
-    String sLower = calculator.convertIntegerToDoublePrecisionFP(dLower);
+    String sUpper = calculator.toHexDoublePrecisionString(lsUpper);
+    String sLower = calculator.toHexDoublePrecisionString(lsLower);
 
     registers.set(des, sUpper + sLower);
 }

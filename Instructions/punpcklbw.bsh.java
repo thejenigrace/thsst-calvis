@@ -7,10 +7,10 @@ execute(des, src, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
-	}
-	else {
+	} else {
 		srcSize = memory.getBitSize(src);
 	}
 
@@ -20,23 +20,19 @@ execute(des, src, registers, memory) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = memory.read(src, desSize);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
@@ -49,8 +45,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
     if( desSize == 64 ) {
         start = 8;
         limit = 14;
-    }
-    else if( desSize == 128 ) {
+    } else if( desSize == 128 ) {
         start = 16;
         limit = 30;
     }

@@ -34,15 +34,25 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    long dPacked4 = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(0,8), 16), 32);
-    long dPacked3 = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(8,16), 16), 32);
-    long dPacked2 = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(16,24), 16), 32);
-    long dPacked1 = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(24), 16), 32);
+    String str4 = srcValue.substring(0,8);
+    String str3 = srcValue.substring(8,16);
+    String str2 = srcValue.substring(16,24);
+    String str1 = srcValue.substring(24);
 
-    String sPacked4 = calculator.convertIntegerToDoublePrecisionFP(dPacked4);
-    String sPacked3 = calculator.convertIntegerToDoublePrecisionFP(dPacked3);
-    String sPacked2 = calculator.convertIntegerToDoublePrecisionFP(dPacked2);
-    String sPacked1 = calculator.convertIntegerToDoublePrecisionFP(dPacked1);
+    System.out.println("str4 = " + str4);
+    System.out.println("str3 = " + str3);
+    System.out.println("str2 = " + str2);
+    System.out.println("str1 = " + str1);
+
+    Long dPacked4 = calculator.convertToSignedInteger(new BigInteger(str4,16), 32);
+    Long dPacked3 = calculator.convertToSignedInteger(new BigInteger(str3,16), 32);
+    Long dPacked2 = calculator.convertToSignedInteger(new BigInteger(str2,16), 32);
+    Long dPacked1 = calculator.convertToSignedInteger(new BigInteger(str1,16), 32);
+
+    String sPacked4 = calculator.toHexSinglePrecisionString(dPacked4);
+    String sPacked3 = calculator.toHexSinglePrecisionString(dPacked3);
+    String sPacked2 = calculator.toHexSinglePrecisionString(dPacked2);
+    String sPacked1 = calculator.toHexSinglePrecisionString(dPacked1);
 
     registers.set(des, sPacked4 + sPacked3 + sPacked2 + sPacked1);
 }
@@ -60,7 +70,7 @@ boolean checkSizeOfDestination(registers, desSize) {
 boolean checkSizeOfSource(registers, srcSize) {
     boolean checkSize = false;
 
-    if( 128 == srcSize ) {
+    if( 64 == srcSize || 128 == srcSize ) {
         checkSize = true;
     }
 

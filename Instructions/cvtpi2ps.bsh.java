@@ -1,12 +1,11 @@
 execute(des, src, registers, memory) {
-    Calculator calculator = new Calculator(registers, memory);
-
     int desSize = 0;
     int srcSize = 0;
 
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
 	}
@@ -17,28 +16,30 @@ execute(des, src, registers, memory) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             String source = memory.read(src, 64);
             String destination = registers.get(des);
             storeResultToRegister(registers, calculator, des, source, destination, desSize);
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    float fLower = calculator.hexToSinglePrecisionFloatingPoint(source.substring(8));
-    float fUpper = calculator.hexToSinglePrecisionFloatingPoint(source.substring(0, 8));
+    Calculator calculator = new Calculator(registers, memory);
 
-    String sLower = calculator.singlePrecisionFloatingPointToHex(fLower);
-    String sUpper = calculator.singlePrecisionFloatingPointToHex(fUpper);
+    BigInteger bLower = new BigInteger(source.substring(8));
+    BigInteger bUpper = new BigInteger(source.substring(0, 8));
+
+    long lLower = calculator.convertToSignedInteger(bLower, 32);
+    long lUpper = calculator.convertToSignedInteger(bUpper, 32);
+    
+    String sLower = calculator.toHexSinglePrecisionString(lLower);
+    String sUpper = calculator.toHexSinglePrecisionString(lUpper);
 
     registers.set(des, sUpper + sLower);
 }
@@ -49,7 +50,7 @@ boolean checkSizeOfDestination(registers, desSize) {
     if( 128 == desSize ) {
         checkSize = true;
     }
-    
+
     return checkSize;
 }
 

@@ -34,10 +34,11 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sUpper = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(0,16));
-    String sLower = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(16));
+    String s31To0 = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(0,16));
+    String s63To31 = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(16));
+    String s127To64 = "0000000000000000";
 
-    registers.set(des, sUpper + sLower);
+    registers.set(des, s127To64 + s63To31 + s31To0);
 }
 
 boolean checkSizeOfDestination(registers, desSize) {

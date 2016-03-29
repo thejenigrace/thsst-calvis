@@ -7,10 +7,10 @@ execute(des, src, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
-	}
-	else {
+	} else {
 		srcSize = memory.getBitSize(src);
 	}
 
@@ -20,23 +20,19 @@ execute(des, src, registers, memory) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = memory.read(src, desSize);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
@@ -54,8 +50,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
         for(int i = 0; i <= 12; i+=4) {
             if( i == 12 ) {
                 biDes = new BigInteger(source.substring(i), 16);
-            }
-            else {
+            } else {
                 biDes = new BigInteger(source.substring(i, i + 4), 16);
             }
 
@@ -65,12 +60,10 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             if( sign.equals("0") ) {
                 if( biDes.compareTo(wordpos) == 1 ) {
                     result += "FF";
-                }
-                else {
+                } else {
                     if( i == 12 ) {
                         result += source.substring(i + 2);
-                    }
-                    else {
+                    } else {
                         result += source.substring(i + 2, i + 4);
                     }
                 }
@@ -82,8 +75,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
         for(int i = 0; i <= 12; i+=4) {
             if( i == 12 ) {
                 biDes = new BigInteger(destination.substring(i), 16);
-            }
-            else {
+            } else {
                 biDes = new BigInteger(destination.substring(i, i + 4), 16);
             }
 
@@ -93,12 +85,10 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             if( sign.equals("0") ) {
                 if( biDes.compareTo(wordpos) == 1 ) {
                     result += "FF";
-                }
-                else {
+                } else {
                     if( i == 12 ) {
                         result += destination.substring(i + 2);
-                    }
-                    else {
+                    } else {
                         result += destination.substring(i + 2, i + 4);
                     }
                 }
@@ -106,13 +96,11 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                 result += "00";
             }
         }
-    }
-    else if( desSize == 128 ) {
+    } else if( desSize == 128 ) {
         for(int i = 0; i <= 28; i+=4) {
             if( i == 28 ) {
                 biDes = new BigInteger(source.substring(i), 16);
-            }
-            else {
+            } else {
                 biDes = new BigInteger(source.substring(i, i + 4), 16);
             }
 
@@ -122,12 +110,10 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             if( sign.equals("0") ) {
                 if( biDes.compareTo(wordpos) == 1 ) {
                     result += "FF";
-                }
-                else {
+                } else {
                     if( i == 28 ) {
                         result += source.substring(i + 2);
-                    }
-                    else {
+                    } else {
                         result += source.substring(i + 2, i + 4);
                     }
                 }
@@ -139,8 +125,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
         for(int i = 0; i <= 28; i+=4) {
             if( i == 28 ) {
                 biDes = new BigInteger(destination.substring(i), 16);
-            }
-            else {
+            } else {
                 biDes = new BigInteger(destination.substring(i, i + 4), 16);
             }
 
@@ -150,12 +135,10 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             if( sign.equals("0") ) {
                 if( biDes.compareTo(wordpos) == 1 ) {
                     result += "FF";
-                }
-                else {
+                } else {
                     if( i == 28 ) {
                         result += destination.substring(i + 2);
-                    }
-                    else {
+                    } else {
                         result += destination.substring(i + 2, i + 4);
                     }
                 }

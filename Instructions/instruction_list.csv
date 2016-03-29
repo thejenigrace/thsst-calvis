@@ -38,7 +38,7 @@ cmppd,Instructions/cmppd.bsh.java,0,0,3,x,x/m128,i
 cmpps,Instructions/cmpps.bsh.java,0,0,3,x,x/m128,i
 cmpsb,Instructions/cmpsb.bsh.java,1,0,0,,,
 cmpsd,Instructions/cmpsd.bsh.java,1,0,0,,,
-cmpsd,Instructions/cmpsd.bsh.java,0,0,3,x,x/m32,i
+cmpsd,Instructions/cmpsd.bsh.java,0,0,3,x,x/m64,i
 cmpss,Instructions/cmpss.bsh.java,0,0,3,x,x/m32,i
 cmpsw,Instructions/cmpsw.bsh.java,1,0,0,,,
 cmpxchg,Instructions/cmpxchg.bsh.java,1,0,2,r/m,r,
@@ -52,7 +52,7 @@ cvtpd2pi,Instructions/cvtpd2pi.bsh.java,0,0,2,d,x/m128,
 cvtpd2ps,Instructions/cvtpd2ps.bsh.java,0,0,2,x,x/m64,
 cvtpi2pd,Instructions/cvtpi2pd.bsh.java,0,0,2,x,d/m64,
 cvtpi2ps,Instructions/cvtpi2ps.bsh.java,0,0,2,x,d/m64,
-cvtps2dq,Instructions/cvtps2dq.bsh.java,0,0,2,x,x/m128,
+cvtps2dq,Instructions/cvtps2dq.bsh.java,0,0,2,d,x/m128,
 cvtps2pd,Instructions/cvtps2pd.bsh.java,0,0,2,x,x/m64,
 cvtps2pi,Instructions/cvtps2pi.bsh.java,0,0,2,d,x/m64,
 cvtsd2si,Instructions/cvtsd2si.bsh.java,0,0,2,r32,x/m64,
@@ -332,3 +332,6 @@ fnstsw,Instructions/fnstsw.bsh.java,1,0,0,,,
 fnop,Instructions/fnop.bsh.java,1,0,0,,,
 fxsave,Instructions/fxsave.bsh.java,1,0,0,,,
 fxrstore,Instructions/fxrstore.bsh.java,1,0,0,,,
+printf,Instructions/printf.bsh.java,1,0,0
+scanf,Instructions/scanf.bsh.java,1,0,0
+cls,Instructions/cls.bsh.java,1,0,0

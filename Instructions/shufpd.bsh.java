@@ -7,11 +7,9 @@ execute(des, src, immediate, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
-	if( src.isRegister() ) {
+
+    if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
-	}
-	else {
-		srcSize = memory.getBitSize(src);
 	}
 
     if( des.isRegister() ) {
@@ -21,45 +19,39 @@ execute(des, src, immediate, registers, memory) {
                 String destination = registers.get(des);
                 String i8 = calculator.hexToBinaryString(immediate.getValue(), 8);
                 storeResultToRegister(registers, calculator, des, source, destination, i8, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = memory.read(src, desSize);
                 String destination = registers.get(des);
                 String i8 = calculator.hexToBinaryString(immediate.getValue(), 8);
                 storeResultToRegister(registers, calculator, des, source, destination, i8, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, i8, desSize) {
-    String i0 = i8.charAt(7) + "";
-    String i1 = i8.charAt(6) + "";
+    String i0 = i8.charAt(0) + "";
+    String i1 = i8.charAt(1) + "";
     String result = "";
 
     if( i0.equals("0") ) {
-        result += destination.substring(16);
-    }
-    else {
         result += destination.substring(0, 16);
+    } else {
+        result += destination.substring(16);
     }
 
     if( i1.equals("0") ) {
-        result += source.substring(16);
-    }
-    else {
         result += source.substring(0, 16);
+    } else {
+        result += source.substring(16);
     }
 
     registers.set(des, result);

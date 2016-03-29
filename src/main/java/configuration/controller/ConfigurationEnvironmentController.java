@@ -157,12 +157,12 @@ public class ConfigurationEnvironmentController implements Initializable {
         Task task = createTaskWorkspace();
         loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
 
-        // comment this
-////        progressBarWorkspace.progressProperty().bind(task.progressProperty());
-////        vBoxDetails.setVisible(false);
-////        vBoxConfiguration.setVisible(false);
-////        vBoxButtons.setVisible(false);
-////        new Thread(task).start();
+//        // comment this
+//////        progressBarWorkspace.progressProperty().bind(task.progressProperty());
+//////        vBoxDetails.setVisible(false);
+//////        vBoxConfiguration.setVisible(false);
+//////        vBoxButtons.setVisible(false);
+//////        new Thread(task).start();
 
         Thread thread = new Thread(task);
         thread.setDaemon(true);

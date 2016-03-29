@@ -48,11 +48,11 @@ String compare(calculator,desValue,srcValue,op3) {
   System.out.println("desValue = " + desValue);
   System.out.println("srcValue = " + srcValue);
 
-  float floatDes = calculator.hexToSinglePrecisionFloatingPoint(desValue);
-  float floatSrc = calculator.hexToSinglePrecisionFloatingPoint(srcValue);
+  Float floatDes = calculator.hexToSinglePrecisionFloatingPoint(desValue);
+  Float floatSrc = calculator.hexToSinglePrecisionFloatingPoint(srcValue);
 
   String operand = op3.getValue();
-  int intOperand = Integer.parseInt(operand,16);
+  int intOperand = Integer.parseInt(operand);
   System.out.println("intOperand = " + intOperand);
   switch(intOperand) {
     case 0:

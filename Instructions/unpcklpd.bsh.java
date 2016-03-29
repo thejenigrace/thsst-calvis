@@ -7,11 +7,9 @@ execute(des, src, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
-	if( src.isRegister() ) {
+
+    if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
-	}
-	else {
-		srcSize = memory.getBitSize(src);
 	}
 
     if( des.isRegister() ) {
@@ -20,28 +18,24 @@ execute(des, src, registers, memory) {
                 String source = registers.get(src);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 String source = memory.read(src, desSize);
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, desSize) {    
+storeResultToRegister(registers, calculator, des, source, destination, desSize) {
     String result = "";
 
     result += source.substring(16);

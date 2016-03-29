@@ -14,18 +14,18 @@ execute(des, src, registers, memory) {
     if( des.isRegister() && checkSizeOfDestination(registers, desSize) ) {
         if( src.isRegister() ) {
             if( checkSizeOfSource(registers, srcSize) ) {
-                String source = registers.get(src);
-                String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
+                String srcValue = registers.get(src);
+                String desValue = registers.get(des);
+                storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
             }
             else {
                 //throw exception
             }
         }
         else if( src.isMemory() ) {
-            String source = memory.read(src, 128);
-            String destination = registers.get(des);
-            storeResultToRegister(registers, calculator, des, source, destination, desSize);
+            String srcValue = memory.read(src, 128);
+            String desValue = registers.get(des);
+            storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
         }
     }
     else {
@@ -34,10 +34,11 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sUpper = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(0,16));
-    String sLower = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(16));
+    String s31To0 = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(0,16));
+    String s63To31 = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(16));
+    String s127To64 = "0000000000000000";
 
-    registers.set(des, sUpper + sLower);
+    registers.set(des, s127To64 + s63To31 + s31To0);
 }
 
 boolean checkSizeOfDestination(registers, desSize) {
