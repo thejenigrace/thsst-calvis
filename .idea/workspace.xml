@@ -6,192 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="all current instructions">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/addpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/addsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/divpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/divsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/f2xm1.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fabs.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fadd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/faddp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fbld.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fchs.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fclex.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcmov.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcom.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcomi.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcomip.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcompp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fcos.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fdecstp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fdiv.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fdivp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fdivr.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fdivrp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/ffree.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fiadd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/ficom.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fidiv.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fidivr.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fild.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fimul.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fincstp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/finit.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fist.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fistp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fisub.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fisubr.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fld.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fld1.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldcw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldenv.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldl2e.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldl2t.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldlg2.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldln2.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldpi.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fldz.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fmul.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fmulp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnclex.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fninit.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnop.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnsave.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnstcw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnstenv.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fnstsw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fpatan.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fprem.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fprem1.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fptan.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/frndint.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsave.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fscale.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsin.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsincos.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsqrt.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fst.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fstcw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fstenv.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fstp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fstsw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsub.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsubp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsubr.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fsubrp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/ftst.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fucom.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fucomi.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fucomip.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fucomp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fucompp.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fxam.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fxch.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fxrstore.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fxsave.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fxtract.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fyl2x.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fyl2xp1.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/maxpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/maxsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/minpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/minsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/mulpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/mulsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pasdbw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pinsrw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pmaxsw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pminsw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pminub.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/psadbw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pshufd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pshufhw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pshuflw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pshufw.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/rcpps.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/rcpss.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/rsqrtps.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/rsqrtss.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/sqrtpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/sqrtps.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/sqrtsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/sqrtss.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/subpd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/subsd.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/datatype/LongDouble.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87Handler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87StatusRegister.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/css/flags.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/DataTypeMismatchException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DataTypeMismatchException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/DuplicateLabelException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DuplicateLabelException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/DuplicateVariableException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DuplicateVariableException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/IncorrectParameterException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/IncorrectParameterException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InvalidSourceOperandException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/InvalidSourceOperandException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/JumpOutOfBoundsException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/JumpOutOfBoundsException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryReadException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryReadException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryRestrictedAccessException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryRestrictedAccessException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryToMemoryException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryWriteException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryWriteException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MissingSizeDirectiveException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MissingSizeDirectiveException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/StackPopException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPopException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/StackPushException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPushException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorLogger.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessage.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessageList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessageList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorMessageListWithSize.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessageListWithSize.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/ErrorType.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/FilePathLogger.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/FilePathLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionFileErrorInvalidMessage.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorInvalidMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionFileErrorMissingMessage.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorMissingMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionInvalid.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionInvalid.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/InstructionMissing.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionMissing.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterFileErrorInvalidMessage.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterFileErrorInvalidMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterFileErrorMissingMessage.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterFileErrorMissingMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterInvalid.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterInvalid.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/RegisterMissing.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterMissing.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/error_logging/Types.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/Types.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/file_handling/ChoiceBoxLogger.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/ChoiceBoxLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePath.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePath.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePathHandler.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/file_handling/FilePathList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/file_handling/SaveFile.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/SaveFile.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="forgot to add pmovmskb">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pmovmskb.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/mulss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/mulss.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/paddb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/paddb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pmulhw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pmulhw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pmullw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pmullw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/subss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/subss.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/FileHandlerController.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/FileHandlerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/HandleConfigFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/HandleConfigFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/VerifierController.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/controller/VerifierController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/EFlags.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/EFlags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryAddressCalculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryAddressCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Mxscr.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Mxscr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserLabelFactory.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserLabelFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Register.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Register.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -245,7 +62,7 @@
       <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.6123499">
+            <state vertical-scroll-proportion="2.379747">
               <caret line="333" column="48" selection-start-line="333" selection-start-column="48" selection-end-line="333" selection-end-column="48" />
               <folding />
             </state>
@@ -1143,12 +960,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00043" summary="Fix Register &amp; Memory Window">
-      <created>1455004409158</created>
-      <option name="number" value="00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004409158</updated>
-    </task>
     <task id="LOCAL-00044" summary="Fix Register &amp; Memory Window">
       <created>1455004504544</created>
       <option name="number" value="00044" />
@@ -1437,7 +1248,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458576764534</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="all current instructions">
+      <created>1459257002963</created>
+      <option name="number" value="00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1459257002982</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1462,11 +1279,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30769232" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30769232" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34056988" sideWeight="0.5045386" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2913257" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
@@ -1528,8 +1345,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator" />
-    <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
@@ -1553,7 +1368,9 @@
     <MESSAGE value="with syntax checker&#10;fixed movd and movq" />
     <MESSAGE value="verifying Calvis Instruction" />
     <MESSAGE value="nice templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="nice templates" />
+    <MESSAGE value="all current instructions" />
+    <MESSAGE value="forgot to add pmovmskb" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot to add pmovmskb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1977,7 +1794,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6123499">
+        <state vertical-scroll-proportion="2.379747">
           <caret line="333" column="48" selection-start-line="333" selection-start-column="48" selection-end-line="333" selection-end-column="48" />
           <folding />
         </state>
