@@ -2,6 +2,8 @@ package simulator_visualizer.controller;
 
 import configuration.controller.ConfiguratorEnvironment;
 import configuration.model.engine.*;
+import configuration.model.exceptions.DataTypeMismatchException;
+import configuration.model.exceptions.DuplicateLabelException;
 import editor.controller.ConsoleController;
 import editor.controller.WorkspaceController;
 import editor.model.AssemblyComponent;
@@ -33,6 +35,7 @@ public class SystemController {
     private HashMap<String, CalvisInstruction> executionMap;
     private HashMap<Integer, String[][]> registerStackMap;
     private HashMap<Integer, String> flagsStackMap;
+    private HashMap<Integer, String> mxscrStackMap;
     private HashMap<Integer, String[][]> memoryStackMap;
     private Integer stackCount;
 
@@ -48,6 +51,7 @@ public class SystemController {
 
         this.registerStackMap = new HashMap<>();
         this.flagsStackMap = new HashMap<>();
+        this.mxscrStackMap = new HashMap<>();
         this.memoryStackMap = new HashMap<>();
         this.stackCount = 0;
     }
@@ -178,6 +182,12 @@ public class SystemController {
                     EFlags flags = this.registerList.getEFlags();
                     String flagsValue = flagsStackMap.get(stackCount);
                     flags.setValue(flagsValue);
+                    flags.refreshFlags();
+
+                    Mxscr mxscr = this.registerList.getMxscr();
+                    String mxscrValue = mxscrStackMap.get(stackCount);
+                    mxscr.setValue(mxscrValue);
+                    mxscr.refreshFlags();
 
                     String[][] memoryArray = memoryStackMap.get(stackCount);
                     Map memoryMap = this.memory.getMemoryMap();
@@ -366,6 +376,10 @@ public class SystemController {
         EFlags flags = registerList.getEFlags();
         String flagsValue = flags.getValue();
         this.flagsStackMap.put(stackCount, flagsValue);
+
+        Mxscr mxscr = registerList.getMxscr();
+        String mxscrValue = mxscr.getValue();
+        this.mxscrStackMap.put(stackCount, mxscrValue);
 
         Map<String, String> memoryMap = memory.getMemoryMap();
         Iterator<String> iterator2 = memoryMap.keySet().iterator();

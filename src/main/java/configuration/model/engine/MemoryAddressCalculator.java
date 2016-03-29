@@ -2,6 +2,7 @@ package configuration.model.engine;
 
 import bsh.EvalError;
 import bsh.Interpreter;
+import configuration.model.exceptions.MemoryRestrictedAccessException;
 
 /**
  * Created by Goodwin Chua on 1/27/2016.

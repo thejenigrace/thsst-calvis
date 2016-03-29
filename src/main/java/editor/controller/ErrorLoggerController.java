@@ -79,7 +79,7 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                         if (lines[i].length() + linesRead < causePosition) {
                             linesRead += lines[i].length();
                         } else {
-                            if (parsedCode.charAt(causePosition - 1) == '\n') {
+                            if (causePosition - 1 >= 0 && parsedCode.charAt(causePosition - 1) == '\n') {
                                 cause = "Line number: " + i;
                             } else {
                                 cause = "Line number: " + (i + 1);

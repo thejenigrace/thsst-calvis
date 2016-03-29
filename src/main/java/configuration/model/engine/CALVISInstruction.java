@@ -1,6 +1,7 @@
 package configuration.model.engine;
 
 import bsh.EvalError;
+import configuration.model.exceptions.*;
 import editor.controller.ConsoleController;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class CalvisInstruction {
 	private Token[] tokens;
 	private RegisterList registers;
 	private Memory memory;
-	private boolean isConditional;
+	private int appendType;
 	private boolean isVerifiable = true;
 	private ArrayList<String> allowable;
 	private ConsoleController console;
@@ -29,13 +30,13 @@ public class CalvisInstruction {
 	}
 
 	public CalvisInstruction(Instruction ins, String name, Object[] params,
-	                         RegisterList registers, Memory memory, boolean isConditional, ArrayList<String> allowable) {
+	                         RegisterList registers, Memory memory, int appendType, ArrayList<String> allowable) {
 		this.ins = ins;
 		this.name = name;
 		this.params = params;
 		this.registers = registers;
 		this.memory = memory;
-		this.isConditional = isConditional;
+		this.appendType = appendType;
 		this.allowable = allowable;
 	}
 
@@ -81,7 +82,7 @@ public class CalvisInstruction {
 		for ( int i = 0; i < size; i++ ) {
 			// System.out.println(params[i] + " : " + params[i].getClass());
 			if ( params[i] instanceof String ) {
-				tokens[i] = new Token(Token.REG, params[i].toString());
+				tokens[i] = new Token(Token.CC, params[i].toString());
 			} else if ( params[i] instanceof Token ) {
 				tokens[i] = (Token) params[i];
 			} else if ( params[i] instanceof Token[] ) {
@@ -111,9 +112,10 @@ public class CalvisInstruction {
 		String currentSpecification = "";
 
 		for ( int i = 0; i < tokens.length; i++ ) {
+			boolean isCC = false;
 			String tokenValue = tokens[i].getValue();
 			if ( tokens[i].isRegister() ) {
-				if ( tokens[i].getValue().equals("CL") ) {
+				if ( tokenValue.equals("CL") ) {
 					currentSpecification += "(r8|c)";
 				} else if ( registers.find(tokenValue)[RegisterList.TYPE].equals("4") ) {
 					currentSpecification += "d";
@@ -132,10 +134,17 @@ public class CalvisInstruction {
 				} else {
 					currentSpecification += "[0-9]+";
 				}
+			} else if ( tokens[i].isCC() ) {
+				// ignore
+				isCC = true;
 			} else {
 				currentSpecification += tokens[i].getType().charAt(0);
 			}
-			currentSpecification += "/";
+
+			if ( !isCC ) {
+				currentSpecification += "/";
+			}
+
 		}
 		if ( currentSpecification.endsWith("/") ) {
 			currentSpecification = currentSpecification.substring(0, currentSpecification.length() - 1);
@@ -143,9 +152,10 @@ public class CalvisInstruction {
 
 		boolean parameterCheck = false;
 		// instruction must have parameters if we want to verify it
-		if ( allowable != null ) {
+		if ( allowable != null && tokens.length > 0 ) {
 			for ( String specification : allowable ) {
-//				System.out.println(specification + " " + specification.matches(currentSpecification));
+//				System.out.println(specification + " " + currentSpecification
+//						+ " " + specification.matches(currentSpecification));
 				if ( specification.matches(currentSpecification) ){
 					// matched, go outside of the loop
 					parameterCheck = true;
@@ -154,42 +164,59 @@ public class CalvisInstruction {
 			}
 		}
 
+		if ( tokens.length == 0 ) {
+			parameterCheck = true;
+		}
+
 		if ( parameterCheck ) {
-			int clIndex = 0;
-			if ( allowable != null ) {
-				for ( String parameterSpecification : allowable ) {
-					String[] instance = parameterSpecification.split("/");
-					for ( int i = 0; i < instance.length; i++ ) {
-						if ( instance[i].equals("c") ) {
-							clIndex = i;
-							System.out.println("found CL");
-							break;
+
+			String upperCaseName = name.toUpperCase();
+			// special check for FCMOV
+			if ( name.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)")) {
+				if ( !tokens[1].getValue().equals("ST0") ) {
+					throw new IncorrectParameterException(name, line);
+				}
+			} else if ( name.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ){
+				if ( !tokens[0].getValue().equals("ST0") ) {
+					throw new IncorrectParameterException(name, line);
+				}
+			} else {
+				int clIndex = 0;
+				if ( allowable != null ) {
+					for ( String parameterSpecification : allowable ) {
+						String[] instance = parameterSpecification.split("/");
+						for ( int i = 0; i < instance.length; i++ ) {
+							if ( instance[i].equals("c") ) {
+								clIndex = i;
+//							System.out.println("found CL");
+								break;
+							}
 						}
 					}
 				}
-			}
 
-			if ( tokens.length > 1 & !isConditional ) {
-				Token first = tokens[0];
-				Token second = tokens[1];
+				if ( tokens.length > 1 & appendType == 0 ) {
+					Token first = tokens[0];
+					Token second = tokens[1];
 
-				if ( first.isMemory() && second.isMemory() ) {
-					throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
-				} else {
-					if ( isVerifiable ) {
-						enforce2ParameterValidation(first, second, line, clIndex);
-					} else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ) {
+					if ( first.isMemory() && second.isMemory() ) {
+						throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
+					} else {
+						if ( isVerifiable ) {
+							enforce2ParameterValidation(first, second, line, clIndex);
+						} else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ) {
+							enforce2ParameterValidation(first, second, line, clIndex);
+						}
+					}
+				} else if ( tokens.length > 2 && appendType != 0 ) { //for cmov
+					Token first = tokens[1];
+					Token second = tokens[2];
+
+					if ( first.isMemory() && second.isMemory() ) {
+						throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
+					} else {
 						enforce2ParameterValidation(first, second, line, clIndex);
 					}
-				}
-			} else if ( tokens.length > 2 && isConditional ) { //for cmov
-				Token first = tokens[1];
-				Token second = tokens[2];
-
-				if ( first.isMemory() && second.isMemory() ) {
-					throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
-				} else {
-					enforce2ParameterValidation(first, second, line, clIndex);
 				}
 			}
 		} else {

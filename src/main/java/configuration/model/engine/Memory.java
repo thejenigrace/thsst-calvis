@@ -1,5 +1,9 @@
 package configuration.model.engine;
 
+import configuration.model.exceptions.DuplicateVariableException;
+import configuration.model.exceptions.MemoryReadException;
+import configuration.model.exceptions.MemoryWriteException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

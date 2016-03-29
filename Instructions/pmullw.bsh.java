@@ -51,8 +51,8 @@ String executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr,
 			strToBuildSrc.append(srcStr.charAt(x));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
+		BigInteger destination = new BigInteger((strToBuildDes).toString(),16);
+		BigInteger source = new BigInteger((strToBuildSrc).toString(),16);
 		destination = destination.multiply(source);
 		resultingMultiply += c.hexZeroExtend(destination.toString(16), sizeOfHex * 2).substring(sizeOfHex);
 	}

@@ -9,6 +9,7 @@ public class Token {
 	public static final String LABEL = "lbl_type";
 	public static final String STRING = "str_type";
 	public static final String FLOAT = "flt_type";
+	public static final String CC = "cc_type";
 
 	private String value;
 	private String type;
@@ -55,7 +56,8 @@ public class Token {
 			case Token.REG:
 				this.value = this.value.toUpperCase();
 				break;
-			case Token.LABEL:
+			case Token.LABEL: //fall through
+			case Token.CC:
 				break;
 			case Token.STRING:
 				this.value = this.value.substring(1, this.value.length() - 1);
@@ -85,6 +87,10 @@ public class Token {
 
 	public boolean isFloatLiteral() {
 		return this.type.equals(Token.FLOAT);
+	}
+
+	public boolean isCC() {
+		return this.type.equals(Token.CC);
 	}
 
 	public String toString() {

@@ -4,7 +4,7 @@ import configuration.model.engine.CalvisParser;
 import configuration.model.engine.InstructionList;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
-import configuration.model.error_logging.ErrorLogger;
+import configuration.model.errorlogging.ErrorLogger;
 
 import java.util.ArrayList;
 

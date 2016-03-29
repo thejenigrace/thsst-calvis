@@ -11,11 +11,13 @@ public class TokenBag {
 	private TokenDef hex;
 	private TokenDef dec;
 	private Grule justLabel;
+	private TokenDef floating;
 
-	public TokenBag(TokenDef hex, TokenDef dec, Grule justLabel) {
+	public TokenBag(TokenDef hex, TokenDef dec, Grule justLabel, TokenDef floating) {
 		this.hex = hex;
 		this.dec = dec;
 		this.justLabel = justLabel;
+		this.floating = floating;
 	}
 
 	public TokenDef hex() {
@@ -28,5 +30,9 @@ public class TokenBag {
 
 	public Grule justLabel() {
 		return justLabel;
+	}
+
+	public TokenDef floating() {
+		return floating;
 	}
 }

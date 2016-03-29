@@ -1,5 +1,7 @@
 package configuration.model.engine;
 
+import configuration.model.exceptions.DuplicateLabelException;
+
 import java.util.ArrayList;
 
 /**

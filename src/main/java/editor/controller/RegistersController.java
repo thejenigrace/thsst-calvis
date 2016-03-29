@@ -35,13 +35,22 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @FXML
     private TreeTableColumn<Register, String> colRegisterValue;
 
-    private ObservableList<Flag> flagList1;
+
     @FXML
     private TableView<Flag> tableViewFlags1;
     @FXML
     private TableColumn flagsName1;
     @FXML
     private TableColumn flagsValue1;
+    @FXML
+    private TableView<Flag> tableViewFlags2;
+    @FXML
+    private TableColumn flagsName2;
+    @FXML
+    private TableColumn flagsValue2;
+
+    private ObservableList<Flag> flagList1;
+    private ObservableList<Flag> flagList2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,6 +61,9 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
         flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         flagsValue1.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+
+        flagsName2.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        flagsValue2.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
     }
 
     @Override
@@ -86,6 +98,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
 //            createTreeTableView(map);
             flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
             tableViewFlags1.setItems(flagList1);
+
+            flagList2 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
+            tableViewFlags2.setItems(flagList2);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,19 +110,15 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @Override
     public void update(String currentLine, int lineNumber) {
         treeTableViewRegister.refresh();
-
-        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
-        tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
+        tableViewFlags2.refresh();
     }
 
     @Override
     public void refresh() {
         treeTableViewRegister.refresh();
-
-        flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
-        tableViewFlags1.setItems(flagList1);
         tableViewFlags1.refresh();
+        tableViewFlags2.refresh();
     }
 
     private void createTreeTableView(Map map) {

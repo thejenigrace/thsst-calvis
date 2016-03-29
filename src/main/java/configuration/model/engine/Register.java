@@ -13,6 +13,10 @@ public class Register {
         initializeValue();
     }
 
+    public Register() {
+
+    }
+
     /*	populates register value with HEX value
         of 0s depending on size
      */

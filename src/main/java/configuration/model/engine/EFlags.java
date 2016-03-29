@@ -9,14 +9,17 @@ public class EFlags extends Register {
     private ArrayList<Flag> flags;
 
     public EFlags(String name, int size) {
-        super(name, size);
+        this.value = "00000002";
+        buildFlags();
+        initializeValue();
     }
 
     @Override
     public void initializeValue() {
-        super.initializeValue();
-        this.value = this.value.substring(1) + "2";
-        buildFlags();
+        this.value = "00000002";
+        for ( Flag f : flags ) {
+            f.setFlagValue("0");
+        }
     }
 
     public void buildFlags() {
@@ -31,17 +34,40 @@ public class EFlags extends Register {
         this.flags.add(new Flag("Interrupt", getInterruptFlag()));
     }
 
+    public void refreshFlags() {
+        for ( int i = 0; i < flags.size(); i++) {
+            String flagName = flags.get(i).getName();
+            switch ( flagName ) {
+                case "Carry": flags.get(i).setFlagValue(getCarryFlag());
+                    break;
+                case "Sign": flags.get(i).setFlagValue(getSignFlag());
+                    break;
+                case "Overflow": flags.get(i).setFlagValue(getOverflowFlag());
+                    break;
+                case "Zero": flags.get(i).setFlagValue(getZeroFlag());
+                    break;
+                case "Parity": flags.get(i).setFlagValue(getParityFlag());
+                    break;
+                case "Auxiliary": flags.get(i).setFlagValue(getAuxiliaryFlag());
+                    break;
+                case "Direction": flags.get(i).setFlagValue(getDirectionFlag());
+                    break;
+                case "Interrupt": flags.get(i).setFlagValue(getInterruptFlag());
+                    break;
+            }
+        }
+    }
+
     private void setFlag(String name, String value) {
         for ( int i = 0; i < flags.size(); i++) {
-            if ( flags.get(i).getName().equals(name)) {
-                flags.set(i, new Flag(name, value));
+            if ( flags.get(i).getName().equals(name) ) {
+                flags.get(i).setFlagValue(value);
                 break;
             }
         }
     }
 
     public ArrayList<Flag> getFlagList() {
-        buildFlags();
         return this.flags;
     }
 

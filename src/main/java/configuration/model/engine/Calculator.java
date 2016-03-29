@@ -1,5 +1,6 @@
 package configuration.model.engine;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class Calculator {
@@ -25,19 +26,19 @@ public class Calculator {
         switch (con) {
             case "A": // fall through
             case "NBE":
-                return (CF.equals("0") || ZF.equals("0"));
+                return (CF.equals("0") && ZF.equals("0"));
             case "AE":
             case "NB":
                 return CF.equals("0");
             case "B":
             case "NAE":
-                return (CF.equals("1") || ZF.equals("1"));
+                return CF.equals("1");
             case "BE":
             case "NA":
-                return CF.equals("1");
+                return (CF.equals("1") || ZF.equals("1"));
             case "G":
             case "NLE":
-                return ((SF.equals(OF)) || (ZF.equals("1")));
+                return ((SF.equals(OF)) && (ZF.equals("0")));
             case "GE":
             case "NL":
                 return SF.equals(OF);
@@ -75,6 +76,11 @@ public class Calculator {
                 return registers.get("CX").equals("0000");
             case "ECXZ":
                 return registers.get("ECX").equals("00000000");
+            case "U":
+                return PF.equals("1");
+            case "NU":
+                return PF.equals("0");
+
             default:
                 System.out.println("Condition not found");
                 return false;

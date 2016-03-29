@@ -48,6 +48,7 @@ public class CalvisParser {
 		TokenDef colon = lang.newToken(":");
 		TokenDef sectionData = lang.newToken("SECTION .DATA");
 		TokenDef hex = lang.newToken(PatternList.hexPattern);
+		TokenDef floatingPoint = lang.newToken(PatternList.floatingPointPattern);
 		TokenDef dec = lang.newToken(PatternList.decPattern);
 
 		justLabel.define(PatternList.labelPattern)
@@ -55,7 +56,7 @@ public class CalvisParser {
 
 		label.define(justLabel, colon);
 
-		this.tokenBag = new TokenBag(hex, dec, justLabel);
+		this.tokenBag = new TokenBag(hex, dec, justLabel, floatingPoint);
 
 		ParserRegisterFactory parserRegisterFactory = new ParserRegisterFactory(registers, lang, elementConcatenator);
 
@@ -111,9 +112,12 @@ public class CalvisParser {
 			System.out.println("");
 
 			String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
-			if ( instructions.isConditionalInstruction(prodRule[0]) ) {
+
+			String appendType = prodRule[3];
+
+			if ( !appendType.equals("0") ) {
 				insName = "(\\b((" + prodRule[0] + "|" + prodRule[0].toLowerCase()
-						+ ")(" + instructions.getConditionsRegEx() + "))\\b)";
+						+ ")(" + instructions.getConditionsRegEx(appendType) + "))\\b)";
 			}
 
 			TokenDef instructionName = lang.newToken(insName);
@@ -134,7 +138,7 @@ public class CalvisParser {
 					break;
 			}
 		}
-
+		
 		TokenDef comma = lang.newToken(",");
 
 		Grule instruction = lang.newGrule();
@@ -175,18 +179,46 @@ public class CalvisParser {
 
 	private CalvisInstruction prepareCalvisInstruction(Object[] args) {
 		int numParameters = args.length / 2;
-		String anInstruction = ((Token) args[0]).getValue();
-		ArrayList<Object> tokenArr = new ArrayList<>();
-		boolean isConditionalInstruction = false;
-		String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
-
-		if ( !anInstruction.equals(baseConditionalInstruction) ) {
-			String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
-			replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");
-			tokenArr.add(replaced);
-			anInstruction = baseConditionalInstruction;
-			isConditionalInstruction = true;
+		String anInstruction;
+		if ( args[0] instanceof Token ) {
+			anInstruction = ((Token) args[0]).getValue();
+		} else {
+			anInstruction = (String) args[0];
 		}
+
+//		String anInstruction = ((Token) args[0]).getValue();
+
+		ArrayList<Object> tokenArr = new ArrayList<>();
+
+		boolean isAppended = false;
+		String base = instructions.getBaseConditionalInstruction("1", anInstruction);
+
+		if ( !anInstruction.equals(base) ){
+			isAppended = true;
+		} else {
+			base = instructions.getBaseConditionalInstruction("2", anInstruction);
+			if ( !anInstruction.equals(base) ) {
+				isAppended = true;
+			}
+		}
+		if ( isAppended ) {
+			String replaced = anInstruction.replaceAll(base, "");
+			replaced = replaced.replaceAll(base.toUpperCase(), "");
+			tokenArr.add(replaced);
+			anInstruction = base;
+		}
+
+		String[] prodRule = instructions.find(anInstruction, numParameters);
+
+//		String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
+//
+//		if ( !anInstruction.equals(baseConditionalInstruction) ) {
+//			String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
+//			replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");
+//			tokenArr.add(replaced);
+//			anInstruction = baseConditionalInstruction;
+//			isConditionalInstruction = true;
+//		}
 
 		Instruction someInstruction = instructions.getInstruction(anInstruction);
 		for ( int i = 0; i < numParameters; i++ ) {
@@ -195,7 +227,6 @@ public class CalvisParser {
 		Object[] tokens = new Object[tokenArr.size()];
 		tokens = tokenArr.toArray(tokens);
 
-		String[] prodRule = instructions.find(anInstruction);
 		ArrayList<String> result = new ArrayList<>();
 
 		if ( numParameters == 1 ) {
@@ -266,7 +297,7 @@ public class CalvisParser {
 
 		CalvisInstruction calvisInstruction
 				= new CalvisInstruction(someInstruction, anInstruction,
-				tokens, registers, memory, isConditionalInstruction, result);
+				tokens, registers, memory, Integer.parseInt(prodRule[3]), result);
 
 		// Insert special check if instruction should be verified
 		calvisInstruction.setVerifiable(instructions.isVerifiable(anInstruction));

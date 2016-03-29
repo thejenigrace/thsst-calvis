@@ -1,10 +1,11 @@
 package configuration.model.engine;
 
 import configuration.controller.HandleConfigFunctions;
-import configuration.model.error_logging.ErrorLogger;
-import configuration.model.error_logging.ErrorMessage;
-import configuration.model.error_logging.ErrorMessageList;
-import configuration.model.error_logging.Types;
+import configuration.model.errorlogging.ErrorLogger;
+import configuration.model.errorlogging.ErrorMessage;
+import configuration.model.errorlogging.ErrorMessageList;
+import configuration.model.errorlogging.Types;
+import configuration.model.exceptions.DataTypeMismatchException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,24 +14,24 @@ import java.util.*;
 
 public class RegisterList {
 
-    static final int NAME = 0;
-    static final int SOURCE = 1;
-    static final int SIZE = 2;
-    static final int TYPE = 3;
-    static final int START = 4;
-    static final int END = 5;
+    public static final int NAME = 0;
+    public static final int SOURCE = 1;
+    public static final int SIZE = 2;
+    public static final int TYPE = 3;
+    public static final int START = 4;
+    public static final int END = 5;
+    public static String instructionPointerName = "EIP";
+    public static int instructionPointerSize = 32;
+    public static int MAX_SIZE = 32; //default is 32 bit registers
 
     private TreeMap<String, Register> map;
     private ArrayList<String[]> lookup;
     private EFlags flags;
     private Mxscr mxscr;
+    private X87Handler x87;
+
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
-
     private TreeMap<String, TreeMap<String, Register>> childMap;
-
-    public static String instructionPointerName = "EIP";
-    public static int instructionPointerSize = 32;
-    public static int MAX_SIZE = 32; //default is 32 bit registers
 
     public RegisterList(String csvFile, int maxSize) {
         Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
@@ -39,8 +40,9 @@ public class RegisterList {
         this.map = new TreeMap<>(orderedComparator);
         this.lookup = new ArrayList<>();
         MAX_SIZE = maxSize;
-
         this.childMap = new TreeMap<>(orderedComparator);
+
+        this.x87 = new X87Handler(this);
 
         BufferedReader br = null;
         String line = "";
@@ -374,6 +376,8 @@ public class RegisterList {
             this.map.get(s).initializeValue();
         }
         flags.initializeValue();
+        mxscr.initializeValue();
+        x87.clear();
 
         // initialize childMap
         for (String s : this.childMap.keySet()) {
@@ -436,5 +440,9 @@ public class RegisterList {
         Integer[] list = new Integer[available.size()];
 
         return available.toArray(list);
+    }
+
+    public X87Handler x87(){
+        return this.x87;
     }
 }

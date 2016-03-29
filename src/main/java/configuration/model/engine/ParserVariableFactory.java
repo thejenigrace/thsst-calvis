@@ -1,6 +1,9 @@
 package configuration.model.engine;
 
 import com.github.pfmiles.dropincc.*;
+import configuration.model.exceptions.DataTypeMismatchException;
+import configuration.model.exceptions.DuplicateVariableException;
+import configuration.model.exceptions.MemoryWriteException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,14 +38,18 @@ public class ParserVariableFactory {
 
 	private void createVariableGrules() {
 		TokenDef stringLiteral = lang.newToken(PatternList.stringLiteralPattern);
-		TokenDef floatingPoint = lang.newToken(PatternList.floatingPointPattern);
 		TokenDef comma = lang.newToken(",");
+
+		Grule negateDecimal = lang.newGrule();
+		negateDecimal.define(CC.op("\\-"), tokenBag.dec())
+				.action((Action<Object[]>) matched -> new Token((String) matched[1], Token.DEC));
 
 		ArrayList<Element> possibleValues = new ArrayList<>();
 		possibleValues.add(tokenBag.hex());
-		possibleValues.add(tokenBag.dec());
 		possibleValues.add(stringLiteral);
-		possibleValues.add(floatingPoint);
+		possibleValues.add(tokenBag.floating());
+//		possibleValues.add(tokenBag.dec());
+		possibleValues.add(negateDecimal);
 		Element valueElement = elementConcatenator.concatenateOrSubRules(possibleValues);
 
 		this.variableDeclarations = lang.newGrule();
@@ -90,7 +97,6 @@ public class ParserVariableFactory {
 								}
 							}
 						} else if ( token.isStringLiteral() ) {
-//                            System.out.println(token.getValue() + " " + token.getType());
 							try {
 								byte[] bytes = tokenValue.getBytes("US-ASCII");
 								for ( int i = 0; i < bytes.length; i++ ) {
@@ -102,7 +108,41 @@ public class ParserVariableFactory {
 							} catch ( Exception e ) {
 								exceptions.add(e);
 							}
+						} else if ( token.isFloatLiteral() ) {
+							if ( prefixSize >= 32 ) {
+								String representation = "";
+								switch ( prefixSize ) {
+									case 32:
+										// declare as 32 bit IEEE single precision
+										float floatValue = Float.parseFloat(tokenValue);
+										representation = Integer.toHexString(Float.floatToIntBits(floatValue));
+										break;
+									case 64:
+										// declare as 64 bit IEEE double precision
+										Double doubleValue = Double.parseDouble(tokenValue);
+										representation = Long.toHexString(Double.doubleToLongBits(doubleValue));
+										break;
+									case 80:
+										// declare as 80 bit extended precision
 
+										// NOT YET IMPLEMENTED
+										break;
+									default:
+										exceptions.add(new DataTypeMismatchException(labelName.getValue(),
+												dataType.getValue(), tokenValue));
+										break;
+								}
+
+								try {
+									memory.write(memory.getVariablePointer(), representation, prefixSize);
+									memory.incrementVariablePointer(prefixSize);
+								} catch ( MemoryWriteException e ) {
+									exceptions.add(e);
+								}
+							} else {
+								exceptions.add(new DataTypeMismatchException(labelName.getValue(),
+										dataType.getValue(), tokenValue));
+							}
 						}
 					}
 

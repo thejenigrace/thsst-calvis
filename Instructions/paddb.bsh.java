@@ -42,17 +42,17 @@ execute(des, src, registers, memory) {
 
 String executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd){
 	String resultingAdd = "";
-	for(int x = 0; x < srcSize / 4; x + sizeOfHex){
+	for(int x = 0; x < srcSize / 4; x + sizeOfAdd){
 		StringBuilder strToBuildDes = new StringBuilder();
 		StringBuilder strToBuildSrc = new StringBuilder();
 
-		for(int y = 0; y < sizeOfHex; y++){
+		for(int y = 0; y < sizeOfAdd; y++){
 			strToBuildDes.append(desStr.charAt(x));
 			strToBuildSrc.append(srcStr.charAt(x));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
+		BigInteger destination = new BigInteger(strToBuildDes.toString(),16);
+		BigInteger source = new BigInteger(strToBuildSrc.toString(),16);
 		destination = destination.add(source);
 		resultingAdd += c.hexZeroExtend( destination.toString(16).substring(destination.toString(16).length() % sizeOfHex), sizeOfHex);
 	}

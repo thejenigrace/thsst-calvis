@@ -20,7 +20,7 @@ execute( des, src, registers, memory ) {
 		srcSize = memory.getBitSize(src);
 	}
 
-		f( des.isRegister() ){
+		if( des.isRegister() ){
 		String destination = registers.get(des);
 		String resultingHexAdd = "";
 		String source = "";

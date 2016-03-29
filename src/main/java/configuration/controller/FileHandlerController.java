@@ -1,9 +1,9 @@
 package configuration.controller;
 
-import configuration.model.error_logging.InstructionFileErrorInvalidMessage;
-import configuration.model.error_logging.InstructionInvalid;
-import configuration.model.file_handling.FilePathHandler;
-import configuration.model.file_handling.FilePathList;
+import configuration.model.errorlogging.InstructionFileErrorInvalidMessage;
+import configuration.model.errorlogging.InstructionInvalid;
+import configuration.model.filehandling.FilePathHandler;
+import configuration.model.filehandling.FilePathList;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

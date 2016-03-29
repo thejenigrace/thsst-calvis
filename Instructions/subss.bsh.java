@@ -24,7 +24,8 @@ execute(des, src, registers, memory) {
 		String destination = registers.get(des);
 		String resultingHexAdd = "";
 		String source = "";
-     	floatValuesDes = c.HexToSinglePrecisionFloatingPoint(destination);
+
+		floatValuesDes = c.HexToSinglePrecisionFloatingPoint(destination);
 
 		if(isRegisterSrc){
 			source = registers.get(src);
@@ -43,6 +44,7 @@ execute(des, src, registers, memory) {
 		floatValuesResult[3] = (floatValuesDes[3] - floatValuesSrc);
 
 		resultingHexAdd = c.SinglePrecisionFloatingPointToHex(floatValuesResult);
+
 		registers.set(des, resultingHexAdd);
 	}
 }

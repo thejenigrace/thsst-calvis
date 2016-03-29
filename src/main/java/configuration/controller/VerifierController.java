@@ -1,11 +1,11 @@
 package configuration.controller;
 
-import configuration.model.error_logging.ErrorLogger;
-import configuration.model.error_logging.ErrorMessage;
-import configuration.model.error_logging.ErrorMessageList;
-import configuration.model.error_logging.ErrorMessageListWithSize;
-import configuration.model.error_logging.ErrorType;
-import configuration.model.error_logging.Types;
+import configuration.model.errorlogging.ErrorLogger;
+import configuration.model.errorlogging.ErrorMessage;
+import configuration.model.errorlogging.ErrorMessageList;
+import configuration.model.errorlogging.ErrorMessageListWithSize;
+import configuration.model.errorlogging.ErrorType;
+import configuration.model.errorlogging.Types;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import java.util.ArrayList;

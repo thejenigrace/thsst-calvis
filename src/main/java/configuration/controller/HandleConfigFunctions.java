@@ -1,9 +1,9 @@
 package configuration.controller;
 
-import configuration.model.error_logging.RegisterFileErrorInvalidMessage;
-import configuration.model.error_logging.RegisterFileErrorMissingMessage;
-import configuration.model.error_logging.RegisterInvalid;
-import configuration.model.error_logging.RegisterMissing;
+import configuration.model.errorlogging.RegisterFileErrorInvalidMessage;
+import configuration.model.errorlogging.RegisterFileErrorMissingMessage;
+import configuration.model.errorlogging.RegisterInvalid;
+import configuration.model.errorlogging.RegisterMissing;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
