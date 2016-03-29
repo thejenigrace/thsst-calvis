@@ -29,7 +29,7 @@ execute(registers, memory) {
 }
 
 // SSE2 Data Transfer Instruction
-xecute(des,src,registers,memory) {
+execute(des,src,registers,memory) {
     int QWORD = 64;
     String srcValue;
     Calculator calculator = new Calculator(registers,memory);

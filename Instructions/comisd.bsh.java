@@ -14,22 +14,30 @@ execute(s,t,registers,memory) {
   // Get the sValue from 0 to 31 bit
   sValue = calculator.cutToCertainHexSize("getLower",sValue,DWORD/4);
 
-  float floatS = calculator.hexToDoublePrecisionFloatingPoint(sValue);
-  float floatT = calculator.hexToDoublePrecisionFloatingPoint(tValue);
+  double doubleS = calculator.hexToDoublePrecisionFloatingPoint(sValue);
+  double doubleT = calculator.hexToDoublePrecisionFloatingPoint(tValue);
 
-  if(Float.isNaN(floatS) || Float.isNaN(floatT)) {
+  int retval = Double.compare(doubleS, doubleT);
+  if(Double.isNaN(doubleS) || Double.isNaN(doubleT)) {
+    System.out.println("isNaN");
     eFlags.setZeroFlag("1");
     eFlags.setParityFlag("1");
     eFlags.setCarryFlag("1");
-  } else if(floatS > floatT) {
+    // S > T
+  } else if(retval > 0) {
+    System.out.println("isGreater");
     eFlags.setZeroFlag("0");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("0");
-  } else if(floatS < floatT) {
+    // S < T
+  } else if(retval < 0) {
+    System.out.println("isLess");
     eFlags.setZeroFlag("0");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("1");
-  } else if(floatS == floatT) {
+    // S == T
+  } else if(retval == 0) {
+    System.out.println("isEquals");
     eFlags.setZeroFlag("1");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("0");
