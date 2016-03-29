@@ -38,11 +38,17 @@ storeResultToRegister(registers, calculator, des, source, destination, srcSize) 
     String sLower = "";
 
     if( srcSize == 32 ) {
-        fLower = calculator.hexToSinglePrecisionFloatingPoint(source);
-        sLower = calculator.singlePrecisionFloatingPointToHex(fLower);
+        BigInteger bLower = new BigInteger(source);
+
+        long lLower = calculator.convertToSignedInteger(bLower, 32);
+
+        String sLower = calculator.toHexSinglePrecisionString(lLower);
     } else if( srcSize == 64 ) {
-        fLower = calculator.hexToSinglePrecisionFloatingPoint(source.substring(8));
-        sLower = calculator.singlePrecisionFloatingPointToHex(fLower);
+        BigInteger bLower = new BigInteger(source.substring(8));
+
+        long lLower = calculator.convertToSignedInteger(bLower, 32);
+
+        String sLower = calculator.toHexSinglePrecisionString(lLower);
     }
 
     registers.set(des, sLower);
