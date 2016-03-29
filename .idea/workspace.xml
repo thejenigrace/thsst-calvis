@@ -6,17 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix hexDoublePrecisionFPToHexInteger method">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix SSE2 Conversion">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtdq2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtdq2pd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2dq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2dq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2pi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2ps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2ps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpi2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpi2pd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtps2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtps2pd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttpd2dq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttpd2dq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttpd2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttpd2pi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,18 +57,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29735935">
-              <caret line="315" column="13" selection-start-line="315" selection-start-column="13" selection-end-line="315" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -948,12 +928,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00044" summary="Fix Register &amp; Memory Window">
-      <created>1455004504544</created>
-      <option name="number" value="00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004504544</updated>
-    </task>
     <task id="LOCAL-00045" summary="Fix Register &amp; Memory Window">
       <created>1455004532717</created>
       <option name="number" value="00045" />
@@ -1242,7 +1216,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459246311505</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Fix SSE2 Conversion">
+      <created>1459257956716</created>
+      <option name="number" value="00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1459257956716</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1267,7 +1247,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="960" height="1018" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1279,7 +1259,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39848813" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31709844" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20943953" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20915033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43952802" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1333,7 +1313,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator" />
     <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
@@ -1358,7 +1337,8 @@
     <MESSAGE value="with syntax checker&#10;fixed movd and movq" />
     <MESSAGE value="Fix MMX, SSE, &amp; SSE2" />
     <MESSAGE value="Fix hexDoublePrecisionFPToHexInteger method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix hexDoublePrecisionFPToHexInteger method" />
+    <MESSAGE value="Fix SSE2 Conversion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix SSE2 Conversion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
