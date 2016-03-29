@@ -46,22 +46,36 @@ multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,re
     System.out.println("longResult = "+longResult);
 
     int registerLowerHalfHexSize = registers.getHexSize(registerLowerHalf);
-    String[] results=calculator.cutToCertainSize(Long.toHexString(longResult), registerLowerHalfHexSize);
+    // String[] results=calculator.cutToCertainSize(Long.toHexString(longResult), registerLowerHalfHexSize);
 
-    registers.set(registerLowerHalf, results[1]);
+    String result = Long.toHexString(longResult);
+    System.out.println("result = " + result);
+    result = calculator.hexZeroExtend(result,registerLowerHalfHexSize*2);
+    System.out.println("extend result = " + result);
+    String finalResult = result.substring(result.length()-registerLowerHalfHexSize);
+    System.out.println("finalResult = " + finalResult);
+
+    registers.set(registerLowerHalf, finalResult);
 
     EFlags ef = registers.getEFlags();
     BigInteger checkUpperHalf;
     if ( registerUpperHalf != null ){
-        registers.set(registerUpperHalf,results[0]);
-        checkUpperHalf = new BigInteger(results[0], 16);
+        System.out.println(result.length());
+        int start = result.length() - registerLowerHalfHexSize * 2;
+        int end = result.length() - registerLowerHalfHexSize;
+        String upperResult = result.substring(start, end);
+        registers.set(registerUpperHalf,upperResult);
+        checkUpperHalf = new BigInteger(upperResult, 16);
 
-        System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
+        System.out.println(registerUpperHalf + " = " + upperResult.toUpperCase());
+
+        // System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
     } else {
         checkUpperHalf = new BigInteger(registers.get("AH"), 16);
     }
 
-    System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());
+    // System.out.println(registerLowerHalf + " = " + results[1].toUpperCase())
+    System.out.println(registerLowerHalf + " = " + finalResult.toUpperCase());
 
     if( checkUpperHalf.equals(BigInteger.ZERO) ){
         System.out.println("CF = 0; OF = 0");
@@ -144,15 +158,33 @@ multiplyForTwoOperand(des,registers,calculator,multiplier) {
         System.out.println("longMultiplier = "+longMultiplier);
         System.out.println("longResult = "+longResult);
 
+        // BigInteger checkTruncatedResult;
+        // String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
+        // if ( results[0].equals("0000") || results[0].equals("00000000") ){
+        //     registers.set(des,results[0]);
+        //     checkTruncatedResult = new BigInteger(results[0], 16);
+        // }else {
+        //     registers.set(des,results[1]);
+        //     checkTruncatedResult = new BigInteger(results[1], 16);
+        // }
+
+        String result = Long.toHexString(longResult);
+        System.out.println("result = " + result);
+        result = calculator.hexZeroExtend(result,desHexSize);
+        System.out.println("extend result = " + result);
+        String finalResult = result.substring(result.length()-desHexSize);
+        System.out.println("finalResult = " + finalResult);
+
         BigInteger checkTruncatedResult;
-        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
-        if ( results[0].equals("0000") || results[0].equals("00000000") ){
-            registers.set(des,results[1]);
-            checkTruncatedResult = new BigInteger(results[1], 16);
-        }else {
-            registers.set(des,results[0]);
-            checkTruncatedResult = new BigInteger(results[0], 16);
-        }
+        // if ( finalResult.equals("0000") || finalResult.equals("00000000") ){
+        //     registers.set(des,finalResult);
+        //     checkTruncatedResult = new BigInteger(finalResult, 16);
+        // }else {
+        //     registers.set(des,results[1]);
+        //     checkTruncatedResult = new BigInteger(results[1], 16);
+        // }
+        registers.set(des,finalResult);
+        checkTruncatedResult = new BigInteger(finalResult,16);
 
         EFlags ef = registers.getEFlags();
         if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
@@ -212,15 +244,27 @@ multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier) {
         System.out.println("longMultiplier = "+longMultiplier);
         System.out.println("longResult = "+longResult);
 
+//        BigInteger checkTruncatedResult;
+//        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
+//        if ( results[0].equals("0000") || results[0].equals("00000000") ){
+//            registers.set(des,results[1]);
+//            checkTruncatedResult = new BigInteger(results[1], 16);
+//        }else {
+//            registers.set(des,results[0]);
+//            checkTruncatedResult = new BigInteger(results[0], 16);
+//        }
+
+        String result = Long.toHexString(longResult);
+        System.out.println("result = " + result);
+        result = calculator.hexZeroExtend(result,desHexSize);
+        System.out.println("extend result = " + result);
+        String finalResult = result.substring(result.length()-desHexSize);
+        System.out.println("finalResult = " + finalResult);
+
+        registers.set(des,finalResult);
+
         BigInteger checkTruncatedResult;
-        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
-        if ( results[0].equals("0000") || results[0].equals("00000000") ){
-            registers.set(des,results[1]);
-            checkTruncatedResult = new BigInteger(results[1], 16);
-        }else {
-            registers.set(des,results[0]);
-            checkTruncatedResult = new BigInteger(results[0], 16);
-        }
+        checkTruncatedResult = new BigInteger(finalResult,16);
 
         EFlags ef = registers.getEFlags();
         if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
