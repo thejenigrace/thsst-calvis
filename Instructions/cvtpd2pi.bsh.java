@@ -34,8 +34,8 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sUpper = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(0,8));
-    String sLower = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(8));
+    String sUpper = calculator.hexDoublePrecisionFPToHexInteger(srcValue.substring(0,8));
+    String sLower = calculator.hexDoublePrecisionFPToHexInteger(srcValue.substring(8));
 
     registers.set(des, sUpper + sLower);
 }

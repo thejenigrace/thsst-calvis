@@ -674,6 +674,13 @@ public class Calculator {
         return doublePrecisionFloatingPointToHex(d);
     }
 
+    public double toHexDoublePrecisionString(String hexValue) {
+        Long l = Long.parseLong(hexValue, 16);
+        Double d = Double.longBitsToDouble(l);
+
+        return d;
+    }
+
 
 //    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
 //        Long l = Long.parseLong(hexValue, 16);
@@ -714,14 +721,14 @@ public class Calculator {
 
         return Integer.toHexString(f.intValue());
     }
-//
-//    public String hexDoublePrecisionFPToHexInteger(String hexValue) {
-//        Double d = hexToDoublePrecisionFloatingPoint(hexValue);
-//
-//        System.out.println("int = " + d.longValue());
-//        System.out.println("int hex = " + Long.toHexString(d.longValue()));
-//
-//        return Long.toHexString(d.longValue());
-//    }
+
+    public String hexDoublePrecisionFPToHexInteger(String hexValue) {
+        Double d = toHexDoublePrecisionString(hexValue);
+
+        System.out.println("int = " + d.longValue());
+        System.out.println("int hex = " + Long.toHexString(d.longValue()));
+
+        return Long.toHexString(d.longValue());
+    }
 
 }
