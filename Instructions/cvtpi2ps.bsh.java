@@ -37,7 +37,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
 
     long lLower = calculator.convertToSignedInteger(bLower, 32);
     long lUpper = calculator.convertToSignedInteger(bUpper, 32);
-    
+
     String sLower = calculator.toHexSinglePrecisionString(lLower);
     String sUpper = calculator.toHexSinglePrecisionString(lUpper);
 

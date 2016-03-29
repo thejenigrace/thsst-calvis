@@ -9,6 +9,7 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -54,6 +55,8 @@ public class TextEditor extends AssemblyComponent {
     public TextEditor(WorkspaceController workspaceController) {
         this.workspaceController = workspaceController;
         this.codeArea = new CodeArea();
+        codeArea.setStyle("-fx-highlight-fill: lightgray;");
+        codeArea.setFont(Font.font(14));
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.richChanges().subscribe(change -> {
 //            this.tab.setGraphic(new Text("*"));
