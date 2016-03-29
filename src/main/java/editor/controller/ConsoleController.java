@@ -125,8 +125,8 @@ public class ConsoleController extends AssemblyComponent {
         this.lineBefore = 0;
     }
 
-    public void attachCALVISInstruction(CalvisInstruction calvisInstruction) {
-        this.currentInstruction = calvisInstruction;
+    public void attachCALVISInstruction(CalvisInstruction CalvisInstruction) {
+        this.currentInstruction = CalvisInstruction;
     }
 
 }
