@@ -41,7 +41,7 @@ execute(des, src, registers, memory) {
     }
 }
 
-storeResultToRegister(registers, calculator, des, source, destination, desSize) {    
+storeResultToRegister(registers, calculator, des, source, destination, desSize) {
     String result = "";
 
     if( source >= 0 && source <= 15 ) {

@@ -7,7 +7,7 @@ execute(des, src, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
-    
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
 	} else {

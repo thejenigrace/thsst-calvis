@@ -9,7 +9,7 @@ execute(des, src, registers, memory) {
 		desSize = registers.getBitSize(des);
         destination = calculator.hexToBinaryString(registers.get(des), des);
 	}
-    
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
 	} else {
