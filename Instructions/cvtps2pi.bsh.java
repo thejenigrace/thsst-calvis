@@ -7,7 +7,7 @@ execute(des, src, registers, memory) {
     if( des.isRegister() ) {
 		desSize = registers.getBitSize(des);
 	}
-    
+
 	if( src.isRegister() ) {
 		srcSize = registers.getBitSize(src);
 	}
@@ -36,11 +36,11 @@ storeResultToRegister(registers, calculator, des, source, destination, src) {
     String sUpper = "";
 
     if( src.isMemory() ) {
-        sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(8));
-        sUpper = calculator.hexSinglePrecisionFPToHexInteger(source.substring(0, 8));
+        sLower = calculator.convertHexSinglePrecisionToHexInteger(source.substring(8));
+        sUpper = calculator.convertHexSinglePrecisionToHexInteger(source.substring(0, 8));
     } else if( src.isRegister() ) {
-        sLower = calculator.hexSinglePrecisionFPToHexInteger(source.substring(24));
-        sUpper = calculator.hexSinglePrecisionFPToHexInteger(source.substring(16, 24));
+        sLower = calculator.convertHexSinglePrecisionToHexInteger(source.substring(24));
+        sUpper = calculator.convertHexSinglePrecisionToHexInteger(source.substring(16, 24));
     }
 
     registers.set(des, sUpper + sLower);
