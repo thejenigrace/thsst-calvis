@@ -1,7 +1,4 @@
 execute(des, src, registers, memory) {
-    int QWORD = 64;
-    int DQWORD = 128;
-
     Calculator calculator = new Calculator(registers, memory);
 
     int desSize = 0;
@@ -26,7 +23,7 @@ execute(des, src, registers, memory) {
             }
         }
         else if( src.isMemory() ) {
-            String srcValue = memory.read(src, QWORD);
+            String srcValue = memory.read(src, 64);
             String desValue = registers.get(des);
             storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
         }
@@ -37,17 +34,14 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    // String str4 = srcValue.substring(0,8);
-    // String str3 = srcValue.substring(8,16);
-    //
-    // Long dPacked4 = calculator.convertToSignedInteger(new BigInteger(str4,16), 32);
-    // Long dPacked3 = calculator.convertToSignedInteger(new BigInteger(str3,16), 32);
+    String s31To0 = srcValue.substring(0,8);
+    String s63To32 = srcValue.substring(8,16);
 
-    String sUpper = calculator.hexToDoublePrecisionFloatingPoint(srcValue.substring(0,8));
-    String sLower = calculator.hexToDoublePrecisionFloatingPoint(srcValue.substring(8));
+    Long lUpper = calculator.convertToSignedInteger(new BigInteger(s31To0,16), 32);
+    Long lLower = calculator.convertToSignedInteger(new BigInteger(s63To32,16), 32);
 
-    sUpper = calculator.hexZeroExtend(sUpper, QWORD/4);
-    sLower = calculator.hexZeroExtend(sLower, QWORD/4);
+    String sUpper = calculator.toHexDoublePrecisionString(lUpper);
+    String sLower = calculator.toHexDoublePrecisionString(lLower);
 
     registers.set(des, sUpper + sLower);
 }

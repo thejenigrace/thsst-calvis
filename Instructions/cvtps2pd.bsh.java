@@ -19,7 +19,7 @@ execute(des, src, registers, memory) {
             if( checkSizeOfSource(registers, srcSize) ) {
                 String srcValue = registers.get(src);
                 String desValue = registers.get(des);
-                storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
+                storeResultToRegister(registers, calculator, src, des, srcValue, desValue, desSize);
             }
             else {
                 //throw exception
@@ -28,7 +28,7 @@ execute(des, src, registers, memory) {
         else if( src.isMemory() ) {
             String srcValue = memory.read(src, QWORD);
             String desValue = registers.get(des);
-            storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
+            storeResultToRegister(registers, calculator, src, des, srcValue, desValue, desSize);
         }
     }
     else {
@@ -37,11 +37,22 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sUpper = calculator.convertSPToDP(srcValue.substring(0,8));
-    String sLower = calculator.convertSPToDP(srcValue.substring(8));
+    // String sUpper = calculator.convertSPToDP(srcValue.substring(0,8));
+    // String sLower = calculator.convertSPToDP(srcValue.substring(8,16));
 
-    sUpper = calculator.hexZeroExtend(sUpper, QWORD/4);
-    sLower = calculator.hexZeroExtend(sLower, QWORD/4);
+    String sUpper;
+    String sLower;
+
+    if(src.isRegister()) {
+        sUpper = calculator.convertSPToDP(srcValue.substring(0,16));
+        sLower = calculator.convertSPToDP(srcValue.substring(16,32));
+    } else if(src.isMemory()) {
+        sUpper = calculator.convertSPToDP(srcValue.substring(0,8));
+        sLower = calculator.convertSPToDP(srcValue.substring(8,16));
+    }
+
+    // sUpper = calculator.hexZeroExtend(sUpper, QWORD/4);
+    // sLower = calculator.hexZeroExtend(sLower, QWORD/4);
 
     registers.set(des, sUpper + sLower);
 }

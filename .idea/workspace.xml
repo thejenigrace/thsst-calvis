@@ -6,9 +6,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix hexDoublePrecisionFPToHexInteger method">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtdq2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtdq2pd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2dq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2dq.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2pi.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpd2ps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpd2ps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtpi2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtpi2pd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvtps2pd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvtps2pd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttpd2dq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttpd2dq.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cvttpd2pi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cvttpd2pi.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -63,8 +70,8 @@
       <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4274354">
-              <caret line="724" column="41" selection-start-line="724" selection-start-column="41" selection-end-line="724" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.29735935">
+              <caret line="315" column="13" selection-start-line="315" selection-start-column="13" selection-end-line="315" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -518,9 +525,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="1440" />
     <option name="y" value="23" />
-    <option name="width" value="720" />
-    <option name="height" value="838" />
+    <option name="width" value="960" />
+    <option name="height" value="1018" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -940,12 +948,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00043" summary="Fix Register &amp; Memory Window">
-      <created>1455004409158</created>
-      <option name="number" value="00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004409158</updated>
-    </task>
     <task id="LOCAL-00044" summary="Fix Register &amp; Memory Window">
       <created>1455004504544</created>
       <option name="number" value="00044" />
@@ -1234,7 +1236,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459232323640</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Fix hexDoublePrecisionFPToHexInteger method">
+      <created>1459246311504</created>
+      <option name="number" value="00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1459246311505</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1258,7 +1266,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="720" height="838" extended-state="0" />
+    <frame x="1440" y="23" width="960" height="1018" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1267,8 +1275,8 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29015544" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28820375" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.44369972" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23542117" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39848813" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31709844" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20943953" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1325,7 +1333,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix IMUL Instruction" />
     <MESSAGE value="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator" />
     <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
@@ -1350,7 +1357,8 @@
     <MESSAGE value="refactored-parser" />
     <MESSAGE value="with syntax checker&#10;fixed movd and movq" />
     <MESSAGE value="Fix MMX, SSE, &amp; SSE2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix MMX, SSE, &amp; SSE2" />
+    <MESSAGE value="Fix hexDoublePrecisionFPToHexInteger method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix hexDoublePrecisionFPToHexInteger method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1724,8 +1732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4274354">
-          <caret line="724" column="41" selection-start-line="724" selection-start-column="41" selection-end-line="724" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.29735935">
+          <caret line="315" column="13" selection-start-line="315" selection-start-column="13" selection-end-line="315" selection-end-column="13" />
           <folding />
         </state>
       </provider>
