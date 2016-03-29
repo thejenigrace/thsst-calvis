@@ -14,35 +14,29 @@ execute(des, src, registers, memory) {
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isMemory() ) {
+        } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 BigInteger count = new BigInteger(memory.read(src, desSize), 16);
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
-        }
-        else if( src.isHex() ) {
+        } else if( src.isHex() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
                 BigInteger count = new BigInteger(src.getValue(), 16);
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
+            } else {
                 //throw exception
             }
         }
-    }
-    else {
+    } else {
         //throw exception
     }
 }
@@ -50,7 +44,7 @@ execute(des, src, registers, memory) {
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
     String result = "";
 
-    if( source >= 0 && source <= 15 ) {
+    if( source >= 0 && source <= 63 ) {
         Token token = new Token(Token.REG, "MM0");
         String temp = "";
         String binaryDes = "";
@@ -63,8 +57,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
             biResult = biDes.shiftLeft(source);
             temp = calculator.binaryToHexString(biResult.toString(2), token);
             result += temp;
-        }
-        else if( desSize == 128 ) {
+        } else if( desSize == 128 ) {
             for(int i = 0; i <= 16; i+=16) {
                 if( i == 16 ) {
                     binaryDes = calculator.hexToBinaryString(destination.substring(i), token);
@@ -72,8 +65,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                     biResult = biDes.shiftLeft(source);
                     temp = calculator.binaryToHexString(biResult.toString(2), token);
                     result += temp;
-                }
-                else {
+                } else {
                     binaryDes = calculator.hexToBinaryString(destination.substring(i, i + 16), token);
                     biDes = new BigInteger(binaryDes, 2);
                     biResult = biDes.shiftLeft(source);
@@ -82,8 +74,7 @@ storeResultToRegister(registers, calculator, des, source, destination, desSize) 
                 }
             }
         }
-    }
-    else {
+    } else {
         result = calculator.hexZeroExtend("0", des);
     }
 
