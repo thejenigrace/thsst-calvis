@@ -48,27 +48,32 @@ String compare(calculator,desValue,srcValue,op3) {
   System.out.println("desValue = " + desValue);
   System.out.println("srcValue = " + srcValue);
 
-  Float floatDes = calculator.hexToSinglePrecisionFloatingPoint(desValue);
-  Float floatSrc = calculator.hexToSinglePrecisionFloatingPoint(srcValue);
+  Float floatDes = calculator.convertHexToSinglePrecision(desValue);
+  Float floatSrc = calculator.convertHexToSinglePrecision(srcValue);
 
   String operand = op3.getValue();
   int intOperand = Integer.parseInt(operand);
   System.out.println("intOperand = " + intOperand);
+
+  int retval = Float.compare(floatDes, floatSrc);
   switch(intOperand) {
     case 0:
-      if(floatDes == floatSrc)
+      // des == src
+      if(retval == 0)
         return "FFFFFFFF";
       else
         return "00000000";
       break;
     case 1:
-      if(floatDes < floatSrc)
+      // des < src
+      if(retval < 0)
         return "FFFFFFFF";
       else
         return "00000000";
       break;
     case 2:
-      if(floatDes <= floatSrc)
+      // des <= src
+      if(retval < 0 || retval == 0)
         return "FFFFFFFF";
       else
         return "00000000";
@@ -80,19 +85,22 @@ String compare(calculator,desValue,srcValue,op3) {
         return "00000000";
       break;
     case 4:
-      if(floatDes != floatSrc)
+      // des != src
+      if(retval != 0)
         return "FFFFFFFF";
       else
         return "00000000";
       break;
     case 5:
-      if(floatDes >= floatSrc)
+      // des >= src
+      if(retval > 0 || retval == 0)
         return "FFFFFFFF";
       else
         return "00000000";
       break;
     case 6:
-      if(floatDes > floatSrc)
+      // des > src
+      if(retval > 0)
         return "FFFFFFFF";
       else
         return "00000000";

@@ -15,27 +15,33 @@ execute(des,src,op3,registers,memory) {
   // Get the desValue from 0 to 31 bit
   desValue = calculator.cutToCertainHexSize("getLower",desValue,DWORD/4);
 
-  float floatDes = calculator.hexToSinglePrecisionFloatingPoint(desValue);
-  float floatSrc = calculator.hexToSinglePrecisionFloatingPoint(srcValue);
+  float floatDes = calculator.convertHexToSinglePrecision(desValue);
+  float floatSrc = calculator.convertHexToSinglePrecision(srcValue);
 
   String operand = op3.getValue();
   int intOperand = Integer.parseInt(operand,16);
   System.out.println("intOperand = " + intOperand);
+
+  int retval = Float.compare(floatDes, floatSrc);
+  System.out.println("retval = " + retval);
   switch(intOperand) {
     case 0:
-      if(floatDes == floatSrc)
+      // des == src
+      if(retval == 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));
       break;
     case 1:
-      if(floatDes < floatSrc)
+      // des < src
+      if(retval < 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));
       break;
     case 2:
-      if(floatDes <= floatSrc)
+      // des <= src
+      if(retval < 0 || retval == 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));
@@ -47,19 +53,22 @@ execute(des,src,op3,registers,memory) {
         registers.set(des,desNewValue.concat("00000000"));
       break;
     case 4:
-      if(floatDes != floatSrc)
+      // des != src
+      if(retval != 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));
       break;
     case 5:
-      if(floatDes >= floatSrc)
+      // des >= src
+      if(retval > 0 || retval == 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));
       break;
     case 6:
-      if(floatDes > floatSrc)
+      // des > src
+      if(retval > 0)
         registers.set(des,desNewValue.concat("FFFFFFFF"));
       else
         registers.set(des,desNewValue.concat("00000000"));

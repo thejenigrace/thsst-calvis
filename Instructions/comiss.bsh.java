@@ -14,22 +14,23 @@ execute(s,t,registers,memory) {
   // Get the sValue from 0 to 31 bit
   sValue = calculator.cutToCertainHexSize("getLower",sValue,DWORD/4);
 
-  float floatS = calculator.hexToSinglePrecisionFloatingPoint(sValue);
-  float floatT = calculator.hexToSinglePrecisionFloatingPoint(tValue);
+  float floatS = calculator.convertHexToSinglePrecision(sValue);
+  float floatT = calculator.convertHexToSinglePrecision(tValue);
 
+  int retval = Float.compare(floatS, floatT);
   if(Float.isNaN(floatS) || Float.isNaN(floatT)) {
     eFlags.setZeroFlag("1");
     eFlags.setParityFlag("1");
     eFlags.setCarryFlag("1");
-  } else if(floatS > floatT) {
+  } else if(retval > 0) {
     eFlags.setZeroFlag("0");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("0");
-  } else if(floatS < floatT) {
+  } else if(retval < 0) {
     eFlags.setZeroFlag("0");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("1");
-  } else if(floatS == floatT) {
+  } else if(retval == 0) {
     eFlags.setZeroFlag("1");
     eFlags.setParityFlag("0");
     eFlags.setCarryFlag("0");

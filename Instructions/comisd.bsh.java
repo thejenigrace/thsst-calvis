@@ -14,8 +14,8 @@ execute(s,t,registers,memory) {
   // Get the sValue from 0 to 31 bit
   sValue = calculator.cutToCertainHexSize("getLower",sValue,DWORD/4);
 
-  double doubleS = calculator.hexToDoublePrecisionFloatingPoint(sValue);
-  double doubleT = calculator.hexToDoublePrecisionFloatingPoint(tValue);
+  double doubleS = calculator.convertHexToDoublePrecision(sValue);
+  double doubleT = calculator.convertHexToDoublePrecision(tValue);
 
   int retval = Double.compare(doubleS, doubleT);
   if(Double.isNaN(doubleS) || Double.isNaN(doubleT)) {
