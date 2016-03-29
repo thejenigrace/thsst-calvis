@@ -34,9 +34,15 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    long dPacked1 = calculator.convertToSignedInteger(new BigInteger(srcValue, 16), 32);
+    long dPacked1;
 
-    String sPacked1 = calculator.convertIntegerToDoublePrecisionFP(dPacked1);
+    if ( srcValue.length() == 8 ){
+        dPacked1 = calculator.convertToSignedInteger(new BigInteger(srcValue,16), 32);
+    } else {
+        dPacked1 = calculator.convertToSignedInteger(new BigInteger(srcValue.substring(8),16), 32);
+    }
+
+    String sPacked1 = calculator.toHexDoublePrecisionString(dPacked1);
 
     registers.set(des, sPacked1);
 }
@@ -54,7 +60,7 @@ boolean checkSizeOfDestination(registers, desSize) {
 boolean checkSizeOfSource(registers, srcSize) {
     boolean checkSize = false;
 
-    if( 32 == srcSize ) {
+    if( 32 == srcSize || 64 == srcSize ) {
         checkSize = true;
     }
 

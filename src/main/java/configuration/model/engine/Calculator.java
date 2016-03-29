@@ -1,6 +1,5 @@
 package configuration.model.engine;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class Calculator {
@@ -728,12 +727,18 @@ public class Calculator {
         Float sp = toHexSinglePrecision(hexValue);
         Double dp = sp.doubleValue();
 
+        System.out.println("hexValue = " + hexValue);
+        System.out.println("result hex = " + convertDoublePrecisionToHexString(dp));
+
         return convertDoublePrecisionToHexString(dp);
     }
 
     public String convertDPToSP(String hexValue) {
         Double dp = toHexDoublePrecision(hexValue);
         Float sp = dp.floatValue();
+
+        System.out.println("hexValue = " + hexValue);
+        System.out.println("result hex = " + convertSinglePrecisionToHexString(sp));
 
         return convertSinglePrecisionToHexString(sp);
     }

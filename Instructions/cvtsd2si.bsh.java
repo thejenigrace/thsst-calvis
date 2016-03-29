@@ -34,7 +34,13 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String value = calculator.hexDoublePrecisionFPTohexInteger(srcValue.substring(16));
+    String value = "";
+    if ( srcValue.length() == 16 ){
+        value = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(8));
+    } else {
+        value = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(16));
+    }
+
 
     registers.set(des, value);
 }

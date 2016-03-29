@@ -14,18 +14,18 @@ execute(des, src, registers, memory) {
     if( des.isRegister() && checkSizeOfDestination(registers, desSize) ) {
         if( src.isRegister() ) {
             if( checkSizeOfSource(registers, srcSize) ) {
-                String source = registers.get(src);
-                String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
+                String srcValue = registers.get(src);
+                String desValue = registers.get(des);
+                storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
             }
             else {
                 //throw exception
             }
         }
         else if( src.isMemory() ) {
-            String source = memory.read(src, 128);
-            String destination = registers.get(des);
-            storeResultToRegister(registers, calculator, des, source, destination, desSize);
+            String srcValue = memory.read(src, 128);
+            String desValue = registers.get(des);
+            storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
         }
     }
     else {
@@ -34,10 +34,10 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sPacked4 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(0,8));
-    String sPacked3 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(8,16));
-    String sPacked2 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(16,24));
-    String sPacked1 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(24));
+    String sPacked4 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(0,8));
+    String sPacked3 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(8,16));
+    String sPacked2 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(16,24));
+    String sPacked1 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(24));
 
     registers.set(des, sPacked4 + sPacked3 + sPacked2 + sPacked1);
 }
@@ -45,7 +45,7 @@ storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
 boolean checkSizeOfDestination(registers, desSize) {
     boolean checkSize = false;
 
-    if( 64 == desSize ) {
+    if( 128 == desSize ) {
         checkSize = true;
     }
 

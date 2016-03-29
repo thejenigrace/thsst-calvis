@@ -46,7 +46,7 @@ storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
         value = calculator.convertSPToDP(srcValue.substring(24));
     }
 
-    value = calculator.hexZeroExtend(value,QWORD/4);
+    // value = calculator.hexZeroExtend(value,QWORD/4);
 
     registers.set(des, unmodified + value);
 }

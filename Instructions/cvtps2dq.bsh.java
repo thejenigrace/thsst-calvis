@@ -34,10 +34,10 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sPacked4 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(0,8));
-    String sPacked3 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(8,16));
-    String sPacked2 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(16,24));
-    String sPacked1 = calculator.hexSinglePrecisionFPTohexInteger(srcValue.substring(24));
+    String sPacked4 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(0,8));
+    String sPacked3 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(8,16));
+    String sPacked2 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(16,24));
+    String sPacked1 = calculator.convertHexSinglePrecisionToHexInteger(srcValue.substring(24));
 
     registers.set(des, sPacked4 + sPacked3 + sPacked2 + sPacked1);
 }
