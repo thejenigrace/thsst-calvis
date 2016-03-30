@@ -76,7 +76,7 @@ execute(des, src, registers, memory) {
           flags.setZeroFlag("0");
         }
 
-        String sign = "" + compareToZero.toString(16).charAt(0);
+        String sign = "" + res.charAt(0);
         flags.setSignFlag(sign);
 
         String parity = calculator.checkParity(compareToZero.toString(16));
