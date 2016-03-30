@@ -691,6 +691,19 @@ public class Calculator {
         return this.convertDoublePrecisionToHexString(dp);
     }
 
+    private long parseUnsignedHex(String text) {
+        if (text.length() == 16) {
+            return (parseUnsignedHex(text.substring(0, 1)) << 60)
+                    | parseUnsignedHex(text.substring(1));
+        }
+//        else if (text.length() == 8) {
+//            return  (parseUnsignedHex(text.substring(0,1)) << 28)
+//                    | parseUnsignedHex(text.substring(1));
+//        }
+
+        return Long.parseLong(text, 16);
+    }
+
     public float convertHexToSinglePrecision(String hexValue) {
         Long l = Long.parseLong(hexValue, 16);
         Float f = Float.intBitsToFloat(l.intValue());
@@ -699,7 +712,7 @@ public class Calculator {
     }
 
     public double convertHexToDoublePrecision(String hexValue) {
-        Long l = Long.parseLong(hexValue, 16);
+        Long l = parseUnsignedHex(hexValue);
         Double d = Double.longBitsToDouble(l);
 
         return d;

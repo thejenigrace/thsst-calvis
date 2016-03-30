@@ -185,7 +185,7 @@ public class RegisterList {
                 index++;
             }
 
-            setRegisterContent();
+            this.setRegisterContent(); // put value into the Register Map
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -455,34 +455,37 @@ public class RegisterList {
         return this.x87;
     }
 
-    public void setRegisterContent() throws DataTypeMismatchException {
-        set("EAX", "DDBBCCAA");
-        set("EBX", "FFFF1111");
-        set("ECX", "00000005");
-        set("EDX", "56F38E84");
-        set("ESP", "FF006655");
-        set("ESI", "00000001");
-        set("EDI", "88774433");
-        set("EBP", "00000008");
+    public void setRegisterContent() {
+        try {
+          set("EAX", "DDBBCCAA");
+          set("EBX", "FFFF1111");
+          set("ECX", "00000005");
+          set("EDX", "56F38E84");
+          set("ESP", "FF006655");
+          set("ESI", "00000001");
+          set("EDI", "88774433");
+          set("EBP", "00000008");
 
-        set("MM0", "FFFF901256781234");
-        set("MM1", "1234567856781234");
-        set("MM2", "FFCA90BB58926789");
-        set("MM3", "9934566711111286");
-        set("MM4", "0055006600770088");
-        set("MM5", "111122228888FFFF");
-        set("MM6", "0000000000000001");
-        set("MM7", "0000000000000002");
+          set("MM0", "FFFF901256781234");
+          set("MM1", "1234567856781234");
+          set("MM2", "FFCA90BB58926789");
+          set("MM3", "9934566711111286");
+          set("MM4", "0055006600770088");
+          set("MM5", "111122228888FFFF");
+          set("MM6", "0000000000000001");
+          set("MM7", "0000000000000002");
 
-        set("XMM0", "ABCEDF123456789000000000123AF43");
-        set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
-        set("XMM2", "11111111111111110000000000000000");
-        set("XMM3", "1234567890AB90931FFF45210123ABCD");
-        set("XMM4", "1FFF45210123ABCD1234567890AB9094");
-        set("XMM5", "1234567845210123123EBDCA0123AF43");
-        set("XMM6", "ABCDEF01452101230000000045210123");
-        set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
-
-        System.out.println("Register Content");
+          set("XMM0", "ABCEDF123456789000000000123AF43");
+          set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
+          set("XMM2", "11111111111111110000000000000000");
+          set("XMM3", "1234567890AB90931FFF45210123ABCD");
+          set("XMM4", "1FFF45210123ABCD1234567890AB9094");
+          set("XMM5", "1234567845210123123EBDCA0123AF43");
+          set("XMM6", "ABCDEF01452101230000000045210123");
+          set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+        System.out.println("Loaded Register Content");
     }
 }

@@ -69,11 +69,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @Override
     public void build() {
         try {
-            this.sysCon.getRegisterState().setRegisterContent();
-
             Map map = this.sysCon.getRegisterState().getRegisterMap();
-
-            System.out.println(map);
 
             ObservableList<Register> registers = FXCollections.observableArrayList(map.values());
             TreeItem<Register> dummyRoot = new TreeItem<>();
