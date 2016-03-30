@@ -36,21 +36,51 @@ execute(src, registers, memory) {
 
             int registerLowerHalfHexSize = registers.getHexSize(registerLowerHalf);
             System.out.println("registerLowerHalfHexSize = " + registerLowerHalfHexSize);
-            String[] results = calculator.cutToCertainSize(biResult.toString(16), registerLowerHalfHexSize);
-            registers.set(registerLowerHalf, results[1]);
+        //     String[] results = calculator.cutToCertainSize(biResult.toString(16), registerLowerHalfHexSize);
+        //     registers.set(registerLowerHalf, results[1]);
 
-            EFlags ef = registers.getEFlags();
-            BigInteger checkUpperHalf;
-            if ( registerUpperHalf != null ){
-                registers.set(registerUpperHalf,results[0]);
-                checkUpperHalf = new BigInteger(results[0], 16);
+        // Get the substring of the result that will fit to the size of the Lower Half Register
+            String result = biResult.toString(16);
+            System.out.println("result = " + result);
+            result = calculator.hexZeroExtend(result,registerLowerHalfHexSize*2);
+            System.out.println("extend result = " + result);
+            String finalResult = result.substring(result.length()-registerLowerHalfHexSize);
+            System.out.println("finalResult = " + finalResult);
 
-                System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
-            } else {
-                checkUpperHalf = new BigInteger(registers.get("AH"), 16);
-            }
+            registers.set(registerLowerHalf, finalResult);
 
-            System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());
+        //     EFlags ef = registers.getEFlags();
+        //     BigInteger checkUpperHalf;
+        //     if ( registerUpperHalf != null ){
+        //         registers.set(registerUpperHalf,results[0]);
+        //         checkUpperHalf = new BigInteger(results[0], 16);
+            //
+        //         System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
+        //     } else {
+        //         checkUpperHalf = new BigInteger(registers.get("AH"), 16);
+        //     }
+            //
+        //     System.out.println(registerLowerHalf + " = " + results[1].toUpperCase());
+
+                EFlags ef = registers.getEFlags();
+                BigInteger checkUpperHalf;
+                if ( registerUpperHalf != null ){
+                        System.out.println(result.length());
+                        int start = result.length() - registerLowerHalfHexSize * 2;
+                        int end = result.length() - registerLowerHalfHexSize;
+                        String upperResult = result.substring(start, end);
+                        registers.set(registerUpperHalf,upperResult);
+                        checkUpperHalf = new BigInteger(upperResult, 16);
+
+                        System.out.println(registerUpperHalf + " = " + upperResult.toUpperCase());
+
+                        // System.out.println(registerUpperHalf + " = " + results[0].toUpperCase());
+                } else {
+                        checkUpperHalf = new BigInteger(registers.get("AH"), 16);
+                }
+
+                // System.out.println(registerLowerHalf + " = " + results[1].toUpperCase())
+                System.out.println(registerLowerHalf + " = " + finalResult.toUpperCase());
 
             if( checkUpperHalf.equals(BigInteger.ZERO) ){
                 System.out.println("CF = 0; OF = 0");

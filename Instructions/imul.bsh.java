@@ -77,7 +77,15 @@ multiplyForOneOperand(srcBitSize,registers,calculator,multiplicand,multiplier,re
     // System.out.println(registerLowerHalf + " = " + results[1].toUpperCase())
     System.out.println(registerLowerHalf + " = " + finalResult.toUpperCase());
 
-    if( checkUpperHalf.equals(BigInteger.ZERO) ){
+    String checker = "";
+    if( registerUpperHalf != null ) {
+        checker = finalResult.substring(0,1);
+    } else {
+        checker = registers.get("AL");
+        checker = checker.substring(0,1);
+    }
+    System.out.println("checker = " + checker);
+    if( checkUpperHalf.equals(new BigInteger(checker, 16)) ){
         System.out.println("CF = 0; OF = 0");
         ef.setCarryFlag("0");
         ef.setOverflowFlag("0");

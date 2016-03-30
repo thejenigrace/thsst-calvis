@@ -51,8 +51,8 @@ execute(src, registers, memory) {
             int resultBitSize = registers.getBitSize(registerForQuotient);
             if(check(longQuotient, resultBitSize)) {
                 int resultHexSize = registers.getHexSize(registerForQuotient);
-                String quotient = calculator.cutToCertainHexSize("original", biResult[0].toString(16), resultHexSize);
-                String remainder = calculator.cutToCertainHexSize("original", biResult[1].toString(16), resultHexSize);
+                String quotient = calculator.cutToCertainHexSize("getUpper", biResult[0].toString(16), resultHexSize);
+                String remainder = calculator.cutToCertainHexSize("getUpper", biResult[1].toString(16), resultHexSize);
 
                 System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
                 System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());

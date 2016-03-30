@@ -58,7 +58,7 @@ execute(des, src, registers, memory) {
         EFlags flags = registers.getEFlags();
         String res = calculator.hexToBinaryString(registers.get(des), des);
         BigInteger biR = new BigInteger(res, 2);
-		System.out.println(d + "wtf d");
+		    System.out.println(d + "wtf d");
         flags.setCarryFlag(carry.toString());
 
         if(overflow == 1) {
