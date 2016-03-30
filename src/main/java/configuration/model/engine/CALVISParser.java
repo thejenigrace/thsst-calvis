@@ -210,16 +210,6 @@ public class CalvisParser {
 
 		String[] prodRule = instructions.find(anInstruction, numParameters);
 
-//		String baseConditionalInstruction = instructions.getBaseConditionalInstruction(anInstruction);
-//
-//		if ( !anInstruction.equals(baseConditionalInstruction) ) {
-//			String replaced = anInstruction.replaceAll(baseConditionalInstruction, "");
-//			replaced = replaced.replaceAll(baseConditionalInstruction.toUpperCase(), "");
-//			tokenArr.add(replaced);
-//			anInstruction = baseConditionalInstruction;
-//			isConditionalInstruction = true;
-//		}
-
 		Instruction someInstruction = instructions.getInstruction(anInstruction);
 		for ( int i = 0; i < numParameters; i++ ) {
 			tokenArr.add(args[i * 2 + 1]);

@@ -658,16 +658,12 @@ public class Calculator {
     }
 
 
-//    public float hexToSinglePrecisionFloatingPoint(String hexValue) {
-//        Long l = Long.parseLong(hexValue, 16);
-//
-//        System.out.println("l.intValue() = " + l.intValue());
-//        Float f = Float.intBitsToFloat(l.intValue());
-//        System.out.println("hexValue = " + Integer.toHexString(Float.floatToIntBits(f)));
-//        System.out.println("float = " + f);
-//
-//        return f;
-//    }
+    public float hexToSinglePrecisionFloatingPoint(String hexValue) {
+        Long l = Long.parseLong(hexValue, 16);
+        Float f = Float.intBitsToFloat(l.intValue());
+
+        return f;
+    }
 
     public String toHexSinglePrecisionString(long l) {
         Long signedLong = l;
@@ -719,14 +715,13 @@ public class Calculator {
     }
 
 
-//    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
-//        Long l = Long.parseLong(hexValue, 16);
-//        Double d = Double.longBitsToDouble(l);
-//        System.out.println("hexValue = " + Long.toHexString(Double.doubleToLongBits(d)));
-//        System.out.println("double = " + d);
-//
-//        return d;
-//    }
+
+    public double hexToDoublePrecisionFloatingPoint(String hexValue) {
+        Long l = Long.parseLong(hexValue, 16);
+        Double d = Double.longBitsToDouble(l);
+
+        return d;
+    }
 
     public String convertSinglePrecisionToHexString(Float fValue) {
         return Integer.toHexString(Float.floatToIntBits(fValue));

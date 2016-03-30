@@ -116,25 +116,12 @@ public class MainApp extends Application {
 		}
 	}
 
-	public static long parseUnsignedHex(String text) {
-		if (text.length() == 16) {
-			return (parseUnsignedHex(text.substring(0, 1)) << 60)
-					| parseUnsignedHex(text.substring(1));
-		}
-		return Long.parseLong(text, 16);
-	}
-
 	/**
 	 * Main method to run the application.
 	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-//		String hex = "c014000000000000"; //"c0399999a0000000"; //"c014000000000000"
-//		long longHex = parseUnsignedHex(hex);
-//		double d = Double.longBitsToDouble(longHex);
-//		System.out.println(d);
 
 		String OS = System.getProperty("os.name").toLowerCase();
 		if ( OS.contains("win") ) {

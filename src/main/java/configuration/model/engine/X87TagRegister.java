@@ -93,4 +93,26 @@ public class X87TagRegister {
 		}
 	}
 
+	public String toHexString() {
+		Integer binaryValue = Integer.parseInt(new String(this.value), 2);
+		String hexString = Integer.toHexString(binaryValue);
+		while ( hexString.length() < 4 ) {
+			hexString = "0" + hexString;
+		}
+		return hexString;
+	}
+
+	public void setValue(String hexValue) {
+		if ( hexValue.length() == 4 ) {
+			// convert hex string to binary string
+			Integer i = Integer.parseInt(hexValue, 16);
+			String binaryString = Integer.toBinaryString(i);
+			while ( binaryString.length() < 16 ) {
+				binaryString = "0" + binaryString;
+			}
+			// store binary string to char[] value
+			this.value = binaryString.toCharArray();
+		}
+	}
+
 }
