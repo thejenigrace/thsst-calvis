@@ -332,3 +332,5 @@ xlat,Instructions/xlat.bsh.java,1,0,0,,,
 xor,Instructions/xor.bsh.java,1,0,2,r/m,r/m/i,
 xorpd,Instructions/xorpd.bsh.java,1,0,2,x,x/m128,
 xorps,Instructions/xorps.bsh.java,1,0,2,x,x/m128,
+movdq2q,Instructions/movdq2q.bsh.java,0,0,2,d,x,
+
