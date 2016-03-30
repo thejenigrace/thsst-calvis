@@ -24,7 +24,7 @@ execute(src, registers, memory) {
         registers.getEFlags().setCarryFlag("1"); 
     }
 
-    registers.x87().set("C1", '0');
+    registers.x87().status().set("C1", '0');
 
     registers.getEFlags().setOverflowFlag("0");
     registers.getEFlags().setSignFlag("0");

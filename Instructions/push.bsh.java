@@ -4,11 +4,11 @@ execute(src, registers, memory) {
 	String val = "";
 
 	if ( src.isRegister() ) {
-		val = registers.get(src);
 		size = registers.getBitSize(src);
+		val = registers.get(src);
 	} else if ( src.isMemory() ) {
-		val = memory.read(src, size);
 		size = memory.getBitSize(src);
+		val = memory.read(src, size);
 	} else if ( src.isHex() ) {
 		val = src.getValue();
 	} else if ( src.isLabel() ) {

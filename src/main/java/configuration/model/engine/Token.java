@@ -45,9 +45,6 @@ public class Token {
 				this.value = this.value.toUpperCase();
 				break;
 			case Token.DEC:
-//				if (this.value.contains("_d") | this.value.contains("_D") ){
-//					this.value = this.value.substring(0, this.value.length()-2).toUpperCase();
-//				}
 				this.value = Integer.toHexString(Integer.parseInt(this.value));
 				this.value = this.value.toUpperCase();
 				this.type = Token.HEX;

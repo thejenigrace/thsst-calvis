@@ -120,7 +120,7 @@ fisubr,Instructions/fisubr.bsh.java,1,0,1,m16/m32,,
 fld,Instructions/fld.bsh.java,1,0,1,s/m32/m64/m80,,
 fld1,Instructions/fld1.bsh.java,1,0,0,,,
 fldcw,Instructions/fldcw.bsh.java,1,0,1,m16,,
-fldenv,Instructions/fldenv.bsh.java,1,0,0,,,
+fldenv,Instructions/fldenv.bsh.java,1,0,1,m16/m32,,
 fldl2e,Instructions/fldl2e.bsh.java,1,0,0,,,
 fldl2t,Instructions/fldl2t.bsh.java,1,0,0,,,
 fldlg2,Instructions/fldlg2.bsh.java,1,0,0,,,
@@ -136,7 +136,7 @@ fninit,Instructions/fninit.bsh.java,1,0,0,,,
 fnop,Instructions/fnop.bsh.java,1,0,0,,,
 fnsave,Instructions/fnsave.bsh.java,1,0,0,,,
 fnstcw,Instructions/fnstcw.bsh.java,1,0,1,m16,,
-fnstenv,Instructions/fnstenv.bsh.java,1,0,0,,,
+fnstenv,Instructions/fnstenv.bsh.java,1,0,1,m16/m32,,
 fnstsw,Instructions/fnstsw.bsh.java,1,0,0,,,
 fpatan,Instructions/fpatan.bsh.java,1,0,0,,,
 fprem,Instructions/fprem.bsh.java,1,0,0,,,
@@ -150,7 +150,7 @@ fsincos,Instructions/fsincos.bsh.java,1,0,0,,,
 fsqrt,Instructions/fsqrt.bsh.java,1,0,0,,,
 fst,Instructions/fst.bsh.java,1,0,1,s/m32/m64,,
 fstcw,Instructions/fstcw.bsh.java,1,0,1,m16,,
-fstenv,Instructions/fstenv.bsh.java,1,0,0,,,
+fstenv,Instructions/fstenv.bsh.java,1,0,1,m16/m32,,
 fstp,Instructions/fstp.bsh.java,1,0,1,s/m32/m64/m80,,
 fstsw,Instructions/fstsw.bsh.java,1,0,0,,,
 fsub,Instructions/fsub.bsh.java,1,0,1,m32/m64,,
@@ -256,7 +256,7 @@ pminub,Instructions/pminub.bsh.java,1,0,2,x/d,x/m128/d/m64,
 pmovmskb,Instructions/pmovmskb.bsh.java,0,0,2,r32,x/d,
 pmulhw,Instructions/pmulhw.bsh.java,0,0,2,x/m128,d/m64,
 pmullw,Instructions/pmullw.bsh.java,0,0,2,x/m128,d/m64,
-pop,Instructions/pop.bsh.java,1,0,1,r16/r32/m16/m32,,
+pop,Instructions/pop.bsh.java,1,0,1,r16/r32/m16/m32/m64,,
 popa,Instructions/popa.bsh.java,1,0,0,,,
 popad,Instructions/popad.bsh.java,1,0,0,,,
 popf,Instructions/popf.bsh.java,1,0,0,,,
@@ -278,7 +278,7 @@ punpckhwd,Instructions/punpckhwd.bsh.java,1,0,2,d/x,d/x/m64/m128,
 punpcklbw,Instructions/punpcklbw.bsh.java,1,0,2,d/x,d/x/m64/m128,
 punpckldq,Instructions/punpckldq.bsh.java,1,0,2,d/x,d/x/m64/m128,
 punpcklwd,Instructions/punpcklwd.bsh.java,1,0,2,d/x,d/x/m64/m128,
-push,Instructions/push.bsh.java,1,0,1,r16/r32/m16/m32/i/l,,
+push,Instructions/push.bsh.java,1,0,1,r16/r32/m16/m32/m64/i/l,,
 pusha,Instructions/pusha.bsh.java,1,0,0,,,
 pushad,Instructions/pushad.bsh.java,1,0,0,,,
 pushf,Instructions/pushf.bsh.java,1,0,0,,,
@@ -332,3 +332,15 @@ xlat,Instructions/xlat.bsh.java,1,0,0,,,
 xor,Instructions/xor.bsh.java,1,0,2,r/m,r/m/i,
 xorpd,Instructions/xorpd.bsh.java,1,0,2,x,x/m128,
 xorps,Instructions/xorps.bsh.java,1,0,2,x,x/m128,
+movdqa,Instructions/movdqa.bsh.java,1,0,2,x/m128,x/m128
+movdqu,Instructions/movdqu.bsh.java,1,0,2,x/m128,x/m128
+movq2dq,Instructions/movq2dq.bsh.java,0,0,2,x,d
+punpckhqdq,Instructions/punpckhqdq.bsh.java,1,0,2,x,x/m128
+punpcklqdq,Instructions/punpcklqdq.bsh.java,1,0,2,x,x/m128
+pslldq,Instructions/pslldq.bsh.java,1,0,2,x,i
+psrldq,Instructions/psrldq.bsh.java,1,0,2,x,i
+pmuludq,Instructions/pmuludq.bsh.java,1,0,2,x/d/m128/m64,x/d/m128/m64
+paddq,Instructions/paddq.bsh.java,1,0,2,x/d,x/d/m128/m64
+psubq,Instructions/psubq.bsh.java,1,0,2,x/d,x/d/m128/m64
+pshufhw,Instructions/pshufhw.bsh.java,1,0,3,x,x/m128,i
+movdq2q,Instructions/movdq2q.bsh.java,0,0,2,d,x

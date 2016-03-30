@@ -235,6 +235,10 @@ public class InstructionList {
 		sb.append("import java.math.BigInteger;");
 		sb.append("import javafx.application.Platform;");
 		sb.append("import java.util.ArrayList;");
+		sb.append("import java.util.HashMap;");
+		sb.append("import java.util.regex.Matcher;");
+		sb.append("import java.util.regex.Pattern;");
+
 		sb.append("\n return (configuration.model.engine.Instruction) this");
 		return sb.toString();
 	}

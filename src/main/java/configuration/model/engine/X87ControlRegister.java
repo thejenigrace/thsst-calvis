@@ -43,7 +43,11 @@ public class X87ControlRegister {
 
 	public String toHexString() {
 		Integer binaryValue = Integer.parseInt(new String(this.value), 2);
-		return Integer.toHexString(binaryValue);
+		String hexString = Integer.toHexString(binaryValue);
+		while ( hexString.length() < 4 ) {
+			hexString = "0" + hexString;
+		}
+		return hexString;
 	}
 
 	public void setValue(String hexValue) {

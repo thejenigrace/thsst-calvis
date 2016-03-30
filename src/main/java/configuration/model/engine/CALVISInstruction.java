@@ -172,11 +172,11 @@ public class CalvisInstruction {
 
 			String upperCaseName = name.toUpperCase();
 			// special check for FCMOV
-			if ( name.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)")) {
+			if ( upperCaseName.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)")) {
 				if ( !tokens[1].getValue().equals("ST0") ) {
 					throw new IncorrectParameterException(name, line);
 				}
-			} else if ( name.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ){
+			} else if ( upperCaseName.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ){
 				if ( !tokens[0].getValue().equals("ST0") ) {
 					throw new IncorrectParameterException(name, line);
 				}

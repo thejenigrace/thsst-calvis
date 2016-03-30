@@ -42,13 +42,12 @@ public class ParserVariableFactory {
 
 		Grule negateDecimal = lang.newGrule();
 		negateDecimal.define(CC.op("\\-"), tokenBag.dec())
-				.action((Action<Object[]>) matched -> new Token((String) matched[1], Token.DEC));
+				.action((Action<Object[]>) matched -> new Token(Token.DEC, (String) matched[1]));
 
 		ArrayList<Element> possibleValues = new ArrayList<>();
 		possibleValues.add(tokenBag.hex());
 		possibleValues.add(stringLiteral);
 		possibleValues.add(tokenBag.floating());
-//		possibleValues.add(tokenBag.dec());
 		possibleValues.add(negateDecimal);
 		Element valueElement = elementConcatenator.concatenateOrSubRules(possibleValues);
 
