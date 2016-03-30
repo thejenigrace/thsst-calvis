@@ -1,15 +1,15 @@
 .register {
-    -fx-fill: orange;
+    -fx-fill: #f22c40;
     -fx-font-weight: bold;
 }
 
 .instruction {
-    -fx-fill: purple;
+    -fx-fill: #6666ea;
     -fx-font-weight: bold;
 }
 
 .memory {
-    -fx-fill: green;
+    -fx-fill: #c38418;
     -fx-font-weight: bold;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .bracket {
-    -fx-fill: darkgreen;
+    -fx-fill: #68615e;
     -fx-font-weight: bold;
 }
 
@@ -29,11 +29,11 @@
 }
 
 .string {
-    -fx-fill: blue;
+    -fx-fill: #7b9726;
 }
 
 .comment {
-    -fx-fill: cadetblue;
+    -fx-fill: #766e6b;
 }
 
 .find {

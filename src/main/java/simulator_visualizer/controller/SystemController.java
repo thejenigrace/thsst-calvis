@@ -306,7 +306,7 @@ public class SystemController {
         try {
             this.executionMap = parser.parse(code);
             for (String lineNumber : this.executionMap.keySet()) {
-                CalvisInstruction calvisInstruction = this.executionMap.get(lineNumber);
+                CalvisInstruction CalvisInstruction = this.executionMap.get(lineNumber);
                 /**
                  * Compute for the equivalent linenumber in textEditor of the
                  * calvis instructions
@@ -323,7 +323,7 @@ public class SystemController {
                         }
                     }
                 }
-                calvisInstruction.verifyParameters(lineCounter);
+                CalvisInstruction.verifyParameters(lineCounter);
             }
         } catch (Exception e) {
             if (e instanceof DuplicateLabelException) {

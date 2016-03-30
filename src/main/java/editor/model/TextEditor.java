@@ -9,6 +9,7 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -54,6 +55,7 @@ public class TextEditor extends AssemblyComponent {
     public TextEditor(WorkspaceController workspaceController) {
         this.workspaceController = workspaceController;
         this.codeArea = new CodeArea();
+        codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.richChanges().subscribe(change -> {
 //            this.tab.setGraphic(new Text("*"));
@@ -154,13 +156,13 @@ public class TextEditor extends AssemblyComponent {
         MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
         PATTERN = Pattern.compile(
                 "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
-                + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
-                + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
-                + "|(?<PAREN>" + PAREN_PATTERN + ")"
-                + "|(?<BRACE>" + BRACE_PATTERN + ")"
-                + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
-                + "|(?<STRING>" + STRING_PATTERN + ")"
-                + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
+                        + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
+                        + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
+                        + "|(?<PAREN>" + PAREN_PATTERN + ")"
+                        + "|(?<BRACE>" + BRACE_PATTERN + ")"
+                        + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+                        + "|(?<STRING>" + STRING_PATTERN + ")"
+                        + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
         );
     }
 

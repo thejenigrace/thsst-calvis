@@ -30,7 +30,7 @@ public class CalvisInstruction {
 	}
 
 	public CalvisInstruction(Instruction ins, String name, Object[] params,
-	                         RegisterList registers, Memory memory, int appendType, ArrayList<String> allowable) {
+							 RegisterList registers, Memory memory, int appendType, ArrayList<String> allowable) {
 		this.ins = ins;
 		this.name = name;
 		this.params = params;

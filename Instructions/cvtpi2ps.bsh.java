@@ -1,4 +1,6 @@
 execute(des, src, registers, memory) {
+    Calculator calculator = new Calculator(registers, memory);
+
     int desSize = 0;
     int srcSize = 0;
 
@@ -30,14 +32,12 @@ execute(des, src, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, desSize) {
-    Calculator calculator = new Calculator(registers, memory);
-
     BigInteger bLower = new BigInteger(source.substring(8));
     BigInteger bUpper = new BigInteger(source.substring(0, 8));
 
     long lLower = calculator.convertToSignedInteger(bLower, 32);
     long lUpper = calculator.convertToSignedInteger(bUpper, 32);
-    
+
     String sLower = calculator.toHexSinglePrecisionString(lLower);
     String sUpper = calculator.toHexSinglePrecisionString(lUpper);
 

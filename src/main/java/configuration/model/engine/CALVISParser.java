@@ -151,13 +151,13 @@ public class CalvisParser {
 				.action((Action<Object>) args -> {
 					String anInstruction = ((Token) args).getValue();
 					Instruction someInstruction = instructions.getInstruction(anInstruction);
-					CalvisInstruction calvisInstruction
+					CalvisInstruction CalvisInstruction
 							= new CalvisInstruction(someInstruction, anInstruction, registers, memory);
 					String instructionAdd = Integer.toHexString(lineNumber);
 					mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-							RegisterList.instructionPointerSize, "0"), calvisInstruction);
+							RegisterList.instructionPointerSize, "0"), CalvisInstruction);
 					lineNumber++;
-					return calvisInstruction;
+					return CalvisInstruction;
 				});
 
 		oneParameterInstruction.define(elementConcatenator.concatenateOrSubRules(oneParameterTokens), getAllParameters(true))
@@ -295,18 +295,18 @@ public class CalvisParser {
 //				System.out.println(result);
 		}
 
-		CalvisInstruction calvisInstruction
+		CalvisInstruction CalvisInstruction
 				= new CalvisInstruction(someInstruction, anInstruction,
 				tokens, registers, memory, Integer.parseInt(prodRule[3]), result);
 
 		// Insert special check if instruction should be verified
-		calvisInstruction.setVerifiable(instructions.isVerifiable(anInstruction));
+		CalvisInstruction.setVerifiable(instructions.isVerifiable(anInstruction));
 
 		String instructionAdd = Integer.toHexString(lineNumber);
 		mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-				RegisterList.instructionPointerSize, "0"), calvisInstruction);
+				RegisterList.instructionPointerSize, "0"), CalvisInstruction);
 		lineNumber++;
-		return calvisInstruction;
+		return CalvisInstruction;
 	}
 
 	/**
