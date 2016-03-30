@@ -8,10 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added new method setRegisterContent()">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsEditor.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -566,7 +563,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -578,6 +574,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -932,12 +929,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00055" summary="Added Label Column into Memory Window">
-      <created>1455703915887</created>
-      <option name="number" value="00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1455703915887</updated>
-    </task>
     <task id="LOCAL-00056" summary="Fix IMUL Instruction">
       <created>1455715867618</created>
       <option name="number" value="00056" />
@@ -1226,7 +1217,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459325939439</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Added new method setRegisterContent()">
+      <created>1459329298545</created>
+      <option name="number" value="00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1459329298546</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1688,6 +1685,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7134588">
           <caret line="488" column="35" selection-start-line="488" selection-start-column="35" selection-end-line="488" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1714,7 +1712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.1643455">
           <caret line="141" column="5" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
