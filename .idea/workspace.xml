@@ -7,46 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="okay printf">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fpatan.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/fptan.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movdqa.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movdqu.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/movq2dq.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pmuludq.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pslldq.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/psrldq.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/punpcklqdq.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcom.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomip.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomip.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcompp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcompp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficom.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fldenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fldenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnstenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnstenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fstenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fstenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ftst.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ftst.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucom.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomi.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomip.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomip.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucompp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucompp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/printf.bsh.java" afterPath="$PROJECT_DIR$/Instructions/printf.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/push.bsh.java" afterPath="$PROJECT_DIR$/Instructions/push.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CALVISParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87StatusRegister.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87StatusRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -922,12 +883,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00046" summary="Fix Register &amp; Memory Window">
-      <created>1455004785401</created>
-      <option name="number" value="00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1455004785401</updated>
-    </task>
     <task id="LOCAL-00047" summary="Fix ADC Instruction &amp; Change Icons">
       <created>1455158019395</created>
       <option name="number" value="00047" />
@@ -1216,7 +1171,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459257970400</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="okay printf">
+      <created>1459329564769</created>
+      <option name="number" value="00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1459329564769</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1307,7 +1268,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix DIV &amp; IDIV Instructions" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility" />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of jar." />
     <MESSAGE value="Fix build.gradle &amp; OS Compatibility of Jar" />
@@ -1332,7 +1292,8 @@
     <MESSAGE value="Fix MMX, SSE, &amp; SSE2" />
     <MESSAGE value="Fix hexDoublePrecisionFPToHexInteger method" />
     <MESSAGE value="Fix SSE2 Conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix SSE2 Conversion" />
+    <MESSAGE value="okay printf" />
+    <option name="LAST_COMMIT_MESSAGE" value="okay printf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
