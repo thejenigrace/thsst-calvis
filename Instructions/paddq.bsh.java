@@ -51,8 +51,8 @@ String executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcS
 			strToBuildSrc.append(srcStr.charAt(x));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
+		BigInteger destination = new BigInteger((strToBuildDes).toString(),16);
+		BigInteger source = new BigInteger((strToBuildSrc).toString(),16);
 		destination = destination.add(source);
 		resultingAdd += c.hexZeroExtend( destination.toString(2).substring(destination.toString(2).length() % sizeOfHex), sizeOfHex);
 	}

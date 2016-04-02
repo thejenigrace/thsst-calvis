@@ -185,7 +185,7 @@ public class RegisterList {
                 index++;
             }
 
-            this.setRegisterContent(); // put value into the Register Map
+//            this.setRegisterContent(); // put value into the Register Map
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -389,11 +389,11 @@ public class RegisterList {
             }
         }
 
-        try {
-            setRegisterContent();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            setRegisterContent();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void print() {

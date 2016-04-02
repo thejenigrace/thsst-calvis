@@ -51,8 +51,8 @@ String executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcS
 			strToBuildSrc.append(srcStr.charAt(x));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
+		BigInteger destination = new BigInteger((strToBuildDes).toString(),16);
+		BigInteger source = new BigInteger((strToBuildSrc).toString(),16);
 		destination = destination.add(negate(des, src, registers, memory, c, sizeOfHex, desStr));
 		resultingSub += c.hexZeroExtend( destination.toString(16).substring(destination.toString(16).length() % sizeOfHex), sizeOfHex);
 	}
