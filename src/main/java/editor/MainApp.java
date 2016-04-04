@@ -122,7 +122,6 @@ public class MainApp extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
 		String OS = System.getProperty("os.name").toLowerCase();
 		if ( OS.contains("win") ) {
 			System.out.println("windows");
