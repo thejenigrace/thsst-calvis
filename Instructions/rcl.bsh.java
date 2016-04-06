@@ -1,6 +1,3 @@
-
-//to fix: if count > operand size, undefined
-//check for 64 bit mode
 execute(des, src, registers, memory) {
 		Calculator calculator = new Calculator(registers, memory);
 		EFlags flags = registers.getEFlags();
@@ -82,7 +79,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		flags.setOverflowFlag("0");
+		// flags.setOverflowFlag(undefined);
 		}
 
 //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
@@ -167,7 +164,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		flags.setOverflowFlag("0");
+		// flags.setOverflowFlag(undefined);
 		}
 
 //			flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
@@ -255,7 +252,7 @@ execute(des, src, registers, memory) {
 		flags.setOverflowFlag("1");
 		}
 		else {
-		flags.setOverflowFlag("0");
+		// flags.setOverflowFlag(undefined);
 		}
 
 		//				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());

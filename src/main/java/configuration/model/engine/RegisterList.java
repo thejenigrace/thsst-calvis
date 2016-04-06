@@ -12,70 +12,64 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class RegisterList {
+public class RegisterList{
 
-    public static final int NAME = 0;
-    public static final int SOURCE = 1;
-    public static final int SIZE = 2;
-    public static final int TYPE = 3;
-    public static final int START = 4;
-    public static final int END = 5;
-    public static String instructionPointerName = "EIP";
-    public static int instructionPointerSize = 32;
-    public static int MAX_SIZE = 32; //default is 32 bit registers
+	public static final int NAME = 0;
+	public static final int SOURCE = 1;
+	public static final int SIZE = 2;
+	public static final int TYPE = 3;
+	public static final int START = 4;
+	public static final int END = 5;
+	public static String instructionPointerName = "EIP";
+	public static int instructionPointerSize = 32;
+	public static int MAX_SIZE = 32; //default is 32 bit registers
 
-    private TreeMap<String, Register> map;
-    private ArrayList<String[]> lookup;
-    private EFlags flags;
-    private Mxscr mxscr;
-    private X87Handler x87;
+	private TreeMap<String, Register> map;
+	private ArrayList<String[]> lookup;
+	private EFlags flags;
+	private Mxscr mxscr;
+	private X87Handler x87;
 
-    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
-    private TreeMap<String, TreeMap<String, Register>> childMap;
+	private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
+	private TreeMap<String, TreeMap<String, Register>> childMap;
 
-    public RegisterList(String csvFile, int maxSize) {
-        Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
-        this.flags = new EFlags("EFLAGS", 32);
-        this.mxscr = new Mxscr("MXSCR", 32);
-        this.map = new TreeMap<>(orderedComparator);
-        this.lookup = new ArrayList<>();
-        MAX_SIZE = maxSize;
-        this.childMap = new TreeMap<>(orderedComparator);
+	public RegisterList(String csvFile, int maxSize){
+		Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
+		this.flags = new EFlags("EFLAGS", 32);
+		this.mxscr = new Mxscr("MXSCR", 32);
+		this.map = new TreeMap<>(orderedComparator);
+		this.lookup = new ArrayList<>();
+		MAX_SIZE = maxSize;
+		this.childMap = new TreeMap<>(orderedComparator);
 
-        this.x87 = new X87Handler(this);
+		this.x87 = new X87Handler(this);
 
-        BufferedReader br = null;
-        String line = "";
-        int lineCounter = 0;
-        ArrayList<String[]> lookUpCopy = new ArrayList<>();
-        ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-                boolean isSkipped = false;
-                String[] reg = HandleConfigFunctions.split(line, ',');
-                for (int i = 0; i < reg.length; i++) {
-                    reg[i] = reg[i].trim();
-                }
-                lookUpCopy.add(reg);
+		BufferedReader br = null;
+		String line = "";
+		int lineCounter = 0;
+		ArrayList<String[]> lookUpCopy = new ArrayList<>();
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
+		try{
+			br = new BufferedReader(new FileReader(csvFile));
+			while( (line = br.readLine()) != null ){
+				boolean isSkipped = false;
+				String[] reg = HandleConfigFunctions.split(line, ',');
+				for( int i = 0; i < reg.length; i++ ){
+					reg[i] = reg[i].trim();
+				}
+				lookUpCopy.add(reg);
 
-                ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);
-                ArrayList<String> invalidParametersRegister = HandleConfigFunctions.checkForInvalidInput(reg);
-                if (missingParametersRegister.size() > 0) {
-                    isSkipped = true;
-                    errorMessages.add(new ErrorMessage(
-                            Types.registerShouldNotBeEmpty,
-                            missingParametersRegister,
-                            Integer.toString(lineCounter)));
-                }
+				ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);
+				ArrayList<String> invalidParametersRegister = HandleConfigFunctions.checkForInvalidInput(reg);
+				if( missingParametersRegister.size() > 0 ){
+					isSkipped = true;
+					errorMessages.add(new ErrorMessage(Types.registerShouldNotBeEmpty, missingParametersRegister, Integer.toString(lineCounter)));
+				}
 
-                if (invalidParametersRegister.size() > 0 && lineCounter != 0) {
-                    isSkipped = true;
-                    errorMessages.add(new ErrorMessage(
-                            Types.registerShouldNotBeInvalid,
-                            invalidParametersRegister,
-                            Integer.toString(lineCounter)));
-                }
+				if( invalidParametersRegister.size() > 0 && lineCounter != 0 ){
+					isSkipped = true;
+					errorMessages.add(new ErrorMessage(Types.registerShouldNotBeInvalid, invalidParametersRegister, Integer.toString(lineCounter)));
+				}
 
 //				System.out.println("configuration.model.engine.Register [name= " + reg[0]
 //	                                 + " , source=" + reg[1]
@@ -83,409 +77,387 @@ public class RegisterList {
 //	                                 + " , type=" + reg[3]
 //	                                 + " , start=" + reg[4]
 //	                                 + " , end=" + reg[5]+ "]");
-                // we need to get the max register size listed in the csv file
-                if (!isSkipped) {
-                    int regSize = 0;
-                    // don't get the table headers
-                    if (lineCounter != 0) {
+				// we need to get the max register size listed in the csv file
+				if( ! isSkipped ){
+					int regSize = 0;
+					// don't get the table headers
+					if( lineCounter != 0 ){
 
-                        regSize = Integer.parseInt(reg[SIZE]);
+						regSize = Integer.parseInt(reg[SIZE]);
 
-                        int startIndex = Integer.parseInt(reg[START]);
-                        int endIndex = Integer.parseInt(reg[END]);
+						int startIndex = Integer.parseInt(reg[START]);
+						int endIndex = Integer.parseInt(reg[END]);
 
-                        if ((startIndex == 0 && endIndex + 1 != regSize)
-                                || (startIndex > 0 && endIndex - startIndex + 1 != regSize)) {
-                            errorMessages.add(new ErrorMessage(
-                                    Types.registerInvalidSizeFormat,
-                                    HandleConfigFunctions.generateArrayListString(reg[NAME]),
-                                    Integer.toString(lineCounter)));
-                            //						reg = HandleConfigFunctions.adjustAnArray(reg, 1);
-                            //						reg[reg.length - 1] = "0";
-                        }
+						if( (startIndex == 0 && endIndex + 1 != regSize) || (startIndex > 0 && endIndex - startIndex + 1 != regSize) ){
+							errorMessages.add(new ErrorMessage(Types.registerInvalidSizeFormat, HandleConfigFunctions.generateArrayListString(reg[NAME]), Integer.toString(lineCounter)));
+							//						reg = HandleConfigFunctions.adjustAnArray(reg, 1);
+							//						reg[reg.length - 1] = "0";
+						}
 
-                        endIndex = ((endIndex + 1) / 4) - 1;
-                        startIndex = startIndex / 4;
+						endIndex = ((endIndex + 1) / 4) - 1;
+						startIndex = startIndex / 4;
 
-                        // reverse order of indices
-                        int dividedBy = 0; //RegisterList.MAX_SIZE / 4;
-                        if (reg[NAME].equals(reg[SOURCE])) {
-                            dividedBy = Integer.parseInt(reg[SIZE]) / 4;
-                        } else {
-                            dividedBy = getBitSize(reg[SOURCE]) / 4;
-                        }
-                        endIndex = (dividedBy - 1) - endIndex;
-                        startIndex = (dividedBy - 1) - startIndex;
+						// reverse order of indices
+						int dividedBy = 0; //RegisterList.MAX_SIZE / 4;
+						if( reg[NAME].equals(reg[SOURCE]) ){
+							dividedBy = Integer.parseInt(reg[SIZE]) / 4;
+						} else{
+							dividedBy = getBitSize(reg[SOURCE]) / 4;
+						}
+						endIndex = (dividedBy - 1) - endIndex;
+						startIndex = (dividedBy - 1) - startIndex;
 
-                        reg[START] = String.valueOf(endIndex);
-                        reg[END] = String.valueOf(startIndex);
-                        reg[NAME] = reg[NAME].toUpperCase();
-                        // add csv row to lookup table
+						reg[START] = String.valueOf(endIndex);
+						reg[END] = String.valueOf(startIndex);
+						reg[NAME] = reg[NAME].toUpperCase();
+						// add csv row to lookup table
 //						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
 //						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
-                        this.lookup.add(reg);
-                    }
+						this.lookup.add(reg);
+					}
 
-                    // if a register is the source register itself
-                    if (reg[NAME].equals(reg[SOURCE])) {
-                        switch (reg[TYPE]) {
-                            case "1": // fall through
-                            case "2": // fall through
-                            case "4":
-                            case "5":
-                            case "6":
-                                Register g = new Register(reg[NAME], regSize);
-                                this.map.put(reg[NAME], g);
-                                break;
-                            case "3": // Instruction Pointer
-                                Register h = new Register(reg[NAME], regSize);
-                                instructionPointerName = reg[NAME];
-                                instructionPointerSize = regSize;
-                                this.map.put(reg[NAME], h);
-                                break;
-                            default:
-                                errorMessages.add(
-                                        new ErrorMessage(Types.invalidRegister,
-                                                HandleConfigFunctions.generateArrayListString(reg[TYPE]),
-                                                Integer.toString(lineCounter + 1)));
-                                break;
-                        }
-                    } else if ( reg[TYPE].equals("2") ) {
-                        Register g = new Register(reg[NAME], regSize);
-                        if (childMap.get(reg[SOURCE]) == null) {
-                            TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
+					// if a register is the source register itself
+					if( reg[NAME].equals(reg[SOURCE]) ){
+						switch(reg[TYPE]){
+							case "1": // fall through
+							case "2": // fall through
+							case "4":
+							case "5":
+							case "6":
+								Register g = new Register(reg[NAME], regSize);
+								this.map.put(reg[NAME], g);
+								break;
+							case "3": // Instruction Pointer
+								Register h = new Register(reg[NAME], regSize);
+								instructionPointerName = reg[NAME];
+								instructionPointerSize = regSize;
+								this.map.put(reg[NAME], h);
+								break;
+							default:
+								errorMessages.add(new ErrorMessage(Types.invalidRegister, HandleConfigFunctions.generateArrayListString(reg[TYPE]), Integer.toString(lineCounter + 1)));
+								break;
+						}
+					} else if( reg[TYPE].equals("2") ){
+						Register g = new Register(reg[NAME], regSize);
+						if( childMap.get(reg[SOURCE]) == null ){
+							TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
 //                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
-                            this.childMap.put(reg[SOURCE], group);
-                        } else {
-                            TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
+							group.put(reg[NAME], g);
+							this.childMap.put(reg[SOURCE], group);
+						} else{
+							TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
 //                            System.out.println("Sibling-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
-                            this.childMap.replace(reg[SOURCE], group);
-                        }
-                    }
-                }
-                lineCounter++;
-            }
-            lookUpCopy.remove(0);
-            // should check for register configuration errors...
-            int index = 0;
-            for (String[] lookupEntry : lookUpCopy) {
+							group.put(reg[NAME], g);
+							this.childMap.replace(reg[SOURCE], group);
+						}
+					}
+				}
+				lineCounter++;
+			}
+			lookUpCopy.remove(0);
+			// should check for register configuration errors...
+			int index = 0;
+			for( String[] lookupEntry : lookUpCopy ){
 
-                // if all source (mother) registers are existent
-                //System.out.println(lookupEntry[1]);
-                if (!this.map.containsKey(lookupEntry[1])) {
+				// if all source (mother) registers are existent
+				//System.out.println(lookupEntry[1]);
+				if( ! this.map.containsKey(lookupEntry[1]) ){
 //					int lineNumber = index;
 //					if(isEmptyError)
 //						lineNumber = index + 1;
-                    errorMessages.add(new ErrorMessage(
-                            Types.doesNotExist, HandleConfigFunctions.generateArrayListString(lookupEntry[1]),
-                            Integer.toString(index + 1)));
-                }
-                index++;
-            }
+					errorMessages.add(new ErrorMessage(Types.doesNotExist, HandleConfigFunctions.generateArrayListString(lookupEntry[1]), Integer.toString(index + 1)));
+				}
+				index++;
+			}
 
 //            this.setRegisterContent(); // put value into the Register Map
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        ErrorMessageList registerErrorList = new ErrorMessageList(Types.registerFile, errorMessages);
-        errorLogger.add(registerErrorList);
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			if( br != null ){
+				try{
+					br.close();
+				} catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		ErrorMessageList registerErrorList = new ErrorMessageList(Types.registerFile, errorMessages);
+		errorLogger.add(registerErrorList);
 
-    }
+	}
 
-    public Iterator<String[]> getRegisterList() {
-        return this.lookup.iterator();
-    }
+	public Iterator<String[]> getRegisterList(){
+		return this.lookup.iterator();
+	}
 
-    /*
+	/*
 		getRegisterKeys() is used for getting all register names to be highlighted
-     */
-    public Iterator<String> getRegisterKeys() {
-        List registerKeys = new ArrayList<>();
-        Iterator<String[]> iterator = getRegisterList();
-        while (iterator.hasNext()) {
-            String regName = iterator.next()[0];
-            registerKeys.add(regName);
-        }
-        return registerKeys.iterator();
-    }
+	 */
+	public Iterator<String> getRegisterKeys(){
+		List registerKeys = new ArrayList<>();
+		Iterator<String[]> iterator = getRegisterList();
+		while( iterator.hasNext() ){
+			String regName = iterator.next()[0];
+			registerKeys.add(regName);
+		}
+		return registerKeys.iterator();
+	}
 
-    public EFlags getEFlags() {
-        return this.flags;
-    }
+	public EFlags getEFlags(){
+		return this.flags;
+	}
 
-    public Mxscr getMxscr() {
-        return this.mxscr;
-    }
+	public Mxscr getMxscr(){
+		return this.mxscr;
+	}
 
-    public boolean isExisting(String registerName) {
-        return (find(registerName) != null);
-    }
+	public boolean isExisting(String registerName){
+		return (find(registerName) != null);
+	}
 
-    public int getBitSize(String registerName) {
-        return getBitSize(new Token(Token.REG, registerName));
-    }
+	public int getBitSize(String registerName){
+		return getBitSize(new Token(Token.REG, registerName));
+	}
 
-    public int getBitSize(Token a) {
-        String key = a.getValue();
-        String size;
-        size = find(key)[SIZE];
-        return Integer.parseInt(size);
-    }
+	public int getBitSize(Token a){
+		String key = a.getValue();
+		String size;
+		size = find(key)[SIZE];
+		return Integer.parseInt(size);
+	}
 
-    public int getHexSize(String registerName) {
-        return getBitSize(registerName) / 4;
-    }
+	public int getHexSize(String registerName){
+		return getBitSize(registerName) / 4;
+	}
 
-    public int getHexSize(Token a) {
-        return getBitSize(a) / 4;
-    }
+	public int getHexSize(Token a){
+		return getBitSize(a) / 4;
+	}
 
-    public String get(String registerName) {
-        return get(new Token(Token.REG, registerName));
-    }
+	public String get(String registerName){
+		return get(new Token(Token.REG, registerName));
+	}
 
-    public String get(Token a) {
-        ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
-        // find the mother/source register
-        String key = a.getValue();
-        String[] register = find(key);
+	public String get(Token a){
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
+		// find the mother/source register
+		String key = a.getValue();
+		String[] register = find(key);
 
-        // get the mother register
-        if (isExisting(key)) {
-            Register mother = this.map.get(register[SOURCE]);
-            int startIndex = Integer.parseInt(register[START]);
-            int endIndex = Integer.parseInt(register[END]);
-            // return the indicated child register value
-            return mother.getValue().substring(startIndex, endIndex + 1);
-        } else {
-            System.out.println("ERROR: Register " + key + " does not exist.");
-            errorMessages.add(new ErrorMessage(Types.doesNotExist,
-                    HandleConfigFunctions.generateArrayListString(key), ""));
-            errorLogger.get(0).add(errorMessages);
-        }
-        return null;
-    }
+		// get the mother register
+		if( isExisting(key) ){
+			Register mother = this.map.get(register[SOURCE]);
+			int startIndex = Integer.parseInt(register[START]);
+			int endIndex = Integer.parseInt(register[END]);
+			// return the indicated child register value
+			return mother.getValue().substring(startIndex, endIndex + 1);
+		} else{
+			System.out.println("ERROR: Register " + key + " does not exist.");
+			errorMessages.add(new ErrorMessage(Types.doesNotExist, HandleConfigFunctions.generateArrayListString(key), ""));
+			errorLogger.get(0).add(errorMessages);
+		}
+		return null;
+	}
 
-    public void set(String registerName, String hexString) throws DataTypeMismatchException {
-        set(new Token(Token.REG, registerName), hexString);
-    }
+	public void set(String registerName, String hexString) throws DataTypeMismatchException{
+		set(new Token(Token.REG, registerName), hexString);
+	}
 
-    public void set(Token a, String hexString) throws DataTypeMismatchException {
-        String key = a.getValue();
-        String[] register = find(key);
-        ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
-        // get the mother register
+	public void set(Token a, String hexString) throws DataTypeMismatchException{
+		String key = a.getValue();
+		String[] register = find(key);
+		ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
+		// get the mother register
 
-        Register mother = this.map.get(register[SOURCE]);
-        int startIndex = Integer.parseInt(register[START]);
-        int endIndex = Integer.parseInt(register[END]);
+		Register mother = this.map.get(register[SOURCE]);
+		int startIndex = Integer.parseInt(register[START]);
+		int endIndex = Integer.parseInt(register[END]);
 
-        //check for mismatch between parameter hexString and child register value		
-        String child = mother.getValue().substring(startIndex, endIndex + 1);
+		//check for mismatch between parameter hexString and child register value
+		String child = mother.getValue().substring(startIndex, endIndex + 1);
 
-        if (child.length() >= hexString.length()) {
-            int differenceInLength = child.length() - hexString.length();
-            for (int i = 0; i < differenceInLength; i++) {
-                hexString = "0" + hexString;
-            }
-            String newValue = mother.getValue();
-            char[] val = newValue.toCharArray();
-            for (int i = startIndex; i <= endIndex; i++) {
-                val[i] = hexString.charAt(i - startIndex);
-            }
-            newValue = new String(val);
-            newValue = newValue.toUpperCase();
-            mother.setValue(newValue);
+		if( child.length() >= hexString.length() ){
+			int differenceInLength = child.length() - hexString.length();
+			for( int i = 0; i < differenceInLength; i++ ){
+				hexString = "0" + hexString;
+			}
+			String newValue = mother.getValue();
+			char[] val = newValue.toCharArray();
+			for( int i = startIndex; i <= endIndex; i++ ){
+				val[i] = hexString.charAt(i - startIndex);
+			}
+			newValue = new String(val);
+			newValue = newValue.toUpperCase();
+			mother.setValue(newValue);
 
-//            System.out.println("register[SOURCE] = " + register[SOURCE]);
-            if (childMap.get(register[SOURCE]) != null) {
-//                System.out.println("key = " + key);
-//				System.out.println("newValue = " + newValue.toUpperCase());
-                int registerType = Integer.parseInt(register[TYPE]);
-                if ( registerType == 2 || registerType == 1) {
-                    String registerCategory = register[SOURCE].charAt(1) + "";
-                    childMap.get(register[SOURCE]).get(registerCategory + "X")
-                            .setValue(get16BitHexString(newValue));
-                    childMap.get(register[SOURCE]).get(registerCategory + "H")
-                            .setValue(get8BitHexString('H', newValue));
-                    childMap.get(register[SOURCE]).get(registerCategory + "L")
-                            .setValue(get8BitHexString('L', newValue));
-                } else if ( registerType == 4 ) { // only for STX and MMX registers
-                    String registerNumber = register[SOURCE].charAt(2) + "";
-//                    System.out.println(newValue.substring(4, 19 + 1));
-                    childMap.get(register[SOURCE]).get("MM" + registerNumber)
-                            .setValue(newValue.substring(4, 20));
-                }
-            }
-        } else {
-            if (hexString.equals("")) {
-                System.out.println("Writing to register failed.");
-                errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
-                        new ArrayList<>(), ""));
-            } else {
-                System.out.println("Size mismatch between "
-                        + register[0] + ":" + child + " and " + hexString);
-                errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
-                        HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
-                throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
-            }
-            errorLogger.get(0).add(errorMessages);
-        }
-    }
+			if( childMap.get(register[SOURCE]) != null ){
+				int registerType = Integer.parseInt(register[TYPE]);
+				if( registerType == 2 || registerType == 1 ){
+					String registerCategory = register[SOURCE].charAt(1) + "";
+					childMap.get(register[SOURCE]).get(registerCategory + "X").setValue(get16BitHexString(newValue));
+					childMap.get(register[SOURCE]).get(registerCategory + "H").setValue(get8BitHexString('H', newValue));
+					childMap.get(register[SOURCE]).get(registerCategory + "L").setValue(get8BitHexString('L', newValue));
+				} else if( registerType == 4 ){ // only for STX and MMX registers
+					String registerNumber = register[SOURCE].charAt(2) + "";
+					childMap.get(register[SOURCE]).get("MM" + registerNumber).setValue(newValue.substring(4, 20));
+				}
+			}
+		} else{
+			if( hexString.equals("") ){
+				System.out.println("Writing to register failed.");
+				errorMessages.add(new ErrorMessage(Types.writeRegisterFailed, new ArrayList<>(), ""));
+			} else{
+				System.out.println("Size mismatch between " + register[0] + ":" + child + " and " + hexString);
+				errorMessages.add(new ErrorMessage(Types.dataTypeMismatch, HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
+				throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
+			}
+			errorLogger.get(0).add(errorMessages);
+		}
+	}
 
-    public String get16BitHexString(String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = hexString.length() / 2; i < hexString.length(); i++) {
-            stringBuilder.append(hexString.charAt(i));
-        }
+	public String get16BitHexString(String hexString){
+		StringBuilder stringBuilder = new StringBuilder();
+		for( int i = hexString.length() / 2; i < hexString.length(); i++ ){
+			stringBuilder.append(hexString.charAt(i));
+		}
 
-        return stringBuilder.toString();
-    }
+		return stringBuilder.toString();
+	}
 
-    public String get8BitHexString(char type, String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        if (type == 'H') {
-            stringBuilder.append(hexString.charAt(4));
-            stringBuilder.append(hexString.charAt(5));
-        } else if (type == 'L') {
-            stringBuilder.append(hexString.charAt(6));
-            stringBuilder.append(hexString.charAt(7));
-        }
+	public String get8BitHexString(char type, String hexString){
+		StringBuilder stringBuilder = new StringBuilder();
+		if( type == 'H' ){
+			stringBuilder.append(hexString.charAt(4));
+			stringBuilder.append(hexString.charAt(5));
+		} else if( type == 'L' ){
+			stringBuilder.append(hexString.charAt(6));
+			stringBuilder.append(hexString.charAt(7));
+		}
 
-        return stringBuilder.toString();
-    }
+		return stringBuilder.toString();
+	}
 
-    public String getInstructionPointer() {
-        return get(instructionPointerName);
-    }
+	public String getInstructionPointer(){
+		return get(instructionPointerName);
+	}
 
-    public void setInstructionPointer(String value) throws DataTypeMismatchException {
-        set(instructionPointerName, value);
-    }
+	public void setInstructionPointer(String value) throws DataTypeMismatchException{
+		set(instructionPointerName, value);
+	}
 
-    public void clear() {
-        for (String s : this.map.keySet()) {
-            this.map.get(s).initializeValue();
-        }
-        flags.initializeValue();
-        mxscr.initializeValue();
-        x87.clear();
+	public void clear(){
+		for( String s : this.map.keySet() ){
+			this.map.get(s).initializeValue();
+		}
+		flags.initializeValue();
+		mxscr.initializeValue();
+		x87.clear();
 
-        // initialize childMap
-        for (String s : this.childMap.keySet()) {
-            for (String t : this.childMap.get(s).keySet()) {
-                this.childMap.get(s).get(t).initializeValue();
-            }
-        }
+		// initialize childMap
+		for( String s : this.childMap.keySet() ){
+			for( String t : this.childMap.get(s).keySet() ){
+				this.childMap.get(s).get(t).initializeValue();
+			}
+		}
 
 //        try {
 //            setRegisterContent();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-    }
+	}
 
-    public void print() {
-        map.entrySet().forEach(System.out::println);
-    }
+	public void print(){
+		map.entrySet().forEach(System.out::println);
+	}
 
-    public String[] find(String registerName) {
-        for (String[] x : this.lookup) {
-            if (x[0].equalsIgnoreCase(registerName)) {
-                return x;
-            }
-        }
-        return null;
-    }
+	public String[] find(String registerName){
+		for( String[] x : this.lookup ){
+			if( x[0].equalsIgnoreCase(registerName) ){
+				return x;
+			}
+		}
+		return null;
+	}
 
-    public int indexOf(String registerName) {
-        for (int i = 0; i < this.lookup.size(); i++) {
-            if (registerName.equals(this.lookup.get(i)[RegisterList.NAME])) {
-                return i;
-            }
-        }
-        return -1;
-    }
+	public int indexOf(String registerName){
+		for( int i = 0; i < this.lookup.size(); i++ ){
+			if( registerName.equals(this.lookup.get(i)[RegisterList.NAME]) ){
+				return i;
+			}
+		}
+		return - 1;
+	}
 
-    public Map getRegisterMap() {
-        return this.map;
-    }
+	public Map getRegisterMap(){
+		return this.map;
+	}
 
-    /**
-     *
-     * @param regName
-     * @return
-     */
-    public Map getChildRegisterMap(String regName) {
-        return this.childMap.get(regName);
-    }
+	/**
+	 * @param regName
+	 * @return
+	 */
+	public Map getChildRegisterMap(String regName){
+		return this.childMap.get(regName);
+	}
 
-    public ErrorLogger getErrorLogger() {
-        if (errorLogger.get(0).getSizeofErrorMessages() == 0) {
-            return new ErrorLogger(new ArrayList<ErrorMessageList>());
-        } else {
-            return errorLogger;
-        }
-    }
+	public ErrorLogger getErrorLogger(){
+		if( errorLogger.get(0).getSizeofErrorMessages() == 0 ){
+			return new ErrorLogger(new ArrayList<ErrorMessageList>());
+		} else{
+			return errorLogger;
+		}
+	}
 
-    public Integer[] getAvailableSizes() {
-        Set<Integer> available = new HashSet<>();
-        Iterator iterator = getRegisterKeys();
-        while (iterator.hasNext()) {
-            String registerName = (String) iterator.next();
-            available.add(getBitSize(registerName));
-        }
-        Integer[] list = new Integer[available.size()];
+	public Integer[] getAvailableSizes(){
+		Set<Integer> available = new HashSet<>();
+		Iterator iterator = getRegisterKeys();
+		while( iterator.hasNext() ){
+			String registerName = (String) iterator.next();
+			available.add(getBitSize(registerName));
+		}
+		Integer[] list = new Integer[available.size()];
 
-        return available.toArray(list);
-    }
+		return available.toArray(list);
+	}
 
-    public X87Handler x87(){
-        return this.x87;
-    }
+	public X87Handler x87(){
+		return this.x87;
+	}
 
-    public void setRegisterContent() {
-        try {
-          set("EAX", "DDBBCCAA");
-          set("EBX", "FFFF1111");
-          set("ECX", "00000005");
-          set("EDX", "56F38E84");
-          set("ESP", "FF006655");
-          set("ESI", "00000001");
-          set("EDI", "88774433");
-          set("EBP", "00000008");
+	public void setRegisterContent(){
+		try{
+			set("EAX", "DDBBCCAA");
+			set("EBX", "FFFF1111");
+			set("ECX", "00000005");
+			set("EDX", "56F38E84");
+			set("ESP", "FF006655");
+			set("ESI", "00000001");
+			set("EDI", "88774433");
+			set("EBP", "00000008");
 
-          set("MM0", "FFFF901256781234");
-          set("MM1", "1234567856781234");
-          set("MM2", "FFCA90BB58926789");
-          set("MM3", "9934566711111286");
-          set("MM4", "0055006600770088");
-          set("MM5", "111122228888FFFF");
-          set("MM6", "0000000000000001");
-          set("MM7", "0000000000000002");
+			set("MM0", "FFFF901256781234");
+			set("MM1", "1234567856781234");
+			set("MM2", "FFCA90BB58926789");
+			set("MM3", "9934566711111286");
+			set("MM4", "0055006600770088");
+			set("MM5", "111122228888FFFF");
+			set("MM6", "0000000000000001");
+			set("MM7", "0000000000000002");
 
-          set("XMM0", "ABCEDF123456789000000000123AF43");
-          set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
-          set("XMM2", "11111111111111110000000000000000");
-          set("XMM3", "1234567890AB90931FFF45210123ABCD");
-          set("XMM4", "1FFF45210123ABCD1234567890AB9094");
-          set("XMM5", "1234567845210123123EBDCA0123AF43");
-          set("XMM6", "ABCDEF01452101230000000045210123");
-          set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-        System.out.println("Loaded Register Content");
-    }
+			set("XMM0", "ABCEDF123456789000000000123AF43");
+			set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
+			set("XMM2", "11111111111111110000000000000000");
+			set("XMM3", "1234567890AB90931FFF45210123ABCD");
+			set("XMM4", "1FFF45210123ABCD1234567890AB9094");
+			set("XMM5", "1234567845210123123EBDCA0123AF43");
+			set("XMM6", "ABCDEF01452101230000000045210123");
+			set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("Loaded Register Content");
+	}
 }

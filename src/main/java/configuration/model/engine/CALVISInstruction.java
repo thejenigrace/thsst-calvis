@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
-public class CalvisInstruction {
+public class CalvisInstruction{
 
 	private Instruction ins;
 	private String name;
@@ -289,9 +289,4 @@ public class CalvisInstruction {
 			}
 		}
 	}
-
-//    public String getInstruction(){
-//        // TO DO
-//        return "";
-//    }
 }

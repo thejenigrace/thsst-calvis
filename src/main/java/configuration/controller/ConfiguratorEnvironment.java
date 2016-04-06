@@ -11,49 +11,47 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 12/11/2015.
  */
-public class ConfiguratorEnvironment {
+public class ConfiguratorEnvironment{
 
-    private CalvisParser p;
-    private Memory memory;
-    private RegisterList registers;
-    private InstructionList instructions;
-    private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
+	private CalvisParser p;
+	private Memory memory;
+	private RegisterList registers;
+	private InstructionList instructions;
+	private ErrorLogger errorLogger = new ErrorLogger( new ArrayList<>() );
 
-    public ConfiguratorEnvironment(ArrayList<String> filePaths) {
-        // 1. Setup the environment
-        this.memory = new Memory(32, 16, filePaths.get(0));
-        this.registers = new RegisterList(filePaths.get(1), 32);
-        this.instructions = new InstructionList(filePaths.get(2));
+	public ConfiguratorEnvironment(ArrayList<String> filePaths){
+		// 1. Setup the environment
+		this.memory = new Memory( 32, 16, filePaths.get( 0 ) );
+		this.registers = new RegisterList( filePaths.get( 1 ), 32 );
+		this.instructions = new InstructionList( filePaths.get( 2 ) );
 
-        //1.5 check for errors
-        errorLogger.combineErrorLogger(registers.getErrorLogger(), instructions.getErrorLogger());
-        // 2. Create the CalvisParser based on the environment
-        if (errorLogger.size() == 0) {
-            this.p = new CalvisParser(instructions, registers, memory);
-            System.out.println("Memory available: "
-                    + Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory()
-            );
-        }
-    }
+		//1.5 check for errors
+		errorLogger.combineErrorLogger( registers.getErrorLogger(), instructions.getErrorLogger() );
+		// 2. Create the CalvisParser based on the environment
+		if( errorLogger.size() == 0 ){
+			this.p = new CalvisParser( instructions, registers, memory );
+			System.out.println( "Memory available: " + Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().totalMemory() );
+		}
+	}
 
-    public CalvisParser getParser() {
-        return this.p;
-    }
+	public CalvisParser getParser(){
+		return this.p;
+	}
 
-    public Memory getMemory() {
-        return this.memory;
-    }
+	public Memory getMemory(){
+		return this.memory;
+	}
 
-    public RegisterList getRegisters() {
-        return this.registers;
-    }
+	public RegisterList getRegisters(){
+		return this.registers;
+	}
 
-    public InstructionList getInstructions() {
-        return this.instructions;
-    }
+	public InstructionList getInstructions(){
+		return this.instructions;
+	}
 
-    public ErrorLogger getMessageLists() {
-        return errorLogger;
-    }
+	public ErrorLogger getMessageLists(){
+		return errorLogger;
+	}
 
 }

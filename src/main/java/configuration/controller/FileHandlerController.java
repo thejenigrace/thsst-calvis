@@ -20,94 +20,102 @@ import java.util.ArrayList;
 /**
  * Created by Ivan on 1/27/2016.
  */
-public class FileHandlerController {
+public class FileHandlerController{
 
-    public static String getExtension(String filename) {
-        if (filename == null) {
-            return null;
-        }
-        int extensionPos = filename.lastIndexOf('.');
-        int lastUnixPos = filename.lastIndexOf('/');
-        int lastWindowsPos = filename.lastIndexOf('\\');
-        int lastSeparator = Math.max(lastUnixPos, lastWindowsPos);
+	public static String getExtension(String filename){
+		if( filename == null ){
+			return null;
+		}
 
-        int index = lastSeparator > extensionPos ? -1 : extensionPos;
-        if (index == -1) {
-            return "";
-        } else {
-            return filename.substring(index + 1);
-        }
-    }
+		int extensionPos = filename.lastIndexOf('.');
+		int lastUnixPos = filename.lastIndexOf('/');
+		int lastWindowsPos = filename.lastIndexOf('\\');
+		int lastSeparator = Math.max(lastUnixPos, lastWindowsPos);
+		int index = lastSeparator > extensionPos ? - 1 : extensionPos;
 
-    public String checkIfFileExists(String filepath) {
-        File f = new File(filepath);
-        ArrayList<String> pathString = new ArrayList<String>();
-        pathString.add(filepath);
-        if (!f.exists() && !filepath.isEmpty()) {
-            return new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFilePath).generateMessage(pathString);
-        }
-        return "";
-    }
+		if( index == - 1 ){
+			return "";
+		} else{
+			return filename.substring(index + 1);
+		}
+	}
 
-    public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes) {
-        Path filePath = Paths.get(filename);
-        ArrayList<String> writable = new ArrayList<>();
-        for (int x = 0; x < filePathListArrayList.size(); x++) {
-            writable.add(filePathListArrayList.get(x).getCategory());
-            writable.add("/*StartOfFile*/");
-            for (int y = 0; y < filePathListArrayList.get(x).size(); y++) {
-                writable.add(filePathListArrayList.get(x).get(y).getLocation());
-            }
-            writable.add("/*EndOfFile*/");
+	public String checkIfFileExists(String filepath){
+		File f = new File(filepath);
+		ArrayList<String> pathString = new ArrayList<String>();
+		pathString.add(filepath);
+		if( ! f.exists() && ! filepath.isEmpty() ){
 
-        }
-        writable.add("/*StartOfIndex*/");
-        for (int x = 0; x < selectedIndexes.size(); x++) {
-            writable.add(selectedIndexes.get(x));
-        }
-        writable.add("/*EndOfIndex*/");
+			return new InstructionFileErrorInvalidMessage(InstructionInvalid.invalidFilePath).generateMessage(pathString);
 
-        try {
-            Files.write(filePath, writable, Charset.forName("UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		}
 
-    public static FilePathHandler loadFilenames(String filename) {
-        ArrayList<ArrayList<String>> completeFileNames = new ArrayList<ArrayList<String>>();
-        ArrayList<String> filepathList = null;
-        ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
-        //FilePathHandler fs = new FilePathHandler(completeFileNames, selectedIndexes);
+		return "";
+	}
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line = br.readLine();
+	public static void writeLocationFile(String filename, ArrayList<FilePathList> filePathListArrayList, ArrayList<String> selectedIndexes){
+		Path filePath = Paths.get(filename);
+		ArrayList<String> writable = new ArrayList<>();
+		for( int x = 0; x < filePathListArrayList.size(); x++ ){
+			writable.add(filePathListArrayList.get(x).getCategory());
+			writable.add("/*StartOfFile*/");
 
-            while (line != null) {
-                boolean IsSkept = false;
-                if (line.equals("/*StartOfFile*/")) {
-                    filepathList = new ArrayList<String>();
-                } else if (line.equals("/*EndOfFile*/")) {
-                    completeFileNames.add(filepathList);
-                } else if (line.equals("Memory File") || line.equals("Register File") || line.equals("Instruction File") || line.equals("/*StartOfIndex*/") || line.equals("/*EndOfIndex*/")) {
-                    line = br.readLine();
-                    IsSkept = true;
-                } else if (line.length() == 1) {
-                    selectedIndexes.add(Integer.parseInt(line));
-                } else {
-                    filepathList.add(line);
-                    System.out.println(line);
-                }
-                if (!IsSkept) {
-                    line = br.readLine();
-                }
+			for( int y = 0; y < filePathListArrayList.get(x).size(); y++ ){
+				writable.add(filePathListArrayList.get(x).get(y).getLocation());
+			}
 
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new FilePathHandler(completeFileNames, selectedIndexes);
-    }
+			writable.add("/*EndOfFile*/");
+
+		}
+
+		writable.add("/*StartOfIndex*/");
+
+		for( int x = 0; x < selectedIndexes.size(); x++ ){
+			writable.add(selectedIndexes.get(x));
+		}
+
+		writable.add("/*EndOfIndex*/");
+
+		try{
+			Files.write(filePath, writable, Charset.forName("UTF-8"));
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	public static FilePathHandler loadFilenames(String filename){
+		ArrayList<ArrayList<String>> completeFileNames = new ArrayList<ArrayList<String>>();
+		ArrayList<String> filepathList = null;
+		ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
+
+		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+			String line = br.readLine();
+
+			while( line != null ){
+				boolean IsSkept = false;
+				if( line.equals("/*StartOfFile*/") ){
+					filepathList = new ArrayList<String>();
+				} else if( line.equals("/*EndOfFile*/") ){
+					completeFileNames.add(filepathList);
+				} else if( line.equals("Memory File") || line.equals("Register File") || line.equals("Instruction File") || line.equals("/*StartOfIndex*/") || line.equals("/*EndOfIndex*/") ){
+					line = br.readLine();
+					IsSkept = true;
+				} else if( line.length() == 1 ){
+					selectedIndexes.add(Integer.parseInt(line));
+				} else{
+					filepathList.add(line);
+					System.out.println(line);
+				}
+				if( ! IsSkept ){
+					line = br.readLine();
+				}
+
+			}
+		} catch(FileNotFoundException e){
+			e.printStackTrace();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		return new FilePathHandler(completeFileNames, selectedIndexes);
+	}
 }

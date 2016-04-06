@@ -14,7 +14,7 @@ import java.util.*;
  * Memory - Protected Mode Flat Model address size - 32-bit starts from - 0x0000
  * 0000 ends at - 0x0000 FFFF
  */
-public class Memory {
+public class Memory{
 
 	public static int MAX_ADDRESS_SIZE;
 	public static int DEFAULT_RELATIVE_SIZE;
@@ -30,7 +30,7 @@ public class Memory {
 	private String variablePointer;
 	private ArrayList<Integer> stackType;
 
-	public Memory(int bitSize, int bitEndLength, String csvFile) {
+	public Memory(int bitSize, int bitEndLength, String csvFile){
 		MAX_ADDRESS_SIZE = bitSize;
 		DEFAULT_RELATIVE_SIZE = bitEndLength;
 		this.mem = new TreeMap<>(Collections.reverseOrder());
@@ -41,7 +41,7 @@ public class Memory {
 
 		String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
 		int end = Integer.parseInt(lastAddress, 16);
-		for ( int i = 0x0; i <= end; i++ ) {
+		for( int i = 0x0; i <= end; i++ ){
 			String address = MemoryAddressCalculator.extend(Integer.toHexString(i), bitSize, "0");
 //            mem.put(address, "00");
 			mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
@@ -52,16 +52,16 @@ public class Memory {
 		String cvsSplitBy = ",";
 		int lineCounter = 0;
 		this.lookup = new ArrayList<>();
-		try {
+		try{
 			br = new BufferedReader(new FileReader(new File(csvFile)));
-			while ( (line = br.readLine()) != null ) {
+			while( (line = br.readLine()) != null ){
 				// use comma as separator
 				String[] row = line.split(cvsSplitBy);
 				// trim every row just in case
-				for ( int i = 0; i < row.length; i++ ) {
+				for( int i = 0; i < row.length; i++ ){
 					row[i] = row[i].trim();
 				}
-				if ( lineCounter != 0 ) {
+				if( lineCounter != 0 ){
 					this.lookup.add(row);
 //                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
 //		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
@@ -69,51 +69,51 @@ public class Memory {
 				}
 				lineCounter++;
 			}
-		} catch ( Exception e ) {
+		} catch(Exception e){
 			e.printStackTrace();
-		} finally {
-			if ( br != null ) {
-				try {
+		} finally{
+			if( br != null ){
+				try{
 					br.close();
-				} catch ( IOException e ) {
+				} catch(IOException e){
 					e.printStackTrace();
 				}
 			}
 		}
 	}
 
-	private void resetVariablePointer() {
+	private void resetVariablePointer(){
 		this.variablePointer = MemoryAddressCalculator.extend("4000", Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
-	public Map getMemoryMap() {
+	public Map getMemoryMap(){
 		return this.mem;
 	}
 
-	public String getVariablePointer() {
+	public String getVariablePointer(){
 		return variablePointer;
 	}
 
-	public void incrementVariablePointer(int prefixSize) {
+	public void incrementVariablePointer(int prefixSize){
 		int byteOffset = prefixSize / 8; // byte addressable memory
 		Integer startingAddress = Integer.parseInt(variablePointer, 16);
 		startingAddress += byteOffset;
 		variablePointer = reformatAddress(Integer.toHexString(startingAddress));
 	}
 
-	public static String reformatAddress(String add) {
+	public static String reformatAddress(String add){
 		return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
 	}
 
-	public void write(Token baseAddressToken, String value, Token des) throws MemoryWriteException {
+	public void write(Token baseAddressToken, String value, Token des) throws MemoryWriteException{
 		write(baseAddressToken.getValue(), value, des);
 	}
 
-	public void write(Token baseAddressToken, String value, int offset) throws MemoryWriteException {
+	public void write(Token baseAddressToken, String value, int offset) throws MemoryWriteException{
 		write(baseAddressToken.getValue(), value, offset);
 	}
 
-	public void write(String wholeMemoryString, String value, Token des) throws MemoryWriteException {
+	public void write(String wholeMemoryString, String value, Token des) throws MemoryWriteException{
 		// des contains our offset.
 		String desValue = des.getValue();
 		String[] memoryArray = desValue.split("/");
@@ -125,49 +125,48 @@ public class Memory {
 		write(baseAddress, reformattedValue, offset);
 	}
 
-	public void write(String baseAddress, String value, int offset) throws MemoryWriteException {
+	public void write(String baseAddress, String value, int offset) throws MemoryWriteException{
 		String memoryBaseAddress = baseAddress;
-		if ( baseAddress.contains("/") ) {
+		if( baseAddress.contains("/") ){
 			memoryBaseAddress = baseAddress.split("/")[1];
 		}
-		if ( this.mem.containsKey(memoryBaseAddress) ) {
+		if( this.mem.containsKey(memoryBaseAddress) ){
 			Integer inc;
 			inc = Integer.parseInt(memoryBaseAddress, 16);
 			int offsetHex = offset / 4;
 			value = value.toUpperCase();
 			value = MemoryAddressCalculator.extend(value, offset, "0");
-			if ( value.length() > offsetHex ) {
+			if( value.length() > offsetHex ){
 				throw new MemoryWriteException(baseAddress, value);
 			}
-			for ( int i = 0; i < offsetHex / 2; i++ ) {
+			for( int i = 0; i < offsetHex / 2; i++ ){
 				String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
-				if ( this.mem.containsKey(succeedingAddress) ) {
-					this.mem.put(succeedingAddress,
-							value.substring((value.length() - 2) - (i * 2), value.length() - (i * 2)));
+				if( this.mem.containsKey(succeedingAddress) ){
+					this.mem.put(succeedingAddress, value.substring((value.length() - 2) - (i * 2), value.length() - (i * 2)));
 					inc++;
-				} else {
+				} else{
 					throw new MemoryWriteException(succeedingAddress);
 				}
 			}
 			//System.out.println("Memory read in little endian starting at: " + baseAddr);
-		} else {
+		} else{
 			throw new MemoryWriteException(memoryBaseAddress);
 		}
 	}
 
-	public String read(String address) {
+	public String read(String address){
 		return this.mem.get(address);
 	}
 
-	public String read(Token baseAddressToken, Token src) throws MemoryReadException {
+	public String read(Token baseAddressToken, Token src) throws MemoryReadException{
 		return read(baseAddressToken.getValue(), src);
 	}
 
-	public String read(Token baseAddressToken, int offset) throws MemoryReadException {
+	public String read(Token baseAddressToken, int offset) throws MemoryReadException{
 		return read(baseAddressToken.getValue(), offset);
 	}
 
-	public String read(String wholeMemoryString, Token src) throws MemoryReadException {
+	public String read(String wholeMemoryString, Token src) throws MemoryReadException{
 		String entireMemoryToken = src.getValue();
 		String[] memoryArray = entireMemoryToken.split("/");
 
@@ -175,8 +174,8 @@ public class Memory {
 		String baseAddress = memoryArray[1];
 
 		int offset = 0; //default offset = 0;
-		for ( String[] x : this.lookup ) {
-			if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ) {
+		for( String[] x : this.lookup ){
+			if( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ){
 				offset = Integer.valueOf(x[SIZE_DIRECTIVE_SIZE]);
 				break;
 			}
@@ -184,61 +183,60 @@ public class Memory {
 		return read(baseAddress, offset);
 	}
 
-	public String read(String baseAddress, int offset) throws MemoryReadException {
+	public String read(String baseAddress, int offset) throws MemoryReadException{
 		String result = "";
 		Integer inc;
 
 		String checkSizeDirective = baseAddress;
-		if ( checkSizeDirective.contains("/") ) {
+		if( checkSizeDirective.contains("/") ){
 			checkSizeDirective = baseAddress.split("/")[1];
 		}
 		//System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
 		inc = Integer.parseInt(checkSizeDirective, 16);
 		int offsetHex = offset / 4;
-		for ( int i = 0; i < offsetHex / 2; i++ ) {
+		for( int i = 0; i < offsetHex / 2; i++ ){
 			result = read(reformatAddress(Integer.toHexString(inc))) + result;
 			inc++;
 		}
 //        System.out.println("Memory read in little endian: " + result);
-		if ( result.contains("null") ) {
+		if( result.contains("null") ){
 			throw new MemoryReadException(baseAddress, offset);
 		}
 		return result;
 	}
 
-	public boolean isExisting(String sizeDirective) {
-		for ( String[] x : this.lookup ) {
-			if ( x[Memory.SIZE_DIRECTIVE_NAME].equals(sizeDirective) ) {
+	public boolean isExisting(String sizeDirective){
+		for( String[] x : this.lookup ){
+			if( x[Memory.SIZE_DIRECTIVE_NAME].equals(sizeDirective) ){
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void print(String start, String end) {
+	public void print(String start, String end){
 		Map<String, String> map = new TreeMap<>(mem).descendingMap();
 		Iterator<Map.Entry<String, String>> ite = map.entrySet().iterator();
-		while ( ite.hasNext() ) {
+		while( ite.hasNext() ){
 			Map.Entry<String, String> x = ite.next();
-			if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16)
-					&& Integer.parseInt(x.getKey(), 16) <= Integer.parseInt(end, 16) ) {
+			if( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16) && Integer.parseInt(x.getKey(), 16) <= Integer.parseInt(end, 16) ){
 				System.out.println(x);
 			}
 		}
 	}
 
-	public void push(int type) {
+	public void push(int type){
 		stackType.add(type);
 	}
 
-	public int pop() {
+	public int pop(){
 		System.out.println("what" + stackType.size());
 		return stackType.remove(0);
 	}
 
-	public void clear() {
+	public void clear(){
 		Iterator<String> keys = this.mem.keySet().iterator();
-		while ( keys.hasNext() ) {
+		while( keys.hasNext() ){
 //            this.mem.put((keys.next()), "00" );
 			String address = keys.next();
 			this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
@@ -249,11 +247,11 @@ public class Memory {
 		stackType.clear();
 	}
 
-	public Iterator<String[]> getLookup() {
+	public Iterator<String[]> getLookup(){
 		return lookup.iterator();
 	}
 
-	public int getLookupPower() {
+	public int getLookupPower(){
 		return this.lookup.size();
 	}
 
@@ -262,10 +260,10 @@ public class Memory {
 	 *
 	 * @return
 	 */
-	public Iterator<String> getMemoryKeys() {
+	public Iterator<String> getMemoryKeys(){
 		List memoryKeys = new ArrayList<>();
 		Iterator<String[]> iterator = getLookup();
-		while ( iterator.hasNext() ) {
+		while( iterator.hasNext() ){
 			String[] arr = iterator.next();
 			String sizeDirective = arr[Memory.SIZE_DIRECTIVE_NAME];
 			String sizePrefix = arr[Memory.SIZE_DIRECTIVE_PREFIX];
@@ -275,44 +273,44 @@ public class Memory {
 		return memoryKeys.iterator();
 	}
 
-	public int getBitSize(Token a) {
+	public int getBitSize(Token a){
 		String key = a.getValue();
 
 		String checkSizeDirective = key;
-		if ( checkSizeDirective.contains("/") ) {
+		if( checkSizeDirective.contains("/") ){
 			key = checkSizeDirective.split("/")[0];
 		}
 
 		String[] arr = find(key, Memory.SIZE_DIRECTIVE_NAME);
-		if ( arr != null ) {
+		if( arr != null ){
 			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
 		}
 		return 0;
 	}
 
-	public int getHexSize(Token a) {
+	public int getHexSize(Token a){
 		return getBitSize(a) / 4;
 	}
 
-	public String[] find(String sizeDirective, int index) {
-		for ( String[] x : this.lookup ) {
-			if ( x[index].equalsIgnoreCase(sizeDirective) ) {
+	public String[] find(String sizeDirective, int index){
+		for( String[] x : this.lookup ){
+			if( x[index].equalsIgnoreCase(sizeDirective) ){
 				return x;
 			}
 		}
 		return null;
 	}
 
-	public int getPrefixBitSize(Token prefix) {
+	public int getPrefixBitSize(Token prefix){
 		String key = prefix.getValue();
 		String[] arr = find(key, Memory.SIZE_DIRECTIVE_PREFIX);
-		if ( arr != null ) {
+		if( arr != null ){
 			return Integer.parseInt(arr[Memory.SIZE_DIRECTIVE_SIZE]);
 		}
 		return 0;
 	}
 
-	public int getPrefixHexSize(Token prefix) {
+	public int getPrefixHexSize(Token prefix){
 		return getPrefixBitSize(prefix) / 4;
 	}
 
@@ -324,52 +322,52 @@ public class Memory {
 	 * @return the address pointed to by the label
 	 * @throws NullPointerException, in case the label does not exist
 	 */
-	public String getFromLabelMap(String key) throws NullPointerException {
-		if ( labelMap.get(key) != null ) {
+	public String getFromLabelMap(String key) throws NullPointerException{
+		if( labelMap.get(key) != null ){
 			return labelMap.get(key);
-		} else {
+		} else{
 			throw new NullPointerException("Label: " + key + " does not exist.");
 		}
 	}
 
-	public void putToLabelMap(String key, String address) {
+	public void putToLabelMap(String key, String address){
 		labelMap.put(key, address);
 	}
 
-	public String getFromVariableMap(String key) throws NullPointerException {
-		if ( variableMap.get(key) != null ) {
+	public String getFromVariableMap(String key) throws NullPointerException{
+		if( variableMap.get(key) != null ){
 			return variableMap.get(key);
-		} else {
+		} else{
 			throw new NullPointerException("Variable " + key + " does not exist.");
 		}
 	}
 
-	public HashMap getVariableMap() {
+	public HashMap getVariableMap(){
 		return this.variableMap;
 	}
 
-	public String getCorrespondingLabel(String addressKey) {
-		for ( Map.Entry<String, String> entry : variableMap.entrySet() ) {
-			if ( Objects.equals(addressKey, entry.getValue()) ) {
+	public String getCorrespondingLabel(String addressKey){
+		for( Map.Entry<String, String> entry : variableMap.entrySet() ){
+			if( Objects.equals(addressKey, entry.getValue()) ){
 				return entry.getKey();
 			}
 		}
 		return "";
 	}
 
-	public void putToVariableMap(String key, String size) throws DuplicateVariableException {
-		if ( variableMap.containsKey(key) ) {
+	public void putToVariableMap(String key, String size) throws DuplicateVariableException{
+		if( variableMap.containsKey(key) ){
 			throw new DuplicateVariableException(key);
-		} else {
+		} else{
 			variableMap.put(key, variablePointer);
 		}
 	}
 
-	public static void setDefaultRelativeSize(int defaultRelativeSize) {
+	public static void setDefaultRelativeSize(int defaultRelativeSize){
 		DEFAULT_RELATIVE_SIZE = defaultRelativeSize;
 	}
 
-	public boolean containsLabel(String label) {
+	public boolean containsLabel(String label){
 		return labelMap.containsKey(label);
 	}
 
@@ -379,9 +377,9 @@ public class Memory {
 	 * @param memoryAddressingMode
 	 * @return
 	 */
-	public String removeSizeDirectives(String memoryAddressingMode) {
+	public String removeSizeDirectives(String memoryAddressingMode){
 		String result = memoryAddressingMode;
-		if ( result.contains("/") ) {
+		if( result.contains("/") ){
 			result = result.split("/")[1];
 		}
 		return result;

@@ -23,8 +23,6 @@ public class InstructionList {
 
 	private ArrayList<String> appendType1;
 	private ArrayList<String> appendType2;
-//    private ArrayList<String> appendType3;
-
 
 	private String conditionsRegEx;
 	private String equalityRegEx;
@@ -101,6 +99,7 @@ public class InstructionList {
 //									missingParametersInstruction,
 //									Integer.toString(lineCounter)));
 //						}
+
 					if ( inst[0].isEmpty() ) {
 						instructionMissingCollection.add(
 								new InstructionFileErrorMissingMessage(InstructionMissing.missingInstructionName).
