@@ -92,11 +92,11 @@ public class HandleConfigFunctions {
                 switch ( x ) {
 //                    case 0:
 //                        invalidArr.add(new RegisterFileErrorInvalidMessage(RegisterInvalid.invalidSourceRegister)
-// .generateMessage());
+//                                .generateMessage());
 //                        break;
 //                    case 1:
 //                        invalidArr.add(new RegisterFileErrorInvalidMessage(RegisterInvalid.invalidNewRegister)
-// .generateMessage());
+//                                .generateMessage());
 //                        break;
                     case 2:
                         invalidArr.add(new RegisterFileErrorInvalidMessage(RegisterInvalid.invalidRegisterSize)

@@ -167,6 +167,56 @@ public class ConfigurationEnvironmentController implements Initializable {
 //        }
     }
 
+
+    @FXML
+    public void handleCancel(ActionEvent event) {
+        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        exitAlert.setTitle("Exit CALVIS?");
+        exitAlert.setHeaderText("Are you sure you want to exit CALVIS?");
+        Optional<ButtonType> result = exitAlert.showAndWait();
+        if ( result.get() == ButtonType.OK ) {
+            System.exit(0);
+        } else {
+
+        }
+    }
+
+    public ArrayList<String> getConfigurationFilePath() {
+        ArrayList<String> ConfigurationFilePaths = new ArrayList<String>();
+        ConfigurationFilePaths.add((String) memoryChoiceBox.getSelectionModel().getSelectedItem());
+        ConfigurationFilePaths.add((String) registerChoiceBox.getSelectionModel().getSelectedItem());
+        ConfigurationFilePaths.add((String) instructionChoiceBox.getSelectionModel().getSelectedItem());
+
+        return ConfigurationFilePaths;
+    }
+
+    public ArrayList<FilePath> getFilePathList(ArrayList<String> filePathsOfChoiceBox) {
+        ArrayList<FilePath> filePaths = new ArrayList<FilePath>();
+        for ( int x = 0; x < filePathsOfChoiceBox.size(); x++ ) {
+            Path path = Paths.get(filePathsOfChoiceBox.get(x));
+            FilePath filePath = new FilePath(filePathsOfChoiceBox.get(x), path.getFileName().toString(),
+                    FileHandlerController.getExtension(filePathsOfChoiceBox.get(x)));
+            filePaths.add(filePath);
+        }
+        return filePaths;
+    }
+
+    private void initializeDefaultChoiceBoxes() {
+        FilePathHandler readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
+//        FileHandlerController fhc = new FileHandlerController();
+//        System.out.println(fhc.checkIfFileExists("SaveFile/savelist.txt"));
+        AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
+        AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
+        AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));
+
+        memoryChoiceBox.getSelectionModel().select(memoryChoiceBox.getItems().get(readSaveFile.getSelectedIndexes()
+                .get(0)));
+        registerChoiceBox.getSelectionModel().select(registerChoiceBox.getItems().get(readSaveFile
+                .getSelectedIndexes().get(1)));
+        instructionChoiceBox.getSelectionModel().select(instructionChoiceBox.getItems().get(readSaveFile
+                .getSelectedIndexes().get(2)));
+    }
+
     private Task<Void> createTaskWorkspace() {
         return new Task<Void>() {
             @Override
@@ -204,44 +254,6 @@ public class ConfigurationEnvironmentController implements Initializable {
                 return null;
             }
         };
-    }
-
-    @FXML
-    public void handleCancel(ActionEvent event) {
-        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        exitAlert.setTitle("Exit CALVIS?");
-        exitAlert.setHeaderText("Are you sure you want to exit CALVIS?");
-        Optional<ButtonType> result = exitAlert.showAndWait();
-        if ( result.get() == ButtonType.OK ) {
-            System.exit(0);
-        } else {
-
-        }
-    }
-
-    private void initializeDefaultChoiceBoxes() {
-        FilePathHandler readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
-//        FileHandlerController fhc = new FileHandlerController();
-//        System.out.println(fhc.checkIfFileExists("SaveFile/savelist.txt"));
-        AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
-        AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
-        AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));
-
-        memoryChoiceBox.getSelectionModel().select(memoryChoiceBox.getItems().get(readSaveFile.getSelectedIndexes()
-                .get(0)));
-        registerChoiceBox.getSelectionModel().select(registerChoiceBox.getItems().get(readSaveFile
-                .getSelectedIndexes().get(1)));
-        instructionChoiceBox.getSelectionModel().select(instructionChoiceBox.getItems().get(readSaveFile
-                .getSelectedIndexes().get(2)));
-    }
-
-    public ArrayList<String> getConfigurationFilePath() {
-        ArrayList<String> ConfigurationFilePaths = new ArrayList<String>();
-        ConfigurationFilePaths.add((String) memoryChoiceBox.getSelectionModel().getSelectedItem());
-        ConfigurationFilePaths.add((String) registerChoiceBox.getSelectionModel().getSelectedItem());
-        ConfigurationFilePaths.add((String) instructionChoiceBox.getSelectionModel().getSelectedItem());
-
-        return ConfigurationFilePaths;
     }
 
     private boolean verifyErrorConfigurationFiles(ErrorLogger errorLogger) {
@@ -290,17 +302,6 @@ public class ConfigurationEnvironmentController implements Initializable {
         for ( int x = 0; x < choices.size(); x++ ) {
             choiceBox.getItems().add(choices.get(x));
         }
-    }
-
-    public ArrayList<FilePath> getFilePathList(ArrayList<String> filePathsOfChoiceBox) {
-        ArrayList<FilePath> filePaths = new ArrayList<FilePath>();
-        for ( int x = 0; x < filePathsOfChoiceBox.size(); x++ ) {
-            Path path = Paths.get(filePathsOfChoiceBox.get(x));
-            FilePath filePath = new FilePath(filePathsOfChoiceBox.get(x), path.getFileName().toString(),
-                    FileHandlerController.getExtension(filePathsOfChoiceBox.get(x)));
-            filePaths.add(filePath);
-        }
-        return filePaths;
     }
 
 }
