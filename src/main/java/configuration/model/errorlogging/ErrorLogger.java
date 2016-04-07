@@ -34,7 +34,7 @@ public class ErrorLogger {
     }
 
     public void combineErrorLogger(ErrorLogger... errorLogger) {
-        for (int x = 0; x < errorLogger.length; x++) {
+        for ( int x = 0; x < errorLogger.length; x++ ) {
             this.errorMessageListArrayList.addAll(errorLogger[x].getAll());
         }
     }

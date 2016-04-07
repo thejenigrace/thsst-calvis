@@ -35,34 +35,34 @@ public class EFlags extends Register {
     }
 
     public void refreshFlags() {
-        for ( int i = 0; i < flags.size(); i++) {
+        for ( int i = 0; i < flags.size(); i++ ) {
             String flagName = flags.get(i).getName();
             switch ( flagName ) {
-                case "Carry": flags.get(i).setFlagValue(getCarryFlag());
+                case "Carry":
+                    flags.get(i).setFlagValue(getCarryFlag());
                     break;
-                case "Sign": flags.get(i).setFlagValue(getSignFlag());
+                case "Sign":
+                    flags.get(i).setFlagValue(getSignFlag());
                     break;
-                case "Overflow": flags.get(i).setFlagValue(getOverflowFlag());
+                case "Overflow":
+                    flags.get(i).setFlagValue(getOverflowFlag());
                     break;
-                case "Zero": flags.get(i).setFlagValue(getZeroFlag());
+                case "Zero":
+                    flags.get(i).setFlagValue(getZeroFlag());
                     break;
-                case "Parity": flags.get(i).setFlagValue(getParityFlag());
+                case "Parity":
+                    flags.get(i).setFlagValue(getParityFlag());
                     break;
-                case "Auxiliary": flags.get(i).setFlagValue(getAuxiliaryFlag());
+                case "Auxiliary":
+                    flags.get(i).setFlagValue(getAuxiliaryFlag());
                     break;
-                case "Direction": flags.get(i).setFlagValue(getDirectionFlag());
+                case "Direction":
+                    flags.get(i).setFlagValue(getDirectionFlag());
                     break;
-                case "Interrupt": flags.get(i).setFlagValue(getInterruptFlag());
+                case "Interrupt":
+                    flags.get(i).setFlagValue(getInterruptFlag());
                     break;
-            }
-        }
-    }
-
-    private void setFlag(String name, String value) {
-        for ( int i = 0; i < flags.size(); i++) {
-            if ( flags.get(i).getName().equals(name) ) {
-                flags.get(i).setFlagValue(value);
-                break;
+                default:
             }
         }
     }
@@ -77,24 +77,23 @@ public class EFlags extends Register {
         int missingZeroes = 32 - val.length();
 
         //zero extend
-        for (int k = 0; k < missingZeroes; k++) {
+        for ( int k = 0; k < missingZeroes; k++ ) {
             val = "0" + val;
         }
         return val.charAt(32 - 1 - index);
     }
 
     public void setFlagIndex(int index, String a) {
-        if (a.equals("0") || a.equals("1")) {
+        if ( a.equals("0") || a.equals("1") ) {
             int hex = Integer.parseInt(this.value, 16);
             String val = Integer.toBinaryString(hex);
             int missingZeroes = 32 - val.length();
 
             //zero extend
-            for (int k = 0; k < missingZeroes; k++) {
+            for ( int k = 0; k < missingZeroes; k++ ) {
                 val = "0" + val;
             }
 
-            // val = 000000000000000000000000000000000
             char[] extended = val.toCharArray();
             extended[32 - 1 - index] = a.charAt(0);
             val = new String(extended);
@@ -102,7 +101,7 @@ public class EFlags extends Register {
             int zeroExtendHexValue = 8 - hexValue.length();
 
             //zero extend
-            for (int k = 0; k < zeroExtendHexValue; k++) {
+            for ( int k = 0; k < zeroExtendHexValue; k++ ) {
                 hexValue = "0" + hexValue;
             }
             this.value = hexValue.toUpperCase();
@@ -181,6 +180,15 @@ public class EFlags extends Register {
     public void setInterruptFlag(String value) {
         setFlagIndex(9, value);
         setFlag("Interrupt", value);
+    }
+
+    private void setFlag(String name, String value) {
+        for ( int i = 0; i < flags.size(); i++ ) {
+            if ( flags.get(i).getName().equals(name) ) {
+                flags.get(i).setFlagValue(value);
+                break;
+            }
+        }
     }
 
 }

@@ -1,66 +1,64 @@
 package configuration.model.engine;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Goodwin Chua on 25/03/2016.
  */
 public class X87ControlRegister {
 
-	private char[] value;
+    private char[] value;
 
-	public X87ControlRegister() {
-		this.value = new char[16];
-		clear();
-	}
+    public X87ControlRegister() {
+        this.value = new char[16];
+        clear();
+    }
 
-	public void clear() {
-		String binary = "0000001101111111";
-		if ( binary.length() == 16 ) {
-			this.value = binary.toCharArray();
-		}
-	}
+    public void clear() {
+        String binary = "0000001101111111";
+        if ( binary.length() == 16 ) {
+            this.value = binary.toCharArray();
+        }
+    }
 
-	public int getRoundingMode() {
-		return Integer.parseInt(getRoundingControl(), 2);
-	}
+    public int getRoundingMode() {
+        return Integer.parseInt(getRoundingControl(), 2);
+    }
 
-	private String getRoundingControl() {
-		String binaryTop = new String(new char[]{value[4], value[5]});
-		return binaryTop;
-	}
+    public String toHexString() {
+        Integer binaryValue = Integer.parseInt(new String(this.value), 2);
+        String hexString = Integer.toHexString(binaryValue);
+        while ( hexString.length() < 4 ) {
+            hexString = "0" + hexString;
+        }
+        return hexString;
+    }
 
-	private void setRoundingControl(int number) {
-		String binaryNumber = Integer.toBinaryString(number);
+    public void setValue(String hexValue) {
+        if ( hexValue.length() == 4 ) {
+            // convert hex string to binary string
+            Integer i = Integer.parseInt(hexValue, 16);
+            String binaryString = Integer.toBinaryString(i);
+            while ( binaryString.length() < 16 ) {
+                binaryString = "0" + binaryString;
+            }
+            // store binary string to char[] value
+            this.value = binaryString.toCharArray();
+        }
+    }
 
-		while ( binaryNumber.length() < 2 ) {
-			binaryNumber = "0" + binaryNumber;
-		}
+    private String getRoundingControl() {
+        String binaryTop = new String(new char[]{value[4], value[5]});
+        return binaryTop;
+    }
 
-		value[4] = binaryNumber.charAt(0);
-		value[5] = binaryNumber.charAt(1);
-	}
+    private void setRoundingControl(int number) {
+        String binaryNumber = Integer.toBinaryString(number);
 
-	public String toHexString() {
-		Integer binaryValue = Integer.parseInt(new String(this.value), 2);
-		String hexString = Integer.toHexString(binaryValue);
-		while ( hexString.length() < 4 ) {
-			hexString = "0" + hexString;
-		}
-		return hexString;
-	}
+        while ( binaryNumber.length() < 2 ) {
+            binaryNumber = "0" + binaryNumber;
+        }
 
-	public void setValue(String hexValue) {
-		if ( hexValue.length() == 4 ) {
-			// convert hex string to binary string
-			Integer i = Integer.parseInt(hexValue, 16);
-			String binaryString = Integer.toBinaryString(i);
-			while ( binaryString.length() < 16 ) {
-				binaryString = "0" + binaryString;
-			}
-			// store binary string to char[] value
-			this.value = binaryString.toCharArray();
-		}
-	}
+        value[4] = binaryNumber.charAt(0);
+        value[5] = binaryNumber.charAt(1);
+    }
 
 }

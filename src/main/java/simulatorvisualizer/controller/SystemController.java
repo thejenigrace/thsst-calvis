@@ -1,4 +1,4 @@
-package simulator_visualizer.controller;
+package simulatorvisualizer.controller;
 
 import configuration.controller.ConfiguratorEnvironment;
 import configuration.model.engine.*;
@@ -8,7 +8,7 @@ import editor.controller.ConsoleController;
 import editor.controller.WorkspaceController;
 import editor.model.AssemblyComponent;
 import javafx.application.Platform;
-import simulator_visualizer.model.SimulationState;
+import simulatorvisualizer.model.SimulationState;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class SystemController {
     private RegisterList registerList;
     private InstructionList instructionList;
     private Memory memory;
-    private CalvisParser parser;
+    private Parser parser;
 
     private List<AssemblyComponent> observerList;
     private ConsoleController console;
@@ -32,7 +32,7 @@ public class SystemController {
     private WorkspaceController workspaceController;
     private String parsedCode;
 
-    private HashMap<String, CalvisInstruction> executionMap;
+    private HashMap<String, CalvisFormattedInstruction> executionMap;
     private HashMap<Integer, String[][]> registerStackMap;
     private HashMap<Integer, String> flagsStackMap;
     private HashMap<Integer, String> mxscrStackMap;
@@ -64,7 +64,7 @@ public class SystemController {
         }
     }
 
-    public void notifyAllObservers(CalvisInstruction currentLine, int lineNumber) {
+    public void notifyAllObservers(CalvisFormattedInstruction currentLine, int lineNumber) {
         if (currentLine != null) {
             for (AssemblyComponent a : observerList) {
                 a.update(currentLine.toString(), lineNumber);
@@ -306,7 +306,7 @@ public class SystemController {
         try {
             this.executionMap = parser.parse(code);
             for (String lineNumber : this.executionMap.keySet()) {
-                CalvisInstruction CalvisInstruction = this.executionMap.get(lineNumber);
+                CalvisFormattedInstruction CalvisInstruction = this.executionMap.get(lineNumber);
                 /**
                  * Compute for the equivalent linenumber in textEditor of the
                  * calvis instructions

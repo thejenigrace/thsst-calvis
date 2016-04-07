@@ -13,7 +13,7 @@ public class RegisterFileErrorInvalidMessage {
 
     public String generateMessage() {
         String returnMessage = "";
-        switch (type) {
+        switch ( type ) {
             case invalidSourceRegister:
                 returnMessage = "Invalid Source Register Name";
                 break;
@@ -32,6 +32,7 @@ public class RegisterFileErrorInvalidMessage {
             case invalidRegisterType:
                 returnMessage = "Invalid New Register Type";
                 break;
+            default:
         }
         return returnMessage;
     }

@@ -42,7 +42,7 @@ public class Mxscr extends Register {
     }
 
     public void refreshFlags() {
-        for ( int i = 0; i < flags.size(); i++) {
+        for ( int i = 0; i < flags.size(); i++ ) {
             String flagName = flags.get(i).getName();
             switch ( flagName ) {
                 case "Invalid Operation":
@@ -90,15 +90,7 @@ public class Mxscr extends Register {
                 case "Flush to Zero":
                     flags.get(i).setFlagValue(getFlushToZero());
                     break;
-            }
-        }
-    }
-
-    private void setFlag(String name, String value) {
-        for ( int i = 0; i < flags.size(); i++) {
-            if ( flags.get(i).getName().equals(name) ) {
-                flags.get(i).setFlagValue(value);
-                break;
+                default:
             }
         }
     }
@@ -113,24 +105,23 @@ public class Mxscr extends Register {
         int missingZeroes = 32 - val.length();
 
         //zero extend
-        for (int k = 0; k < missingZeroes; k++) {
+        for ( int k = 0; k < missingZeroes; k++ ) {
             val = "0" + val;
         }
         return val.charAt(32 - 1 - index) + "";
     }
 
     public void setFlagIndex(int index, String a) {
-        if (a.equals("0") || a.equals("1")) {
+        if ( a.equals("0") || a.equals("1") ) {
             int hex = Integer.parseInt(this.value, 16);
             String val = Integer.toBinaryString(hex);
             int missingZeroes = 32 - val.length();
 
             //zero extend
-            for (int k = 0; k < missingZeroes; k++) {
+            for ( int k = 0; k < missingZeroes; k++ ) {
                 val = "0" + val;
             }
 
-            // val = 000000000000000000000000000000000
             char[] extended = val.toCharArray();
             extended[32 - 1 - index] = a.charAt(0);
             val = new String(extended);
@@ -138,9 +129,10 @@ public class Mxscr extends Register {
             int zeroExtendHexValue = 8 - hexValue.length();
 
             //zero extend
-            for (int k = 0; k < zeroExtendHexValue; k++) {
+            for ( int k = 0; k < zeroExtendHexValue; k++ ) {
                 hexValue = "0" + hexValue;
             }
+
             this.value = hexValue.toUpperCase();
         } else {
             System.out.println("Invalid flag value");
@@ -280,6 +272,15 @@ public class Mxscr extends Register {
     public void setFlushToZero() {
         setFlagIndex(15, value);
         setFlag("Flush to Zero", value);
+    }
+
+    private void setFlag(String name, String value) {
+        for ( int i = 0; i < flags.size(); i++ ) {
+            if ( flags.get(i).getName().equals(name) ) {
+                flags.get(i).setFlagValue(value);
+                break;
+            }
+        }
     }
 
 }

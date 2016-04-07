@@ -7,14 +7,14 @@ public class Register {
     protected String name;
     protected int size;
 
+    public Register() {
+
+    }
+
     public Register(String name, int size) {
         this.name = name;
         this.size = size;
         initializeValue();
-    }
-
-    public Register() {
-
     }
 
     /*	populates register value with HEX value
@@ -22,11 +22,11 @@ public class Register {
      */
     public void initializeValue() {
         String regInitialValue = "";
-        for (int i = 0; i < this.size / 4; i++) {
+        for ( int i = 0; i < this.size / 4; i++ ) {
             regInitialValue += "0";
         }
         this.value = regInitialValue;
-        if (this.name.equals("ESP")){
+        if ( this.name.equals("ESP") ) {
             this.value = "0000FFFE";
         }
     }

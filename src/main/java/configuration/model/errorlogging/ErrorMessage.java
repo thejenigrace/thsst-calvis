@@ -29,9 +29,6 @@ public class ErrorMessage {
         return variables;
     }
 
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
     public String getErrorLine() {
         return errorLine;
     }

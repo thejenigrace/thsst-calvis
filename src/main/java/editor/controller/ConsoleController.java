@@ -1,6 +1,6 @@
 package editor.controller;
 
-import configuration.model.engine.CalvisInstruction;
+import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
@@ -21,7 +21,7 @@ public class ConsoleController extends AssemblyComponent {
     private Tab tab;
     private boolean state;
     private int lineBefore;
-    private CalvisInstruction currentInstruction;
+    private CalvisFormattedInstruction currentInstruction;
 
     public ConsoleController() {
         this.state = false;
@@ -125,7 +125,7 @@ public class ConsoleController extends AssemblyComponent {
         this.lineBefore = 0;
     }
 
-    public void attachCALVISInstruction(CalvisInstruction CalvisInstruction) {
+    public void attachCALVISInstruction(CalvisFormattedInstruction CalvisInstruction) {
         this.currentInstruction = CalvisInstruction;
     }
 

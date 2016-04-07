@@ -13,7 +13,7 @@ public class InstructionFileErrorMissingMessage {
 
     public String generateMessage() {
         String returnMessage = "";
-        switch (type) {
+        switch ( type ) {
             case missingInstructionName:
                 returnMessage = "Missing Instruction Name";
                 break;
@@ -23,6 +23,7 @@ public class InstructionFileErrorMissingMessage {
             case missingInstructionParameterSize:
                 returnMessage = "Missing Instruction Parameter Size";
                 break;
+            default:
         }
         return returnMessage;
     }

@@ -1,6 +1,12 @@
 package configuration.model.engine;
 
-import com.github.pfmiles.dropincc.*;
+import com.github.pfmiles.dropincc.Action;
+import com.github.pfmiles.dropincc.CC;
+import com.github.pfmiles.dropincc.DropinccException;
+import com.github.pfmiles.dropincc.Element;
+import com.github.pfmiles.dropincc.Grule;
+import com.github.pfmiles.dropincc.Lang;
+import com.github.pfmiles.dropincc.TokenDef;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,218 +17,218 @@ import java.util.Iterator;
  */
 public class ParserMemoryFactory {
 
-	private Memory memory;
-	private Lang lang;
-	private ElementConcatenator elementConcatenator;
+    private Memory memory;
+    private Lang lang;
+    private ElementConcatenator elementConcatenator;
 
-	private HashMap<String, Element> memoryTokenMap;
-	private HashMap<String, Element> variableDeclarationTokenMap;
-	private HashMap<String, Grule> memorySizeDirectives;
+    private HashMap<String, Element> memoryTokenMap;
+    private HashMap<String, Element> variableDeclarationTokenMap;
+    private HashMap<String, Grule> memorySizeDirectives;
 
-	private TokenBag tokenBag;
-	private Element allRegisters;
-	private Element memoryPermissibleRegisters;
-	private Element memoryIndexScalableRegisters;
+    private TokenBag tokenBag;
+    private Element allRegisters;
+    private Element memoryPermissibleRegisters;
+    private Element memoryIndexScalableRegisters;
 
-	private Grule memoryAddressingMode;
+    private Grule memoryAddressingMode;
 
-	public ParserMemoryFactory(Memory memory, Lang lang, ElementConcatenator elementConcatenator, TokenBag tokenBag,
-	                           Element allRegisters, Element memoryPermissibleRegisters,
-	                           Element memoryIndexScalableRegisters) {
-		this.memory = memory;
-		this.lang = lang;
-		this.elementConcatenator = elementConcatenator;
-		this.tokenBag = tokenBag;
-		this.allRegisters = allRegisters;
-		this.memoryPermissibleRegisters = memoryPermissibleRegisters;
-		this.memoryIndexScalableRegisters = memoryIndexScalableRegisters;
+    public ParserMemoryFactory(Memory memory, Lang lang, ElementConcatenator elementConcatenator, TokenBag tokenBag,
+                               Element allRegisters, Element memoryPermissibleRegisters,
+                               Element memoryIndexScalableRegisters) {
+        this.memory = memory;
+        this.lang = lang;
+        this.elementConcatenator = elementConcatenator;
+        this.tokenBag = tokenBag;
+        this.allRegisters = allRegisters;
+        this.memoryPermissibleRegisters = memoryPermissibleRegisters;
+        this.memoryIndexScalableRegisters = memoryIndexScalableRegisters;
 
-		prepareMemorySizeDirectives();
-		createMemoryGrules();
-	}
+        prepareMemorySizeDirectives();
+        createMemoryGrules();
+    }
 
-	private void prepareMemorySizeDirectives() {
-		this.memoryTokenMap = new HashMap<>();
-		this.variableDeclarationTokenMap = new HashMap<>();
+    public Grule getMemoryAddressingMode() {
+        return memoryAddressingMode;
+    }
 
-		Iterator<String[]> memoryTokens = this.memory.getLookup();
+    public Element getAllMemorySizeDirectiveElements() {
+        Iterator<String> keys = memorySizeDirectives.keySet().iterator();
+        ArrayList<Element> list = new ArrayList<>();
+        while ( keys.hasNext() ) {
+            String key = keys.next();
+            Element temp = memorySizeDirectives.get(key);
+            list.add(temp);
+        }
+        return elementConcatenator.concatenateOrSubRules(list);
+    }
 
-		while (memoryTokens.hasNext()) {
-			String[] memoryToken = memoryTokens.next();
-			String sizeDirectiveName = memoryToken[Memory.SIZE_DIRECTIVE_NAME];
-			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
-			String sizeDirectivePrefix = memoryToken[Memory.SIZE_DIRECTIVE_PREFIX];
+    public HashMap<String, Element> getVariableDeclarationTokenMap() {
+        return this.variableDeclarationTokenMap;
+    }
 
-			String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)"
-					+ "|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
-			TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
-			this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
+    private void prepareMemorySizeDirectives() {
+        this.memoryTokenMap = new HashMap<>();
+        this.variableDeclarationTokenMap = new HashMap<>();
 
-			String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|"
-					+ sizeDirectivePrefix.toUpperCase() + ")\\b";
-			TokenDef variableType = lang.newToken(variableTypePattern);
-			this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
-		}
-	}
+        Iterator<String[]> memoryTokens = this.memory.getLookup();
 
-	private void createMemoryGrules() {
-		this.memoryAddressingMode = lang.newGrule();
+        while ( memoryTokens.hasNext() ) {
+            String[] memoryToken = memoryTokens.next();
+            String sizeDirectiveName = memoryToken[Memory.SIZE_DIRECTIVE_NAME];
+            String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
+            String sizeDirectivePrefix = memoryToken[Memory.SIZE_DIRECTIVE_PREFIX];
 
-		Grule memoryExpression = lang.newGrule();
-		Grule memoryBase = lang.newGrule();
-		Grule memoryIndex = lang.newGrule();
-		Grule memoryDisplacement = lang.newGrule();
+            String sizeDirectivePattern = "(\\b" + sizeDirectiveName + "\\b)"
+                    + "|(\\b" + sizeDirectiveName.toUpperCase() + "\\b)";
+            TokenDef memorySizeDirective = lang.newToken(sizeDirectivePattern);
+            this.memoryTokenMap.put(sizeDirectiveSize, memorySizeDirective);
 
-		TokenDef lsb = lang.newToken("\\[");
-		TokenDef rsb = lang.newToken("\\]");
-		TokenDef plus = lang.newToken("\\+");
-		TokenDef times = lang.newToken("\\*");
+            String variableTypePattern = "\\b(" + sizeDirectivePrefix + "|"
+                    + sizeDirectivePrefix.toUpperCase() + ")\\b";
+            TokenDef variableType = lang.newToken(variableTypePattern);
+            this.variableDeclarationTokenMap.put(sizeDirectiveSize, variableType);
+        }
+    }
 
-		// memory addressing mode constructs
-		// memory ::= [ memoryExpr ]
-		memoryAddressingMode.define(lsb, memoryExpression, rsb)
-				.action((Action<Object[]>) matched -> {
-					Token[] mem = (Token[]) matched[1];
-					return mem;
-				});
+    private void createMemoryGrules() {
+        this.memoryAddressingMode = lang.newGrule();
 
-		//memoryExpression ::= base + index * scale + displacement
-		memoryExpression.define(memoryBase, CC.op(plus, memoryIndex), CC.op(plus.or("\\-"), memoryDisplacement))
-				.action((Action<Object[]>) matched -> {
-					ArrayList<Token> tokenArrayList = new ArrayList<>();
-					for (Object obj : matched) {
-						if (obj != null) {
-							if (obj instanceof Token) {
-								tokenArrayList.add((Token) obj);
-							} else if (obj instanceof Object[]) {
-								Object[] objects = (Object[]) obj;
-								/**
-								 * This object[] is always: object[0] = "+" or
-								 * "-" object[1] = Token
-								 */
-								Token t = (Token) objects[1];
-								t.setValue(objects[0].toString() + " " + t.getValue());
-								tokenArrayList.add(t);
-							}
-						}
-					}
-					// Perform address computations within each element of the object[] matched
-					Token[] tokens = new Token[tokenArrayList.size()];
-					tokens = tokenArrayList.toArray(tokens);
-					return tokens;
-				});
+        Grule memoryExpression = lang.newGrule();
+        Grule memoryBase = lang.newGrule();
+        Grule memoryIndex = lang.newGrule();
+        Grule memoryDisplacement = lang.newGrule();
 
-		memoryBase.define(memoryPermissibleRegisters)
-				.action((Action<Object>) matched -> {
-					Token t = (Token) matched;
-					return t;
-				})
-				.alt(tokenBag.hex())
-				.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
-				.alt(tokenBag.dec())
-				.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()))
-				.alt(tokenBag.justLabel())
-				.action((Action<Object>) matched -> (Token) matched);
+        TokenDef lsb = lang.newToken("\\[");
+        TokenDef rsb = lang.newToken("\\]");
+        TokenDef plus = lang.newToken("\\+");
+        TokenDef times = lang.newToken("\\*");
 
-		memoryIndex.define(memoryIndexScalableRegisters, CC.op(times, tokenBag.dec()))
-				.action((Action<Object[]>) matched -> {
-					String result = "";
-					for (Object obj : matched) {
-						if (obj != null) {
-							if (obj instanceof Token) {
-								result += ((Token) obj).getValue() + " ";
-							} else if (obj instanceof Object[]) {
-								Object[] objects = (Object[]) obj;
-								if (!objects[1].toString().matches("[1248]")) {
-									throw new DropinccException("Invalid scale value");
-								}
-								String optionalTimes = objects[0] + " " + objects[1];
-								result += optionalTimes;
-							}
-						}
-					}
-					return new Token(Token.REG, result);
-				})
-				.alt(CC.op(tokenBag.dec(), times), memoryIndexScalableRegisters)
-				.action((Action<Object[]>) matched -> {
-					String result = "";
-					for (Object obj : matched) {
-						if (obj != null) {
-							if (obj instanceof Token) {
-								result += ((Token) obj).getValue();
-							} else if (obj instanceof Object[]) {
-								Object[] objects = (Object[]) obj;
-								if (!objects[0].toString().matches("[1248]")) {
-									throw new DropinccException("Invalid scale value");
-								}
-								String optionalTimes = objects[0] + " " + objects[1] + " ";
-								result += optionalTimes;
-							}
-						}
-					}
-					return new Token(Token.REG, result);
-				});
+        // memory addressing mode constructs
+        // memory ::= [ memoryExpr ]
+        memoryAddressingMode.define(lsb, memoryExpression, rsb)
+                .action((Action<Object[]>) matched -> {
+                    Token[] mem = (Token[]) matched[1];
+                    return mem;
+                });
 
-		memoryDisplacement.define(tokenBag.hex())
-				.action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
-				.alt(tokenBag.dec())
-				.action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
-		/**
-		 * Prepare memory size directive addressing mode
-		 */
-		this.memorySizeDirectives = new HashMap<>();
+        //memoryExpression ::= base + index * scale + displacement
+        memoryExpression.define(memoryBase, CC.op(plus, memoryIndex), CC.op(plus.or("\\-"), memoryDisplacement))
+                .action((Action<Object[]>) matched -> {
+                    ArrayList<Token> tokenArrayList = new ArrayList<>();
+                    for ( Object obj : matched ) {
+                        if ( obj != null ) {
+                            if ( obj instanceof Token ) {
+                                tokenArrayList.add((Token) obj);
+                            } else if ( obj instanceof Object[] ) {
+                                Object[] objects = (Object[]) obj;
+                                /**
+                                 * This object[] is always: object[0] = "+" or
+                                 * "-" object[1] = Token
+                                 */
+                                Token t = (Token) objects[1];
+                                t.setValue(objects[0].toString() + " " + t.getValue());
+                                tokenArrayList.add(t);
+                            }
+                        }
+                    }
+                    // Perform address computations within each element of the object[] matched
+                    Token[] tokens = new Token[tokenArrayList.size()];
+                    tokens = tokenArrayList.toArray(tokens);
+                    return tokens;
+                });
 
-		Iterator<String[]> memoryTokens = this.memory.getLookup();
+        memoryBase.define(memoryPermissibleRegisters)
+                .action((Action<Object>) matched -> {
+                    Token t = (Token) matched;
+                    return t;
+                })
+                .alt(tokenBag.hex())
+                .action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
+                .alt(tokenBag.dec())
+                .action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()))
+                .alt(tokenBag.justLabel())
+                .action((Action<Object>) matched -> (Token) matched);
 
-		while (memoryTokens.hasNext()) {
-			String[] memoryToken = memoryTokens.next();
-			String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
-			Grule sizeDirectiveInstance = lang.newGrule();
-			sizeDirectiveInstance.define(getMemoryElement(sizeDirectiveSize), memoryAddressingMode)
-					.action((Action<Object[]>) matched -> {
-						ArrayList<Token> tokenArrayList = new ArrayList<>();
-						for (Object obj : matched) {
-							if (obj instanceof String) {
-								String sizeDirectiveName = (String) obj;
-								Token sizeDirective = new Token(Token.MEM, sizeDirectiveName);
-								tokenArrayList.add(sizeDirective);
-							} else if (obj instanceof Token[]) {
-								Token[] tokens = (Token[]) obj;
-								for (int k = 0; k < tokens.length; k++) {
-									tokenArrayList.add(tokens[k]);
-								}
-							}
-						}
-						Token[] appendedTokens = new Token[tokenArrayList.size()];
-						appendedTokens = tokenArrayList.toArray(appendedTokens);
-						return appendedTokens;
-					});
+        memoryIndex.define(memoryIndexScalableRegisters, CC.op(times, tokenBag.dec()))
+                .action((Action<Object[]>) matched -> {
+                    String result = "";
+                    for ( Object obj : matched ) {
+                        if ( obj != null ) {
+                            if ( obj instanceof Token ) {
+                                result += ((Token) obj).getValue() + " ";
+                            } else if ( obj instanceof Object[] ) {
+                                Object[] objects = (Object[]) obj;
+                                if ( !objects[1].toString().matches("[1248]") ) {
+                                    throw new DropinccException("Invalid scale value");
+                                }
+                                String optionalTimes = objects[0] + " " + objects[1];
+                                result += optionalTimes;
+                            }
+                        }
+                    }
+                    return new Token(Token.REG, result);
+                })
+                .alt(CC.op(tokenBag.dec(), times), memoryIndexScalableRegisters)
+                .action((Action<Object[]>) matched -> {
+                    String result = "";
+                    for ( Object obj : matched ) {
+                        if ( obj != null ) {
+                            if ( obj instanceof Token ) {
+                                result += ((Token) obj).getValue();
+                            } else if ( obj instanceof Object[] ) {
+                                Object[] objects = (Object[]) obj;
+                                if ( !objects[0].toString().matches("[1248]") ) {
+                                    throw new DropinccException("Invalid scale value");
+                                }
+                                String optionalTimes = objects[0] + " " + objects[1] + " ";
+                                result += optionalTimes;
+                            }
+                        }
+                    }
+                    return new Token(Token.REG, result);
+                });
 
-			this.memorySizeDirectives.put(sizeDirectiveSize, sizeDirectiveInstance);
-		}
-	}
+        memoryDisplacement.define(tokenBag.hex())
+                .action((Action<Object>) matched -> new Token(Token.HEX, matched.toString()))
+                .alt(tokenBag.dec())
+                .action((Action<Object>) matched -> new Token(Token.DEC, matched.toString()));
+        /**
+         * Prepare memory size directive addressing mode
+         */
+        this.memorySizeDirectives = new HashMap<>();
 
-	private Element getMemoryElement(String size) {
-		return memoryTokenMap.get(size);
-	}
+        Iterator<String[]> memoryTokens = this.memory.getLookup();
 
-	public Grule getMemoryAddressingMode() {
-		return memoryAddressingMode;
-	}
+        while ( memoryTokens.hasNext() ) {
+            String[] memoryToken = memoryTokens.next();
+            String sizeDirectiveSize = memoryToken[Memory.SIZE_DIRECTIVE_SIZE];
+            Grule sizeDirectiveInstance = lang.newGrule();
+            sizeDirectiveInstance.define(getMemoryElement(sizeDirectiveSize), memoryAddressingMode)
+                    .action((Action<Object[]>) matched -> {
+                        ArrayList<Token> tokenArrayList = new ArrayList<>();
+                        for ( Object obj : matched ) {
+                            if ( obj instanceof String ) {
+                                String sizeDirectiveName = (String) obj;
+                                Token sizeDirective = new Token(Token.MEM, sizeDirectiveName);
+                                tokenArrayList.add(sizeDirective);
+                            } else if ( obj instanceof Token[] ) {
+                                Token[] tokens = (Token[]) obj;
+                                for ( int k = 0; k < tokens.length; k++ ) {
+                                    tokenArrayList.add(tokens[k]);
+                                }
+                            }
+                        }
+                        Token[] appendedTokens = new Token[tokenArrayList.size()];
+                        appendedTokens = tokenArrayList.toArray(appendedTokens);
+                        return appendedTokens;
+                    });
 
-	public Element getAllMemorySizeDirectiveElements() {
-		Iterator<String> keys = memorySizeDirectives.keySet().iterator();
-		ArrayList<Element> list = new ArrayList<>();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			Element temp = memorySizeDirectives.get(key);
-			list.add(temp);
-		}
-		return elementConcatenator.concatenateOrSubRules(list);
-	}
+            this.memorySizeDirectives.put(sizeDirectiveSize, sizeDirectiveInstance);
+        }
+    }
 
-	public HashMap<String, Element> getVariableDeclarationTokenMap() {
-		return this.variableDeclarationTokenMap;
-	}
+    private Element getMemoryElement(String size) {
+        return memoryTokenMap.get(size);
+    }
 
 }

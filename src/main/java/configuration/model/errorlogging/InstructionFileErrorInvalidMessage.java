@@ -15,7 +15,7 @@ public class InstructionFileErrorInvalidMessage {
 
     public String generateMessage(ArrayList<String> variables) {
         String returnMessage = "";
-        switch (type) {
+        switch ( type ) {
             case invalidFilePath:
                 returnMessage = "Invalid File Path: " + variables.get(0);
                 break;
@@ -27,13 +27,13 @@ public class InstructionFileErrorInvalidMessage {
                 break;
             case invalidDuplicateFileRegisterDestinationParameter:
                 returnMessage = "Duplicate Specification For Parameter : " + variables.get(0) + " \n";
-                for (int x = 1; x < variables.size(); x++) {
+                for ( int x = 1; x < variables.size(); x++ ) {
                     returnMessage += "       " + variables.get(x) + "\n";
                 }
                 break;
             case invalidFileNoSuchAddressingVariable:
                 returnMessage = "Non-Existent Specification For Parameter : " + variables.get(0) + " \n";
-                for (int x = 1; x < variables.size(); x++) {
+                for ( int x = 1; x < variables.size(); x++ ) {
                     returnMessage += "       " + variables.get(x) + "\n";
                 }
                 break;
@@ -47,10 +47,11 @@ public class InstructionFileErrorInvalidMessage {
                 break;
             case invalidParameterFormat:
                 returnMessage = "Invalid Value Specification For Parameter : " + variables.get(0) + " \n";
-                for (int x = 1; x < variables.size(); x++) {
+                for ( int x = 1; x < variables.size(); x++ ) {
                     returnMessage += "       " + variables.get(x) + "\n";
                 }
                 break;
+            default:
         }
         return returnMessage;
     }

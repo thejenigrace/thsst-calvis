@@ -1,6 +1,6 @@
 package editor.model;
 
-import simulator_visualizer.controller.SystemController;
+import simulatorvisualizer.controller.SystemController;
 
 /**
  * Created by Goodwin Chua on 1/23/2016.

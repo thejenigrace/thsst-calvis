@@ -3,7 +3,7 @@ package editor.controller;
 import configuration.controller.ConfiguratorEnvironment;
 import editor.MainApp;
 import editor.model.TextEditor;
-import simulator_visualizer.controller.SystemController;
+import simulatorvisualizer.controller.SystemController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.ReadOnlyObjectWrapper;

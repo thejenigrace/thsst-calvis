@@ -15,7 +15,7 @@ public class ErrorType {
 
     public String generateType(ArrayList<String> variables, String lineNumber) {
         String returningType = "";
-        switch (type) {
+        switch ( type ) {
             case registerFile:
                 returningType = "Register CSV File Error:\n";
                 break;
@@ -40,29 +40,35 @@ public class ErrorType {
                 returningType = "File not found for Register List CSV file:" + variables.get(0) + "\n";
                 break;
             case invalidRegister:
-                returningType = "ERROR: configuration.model.engine.Register :\n Invalid Register Type: " + variables.get(0) + " at line " + lineNumber + ".\n";
+                returningType = "ERROR: configuration.model.engine.Register :\n Invalid Register Type: "
+                        + variables.get(0) + " at line " + lineNumber + ".\n";
                 break;
             case doesNotExist:
-                returningType = "ERROR: configuration.model.engine.Register :\n" + variables.get(0) + " Register does not exist at line " + lineNumber + ". \n";
+                returningType = "ERROR: configuration.model.engine.Register :\n" + variables.get(0)
+                        + " Register does not exist at line " + lineNumber + ". \n";
                 break;
             case dataTypeMismatch:
-                returningType = "ERROR: configuration.model.engine.Register :\nData Type Mismatch Between Register " + variables.get(0) + ": " + variables.get(1) + " and " + variables.get(2) + "\n";
+                returningType = "ERROR: configuration.model.engine.Register :\nData Type Mismatch Between Register "
+                        + variables.get(0) + ": " + variables.get(1) + " and " + variables.get(2) + "\n";
                 break;
             case writeRegisterFailed:
                 returningType = "ERROR: configuration.model.engine.Register :\nWriting to register failed\n ";
                 break;
             case instructionShouldNotBeEmpty:
-                returningType = "ERROR: configuration.model.engine.Instruction :\nThere are lacking parameters in line " + lineNumber + ":\n";
-                for (int x = 0; x < variables.size(); x++) {
+                returningType = "ERROR: configuration.model.engine.Instruction :\nThere are lacking parameters in line "
+                        + lineNumber + ":\n";
+                for ( int x = 0; x < variables.size(); x++ ) {
                     returningType += variables.get(x) + "\n";
                 }
                 break;
             case instructionShouldNotBeInvalid:
-                returningType = "ERROR: configuration.model.Instruction :\nThere are invalid parameters in line " + lineNumber + ":\n";
-                for (int x = 0; x < variables.size(); x++) {
+                returningType = "ERROR: configuration.model.Instruction :\nThere are invalid parameters in line "
+                        + lineNumber + ":\n";
+                for ( int x = 0; x < variables.size(); x++ ) {
                     returningType += variables.get(x) + "\n";
                 }
                 break;
+            default:
         }
 
         return returningType;

@@ -10,7 +10,14 @@ import configuration.model.exceptions.DataTypeMismatchException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class RegisterList {
 
@@ -51,17 +58,17 @@ public class RegisterList {
         ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
         try {
             br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
+            while ( (line = br.readLine()) != null ) {
                 boolean isSkipped = false;
                 String[] reg = HandleConfigFunctions.split(line, ',');
-                for (int i = 0; i < reg.length; i++) {
+                for ( int i = 0; i < reg.length; i++ ) {
                     reg[i] = reg[i].trim();
                 }
                 lookUpCopy.add(reg);
 
-                ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkifMissing(reg);
+                ArrayList<String> missingParametersRegister = HandleConfigFunctions.checkIfMissing(reg);
                 ArrayList<String> invalidParametersRegister = HandleConfigFunctions.checkForInvalidInput(reg);
-                if (missingParametersRegister.size() > 0) {
+                if ( missingParametersRegister.size() > 0 ) {
                     isSkipped = true;
                     errorMessages.add(new ErrorMessage(
                             Types.registerShouldNotBeEmpty,
@@ -69,7 +76,7 @@ public class RegisterList {
                             Integer.toString(lineCounter)));
                 }
 
-                if (invalidParametersRegister.size() > 0 && lineCounter != 0) {
+                if ( invalidParametersRegister.size() > 0 && lineCounter != 0 ) {
                     isSkipped = true;
                     errorMessages.add(new ErrorMessage(
                             Types.registerShouldNotBeInvalid,
@@ -83,19 +90,20 @@ public class RegisterList {
 //	                                 + " , type=" + reg[3]
 //	                                 + " , start=" + reg[4]
 //	                                 + " , end=" + reg[5]+ "]");
+
                 // we need to get the max register size listed in the csv file
-                if (!isSkipped) {
+                if ( !isSkipped ) {
                     int regSize = 0;
                     // don't get the table headers
-                    if (lineCounter != 0) {
+                    if ( lineCounter != 0 ) {
 
                         regSize = Integer.parseInt(reg[SIZE]);
 
                         int startIndex = Integer.parseInt(reg[START]);
                         int endIndex = Integer.parseInt(reg[END]);
 
-                        if ((startIndex == 0 && endIndex + 1 != regSize)
-                                || (startIndex > 0 && endIndex - startIndex + 1 != regSize)) {
+                        if ( (startIndex == 0 && endIndex + 1 != regSize)
+                                || (startIndex > 0 && endIndex - startIndex + 1 != regSize) ) {
                             errorMessages.add(new ErrorMessage(
                                     Types.registerInvalidSizeFormat,
                                     HandleConfigFunctions.generateArrayListString(reg[NAME]),
@@ -109,7 +117,7 @@ public class RegisterList {
 
                         // reverse order of indices
                         int dividedBy = 0; //RegisterList.MAX_SIZE / 4;
-                        if (reg[NAME].equals(reg[SOURCE])) {
+                        if ( reg[NAME].equals(reg[SOURCE]) ) {
                             dividedBy = Integer.parseInt(reg[SIZE]) / 4;
                         } else {
                             dividedBy = getBitSize(reg[SOURCE]) / 4;
@@ -127,13 +135,13 @@ public class RegisterList {
                     }
 
                     // if a register is the source register itself
-                    if (reg[NAME].equals(reg[SOURCE])) {
-                        switch (reg[TYPE]) {
+                    if ( reg[NAME].equals(reg[SOURCE]) ) {
+                        switch ( reg[TYPE] ) {
                             case "1": // fall through
                             case "2": // fall through
-                            case "4":
-                            case "5":
-                            case "6":
+                            case "4": // fall through
+                            case "5": // fall through
+                            case "6": // fall through
                                 Register g = new Register(reg[NAME], regSize);
                                 this.map.put(reg[NAME], g);
                                 break;
@@ -152,7 +160,7 @@ public class RegisterList {
                         }
                     } else if ( reg[TYPE].equals("2") ) {
                         Register g = new Register(reg[NAME], regSize);
-                        if (childMap.get(reg[SOURCE]) == null) {
+                        if ( childMap.get(reg[SOURCE]) == null ) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
 //                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
                             group.put(reg[NAME], g);
@@ -170,11 +178,11 @@ public class RegisterList {
             lookUpCopy.remove(0);
             // should check for register configuration errors...
             int index = 0;
-            for (String[] lookupEntry : lookUpCopy) {
+            for ( String[] lookupEntry : lookUpCopy ) {
 
                 // if all source (mother) registers are existent
                 //System.out.println(lookupEntry[1]);
-                if (!this.map.containsKey(lookupEntry[1])) {
+                if ( !this.map.containsKey(lookupEntry[1]) ) {
 //					int lineNumber = index;
 //					if(isEmptyError)
 //						lineNumber = index + 1;
@@ -187,13 +195,13 @@ public class RegisterList {
 
 //            this.setRegisterContent(); // put value into the Register Map
 
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             e.printStackTrace();
         } finally {
-            if (br != null) {
+            if ( br != null ) {
                 try {
                     br.close();
-                } catch (IOException e) {
+                } catch ( IOException e ) {
                     e.printStackTrace();
                 }
             }
@@ -207,13 +215,10 @@ public class RegisterList {
         return this.lookup.iterator();
     }
 
-    /*
-		getRegisterKeys() is used for getting all register names to be highlighted
-     */
     public Iterator<String> getRegisterKeys() {
         List registerKeys = new ArrayList<>();
         Iterator<String[]> iterator = getRegisterList();
-        while (iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             String regName = iterator.next()[0];
             registerKeys.add(regName);
         }
@@ -262,7 +267,7 @@ public class RegisterList {
         String[] register = find(key);
 
         // get the mother register
-        if (isExisting(key)) {
+        if ( isExisting(key) ) {
             Register mother = this.map.get(register[SOURCE]);
             int startIndex = Integer.parseInt(register[START]);
             int endIndex = Integer.parseInt(register[END]);
@@ -294,14 +299,14 @@ public class RegisterList {
         //check for mismatch between parameter hexString and child register value		
         String child = mother.getValue().substring(startIndex, endIndex + 1);
 
-        if (child.length() >= hexString.length()) {
+        if ( child.length() >= hexString.length() ) {
             int differenceInLength = child.length() - hexString.length();
-            for (int i = 0; i < differenceInLength; i++) {
+            for ( int i = 0; i < differenceInLength; i++ ) {
                 hexString = "0" + hexString;
             }
             String newValue = mother.getValue();
             char[] val = newValue.toCharArray();
-            for (int i = startIndex; i <= endIndex; i++) {
+            for ( int i = startIndex; i <= endIndex; i++ ) {
                 val[i] = hexString.charAt(i - startIndex);
             }
             newValue = new String(val);
@@ -309,11 +314,11 @@ public class RegisterList {
             mother.setValue(newValue);
 
 //            System.out.println("register[SOURCE] = " + register[SOURCE]);
-            if (childMap.get(register[SOURCE]) != null) {
+            if ( childMap.get(register[SOURCE]) != null ) {
 //                System.out.println("key = " + key);
 //				System.out.println("newValue = " + newValue.toUpperCase());
                 int registerType = Integer.parseInt(register[TYPE]);
-                if ( registerType == 2 || registerType == 1) {
+                if ( registerType == 2 || registerType == 1 ) {
                     String registerCategory = register[SOURCE].charAt(1) + "";
                     childMap.get(register[SOURCE]).get(registerCategory + "X")
                             .setValue(get16BitHexString(newValue));
@@ -329,7 +334,7 @@ public class RegisterList {
                 }
             }
         } else {
-            if (hexString.equals("")) {
+            if ( hexString.equals("") ) {
                 System.out.println("Writing to register failed.");
                 errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
                         new ArrayList<>(), ""));
@@ -346,7 +351,7 @@ public class RegisterList {
 
     public String get16BitHexString(String hexString) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = hexString.length() / 2; i < hexString.length(); i++) {
+        for ( int i = hexString.length() / 2; i < hexString.length(); i++ ) {
             stringBuilder.append(hexString.charAt(i));
         }
 
@@ -355,10 +360,10 @@ public class RegisterList {
 
     public String get8BitHexString(char type, String hexString) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (type == 'H') {
+        if ( type == 'H' ) {
             stringBuilder.append(hexString.charAt(4));
             stringBuilder.append(hexString.charAt(5));
-        } else if (type == 'L') {
+        } else if ( type == 'L' ) {
             stringBuilder.append(hexString.charAt(6));
             stringBuilder.append(hexString.charAt(7));
         }
@@ -375,7 +380,7 @@ public class RegisterList {
     }
 
     public void clear() {
-        for (String s : this.map.keySet()) {
+        for ( String s : this.map.keySet() ) {
             this.map.get(s).initializeValue();
         }
         flags.initializeValue();
@@ -383,17 +388,12 @@ public class RegisterList {
         x87.clear();
 
         // initialize childMap
-        for (String s : this.childMap.keySet()) {
-            for (String t : this.childMap.get(s).keySet()) {
+        for ( String s : this.childMap.keySet() ) {
+            for ( String t : this.childMap.get(s).keySet() ) {
                 this.childMap.get(s).get(t).initializeValue();
             }
         }
 
-//        try {
-//            setRegisterContent();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void print() {
@@ -401,8 +401,8 @@ public class RegisterList {
     }
 
     public String[] find(String registerName) {
-        for (String[] x : this.lookup) {
-            if (x[0].equalsIgnoreCase(registerName)) {
+        for ( String[] x : this.lookup ) {
+            if ( x[0].equalsIgnoreCase(registerName) ) {
                 return x;
             }
         }
@@ -410,8 +410,8 @@ public class RegisterList {
     }
 
     public int indexOf(String registerName) {
-        for (int i = 0; i < this.lookup.size(); i++) {
-            if (registerName.equals(this.lookup.get(i)[RegisterList.NAME])) {
+        for ( int i = 0; i < this.lookup.size(); i++ ) {
+            if ( registerName.equals(this.lookup.get(i)[RegisterList.NAME]) ) {
                 return i;
             }
         }
@@ -423,7 +423,6 @@ public class RegisterList {
     }
 
     /**
-     *
      * @param regName
      * @return
      */
@@ -432,7 +431,7 @@ public class RegisterList {
     }
 
     public ErrorLogger getErrorLogger() {
-        if (errorLogger.get(0).getSizeofErrorMessages() == 0) {
+        if ( errorLogger.get(0).getSizeofErrorMessages() == 0 ) {
             return new ErrorLogger(new ArrayList<ErrorMessageList>());
         } else {
             return errorLogger;
@@ -442,7 +441,7 @@ public class RegisterList {
     public Integer[] getAvailableSizes() {
         Set<Integer> available = new HashSet<>();
         Iterator iterator = getRegisterKeys();
-        while (iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             String registerName = (String) iterator.next();
             available.add(getBitSize(registerName));
         }
@@ -451,41 +450,41 @@ public class RegisterList {
         return available.toArray(list);
     }
 
-    public X87Handler x87(){
+    public X87Handler x87() {
         return this.x87;
     }
 
     public void setRegisterContent() {
         try {
-          set("EAX", "DDBBCCAA");
-          set("EBX", "FFFF1111");
-          set("ECX", "00000005");
-          set("EDX", "56F38E84");
-          set("ESP", "FF006655");
-          set("ESI", "00000001");
-          set("EDI", "88774433");
-          set("EBP", "00000008");
+            set("EAX", "DDBBCCAA");
+            set("EBX", "FFFF1111");
+            set("ECX", "00000005");
+            set("EDX", "56F38E84");
+            set("ESP", "FF006655");
+            set("ESI", "00000001");
+            set("EDI", "88774433");
+            set("EBP", "00000008");
 
-          set("MM0", "FFFF901256781234");
-          set("MM1", "1234567856781234");
-          set("MM2", "FFCA90BB58926789");
-          set("MM3", "9934566711111286");
-          set("MM4", "0055006600770088");
-          set("MM5", "111122228888FFFF");
-          set("MM6", "0000000000000001");
-          set("MM7", "0000000000000002");
+            set("MM0", "FFFF901256781234");
+            set("MM1", "1234567856781234");
+            set("MM2", "FFCA90BB58926789");
+            set("MM3", "9934566711111286");
+            set("MM4", "0055006600770088");
+            set("MM5", "111122228888FFFF");
+            set("MM6", "0000000000000001");
+            set("MM7", "0000000000000002");
 
-          set("XMM0", "ABCEDF123456789000000000123AF43");
-          set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
-          set("XMM2", "11111111111111110000000000000000");
-          set("XMM3", "1234567890AB90931FFF45210123ABCD");
-          set("XMM4", "1FFF45210123ABCD1234567890AB9094");
-          set("XMM5", "1234567845210123123EBDCA0123AF43");
-          set("XMM6", "ABCDEF01452101230000000045210123");
-          set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
+            set("XMM0", "ABCEDF123456789000000000123AF43");
+            set("XMM1", "1234567890ABCDEF123EBDCA0123AF43");
+            set("XMM2", "11111111111111110000000000000000");
+            set("XMM3", "1234567890AB90931FFF45210123ABCD");
+            set("XMM4", "1FFF45210123ABCD1234567890AB9094");
+            set("XMM5", "1234567845210123123EBDCA0123AF43");
+            set("XMM6", "ABCDEF01452101230000000045210123");
+            set("XMM7", "CDEF123E1234567890AB9093CDEF123E");
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
         System.out.println("Loaded Register Content");
     }
 }

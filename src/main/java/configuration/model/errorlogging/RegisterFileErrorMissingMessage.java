@@ -13,7 +13,7 @@ public class RegisterFileErrorMissingMessage {
 
     public String generateMessage() {
         String returnMessage = "";
-        switch (type) {
+        switch ( type ) {
             case missingSourceRegister:
                 returnMessage = "Missing Source Register Name";
                 break;
@@ -32,6 +32,7 @@ public class RegisterFileErrorMissingMessage {
             case missingRegisterType:
                 returnMessage = "Missing New Register Type";
                 break;
+            default:
         }
         return returnMessage;
     }
