@@ -42,7 +42,7 @@ execute(des, registers, memory) {
 		else
 		ef.setZeroFlag("0");
 
-		//ef.setOverflowFlag("0");
+		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0)));
 	}
 	else if ( des.isMemory() ){
 		int desSize = memory.getBitSize(des);
@@ -67,10 +67,10 @@ execute(des, registers, memory) {
 		ef.setSignFlag(sign);
 
 		if(result.equals(BigInteger.ZERO))
-		ef.setZeroFlag("1");
+			ef.setZeroFlag("1");
 		else
-		ef.setZeroFlag("0");
+			ef.setZeroFlag("0");
 
-		ef.setOverflowFlag("0");
+		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0)));
 	}
 }
