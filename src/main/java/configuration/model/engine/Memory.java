@@ -387,7 +387,8 @@ public class Memory {
     }
 
     private void resetVariablePointer() {
-        this.variablePointer = MemoryAddressCalculator.extend("4000", Memory.MAX_ADDRESS_SIZE, "0");
+//        this.variablePointer = MemoryAddressCalculator.extend("4000", Memory.MAX_ADDRESS_SIZE, "0");
+        this.variablePointer = MemoryAddressCalculator.extend("0000", Memory.MAX_ADDRESS_SIZE, "0");
     }
 
 }
