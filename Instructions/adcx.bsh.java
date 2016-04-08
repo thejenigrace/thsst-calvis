@@ -34,8 +34,8 @@ execute(des, src, registers, memory) {
 				}
 				else{
 					resultingValue = result.toString(2);
-				}
-				registers.set(des,c.binaryToHexString(resultingValue,des));
+//				}registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
+				registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
 
 				BigInteger biC=new BigInteger(numberOfF,16);
 				if(result.compareTo(biC)==1)
@@ -68,7 +68,7 @@ execute(des, src, registers, memory) {
 			else{
 				resultingValue = result.toString(2);
 			}
-			registers.set(des,c.binaryToHexString(resultingValue,des));
+			registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
 
 			BigInteger biC=new BigInteger(numberOfF,16);
 			if(result.compareTo(biC)==1)
@@ -110,7 +110,7 @@ execute(des, src, registers, memory) {
 				resultingValue = result.toString(2);
 			}
 
-			memory.write(des,c.binaryToHexString(resultingValue,des), desSize);
+			memory.write(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des), desSize);
 
 
 			BigInteger biC=new BigInteger(numberOfF,16);

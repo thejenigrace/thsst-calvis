@@ -1,6 +1,6 @@
 execute(des, src, registers, memory) {
 	if(des.isRegister()){
-		if(src.isMemory ){
+		if(src.isMemory()){
 			if(registers.getBitSize(des) == 16){
 				doStoreFarPointer(des, src, registers, memory, 16, 32);
 			}

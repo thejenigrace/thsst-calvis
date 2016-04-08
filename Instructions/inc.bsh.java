@@ -16,7 +16,7 @@ execute(des, registers, memory) {
 		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
-		if(result.equals(BigInteger.ZERO))
+		if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
 			ef.setZeroFlag("1");
 		else
 			ef.setZeroFlag("0");
@@ -40,7 +40,7 @@ execute(des, registers, memory) {
 		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
-		if(result.equals(BigInteger.ZERO))
+		if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
 			ef.setZeroFlag("1");
 		else
 			ef.setZeroFlag("0");
