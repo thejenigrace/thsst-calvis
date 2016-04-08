@@ -9,11 +9,11 @@ execute(des, registers, memory) {
 		BigInteger result = biX.add(new BigInteger("1"));
 
 		registers.set(des,c.binaryToHexString(result.toString(2),des));
-		ef.setParityFlag(c.checkParity(result.toString(2)));
+		ef.setParityFlag(c.checkParity(c.binaryZeroExtend(result.toString(2), des)));
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), new BigInteger("1").toString(16)));
 
-		String sign = "" + result.toString(2).charAt(0);
+		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
 		if(result.equals(BigInteger.ZERO))
@@ -21,7 +21,7 @@ execute(des, registers, memory) {
 		else
 			ef.setZeroFlag("0");
 
-		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), result.toString(2).charAt(0)));
+		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0)));
 
  	}else if ( des.isMemory() ){
 		int desSize = memory.getBitSize(des);
@@ -37,7 +37,7 @@ execute(des, registers, memory) {
 
 		ef.setParityFlag(c.checkParity(result.toString(2)));
 
-		String sign = "" + result.toString(2).charAt(0);
+		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
 		if(result.equals(BigInteger.ZERO))
@@ -45,6 +45,6 @@ execute(des, registers, memory) {
 		else
 			ef.setZeroFlag("0");
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), new BigInteger("1").toString(16)));
-		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), result.toString(2).charAt(0)));
+		ef.setOverflowFlag(c.checkOverflowAdd('0', c.binaryZeroExtend(biX.toString(2), des).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0)));
 		}
  }
