@@ -17,7 +17,7 @@ execute(des, src, registers, memory) {
 
                 //Flags
                 String r = calculator.hexToBinaryString(registers.get(des), des);
-                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize);
+                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize, des);
             }
         }
         else if ( src.isHex() && src.getValue().length() <= 2 ) {
@@ -34,7 +34,7 @@ execute(des, src, registers, memory) {
 
                 //Flags
                 String r = calculator.hexToBinaryString(registers.get(des), des);
-                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize);
+                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize, des);
             }
         }
     }
@@ -54,7 +54,7 @@ execute(des, src, registers, memory) {
 
                 //FLAGS
                 String r = calculator.hexToBinaryString(memory.read(des, des), des);
-                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize);
+                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize, des);
             }
         }
         else if ( src.isHex() && src.getValue().length() <= 2 ) {
@@ -72,7 +72,7 @@ execute(des, src, registers, memory) {
 
                 //Flags
                 String r = calculator.hexToBinaryString(memory.read(des, des), des);
-                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize);
+                setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize, des);
             }
         }
     }
@@ -87,14 +87,14 @@ String performShr(calculator, des, destination, count) {
     return result;
 }
 
-setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize) {
+setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desSize, des) {
     BigInteger biR = new BigInteger(r, 2);
 
     if ( limit == 0 ) {
         //flags not affected
     }
     else {
-        if( biR.equals(BigInteger.ZERO) ) {
+        if (calculator.binaryZeroExtend(biR.toString(2), desSize).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
             flags.setZeroFlag("1");
         }
         else {

@@ -230,6 +230,8 @@ public class InstructionList {
 		sb.append("import configuration.model.engine.EFlags;");
 		sb.append("import configuration.model.engine.Calculator;");
 		sb.append("import configuration.model.exceptions.JumpOutOfBoundsException;");
+		sb.append("import configuration.model.exceptions.DataOutOfRangeException;");
+		sb.append("import configuration.model.exceptions.DataInvalidValueException;");
 		sb.append("import configuration.model.exceptions.StackPopException;");
 		sb.append("import java.math.BigInteger;");
 		sb.append("import javafx.application.Platform;");

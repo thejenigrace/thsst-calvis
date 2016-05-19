@@ -153,9 +153,9 @@ public class ConfigurationEnvironmentController implements Initializable{
 		MainApp.primaryStage.setScene(new Scene(loaderView));
 		MainApp.primaryStage.setTitle("CALVIS");
 
-		LoaderController loaderController = loader.getController();
-		Task task = createTaskWorkspace();
-		loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
+//		LoaderController loaderController = loader.getController();
+//		Task task = createTaskWorkspace();
+//		loaderController.setProgressBarWorkspaceProgressProperty(task.progressProperty());
 
 //        // comment this
 //////        progressBarWorkspace.progressProperty().bind(task.progressProperty());
@@ -164,20 +164,20 @@ public class ConfigurationEnvironmentController implements Initializable{
 //////        vBoxButtons.setVisible(false);
 //////        new Thread(task).start();
 
-		Thread thread = new Thread(task);
-		thread.setDaemon(true);
-		thread.start();
+//		Thread thread = new Thread(task);
+//		thread.setDaemon(true);
+//		thread.start();
 
 		// No Loader
-//        ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
+        ConfiguratorEnvironment configuratorEnvironment = new ConfiguratorEnvironment(getConfigurationFilePath());
 //        ErrorMessageListWithSize errorMessageListWithSize = verifierController.checkFileNotFoundMessage(getConfigurationFilePath());
 //        if (errorMessageListWithSize.getSize() > 0) {
 //            errorLogger.add(errorMessageListWithSize.getErrorMessageList());
 //        }
 //        errorLogger.combineErrorLogger(configuratorEnvironment.getMessageLists());
 //        if (verifyErrorConfigurationFiles(errorLogger)) {
-//            MainApp.hidePrimaryStage();
-//            MainApp.showWorkspace(configuratorEnvironment);
+            MainApp.hidePrimaryStage();
+            MainApp.showWorkspace(configuratorEnvironment);
 //        }
 	}
 

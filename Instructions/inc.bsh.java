@@ -8,7 +8,7 @@ execute(des, registers, memory) {
 		BigInteger biX = new BigInteger(x,16);
 		BigInteger result = biX.add(new BigInteger("1"));
 
-		registers.set(des,c.binaryToHexString(result.toString(2),des));
+		registers.set(des,c.binaryToHexString(c.binaryZeroExtend(result.toString(2), des),des));
 		ef.setParityFlag(c.checkParity(c.binaryZeroExtend(result.toString(2), des)));
 
 		ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), new BigInteger("1").toString(16)));
@@ -16,7 +16,7 @@ execute(des, registers, memory) {
 		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
-		if(result.equals(BigInteger.ZERO))
+		if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
 			ef.setZeroFlag("1");
 		else
 			ef.setZeroFlag("0");
@@ -33,14 +33,14 @@ execute(des, registers, memory) {
 		BigInteger biX = new BigInteger(x,16);
 		BigInteger result = biX.add(new BigInteger("1"));
 
-		memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
+		memory.write(des,c.binaryToHexString(c.binaryZeroExtend(result.toString(2), des),des), desSize);
 
 		ef.setParityFlag(c.checkParity(result.toString(2)));
 
 		String sign = "" + c.binaryZeroExtend(result.toString(2), des).charAt(0);
 		ef.setSignFlag(sign);
 
-		if(result.equals(BigInteger.ZERO))
+		if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
 			ef.setZeroFlag("1");
 		else
 			ef.setZeroFlag("0");

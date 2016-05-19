@@ -11,15 +11,21 @@ execute(des, src, registers, memory) {
 	}
 }
 
-void doStoreFarPointer(des, src, registers, memory, desSize, srcSize){
-	String memoryData = memory.read(src, srcSize);
-	switch(srcSize){
+		void doStoreFarPointer(des, src, registers, memory, desSize, srcSize){
+		String memoryData = memory.read(src, srcSize);
+		Calculator c = new Calculator(registers, memory);
+		switch(srcSize){
 		case 32:
-			registers.set(registers.get("GS"), memoryData.subString(4));
-			registers.set(registers.get(des), memoryData.subString(0,3));
-		case 64:
-			registers.set(registers.get("GS"), memoryData.subString(8));
-			registers.set(registers.get(des), memoryData.subString(0,7));
+		registers.set("GS", memoryData.substring(4));
+//			System.out.println(memoryData.substring(0,4));
+		registers.set(des, memoryData.substring(0,4));
 		break;
-	}
-}
+		case 64:
+//			registers.set("DS", memoryData.substring(8));
+//			registers.set(des.getValue(), memoryData.substring(0,7));
+		registers.set("GS", memoryData.substring(8));
+		//			System.out.println(memoryData.substring(0,4));
+		registers.set(des, memoryData.substring(0,8));
+		break;
+		}
+		}
