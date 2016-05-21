@@ -136,7 +136,7 @@ setFlags(calculator, flags, registers, des, limit, originalSign, desSize, origin
     else {
         BigInteger biR = new BigInteger(r, 2);
 
-        if( biR.equals(BigInteger.ZERO) ) {
+        if (calculator.binaryZeroExtend(biR.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
             flags.setZeroFlag("1");
         }
         else {

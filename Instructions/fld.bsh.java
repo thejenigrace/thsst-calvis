@@ -3,16 +3,22 @@ execute(src, registers, memory) {
         if ( registers.getBitSize(src) == 80 ) {
             String value = registers.get(src);
             registers.x87().push(value);
+
+            System.out.println("value: " + value);
         }
     }
     else if ( src.isMemory() ) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
+
+        System.out.println("value: " + value);
+
         if ( size == 32 ) {
             // conversion to extended precision
 
         } else if ( size == 64 ) {
             // conversion
+
 
         } else if ( size == 80 ) {
             // conversion

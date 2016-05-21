@@ -39,7 +39,6 @@ execute(des, src, count, registers, memory) {
                 //BigInteger biResult = biDes.shiftLeft(count.intValue());
                 String carryFlag = eflags.getCarryFlag();
 
-                System.out.println(desSize + "pota");
                 for (int x = 0; x < limit; x++) {
                     bitSet = biDes.testBit(desSize - 1);
                     biResult = biResult.shiftLeft(1);
@@ -76,7 +75,7 @@ execute(des, src, count, registers, memory) {
                 if (limit == 0) {
                     //eflags not affected
                 } else {
-                    if (biDes.equals(BigInteger.ZERO)) {
+                    if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         eflags.setZeroFlag("1");
                     } else {
                         eflags.setZeroFlag("0");
@@ -92,7 +91,7 @@ execute(des, src, count, registers, memory) {
                     } else if (limit == 1 && !originalSign.equals(sign)) {
                         eflags.setOverflowFlag("1");
                     } else {
-                        // eflags.setOverflowFlag(undefined);
+                         eflags.setOverflowFlag("0");
                     }
                     eflags.setCarryFlag(originalDes.charAt(limit - 1).toString());
                     //eflags.setAuxiliaryFlag(undefined)
@@ -162,7 +161,7 @@ execute(des, src, count, registers, memory) {
                 if (limit == 0) {
                     //eflags not affected
                 } else {
-                    if (biResult.equals(BigInteger.ZERO)) {
+                    if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         eflags.setZeroFlag("1");
                     } else {
                         eflags.setZeroFlag("0");
@@ -255,7 +254,7 @@ execute(des, src, count, registers, memory) {
                 if (limit == 0) {
                     //eflags not affected
                 } else {
-                    if (biDes.equals(BigInteger.ZERO)) {
+                    if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         eflags.setZeroFlag("1");
                     } else {
                         eflags.setZeroFlag("0");
@@ -278,7 +277,6 @@ execute(des, src, count, registers, memory) {
                 }
             }
         } else if (((desSize == 32 && srcSize == 32) || (desSize == 16 && srcSize == 16)) && count.getValue().length() <= 2) {
-            System.out.println("woy puta");
             //get size of des
             String originalDes = calculator.hexToBinaryString(memory.read(des, desSize), des);
             String originalSign = originalDes.charAt(0) + "";
@@ -339,7 +337,7 @@ execute(des, src, count, registers, memory) {
                 if (limit == 0) {
                     //eflags not affected
                 } else {
-                    if (biDes.equals(BigInteger.ZERO)) {
+                    if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         eflags.setZeroFlag("1");
                     } else {
                         eflags.setZeroFlag("0");

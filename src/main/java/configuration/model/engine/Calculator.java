@@ -1,6 +1,10 @@
 package configuration.model.engine;
 
+import api.DoubleDouble;
+
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Calculator {
 
@@ -789,5 +793,121 @@ public class Calculator {
 //        }
 
         return Long.parseLong(text, 16);
+    }
+
+    /**
+     * IEEE Extended Precision (80-bit) for 0x87 FPU
+     */
+    public String convertToExtendedPrecision(float f) {
+        Float fValue = f;
+        DoubleDouble ddValue = new DoubleDouble(fValue.doubleValue());
+
+        if(ddValue.isNaN())
+            return "NaN";
+
+        return ddValue.toString();
+    }
+
+    public String convertToExtendedPrecision(double d) {
+        Double dValue = d;
+        DoubleDouble ddValue = new DoubleDouble(dValue);
+
+        if(ddValue.isNaN())
+            return "NaN";
+
+        return ddValue.toString();
+    }
+
+    public String convertExtendedPrecisionToIntegerString(DoubleDouble dd) {
+        if(dd.isNaN())
+            return "NaN";
+
+        return new Integer(dd.intValue()).toString();
+    }
+
+    public String extendedPrecisionToBCDString(DoubleDouble dd) {
+        if(dd.isNaN())
+            return "NaN";
+
+        String signBit = "";
+        if(dd.isNegative())
+            signBit = "1";
+        else if(dd.isPositive())
+            signBit = "0";
+
+        BigDecimal bd = new BigDecimal(dd.toString());
+        String realNumber = bd.setScale(13, BigDecimal.ROUND_FLOOR).toString();
+        String split[] = realNumber.split("\\.");
+//        System.out.println("upper = " + content[0]);
+//        System.out.println("lower = " + content[1]);
+
+        BigDecimal decimal = new BigDecimal(split[0]);
+        BigDecimal real = new BigDecimal(realNumber);
+        BigDecimal fraction = real.subtract(decimal);
+        String fractionString = fraction.toString();
+
+        System.out.println(decimal.toString());
+        System.out.println(fractionString);
+
+        System.out.println(String.format("Decimal : %s\nFraction: %s", decimal.toString(),fraction.toString()));
+
+        // sign = 1; exponent = 14; mantissa = 64
+        String mantissa = Integer.toBinaryString(decimal.intValue());
+        ArrayList<String> lol = new ArrayList<>();
+        for (int i = 0; i < fraction.toString().length()-1; i++) {
+            BigDecimal bbdd = new BigDecimal(2);
+            String aa = fractionString.substring(0, 2) + fractionString.substring(i + 2, fractionString.length());
+            bbdd = bbdd.multiply(new BigDecimal(aa));
+            lol.add(bbdd.toString());
+        }
+
+        String bilol = "";
+        for (int i = 0; i < lol.size(); i++) {
+            System.out.println(lol.get(i));
+
+            String dddd = lol.get(i);
+            bilol = bilol + dddd.charAt(0);
+        }
+
+        System.out.println(bilol);
+
+        System.out.println(bilol.length());
+
+
+        String binary = mantissa + bilol;
+
+        int missingZeroes = 63 - binary.length();
+        System.out.println(missingZeroes);
+        for(int i = 0; i < missingZeroes; i++) {
+            binary = binary + "0";
+        }
+
+        System.out.println(binary);
+
+        int exponent = mantissa.length() - 1 + 16383;
+
+        System.out.println(Integer.toBinaryString(exponent).length());
+
+        String exponentBinary = Integer.toBinaryString(exponent);
+        exponentBinary = binaryZeroExtend(exponentBinary, 15);
+
+        binary = signBit + exponentBinary + binary;
+        System.out.println(binary);
+        System.out.println(binary.length());
+
+        String bcd = binary.substring(7);
+
+        System.out.println(bcd.length());
+
+        StringBuilder sbBCD = new StringBuilder();
+        for(int i = 0; i < bcd.length(); i += 4) {
+            Integer iBCD = Integer.parseInt(bcd.substring(i, i+4), 2);
+            System.out.println("binary = " + Integer.toBinaryString(iBCD)
+                    + "; iBCD = " + iBCD);
+
+            sbBCD.append(iBCD.toString());
+        }
+
+        return bcd;
     }
 }

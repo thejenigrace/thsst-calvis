@@ -7,10 +7,29 @@
 	 		char[] temp = x.toCharArray();
 			char[] toBeReplaced = x.toCharArray();
 		    int y = 7;
-			for(int x = 0; x < 8; x++){
-		        toBeReplaced[x] = temp[y];
-		        y--;
-		    }
+		 	int z = 0;
+		 	char tempa;
+		 	char tempb;
+//			for(int x = 0; x < 4; x++){
+		 		tempa = toBeReplaced[0];
+		 		tempb = toBeReplaced[1];
+		        toBeReplaced[0] = temp[6];
+				toBeReplaced[1] = temp[7];
+		 		toBeReplaced[6] = tempa;
+				toBeReplaced[7] = tempb;
+		 		tempa = toBeReplaced[2];
+				tempb = toBeReplaced[3];
+				toBeReplaced[2] = temp[4];
+				toBeReplaced[3] = temp[5];
+				toBeReplaced[4] = tempa;
+				toBeReplaced[5] = tempb;
+
+//				System.out.println(tempa + " " + tempb + " " + toBeReplaced[x] + " " + toBeReplaced[x + 1] + " " + temp[y] + " " + temp[y-1]);
+		 y--;
+		 z++;
+
+//		    }
+		 registers.set(des, new String(toBeReplaced));
  		}
  	}
  }

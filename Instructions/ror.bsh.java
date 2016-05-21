@@ -53,7 +53,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-                    if (biResult.equals(BigInteger.ZERO)) {
+		if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -127,7 +127,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-                    if (biResult.equals(BigInteger.ZERO)) {
+					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -201,7 +201,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-                    if (biResult.equals(BigInteger.ZERO)) {
+					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -271,7 +271,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-                    if (biResult.equals(BigInteger.ZERO)) {
+					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
