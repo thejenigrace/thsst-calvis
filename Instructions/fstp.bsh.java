@@ -1,6 +1,6 @@
 execute(des, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
-    
+
     String value = registers.x87().pop();
     if ( des.isRegister() ) {
         if ( registers.getBitSize(des) == 80 ) {

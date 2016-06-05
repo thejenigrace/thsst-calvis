@@ -1,6 +1,6 @@
 execute(src, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
-    
+
     if ( src.isRegister() ) {
         if ( registers.getBitSize(src) == 80 ) {
             String value = registers.get(src);

@@ -1,6 +1,6 @@
 execute(src, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
-    
+
     if ( src.isMemory() ) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
@@ -8,12 +8,11 @@ execute(src, registers, memory) {
 
         if ( size == 16 ) {
             // conversion to extended precision
-
+            value = value.substring(16);
         } else if ( size == 32 ) {
             // conversion
             convertedValue = calculator.convertHexToSinglePrecision(value);
             value = calculator.convertSinglePrecisionToHexString(convertedValue);
-
         } else if ( size == 64 ) {
             // conversion
             convertedValue = calculator.convertHexToDoublePrecision(value);
