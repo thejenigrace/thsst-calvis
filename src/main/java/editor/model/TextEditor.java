@@ -1,5 +1,6 @@
 package editor.model;
 
+import editor.MainApp;
 import editor.controller.WorkspaceController;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -7,20 +8,14 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.Tab;
-import javafx.scene.control.Tooltip;
-import javafx.scene.text.Font;
+import javafx.geometry.Point2D;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import org.fxmisc.richtext.CodeArea;
-import org.fxmisc.richtext.LineNumberFactory;
-import org.fxmisc.richtext.StyleSpans;
-import org.fxmisc.richtext.StyleSpansBuilder;
+import org.fxmisc.richtext.*;
 import org.fxmisc.undo.UndoManager;
 
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,7 +47,19 @@ public class TextEditor extends AssemblyComponent {
     private static String MEMORY_PATTERN;
     private static Pattern PATTERN;
 
+    /**
+     * The existing autocomplete entries.
+     */
+    private SortedSet<String> entries;
+    /**
+     * The popup used to select an entry.
+     */
+    private ContextMenu entriesPopup;
+
+//    private void findWord(caret)
+
     public TextEditor(WorkspaceController workspaceController) {
+        System.out.println("Initialize");
         this.workspaceController = workspaceController;
         this.codeArea = new CodeArea();
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
@@ -60,6 +67,32 @@ public class TextEditor extends AssemblyComponent {
         codeArea.richChanges().subscribe(change -> {
 //            this.tab.setGraphic(new Text("*"));
 //            this.workspaceController.disableSaveMode(false);
+//            System.out.println(codeArea.getCaretPosition());
+            int caret = codeArea.getCaretPosition();
+            System.out.println("caret = " + caret);
+            String text = codeArea.getText();
+
+            int count = 0;
+            int start = 0;
+            for ( int i = caret-1; i > 0; i-- ) {
+                System.out.println("try = " + codeArea.getText(i, caret));
+                start = i;
+                if ( codeArea.getText(i, caret-count).equals(" "))
+                    break;
+
+                count++;
+            }
+
+            System.out.println("count = " + count);
+
+            if ( caret > 1 && codeArea.getText(caret-count-1, caret-count).equals(" ")) {
+                System.out.println("space");
+                System.out.println(codeArea.getText(caret-count, caret));
+                this.autocomplete(codeArea.getText(caret-count, caret), caret-count, caret);
+            } else {
+                this.autocomplete(codeArea.getText(), 0, caret);
+            }
+
             codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
         });
 
@@ -73,7 +106,7 @@ public class TextEditor extends AssemblyComponent {
         updateTab();
 
         tab.setOnSelectionChanged(e -> {
-            if (tab.isSelected()) {
+            if ( tab.isSelected() ) {
                 Platform.runLater(() -> activated());
             }
         });
@@ -114,7 +147,7 @@ public class TextEditor extends AssemblyComponent {
         tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
         tab.setGraphic(isModified() ? new Text("*") : null);
 
-        if (isModified()) {
+        if ( isModified() ) {
             workspaceController.disableSaveMode(false);
         } else {
             workspaceController.disableSaveMode(true);
@@ -137,7 +170,7 @@ public class TextEditor extends AssemblyComponent {
 
         codeArea.requestFocus();
 
-        if (isModified()) {
+        if ( isModified() ) {
             workspaceController.disableSaveMode(false);
         } else {
             workspaceController.disableSaveMode(true);
@@ -171,7 +204,7 @@ public class TextEditor extends AssemblyComponent {
         int lastKwEnd = 0;
         StyleSpansBuilder<Collection<String>> spansBuilder
                 = new StyleSpansBuilder<>();
-        while (matcher.find()) {
+        while ( matcher.find() ) {
             String styleClass = matcher.group("INSTRUCTIONPATTERN") != null ? "instruction"
                     : matcher.group("REGISTERPATTERN") != null ? "register"
                     : matcher.group("MEMORYPATTERN") != null ? "memory"
@@ -193,15 +226,15 @@ public class TextEditor extends AssemblyComponent {
 
     @Override
     public void update(String currentLine, int lineNumber) {
-        if (currentLine != null) {
+        if ( currentLine != null ) {
             String codeAreaText = this.codeArea.getText();
             Matcher matcher = lineByLinePattern.matcher(codeAreaText);
             HashMap<Integer, int[]> findHighlightRanges = new HashMap<>();
             // c represents matched
             int c = 0;
 
-            while (matcher.find()) {
-                if (!matcher.toMatchResult().group().contains(";")) {
+            while ( matcher.find() ) {
+                if ( !matcher.toMatchResult().group().contains(";") ) {
                     int[] arrRange = new int[2];
                     arrRange[0] = matcher.start();
                     arrRange[1] = matcher.end();
@@ -210,7 +243,7 @@ public class TextEditor extends AssemblyComponent {
                 }
             }
             int[] range = findHighlightRanges.get(lineNumber);
-            if (range != null) {
+            if ( range != null ) {
                 // System.out.println(range[0] + " to " + range[1]);
                 codeArea.selectRange(range[0], range[1]);
                 codeArea.redo();
@@ -228,6 +261,64 @@ public class TextEditor extends AssemblyComponent {
         codeArea.redo();
     }
 
+    private void autocomplete(String text, int start, int end) {
+        if ( text.length() == 0 ) {
+            System.out.println("HIDE!");
+            entriesPopup.hide();
+        } else {
+            System.out.println("SHOW");
+            LinkedList<String> searchResult = new LinkedList<>();
+            searchResult.addAll(entries.subSet(text, text + Character.MAX_VALUE));
+            if ( entries.size() > 0 ) {
+                populatePopupItems(searchResult, start, end);
+                if ( !entriesPopup.isShowing() ) {
+                    entriesPopup.show(MainApp.primaryStage);
+                }
+            }
+        }
+    }
+
+    private void populatePopupItems(List<String> searchResult, int start, int end) {
+        List<CustomMenuItem> menuItems = new LinkedList<>();
+
+        // If you'd life more entries, modify this line.
+        int maxEntries = 10;
+        int count = Math.min(searchResult.size(), maxEntries);
+        for ( int i = 0; i < count; i++ ) {
+            final String result = searchResult.get(i);
+            Label entryLabel = new Label(result);
+            CustomMenuItem item = new CustomMenuItem(entryLabel, true);
+//            item.setOnAction(new EventHandler<ActionEvent>() {
+//                @Override
+//                public void handle(ActionEvent event) {
+//                    // TODO: Replace the word being completed in the codeArea
+//                    codeArea.replaceText(start, end, result);
+//                    entriesPopup.hide();
+//                }
+//            });
+            item.setOnAction((event) -> {
+                // TODO: Replace the word being completed in the codeArea
+                codeArea.replaceText(start, end, result);
+                entriesPopup.hide();
+            });
+            menuItems.add(item);
+        }
+        entriesPopup.getItems().clear();
+        entriesPopup.getItems().addAll(menuItems);
+    }
+
+    private void setCodeAreaAutocomplete() {
+        System.out.println("setCodeAreaAutoComplete");
+        this.entries = new TreeSet<>();
+        this.entriesPopup = new ContextMenu();
+
+        this.entries.addAll(Arrays.asList(sysCon.getInstructionKeywords()));
+
+        codeArea.setPopupWindow(entriesPopup);
+        codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
+        codeArea.setPopupAnchorOffset(new Point2D(4, 4));
+    }
+
     @Override
     public void build() {
         this.setCodeEnvironment();
@@ -236,5 +327,7 @@ public class TextEditor extends AssemblyComponent {
         expression = "((.*)\\b(" + expression + ")\\b(.*)(?=;))|((.*)\\b(" + expression + ")\\b(.*))";
 //        expression = "[^;]\\b(" + expression + ")\\b(.*)"; //?)(?=;)|\\b(" + expression + ")\\b(.*)";
         lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
+
+        this.setCodeAreaAutocomplete();
     }
 }
