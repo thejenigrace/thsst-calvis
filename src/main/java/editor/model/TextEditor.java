@@ -298,7 +298,7 @@ public class TextEditor extends AssemblyComponent {
 //            });
             item.setOnAction((event) -> {
                 // TODO: Replace the word being completed in the codeArea
-                codeArea.replaceText(start, end, result);
+                codeArea.replaceText(start, end, result.toUpperCase());
                 entriesPopup.hide();
             });
             menuItems.add(item);
@@ -313,6 +313,7 @@ public class TextEditor extends AssemblyComponent {
         this.entriesPopup = new ContextMenu();
 
         this.entries.addAll(Arrays.asList(sysCon.getInstructionKeywords()));
+        this.entries.addAll(Arrays.asList(sysCon.getRegisterKeywords()));
 
         codeArea.setPopupWindow(entriesPopup);
         codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
