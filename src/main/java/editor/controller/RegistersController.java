@@ -21,8 +21,8 @@ import java.util.ResourceBundle;
  */
 public class RegistersController extends AssemblyComponent implements Initializable {
 
-    @FXML
-    private ComboBox conversionTypeComboBox;
+//    @FXML
+//    private ComboBox conversionTypeComboBox;
 
     @FXML
     private GridPane gridPaneRegister;
@@ -31,8 +31,9 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @FXML
     private TreeTableColumn<Register, String> colRegisterName;
     @FXML
-    private TreeTableColumn<Register, String> colRegisterValue;
-
+    private TreeTableColumn<Register, String> colRegisterHexValue;
+    @FXML
+    private TreeTableColumn<Register, String> colRegisterInfo;
 
     @FXML
     private TableView<Flag> tableViewFlags1;
@@ -52,22 +53,29 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        conversionTypeComboBox.getItems().addAll("Hex", "Decimal", "Floating Point");
-        conversionTypeComboBox.setValue("Hex");
-        conversionTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-
-        });
-
         colRegisterName.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-                p.getValue().getValue().getName()));
-        colRegisterValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-                p.getValue().getValue().getValue().toString()));
+                p.getValue().getValue().getName()
+        ));
+        colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
+               p.getValue().getValue().getValue().toString()
+        ));
+        colRegisterInfo.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
+               convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
+        ));
 
         flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         flagsValue1.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
 
         flagsName2.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         flagsValue2.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+    }
+
+    public String convert(String registerName, String hexValue) {
+        System.out.println(registerName + ": " + hexValue);
+
+        Integer integer = Integer.parseInt(hexValue, 16);
+
+        return integer.toString();
     }
 
     @Override
@@ -124,64 +132,5 @@ public class RegistersController extends AssemblyComponent implements Initializa
         tableViewFlags1.refresh();
         tableViewFlags2.refresh();
     }
-
-//    private void createTreeTableView(Map map) {
-//        TreeItem<Register> dummyRoot = createNode(map);
-//
-//        for (int i = 0; i < dummyRoot.getChildren().size(); i++) {
-//            System.out.println(dummyRoot.getChildren().get(i).getValue().getName());
-//        }
-//
-//        this.treeTableViewRegister.setRoot(dummyRoot);
-//        this.treeTableViewRegister.setShowRoot(false);
-//    }
-
-//    private TreeItem<Register> createNode(Map map) {
-//
-//        return new TreeItem<Register>() {
-//            private boolean isLeaf;
-//            private boolean isFirstTimeChildren = true;
-//            private boolean isFirstTimeLeaf = true;
-//
-//            @Override
-//            public ObservableList<TreeItem<Register>> getChildren() {
-//                if (isFirstTimeChildren) {
-//                    isFirstTimeChildren = false;
-//                    super.getChildren().setAll(buildChildren(map));
-//                }
-//                return super.getChildren();
-//            }
-//
-//            @Override
-//            public boolean isLeaf() {
-//                if (isFirstTimeLeaf) {
-//                    isFirstTimeLeaf = false;
-////                    Register r = getValue();
-//                    isLeaf = true;
-//                }
-//
-//                return isLeaf;
-//            }
-//
-//            private ObservableList<TreeItem<Register>> buildChildren(Map map) {
-////                File f = TreeItem.getValue();
-////                if (f != null && f.isDirectory()) {
-////                    File[] files = f.listFiles();
-////                    if (files != null) {
-//                ObservableList<Register> registers = FXCollections.observableArrayList(map.values());
-//                ArrayList<TreeItem<Register>> collection = new ArrayList<>();
-//
-//                for (Register r : registers) {
-//                    collection.add(new TreeItem<>(r));
-//                }
-//
-//                return FXCollections.observableArrayList(collection);
-////                    }
-////                }
-////
-////                return FXCollections.emptyObservableList();
-//            }
-//        };
-//    }
 
 }
