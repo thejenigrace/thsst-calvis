@@ -94,7 +94,7 @@ setFlags(calculator, flags, registers, limit, r, originalSign, originalDes, desS
         //flags not affected
     }
     else {
-        if (calculator.binaryZeroExtend(biR.toString(2), desSize).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
+        if( biR.equals(BigInteger.ZERO) ) {
             flags.setZeroFlag("1");
         }
         else {

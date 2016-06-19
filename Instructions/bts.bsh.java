@@ -70,7 +70,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source);
+                storeResultToDesMemory(memory, registers, calculator, des, destination, source);
             }
         }
         else if( src.isHex() && src.getValue().length() <= 2 ) {
@@ -85,7 +85,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source);
+                storeResultToDesMemory(memory, registers, calculator, des, destination, source);
             }
         }
     }
@@ -99,7 +99,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source);
+                storeResultToDesMemory(memory, registers, calculator, des, destination, source);
             }
         }
         else if( src.isHex() && src.getValue().length() <= 2 ) {
@@ -114,7 +114,7 @@ execute(des, src, registers, memory){
                 //Flags
                 setFlags(flags, destination.charAt(source.intValue()));
 
-                storeResultToDesMemory(memory, calculator, des, destination, source);
+                storeResultToDesMemory(memory, registers, calculator, des, destination, source);
             }
         }
     }
@@ -141,7 +141,7 @@ storeResultToDesRegister(registers, calculator, des, destination, i) {
     registers.set(des, calculator.binaryToHexString(destination, des));
 }
 
-storeResultToDesMemory(registers, calculator, des, destination, source) {
+storeResultToDesMemory(memory, registers, calculator, des, destination, source) {
     StringBuffer buffer = new StringBuffer(destination);
     buffer.setCharAt(source.intValue(), '1');
     destination = buffer.reverse().toString();

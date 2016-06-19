@@ -8,11 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fpu data transfer with conversion">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbld.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbld.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fild.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fild.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fld.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fld.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fstp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/bts.bsh.java" afterPath="$PROJECT_DIR$/Instructions/bts.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lahf.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lahf.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pandn.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pandn.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/sal.bsh.java" afterPath="$PROJECT_DIR$/Instructions/sal.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shl.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shr.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,20 +64,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20127796">
-              <caret line="717" column="44" selection-start-line="717" selection-start-column="44" selection-end-line="717" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -461,12 +450,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Instructions/imul.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/datatype/DoubleDouble.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulator_visualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/SettingsEditor.java" />
         <option value="$PROJECT_DIR$/Instructions/paddq.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/psubq.bsh.java" />
@@ -512,6 +499,8 @@
         <option value="$PROJECT_DIR$/src/main/java/api/DoubleDouble.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
         <option value="$PROJECT_DIR$/Instructions/fld.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
       </list>
     </option>
   </component>
@@ -580,9 +569,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -593,6 +579,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -957,12 +946,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00064" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455974811899</created>
-      <option name="number" value="00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1455974811899</updated>
-    </task>
     <task id="LOCAL-00065" summary="Fix build.gradle &amp; OS Compatibility of jar.">
       <created>1456309956742</created>
       <option name="number" value="00065" />
@@ -1251,7 +1234,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465001955845</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="fpu data transfer with conversion">
+      <created>1465112582348</created>
+      <option name="number" value="00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1465112582350</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1284,11 +1273,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2894309" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25201073" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25076452" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.26911315" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31709844" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14378029" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1736672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18903089" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1392,16 +1381,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/JumpOutOfBoundsException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryReadException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryRestrictedAccessException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryWriteException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MissingSizeDirectiveException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPopException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPushException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/ChoiceBoxLogger.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePath.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathHandler.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathList.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/SaveFile.java" />
@@ -1434,13 +1413,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="88" column="57" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1563,14 +1535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/api/DoubleDouble.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/fld1.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1646,8 +1610,97 @@
         <state vertical-scroll-proportion="0.20127796">
           <caret line="717" column="44" selection-start-line="717" selection-start-column="44" selection-end-line="717" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/VisualizationEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11980831">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.126198">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/LoaderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16773163">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1389775">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.535144">
+          <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/api/DoubleDouble.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30830672">
+          <caret line="61" column="22" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.384984">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.047923323">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44888178">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/TreeTableView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2140574">
+          <caret line="337" column="13" selection-start-line="337" selection-start-column="13" selection-end-line="337" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78913736">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/registers.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02617801">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
         </state>
       </provider>
     </entry>

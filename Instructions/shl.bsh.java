@@ -155,6 +155,9 @@ setFlags(calculator, flags, registers, des, limit, originalSign, desSize, origin
         else if( limit == 1 && !originalSign.equals(sign) ) {
             flags.setOverflowFlag("1");
         }
+        else if( originalSign.equals(sign) ) {
+            flags.setOverflowFlag("1");
+        }
         else {
             flags.setOverflowFlag("0"); //undefined
         }

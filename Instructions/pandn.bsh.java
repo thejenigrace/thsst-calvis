@@ -58,8 +58,6 @@ String performNot(calculator, des, destination, desSize) {
         }
     }
 
-    result = calculator.binaryToHexString(result, des);
-
     return result;
 }
 
