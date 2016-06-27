@@ -44,10 +44,10 @@ storeResultToRegister(registers, calculator, des, source, destination, i8, desSi
     String i67 = i8.substring(6);
     String result = "";
 
-    result += returnStringChoice(i01, destination);
-    result += returnStringChoice(i23, destination);
-    result += returnStringChoice(i45, source);
-    result += returnStringChoice(i67, source);
+    result += returnStringChoice(i01, source);
+    result += returnStringChoice(i23, source);
+    result += returnStringChoice(i45, destination);
+    result += returnStringChoice(i67, destination);
 
     registers.set(des, result);
 }
@@ -55,13 +55,13 @@ storeResultToRegister(registers, calculator, des, source, destination, i8, desSi
 String returnStringChoice(i, value) {
     switch (i) {
         case "00":
-            return value.substring(0, 8);
-        case "01":
-            return value.substring(8, 16);
-        case "10":
-            return value.substring(16, 24);
-        case "11":
             return value.substring(24);
+        case "01":
+            return value.substring(16, 24);
+        case "10":
+            return value.substring(8, 16);
+        case "11":
+            return value.substring(0, 8);
         default:
             return "00000000";
     }
