@@ -38,20 +38,20 @@ execute(des, src, immediate, registers, memory) {
 }
 
 storeResultToRegister(registers, calculator, des, source, destination, i8, desSize) {
-    String i0 = i8.charAt(0) + "";
-    String i1 = i8.charAt(1) + "";
+    String i0 = i8.charAt(7) + "";
+    String i1 = i8.charAt(6) + "";
     String result = "";
 
-    if( i0.equals("0") ) {
-        result += destination.substring(0, 16);
+    if( i1.equals("0") ) {
+        result += source.substring(16);
     } else {
-        result += destination.substring(16);
+        result += source.substring(0, 16);
     }
 
-    if( i1.equals("0") ) {
-        result += source.substring(0, 16);
+    if( i0.equals("0") ) {
+        result += destination.substring(16);
     } else {
-        result += source.substring(16);
+        result += destination.substring(0, 16);
     }
 
     registers.set(des, result);

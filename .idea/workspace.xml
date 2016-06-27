@@ -6,9 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="FIXED SSE AND SSE2 INSTRUCTIONS">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="fixed shufps">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shufps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shufps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/shufpd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/shufpd.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1030,12 +1030,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00067" summary="Added latest Instructions">
-      <created>1456311037883</created>
-      <option name="number" value="00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1456311037883</updated>
-    </task>
     <task id="LOCAL-00068" summary="Fix MUL &amp; ADOX Instructions">
       <created>1456323146801</created>
       <option name="number" value="00068" />
@@ -1324,7 +1318,13 @@
       <option name="project" value="LOCAL" />
       <updated>1466868135580</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="fixed shufps">
+      <created>1467014919655</created>
+      <option name="number" value="00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1467014919656</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1419,7 +1419,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added PCMPGT(B/W/D) Instructions" />
     <MESSAGE value="Merge with marielle-mmx" />
     <MESSAGE value="still needs to check the result" />
     <MESSAGE value="refactored-parser" />
@@ -1444,7 +1443,8 @@
     <MESSAGE value="fpu data transfer with conversion" />
     <MESSAGE value="fixed gp and mmx instructions" />
     <MESSAGE value="FIXED SSE AND SSE2 INSTRUCTIONS" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIXED SSE AND SSE2 INSTRUCTIONS" />
+    <MESSAGE value="fixed shufps" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed shufps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
