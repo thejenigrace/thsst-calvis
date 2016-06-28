@@ -21,6 +21,9 @@ execute(des, src, registers, memory) {
 			if (src.isMemory()){
 				sourceReg = c.hexZeroExtend(memory.read(src, 64), des);
 			}
+			else{
+				sourceReg = c.hexZeroExtend(registers.get(src), des);
+			}
 		}
 		registers.set(des, sourceReg);
 	}

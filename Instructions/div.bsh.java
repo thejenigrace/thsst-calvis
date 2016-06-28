@@ -45,14 +45,14 @@ execute(src, registers, memory) {
             long longQuotient = Long.parseLong(biResult[0].toString());
             long longRemainder = Long.parseLong(biResult[1].toString());
 
-            System.out.println("quotient = " + Long.toHexString(longQuotient));
-            System.out.println("remainder = " + Long.toHexString(longRemainder));
+            System.out.println("long quotient = " + Long.toHexString(longQuotient));
+            System.out.println("long remainder = " + Long.toHexString(longRemainder));
 
             int resultBitSize = registers.getBitSize(registerForQuotient);
             if(check(longQuotient, resultBitSize)) {
                 int resultHexSize = registers.getHexSize(registerForQuotient);
-                String quotient = calculator.cutToCertainHexSize("getUpper", biResult[0].toString(16), resultHexSize);
-                String remainder = calculator.cutToCertainHexSize("getUpper", biResult[1].toString(16), resultHexSize);
+                String quotient = calculator.cutToCertainHexSize("getLower", biResult[0].toString(16), resultHexSize);
+                String remainder = calculator.cutToCertainHexSize("getLower", biResult[1].toString(16), resultHexSize);
 
                 System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
                 System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());

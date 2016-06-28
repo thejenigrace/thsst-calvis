@@ -29,7 +29,7 @@ public class Calculator {
         switch ( con ) {
             case "A":
             case "NBE": // fall through
-                return (CF.equals("0") && ZF.equals("0"));
+                return (CF.equals("0") || ZF.equals("0"));
             case "AE":
             case "NB": // fall through
                 return CF.equals("0");
@@ -41,7 +41,7 @@ public class Calculator {
                 return (CF.equals("1") || ZF.equals("1"));
             case "G":
             case "NLE": // fall through
-                return ((SF.equals(OF)) && (ZF.equals("0")));
+                return ((SF.equals(OF)) || (ZF.equals("0")));
             case "GE":
             case "NL": // fall through
                 return SF.equals(OF);

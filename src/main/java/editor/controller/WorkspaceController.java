@@ -358,8 +358,10 @@ public class WorkspaceController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        fileChooser.getExtensionFilters().add(extFilter);
+        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+
+        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
         // Show open file dialog
         File file = fileChooser.showOpenDialog(MainApp.primaryStage);
 
@@ -400,8 +402,10 @@ public class WorkspaceController implements Initializable {
 
             FileChooser fileChooser = new FileChooser();
             //Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-            fileChooser.getExtensionFilters().add(extFilter);
+            FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+            FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+
+            fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
 
             if (textEditor.getPath() == null) {
                 //Show save file dialog
@@ -442,8 +446,10 @@ public class WorkspaceController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        fileChooser.getExtensionFilters().add(extFilter);
+        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+
+        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
 
         //Show save file dialog
         File file = fileChooser.showSaveDialog(MainApp.primaryStage);

@@ -19,7 +19,7 @@ execute(des, src, registers, memory) {
                 }
             }
 
-            int count = new BigInteger(register.get(src), 16).intValue() % 32;
+            int count = new BigInteger(registers.get(src), 16).intValue() % 32;
             int limit = count;
             if (checkSize && (limit >= 0 && limit <= 31)) {
                 String destination = calculator.hexToBinaryString(registers.get(des), des);
@@ -53,7 +53,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-		if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
+                    if (biResult.equals(BigInteger.ZERO)) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -100,10 +100,13 @@ execute(des, src, registers, memory) {
                 String carryFlagValue = flags.getCarryFlag();
                 boolean bitSet = false;
                 for (int x = 0; x < count.intValue(); x++) {
-                    biResult = biResult.shiftRight(1);
-                    bitSet = biDes.testBit(0);
 
-                    if (bitSet) {
+                    bitSet = biResult.testBit(0);
+					biResult = biResult.shiftRight(1);
+
+
+
+		if (bitSet) {
                         biResult = biResult.setBit(desSize - 1);
                         carryFlagValue = "1";
                     } else {
@@ -127,7 +130,7 @@ execute(des, src, registers, memory) {
                 if (limit == 0) {
                     //flags not affected
                 } else {
-					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
+                    if (biResult.equals(BigInteger.ZERO)) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -189,19 +192,20 @@ execute(des, src, registers, memory) {
                 }
                 flags.setCarryFlag(carryFlagValue);
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-                if (result.length() > 8) {
-                    int cut = result.length() - 8;
-                    String t = result.substring(cut);
-                    memory.write(des, t, desSize);
-                } else {
-                    memory.write(des, result, desSize);
-                }
+				if (memory.getHexSize(des) < result.length()) {
+					int cut = result.length() - memory.getHexSize(des);
+					String t = result.substring(cut);
+//
+					memory.write(des, t, desSize);
+				} else {
+					memory.write(des, result, desSize);
+				}
 
                 //FLAGS
                 if (limit == 0) {
                     //flags not affected
                 } else {
-					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
+                    if (biResult.equals(BigInteger.ZERO)) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");
@@ -259,19 +263,27 @@ execute(des, src, registers, memory) {
                 }
                 flags.setCarryFlag(carryFlagValue);
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-                if (result.length() > 8) {
+                /*if (result.length() > 8) {
                     int cut = result.length() - 8;
                     String t = result.substring(cut);
                     memory.write(des, t, desSize);
                 } else {
                     memory.write(des, result, desSize);
-                }
+                }*/
+				if (memory.getHexSize(des) < result.length()) {
+					int cut = result.length() - memory.getHexSize(des);
+					String t = result.substring(cut);
+					System.out.println(t + " result");
+					memory.write(des, t, desSize);
+				} else {
+					memory.write(des, result, desSize);
+				}
 
                 //FLAGS
                 if (limit == 0) {
                     //flags not affected
                 } else {
-					if (calculator.binaryZeroExtend(biResult.toString(2), des).equals(calculator.binaryZeroExtend(BigInteger.ZERO.toString(2), des))) {
+                    if (biResult.equals(BigInteger.ZERO)) {
                         flags.setZeroFlag("1");
                     } else {
                         flags.setZeroFlag("0");

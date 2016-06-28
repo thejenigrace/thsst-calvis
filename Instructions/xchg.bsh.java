@@ -9,36 +9,36 @@
  		}
  		else if ( src.isMemory() ){
  			System.out.println("Exchange memory to register");
- 			EnvironmentConfiguration.model.Calculator cal = new EnvironmentConfiguration.model.Calculator(registers, memory);
- 			String address = cal.computeMemoryAddress(src);
-			int des_reg_size = registers.getSize(des);
- 			String x = memory.read(address, des_reg_size);
+ 			Calculator cal = new Calculator(registers, memory);
+ 			//String address = cal.computeMemoryAddress(src);
+			int des_reg_size = registers.getBitSize(des);
+ 			String x = memory.read(src, des_reg_size);
 
  			// get value of registers
  			String y = registers.get(des);
  			// write value to memory
- 			memory.write(address, y, des_reg_size);
+ 			memory.write(src, y, des_reg_size);
  			// set register to value read from memory;
  			registers.set(des, x);
 
  		}
  	}
  	else if ( des.isMemory() ){
- 		EnvironmentConfiguration.model.Calculator cal = new EnvironmentConfiguration.model.Calculator(registers, memory);
- 		String address = cal.computeMemoryAddress(des);
+ 		Calculator cal = new Calculator(registers, memory);
+ 		//String address = cal.computeMemoryAddress(des);
 
  		if ( src.isRegister() ){
  			System.out.println("Exchange register to memory");
  			String x = registers.get(src);
- 			int src_reg_size = registers.getSize(src);
+ 			int src_reg_size = registers.getBitSize(src);
  			
 
  			// read from memory
- 			String y = memory.read(address, src_reg_size);
+ 			String y = memory.read(des, src_reg_size);
  			// set register to value read from memory
  			registers.set(src, y);
  			// write register value to memory
-			memory.write(address, x, src_reg_size);
+			memory.write(des, x, src_reg_size);
  		}
  	}
  }

@@ -14,6 +14,9 @@ execute(des, src, registers, memory) {
 	}
 	else{
 		srcSize = memory.getBitSize(src);
+		if( srcSize == 0){
+		srcSize = registers.getBitSize(des);
+		}
 	}
 	String sourceReg = "";
 	String desStr = "";
@@ -23,26 +26,27 @@ execute(des, src, registers, memory) {
 		if(desSize == srcSize && (srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = registers.get(des);
 			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
 		if((srcSize == 64  || srcSize == 128 ) && src.isMemory() ){
 			desStr = registers.get(des);
 			srcStr = memory.read(src, desSize);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
+		registers.set(des, sourceReg);
 	}
 	if(des.isMemory()){
 		if(desSize == srcSize && ( srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = memory.read(des, desSize);
 			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
 	}
 }
 
-String executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd){
+String executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex){
 	String resultingMultiply = "";
-	for(int x = 0; x < srcSize / 4; x + sizeOfHex){
+	for(int x = 0; x < srcSize / 4; x = x + sizeOfHex){
 		StringBuilder strToBuildDes = new StringBuilder();
 		StringBuilder strToBuildSrc = new StringBuilder();
 
@@ -54,7 +58,9 @@ String executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr,
 		BigInteger destination = new BigInteger((strToBuildDes).toString(),16);
 		BigInteger source = new BigInteger((strToBuildSrc).toString(),16);
 		destination = destination.multiply(source);
+
 		resultingMultiply += c.hexZeroExtend(destination.toString(16), sizeOfHex * 2).substring(0, sizeOfHex);
+		System.out.println(c.hexZeroExtend(destination.toString(16), sizeOfHex * 2).substring(0, sizeOfHex) + " hex result");
 	}
 	return resultingMultiply;
 }

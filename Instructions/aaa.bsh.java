@@ -1,7 +1,7 @@
 execute(registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
-    
+
     Token token = new Token(Token.REG, "AL");
 
     String sAL = calculator.hexToBinaryString(registers.get("AL"), token);
@@ -11,6 +11,10 @@ execute(registers, memory) {
     BigInteger biAL = new BigInteger(sAL, 2);
     BigInteger toAddAF = new BigInteger("0110", 2);
     BigInteger toAddAH = new BigInteger("00010000", 2);
+
+    System.out.println("sAL: " + sAL);
+    System.out.println("toAddAF: " + toAddAF.toString());
+    System.out.println("toAddAH: " + toAddAH.toString());
 
     String oldAF = flags.getAuxiliaryFlag();
     String oldCF = flags.getCarryFlag();

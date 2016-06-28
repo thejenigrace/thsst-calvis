@@ -14,56 +14,82 @@ execute(des, src, registers, memory) {
 	}
 	else{
 		srcSize = memory.getBitSize(src);
+		if( srcSize == 0){
+			srcSize = registers.getBitSize(des);
+		}
 	}
-	String saturateStr = "";
+	String saturateStrAbove = "F";
+	String saturateStrBelow = "8";
 	String sourceReg = "";
 	String desStr = "";
 	String srcStr = "";
-	for(int x = 0; x < sizeOfHex; x++){
-		saturateStr += "F";
+	for(int x = 1; x < sizeOfHex; x++){
+		saturateStrAbove += "F";
+		saturateStrBelow += "0";
 	}
+	
+	String sourceReg = "";
+	String desStr = "";
+	String srcStr = "";
+	int sizeOfAdd = 0;
 	///end of defining sizes///
 	if(des.isRegister()){
 		if(desSize == srcSize && (srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = registers.get(des);
 			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex, saturateStrAbove, saturateStrBelow);
 		}
 		if((srcSize == 64  || srcSize == 128 ) && src.isMemory() ){
 			desStr = registers.get(des);
+
 			srcStr = memory.read(src, desSize);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex, saturateStrAbove, saturateStrBelow);
 		}
+		registers.set(des, sourceReg);
 	}
 	if(des.isMemory()){
 		if(desSize == srcSize && ( srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = memory.read(des, desSize);
 			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex, saturateStrAbove, saturateStrBelow);
 		}
 	}
 }
 
-String executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd){
+String executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex, saturateStrAbove, saturateStrBelow){
 	String resultingAdd = "";
-	for(int x = 0; x < srcSize / 4; x + sizeOfHex){
+	for(int x = 0; x < srcSize / 4; x = x + sizeOfHex){
 		StringBuilder strToBuildDes = new StringBuilder();
 		StringBuilder strToBuildSrc = new StringBuilder();
-
+		int intSrc = 0;
+		int intDes = 0;
+		
 		for(int y = 0; y < sizeOfHex; y++){
-			strToBuildDes.append(desStr.charAt(x));
-			strToBuildSrc.append(srcStr.charAt(x));
+			strToBuildDes.append(desStr.charAt(x + y));
+			strToBuildSrc.append(srcStr.charAt(x + y));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
-		destination = destination.add(source);
-		if(destination.toString(16).length() > 2){
-			resultingAdd += saturateStr;
+		BigInteger destination = new BigInteger(strToBuildDes.toString(),16);
+		BigInteger source = new BigInteger(strToBuildSrc.toString(),16);
+		 
+		
+		intDes = Integer.parseInt( c.hexZeroExtend(destination.toString(16), sizeOfHex), 16);
+
+		intSrc = Integer.parseInt( c.hexZeroExtend(source.toString(16), sizeOfHex), 16);
+
+		
+		
+		int result = intSrc + intDes;
+		/*System.out.println(intSrc);
+		System.out.println(intDes);
+		System.out.println(result + " result");*/
+		if(result > Integer.parseInt(saturateStrAbove, 16)){
+			resultingAdd += saturateStrAbove;
 		}
 		else{
-			resultingAdd += c.hexZeroExtend(destination.toString(16).substring(destination.toString(16).length() % sizeOfHex),sizeOfHex);
+			resultingAdd += c.hexZeroExtend(new BigInteger(String.valueOf(result), 10).toString(16), sizeOfHex);
 		}
+		
 	}
 	return resultingAdd;
 }

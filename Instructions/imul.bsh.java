@@ -166,16 +166,6 @@ multiplyForTwoOperand(des,registers,calculator,multiplier) {
         System.out.println("longMultiplier = "+longMultiplier);
         System.out.println("longResult = "+longResult);
 
-        // BigInteger checkTruncatedResult;
-        // String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
-        // if ( results[0].equals("0000") || results[0].equals("00000000") ){
-        //     registers.set(des,results[0]);
-        //     checkTruncatedResult = new BigInteger(results[0], 16);
-        // }else {
-        //     registers.set(des,results[1]);
-        //     checkTruncatedResult = new BigInteger(results[1], 16);
-        // }
-
         String result = Long.toHexString(longResult);
         System.out.println("result = " + result);
         result = calculator.hexZeroExtend(result,desHexSize);
@@ -183,26 +173,21 @@ multiplyForTwoOperand(des,registers,calculator,multiplier) {
         String finalResult = result.substring(result.length()-desHexSize);
         System.out.println("finalResult = " + finalResult);
 
-        BigInteger checkTruncatedResult;
-        // if ( finalResult.equals("0000") || finalResult.equals("00000000") ){
-        //     registers.set(des,finalResult);
-        //     checkTruncatedResult = new BigInteger(finalResult, 16);
-        // }else {
-        //     registers.set(des,results[1]);
-        //     checkTruncatedResult = new BigInteger(results[1], 16);
-        // }
         registers.set(des,finalResult);
+
+        BigInteger checkTruncatedResult;
         checkTruncatedResult = new BigInteger(finalResult,16);
 
         EFlags ef = registers.getEFlags();
+        // CF = OF = 1; intermediate product is different from the truncated result
         if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
-            System.out.println("CF = 1; OF = 1"); // debugging
-            ef.setCarryFlag("1");
-            ef.setOverflowFlag("1");
-        } else{
             System.out.println("CF = 0; OF = 0"); // debugging
             ef.setCarryFlag("0");
             ef.setOverflowFlag("0");
+        } else{
+            System.out.println("CF = 1; OF = 1"); // debugging
+            ef.setCarryFlag("1");
+            ef.setOverflowFlag("1");
         }
 }
 
@@ -252,16 +237,6 @@ multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier) {
         System.out.println("longMultiplier = "+longMultiplier);
         System.out.println("longResult = "+longResult);
 
-//        BigInteger checkTruncatedResult;
-//        String[] results=calculator.cutToCertainSize(Long.toHexString(longResult),desHexSize);
-//        if ( results[0].equals("0000") || results[0].equals("00000000") ){
-//            registers.set(des,results[1]);
-//            checkTruncatedResult = new BigInteger(results[1], 16);
-//        }else {
-//            registers.set(des,results[0]);
-//            checkTruncatedResult = new BigInteger(results[0], 16);
-//        }
-
         String result = Long.toHexString(longResult);
         System.out.println("result = " + result);
         result = calculator.hexZeroExtend(result,desHexSize);
@@ -275,13 +250,14 @@ multiplyForThreeOperand(des,registers,calculator,multiplicand,multiplier) {
         checkTruncatedResult = new BigInteger(finalResult,16);
 
         EFlags ef = registers.getEFlags();
+        // CF = OF = 1; intermediate product is different from the truncated result
         if( checkTruncatedResult.equals(new BigInteger(longResult.toString())) ){
-            System.out.println("CF = 1; OF = 1"); // debugging
-            ef.setCarryFlag("1");
-            ef.setOverflowFlag("1");
-        } else{
             System.out.println("CF = 0; OF = 0"); // debugging
             ef.setCarryFlag("0");
             ef.setOverflowFlag("0");
+        } else{
+            System.out.println("CF = 1; OF = 1"); // debugging
+            ef.setCarryFlag("1");
+            ef.setOverflowFlag("1");
         }
 }

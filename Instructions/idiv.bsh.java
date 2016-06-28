@@ -49,13 +49,13 @@ execute(src, registers, memory) throws Exception {
             long longQuotient = Long.parseLong(biResult[0].toString());
             long longRemainder = Long.parseLong(biResult[1].toString());
 
-            System.out.println("quotient = " + Long.toHexString(longQuotient));
-            System.out.println("remainder = " + Long.toHexString(longRemainder));
+            System.out.println("long quotient = " + Long.toHexString(longQuotient));
+            System.out.println("long remainder = " + Long.toHexString(longRemainder));
 
             if(check(longQuotient, resultBitSize)) {
                 int resultHexSize = registers.getHexSize(registerForQuotient);
-                String quotient = calculator.cutToCertainHexSize("getUpper", Long.toHexString(longQuotient), resultHexSize);
-                String remainder = calculator.cutToCertainHexSize("getUpper", Long.toHexString(longRemainder), resultHexSize);
+                String quotient = calculator.cutToCertainHexSize("getLower", Long.toHexString(longQuotient), resultHexSize);
+                String remainder = calculator.cutToCertainHexSize("getLower", Long.toHexString(longRemainder), resultHexSize);
 
                 System.out.println("FINAL QUOTIENT = " + quotient.toUpperCase());
                 System.out.println("FINAL REMAINDER = " + remainder.toUpperCase());
