@@ -1,25 +1,27 @@
 execute(registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
-    
-    Token token = new Token(Token.REG, "AL");
 
-    String sAL = calculator.hexToBinaryString(registers.get("AL"), token);
+    Token tokenAX = new Token(Token.REG, "AX");
+    Token tokenAH = new Token(Token.REG, "AH");
 
-    BigInteger biLowerAL = new BigInteger(sAL.substring(4), 2);
-    BigInteger biUpperAL = new BigInteger(sAL.substring(0, 4), 2);
-    BigInteger biAL = new BigInteger(sAL, 2);
-    BigInteger toAddAF = new BigInteger("0110", 2);
-    BigInteger toAddAH = new BigInteger("00010000", 2);
+    String sAX = calculator.hexToBinaryString(registers.get("AX"), tokenAX);
+    String sAH = calculator.hexToBinaryString(registers.get("AH"), tokenAH);
+
+    BigInteger biLowerAL = new BigInteger(sAX.substring(12), 2);
+    BigInteger biAX = new BigInteger(sAX, 2);
+    BigInteger biAH = new BigInteger(sAH, 2);
+    BigInteger toAddAF = new BigInteger("0000000000000110", 2);
+    BigInteger toAddAH = new BigInteger("000000001", 2);
 
     String oldAF = flags.getAuxiliaryFlag();
     String oldCF = flags.getCarryFlag();
     flags.setCarryFlag("0");
 
     if( oldAF.equals("1") || biLowerAL.intValue() > 9 ) {
-        biAL = biAL.subtract(toAddAF);
-        biAL = biAL.subtract(toAddAH);
-        storeResultInDes(registers, calculator, biAL, token);
+        biAX = biAX.subtract(toAddAF);
+        biAH = biAH.subtract(toAddAH);
+        storeResultInDes(registers, calculator, biAX, biAH, tokenAX, tokenAH);
 
         //Flags
         flags.setCarryFlag("1");
@@ -27,7 +29,7 @@ execute(registers, memory) {
         setFlags(flags);
     }
     else {
-        storeResultInDes(registers, calculator, biAL, token);
+        storeResultInDes(registers, calculator, biAX, biAH, tokenAX, tokenAH);
 
         //Flags
         flags.setCarryFlag("0");
@@ -36,10 +38,12 @@ execute(registers, memory) {
     }
 }
 
-storeResultInDes(registers, calculator, biAL, token) {
-    BigInteger zeroOutAH = new BigInteger("00001111", 2);
-    biAL = biAL.and(zeroOutAH);
-    registers.set(token, calculator.binaryToHexString(biAL.toString(2), token));
+storeResultInDes(registers, calculator, biAX, biAH, tokenAX, tokenAH){
+    BigInteger zeroOutAL = new BigInteger("00001111", 2);
+    biAX = biAX.and(zeroOutAL);
+
+    registers.set(tokenAX, calculator.binaryToHexString(biAX.toString(2), tokenAX));
+    registers.set(tokenAH, calculator.binaryToHexString(biAH.toString(2), tokenAH));
 }
 
 setFlags(flags) {
