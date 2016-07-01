@@ -10,14 +10,7 @@ import configuration.model.exceptions.DataTypeMismatchException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class RegisterList {
 
@@ -42,13 +35,14 @@ public class RegisterList {
 
     public RegisterList(String csvFile, int maxSize) {
         Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
-        this.flags = new EFlags("EFLAGS", 32);
-        this.mxscr = new Mxscr("MXSCR", 32);
+
         this.map = new TreeMap<>(orderedComparator);
         this.lookup = new ArrayList<>();
         MAX_SIZE = maxSize;
         this.childMap = new TreeMap<>(orderedComparator);
 
+        this.flags = new EFlags("EFLAGS", 32);
+        this.mxscr = new Mxscr("MXSCR", 32);
         this.x87 = new X87Handler(this);
 
         BufferedReader br = null;
@@ -144,6 +138,20 @@ public class RegisterList {
                             case "6": // fall through
                                 Register g = new Register(reg[NAME], regSize);
                                 this.map.put(reg[NAME], g);
+                                break;
+                            case "7":
+                                X87Register fpu = null;
+                                if ( reg[NAME].equals("STATUS") ) {
+                                    fpu = new X87StatusRegister();
+                                    this.x87.setStatus((X87StatusRegister) fpu);
+                                } else if ( reg[NAME].equals("TAG") ) {
+                                    fpu = new X87TagRegister();
+                                    this.x87.setTag((X87TagRegister) fpu);
+                                } else if ( reg[NAME].equals("CONTROL") ) {
+                                    fpu = new X87ControlRegister();
+                                    this.x87.setControl((X87ControlRegister) fpu);
+                                }
+                                this.map.put(reg[NAME], fpu);
                                 break;
                             case "3": // Instruction Pointer
                                 Register h = new Register(reg[NAME], regSize);
@@ -272,7 +280,11 @@ public class RegisterList {
             int startIndex = Integer.parseInt(register[START]);
             int endIndex = Integer.parseInt(register[END]);
             // return the indicated child register value
-            return mother.getValue().substring(startIndex, endIndex + 1);
+            if ( mother.getName().matches("ST[0-7]") ) {
+                return mother.getValue();
+            } else {
+                return mother.getValue().substring(startIndex, endIndex + 1);
+            }
         } else {
             System.out.println("ERROR: Register " + key + " does not exist.");
             errorMessages.add(new ErrorMessage(Types.doesNotExist,
@@ -282,12 +294,11 @@ public class RegisterList {
         return null;
     }
 
-    public void set(String registerName, String hexString) throws DataTypeMismatchException {
-        set(new Token(Token.REG, registerName), hexString);
+    public void set(Token registerToken, String hexString) throws DataTypeMismatchException {
+        set(registerToken.getValue(), hexString);
     }
 
-    public void set(Token a, String hexString) throws DataTypeMismatchException {
-        String key = a.getValue();
+    public void set(String key, String hexString) throws DataTypeMismatchException {
         String[] register = find(key);
         ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
         // get the mother register
@@ -296,56 +307,55 @@ public class RegisterList {
         int startIndex = Integer.parseInt(register[START]);
         int endIndex = Integer.parseInt(register[END]);
 
-        //check for mismatch between parameter hexString and child register value		
-        String child = mother.getValue().substring(startIndex, endIndex + 1);
-
-        if ( child.length() >= hexString.length() ) {
-            int differenceInLength = child.length() - hexString.length();
-            for ( int i = 0; i < differenceInLength; i++ ) {
-                hexString = "0" + hexString;
-            }
-            String newValue = mother.getValue();
-            char[] val = newValue.toCharArray();
-            for ( int i = startIndex; i <= endIndex; i++ ) {
-                val[i] = hexString.charAt(i - startIndex);
-            }
-            newValue = new String(val);
-            newValue = newValue.toUpperCase();
-            mother.setValue(newValue);
+        if ( mother.getName().matches("ST[0-7]") ) {
+            mother.setValue(hexString);
+        } else {
+            //check for mismatch between parameter hexString and child register value
+            String child = mother.getValue().substring(startIndex, endIndex + 1);
+            
+            if ( child.length() >= hexString.length() ) {
+                int differenceInLength = child.length() - hexString.length();
+                for ( int i = 0; i < differenceInLength; i++ ) {
+                    hexString = "0" + hexString;
+                }
+                String newValue = mother.getValue();
+                char[] val = newValue.toCharArray();
+                for ( int i = startIndex; i <= endIndex; i++ ) {
+                    val[i] = hexString.charAt(i - startIndex);
+                }
+                newValue = new String(val);
+                newValue = newValue.toUpperCase();
+                mother.setValue(newValue);
 
 //            System.out.println("register[SOURCE] = " + register[SOURCE]);
-            if ( childMap.get(register[SOURCE]) != null ) {
+                if ( childMap.get(register[SOURCE]) != null ) {
 //                System.out.println("key = " + key);
 //				System.out.println("newValue = " + newValue.toUpperCase());
-                int registerType = Integer.parseInt(register[TYPE]);
-                if ( registerType == 2 || registerType == 1 ) {
-                    String registerCategory = register[SOURCE].charAt(1) + "";
-                    childMap.get(register[SOURCE]).get(registerCategory + "X")
-                            .setValue(get16BitHexString(newValue));
-                    childMap.get(register[SOURCE]).get(registerCategory + "H")
-                            .setValue(get8BitHexString('H', newValue));
-                    childMap.get(register[SOURCE]).get(registerCategory + "L")
-                            .setValue(get8BitHexString('L', newValue));
-                } else if ( registerType == 4 ) { // only for STX and MMX registers
-                    String registerNumber = register[SOURCE].charAt(2) + "";
-//                    System.out.println(newValue.substring(4, 19 + 1));
-                    childMap.get(register[SOURCE]).get("MM" + registerNumber)
-                            .setValue(newValue.substring(4, 20));
+                    int registerType = Integer.parseInt(register[TYPE]);
+                    if ( registerType == 2 || registerType == 1 ) {
+                        String registerCategory = register[SOURCE].charAt(1) + "";
+                        childMap.get(register[SOURCE]).get(registerCategory + "X")
+                                .setValue(get16BitHexString(newValue));
+                        childMap.get(register[SOURCE]).get(registerCategory + "H")
+                                .setValue(get8BitHexString('H', newValue));
+                        childMap.get(register[SOURCE]).get(registerCategory + "L")
+                                .setValue(get8BitHexString('L', newValue));
+                    }
                 }
-            }
-        } else {
-            if ( hexString.equals("") ) {
-                System.out.println("Writing to register failed.");
-                errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
-                        new ArrayList<>(), ""));
             } else {
-                System.out.println("Size mismatch between "
-                        + register[0] + ":" + child + " and " + hexString);
-                errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
-                        HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
-                throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
+                if ( hexString.equals("") ) {
+                    System.out.println("Writing to register failed.");
+                    errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
+                            new ArrayList<>(), ""));
+                } else {
+                    System.out.println("Size mismatch between "
+                            + register[0] + ":" + child + " and " + hexString);
+                    errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
+                            HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
+                    throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
+                }
+                errorLogger.get(0).add(errorMessages);
             }
-            errorLogger.get(0).add(errorMessages);
         }
     }
 
@@ -422,10 +432,6 @@ public class RegisterList {
         return this.map;
     }
 
-    /**
-     * @param regName
-     * @return
-     */
     public Map getChildRegisterMap(String regName) {
         return this.childMap.get(regName);
     }

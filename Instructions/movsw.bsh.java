@@ -20,7 +20,7 @@ execute(registers, memory) {
         BigInteger x = new BigInteger(registers.get("ESI"), 16);
         BigInteger y = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.subtract(new BigInteger("2"));
-        BigInteger result1 = x.subtract(new BigInteger("2"));
+        BigInteger result1 = y.subtract(new BigInteger("2"));
 
         registers.set("ESI", calculator.binaryToHexString(result.toString(2), tokenX));
         registers.set("EDI", calculator.binaryToHexString(result1.toString(2), tokenY));

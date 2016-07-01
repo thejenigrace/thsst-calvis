@@ -9,11 +9,12 @@ execute(des, registers, memory) {
         int size = memory.getBitSize(des); 
         if ( size == 32 ) {
             // conversion to single precision
-            value = value.substring(12);
-
+            float floatValue = Float.parseFloat(value);
+            value = Integer.toHexString(Float.floatToIntBits(floatValue));
         } else if ( size == 64 ) {
             // conversion to double precision
-            value = value.substring(4);
+            Double doubleValue = Double.parseDouble(value);
+            value = Long.toHexString(Double.doubleToLongBits(doubleValue));
         }
         memory.write(des, value, des);
     }

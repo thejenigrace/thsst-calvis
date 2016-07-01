@@ -1,4 +1,4 @@
 execute(registers, memory) {
-    String value = "3FFEB17217F7D1CF79AC";
+    String value = String.valueOf(0.69314718055994529);
     registers.x87().push(value);
 }

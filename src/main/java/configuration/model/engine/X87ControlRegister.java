@@ -3,50 +3,18 @@ package configuration.model.engine;
 /**
  * Created by Goodwin Chua on 25/03/2016.
  */
-public class X87ControlRegister {
-
-    private char[] value;
+public class X87ControlRegister extends X87Register {
 
     public X87ControlRegister() {
-        this.value = new char[16];
-        clear();
-    }
-
-    public void clear() {
-        String binary = "0000001101111111";
-        if ( binary.length() == 16 ) {
-            this.value = binary.toCharArray();
-        }
+        super("0000001101111111", "CONTROL", 16);
     }
 
     public int getRoundingMode() {
         return Integer.parseInt(getRoundingControl(), 2);
     }
 
-    public String toHexString() {
-        Integer binaryValue = Integer.parseInt(new String(this.value), 2);
-        String hexString = Integer.toHexString(binaryValue);
-        while ( hexString.length() < 4 ) {
-            hexString = "0" + hexString;
-        }
-        return hexString;
-    }
-
-    public void setValue(String hexValue) {
-        if ( hexValue.length() == 4 ) {
-            // convert hex string to binary string
-            Integer i = Integer.parseInt(hexValue, 16);
-            String binaryString = Integer.toBinaryString(i);
-            while ( binaryString.length() < 16 ) {
-                binaryString = "0" + binaryString;
-            }
-            // store binary string to char[] value
-            this.value = binaryString.toCharArray();
-        }
-    }
-
     private String getRoundingControl() {
-        String binaryTop = new String(new char[]{value[4], value[5]});
+        String binaryTop = new String(new char[]{charArray[4], charArray[5]});
         return binaryTop;
     }
 
@@ -57,8 +25,8 @@ public class X87ControlRegister {
             binaryNumber = "0" + binaryNumber;
         }
 
-        value[4] = binaryNumber.charAt(0);
-        value[5] = binaryNumber.charAt(1);
+        charArray[4] = binaryNumber.charAt(0);
+        charArray[5] = binaryNumber.charAt(1);
     }
 
 }

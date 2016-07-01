@@ -29,8 +29,8 @@ execute(registers, memory) {
 }
 
 cmp(registers, memory, flags, calculator, tokenAX) {
-    String destination = calculator.hexToBinaryString(memory.read(registers.get("EDI"), 8), tokenAX);
-    String source = calculator.hexToBinaryString(memory.read(registers.get("ESI"), 8), tokenAX);
+    String source = calculator.hexToBinaryString(memory.read(registers.get("EDI"), 16), tokenAX);
+    String destination = calculator.hexToBinaryString(memory.read(registers.get("ESI"), 16), tokenAX);
 
     String result = "";
     int r = 0;
@@ -64,7 +64,7 @@ cmp(registers, memory, flags, calculator, tokenAX) {
     String d = new StringBuffer(result).reverse().toString();
 
     //FLAGS
-    String res = calculator.hexToBinaryString(d, tokenAX);
+    String res = d;
     BigInteger biR = new BigInteger(res, 2);
 
     flags.setCarryFlag(carry.toString());

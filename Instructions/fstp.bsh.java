@@ -6,16 +6,20 @@ execute(des, registers, memory) {
         }
     }
     else if ( des.isMemory() ) {
-        int size = memory.getBitSize(des);
+        int size = memory.getBitSize(des); 
         if ( size == 32 ) {
             // conversion to single precision
-            value = value.substring(12);
+            float floatValue = Float.parseFloat(value);
+            value = Integer.toHexString(Float.floatToIntBits(floatValue));
         } else if ( size == 64 ) {
             // conversion to double precision
-            value = value.substring(4);
+            Double doubleValue = Double.parseDouble(value);
+            value = Long.toHexString(Double.doubleToLongBits(doubleValue));
         } else if ( size == 80 ) {
-            // conversion to extended precision
-		}
+            // conversion to double precision
+            Double doubleValue = Double.parseDouble(value);
+            value = "0000" + Long.toHexString(Double.doubleToLongBits(doubleValue));
+        }
         memory.write(des, value, des);
     }
 }
