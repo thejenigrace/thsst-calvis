@@ -1,28 +1,104 @@
-execute(registers, memory) {   
-    String st0 = registers.get("ST0");
-    String st1 = registers.get("ST1");
-    
-    // add st0 + st1, store in result
-    String result = st0;
-    // set ST1 to result
-    registers.set("ST1", result);
-    // pop
-    registers.x87().pop();
+/*
+execute(src, registers, memory) {
+	Calculator c = new Calculator(registers, memory);
+    if ( src.isMemory() ) {
+		
+        int size = memory.getBitSize(src);
+        String value = memory.read(src, size);
+		double spValue = 0.0;
+        if ( size == 32 ) {
+            // conversion to extended precision
+			spValue = c.convertHexToSinglePrecision(value);
+			
+        } else if ( size == 64 ) {
+            // conversion
+			spValue = c.convertHexToDoublePrecision(value);
+        }
+		
+        String st0 = registers.get("ST0");
+        double stValue = c.convertHexToDoublePrecision(st0);
+		double resultingValue = stValue + spValue;
+		if(resultingValue > Math.pow(2,64)){
+			registers.mxscr.setOverflowFlag("1");
+		}
+		else if(resultingValue < Math.pow(2, 64) * -1){
+			registers.mxscr.setUnderflowFlag("1");
+		}
+		else{
+			System.out.println(resultingValue + " value");
+			registers.set("ST0", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+		}
+        
+		registers.x87().status().set("C3",'0');
+		registers.x87().status().set("C2",'0');
+		registers.x87().status().set("C0",'0');
+		registers.x87().pop();
+    }
 }
 
 execute(des, src, registers, memory) {
+	Calculator c = new Calculator(registers, memory);
     if ( des.isRegister() && src.isRegister() ) {
-        int desSize = registers.getBitSize(des);
-        int srcSize = registers.getBitSize(src);
-        if ( desSize == srcSize && desSize == 80 ) {
+        if ( registers.getBitSize(des) == registers.getBitSize(src) ) {
             String desValue = registers.get(des);
             String srcValue = registers.get(src);
-            // perform add
-            String result = desValue;
-            // store result to des
-            registers.set(des, result);
-            // pop
-            registers.x87().pop();
+			//String result = desValue;
+            //if(des.getValue().equals("ST0")){
+				
+			//}
+            if(src.getValue().equals("ST0")){
+				
+			}
+			else{
+				throw new IncorrectParameterException("FADD"); 
+			}
+			
+			double dbDes = c.convertHexToDoublePrecision(desValue);
+			double dbSrc = c.convertHexToDoublePrecision(srcValue);
+			
+			double resultingValue = dbSrc + dbDes;
+			
+			if(resultingValue > Math.pow(2,64)){
+				registers.mxscr.setOverflowFlag("1");
+			}
+			else if(resultingValue < Math.pow(2, 64) * -1){
+				registers.mxscr.setUnderflowFlag("1");
+			}
+			else{
+				//System.out.println(resultingValue + " value");
+				registers.set(des.getValue(), c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+			}
+		
+		registers.x87().status().set("C3",'0');
+		registers.x87().status().set("C2",'0');
+		registers.x87().status().set("C0",'0');
+		registers.x87().pop();
         }
     }
+}
+*/
+execute(registers, memory) {
+	Calculator c = new Calculator(registers, memory);
+			String desValue = registers.get("ST1");
+            String srcValue = registers.get("ST0");
+			double dbDes = c.convertHexToDoublePrecision(desValue);
+			double dbSrc = c.convertHexToDoublePrecision(srcValue);
+			
+			double resultingValue = dbSrc + dbDes;
+			
+			if(resultingValue > Math.pow(2,64)){
+				registers.mxscr.setOverflowFlag("1");
+			}
+			else if(resultingValue < Math.pow(2, 64) * -1){
+				registers.mxscr.setUnderflowFlag("1");
+			}
+			else{
+				//System.out.println(resultingValue + " value");
+				registers.set("ST1", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+			}
+		
+		registers.x87().status().set("C3",'0');
+		registers.x87().status().set("C2",'0');
+		registers.x87().status().set("C0",'0');
+		registers.x87().pop();
 }

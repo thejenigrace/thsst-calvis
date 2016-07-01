@@ -8,19 +8,14 @@ execute(des,src,registers,memory) {
         String desValue = registers.get(des);
         String srcValue = registers.get(src);
 
-        Long longValue = Long.parseLong(srcValue,16);
-        String binaryValue = Long.toBinaryString(longValue);
+        String srcBin = calculator.binaryZeroExtend(new BigInteger(srcValue, 16).toString(2), 128);
         srcValue = "";
-        srcValue = srcValue.concat(binaryValue.charAt(127));
-        srcValue = srcValue.concat(binaryValue.charAt(95));
-        srcValue = srcValue.concat(binaryValue.charAt(63));
-        srcValue = srcValue.concat(binaryValue.charAt(31));
+        srcValue = Character.toString(srcBin.charAt(127)) + Character.toString(srcBin.charAt(95))
+		+ Character.toString(srcBin.charAt(63)) + Character.toString(srcBin.charAt(31));
 
-        int missingZeroes = DWORD - srcValue.length();
-        for(int i = 0; i < missingZeroes; i++) {
-            srcValue = "0" + srcValue;
-        }
+		System.out.println(srcValue + " wow");
+		srcValue = calculator.binaryZeroExtend(srcValue, 32);
 
-        registers.set(des, srcValue);
+        registers.set(des, calculator.hexZeroExtend(new BigInteger(srcValue, 2).toString(2), des));
     }
 }

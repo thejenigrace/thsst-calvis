@@ -13,8 +13,10 @@ execute(des, src, registers, memory) {
 		
 	}
 	else{
-		desSize = memory.getBitSize(src);
-		
+		desSize = memory.getBitSize(des);
+		if(desSize == 0){
+			desSize = registers.getBitSize(src);
+		}
 	}
 
 	if(src.isRegister()){
@@ -33,16 +35,17 @@ execute(des, src, registers, memory) {
 		srcSize = desSize;
 	}
 
-	if(registers.getBitSize(des) == 128 && desSize == srcSize){
-		if(isRegisterDes){
-				registers.set(des, source);
-		}
-		else {
-				memory.write(src, source, desSize);
-		}
-		
+	if(desSize == srcSize && srcSize == 128){
+
+			if(isRegisterDes){
+					registers.set(des, source);
+			}
+			else {
+					memory.write(des, source, desSize);
+			}
 
 	}
+
 	
 	
 	

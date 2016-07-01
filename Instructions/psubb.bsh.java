@@ -14,6 +14,10 @@ execute(des, src, registers, memory) {
 	}
 	else{
 		srcSize = memory.getBitSize(src);
+		srcSize = memory.getBitSize(src);
+		if( srcSize == 0){
+		srcSize = registers.getBitSize(des);
+		}
 	}
 	String sourceReg = "";
 	String desStr = "";
@@ -23,38 +27,43 @@ execute(des, src, registers, memory) {
 		if(desSize == srcSize && (srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = registers.get(des);
 			srcStr = registers.get(src);
-			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
 		if((srcSize == 64  || srcSize == 128 ) && src.isMemory() ){
 			desStr = registers.get(des);
 			srcStr = memory.read(src, desSize);
-			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
+		registers.set(des, sourceReg);
 	}
 	if(des.isMemory()){
 		if(desSize == srcSize && ( srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
 			desStr = memory.read(des, desSize);
 			srcStr = registers.get(src);
-			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd);
+			sourceReg = executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
 		}
 	}
 }
 
-String executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfAdd){
+String executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex){
 	String resultingSub = "";
-	for(int x = 0; x < srcSize / 4; x + sizeOfHex){
+	for(int x = 0; x < srcSize / 4; x = x + sizeOfHex){
 		StringBuilder strToBuildDes = new StringBuilder();
 		StringBuilder strToBuildSrc = new StringBuilder();
 
 		for(int y = 0; y < sizeOfHex; y++){
-			strToBuildDes.append(desStr.charAt(x));
-			strToBuildSrc.append(srcStr.charAt(x));
+			strToBuildDes.append(desStr.charAt(x + y));
+			strToBuildSrc.append(srcStr.charAt(x + y));
 		}
 
-		BigInteger destination = new BigInteger(strToBuildDes).toString(),16);
-		BigInteger source = new BigInteger(strToBuildSrc).toString(),16);
-		destination = destination.add(negate(des, src, registers, memory, c, sizeOfHex, desStr));
-		resultingSub += c.hexZeroExtend( destination.toString(16).substring(destination.toString(16).length() % sizeOfHex), sizeOfHex);
+		BigInteger destination = new BigInteger((strToBuildDes).toString(),16);
+		BigInteger source = new BigInteger((strToBuildSrc).toString(),16);
+//		System.out.println("result sub source: " + new BigInteger(negate(des, src, registers, memory, c, sizeOfHex, desStr), 2).toString(16));
+		destination = destination.subtract(source);
+		destination = destination.multiply(new BigInteger("-1", 10));
+		resultingSub += c.hexZeroExtend(negate(des, src, registers, memory, c, sizeOfHex, destination.toString(16)), sizeOfHex);
+		System.out.println(resultingSub + " resultsss");
+//		resultingSub += c.hexZeroExtend( destination.toString(16).substring(destination.toString(16).length() % sizeOfHex), sizeOfHex);
 	}
 	return resultingSub;
 }
@@ -62,28 +71,18 @@ String executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcS
 String negate(des, src, registers, memory, c, sizeOfHex, desStr){
 	String source = "";
 	int borrow = 0;
-	String destination = c.hexToBinaryString(destStr, sizeOfHex);
-	String result = "";
-	int r = 0;
-
-	for(int x = 0; x < sizeOfHex; x++){
-		source += "0";
-	}
-
-	for(int i = sizeOfHex - 1; i >= 0; i--) {
-		r = Integer.parseInt(String.valueOf(source.charAt(i))) - Integer.parseInt(String.valueOf(destination.charAt(i)))  - borrow;
-		if( r < 0 ) {
-			r += 2;
-			result = result.concat(r.toString());
-
-			if( i == 0 ) {
-				carry = 1;
-			}
+	String destination = c.hexToBinaryString(desStr, sizeOfHex);
+	destination = c.binaryZeroExtend(destination, sizeOfHex * 4);
+	StringBuilder sb = new StringBuilder(destination);
+	
+	for(int x = 0; x < destination.length(); x++){
+		if(sb.charAt(x) == '1'){
+			sb.setCharAt(x, '0');
 		}
-		else {
-			borrow = 0;
-			result = result.concat(r.toString());
+		else{
+			sb.setCharAt(x, '1');
 		}
 	}
-	return new StringBuffer(result).reverse().toString();
+	
+	return new BigInteger(sb.toString(), 2).add(new BigInteger("1")).toString(16);
 }

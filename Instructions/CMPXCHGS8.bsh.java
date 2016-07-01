@@ -8,17 +8,18 @@ execute(des, registers, memory) {
 		int memSize = memory.getBitSize(des);
 		String memoryData = memory.read(des, memSize);
 		if ( memSize == 64 ){
-		if(src.isRegister() && registers.getBitSize(src) == registers.getBitSize(des)){
-		if(EAXRegister.equals(EDXRegister)){
-		memory.write(des, ECXRegister + EBXRegister, memSize);
-		ef.setZeroFlag("1");
-		}
-		else{
-		registers.set("EDX", memoryData.substring(0, 8));
-		registers.set("EAX", memoryData.substring(9, 16));
-		ef.setZeroFlag("1");
-		}
-		}
-		}
+
+			//if(src.isRegister() && registers.getBitSize(src) == registers.getBitSize(des)){
+				if((EAXRegister + EDXRegister).equals(memoryData)){
+					memory.write(des, ECXRegister + EBXRegister, memSize);
+					ef.setZeroFlag("1");
+				}
+				else{
+				registers.set("EDX", memoryData.substring(0, 8));
+				registers.set("EAX", memoryData.substring(8, 16));
+				ef.setZeroFlag("1");
+				}
+				//}
+			}
 		}
 		}

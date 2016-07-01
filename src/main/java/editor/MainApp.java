@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.

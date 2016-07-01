@@ -1,6 +1,7 @@
 execute(des,src,registers,memory) {
     int QWORD = 64;
     String srcValue;
+	String desValue;
     Calculator calculator = new Calculator(registers,memory);
 
     //TODO Need to set value into lower 64-bit of XMM Register
@@ -9,18 +10,15 @@ execute(des,src,registers,memory) {
     if(src.isMemory() && des.isRegister()) {
         srcValue = memory.read(src, QWORD);
 
-        String desValue = registers.get(des);
-        desValue = calculator.cutToCertainHexSize("getUpper", desValue, QWORD);
+        desValue = registers.get(des);
+        desValue = desValue.substring(0, 16);
 
         srcValue = desValue.concat(srcValue);
 
         registers.set(des, srcValue);
     } else if(src.isRegister() && des.isMemory()) {
-        srcValue = registers.get(src);
-
-        // Get the low quad-word of the register
-        srcValue = calculator.cutToCertainHexSize("getLower", srcValue, QWORD/4);
-
-        memory.write(des, srcValue, QWORD);
+        desValue = memory.read(des, 128);
+		srcValue = registers.get(src);
+        memory.write(des, desValue.substring(0, 16).concat(srcValue.substring(16,32)), QWORD * 2);
     }
 }

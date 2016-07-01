@@ -1,7 +1,7 @@
 execute(des, src, registers, memory) {
 	int desSize = 0;
 	int srcSize = 0;
-	int sizeOfHex = 4;
+	int sizeOfHex = 16;
 	Calculator c = new Calculator(registers, memory);
 	if(des.isRegister()){
 		desSize = registers.getBitSize(des);
@@ -62,7 +62,7 @@ String executeSub(des, src, registers, memory, c, desSize, srcSize, desStr, srcS
 		destination = destination.subtract(source);
 		destination = destination.multiply(new BigInteger("-1", 10));
 		resultingSub += c.hexZeroExtend(negate(des, src, registers, memory, c, sizeOfHex, destination.toString(16)), sizeOfHex);
-		System.out.println(resultingSub + " resultsss");
+		//System.out.println(resultingSub + " resultsss");
 //		resultingSub += c.hexZeroExtend( destination.toString(16).substring(destination.toString(16).length() % sizeOfHex), sizeOfHex);
 	}
 	return resultingSub;
@@ -85,28 +85,5 @@ String negate(des, src, registers, memory, c, sizeOfHex, desStr){
 	}
 	
 	return new BigInteger(sb.toString(), 2).add(new BigInteger("1")).toString(16);
-	
-	/*String result = "";
-	int r = 0;
 
-	for(int x = 0; x < sizeOfHex * 4; x++){
-		source += "0";
-	}
-
-	for(int i = sizeOfHex - 1; i >= 0; i--) {
-		r = Integer.parseInt(String.valueOf(source.charAt(i))) - Integer.parseInt(String.valueOf(destination.charAt(i)))  - borrow;
-		if( r < 0 ) {
-			r += 2;
-			result = result.concat(r.toString());
-
-			if( i == 0 ) {
-				carry = 1;
-			}
-		}
-		else {
-			borrow = 0;
-			result = result.concat(r.toString());
-		}
-	}
-	return new StringBuffer(result).reverse().toString();*/
 }

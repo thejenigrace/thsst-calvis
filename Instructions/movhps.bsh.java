@@ -7,20 +7,17 @@ execute(des,src,registers,memory) {
     //Memory to XMM: Destination-High DWORD cleared to 0
     //XMM to Memory: Destination-High DWORD should NOT changed
     if(src.isMemory() && des.isRegister()) {
-        srcValue = memory.read(src, QWORD);
+		srcValue = memory.read(src, QWORD);
 
-        String desValue = registers.get(des);
-        desValue = calculator.cutToCertainHexSize("getLower", desValue, QWORD);
+		desValue = registers.get(des);
+		desValue = desValue.substring(16, 32);
 
-        srcValue = srcValue.concat(desValue);
+		srcValue = srcValue.concat(desValue);
 
-        registers.set(des, srcValue);
+		registers.set(des, srcValue);
     } else if(src.isRegister() && des.isMemory()) {
-        srcValue = registers.get(src);
-
-        // Get the low quad-word of the register
-        srcValue = calculator.cutToCertainHexSize("getLower", srcValue, QWORD/4);
-
-        memory.write(des, srcValue, QWORD);
+		desValue = memory.read(des, 128);
+		srcValue = registers.get(src);
+		memory.write(des, srcValue.substring(0, 16).concat(desValue.substring(16,32)), QWORD * 2);
     }
 }
