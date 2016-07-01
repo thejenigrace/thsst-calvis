@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.65" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.RegistersController">
+<SplitPane dividerPositions="0.65" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.RegistersController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
+        <AnchorPane>
             <children>
-                <GridPane fx:id="gridPaneRegister" prefHeight="361.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <GridPane fx:id="gridPaneRegister" prefHeight="404.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                     </columnConstraints>
@@ -17,10 +22,12 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
+                        <!--<ComboBox fx:id="conversionTypeComboBox" maxWidth="Infinity"/>-->
                         <TreeTableView fx:id="treeTableViewRegister" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TreeTableColumn fx:id="colRegisterName" maxWidth="80" minWidth="80" text="Register" />
-                                <TreeTableColumn fx:id="colRegisterValue" text="Value" />
+                                <TreeTableColumn fx:id="colRegisterHexValue" text="Hex Value" />
+                                <TreeTableColumn fx:id="colRegisterInfo" maxWidth="80" minWidth="80" text="Info" />
                             </columns>
                             <columnResizePolicy>
                                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -30,18 +37,18 @@
                 </GridPane>
             </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0">
+        <AnchorPane>
             <children>
                 <GridPane prefHeight="190.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  <ColumnConstraints />
+                        <ColumnConstraints />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TableView fx:id="tableViewFlags2" prefHeight="165.0"  stylesheets="@../css/flags.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <TableView fx:id="tableViewFlags2" prefHeight="165.0" stylesheets="@../css/flags.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <columns>
                                 <TableColumn fx:id="flagsName2" prefWidth="110.0" text="MXSCR" />
                                 <TableColumn fx:id="flagsValue2" maxWidth="15.0" minWidth="15.0" text="" />
@@ -50,7 +57,7 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <TableView fx:id="tableViewFlags1" prefHeight="165.0"  stylesheets="@../css/flags.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <TableView fx:id="tableViewFlags1" prefHeight="165.0" stylesheets="@../css/flags.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <columns>
                                 <TableColumn fx:id="flagsName1" prefWidth="110.0" text="EFLAGS" />
                                 <TableColumn fx:id="flagsValue1" maxWidth="15.0" minWidth="15.0" text="" />
