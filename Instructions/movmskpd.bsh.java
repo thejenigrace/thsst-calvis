@@ -8,28 +8,25 @@ execute(des,src,registers,memory) {
         String desValue = registers.get(des);
         String srcValue = registers.get(src);
 
-        String firstHex = "" + srcValue.charAt(24);
-        String secondHex = "" + srcValue.charAt(0);
+        String hex127 = "" + srcValue.charAt(0);
+        String hex63 = "" + srcValue.charAt(16);
 
-        Long longFirstHex = Long.parseLong(firstHex, 16);
-        String binaryFirstHex = Long.toBinaryString(longFirstHex);
+        Long long127 = Long.parseLong(hex127, 16);
+        String binary127 = Long.toBinaryString(long127);
 
-        Long longSecondHex = Long.parseLong(secondHex, 16);
-        String binarySecondHex = Long.toBinaryString(longSecondHex);
+        Long long63 = Long.parseLong(hex63, 16);
+        String binary63 = Long.toBinaryString(long63);
 
         // Long longValue = Long.parseLong(srcValue,16);
         // BigInteger biValue = new BigInteger(srcValue, 16);
         // String binaryValue = Long.toBinaryString(longValue);
         // String binaryValue = biValue.toString(2);
         srcValue = "";
-        srcValue = srcValue.concat("" + binaryFirstHex.charAt(0));
-        srcValue = srcValue.concat("" + binarySecondHex.charAt(0));
+        srcValue = srcValue.concat(calculator.binaryZeroExtend(binary127, 4).substring(0,1));
+        srcValue = srcValue.concat(calculator.binaryZeroExtend(binary63, 4).substring(0,1));
 
-        int missingZeroes = DWORD/4 - srcValue.length();
-        for(int i = 0; i < missingZeroes; i++) {
-            srcValue = "0" + srcValue;
-        }
+        Long longSrcValue = Long.parseLong(srcValue, 2);
 
-        registers.set(des, srcValue);
+        registers.set(des, Long.toHexString(longSrcValue));
     }
 }

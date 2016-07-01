@@ -1,18 +1,18 @@
 execute(s,t,registers,memory) {
-  int DWORD = 32;
+  int QWORD = 64;
   Calculator calculator = new Calculator(registers,memory);
   EFlags eFlags = registers.getEFlags();
   String sValue = registers.get(s);
   String tValue;
   if(t.isRegister()) {
     tValue = registers.get(t);
-    tValue = calculator.cutToCertainHexSize("getLower",tValue,DWORD/4);
+    tValue = calculator.cutToCertainHexSize("getLower",tValue,QWORD/4);
   } else if(t.isMemory()) {
-    tValue = memory.read(t,DWORD);
+    tValue = memory.read(t,QWORD);
   }
 
   // Get the sValue from 0 to 31 bit
-  sValue = calculator.cutToCertainHexSize("getLower",sValue,DWORD/4);
+  sValue = calculator.cutToCertainHexSize("getLower",sValue,QWORD/4);
 
   double doubleS = calculator.convertHexToDoublePrecision(sValue);
   double doubleT = calculator.convertHexToDoublePrecision(tValue);

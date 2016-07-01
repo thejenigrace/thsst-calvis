@@ -25,7 +25,7 @@ execute(des,src,registers,memory) {
 			srcValue = memory.read(src, desBitSize);
 	}
 
-	if( des.isRegister() && desBitSize == 128) {
+	if( des.isRegister() ) {
 		String effectiveAddress = src.getValue();
 		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
 		System.out.println(effectiveAddress);
@@ -35,8 +35,7 @@ execute(des,src,registers,memory) {
 			|| (src.isRegister() && srcHexSize == 128 )){
 			registers.set(des, srcValue);
 		}
-	}
-	else if(des.isMemory()) {
+	} else if( des.isMemory() ) {
 		String effectiveAddress = des.getValue();
 		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
 		if(!isDesSizeNotNull && effectiveAddress.substring(effectiveAddress.length() - 1).equals("0")){

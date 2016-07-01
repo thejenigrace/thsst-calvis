@@ -1,27 +1,25 @@
 execute(des,src,registers,memory) {
-    int desBitSize;
-    int desHexSize;
+    int desBitSize = 128;
+    int desHexSize = 32;
     String srcValue;
 
-    if(des.isRegister()) {
-        desBitSize = registers.getBitSize(des);
-        desHexSize = registers.getHexSize(des);
-    } else if(des.isMemory()) {
-        desBitSize = memory.getBitSize(des);
-        desHexSize = memory.getHexSize(des);
-    }
-
-    if(src.isRegister()) {
+    // Check if SOURCE is either XMM or m128
+    if( src.isRegister() ) {
         srcValue = registers.get(src);
-    } else if(src.isMemory()) {
+    } else if( src.isMemory() ) {
         srcValue = memory.read(src,desBitSize);
     }
 
-    if(des.isRegister()) {
+    // Check if DESTINATION is either XMM or m128
+    if( des.isRegister() ) {
         System.out.println("srcValue = " + srcValue);
         registers.set(des, srcValue);
-    } else if(des.isMemory()) {
-        System.out.println("srcValue = " + srcValue);
-        memory.write(des, srcValue, des);
+    } else if( des.isMemory() ) {
+        String desEffectiveAddress = memory.removeSizeDirectives(des.getValue());
+        System.out.println("desEffectiveAddress = " + desEffectiveAddress);
+        if(desEffectiveAddress.substring(desEffectiveAddress.length() - 1).equals("0")) {
+            System.out.println("srcValue = " + srcValue);
+            memory.write(des, srcValue, desBitSize);
+        }
     }
 }

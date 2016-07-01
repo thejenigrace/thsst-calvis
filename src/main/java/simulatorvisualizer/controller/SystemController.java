@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class SystemController {
 
-    static long SIMULATION_DELAY = 1500;
+    static long SIMULATION_DELAY = 500;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;

@@ -117,6 +117,8 @@ execute(des,src,op3,registers,memory) {
   double doubleDes = calculator.convertHexToDoublePrecision(desValue);
   double doubleSrc = calculator.convertHexToDoublePrecision(srcValue);
 
+    System.out.println("d: " + doubleDes + " _ s: " + doubleSrc);
+
   String operand = op3.getValue();
   int intOperand = Integer.parseInt(operand,16);
   System.out.println("intOperand = " + intOperand);

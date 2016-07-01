@@ -18,6 +18,8 @@ execute(des,src,op3,registers,memory) {
   float floatDes = calculator.convertHexToSinglePrecision(desValue);
   float floatSrc = calculator.convertHexToSinglePrecision(srcValue);
 
+  System.out.println("d: " + floatDes + " _ s: " + floatSrc);
+
   String operand = op3.getValue();
   int intOperand = Integer.parseInt(operand,16);
   System.out.println("intOperand = " + intOperand);

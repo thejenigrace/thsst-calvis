@@ -6,12 +6,23 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed GP Instructions">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed SSE Instructions">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpsd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpsd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpss.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpss.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/comisd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/comisd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcom.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficom.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movapd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movapd.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movaps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movaps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movmskps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movmskps.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movmskpd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movmskpd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movsd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movsd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movupd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movupd.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movups.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movups.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pmaddwd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pmaddwd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ucomisd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ucomisd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -447,7 +458,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Instructions/psubq.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/controller/FileHandlerController.java" />
@@ -498,6 +508,7 @@
         <option value="$PROJECT_DIR$/Instructions/fidiv.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/fidivr.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
       </list>
     </option>
   </component>
@@ -566,8 +577,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -588,7 +598,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -965,12 +976,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00063" summary="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator">
-      <created>1455973719936</created>
-      <option name="number" value="00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1455973719937</updated>
-    </task>
     <task id="LOCAL-00064" summary="Fix DIV &amp; IDIV Instructions">
       <created>1455974811899</created>
       <option name="number" value="00064" />
@@ -1259,7 +1264,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467153207086</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Fixed SSE Instructions">
+      <created>1467221004183</created>
+      <option name="number" value="00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1467221004184</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1288,28 +1299,28 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3046632" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2894309" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24868421" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39210525" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24736843" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31709844" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18903089" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39736843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39736843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3046632" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39210525" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32520324" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1354,7 +1365,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix Play Speed Settings" />
     <MESSAGE value="Fix Settings &amp; Loader" />
     <MESSAGE value="Added MMX Comparison Instructions" />
     <MESSAGE value="Added PCMPGT(B/W/D) Instructions" />
@@ -1379,7 +1389,8 @@
     <MESSAGE value="CALVIS version 1.0.7" />
     <MESSAGE value="Fixed GP Instructions (Ivan)" />
     <MESSAGE value="Fixed GP Instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed GP Instructions" />
+    <MESSAGE value="Fixed SSE Instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed SSE Instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1400,7 +1411,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPushException.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/ChoiceBoxLogger.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePath.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathHandler.java" />
@@ -1683,19 +1693,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Memory/config.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="545" column="18" selection-start-line="545" selection-start-column="18" selection-end-line="545" selection-end-column="18" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12295082">
+          <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Memory/config.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14754099">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
         </state>
       </provider>
     </entry>
