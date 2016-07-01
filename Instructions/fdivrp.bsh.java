@@ -6,7 +6,7 @@ execute(registers, memory) {
 			double dbDes = c.convertHexToDoublePrecision("ST1");
 			double dbSrc = c.convertHexToDoublePrecision("ST0");
 			
-			double resultingValue = dbSrc \ dbDes;
+			double resultingValue = dbSrc / dbDes;
 			
 			if(resultingValue > Math.pow(2,64)){
 				registers.mxscr.setOverflowFlag("1");
