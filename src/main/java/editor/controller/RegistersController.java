@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -57,10 +58,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 p.getValue().getValue().getName()
         ));
         colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-               p.getValue().getValue().getValue().toString()
+                p.getValue().getValue().getValue().toString()
         ));
         colRegisterInfo.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-               convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
+                convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
         ));
 
         flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
@@ -70,12 +71,22 @@ public class RegistersController extends AssemblyComponent implements Initializa
         flagsValue2.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
     }
 
+
     public String convert(String registerName, String hexValue) {
         System.out.println(registerName + ": " + hexValue);
 
-        Integer integer = Integer.parseInt(hexValue, 16);
+        String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
+        String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
 
-        return integer.toString();
+        if ( Arrays.asList(gpRegisters).contains(registerName) ) {
+            Integer integerValue = Integer.parseInt(hexValue, 16);
+            return integerValue.toString();
+        } else if ( Arrays.asList(mmxRegisters).contains(mmxRegisters) ) {
+            Long longValue = Long.parseLong(hexValue, 16);
+            return longValue.toString();
+        }
+
+        return "";
     }
 
     @Override
@@ -86,13 +97,13 @@ public class RegistersController extends AssemblyComponent implements Initializa
             ObservableList<Register> registers = FXCollections.observableArrayList(map.values());
             TreeItem<Register> dummyRoot = new TreeItem<>();
 
-            for (Register rMother : registers) {
+            for ( Register rMother : registers ) {
                 TreeItem<Register> motherRegister = new TreeItem<>(rMother);
                 Map childMap = this.sysCon.getRegisterState().getChildRegisterMap(rMother.getName());
 
-                if (childMap != null) {
+                if ( childMap != null ) {
                     ObservableList<Register> childRegisters = FXCollections.observableArrayList(childMap.values());
-                    for (Register rChild : childRegisters) {
+                    for ( Register rChild : childRegisters ) {
                         motherRegister.getChildren().add(new TreeItem<>(rChild));
                     }
                 }
@@ -114,7 +125,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
             flagList2 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
             tableViewFlags2.setItems(flagList2);
 
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
     }
