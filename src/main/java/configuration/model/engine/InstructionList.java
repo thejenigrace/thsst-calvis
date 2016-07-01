@@ -335,6 +335,7 @@ public class InstructionList {
         sb.append("import configuration.model.engine.Calculator;");
         sb.append("import configuration.model.exceptions.JumpOutOfBoundsException;");
         sb.append("import configuration.model.exceptions.StackPopException;");
+        sb.append("import configuration.model.exceptions.InvalidArithmeticOperandException;");
         sb.append("import java.math.BigInteger;");
         sb.append("import javafx.application.Platform;");
         sb.append("import java.util.ArrayList;");

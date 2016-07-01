@@ -1,6 +1,4 @@
 execute(des, registers, memory) {
-    Calculator calculator = new Calculator(registers, memory);
-    
     String value = registers.x87().peek();
     if ( des.isRegister() ) {
         if ( registers.getBitSize(des) == 80 ) {
@@ -8,22 +6,15 @@ execute(des, registers, memory) {
         }
     }
     else if ( des.isMemory() ) {
-        int size = memory.getBitSize(des);
-        double convertedValue;
-
+        int size = memory.getBitSize(des); 
         if ( size == 32 ) {
             // conversion to single precision
-            convertedValue = calculator.convertHexToSinglePrecision(value);
-            value = calculator.convertSinglePrecisionToHexString(convertedValue);
-
-            value = value.substring(12);
-
+            float floatValue = Float.parseFloat(value);
+            value = Integer.toHexString(Float.floatToIntBits(floatValue));
         } else if ( size == 64 ) {
             // conversion to double precision
-            convertedValue = calculator.convertHexToDoublePrecision(value);
-            value = calculator.convertDoublePrecisionToHexString(convertedValue);
-
-            value = value.substring(4);
+            Double doubleValue = Double.parseDouble(value);
+            value = Long.toHexString(Double.doubleToLongBits(doubleValue));
         }
         memory.write(des, value, des);
     }

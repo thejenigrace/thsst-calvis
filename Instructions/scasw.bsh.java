@@ -57,7 +57,7 @@ cmp(registers, memory, flags, calculator, tokenEDI, tokenAX) {
     String d = new StringBuffer(result).reverse().toString();
 
     //FLAGS
-    String res = calculator.hexToBinaryString(d, tokenAX);
+    String res = d;
     BigInteger biR = new BigInteger(res, 2);
 
     flags.setCarryFlag(carry.toString());

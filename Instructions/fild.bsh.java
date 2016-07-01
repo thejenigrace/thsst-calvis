@@ -1,23 +1,26 @@
 execute(src, registers, memory) {
-    Calculator calculator = new Calculator(registers, memory);
-
     if ( src.isMemory() ) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
-        double convertedValue;
 
-        if ( size == 16 ) {
-            // conversion to extended precision
-            value = value.substring(16);
-        } else if ( size == 32 ) {
-            // conversion
-            convertedValue = calculator.convertHexToSinglePrecision(value);
-            value = calculator.convertSinglePrecisionToHexString(convertedValue);
-        } else if ( size == 64 ) {
-            // conversion
-            convertedValue = calculator.convertHexToDoublePrecision(value);
-            value = calculator.convertDoublePrecisionToHexString(convertedValue);
+        BigInteger convertedValue = new BigInteger(value, 16);
+        String binaryValue = convertedValue.toString(2);
+
+        // make the binary value's length divisble by 4 
+        while ( binaryValue.length() % 4 != 0 ) {
+            binaryValue = "0" + binaryValue;
         }
-        registers.x87().push(value);
+
+        // get the sign of the binary value
+        String sign = binaryValue.charAt(0) + "";
+
+        // sign extend to 64 bits
+        while ( binaryValue.length() < 64 ) {
+            binaryValue = sign + binaryValue;
+        }
+
+        long l = new BigInteger(binaryValue, 2).longValue();
+
+        registers.x87().push(l + "");
     }
 }

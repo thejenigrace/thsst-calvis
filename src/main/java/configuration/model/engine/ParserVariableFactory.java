@@ -130,6 +130,9 @@ public class ParserVariableFactory {
                                         // declare as 80 bit extended precision
 
                                         // NOT YET IMPLEMENTED
+                                        Double doubleValue2 = Double.parseDouble(tokenValue);
+                                        representation = "0000" + Long.toHexString(Double.doubleToLongBits
+                                                (doubleValue2));
                                         break;
                                     default:
                                         exceptions.add(new DataTypeMismatchException(labelName.getValue(),

@@ -56,7 +56,7 @@ public class CalvisFormattedInstruction {
                 case 0:
                     if ( name.equalsIgnoreCase("printf") ||
                             name.equalsIgnoreCase("scanf") || name.equalsIgnoreCase("cls") ) {
-                        consoleController.attachCALVISInstruction(this);
+                        consoleController.attachCalvisInstruction(this);
                         this.console = consoleController;
                         this.ins.consoleExecute(registers, memory, consoleController);
                     } else {

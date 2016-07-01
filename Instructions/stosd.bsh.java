@@ -16,6 +16,10 @@ execute(registers, memory) {
         BigInteger x = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.subtract(new BigInteger("4"));
 
-        registers.set(token, calculator.binaryToHexString(result.toString(2), token));
+        if ( result.signum() == -1 ) {
+            registers.set(token, "0");
+        } else {
+            registers.set(token, calculator.binaryToHexString(result.toString(2), token));
+        }
     }
 }
