@@ -336,7 +336,10 @@ public class InstructionList {
         sb.append("import configuration.model.exceptions.JumpOutOfBoundsException;");
         sb.append("import configuration.model.exceptions.StackPopException;");
         sb.append("import configuration.model.exceptions.InvalidArithmeticOperandException;");
+        sb.append("import configuration.model.exceptions.IncorrectParameterException;");
+        sb.append("import configuration.model.exceptions.ValueExceedException;");
         sb.append("import java.math.BigInteger;");
+        sb.append("import java.math.BigDecimal;");
         sb.append("import javafx.application.Platform;");
         sb.append("import java.util.ArrayList;");
         sb.append("import java.util.HashMap;");

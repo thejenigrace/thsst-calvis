@@ -47,7 +47,7 @@ execute(des, src, registers, memory) {
 			}
 		}
 
-		resultingHexAdd += c.doublePrecisionFloatingPointToHex(floatValuesResult[1]);
+		resultingHexAdd += c.convertDoublePrecisionToHexString(floatValuesResult[1]);
 		registers.set(des, destination.substring(0,16) + resultingHexAdd);
 	}
 }

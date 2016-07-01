@@ -13,8 +13,8 @@ execute(des,src,ctr,registers,memory) {
         desHexSize = registers.getHexSize(des);
         desValue = registers.get(des);
     }
-    else if( des.isMemory() && (memory.getBitSize(des) == 0 || memory.getBitSize(des) == 16) ) {
-        desBitSize = 16;
+    else if( des.isMemory() && (memory.getBitSize(des) == 0 || memory.getBitSize(des) == 32) ) {
+        desBitSize = 32;
         desHexSize = 4;
         desValue = memory.read(des, desBitSize);
 

@@ -38,11 +38,11 @@ execute(des, src, registers, memory) {
 		floatValuesSrc[0] = c.hexToDoublePrecisionFloatingPoint(source.substring(0,16));
 		floatValuesSrc[1] = c.hexToDoublePrecisionFloatingPoint(source.substring(16,32));
 		for(int x = 0; x < floatValuesDes.length; x++){
-			floatValuesResult[x] = (floatValuesDes[x] \ floatValuesSrc[x]);
+			floatValuesResult[x] = (floatValuesDes[x] / floatValuesSrc[x]);
 		}
 
-		resultingHexAdd += c.doublePrecisionFloatingPointToHex(floatValuesResult[0]);
-		resultingHexAdd += c.doublePrecisionFloatingPointToHex(floatValuesResult[1]);
+		resultingHexAdd += c.convertDoublePrecisionToHexString(floatValuesResult[0]);
+		resultingHexAdd += c.convertDoublePrecisionToHexString(floatValuesResult[1]);
 		registers.set(des, resultingHexAdd);
 	}
 }

@@ -32,22 +32,23 @@ execute(des, src, registers, memory) {
 		}
 
 		else if(!isRegisterSrc){
-			source = memory.read(src, 32);
+			source = memory.read(src, 128);
 		}
 
-		floatValuesSrc = c.HexToSinglePrecisionFloatingPointSingle(source);
+		floatValuesSrc = c.HexToSinglePrecisionFloatingPointSingle(source.substring(24,32));
 
 		for(int x = 0; x < 3 ; x++){
 			floatValuesResult[x] = (floatValuesDes[x]);
 		}
 
-		if(floatValuesDes[3] <= floatValuesSrc[3]){
+		if(floatValuesDes[3] <= floatValuesSrc){
 			floatValuesResult[3] = floatValuesDes[3];
 		}
 		else{
-			floatValuesResult[3] = floatValuesSrc[3];
+			floatValuesResult[3] = floatValuesSrc;
 		}
-		resultingHexAdd = c.SinglePrecisionFloatingPointToHex(floatValuesResult);
+		
+		resultingHexAdd = c.hexZeroExtend(c.SinglePrecisionFloatingPointToHexSingle(floatValuesResult[0]), 8) + c.hexZeroExtend(c.SinglePrecisionFloatingPointToHexSingle(floatValuesResult[1]), 8) +  c.hexZeroExtend(c.SinglePrecisionFloatingPointToHexSingle(floatValuesResult[2]), 8) + c.hexZeroExtend(c.SinglePrecisionFloatingPointToHexSingle(floatValuesResult[3]), 8);
 		registers.set(des, resultingHexAdd);
 	}
 }

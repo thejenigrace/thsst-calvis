@@ -25,12 +25,13 @@ execute(des, src, registers, memory) {
 		resultingHex = destination;
 		for(int x = 0; x < (counter); x++){
 			StringBuilder sb = new StringBuilder(resultingHex);
-			String temp = resultingHex.substring(0, 32 - ((x + 1) * 2));
+			String temp = resultingHex.substring(0, 30);
+			System.out.println(32 - ((x + 1) * 2) + " num");
 			temp = "00" + temp;
 			resultingHex = temp;
 		}
 
-
+		System.out.println(resultingHex + " temp :)");
 		registers.set(des, resultingHex);
 	}
 	

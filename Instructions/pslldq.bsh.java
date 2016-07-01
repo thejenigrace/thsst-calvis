@@ -27,7 +27,7 @@ execute(des, src, registers, memory) {
 		for(int x = 0; x < (counter); x++){;
 			temp = resultingHex.substring(2 , 32);
 			StringBuilder sb = new StringBuilder(temp);
-			sb.append( "00");
+			sb.append("00");
 			resultingHex = sb.toString();
 		System.out.println(resultingHex);
 		}

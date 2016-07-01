@@ -15,7 +15,7 @@ execute(des,src,ctr,registers,memory) {
     }
 	
     if( (src.isRegister() && registers.getBitSize(src) == 32 )){
-        srcValue = registers.get(src);
+        srcValue = registers.get(src).substring(4, 8);
         srcBitSize = registers.getBitSize(src);
         srcHexSize = registers.getHexSize(src);
     }
@@ -24,33 +24,27 @@ execute(des,src,ctr,registers,memory) {
         srcHexSize = memory.getHexSize(src);
 		srcValue = memory.read(src, srcBitSize);
 	}
-	
+
+	else if(src.isMemory() && memory.getBitSize(src) == 0 ){
+		srcBitSize = desBitSize;
+		srcHexSize =desHexSize;
+		srcValue = memory.read(src, srcBitSize);
+	}
     if(registers.getBitSize(des) == 64 || registers.getBitSize(des) == 128 ){
         int count = 0 ;
-
-        if(src.isRegister()){
-            if(desBitSize == 64 && ctr.isHex()){
-                count = new BigInteger(ctr.getValue(), 16).intValue() % 4;
-            }
-            else if(desBitSize == 128 && ctr.isHex()){
-                count = new BigInteger(ctr.getValue(), 16).intValue() % 8;
-            }
+		if(desBitSize == 64 && ctr.isHex()){
+            count = new BigInteger(ctr.getValue(), 16).intValue() % 4;
         }
-        System.out.println(count);
+        else if(desBitSize == 128 && ctr.isHex()){
+            count = new BigInteger(ctr.getValue(), 16).intValue() % 8;
+        }
+
         StringBuilder myResultString = new StringBuilder(desValue);
-        System.out.println(myResultString.toString() + " nganga");
-        for(int y = count * 4; y < count * 4 + 4; y++){
-            myResultString.setCharAt(y, srcValue.charAt(y % 4));
+//		System.out.println(count + " count");
+        for(int y = 0; y < 4; y++){
+            myResultString.setCharAt(count * 4 + y, srcValue.charAt(y));
         }
+		registers.set(des, myResultString.toString());
 
-		System.out.println(myResultString.toString() + " icant wait");
-        if(c.checkIfInGPRegisterLow(effectiveAddress)){
-            if( des.isRegister()){
-                registers.set(des, myResultString.toString());
-            }
-        }
-        else if(des.isMemory() && srcBitSize == 16){
-            memory.write(des, myResultString.toString(), desBitSize);
-        }
     }
 }

@@ -35,7 +35,7 @@ execute(des, src, registers, memory) {
 			String strSource = source.substring(x * 16, x * 16 + 16);
 			double longSource = c.hexToDoublePrecisionFloatingPoint(strSource);
 	        double result = Math.sqrt(longSource);
-			resultingHex += c.doublePrecisionFloatingPointToHex(result);
+			resultingHex += c.convertDoublePrecisionToHexString(result);
 			System.out.println(resultingHex);
 		}
 		registers.set(des, resultingHex);

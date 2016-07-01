@@ -164,28 +164,52 @@ public class Calculator {
         return val;
     }
 
+//    public String computeAveragePackedHex(String destination, String source, int count) {
+//        String convertedString = "";
+//        String desBit = "";
+//        String srcBit = "";
+//        BigInteger des = new BigInteger(destination, 16);
+//        BigInteger src = new BigInteger(source, 16);
+//        srcBit = binaryZeroExtend(src.toString(2), 128);
+//        desBit = binaryZeroExtend(des.toString(2), 128);
+//
+//        int a = 0;
+//        BigInteger addPlusOne = BigInteger.valueOf(new Integer(1).intValue());
+//        for ( int x = 0; x < 16; x++ ) {
+//            BigInteger desBitBigInt = new BigInteger(desBit.substring(a, a + 8), 2);
+//            BigInteger srcBitBigInt = new BigInteger(srcBit.substring(a, a + 8), 2);
+//            String miniResult = binaryZeroExtend(
+//                    new BigInteger(binaryZeroExtend(desBitBigInt.add(srcBitBigInt).add(addPlusOne).toString(2), 8), 2)
+//                            .shiftRight(1).toString(2), 8);
+//            a += count;
+//
+//            convertedString += binaryZeroExtend(new BigInteger(miniResult, 2).toString(16), count / 4);
+//            System.out.println(convertedString + " string");
+//        }
+//        return convertedString.toUpperCase();
+//    }
+
     public String computeAveragePackedHex(String destination, String source, int count) {
-        String convertedString = "";
-        String desBit = "";
-        String srcBit = "";
-        BigInteger des = new BigInteger(destination, 16);
-        BigInteger src = new BigInteger(source, 16);
-        srcBit = binaryZeroExtend(src.toString(2), 128);
-        desBit = binaryZeroExtend(des.toString(2), 128);
+//        ArrayList<String> arrDes = new ArrayList<>();
+//        ArrayList<String> arrSrc = new ArrayList<>();
+        String result = "";
+        System.out.println(destination + " destination");
 
-        int a = 0;
-        BigInteger addPlusOne = BigInteger.valueOf(new Integer(1).intValue());
-        for ( int x = 0; x < 16; x++ ) {
-            BigInteger desBitBigInt = new BigInteger(desBit.substring(a, a + 8), 2);
-            BigInteger srcBitBigInt = new BigInteger(srcBit.substring(a, a + 8), 2);
-            String miniResult = binaryZeroExtend(
-                    new BigInteger(binaryZeroExtend(desBitBigInt.add(srcBitBigInt).add(addPlusOne).toString(2), 8), 2)
-                            .shiftRight(1).toString(2), 8);
-            a += count;
+        for(int x = 0; x < destination.length(); x = x + count){
+//            System.out.println(x + count + " : count");
+            String subDes = destination.substring(x, x + count);
+            String subSrc = source.substring(x, x + count);
+//            System.out.println(subDes);
+//            System.out.println(subSrc + " srccccccc");
+            BigInteger des = new BigInteger(subDes, 16);
+            BigInteger src = new BigInteger(subSrc, 16);
+            BigInteger res = des.add(src);
+            res = res.divide(new BigInteger("2", 16));
+            result += hexZeroExtend(res.toString(16), count);
 
-            convertedString += binaryZeroExtend(new BigInteger(miniResult, 2).toString(16), count / 4);
         }
-        return convertedString.toUpperCase();
+//        System.out.println(result + " result");
+        return result;
     }
 
     public long convertToSignedInteger(BigInteger hexValue, int bitSize) {
@@ -553,6 +577,35 @@ public class Calculator {
             }
         }
         return value;
+    }
+
+    public String hexFExtend(String value, int count) {
+        if ( value.length() > count ) {
+            return value.substring(1);
+        } else {
+            int y = count - value.length();
+            for ( int x = 0; x < y; x++ ) {
+                value = "F" + value;
+            }
+        }
+        return value;
+    }
+
+    public String binaryZeroFPExtend(String value){
+        if ( value.length() > 80 ) {
+            return value.substring(1);
+        } else {
+            String sign = value.substring(0,1);
+            String subs = value.substring(1);
+            int y = 79 - value.length();
+            for ( int x = 0; x < y; x++ ) {
+                subs = "0" + subs;
+            }
+            subs = sign + subs;
+            return subs;
+        }
+
+
     }
 
     //temporary something

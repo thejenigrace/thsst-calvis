@@ -9,4 +9,7 @@ public class IncorrectParameterException extends Exception {
         super("Syntax Error: incorrect parameter/s provided for instruction: " + name + " at line number: " + line);
     }
 
+    public IncorrectParameterException(String name) {
+        super("Syntax Error: incorrect parameter/s provided for instruction: " + name + ".");
+    }
 }

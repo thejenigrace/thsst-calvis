@@ -25,8 +25,13 @@ execute(des,src,registers,memory) {
 
         if(desSize == 128){
             if((src.isRegister() && srcSize == 128) || src.isMemory() && (srcSize == 0 || srcSize == 128)){
-                registers.set(des, c.computeAveragePackedHex(destination, source, 16));
+                registers.set(des, c.computeAveragePackedHex(destination, source, 4));
             }
         }
+		else if(desSize == 64){
+			if((src.isRegister() && srcSize == 64) || src.isMemory() && (srcSize == 0 || srcSize == 64)){
+				registers.set(des, c.computeAveragePackedHex(destination, source, 4));
+			}
+		}
 	}
 }

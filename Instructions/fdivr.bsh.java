@@ -17,7 +17,7 @@ execute(src, registers, memory) {
 		
         String st0 = registers.get("ST0");
         double stValue = c.convertHexToDoublePrecision(st0);
-		double resultingValue =  spValue / stValue;
+		double resultingValue =  spValue \ stValue;
 		if(resultingValue > Math.pow(2,64)){
 			registers.mxscr.setOverflowFlag("1");
 		}
@@ -55,7 +55,7 @@ execute(des, src, registers, memory) {
 			double dbDes = c.convertHexToDoublePrecision(desValue);
 			double dbSrc = c.convertHexToDoublePrecision(srcValue);
 			
-			double resultingValue = dbSrc / dbDes;
+			double resultingValue = dbSrc \ dbDes;
 			
 			if(resultingValue > Math.pow(2,64)){
 				registers.mxscr.setOverflowFlag("1");

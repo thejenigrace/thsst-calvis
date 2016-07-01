@@ -32,10 +32,10 @@ execute(des, src, registers, memory) {
 		}
 
 		else if(!isRegisterSrc){
-			source = memory.read(src, 32);
+			source = memory.read(src, 128);
 		}
 
-		floatValuesSrc = c.HexToSinglePrecisionFloatingPointSingle(source);
+		floatValuesSrc = c.HexToSinglePrecisionFloatingPointSingle(source.substring(24,32));
 
 		for(int x = 0; x < 3 ; x++){
 			floatValuesResult[x] = (floatValuesDes[x]);
