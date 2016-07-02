@@ -1,14 +1,15 @@
 package editor.controller;
 
 import configuration.controller.ConfiguratorEnvironment;
-import editor.MainApp;
-import editor.model.TextEditor;
-import simulatorvisualizer.controller.SystemController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import editor.MainApp;
+import editor.model.FileEditor;
+import editor.model.FileEditorTabPane;
+import editor.model.TextEditorPane;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,51 +18,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
-import org.fxmisc.richtext.CodeArea;
+import simulatorvisualizer.controller.SystemController;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
  */
 public class WorkspaceController implements Initializable {
 
-    private SystemController sysCon;
-
-    private HashMap<Integer, int[]> findHighlightRanges;
-    private int currentFindRangeIndex;
-
-    private final ReadOnlyObjectWrapper<TextEditor> activeFileEditor = new ReadOnlyObjectWrapper<>();
-
     @FXML
     private BorderPane root;
-
-    @FXML
-    private GridPane gridPaneFind;
-
     @FXML
     private AnchorPane registerPane;
     @FXML
     private AnchorPane paneMemory;
-    @FXML
-    private AnchorPane memoryTableViewPane;
-    @FXML
-    private AnchorPane otherWindowsPane;
 
     @FXML
     private Button btnSave;
@@ -78,86 +62,88 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnHide;
 
-//    @FXML
-//    private AnchorPane memoryFilterPane;
+    @FXML
+    private SplitPane fileEditorSplitPane;
 
     @FXML
-    private SplitPane rootSplitPane;
-    @FXML
-    private SplitPane editorSplitPane;
-
-    @FXML
-    private TabPane textEditorTabPane;
-    @FXML
-    private TabPane otherWindowsTabPane;
+    private TabPane consoleAndErrorLoggerTabPane;
 
     @FXML
     private ToolBar toolbarMain;
     @FXML
     private ToolBar toolbarHide;
 
-//    @FXML
-//    private VBox vBoxMemoryPane;
+    @FXML
+    private VBox fileEditorVBox;
+
+    private FileEditorTabPane fileEditorTabPane;
+
+    private SystemController sysCon;
+
+    private HashMap<Integer, int[]> findHighlightRanges;
+    private int currentFindRangeIndex;
 
     private TextField textFieldFind;
-//    private TextField textFieldFilter;
-
     private boolean hide = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // initialize find textfield
-        textFieldFind = TextFields.createClearableTextField();
-        textFieldFind.setPrefWidth(250.0);
-        toolbarMain.getItems().add(15, textFieldFind);
+        // Initialize find text field
+        this.textFieldFind = TextFields.createClearableTextField();
+        this.textFieldFind.setPrefWidth(250.0);
+        this.toolbarMain.getItems().add(15, textFieldFind);
+    }
+
+    public Alert createAlert(AlertType alertType, String title, String contentTextFormat,
+                             Object... contentTextArgs) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(MessageFormat.format(contentTextFormat, contentTextArgs));
+        alert.initOwner(MainApp.primaryStage);
+        return alert;
     }
 
     private void init() {
-        // update activeFileEditor property
-        textEditorTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
-            activeFileEditor.set((newTab != null) ? (TextEditor) newTab.getUserData() : null);
-        });
-
-        textFieldFind.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-                if (!newValue.isEmpty() && tab != null) {
-                    CodeArea codeArea = (CodeArea) tab.getContent();
-                    String find_pattern = "\\b(" + newValue + ")\\b";
-                    Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
-                    System.out.println("PATTERN: " + pattern.toString());
-
-                    Matcher matcher = pattern.matcher(codeArea.getText());
-
-                    findHighlightRanges = new HashMap<>();
-                    int c = 0;
-                    while (matcher.find()) {
-                        System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
-
-                        System.out.println("matcher.end() " + matcher.end());
-                        System.out.println("matcher.start() " + matcher.start());
-
-                        int[] arrRange = new int[2];
-                        arrRange[0] = matcher.start();
-                        arrRange[1] = matcher.end();
-
-                        findHighlightRanges.put(c, arrRange);
-
-                        c++;
-                    }
-
-                    if (c > 0) {
-                        onActionFind(findHighlightRanges);
-                        disableFindButton(false);
-                    } else {
-                        disableFindButton(true);
-                    }
-                } else {
-                    disableFindButton(true);
-                }
-            }
-        });
+//        this.textFieldFind.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//                if ( !newValue.isEmpty() && tab != null ) {
+//                    CodeArea codeArea = (CodeArea) tab.getContent();
+//                    String find_pattern = "\\b(" + newValue + ")\\b";
+//                    Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
+//                    System.out.println("PATTERN: " + pattern.toString());
+//
+//                    Matcher matcher = pattern.matcher(codeArea.getText());
+//
+//                    findHighlightRanges = new HashMap<>();
+//                    int c = 0;
+//                    while ( matcher.find() ) {
+//                        System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
+//                        System.out.println("matcher.end() " + matcher.end());
+//                        System.out.println("matcher.start() " + matcher.start());
+//
+//                        int[] arrRange = new int[2];
+//                        arrRange[0] = matcher.start();
+//                        arrRange[1] = matcher.end();
+//
+//                        findHighlightRanges.put(c, arrRange);
+//
+//                        c++;
+//                    }
+//
+//                    if ( c > 0 ) {
+//                        onActionFind(findHighlightRanges);
+//                        disableFindButton(false);
+//                    } else {
+//                        disableFindButton(true);
+//                    }
+//                } else {
+//                    disableFindButton(true);
+//                }
+//            }
+//        });
     }
 
     private void showRegisterPane() throws Exception {
@@ -187,15 +173,6 @@ public class WorkspaceController implements Initializable {
             AnchorPane.setBottomAnchor(memoryView, 0.0);
             AnchorPane.setLeftAnchor(memoryView, 0.0);
             AnchorPane.setRightAnchor(memoryView, 0.0);
-//            memoryTableViewPane.getChildren().add(memoryView);
-//
-//            textFieldFilter = TextFields.createClearableTextField();
-//            textFieldFilter.setPromptText("Memory Filter");
-//            AnchorPane.setTopAnchor(textFieldFilter, 0.0);
-//            AnchorPane.setBottomAnchor(textFieldFilter, 0.0);
-//            AnchorPane.setLeftAnchor(textFieldFilter, 0.0);
-//            AnchorPane.setRightAnchor(textFieldFilter, 0.0);
-//            memoryFilterPane.getChildren().add(textFieldFilter);
 
             paneMemory.getChildren().add(memoryView);
 
@@ -203,19 +180,59 @@ public class WorkspaceController implements Initializable {
             MemoryController memoryController = loader.getController();
             this.sysCon.attach(memoryController);
             memoryController.build();
-        } catch(Exception e) {
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
     }
 
-    private void showTextEditorPane() throws Exception {
-        this.newFile();
-
+    private void showConsoleAndErrorLoggerPane() throws Exception {
         ConsoleController consoleController = new ConsoleController();
-        this.otherWindowsTabPane.getTabs().add(consoleController.getTab());
-        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab(null));
+        this.consoleAndErrorLoggerTabPane.getTabs().add(consoleController.getTab());
+        this.consoleAndErrorLoggerTabPane.getTabs().add(createErrorLoggerTab(null));
         this.sysCon.attach(consoleController);
         consoleController.build();
+    }
+
+    private void showFileEditorPane() {
+        this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
+        this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getNode());
+        this.fileEditorTabPane.newFileEditor();
+    }
+
+    private TextEditorPane getActiveEditor() {
+        return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
+    }
+
+    /**
+     * Creates a boolean property that is bound to another boolean value
+     * of the active editor.
+     */
+    private BooleanProperty createActiveBooleanProperty(Function<FileEditor, ObservableBooleanValue> func) {
+        BooleanProperty b = new SimpleBooleanProperty();
+        FileEditor fileEditor = fileEditorTabPane.getActiveFileEditor();
+        if ( fileEditor != null )
+            b.bind(func.apply(fileEditor));
+        this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
+            b.unbind();
+            if ( newFileEditor != null )
+                b.bind(func.apply(newFileEditor));
+            else
+                b.set(false);
+        });
+        return b;
+    }
+
+    @FXML
+    private void handleHide(ActionEvent event) {
+        if ( !hide ) {
+            hide = true;
+            this.fileEditorSplitPane.setDividerPositions(1);
+            this.changeIconToShow();
+        } else {
+            hide = false;
+            this.fileEditorSplitPane.setDividerPositions(0.65);
+            this.changeIconToHide();
+        }
     }
 
     private Tab createErrorLoggerTab(Exception e) throws Exception {
@@ -235,34 +252,10 @@ public class WorkspaceController implements Initializable {
     }
 
     public void handleErrorLoggerTab(Exception e) throws Exception {
-        this.otherWindowsTabPane.getTabs().set(1, createErrorLoggerTab(e));
-        this.otherWindowsTabPane.getSelectionModel().select(1);
+        this.consoleAndErrorLoggerTabPane.getTabs().set(1, createErrorLoggerTab(e));
+        this.consoleAndErrorLoggerTabPane.getSelectionModel().select(1);
     }
 
-    public void newFile() {
-        TextEditor textEditor = new TextEditor(this);
-        textEditorTabPane.getTabs().add(textEditor.getTab());
-        textEditorTabPane.getSelectionModel().select(textEditor.getTab());
-        textEditorTabPane.prefWidthProperty().bind(editorSplitPane.widthProperty());
-        textEditorTabPane.prefHeightProperty().bind(editorSplitPane.heightProperty());
-
-        this.sysCon.attach(textEditor);
-        textEditor.build();
-        this.sysCon.clear();
-    }
-
-    @FXML
-    private void handleHide(ActionEvent event) {
-        if (!hide) {
-            hide = true;
-            this.editorSplitPane.setDividerPositions(1);
-            this.changeIconToShow();
-        } else {
-            hide = false;
-            this.editorSplitPane.setDividerPositions(0.65);
-            this.changeIconToHide();
-        }
-    }
 
     /**
      * Action for Play Simulation; a MenuItem in Execute.
@@ -271,11 +264,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handlePlay(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("")) {
-            this.sysCon.play(codeArea.getText());
-        }
+        this.fileEditorTabPane.play();
     }
 
     /**
@@ -285,25 +274,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleStop(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("")) {
-            this.sysCon.end();
-        }
-    }
-
-    /**
-     * Action for Next Simulation; a MenuItem in Execute.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleNext(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("")) {
-            this.sysCon.next();
-        }
+        this.fileEditorTabPane.stop();
     }
 
     /**
@@ -313,11 +284,17 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handlePrevious(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+        this.fileEditorTabPane.previous();
+    }
 
-        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("")) {
-            this.sysCon.previous();
-        }
+    /**
+     * Action for Next Simulation; a MenuItem in Execute.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleNext(ActionEvent event) {
+        this.fileEditorTabPane.next();
     }
 
     /**
@@ -327,11 +304,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleReset(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if (codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("")) {
-            this.sysCon.reset();
-        }
+        this.fileEditorTabPane.reset();
     }
 
     /**
@@ -341,7 +314,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleNewFile(ActionEvent event) {
-        this.newFile();
+        this.fileEditorTabPane.newFileEditor();
     }
 
     /**
@@ -349,42 +322,46 @@ public class WorkspaceController implements Initializable {
      *
      * @param event
      */
+//    @FXML
+//    private void handleOpenFile(ActionEvent event) {
+//        this.newFile();
+//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//        TextEditorPane textEditor = (TextEditorPane) tab.getUserData();
+//        CodeArea codeArea = (CodeArea) tab.getContent();
+//
+//        FileChooser fileChooser = new FileChooser();
+//        // Set extension filter
+//        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+//
+//        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
+//        // Show open file dialog
+//        File file = fileChooser.showOpenDialog(MainApp.primaryStage);
+//
+//        if (codeArea != null && file != null) {
+//            Alert alert = new Alert(AlertType.CONFIRMATION);
+//            alert.setTitle("Confirmation Dialog");
+//            alert.setHeaderText("Do you want to open " + file.getName() + "?");
+//            alert.setContentText("Unsaved changes will be lost if you continue.");
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.get() == ButtonType.OK) {
+//                if (file != null) {
+////                    newFile();
+//                    codeArea.replaceText(readFile(file));
+//                    Path path = Paths.get(file.getAbsolutePath());
+//                    textEditor.setPath(path);
+//                    tab.setText(file.getName());
+////                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//                }
+//            } else {
+//                // ... user chose CANCEL or closed the dialog
+//            }
+//        }
+//    }
     @FXML
     private void handleOpenFile(ActionEvent event) {
-        this.newFile();
-        Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-        TextEditor textEditor = (TextEditor) tab.getUserData();
-        CodeArea codeArea = (CodeArea) tab.getContent();
-
-        FileChooser fileChooser = new FileChooser();
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-
-        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-        // Show open file dialog
-        File file = fileChooser.showOpenDialog(MainApp.primaryStage);
-
-        if (codeArea != null && file != null) {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Do you want to open " + file.getName() + "?");
-            alert.setContentText("Unsaved changes will be lost if you continue.");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                if (file != null) {
-//                    newFile();
-                    codeArea.replaceText(readFile(file));
-                    Path path = Paths.get(file.getAbsolutePath());
-                    textEditor.setPath(path);
-                    tab.setText(file.getName());
-//                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-                }
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
-        }
+//        openEditor();
     }
 
     /**
@@ -394,43 +371,45 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleSaveFile(ActionEvent event) {
-        Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
+        this.fileEditorTabPane.saveEditor(this.fileEditorTabPane.getActiveFileEditor());
 
-        if (tab != null) {
-            TextEditor textEditor = (TextEditor) tab.getUserData();
-            CodeArea codeArea = (CodeArea) tab.getContent();
-
-            FileChooser fileChooser = new FileChooser();
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-            FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-
-            fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-
-            if (textEditor.getPath() == null) {
-                //Show save file dialog
-                File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-
-                if (file != null) {
-                    writeFile(codeArea.getText(), file);
-//                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-                    tab.setText(file.getName());
-                    Path path = Paths.get(file.getAbsolutePath());
-                    textEditor.setPath(path);
-                }
-            } else {
-                File file = new File(textEditor.getPath().toAbsolutePath().toString());
-                writeFile(codeArea.getText(), file);
-//                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-                tab.setText(file.getName());
-                Path path = Paths.get(file.getAbsolutePath());
-                textEditor.setPath(path);
-                disableSaveMode(true);
-//                fileLocation = file.getAbsolutePath();
-            }
-
-            tab.setGraphic(null);
-        }
+//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//
+//        if ( tab != null ) {
+//            TextEditorPane textEditorPane = (TextEditorPane) tab.getUserData();
+//            CodeArea codeArea = (CodeArea) tab.getContent();
+//
+//            FileChooser fileChooser = new FileChooser();
+//            //Set extension filter
+//            FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//            FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+//
+//            fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
+//
+//            if ( textEditorPane.getPath() == null ) {
+//                //Show save file dialog
+//                File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+//
+//                if ( file != null ) {
+//                    writeFile(codeArea.getText(), file);
+////                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//                    tab.setText(file.getName());
+//                    Path path = Paths.get(file.getAbsolutePath());
+//                    textEditorPane.setPath(path);
+//                }
+//            } else {
+//                File file = new File(textEditorPane.getPath().toAbsolutePath().toString());
+//                writeFile(codeArea.getText(), file);
+////                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//                tab.setText(file.getName());
+//                Path path = Paths.get(file.getAbsolutePath());
+//                textEditorPane.setPath(path);
+//                disableSaveMode(true);
+////                fileLocation = file.getAbsolutePath();
+//            }
+//
+//            tab.setGraphic(null);
+//        }
     }
 
     /**
@@ -440,29 +419,29 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleSaveAsFile(ActionEvent event) {
-        Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-        TextEditor textEditor = (TextEditor) tab.getUserData();
-        CodeArea codeArea = (CodeArea) tab.getContent();
-
-        FileChooser fileChooser = new FileChooser();
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-
-        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-
-        if (file != null) {
-            writeFile(codeArea.getText(), file);
-//            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-            tab.setText(file.getName());
-            Path path = Paths.get(file.getAbsolutePath());
-            textEditor.setPath(path);
-            disableSaveMode(true);
-//            fileLocation = file.getAbsolutePath();
-        }
+//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//        TextEditorPane textEditorPane = (TextEditorPane) tab.getUserData();
+//        CodeArea codeArea = (CodeArea) tab.getContent();
+//
+//        FileChooser fileChooser = new FileChooser();
+//        //Set extension filter
+//        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
+//        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+//
+//        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
+//
+//        //Show save file dialog
+//        File file = fileChooser.showSaveDialog(MainApp.primaryStage);
+//
+//        if ( file != null ) {
+//            writeFile(codeArea.getText(), file);
+////            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
+//            tab.setText(file.getName());
+//            Path path = Paths.get(file.getAbsolutePath());
+//            textEditorPane.setPath(path);
+//            disableSaveMode(true);
+////            fileLocation = file.getAbsolutePath();
+//        }
     }
 
     @FXML
@@ -484,7 +463,7 @@ public class WorkspaceController implements Initializable {
             SettingsController settingsController = loader.getController();
             settingsController.setWorkspaceController(this);
             settingsController.setDialogStage(settingsDialogStage);
-        } catch(Exception e) {
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
     }
@@ -496,8 +475,8 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleCut(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.cut();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.cut();
     }
 
     /**
@@ -507,8 +486,8 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleCopy(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.copy();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.copy();
     }
 
     /**
@@ -518,8 +497,8 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handlePaste(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.paste();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.paste();
     }
 
     /**
@@ -529,8 +508,8 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleUndo(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.undo();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.undo();
     }
 
     /**
@@ -540,8 +519,8 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleRedo(ActionEvent event) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.redo();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.redo();
     }
 
     /**
@@ -556,112 +535,112 @@ public class WorkspaceController implements Initializable {
 
     @FXML
     private void handleFindAndReplace(ActionEvent event) {
-        try {
-            // Load root layout from fxml file
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
-            Parent findAndReplaceView = (BorderPane) loader.load();
-
-            Stage findAndReplaceDialogStage = new Stage();
-            findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
-            findAndReplaceDialogStage.setTitle("Find & Replace");
-            findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
-            findAndReplaceDialogStage.setResizable(false);
-            findAndReplaceDialogStage.setX(root.getWidth() / 3);
-            findAndReplaceDialogStage.setY(root.getHeight() / 3);
-            findAndReplaceDialogStage.show();
-
-            // Pass the current code in the text editor to FindDialogController
-            FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
-            findAndReplaceDialogController.setWorkspaceController(this);
-            findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            // Load root layout from fxml file
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+//            Parent findAndReplaceView = (BorderPane) loader.load();
+//
+//            Stage findAndReplaceDialogStage = new Stage();
+//            findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
+//            findAndReplaceDialogStage.setTitle("Find & Replace");
+//            findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
+//            findAndReplaceDialogStage.setResizable(false);
+//            findAndReplaceDialogStage.setX(root.getWidth() / 3);
+//            findAndReplaceDialogStage.setY(root.getHeight() / 3);
+//            findAndReplaceDialogStage.show();
+//
+//            // Pass the current code in the text editor to FindDialogController
+//            FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
+//            findAndReplaceDialogController.setWorkspaceController(this);
+//            findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
+//        } catch ( Exception e ) {
+//            e.printStackTrace();
+//        }
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        System.out.println("onActionFind");
-
-        this.findHighlightRanges = findHighlightRanges;
-        if (findHighlightRanges.size() != 0) {
-            currentFindRangeIndex = 0;
-            int[] range = findHighlightRanges.get(0);
-            codeArea.selectRange(range[0], range[1]);
-        }
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        System.out.println("onActionFind");
+//
+//        this.findHighlightRanges = findHighlightRanges;
+//        if ( findHighlightRanges.size() != 0 ) {
+//            currentFindRangeIndex = 0;
+//            int[] range = findHighlightRanges.get(0);
+//            codeArea.selectRange(range[0], range[1]);
+//        }
     }
 
     @FXML
     public void handleFindUp(ActionEvent event) {
-        try {
-            Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-            if (tab != null) {
-                CodeArea codeArea = (CodeArea) tab.getContent();
-                int[] range;
-                if (findHighlightRanges.size() > 0) {
-                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                    if (currentFindRangeIndex > 0) {
-                        currentFindRangeIndex--;
-                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                        range = findHighlightRanges.get(currentFindRangeIndex);
-                        codeArea.selectRange(range[0], range[1]);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//            if ( tab != null ) {
+//                CodeArea codeArea = (CodeArea) tab.getContent();
+//                int[] range;
+//                if ( findHighlightRanges.size() > 0 ) {
+//                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//                    if ( currentFindRangeIndex > 0 ) {
+//                        currentFindRangeIndex--;
+//                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                        range = findHighlightRanges.get(currentFindRangeIndex);
+//                        codeArea.selectRange(range[0], range[1]);
+//                    }
+//                }
+//            }
+//        } catch ( Exception e ) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML
     public void handleFindDown(ActionEvent event) {
-        try {
-            Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-            if (tab != null) {
-                CodeArea codeArea = (CodeArea) tab.getContent();
-                int[] range;
-                if (findHighlightRanges.size() > 1) {
-                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
-
-                    if (currentFindRangeIndex < findHighlightRanges.size() - 1) {
-                        currentFindRangeIndex++;
-                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
-                        range = findHighlightRanges.get(currentFindRangeIndex);
-                        codeArea.selectRange(range[0], range[1]);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//            if ( tab != null ) {
+//                CodeArea codeArea = (CodeArea) tab.getContent();
+//                int[] range;
+//                if ( findHighlightRanges.size() > 1 ) {
+//                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
+//
+//                    if ( currentFindRangeIndex < findHighlightRanges.size() - 1 ) {
+//                        currentFindRangeIndex++;
+//                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                        range = findHighlightRanges.get(currentFindRangeIndex);
+//                        codeArea.selectRange(range[0], range[1]);
+//                    }
+//                }
+//            }
+//        } catch ( Exception e ) {
+//            e.printStackTrace();
+//        }
     }
 
     public void onActionFindAndReplace(String find, String replace) {
-        System.out.println("BTW find: " + find);
-        System.out.println("BTW replace: " + replace);
-
-        Tab tab = textEditorTabPane.getSelectionModel().getSelectedItem();
-
-        if (tab != null) {
-            CodeArea codeArea = (CodeArea) tab.getContent();
-            String text = codeArea.getText();
-            Pattern p = Pattern.compile(find);
-            Matcher m = p.matcher(text);
-
-            StringBuffer sb = new StringBuffer();
-            int c = 0;
-            while (m.find()) {
-                m.appendReplacement(sb, replace);
-                c++;
-            }
-
-            System.out.println("count: " + c);
-            m.appendTail(sb);
-            System.out.println("sb: " + sb);
-            codeArea.replaceText(sb.toString());
-        }
+//        System.out.println("BTW find: " + find);
+//        System.out.println("BTW replace: " + replace);
+//
+//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
+//
+//        if ( tab != null ) {
+//            CodeArea codeArea = (CodeArea) tab.getContent();
+//            String text = codeArea.getText();
+//            Pattern p = Pattern.compile(find);
+//            Matcher m = p.matcher(text);
+//
+//            StringBuffer sb = new StringBuffer();
+//            int c = 0;
+//            while ( m.find() ) {
+//                m.appendReplacement(sb, replace);
+//                c++;
+//            }
+//
+//            System.out.println("count: " + c);
+//            m.appendTail(sb);
+//            System.out.println("sb: " + sb);
+//            codeArea.replaceText(sb.toString());
+//        }
     }
 
     /**
@@ -685,17 +664,17 @@ public class WorkspaceController implements Initializable {
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
             String text;
-            while ((text = bufferedReader.readLine()) != null) {
+            while ( (text = bufferedReader.readLine()) != null ) {
                 stringBuffer.append(text + "\n");
             }
-        } catch (FileNotFoundException ex) {
+        } catch ( FileNotFoundException ex ) {
             Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch ( IOException ex ) {
             Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 bufferedReader.close();
-            } catch (IOException ex) {
+            } catch ( IOException ex ) {
                 Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -709,7 +688,7 @@ public class WorkspaceController implements Initializable {
             fileWriter = new FileWriter(file);
             fileWriter.write(content);
             fileWriter.close();
-        } catch (IOException ex) {
+        } catch ( IOException ex ) {
             Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -720,16 +699,17 @@ public class WorkspaceController implements Initializable {
 
     public void displayDefaultWindows() {
         try {
-            showRegisterPane();
-            showMemoryPane();
-            showTextEditorPane();
-            disableSaveMode(true);
-            disableFindButton(true);
-            init();
-        } catch (Exception e) {
+            this.showRegisterPane();
+            this.showMemoryPane();
+            this.showConsoleAndErrorLoggerPane();
+            this.showFileEditorPane();
+            this.disableSaveMode(true);
+            this.disableFindButton(true);
+            this.init();
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
-        disableStepMode(true);
+        this.disableStepMode(true);
     }
 
     public void changeIconToPause() {
@@ -765,21 +745,25 @@ public class WorkspaceController implements Initializable {
     }
 
     public void enableCodeArea(boolean flag) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.setDisable(!flag);
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        codeArea.setDisable(!flag);
     }
 
     public void formatCodeArea(String codeBlock) {
-        CodeArea codeArea = (CodeArea) textEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-        String[] arr = this.sysCon.getInstructionKeywords();
-        String expression = String.join("|", arr);
-        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
-        Pattern pattern = Pattern.compile(pat);
-        Matcher matcher = pattern.matcher(codeBlock);
-        String replacedCodeAreaText = matcher.replaceAll("\r\n");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
-        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
-        codeArea.replaceText(replacedCodeAreaText);
-        codeArea.redo();
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        String[] arr = this.sysCon.getInstructionKeywords();
+//        String expression = String.join("|", arr);
+//        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
+//        Pattern pattern = Pattern.compile(pat);
+//        Matcher matcher = pattern.matcher(codeBlock);
+//        String replacedCodeAreaText = matcher.replaceAll("\r\n");
+//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
+//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
+//        codeArea.replaceText(replacedCodeAreaText);
+//        codeArea.redo();
+    }
+
+    public SystemController getSysCon() {
+        return this.sysCon;
     }
 }

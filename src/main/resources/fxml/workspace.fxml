@@ -145,7 +145,8 @@
                                                             shortcut="UP"/>
                                     </accelerator>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleReset" text="Reset">
+                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleReset"
+                                          text="Reset">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP"
                                                             shortcut="UP"/>
@@ -268,20 +269,21 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <SplitPane fx:id="editorSplitPane" dividerPositions="0.65" orientation="VERTICAL"
+                        <SplitPane fx:id="fileEditorSplitPane" dividerPositions="0.65" orientation="VERTICAL"
                                    prefHeight="730.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0"
                                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane fx:id="otherWindowsPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0"
-                                            prefWidth="160.0">
+                                <AnchorPane fx:id="fileEditorAnchorPane" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <VBox layoutY="429.0" prefHeight="469.0" prefWidth="878.0"
-                                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <VBox fx:id="fileEditorVBox" layoutY="429.0" prefHeight="469.0"
+                                              prefWidth="878.0" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <TabPane fx:id="textEditorTabPane" focusTraversable="false"
-                                                         prefHeight="730.0" prefWidth="886.0"
-                                                         tabClosingPolicy="ALL_TABS"/>
+                                                <!--<TabPane fx:id="fileEditorTabPane" focusTraversable="false"-->
+                                                         <!--prefHeight="730.0" prefWidth="886.0"-->
+                                                         <!--tabClosingPolicy="ALL_TABS"/>-->
                                                 <ToolBar fx:id="toolbarHide">
                                                     <items>
                                                         <Pane HBox.hgrow="ALWAYS"/>
@@ -297,10 +299,10 @@
                                         </VBox>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <AnchorPane fx:id="consoleAndErrorLoggerAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <TabPane fx:id="otherWindowsTabPane" prefHeight="178.0" prefWidth="880.0"
-                                                 side="BOTTOM" tabClosingPolicy="UNAVAILABLE"
+                                        <TabPane fx:id="consoleAndErrorLoggerTabPane" prefHeight="178.0"
+                                                 prefWidth="880.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE"
                                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         </TabPane>

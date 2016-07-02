@@ -1,16 +1,14 @@
 package editor.model;
 
 import editor.MainApp;
-import editor.controller.WorkspaceController;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
-import javafx.scene.control.*;
-import javafx.scene.text.Text;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Label;
 import org.fxmisc.richtext.*;
 import org.fxmisc.undo.UndoManager;
 
@@ -22,17 +20,16 @@ import java.util.regex.Pattern;
 /**
  * Created by Jennica on 04/02/2016.
  */
-public class TextEditor extends AssemblyComponent {
+public class TextEditorPane extends AssemblyComponent {
 
-    private WorkspaceController workspaceController;
+//    private WorkspaceController workspaceController;
     private CodeArea codeArea;
-    private Tab tab;
     private Pattern lineByLinePattern;
 
-    // 'path' property
-    private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
-    // 'modified' property
-    private final ReadOnlyBooleanWrapper modified = new ReadOnlyBooleanWrapper();
+    // The existing autocomplete entries.
+    private SortedSet<String> entries;
+    // The popup used to select an entry.
+    private ContextMenu entriesPopup;
 
     private static final String PAREN_PATTERN = "\\(|\\)";
     private static final String BRACE_PATTERN = "\\{|\\}";
@@ -47,37 +44,23 @@ public class TextEditor extends AssemblyComponent {
     private static String MEMORY_PATTERN;
     private static Pattern PATTERN;
 
-    /**
-     * The existing autocomplete entries.
-     */
-    private SortedSet<String> entries;
-    /**
-     * The popup used to select an entry.
-     */
-    private ContextMenu entriesPopup;
-
-//    private void findWord(caret)
-
-    public TextEditor(WorkspaceController workspaceController) {
-        System.out.println("Initialize");
-        this.workspaceController = workspaceController;
+    public TextEditorPane() {
+        System.out.println("Initialize TextEditorPane!");
+//        this.workspaceController = workspaceController;
         this.codeArea = new CodeArea();
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.richChanges().subscribe(change -> {
-//            this.tab.setGraphic(new Text("*"));
-//            this.workspaceController.disableSaveMode(false);
-//            System.out.println(codeArea.getCaretPosition());
             int caret = codeArea.getCaretPosition();
             System.out.println("caret = " + caret);
             String text = codeArea.getText();
 
             int count = 0;
             int start = 0;
-            for ( int i = caret-1; i > 0; i-- ) {
+            for ( int i = caret - 1; i > 0; i-- ) {
                 System.out.println("try = " + codeArea.getText(i, caret));
                 start = i;
-                if ( codeArea.getText(i, caret-count).equals(" "))
+                if ( codeArea.getText(i, caret - count).equals(" ") )
                     break;
 
                 count++;
@@ -85,96 +68,28 @@ public class TextEditor extends AssemblyComponent {
 
             System.out.println("count = " + count);
 
-            if ( caret > 1 && codeArea.getText(caret-count-1, caret-count).equals(" ")) {
+            if ( caret > 1 && codeArea.getText(caret - count - 1, caret - count).equals(" ") ) {
                 System.out.println("space");
-                System.out.println(codeArea.getText(caret-count, caret));
-                this.autocomplete(codeArea.getText(caret-count, caret), caret-count, caret);
+                System.out.println(codeArea.getText(caret - count, caret));
+                this.autocomplete(codeArea.getText(caret - count, caret), caret - count, caret);
             } else {
                 this.autocomplete(codeArea.getText(), 0, caret);
             }
 
             codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
         });
-
-        this.tab = new Tab();
-//        this.tab.setText("Untitled");
-        this.tab.setUserData(this);
-        this.tab.setContent(codeArea);
-
-        this.path.addListener((observable, oldPath, newPath) -> updateTab());
-        this.modified.addListener((observable, oldPath, newPath) -> updateTab());
-        updateTab();
-
-        tab.setOnSelectionChanged(e -> {
-            if ( tab.isSelected() ) {
-                Platform.runLater(() -> activated());
-            }
-        });
-//       activated();
     }
 
-    public Tab getTab() {
-        return tab;
-    }
-
-    public CodeArea getCodeArea() {
-        return codeArea;
-    }
-
+    // 'path' property
+    private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
     public Path getPath() {
         return path.get();
     }
-
     public void setPath(Path path) {
         this.path.set(path);
     }
-
     public ObjectProperty<Path> pathProperty() {
         return path;
-    }
-
-    public boolean isModified() {
-        return modified.get();
-    }
-
-    public ReadOnlyBooleanProperty modifiedProperty() {
-        return modified.getReadOnlyProperty();
-    }
-
-    private void updateTab() {
-        Path path = this.path.get();
-        tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
-        tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
-        tab.setGraphic(isModified() ? new Text("*") : null);
-
-        if ( isModified() ) {
-            workspaceController.disableSaveMode(false);
-        } else {
-            workspaceController.disableSaveMode(true);
-        }
-    }
-
-    private void activated() {
-        System.out.println("Tab Pane Activated");
-//        if( tab.getTabPane() == null || !tab.isSelected())
-//            return; // tab is already closed or no longer active
-//
-//        if (tab.getContent() != null) {
-//            codeArea.requestFocus();
-//            return;
-//        }
-
-        // bind the editor undo manager to the properties
-        UndoManager undoManager = codeArea.getUndoManager();
-        modified.bind(Bindings.not(undoManager.atMarkedPositionProperty()));
-
-        codeArea.requestFocus();
-
-        if ( isModified() ) {
-            workspaceController.disableSaveMode(false);
-        } else {
-            workspaceController.disableSaveMode(true);
-        }
     }
 
     /**
@@ -224,55 +139,18 @@ public class TextEditor extends AssemblyComponent {
         return spansBuilder.create();
     }
 
-    @Override
-    public void update(String currentLine, int lineNumber) {
-        if ( currentLine != null ) {
-            String codeAreaText = this.codeArea.getText();
-            Matcher matcher = lineByLinePattern.matcher(codeAreaText);
-            HashMap<Integer, int[]> findHighlightRanges = new HashMap<>();
-            // c represents matched
-            int c = 0;
-
-            while ( matcher.find() ) {
-                if ( !matcher.toMatchResult().group().contains(";") ) {
-                    int[] arrRange = new int[2];
-                    arrRange[0] = matcher.start();
-                    arrRange[1] = matcher.end();
-                    findHighlightRanges.put(c, arrRange);
-                    c++;
-                }
-            }
-            int[] range = findHighlightRanges.get(lineNumber);
-            if ( range != null ) {
-                // System.out.println(range[0] + " to " + range[1]);
-                codeArea.selectRange(range[0], range[1]);
-                codeArea.redo();
-            }
-        } else {
-            System.out.println("null highlight currentLine");
-            codeArea.selectRange(0, 0);
-            codeArea.redo();
-        }
-    }
-
-    @Override
-    public void refresh() {
-        codeArea.selectRange(0, 0);
-        codeArea.redo();
-    }
-
     private void autocomplete(String text, int start, int end) {
         if ( text.length() == 0 ) {
             System.out.println("HIDE!");
-            entriesPopup.hide();
+            this.entriesPopup.hide();
         } else {
-            System.out.println("SHOW");
+            System.out.println("SHOW!");
             LinkedList<String> searchResult = new LinkedList<>();
-            searchResult.addAll(entries.subSet(text, text + Character.MAX_VALUE));
-            if ( entries.size() > 0 ) {
+            searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
+            if ( this.entries.size() > 0 ) {
                 populatePopupItems(searchResult, start, end);
                 if ( !entriesPopup.isShowing() ) {
-                    entriesPopup.show(MainApp.primaryStage);
+                    this.entriesPopup.show(MainApp.primaryStage);
                 }
             }
         }
@@ -298,36 +176,98 @@ public class TextEditor extends AssemblyComponent {
 //            });
             item.setOnAction((event) -> {
                 // TODO: Replace the word being completed in the codeArea
-                codeArea.replaceText(start, end, result.toUpperCase());
-                entriesPopup.hide();
+                this.codeArea.replaceText(start, end, result.toUpperCase());
+                this.entriesPopup.hide();
             });
             menuItems.add(item);
         }
-        entriesPopup.getItems().clear();
-        entriesPopup.getItems().addAll(menuItems);
+        this.entriesPopup.getItems().clear();
+        this.entriesPopup.getItems().addAll(menuItems);
     }
 
     private void setCodeAreaAutocomplete() {
-        System.out.println("setCodeAreaAutoComplete");
+        System.out.println("Set CodeArea AutoComplete!");
         this.entries = new TreeSet<>();
         this.entriesPopup = new ContextMenu();
 
         this.entries.addAll(Arrays.asList(sysCon.getInstructionKeywords()));
         this.entries.addAll(Arrays.asList(sysCon.getRegisterKeywords()));
 
-        codeArea.setPopupWindow(entriesPopup);
-        codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
-        codeArea.setPopupAnchorOffset(new Point2D(4, 4));
+        this.codeArea.setPopupWindow(entriesPopup);
+        this.codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
+        this.codeArea.setPopupAnchorOffset(new Point2D(4, 4));
+    }
+
+    public Node getCodeArea() {
+        return codeArea;
+    }
+
+    public UndoManager getUndoManager() {
+        return codeArea.getUndoManager();
+    }
+
+    public void undo() {
+        codeArea.getUndoManager().undo();
+    }
+
+    public void redo() {
+        codeArea.getUndoManager().redo();
+    }
+
+    public void requestFocus() {
+        Platform.runLater(() -> codeArea.requestFocus());
+    }
+
+    public String getCodeAreaText() {
+        return codeArea.getText();
+    }
+
+    @Override
+    public void update(String currentLine, int lineNumber) {
+        System.out.println("Update TextEditorPane!");
+        if ( currentLine != null ) {
+            String codeAreaText = this.codeArea.getText();
+            Matcher matcher = this.lineByLinePattern.matcher(codeAreaText);
+            HashMap<Integer, int[]> findHighlightRanges = new HashMap<>();
+            // c represents matched
+            int c = 0;
+
+            while ( matcher.find() ) {
+                if ( !matcher.toMatchResult().group().contains(";") ) {
+                    int[] arrRange = new int[2];
+                    arrRange[0] = matcher.start();
+                    arrRange[1] = matcher.end();
+                    findHighlightRanges.put(c, arrRange);
+                    c++;
+                }
+            }
+            int[] range = findHighlightRanges.get(lineNumber);
+            if ( range != null ) {
+                // System.out.println(range[0] + " to " + range[1]);
+                this.codeArea.selectRange(range[0], range[1]);
+                this.codeArea.redo();
+            }
+        } else {
+            System.out.println("null highlight currentLine");
+            this.codeArea.selectRange(0, 0);
+            this.redo();
+        }
+    }
+
+    @Override
+    public void refresh() {
+        this.codeArea.selectRange(0, 0);
+        this.redo();
     }
 
     @Override
     public void build() {
         this.setCodeEnvironment();
+
         String[] arr = this.sysCon.getInstructionKeywords();
         String expression = String.join("|", arr);
         expression = "((.*)\\b(" + expression + ")\\b(.*)(?=;))|((.*)\\b(" + expression + ")\\b(.*))";
-//        expression = "[^;]\\b(" + expression + ")\\b(.*)"; //?)(?=;)|\\b(" + expression + ")\\b(.*)";
-        lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
+        this.lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
 
         this.setCodeAreaAutocomplete();
     }

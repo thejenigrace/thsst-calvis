@@ -75,7 +75,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
 
     public String convert(String registerName, String hexValue) {
-        System.out.println(registerName + ": " + hexValue);
+//        System.out.println(registerName + ": " + hexValue);
 
         String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
         String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
