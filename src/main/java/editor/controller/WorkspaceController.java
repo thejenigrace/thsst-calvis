@@ -47,7 +47,13 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnSave;
     @FXML
+    private Button btnUndo;
+    @FXML
+    private Button btnRedo;
+    @FXML
     private Button btnPlay;
+    @FXML
+    private Button btnStop;
     @FXML
     private Button btnNext;
     @FXML
@@ -141,6 +147,10 @@ public class WorkspaceController implements Initializable {
 //                }
 //            }
 //        });
+
+        this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditor::modifiedProperty).not());
+        this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditor::canUndoProperty).not());
+        this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditor::canRedoProperty).not());
     }
 
     private void showRegisterPane() throws Exception {
@@ -194,29 +204,6 @@ public class WorkspaceController implements Initializable {
         this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
         this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getNode());
         this.fileEditorTabPane.newFileEditor();
-    }
-
-    private TextEditorPane getActiveEditor() {
-        return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
-    }
-
-    /**
-     * Creates a boolean property that is bound to another boolean value
-     * of the active editor.
-     */
-    private BooleanProperty createActiveBooleanProperty(Function<FileEditor, ObservableBooleanValue> func) {
-        BooleanProperty b = new SimpleBooleanProperty();
-        FileEditor fileEditor = fileEditorTabPane.getActiveFileEditor();
-        if ( fileEditor != null )
-            b.bind(func.apply(fileEditor));
-        this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
-            b.unbind();
-            if ( newFileEditor != null )
-                b.bind(func.apply(newFileEditor));
-            else
-                b.set(false);
-        });
-        return b;
     }
 
     @FXML
@@ -526,14 +513,39 @@ public class WorkspaceController implements Initializable {
         alert.showAndWait();
     }
 
+    private TextEditorPane getActiveEditor() {
+        return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
+    }
+
+    /**
+     * Creates a boolean property that is bound to another boolean value
+     * of the active editor.
+     */
+    private BooleanProperty createActiveBooleanProperty(Function<FileEditor, ObservableBooleanValue> func) {
+        BooleanProperty bp = new SimpleBooleanProperty();
+        FileEditor fileEditor = this.fileEditorTabPane.getActiveFileEditor();
+        if ( fileEditor != null )
+            bp.bind(func.apply(fileEditor));
+        this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
+            bp.unbind();
+            if ( newFileEditor != null )
+                bp.bind(func.apply(newFileEditor));
+            else
+                bp.set(false);
+        });
+        return bp;
+    }
+
     public void changeIconToPause() {
         this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
         this.disableStepMode(true);
+//        this.disableStopMode(true);
     }
 
     public void changeIconToPlay() {
         this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PLAY));
         this.disableStepMode(false);
+//        this.disableStopMode(false);
     }
 
     public void changeIconToHide() {
@@ -549,6 +561,10 @@ public class WorkspaceController implements Initializable {
         this.btnPrevious.setDisable(flag);
     }
 
+    public void disableStopMode(boolean flag) {
+        this.btnStop.setDisable(flag);
+    }
+
     public void disableSaveMode(boolean flag) {
         this.btnSave.setDisable(flag);
     }
@@ -558,8 +574,8 @@ public class WorkspaceController implements Initializable {
         this.btnFindDown.setDisable(flag);
     }
 
-    public void enableCodeArea(boolean flag) {
-        this.fileEditorTabPane.enableCodeArea(flag);
+    public void disableCodeArea(boolean flag) {
+        this.fileEditorTabPane.disableCodeArea(flag);
     }
 
     public void formatCodeArea(String codeBlock) {
@@ -597,5 +613,6 @@ public class WorkspaceController implements Initializable {
             e.printStackTrace();
         }
         this.disableStepMode(true);
+//        this.disableStopMode(true);
     }
 }

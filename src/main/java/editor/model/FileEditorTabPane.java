@@ -337,9 +337,9 @@ public class FileEditorTabPane {
             this.workspaceController.getSysCon().reset();
     }
 
-    public void enableCodeArea(boolean flag) {
+    public void disableCodeArea(boolean flag) {
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.setDisable(!flag);
+        codeArea.setDisable(flag);
     }
 
     public void undo() {

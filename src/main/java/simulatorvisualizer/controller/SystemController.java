@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class SystemController {
 
-    static long SIMULATION_DELAY = 500;
+    static long SIMULATION_DELAY = 1000;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;
@@ -135,7 +135,7 @@ public class SystemController {
                     public void run() {
                         workspaceController.changeIconToPlay();
                         workspaceController.disableStepMode(true);
-                        workspaceController.enableCodeArea(true);
+                        workspaceController.disableCodeArea(false);
                     }
                 }
         );
@@ -233,7 +233,7 @@ public class SystemController {
     }
 
     private void beginSimulation() {
-        workspaceController.enableCodeArea(false);
+        workspaceController.disableCodeArea(true);
         thread = new Thread() {
             public void run() {
                 while ((state == SimulationState.PLAY)

@@ -189,12 +189,12 @@
                                 <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                             </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleUndo">
+                        <Button fx:id="btnUndo" mnemonicParsing="false" onAction="#handleUndo">
                             <graphic>
                                 <FontAwesomeIconView glyphName="UNDO"/>
                             </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleRedo">
+                        <Button fx:id="btnRedo" mnemonicParsing="false" onAction="#handleRedo">
                             <graphic>
                                 <FontAwesomeIconView glyphName="REPEAT"/>
                             </graphic>
@@ -229,7 +229,7 @@
                                 <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                             </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleStop">
+                        <Button fx:id="btnStop" mnemonicParsing="false" onAction="#handleStop">
                             <graphic>
                                 <FontAwesomeIconView glyphName="STOP"/>
                             </graphic>

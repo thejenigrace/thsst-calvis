@@ -28,6 +28,10 @@ public class FileEditor {
     private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
     // 'modified' property
     private final ReadOnlyBooleanWrapper modified = new ReadOnlyBooleanWrapper();
+    // 'canUndo' property
+    private final BooleanProperty canUndo = new SimpleBooleanProperty();
+    // 'canRedo' property
+    private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
     public FileEditor(WorkspaceController workspaceController, Path path) {
         System.out.println("Initialize FileEditor!");
@@ -86,24 +90,16 @@ public class FileEditor {
     }
 
     // 'canUndo' property
-    private final BooleanProperty canUndo = new SimpleBooleanProperty();
-    BooleanProperty canUndoProperty() { return canUndo; }
+    public BooleanProperty canUndoProperty() { return canUndo; }
 
     // 'canRedo' property
-    private final BooleanProperty canRedo = new SimpleBooleanProperty();
-    BooleanProperty canRedoProperty() { return canRedo; }
+    public BooleanProperty canRedoProperty() { return canRedo; }
 
     private void updateTab() {
         Path path = this.path.get();
         this.tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
         this.tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
         this.tab.setGraphic(isModified() ? new Text("*") : null);
-
-//        if ( isModified() ) {
-//            this.workspaceController.disableSaveMode(false);
-//        } else {
-//            this.workspaceController.disableSaveMode(true);
-//        }
     }
 
     private void activated() {
