@@ -6,15 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed x87 Instructions">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/TextEditor.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed Calvis/Text File Editor Implementation">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -65,7 +60,85 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="WorkspaceController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="323" column="44" selection-start-line="323" selection-start-column="44" selection-end-line="323" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#9382#9383#0" expanded="true" />
+                <element signature="e#9427#9428#0" expanded="true" />
+                <element signature="e#9588#9589#0" expanded="true" />
+                <element signature="e#9633#9634#0" expanded="true" />
+                <element signature="e#9802#9803#0" expanded="true" />
+                <element signature="e#9851#9852#0" expanded="true" />
+                <element signature="e#10012#10013#0" expanded="true" />
+                <element signature="e#10057#10058#0" expanded="true" />
+                <element signature="e#10220#10221#0" expanded="true" />
+                <element signature="e#10266#10267#0" expanded="true" />
+                <element signature="e#10420#10421#0" expanded="true" />
+                <element signature="e#10474#10475#0" expanded="true" />
+                <element signature="e#10630#10631#0" expanded="true" />
+                <element signature="e#10681#10682#0" expanded="true" />
+                <element signature="e#12325#12326#0" expanded="true" />
+                <element signature="e#12369#12370#0" expanded="true" />
+                <element signature="e#12429#12430#0" expanded="true" />
+                <element signature="e#12474#12475#0" expanded="true" />
+                <element signature="e#12535#12536#0" expanded="true" />
+                <element signature="e#12581#12582#0" expanded="true" />
+                <element signature="e#12641#12642#0" expanded="true" />
+                <element signature="e#12686#12687#0" expanded="true" />
+                <element signature="e#12746#12747#0" expanded="true" />
+                <element signature="e#12791#12792#0" expanded="true" />
+                <element signature="e#12854#12855#0" expanded="true" />
+                <element signature="e#12884#12885#0" expanded="true" />
+                <element signature="e#18565#18566#0" expanded="true" />
+                <element signature="e#18653#18654#0" expanded="true" />
+                <element signature="e#19073#19074#0" expanded="true" />
+                <element signature="e#19132#19133#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileEditorTabPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileEditor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1467469750000" expanded="true" signature="1279:1448" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextEditorPane.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.44262296">
+              <caret line="152" column="65" selection-start-line="152" selection-start-column="65" selection-end-line="152" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -497,11 +570,11 @@
         <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -977,12 +1050,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00069" summary="Fix MUL &amp; IMUL Instructions">
-      <created>1456382674954</created>
-      <option name="number" value="00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1456382674955</updated>
-    </task>
     <task id="LOCAL-00070" summary="Fixed issue regarding OSX Compatibility. Updated  build.gradle file.">
       <created>1456412055597</created>
       <option name="number" value="00070" />
@@ -1271,7 +1338,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467386744911</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Fixed Calvis/Text File Editor Implementation">
+      <created>1467470744539</created>
+      <option name="number" value="00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1467470744540</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1296,7 +1369,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="852" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1308,7 +1381,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39210525" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18884121" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1339,7 +1412,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="still needs to check the result" />
     <MESSAGE value="refactored-parser" />
     <MESSAGE value="with syntax checker&#10;fixed movd and movq" />
     <MESSAGE value="Fix MMX, SSE, &amp; SSE2" />
@@ -1364,7 +1436,8 @@
     <MESSAGE value="Merge with autocomplete" />
     <MESSAGE value="Merge with conversion" />
     <MESSAGE value="Fixed x87 Instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed x87 Instructions" />
+    <MESSAGE value="Fixed Calvis/Text File Editor Implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Calvis/Text File Editor Implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1381,8 +1454,14 @@
           <properties />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java</url>
+          <line>546</line>
+          <properties class="editor.controller.WorkspaceController" method="disableStepMode" />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="46" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1675,38 +1754,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32496306">
-          <caret line="289" column="70" selection-start-line="289" selection-start-column="70" selection-end-line="289" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/editor/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27322406">
           <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1639345">
-          <caret line="203" column="57" selection-start-line="203" selection-start-column="57" selection-end-line="203" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2883#2884#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2953#2954#0" expanded="true" />
-            <element signature="e#2988#2989#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-            <element signature="e#3115#3116#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1734,58 +1786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26229507">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1697#1698#0" expanded="true" />
-            <element signature="e#1723#1724#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1888#1889#0" expanded="true" />
-            <element signature="e#1926#1927#0" expanded="true" />
-            <element signature="e#1961#1962#0" expanded="true" />
-            <element signature="e#2011#2012#0" expanded="true" />
-            <element signature="e#2038#2039#0" expanded="true" />
-            <element signature="e#2098#2099#0" expanded="true" />
-            <element signature="e#2135#2136#0" expanded="true" />
-            <element signature="e#2192#2193#0" expanded="true" />
-            <element signature="e#2245#2246#0" expanded="true" />
-            <marker date="1467469750000" expanded="true" signature="1279:1448" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding>
-            <element signature="e#3142#3143#0" expanded="true" />
-            <element signature="e#3175#3176#0" expanded="true" />
-            <element signature="e#3212#3213#0" expanded="true" />
-            <element signature="e#3247#3248#0" expanded="true" />
-            <element signature="e#3296#3297#0" expanded="true" />
-            <element signature="e#3323#3324#0" expanded="true" />
-            <element signature="e#8320#8321#0" expanded="true" />
-            <element signature="e#8351#8352#0" expanded="true" />
-            <element signature="e#8394#8395#0" expanded="true" />
-            <element signature="e#8442#8443#0" expanded="true" />
-            <element signature="e#8468#8469#0" expanded="true" />
-            <element signature="e#8516#8517#0" expanded="true" />
-            <element signature="e#8542#8543#0" expanded="true" />
-            <element signature="e#8590#8591#0" expanded="true" />
-            <element signature="e#8624#8625#0" expanded="true" />
-            <element signature="e#8688#8689#0" expanded="true" />
-            <element signature="e#8727#8728#0" expanded="true" />
-            <element signature="e#8768#8769#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.8306011">
@@ -1794,24 +1794,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19672132">
-          <caret line="315" column="51" selection-start-line="315" selection-start-column="51" selection-end-line="315" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9465#9466#0" expanded="true" />
-            <element signature="e#9510#9511#0" expanded="true" />
-            <element signature="e#9671#9672#0" expanded="true" />
-            <element signature="e#9716#9717#0" expanded="true" />
-            <element signature="e#9885#9886#0" expanded="true" />
-            <element signature="e#9934#9935#0" expanded="true" />
-            <element signature="e#10095#10096#0" expanded="true" />
-            <element signature="e#10140#10141#0" expanded="true" />
-            <element signature="e#10303#10304#0" expanded="true" />
-            <element signature="e#10349#10350#0" expanded="true" />
-            <element signature="e#10557#10558#0" expanded="true" />
+            <marker date="1467469750000" expanded="true" signature="1279:1448" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4553846">
+          <caret line="61" column="65" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="323" column="44" selection-start-line="323" selection-start-column="44" selection-end-line="323" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9382#9383#0" expanded="true" />
+            <element signature="e#9427#9428#0" expanded="true" />
+            <element signature="e#9588#9589#0" expanded="true" />
+            <element signature="e#9633#9634#0" expanded="true" />
+            <element signature="e#9802#9803#0" expanded="true" />
+            <element signature="e#9851#9852#0" expanded="true" />
+            <element signature="e#10012#10013#0" expanded="true" />
+            <element signature="e#10057#10058#0" expanded="true" />
+            <element signature="e#10220#10221#0" expanded="true" />
+            <element signature="e#10266#10267#0" expanded="true" />
+            <element signature="e#10420#10421#0" expanded="true" />
+            <element signature="e#10474#10475#0" expanded="true" />
+            <element signature="e#10630#10631#0" expanded="true" />
+            <element signature="e#10681#10682#0" expanded="true" />
+            <element signature="e#12325#12326#0" expanded="true" />
+            <element signature="e#12369#12370#0" expanded="true" />
+            <element signature="e#12429#12430#0" expanded="true" />
+            <element signature="e#12474#12475#0" expanded="true" />
+            <element signature="e#12535#12536#0" expanded="true" />
+            <element signature="e#12581#12582#0" expanded="true" />
+            <element signature="e#12641#12642#0" expanded="true" />
+            <element signature="e#12686#12687#0" expanded="true" />
+            <element signature="e#12746#12747#0" expanded="true" />
+            <element signature="e#12791#12792#0" expanded="true" />
+            <element signature="e#12854#12855#0" expanded="true" />
+            <element signature="e#12884#12885#0" expanded="true" />
+            <element signature="e#18565#18566#0" expanded="true" />
+            <element signature="e#18653#18654#0" expanded="true" />
+            <element signature="e#19073#19074#0" expanded="true" />
+            <element signature="e#19132#19133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44262296">
+          <caret line="152" column="65" selection-start-line="152" selection-start-column="65" selection-end-line="152" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>

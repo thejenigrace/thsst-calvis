@@ -5,6 +5,8 @@ import editor.controller.WorkspaceController;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,6 +17,7 @@ import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Created by Jennica on 02/07/2016.
@@ -132,6 +135,45 @@ public class FileEditorTabPane {
         return fileChooser;
     }
 
+    public FileEditor[] openEditor() {
+        FileChooser fileChooser = createFileChooser("Open CALVIS File");
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(MainApp.primaryStage);
+        if (selectedFiles == null)
+            return null;
+
+//        saveLastDirectory(selectedFiles.get(0));
+        return openEditors(selectedFiles, 0);
+    }
+
+    private FileEditor[] openEditors(List<File> files, int activeIndex) {
+        // close single unmodified "Untitled" tab
+        if (tabPane.getTabs().size() == 1) {
+            FileEditor fileEditor = (FileEditor) tabPane.getTabs().get(0).getUserData();
+            if (fileEditor.getPath() == null && !fileEditor.isModified())
+                closeEditor(fileEditor, false);
+        }
+
+        FileEditor[] fileEditors = new FileEditor[files.size()];
+        for (int i = 0; i < files.size(); i++) {
+            Path path = files.get(i).toPath();
+
+            // check whether file is already opened
+            FileEditor fileEditor = findEditor(path);
+            if (fileEditor == null) {
+                fileEditor = createFileEditor(path);
+
+                tabPane.getTabs().add(fileEditor.getTab());
+            }
+
+            // select first file
+            if (i == activeIndex)
+                tabPane.getSelectionModel().select(fileEditor.getTab());
+
+            fileEditors[i] = fileEditor;
+        }
+        return fileEditors;
+    }
+
     public boolean saveEditor(FileEditor fileEditor) {
         if (fileEditor == null || !fileEditor.isModified())
             return true;
@@ -151,7 +193,19 @@ public class FileEditorTabPane {
         return fileEditor.save();
     }
 
-    private boolean canCloseEditor(FileEditor fileEditor) {
+    public boolean saveAllEditors() {
+        FileEditor[] allEditors = getAllEditors();
+
+        boolean success = true;
+        for (FileEditor fileEditor : allEditors) {
+            if (!saveEditor(fileEditor))
+                success = false;
+        }
+
+        return success;
+    }
+
+    public boolean canCloseEditor(FileEditor fileEditor) {
         if (!fileEditor.isModified())
             return true;
 
@@ -164,6 +218,78 @@ public class FileEditorTabPane {
             return (result == ButtonType.NO);
 
         return saveEditor(fileEditor);
+    }
+
+    boolean closeEditor(FileEditor fileEditor, boolean save) {
+        if (fileEditor == null)
+            return true;
+
+        Tab tab = fileEditor.getTab();
+
+        if (save) {
+            Event event = new Event(tab,tab,Tab.TAB_CLOSE_REQUEST_EVENT);
+            Event.fireEvent(tab, event);
+            if (event.isConsumed())
+                return false;
+        }
+
+        tabPane.getTabs().remove(tab);
+        if (tab.getOnClosed() != null)
+            Event.fireEvent(tab, new Event(Tab.CLOSED_EVENT));
+
+        return true;
+    }
+
+    boolean closeAllEditors() {
+        FileEditor[] allEditors = getAllEditors();
+        FileEditor activeEditor = activeFileEditor.get();
+
+        // try to save active tab first because in case the user decides to cancel,
+        // then it stays active
+        if (activeEditor != null && !canCloseEditor(activeEditor))
+            return false;
+
+        // save modified tabs
+        for (int i = 0; i < allEditors.length; i++) {
+            FileEditor fileEditor = allEditors[i];
+            if (fileEditor == activeEditor)
+                continue;
+
+            if (fileEditor.isModified()) {
+                // activate the modified tab to make its modified content visible to the user
+                tabPane.getSelectionModel().select(i);
+
+                if (!canCloseEditor(fileEditor))
+                    return false;
+            }
+        }
+
+        // close all tabs
+        for (FileEditor fileEditor : allEditors) {
+            if (!closeEditor(fileEditor, false))
+                return false;
+        }
+
+//        saveState(allEditors, activeEditor);
+
+        return tabPane.getTabs().isEmpty();
+    }
+
+    private FileEditor[] getAllEditors() {
+        ObservableList<Tab> tabs = tabPane.getTabs();
+        FileEditor[] allEditors = new FileEditor[tabs.size()];
+        for (int i = 0; i < tabs.size(); i++)
+            allEditors[i] = (FileEditor) tabs.get(i).getUserData();
+        return allEditors;
+    }
+
+    private FileEditor findEditor(Path path) {
+        for (Tab tab : tabPane.getTabs()) {
+            FileEditor fileEditor = (FileEditor) tab.getUserData();
+            if (path.equals(fileEditor.getPath()))
+                return fileEditor;
+        }
+        return null;
     }
 
     /**
@@ -202,5 +328,35 @@ public class FileEditorTabPane {
 
         if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
             this.workspaceController.getSysCon().reset();
+    }
+
+    public void enableCodeArea(boolean flag) {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.setDisable(!flag);
+    }
+
+    public void undo() {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.getUndoManager().undo();
+    }
+
+    public void redo() {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.getUndoManager().redo();
+    }
+
+    public void cut() {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.cut();
+    }
+
+    public void copy() {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.copy();
+    }
+
+    public void paste() {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        codeArea.paste();
     }
 }

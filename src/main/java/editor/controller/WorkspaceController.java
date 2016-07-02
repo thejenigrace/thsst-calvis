@@ -26,14 +26,11 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import simulatorvisualizer.controller.SystemController;
 
-import java.io.*;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -322,46 +319,9 @@ public class WorkspaceController implements Initializable {
      *
      * @param event
      */
-//    @FXML
-//    private void handleOpenFile(ActionEvent event) {
-//        this.newFile();
-//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
-//        TextEditorPane textEditor = (TextEditorPane) tab.getUserData();
-//        CodeArea codeArea = (CodeArea) tab.getContent();
-//
-//        FileChooser fileChooser = new FileChooser();
-//        // Set extension filter
-//        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-//        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-//
-//        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-//        // Show open file dialog
-//        File file = fileChooser.showOpenDialog(MainApp.primaryStage);
-//
-//        if (codeArea != null && file != null) {
-//            Alert alert = new Alert(AlertType.CONFIRMATION);
-//            alert.setTitle("Confirmation Dialog");
-//            alert.setHeaderText("Do you want to open " + file.getName() + "?");
-//            alert.setContentText("Unsaved changes will be lost if you continue.");
-//
-//            Optional<ButtonType> result = alert.showAndWait();
-//            if (result.get() == ButtonType.OK) {
-//                if (file != null) {
-////                    newFile();
-//                    codeArea.replaceText(readFile(file));
-//                    Path path = Paths.get(file.getAbsolutePath());
-//                    textEditor.setPath(path);
-//                    tab.setText(file.getName());
-////                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-//                }
-//            } else {
-//                // ... user chose CANCEL or closed the dialog
-//            }
-//        }
-//    }
     @FXML
     private void handleOpenFile(ActionEvent event) {
-//        openEditor();
+        this.fileEditorTabPane.openEditor();
     }
 
     /**
@@ -372,44 +332,6 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handleSaveFile(ActionEvent event) {
         this.fileEditorTabPane.saveEditor(this.fileEditorTabPane.getActiveFileEditor());
-
-//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
-//
-//        if ( tab != null ) {
-//            TextEditorPane textEditorPane = (TextEditorPane) tab.getUserData();
-//            CodeArea codeArea = (CodeArea) tab.getContent();
-//
-//            FileChooser fileChooser = new FileChooser();
-//            //Set extension filter
-//            FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-//            FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-//
-//            fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-//
-//            if ( textEditorPane.getPath() == null ) {
-//                //Show save file dialog
-//                File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-//
-//                if ( file != null ) {
-//                    writeFile(codeArea.getText(), file);
-////                    MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-//                    tab.setText(file.getName());
-//                    Path path = Paths.get(file.getAbsolutePath());
-//                    textEditorPane.setPath(path);
-//                }
-//            } else {
-//                File file = new File(textEditorPane.getPath().toAbsolutePath().toString());
-//                writeFile(codeArea.getText(), file);
-////                MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-//                tab.setText(file.getName());
-//                Path path = Paths.get(file.getAbsolutePath());
-//                textEditorPane.setPath(path);
-//                disableSaveMode(true);
-////                fileLocation = file.getAbsolutePath();
-//            }
-//
-//            tab.setGraphic(null);
-//        }
     }
 
     /**
@@ -419,31 +341,14 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleSaveAsFile(ActionEvent event) {
-//        Tab tab = fileEditorTabPane.getSelectionModel().getSelectedItem();
-//        TextEditorPane textEditorPane = (TextEditorPane) tab.getUserData();
-//        CodeArea codeArea = (CodeArea) tab.getContent();
-//
-//        FileChooser fileChooser = new FileChooser();
-//        //Set extension filter
-//        FileChooser.ExtensionFilter extFilterCalvis = new FileChooser.ExtensionFilter("CALVIS files (*.calvis)", "*.calvis");
-//        FileChooser.ExtensionFilter extFilterText = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
-//
-//        fileChooser.getExtensionFilters().addAll(extFilterText, extFilterCalvis);
-//
-//        //Show save file dialog
-//        File file = fileChooser.showSaveDialog(MainApp.primaryStage);
-//
-//        if ( file != null ) {
-//            writeFile(codeArea.getText(), file);
-////            MainApp.primaryStage.setTitle("CALVIS x86-32 Workspace - " + file.getName());
-//            tab.setText(file.getName());
-//            Path path = Paths.get(file.getAbsolutePath());
-//            textEditorPane.setPath(path);
-//            disableSaveMode(true);
-////            fileLocation = file.getAbsolutePath();
-//        }
+        this.fileEditorTabPane.saveEditor(this.fileEditorTabPane.getActiveFileEditor());
     }
 
+    /**
+     * Action for Settings; a MenuItem in File.
+     *
+     * @param event
+     */
     @FXML
     private void handleSettings(ActionEvent event) {
         try {
@@ -468,66 +373,31 @@ public class WorkspaceController implements Initializable {
         }
     }
 
-    /**
-     * Action for Cut; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handleCut(ActionEvent event) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.cut();
+        this.fileEditorTabPane.cut();
     }
 
-    /**
-     * Action for Copy; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handleCopy(ActionEvent event) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.copy();
+        this.fileEditorTabPane.copy();
     }
 
-    /**
-     * Action for Paste; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handlePaste(ActionEvent event) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.paste();
+        this.fileEditorTabPane.paste();
     }
 
-    /**
-     * Action for Undo; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handleUndo(ActionEvent event) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.undo();
+        this.fileEditorTabPane.undo();
     }
 
-    /**
-     * Action for Redo; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handleRedo(ActionEvent event) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.redo();
+        this.fileEditorTabPane.redo();
     }
 
-    /**
-     * Action for Exit; a MenuItem in File.
-     *
-     * @param event
-     */
     @FXML
     private void handleExitApp(ActionEvent event) {
         System.exit(0);
@@ -652,45 +522,62 @@ public class WorkspaceController implements Initializable {
         alert.setTitle("About");
         alert.setHeaderText("De La Salle University: CALVIS x86-32");
         alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, & Marielle Ong\n All rights reserved.");
-//        alert.initOwner(getScene().getWindow());
 
         alert.showAndWait();
     }
 
-    private String readFile(File file) {
-        StringBuilder stringBuffer = new StringBuilder();
-        BufferedReader bufferedReader = null;
-
-        try {
-            bufferedReader = new BufferedReader(new FileReader(file));
-            String text;
-            while ( (text = bufferedReader.readLine()) != null ) {
-                stringBuffer.append(text + "\n");
-            }
-        } catch ( FileNotFoundException ex ) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch ( IOException ex ) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                bufferedReader.close();
-            } catch ( IOException ex ) {
-                Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return stringBuffer.toString();
+    public void changeIconToPause() {
+        this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
+        this.disableStepMode(true);
     }
 
-    private void writeFile(String content, File file) {
-        try {
-            FileWriter fileWriter = null;
-            fileWriter = new FileWriter(file);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch ( IOException ex ) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void changeIconToPlay() {
+        this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PLAY));
+        this.disableStepMode(false);
+    }
+
+    public void changeIconToHide() {
+        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.DOWNLOAD));
+    }
+
+    public void changeIconToShow() {
+        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
+    }
+
+    public void disableStepMode(boolean flag) {
+        this.btnNext.setDisable(flag);
+        this.btnPrevious.setDisable(flag);
+    }
+
+    public void disableSaveMode(boolean flag) {
+        this.btnSave.setDisable(flag);
+    }
+
+    public void disableFindButton(boolean flag) {
+        this.btnFindUp.setDisable(flag);
+        this.btnFindDown.setDisable(flag);
+    }
+
+    public void enableCodeArea(boolean flag) {
+        this.fileEditorTabPane.enableCodeArea(flag);
+    }
+
+    public void formatCodeArea(String codeBlock) {
+//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
+//        String[] arr = this.sysCon.getInstructionKeywords();
+//        String expression = String.join("|", arr);
+//        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
+//        Pattern pattern = Pattern.compile(pat);
+//        Matcher matcher = pattern.matcher(codeBlock);
+//        String replacedCodeAreaText = matcher.replaceAll("\r\n");
+//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
+//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
+//        codeArea.replaceText(replacedCodeAreaText);
+//        codeArea.redo();
+    }
+
+    public SystemController getSysCon() {
+        return this.sysCon;
     }
 
     public void buildSystem(ConfiguratorEnvironment env) {
@@ -710,60 +597,5 @@ public class WorkspaceController implements Initializable {
             e.printStackTrace();
         }
         this.disableStepMode(true);
-    }
-
-    public void changeIconToPause() {
-        btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
-        disableStepMode(true);
-    }
-
-    public void changeIconToPlay() {
-        btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PLAY));
-        disableStepMode(false);
-    }
-
-    public void changeIconToHide() {
-        btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.DOWNLOAD));
-    }
-
-    public void changeIconToShow() {
-        btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
-    }
-
-    public void disableStepMode(boolean flag) {
-        btnNext.setDisable(flag);
-        btnPrevious.setDisable(flag);
-    }
-
-    public void disableSaveMode(boolean flag) {
-        btnSave.setDisable(flag);
-    }
-
-    public void disableFindButton(boolean flag) {
-        btnFindUp.setDisable(flag);
-        btnFindDown.setDisable(flag);
-    }
-
-    public void enableCodeArea(boolean flag) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        codeArea.setDisable(!flag);
-    }
-
-    public void formatCodeArea(String codeBlock) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        String[] arr = this.sysCon.getInstructionKeywords();
-//        String expression = String.join("|", arr);
-//        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
-//        Pattern pattern = Pattern.compile(pat);
-//        Matcher matcher = pattern.matcher(codeBlock);
-//        String replacedCodeAreaText = matcher.replaceAll("\r\n");
-//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
-//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
-//        codeArea.replaceText(replacedCodeAreaText);
-//        codeArea.redo();
-    }
-
-    public SystemController getSysCon() {
-        return this.sysCon;
     }
 }
