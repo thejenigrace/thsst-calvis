@@ -539,13 +539,11 @@ public class WorkspaceController implements Initializable {
     public void changeIconToPause() {
         this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
         this.disableStepMode(true);
-//        this.disableStopMode(true);
     }
 
     public void changeIconToPlay() {
         this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PLAY));
         this.disableStepMode(false);
-//        this.disableStopMode(false);
     }
 
     public void changeIconToHide() {
@@ -559,10 +557,6 @@ public class WorkspaceController implements Initializable {
     public void disableStepMode(boolean flag) {
         this.btnNext.setDisable(flag);
         this.btnPrevious.setDisable(flag);
-    }
-
-    public void disableStopMode(boolean flag) {
-        this.btnStop.setDisable(flag);
     }
 
     public void disableSaveMode(boolean flag) {
@@ -579,17 +573,7 @@ public class WorkspaceController implements Initializable {
     }
 
     public void formatCodeArea(String codeBlock) {
-//        CodeArea codeArea = (CodeArea) fileEditorTabPane.getSelectionModel().getSelectedItem().getContent();
-//        String[] arr = this.sysCon.getInstructionKeywords();
-//        String expression = String.join("|", arr);
-//        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
-//        Pattern pattern = Pattern.compile(pat);
-//        Matcher matcher = pattern.matcher(codeBlock);
-//        String replacedCodeAreaText = matcher.replaceAll("\r\n");
-//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
-//        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
-//        codeArea.replaceText(replacedCodeAreaText);
-//        codeArea.redo();
+        this.fileEditorTabPane.formatCode(codeBlock);
     }
 
     public SystemController getSysCon() {
@@ -613,6 +597,5 @@ public class WorkspaceController implements Initializable {
             e.printStackTrace();
         }
         this.disableStepMode(true);
-//        this.disableStopMode(true);
     }
 }

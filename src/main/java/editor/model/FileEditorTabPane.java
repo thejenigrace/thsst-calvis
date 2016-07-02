@@ -18,6 +18,8 @@ import org.fxmisc.richtext.CodeArea;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Jennica on 02/07/2016.
@@ -365,5 +367,19 @@ public class FileEditorTabPane {
     public void paste() {
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
         codeArea.paste();
+    }
+
+    public void formatCode(String codeBlock) {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+        String[] arr = this.workspaceController.getSysCon().getInstructionKeywords();
+        String expression = String.join("|", arr);
+        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
+        Pattern pattern = Pattern.compile(pat);
+        Matcher matcher = pattern.matcher(codeBlock);
+        String replacedCodeAreaText = matcher.replaceAll("\r\n");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*,\\s*", ", ");
+        replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
+        codeArea.replaceText(replacedCodeAreaText);
+        codeArea.redo();
     }
 }
