@@ -6,11 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed Calvis/Text File Editor Implementation">
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed Open File Editor&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,85 +61,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="WorkspaceController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="323" column="44" selection-start-line="323" selection-start-column="44" selection-end-line="323" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9382#9383#0" expanded="true" />
-                <element signature="e#9427#9428#0" expanded="true" />
-                <element signature="e#9588#9589#0" expanded="true" />
-                <element signature="e#9633#9634#0" expanded="true" />
-                <element signature="e#9802#9803#0" expanded="true" />
-                <element signature="e#9851#9852#0" expanded="true" />
-                <element signature="e#10012#10013#0" expanded="true" />
-                <element signature="e#10057#10058#0" expanded="true" />
-                <element signature="e#10220#10221#0" expanded="true" />
-                <element signature="e#10266#10267#0" expanded="true" />
-                <element signature="e#10420#10421#0" expanded="true" />
-                <element signature="e#10474#10475#0" expanded="true" />
-                <element signature="e#10630#10631#0" expanded="true" />
-                <element signature="e#10681#10682#0" expanded="true" />
-                <element signature="e#12325#12326#0" expanded="true" />
-                <element signature="e#12369#12370#0" expanded="true" />
-                <element signature="e#12429#12430#0" expanded="true" />
-                <element signature="e#12474#12475#0" expanded="true" />
-                <element signature="e#12535#12536#0" expanded="true" />
-                <element signature="e#12581#12582#0" expanded="true" />
-                <element signature="e#12641#12642#0" expanded="true" />
-                <element signature="e#12686#12687#0" expanded="true" />
-                <element signature="e#12746#12747#0" expanded="true" />
-                <element signature="e#12791#12792#0" expanded="true" />
-                <element signature="e#12854#12855#0" expanded="true" />
-                <element signature="e#12884#12885#0" expanded="true" />
-                <element signature="e#18565#18566#0" expanded="true" />
-                <element signature="e#18653#18654#0" expanded="true" />
-                <element signature="e#19073#19074#0" expanded="true" />
-                <element signature="e#19132#19133#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileEditorTabPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileEditor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1467469750000" expanded="true" signature="1279:1448" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextEditorPane.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44262296">
-              <caret line="152" column="65" selection-start-line="152" selection-start-column="65" selection-end-line="152" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -566,15 +489,15 @@
         <option value="$PROJECT_DIR$/Instructions/fidivr.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
       </list>
     </option>
   </component>
@@ -652,16 +575,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="thsst-calvis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1050,12 +963,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00070" summary="Fixed issue regarding OSX Compatibility. Updated  build.gradle file.">
-      <created>1456412055597</created>
-      <option name="number" value="00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1456412055598</updated>
-    </task>
     <task id="LOCAL-00071" summary="Remove unused dependencies in build.gradle">
       <created>1456412747534</created>
       <option name="number" value="00071" />
@@ -1344,7 +1251,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467470744540</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="Fixed Open File Editor&#10;">
+      <created>1467472655082</created>
+      <option name="number" value="00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1467472655082</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1369,7 +1282,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="852" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1378,7 +1291,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2894309" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24736843" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39210525" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.30921054" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21387696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1412,7 +1325,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactored-parser" />
     <MESSAGE value="with syntax checker&#10;fixed movd and movq" />
     <MESSAGE value="Fix MMX, SSE, &amp; SSE2" />
     <MESSAGE value="Fix hexDoublePrecisionFPToHexInteger method" />
@@ -1437,7 +1349,8 @@
     <MESSAGE value="Merge with conversion" />
     <MESSAGE value="Fixed x87 Instructions" />
     <MESSAGE value="Fixed Calvis/Text File Editor Implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Calvis/Text File Editor Implementation" />
+    <MESSAGE value="Fixed Open File Editor&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Open File Editor&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1450,7 +1363,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java</url>
-          <line>96</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
@@ -1754,14 +1667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27322406">
-          <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.027322404">
@@ -1794,17 +1699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1467469750000" expanded="true" signature="1279:1448" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -1816,20 +1710,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="323" column="44" selection-start-line="323" selection-start-column="44" selection-end-line="323" selection-end-column="44" />
+          <caret line="599" column="5" selection-start-line="599" selection-start-column="5" selection-end-line="599" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9382#9383#0" expanded="true" />
@@ -1866,10 +1750,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="5" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
+          <folding>
+            <element signature="e#4240#4241#0" expanded="true" />
+            <element signature="e#4300#4301#0" expanded="true" />
+            <element signature="e#4339#4340#0" expanded="true" />
+            <element signature="e#4392#4393#0" expanded="true" />
+            <element signature="e#4436#4437#0" expanded="true" />
+            <element signature="e#4487#4488#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="172" column="13" selection-start-line="166" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="31" selection-start-column="3" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1467476794000" expanded="true" signature="1334:1503" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44262296">
-          <caret line="152" column="65" selection-start-line="152" selection-start-column="65" selection-end-line="152" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.4262295">
+          <caret line="260" column="5" selection-start-line="260" selection-start-column="5" selection-end-line="260" selection-end-column="5" />
           <folding />
         </state>
       </provider>

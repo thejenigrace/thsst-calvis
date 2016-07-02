@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.sql.SQLOutput;
+import java.util.prefs.Preferences;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -137,4 +135,15 @@ public class MainApp extends Application {
         launch(args);
     }
 
+    static private Preferences getPrefsRoot() {
+        return Preferences.userRoot().node("calvis");
+    }
+
+    static Preferences getOptions() {
+        return getPrefsRoot().node("options");
+    }
+
+    public static Preferences getState() {
+        return getPrefsRoot().node("state");
+    }
 }

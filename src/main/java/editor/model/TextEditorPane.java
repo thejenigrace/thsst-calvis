@@ -51,6 +51,9 @@ public class TextEditorPane extends AssemblyComponent {
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.richChanges().subscribe(change -> {
+            codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
+        });
+        codeArea.setOnKeyReleased(event -> {
             int caret = codeArea.getCaretPosition();
             System.out.println("caret = " + caret);
             String text = codeArea.getText();
@@ -75,8 +78,6 @@ public class TextEditorPane extends AssemblyComponent {
             } else {
                 this.autocomplete(codeArea.getText(), 0, caret);
             }
-
-            codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
         });
     }
 
@@ -96,11 +97,11 @@ public class TextEditorPane extends AssemblyComponent {
      * Method for configuring the highlighted keywords within the text editor
      */
     private void setCodeEnvironment() {
-        INSTRUCTION_KEYWORDS = sysCon.getInstructionKeywords();
+        INSTRUCTION_KEYWORDS = this.sysCon.getInstructionKeywords();
         INSTRUCTION_PATTERN = "\\b(" + String.join("|", INSTRUCTION_KEYWORDS) + ")\\b";
-        REGISTER_KEYWORDS = sysCon.getRegisterKeywords();
+        REGISTER_KEYWORDS = this.sysCon.getRegisterKeywords();
         REGISTER_PATTERN = "\\b(" + String.join("|", REGISTER_KEYWORDS) + ")\\b";
-        MEMORY_KEYWORDS = sysCon.getMemoryKeywords();
+        MEMORY_KEYWORDS = this.sysCon.getMemoryKeywords();
         MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
         PATTERN = Pattern.compile(
                 "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
@@ -190,8 +191,8 @@ public class TextEditorPane extends AssemblyComponent {
         this.entries = new TreeSet<>();
         this.entriesPopup = new ContextMenu();
 
-        this.entries.addAll(Arrays.asList(sysCon.getInstructionKeywords()));
-        this.entries.addAll(Arrays.asList(sysCon.getRegisterKeywords()));
+        this.entries.addAll(Arrays.asList(this.sysCon.getInstructionKeywords()));
+        this.entries.addAll(Arrays.asList(this.sysCon.getRegisterKeywords()));
 
         this.codeArea.setPopupWindow(entriesPopup);
         this.codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
@@ -252,6 +253,11 @@ public class TextEditorPane extends AssemblyComponent {
             this.codeArea.selectRange(0, 0);
             this.redo();
         }
+    }
+
+    public void setCodeAreaText(String text) {
+        this.codeArea.replaceText(text);
+//        this.codeArea.selectRange(0, 0);
     }
 
     @Override

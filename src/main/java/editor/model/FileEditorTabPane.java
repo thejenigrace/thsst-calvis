@@ -126,12 +126,11 @@ public class FileEditorTabPane {
                 new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
 
-//        String lastDirectory = MarkdownWriterFXApp.getState().get("lastDirectory", null);
-//        File file = new File((lastDirectory != null) ? lastDirectory : ".");
-//        File file = new File();
-//        if (!file.isDirectory())
-//            file = new File(".");
-//        fileChooser.setInitialDirectory(file);
+        String lastDirectory = MainApp.getState().get("lastDirectory", null);
+        File file = new File((lastDirectory != null) ? lastDirectory : ".");
+        if (!file.isDirectory())
+            file = new File(".");
+        fileChooser.setInitialDirectory(file);
         return fileChooser;
     }
 
@@ -147,10 +146,10 @@ public class FileEditorTabPane {
 
     private FileEditor[] openEditors(List<File> files, int activeIndex) {
         // close single unmodified "Untitled" tab
-        if (tabPane.getTabs().size() == 1) {
-            FileEditor fileEditor = (FileEditor) tabPane.getTabs().get(0).getUserData();
+        if (this.tabPane.getTabs().size() == 1) {
+            FileEditor fileEditor = (FileEditor) this.tabPane.getTabs().get(0).getUserData();
             if (fileEditor.getPath() == null && !fileEditor.isModified())
-                closeEditor(fileEditor, false);
+                this.closeEditor(fileEditor, false);
         }
 
         FileEditor[] fileEditors = new FileEditor[files.size()];
@@ -162,12 +161,20 @@ public class FileEditorTabPane {
             if (fileEditor == null) {
                 fileEditor = createFileEditor(path);
 
-                tabPane.getTabs().add(fileEditor.getTab());
+                this.tabPane.getTabs().add(fileEditor.getTab());
+            }
+
+            try {
+                this.workspaceController.getSysCon().attach(fileEditor.getTextEditor());
+                fileEditor.getTextEditor().build();
+                this.workspaceController.getSysCon().clear();
+            } catch ( Exception e ) {
+                e.printStackTrace();
             }
 
             // select first file
             if (i == activeIndex)
-                tabPane.getSelectionModel().select(fileEditor.getTab());
+                this.tabPane.getSelectionModel().select(fileEditor.getTab());
 
             fileEditors[i] = fileEditor;
         }

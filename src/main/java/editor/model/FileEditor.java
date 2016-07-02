@@ -9,9 +9,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import org.fxmisc.undo.UndoManager;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Jennica on 02/07/2016.
@@ -48,8 +50,8 @@ public class FileEditor {
             if ( tab.isSelected() )
                 this.activated();
         });
-
-//        this.tab.setContent(textEditorPane.getCodeArea());
+//        this.textEditorPane.pathProperty().bind(this.path);
+        this.tab.setContent(textEditorPane.getCodeArea());
         this.activated();
     }
 
@@ -110,10 +112,10 @@ public class FileEditor {
 //        if( this.tab.getTabPane() == null || !tab.isSelected() )
 //            return; // Tab is already closed or no longer active
 
-        if ( tab.getContent() != null ) {
-            this.textEditorPane.requestFocus();
-            return;
-        }
+//        if ( this.tab.getContent() != null ) {
+//            this.textEditorPane.requestFocus();
+//            return;
+//        }
 
         // Load file and create UI when the tab becomes visible the first time
         this.textEditorPane = new TextEditorPane();
@@ -136,17 +138,23 @@ public class FileEditor {
 
     private void load() {
         Path path = this.path.get();
+        System.out.println("path = " + path);
         if(path == null)
             return;
 
         try {
             byte[] bytes = Files.readAllBytes(path);
 
-            String text = null;
+            String text = new String(bytes);
 
-            text = new String(bytes);
-        } catch ( IOException ioe ) {
-            ioe.printStackTrace();
+            System.out.println("load text = " + text);
+
+            this.textEditorPane.setCodeAreaText(text);
+            this.textEditorPane.getUndoManager().mark();
+        } catch ( IOException ex ) {
+            Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Load",
+                    "Failed to load ''{0}''.\n\nReason: {1}", path, ex.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -159,11 +167,47 @@ public class FileEditor {
             Files.write(path.get(), bytes);
             this.textEditorPane.getUndoManager().mark();
             return true;
-        } catch ( IOException ioe ) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Failed to save ''{0}''.\n\nReason: {1}'");
+        } catch ( IOException ex ) {
+            Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Save",
+                    "Failed to save ''{0}''.\n\nReason: {1}", path.get(), ex.getMessage());
+            alert.showAndWait();
             return false;
+        }
+    }
+
+    private String readFile(File file) {
+        StringBuilder stringBuffer = new StringBuilder();
+        BufferedReader bufferedReader = null;
+
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+            String text;
+            while ((text = bufferedReader.readLine()) != null) {
+                stringBuffer.append(text + "\n");
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                bufferedReader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return stringBuffer.toString();
+    }
+
+    private void writeFile(String content, File file) {
+        try {
+            FileWriter fileWriter = null;
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
