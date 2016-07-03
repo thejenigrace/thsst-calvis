@@ -33,8 +33,8 @@ public class FindDialogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnUp.setVisible(false);
-        btnDown.setVisible(false);
+        this.btnUp.setVisible(false);
+        this.btnDown.setVisible(false);
     }
 
     public void setWorkspaceController(WorkspaceController workspaceController) {
@@ -50,7 +50,7 @@ public class FindDialogController implements Initializable {
     }
 
     public String getFindField() {
-        return textFieldFind.getText();
+        return this.textFieldFind.getText();
     }
 
     @FXML
@@ -90,15 +90,15 @@ public class FindDialogController implements Initializable {
             arrRange[0] = matcher.start();
             arrRange[1] = matcher.end();
 
-            findHighlightRanges.put(c, arrRange);
+            this.findHighlightRanges.put(c, arrRange);
 
             c++;
         }
 
         if (c > 0) {
-            workspaceController.onActionFind(findHighlightRanges);
-            btnUp.setVisible(true);
-            btnDown.setVisible(true);
+            this.workspaceController.onActionFind(this.findHighlightRanges);
+            this.btnUp.setDisable(false);
+            this.btnDown.setDisable(false);
         }
     }
 }

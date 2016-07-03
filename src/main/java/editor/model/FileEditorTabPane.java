@@ -17,6 +17,7 @@ import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,9 @@ public class FileEditorTabPane {
     private TabPane tabPane;
     private final ReadOnlyObjectWrapper<FileEditor> activeFileEditor = new ReadOnlyObjectWrapper<>();
     private final ReadOnlyBooleanWrapper anyFileEditorModified = new ReadOnlyBooleanWrapper();
+
+    private HashMap<Integer, int[]> findHighlightRanges;
+    private int currentFindRangeIndex;
 
     public FileEditorTabPane(WorkspaceController workspaceController, ReadOnlyDoubleProperty width, ReadOnlyDoubleProperty height) {
         System.out.println("Initialize FileEditorTabPane!");
@@ -229,7 +233,7 @@ public class FileEditorTabPane {
         return saveEditor(fileEditor);
     }
 
-    boolean closeEditor(FileEditor fileEditor, boolean save) {
+    public boolean closeEditor(FileEditor fileEditor, boolean save) {
         if (fileEditor == null)
             return true;
 
@@ -249,7 +253,7 @@ public class FileEditorTabPane {
         return true;
     }
 
-    boolean closeAllEditors() {
+    public boolean closeAllEditors() {
         FileEditor[] allEditors = getAllEditors();
         FileEditor activeEditor = activeFileEditor.get();
 
@@ -381,5 +385,123 @@ public class FileEditorTabPane {
         replacedCodeAreaText = replacedCodeAreaText.replaceAll("(?!.*\")\\s*:\\s*", ": ");
         codeArea.replaceText(replacedCodeAreaText);
         codeArea.redo();
+    }
+
+    public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
+        System.out.println("Launch onActionFind!");
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+
+        this.findHighlightRanges = findHighlightRanges;
+        if ( findHighlightRanges.size() != 0 ) {
+            currentFindRangeIndex = 0;
+            int[] range = findHighlightRanges.get(0);
+            codeArea.selectRange(range[0], range[1]);
+        }
+    }
+
+    public void findTextFieldChange(String newValue) {
+        Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
+        if ( !newValue.isEmpty() && tab != null ) {
+            CodeArea codeArea = (CodeArea) tab.getContent();
+            String find_pattern = "\\b(" + newValue + ")\\b";
+            Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
+            System.out.println("PATTERN: " + pattern.toString());
+
+            Matcher matcher = pattern.matcher(codeArea.getText());
+
+            findHighlightRanges = new HashMap<>();
+            int c = 0;
+            while ( matcher.find() ) {
+                System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
+                System.out.println("matcher.end() " + matcher.end());
+                System.out.println("matcher.start() " + matcher.start());
+
+                int[] arrRange = new int[2];
+                arrRange[0] = matcher.start();
+                arrRange[1] = matcher.end();
+
+                this.findHighlightRanges.put(c, arrRange);
+                c++;
+            }
+
+            if ( c > 0 ) {
+                onActionFind(findHighlightRanges);
+                this.workspaceController.disableFindButton(false);
+            } else {
+                this.workspaceController.disableFindButton(true);
+            }
+        } else {
+            this.workspaceController.disableFindButton(true);
+        }
+    }
+
+    public void onFindUp() {
+        try {
+            Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
+            if ( tab != null ) {
+                CodeArea codeArea = (CodeArea) tab.getContent();
+                int[] range;
+                if ( findHighlightRanges.size() > 0 ) {
+                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                    if ( currentFindRangeIndex > 0 ) {
+                        currentFindRangeIndex--;
+                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                        range = findHighlightRanges.get(currentFindRangeIndex);
+                        codeArea.selectRange(range[0], range[1]);
+                    }
+                }
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onFindDown() {
+        try {
+            Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
+            if ( tab != null ) {
+                CodeArea codeArea = (CodeArea) tab.getContent();
+                int[] range;
+                if ( findHighlightRanges.size() > 1 ) {
+                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
+
+                    if ( currentFindRangeIndex < findHighlightRanges.size() - 1 ) {
+                        currentFindRangeIndex++;
+                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+                        range = findHighlightRanges.get(currentFindRangeIndex);
+                        codeArea.selectRange(range[0], range[1]);
+                    }
+                }
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onActionFindAndReplace(String find, String replace) {
+        System.out.println("BTW find: " + find);
+        System.out.println("BTW replace: " + replace);
+
+        Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
+
+        if ( tab != null ) {
+            CodeArea codeArea = (CodeArea) tab.getContent();
+            String text = codeArea.getText();
+            Pattern p = Pattern.compile(find);
+            Matcher m = p.matcher(text);
+
+            StringBuffer sb = new StringBuffer();
+            int c = 0;
+            while ( m.find() ) {
+                m.appendReplacement(sb, replace);
+                c++;
+            }
+
+            System.out.println("count: " + c);
+            m.appendTail(sb);
+            System.out.println("sb: " + sb);
+            codeArea.replaceText(sb.toString());
+        }
     }
 }
