@@ -6,22 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed Find, Find &amp; Replace and MenuItems Icon">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mov.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added visualization engine">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/cmpxchgs8.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Instructions/CMPXCHGS8.bsh.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/lea.bsh.java" afterPath="$PROJECT_DIR$/Instructions/lea.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/MemoryController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/MemoryController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,18 +62,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.94207835">
-              <caret line="345" column="49" selection-start-line="345" selection-start-column="49" selection-end-line="345" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -468,9 +448,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87StatusRegister.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorLogger.java" />
@@ -506,19 +483,22 @@
         <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/Animation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/MemoryController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/Instructions/lea.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mov.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
         <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java" />
+        <option value="$PROJECT_DIR$/Instructions/cmpxchgs8.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/cmpxchgs8.java" />
       </list>
     </option>
   </component>
@@ -825,20 +805,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Instructions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -872,23 +838,23 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
-      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="configuration.model.engine" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Goodwin Chua\Documents\Workspace\thsst-calvis\Instructions" />
       <recent name="$PROJECT_DIR$/Instructions" />
       <recent name="$PROJECT_DIR$/src/main/java/api" />
       <recent name="$PROJECT_DIR$/src/main/java/configuration/model/datatype" />
       <recent name="$PROJECT_DIR$/src/main/resources/img" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="configuration.model.engine" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="configuration.model.engine" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
+      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
@@ -1118,12 +1084,6 @@
       <created>1453789344795</created>
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
-    </task>
-    <task id="LOCAL-00074" summary="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;">
-      <created>1456542863655</created>
-      <option name="number" value="00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1456542863655</updated>
     </task>
     <task id="LOCAL-00075" summary="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;">
       <created>1456542952635</created>
@@ -1413,7 +1373,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467526908791</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Added visualization engine">
+      <created>1467718001937</created>
+      <option name="number" value="00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1467718001939</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1438,7 +1404,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
@@ -1449,7 +1415,7 @@
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23676248" sideWeight="0.49546143" order="8" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21331316" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2344932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18884121" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1508,7 +1474,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix SSE2 Conversion" />
     <MESSAGE value="Merge" />
     <MESSAGE value="FIx SSE2 Comparison Instructions" />
     <MESSAGE value="Fix GP Instructions" />
@@ -1533,7 +1498,8 @@
     <MESSAGE value="Fixed Open, Save &amp; Save As File Editor&#10;" />
     <MESSAGE value="Fixed Open, Save &amp; Save As Toolbar Buttons&#10;" />
     <MESSAGE value="Fixed Find, Find &amp; Replace and MenuItems Icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Find, Find &amp; Replace and MenuItems Icon" />
+    <MESSAGE value="Added visualization engine" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added visualization engine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1566,20 +1532,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DataTypeMismatchException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15277778">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/fldln2.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/fnclex.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1843,16 +1795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14480409">
@@ -1895,21 +1837,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65587735">
           <caret line="209" column="48" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
           <folding>
-            <element signature="e#2989#2990#0" expanded="true" />
-            <element signature="e#3053#3054#0" expanded="true" />
+            <element signature="e#2989#2990#0" expanded="false" />
+            <element signature="e#3053#3054#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1957,11 +1891,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23168655">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94207835">
-          <caret line="345" column="49" selection-start-line="345" selection-start-column="49" selection-end-line="345" selection-end-column="49" />
+        <state vertical-scroll-proportion="-0.01362862">
+          <caret line="316" column="48" selection-start-line="316" selection-start-column="48" selection-end-line="316" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/cmpxchgs8.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4923339">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5076661">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#1764#1765#0" expanded="true" />
+            <element signature="e#1818#1819#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3475298">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#386#387#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

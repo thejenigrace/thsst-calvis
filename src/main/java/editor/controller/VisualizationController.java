@@ -4,6 +4,7 @@ import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
 import javafx.application.Platform;
 import javafx.scene.control.Tab;
+import simulatorvisualizer.model.AnimationMap;
 import simulatorvisualizer.model.CalvisAnimation;
 import simulatorvisualizer.model.instructionanimation.*;
 
@@ -15,13 +16,9 @@ import java.util.HashMap;
  */
 public class VisualizationController extends AssemblyComponent {
 
-    private static final double animationX = 500;
-    private static final double animationY = 130;
-
     private Tab tab;
     private CalvisFormattedInstruction currentInstruction;
-    private HashMap<String, CalvisAnimation> animationMap;
-
+    private AnimationMap animationMap;
 
     public VisualizationController() {
         this.tab = new Tab();
@@ -47,10 +44,9 @@ public class VisualizationController extends AssemblyComponent {
     }
 
     public void animate() {
-        // traverse through the list
         // find the appropriate animation for currentInstruction
         String name = this.currentInstruction.getName();
-
+        // get CalvisAnimation from the Animation Map
         CalvisAnimation animation = this.animationMap.get(name);
 
         if ( animation == null ) {
@@ -63,20 +59,13 @@ public class VisualizationController extends AssemblyComponent {
 
     @Override
     public void refresh() {
-//        this.tab.setContent(root);
     }
 
     @Override
     public void build() {
-        // instantiate animation classes
-        buildAnimations();
+        this.animationMap = new AnimationMap();
     }
 
-    private void buildAnimations() {
-        // LIST
-        this.animationMap = new HashMap<>();
-        this.animationMap.put("MOV", new Mov());
-    }
 
     public void attachCalvisInstruction(CalvisFormattedInstruction CalvisInstruction) {
         this.currentInstruction = CalvisInstruction;

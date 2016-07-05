@@ -17,12 +17,11 @@ public abstract class CalvisAnimation {
     public CalvisAnimation() {
         this.timeline = new Timeline();
         this.root = new Group();
-
     }
-
-    public abstract void animate(Tab tab);
 
     public void setCurrentInstruction(CalvisFormattedInstruction currentInstruction) {
         this.currentInstruction = currentInstruction;
     }
+
+    public abstract void animate(Tab tab);
 }
