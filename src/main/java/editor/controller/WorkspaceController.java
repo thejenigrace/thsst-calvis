@@ -213,9 +213,15 @@ public class WorkspaceController implements Initializable {
 
         ConsoleController consoleController = new ConsoleController();
         this.otherWindowsTabPane.getTabs().add(consoleController.getTab());
-        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab(null));
         this.sysCon.attach(consoleController);
         consoleController.build();
+
+        VisualizationController visualController = new VisualizationController();
+        this.otherWindowsTabPane.getTabs().add(visualController.getTab());
+        this.sysCon.attach(visualController);
+        visualController.build();
+
+        this.otherWindowsTabPane.getTabs().add(createErrorLoggerTab(null));
     }
 
     private Tab createErrorLoggerTab(Exception e) throws Exception {
