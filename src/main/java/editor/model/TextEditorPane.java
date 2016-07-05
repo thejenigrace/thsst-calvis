@@ -54,30 +54,34 @@ public class TextEditorPane extends AssemblyComponent {
             codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
         });
         codeArea.setOnKeyReleased(event -> {
-            int caret = codeArea.getCaretPosition();
-            System.out.println("caret = " + caret);
-            String text = codeArea.getText();
+           try {
+               int caret = codeArea.getCaretPosition();
+               System.out.println("caret = " + caret);
+               String text = codeArea.getText();
 
-            int count = 0;
-            int start = 0;
-            for ( int i = caret - 1; i > 0; i-- ) {
-                System.out.println("try = " + codeArea.getText(i, caret));
-                start = i;
-                if ( codeArea.getText(i, caret - count).equals(" ") )
-                    break;
+               int count = 0;
+               int start = 0;
+               for ( int i = caret - 1; i > 0; i-- ) {
+                   System.out.println("try = " + codeArea.getText(i, caret));
+                   start = i;
+                   if ( codeArea.getText(i, caret - count).equals(" ") )
+                       break;
 
-                count++;
-            }
+                   count++;
+               }
 
-            System.out.println("count = " + count);
+               System.out.println("count = " + count);
 
-            if ( caret > 1 && codeArea.getText(caret - count - 1, caret - count).equals(" ") ) {
-                System.out.println("space");
-                System.out.println(codeArea.getText(caret - count, caret));
-                this.autocomplete(codeArea.getText(caret - count, caret), caret - count, caret);
-            } else {
-                this.autocomplete(codeArea.getText(), 0, caret);
-            }
+               if ( caret > 1 && codeArea.getText(caret - count - 1, caret - count).equals(" ") ) {
+                   System.out.println("space");
+                   System.out.println(codeArea.getText(caret - count, caret));
+                   this.autocomplete(codeArea.getText(caret - count, caret), caret - count, caret);
+               } else {
+                   this.autocomplete(codeArea.getText(), 0, caret);
+               }
+           } catch ( Exception e ) {
+               e.printStackTrace();
+           }
         });
     }
 

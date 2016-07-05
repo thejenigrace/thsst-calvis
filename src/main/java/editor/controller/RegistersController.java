@@ -74,16 +74,13 @@ public class RegistersController extends AssemblyComponent implements Initializa
     }
 
 
-    public String convert(String registerName, String hexValue) {
+    public String convert(String registerName, String hexValue) throws NumberFormatException {
 //        System.out.println(registerName + ": " + hexValue);
 
         String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
         String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
 
-        if ( Arrays.asList(gpRegisters).contains(registerName) ) {
-            Integer integerValue = Integer.parseInt(hexValue, 16);
-            return integerValue.toString();
-        } else if ( Arrays.asList(mmxRegisters).contains(mmxRegisters) ) {
+        if ( Arrays.asList(gpRegisters).contains(registerName) || Arrays.asList(mmxRegisters).contains(registerName) ) {
             Long longValue = Long.parseLong(hexValue, 16);
             return longValue.toString();
         }
