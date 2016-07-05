@@ -46,8 +46,6 @@ public class TextEditorPane extends AssemblyComponent {
     private static Pattern PATTERN;
 
     public TextEditorPane() {
-        System.out.println("Initialize TextEditorPane!");
-        
         this.codeArea = new CodeArea();
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
@@ -64,7 +62,6 @@ public class TextEditorPane extends AssemblyComponent {
                     wordCount++;
                 }
 
-                System.out.println("KeyCode = " + event.getCode().toString());
                 if ( !event.getCode().equals(KeyCode.UP) && !event.getCode().equals(KeyCode.DOWN) &&
                         !event.getCode().equals(KeyCode.LEFT) && !event.getCode().equals(KeyCode.RIGHT)
                         && !event.getCode().equals(KeyCode.ENTER) && !event.getCode().equals(KeyCode.TAB) ) {

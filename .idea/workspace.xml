@@ -6,11 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fixed TextEditorPane and Register Values Conversion">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Instructions/cmpxchgs8.java" afterPath="$PROJECT_DIR$/Instructions/cmpxchgs8.bsh.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Remove debugging lines in the Text Editor">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" afterPath="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -982,18 +979,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00075" summary="- Memory Search Address&#10;- Added Settings MenuItem&#10;- Update Find TextField with Clear Button&#10;- Fix UI of Configuration Environment&#10;">
-      <created>1456542952635</created>
-      <option name="number" value="00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1456542952635</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Fix Instructions List">
-      <created>1456543152088</created>
-      <option name="number" value="00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1456543152088</updated>
-    </task>
     <task id="LOCAL-00077" summary="Fix UI for Configuration Environment">
       <created>1456545924203</created>
       <option name="number" value="00077" />
@@ -1276,7 +1261,19 @@
       <option name="project" value="LOCAL" />
       <updated>1467704243711</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Fixed Autocomplete feature when typing in the text editor">
+      <created>1467739758813</created>
+      <option name="number" value="00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1467739758814</updated>
+    </task>
+    <task id="LOCAL-00125" summary="Remove debugging lines in the Text Editor">
+      <created>1467739918181</created>
+      <option name="number" value="00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1467739918181</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1309,7 +1306,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2894309" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24736843" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24736843" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.30921054" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1344,9 +1341,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Merge" />
-    <MESSAGE value="FIx SSE2 Comparison Instructions" />
-    <MESSAGE value="Fix GP Instructions" />
     <MESSAGE value="Fixed SSE &amp; SSE2 Instructions" />
     <MESSAGE value="Merged with &quot;almost-there&quot;" />
     <MESSAGE value="Fixed GP Arithmetic Instructions" />
@@ -1369,7 +1363,10 @@
     <MESSAGE value="Fixed Open, Save &amp; Save As Toolbar Buttons&#10;" />
     <MESSAGE value="Fixed Find, Find &amp; Replace and MenuItems Icon" />
     <MESSAGE value="Fixed TextEditorPane and Register Values Conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed TextEditorPane and Register Values Conversion" />
+    <MESSAGE value="Fixed Autocomplete feature when typing in the text editor" />
+    <MESSAGE value="Remove debugging printline in the Text Editor" />
+    <MESSAGE value="Remove debugging lines in the Text Editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove debugging lines in the Text Editor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1754,19 +1751,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37704918">
-          <caret line="148" column="36" selection-start-line="148" selection-start-column="36" selection-end-line="148" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.1213236">
           <caret line="141" column="42" selection-start-line="141" selection-start-column="42" selection-end-line="141" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.75">
+          <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
