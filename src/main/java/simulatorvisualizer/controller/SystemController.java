@@ -5,6 +5,7 @@ import configuration.model.engine.*;
 import configuration.model.exceptions.DataTypeMismatchException;
 import configuration.model.exceptions.DuplicateLabelException;
 import editor.controller.ConsoleController;
+import editor.controller.VisualizationController;
 import editor.controller.WorkspaceController;
 import editor.model.AssemblyComponent;
 import javafx.application.Platform;
@@ -27,6 +28,7 @@ public class SystemController {
 
     private List<AssemblyComponent> observerList;
     private ConsoleController console;
+    private VisualizationController visualizer;
     private SimulationState state;
     private Thread thread;
     private WorkspaceController workspaceController;
@@ -61,6 +63,8 @@ public class SystemController {
         observerList.add(observer);
         if ( observer instanceof ConsoleController ) {
             this.console = (ConsoleController) observer;
+        } else if ( observer instanceof VisualizationController ) {
+            this.visualizer = (VisualizationController) observer;
         }
     }
 
@@ -267,7 +271,7 @@ public class SystemController {
         // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
         boolean flag = true;
         try {
-            flag = executionMap.get(currentLine).execute(console); // EXECUTE THE CALVIS INSTRUCTION
+            flag = executionMap.get(currentLine).execute(console, visualizer); // EXECUTE THE CALVIS INSTRUCTION
         } catch (Exception e) {
             System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
             System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());

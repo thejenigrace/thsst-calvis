@@ -8,6 +8,7 @@ import configuration.model.exceptions.MemoryRestrictedAccessException;
 import configuration.model.exceptions.MemoryToMemoryException;
 import configuration.model.exceptions.MissingSizeDirectiveException;
 import editor.controller.ConsoleController;
+import editor.controller.VisualizationController;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,8 @@ public class CalvisFormattedInstruction {
         this.allowable = allowable;
     }
 
-    public boolean execute(ConsoleController consoleController) throws Exception {
+    public boolean execute(ConsoleController consoleController,
+                           VisualizationController visualizationController) throws Exception {
         int numParameters = 0;
         if ( params != null ) {
             numParameters = params.length;
@@ -60,16 +62,20 @@ public class CalvisFormattedInstruction {
                         this.console = consoleController;
                         this.ins.consoleExecute(registers, memory, consoleController);
                     } else {
+                        visualizationController.attachCalvisInstruction(this);
                         this.ins.execute(registers, memory);
                     }
                     break;
                 case 1:
+                    visualizationController.attachCalvisInstruction(this);
                     this.ins.execute(tokens[0], registers, memory);
                     break;
                 case 2:
+                    visualizationController.attachCalvisInstruction(this);
                     this.ins.execute(tokens[0], tokens[1], registers, memory);
                     break;
                 case 3:
+                    visualizationController.attachCalvisInstruction(this);
                     this.ins.execute(tokens[0], tokens[1], tokens[2], registers, memory);
                     break;
                 default:
@@ -293,6 +299,11 @@ public class CalvisFormattedInstruction {
             }
         }
         return tokens;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + " : " + this.tokens;
     }
 
 }
