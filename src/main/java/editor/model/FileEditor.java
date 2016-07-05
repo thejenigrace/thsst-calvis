@@ -44,18 +44,12 @@ public class FileEditor {
         this.modified.addListener((observable, oldPath, newPath) -> updateTab());
         this.updateTab();
 
-//        this.tab.setOnSelectionChanged(e -> {
-//            if ( tab.isSelected() ) {
-//                Platform.runLater(() -> this.activated());
-//            }
-//        });
-
         this.tab.setOnSelectionChanged(e -> {
             if ( tab.isSelected() )
                 this.activated();
         });
-//        this.textEditorPane.pathProperty().bind(this.path);
         this.tab.setContent(textEditorPane.getCodeArea());
+
         this.activated();
     }
 

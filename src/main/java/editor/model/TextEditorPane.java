@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import org.fxmisc.richtext.*;
 import org.fxmisc.undo.UndoManager;
 
@@ -23,7 +24,7 @@ import java.util.regex.Pattern;
  */
 public class TextEditorPane extends AssemblyComponent {
 
-//    private WorkspaceController workspaceController;
+    //    private WorkspaceController workspaceController;
     private CodeArea codeArea;
     private Pattern lineByLinePattern;
 
@@ -55,45 +56,42 @@ public class TextEditorPane extends AssemblyComponent {
             codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
         });
         codeArea.setOnKeyReleased(event -> {
-           try {
-               int caret = codeArea.getCaretPosition();
-               System.out.println("caret = " + caret);
-               String text = codeArea.getText();
+            try {
+                int caret = codeArea.getCaretPosition();
+                int wordCount = 0;
+                for ( int i = caret - 1; i > 0; i-- ) {
+                    if ( codeArea.getText(i, caret - wordCount).equals(" ") )
+                        break;
+                    wordCount++;
+                }
 
-               int count = 0;
-               int start = 0;
-               for ( int i = caret - 1; i > 0; i-- ) {
-                   System.out.println("try = " + codeArea.getText(i, caret));
-                   start = i;
-                   if ( codeArea.getText(i, caret - count).equals(" ") )
-                       break;
-
-                   count++;
-               }
-
-               System.out.println("count = " + count);
-
-               if ( caret > 1 && codeArea.getText(caret - count - 1, caret - count).equals(" ") ) {
-                   System.out.println("space");
-                   System.out.println(codeArea.getText(caret - count, caret));
-                   this.autocomplete(codeArea.getText(caret - count, caret), caret - count, caret);
-               } else {
-                   this.autocomplete(codeArea.getText(), 0, caret);
-               }
-           } catch ( Exception e ) {
-               e.printStackTrace();
-           }
+                System.out.println("KeyCode = " + event.getCode().toString());
+                if ( !event.getCode().equals(KeyCode.UP) && !event.getCode().equals(KeyCode.DOWN) &&
+                        !event.getCode().equals(KeyCode.LEFT) && !event.getCode().equals(KeyCode.RIGHT)
+                        && !event.getCode().equals(KeyCode.ENTER) && !event.getCode().equals(KeyCode.TAB) ) {
+                    // Check if the current character is whitespace; start autocomplete after the whitespace
+                    if ( caret > 1 && codeArea.getText(caret - wordCount - 1, caret - wordCount).equals(" ") )
+                        this.autocomplete(codeArea.getText(caret - wordCount, caret), caret - wordCount, caret);
+                    else
+                        this.autocomplete(codeArea.getText(), 0, caret);
+                }
+            } catch ( Exception e ) {
+                e.printStackTrace();
+            }
         });
     }
 
     // 'path' property
     private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
+
     public Path getPath() {
         return path.get();
     }
+
     public void setPath(Path path) {
         this.path.set(path);
     }
+
     public ObjectProperty<Path> pathProperty() {
         return path;
     }
@@ -146,7 +144,9 @@ public class TextEditorPane extends AssemblyComponent {
     }
 
     private void autocomplete(String text, int start, int end) {
-        if ( text.length() == 0 ) {
+        System.out.println("text = " + text + "; text.length() = " + text.length());
+        text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
+        if ( text.length() == 0 || this.entries.contains(text) ) {
             System.out.println("HIDE!");
             this.entriesPopup.hide();
         } else {
@@ -192,7 +192,6 @@ public class TextEditorPane extends AssemblyComponent {
     }
 
     private void setCodeAreaAutocomplete() {
-        System.out.println("Set CodeArea AutoComplete!");
         this.entries = new TreeSet<>();
         this.entriesPopup = new ContextMenu();
 
@@ -204,8 +203,16 @@ public class TextEditorPane extends AssemblyComponent {
         this.codeArea.setPopupAnchorOffset(new Point2D(4, 4));
     }
 
+    public void setCodeAreaText(String text) {
+        this.codeArea.replaceText(text);
+    }
+
     public Node getCodeArea() {
         return codeArea;
+    }
+
+    public String getCodeAreaText() {
+        return codeArea.getText();
     }
 
     public UndoManager getUndoManager() {
@@ -222,10 +229,6 @@ public class TextEditorPane extends AssemblyComponent {
 
     public void requestFocus() {
         Platform.runLater(() -> codeArea.requestFocus());
-    }
-
-    public String getCodeAreaText() {
-        return codeArea.getText();
     }
 
     @Override
@@ -259,11 +262,6 @@ public class TextEditorPane extends AssemblyComponent {
             this.codeArea.selectRange(0, 0);
             this.redo();
         }
-    }
-
-    public void setCodeAreaText(String text) {
-        this.codeArea.replaceText(text);
-//        this.codeArea.selectRange(0, 0);
     }
 
     @Override
