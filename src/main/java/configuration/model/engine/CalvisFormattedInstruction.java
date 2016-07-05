@@ -303,7 +303,23 @@ public class CalvisFormattedInstruction {
 
     @Override
     public String toString(){
-        return this.name + " : " + this.tokens;
+        return this.name + " : " + this.tokens.toString();
+    }
+
+    public String getName(){
+        return this.name.toUpperCase();
+    }
+
+    public Token[] getParameterTokens() {
+        return this.tokens;
+    }
+
+    public RegisterList getRegisters() {
+        return this.registers;
+    }
+
+    public Memory getMemory() {
+        return this.memory;
     }
 
 }

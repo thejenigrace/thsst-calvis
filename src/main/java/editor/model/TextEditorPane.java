@@ -1,5 +1,6 @@
 package editor.model;
 
+import configuration.model.engine.CalvisFormattedInstruction;
 import editor.MainApp;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -228,8 +229,9 @@ public class TextEditorPane extends AssemblyComponent {
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         System.out.println("Update TextEditorPane!");
+        String currentLine = currentInstruction.toString();
         if ( currentLine != null ) {
             String codeAreaText = this.codeArea.getText();
             Matcher matcher = this.lineByLinePattern.matcher(codeAreaText);

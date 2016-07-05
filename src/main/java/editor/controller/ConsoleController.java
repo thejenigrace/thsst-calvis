@@ -45,6 +45,10 @@ public class ConsoleController extends AssemblyComponent {
                 }
             }
 
+            @Override
+            public void clear() {
+                super.replaceText(0, super.getLength(), "");
+            }
         };
         this.textArea.setWrapText(true);
         this.textArea.getStyleClass().add("console");
@@ -67,7 +71,7 @@ public class ConsoleController extends AssemblyComponent {
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
 //        Platform.runLater(
 //                new Thread() {
 //                    public void run() {
@@ -119,6 +123,7 @@ public class ConsoleController extends AssemblyComponent {
     }
 
     public void cls(){
+        System.out.println("CLEAR");
         this.state = true;
         this.textArea.clear();
         this.state = false;

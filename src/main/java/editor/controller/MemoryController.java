@@ -1,5 +1,6 @@
 package editor.controller;
 
+import configuration.model.engine.CalvisFormattedInstruction;
 import configuration.model.engine.Memory;
 import editor.model.AssemblyComponent;
 import javafx.beans.property.SimpleStringProperty;
@@ -51,7 +52,7 @@ public class MemoryController extends AssemblyComponent implements Initializable
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         tableViewMemory.refresh();
     }
 

@@ -1,5 +1,6 @@
 package editor.controller;
 
+import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
 import editor.model.ErrorLog;
 import com.github.pfmiles.dropincc.DropinccException;
@@ -39,7 +40,7 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         tableViewErrorLogger.refresh();
     }
 

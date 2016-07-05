@@ -68,10 +68,10 @@ public class SystemController {
         }
     }
 
-    public void notifyAllObservers(CalvisFormattedInstruction currentLine, int lineNumber) {
-        if (currentLine != null) {
+    public void notifyAllObservers(CalvisFormattedInstruction currentInstruction, int lineNumber) {
+        if (currentInstruction != null) {
             for (AssemblyComponent a : observerList) {
-                a.update(currentLine.toString(), lineNumber);
+                a.update(currentInstruction, lineNumber);
             }
         } else {
             for (AssemblyComponent a : observerList) {

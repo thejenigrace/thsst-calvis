@@ -1,5 +1,6 @@
 package editor.model;
 
+import configuration.model.engine.CalvisFormattedInstruction;
 import simulatorvisualizer.controller.SystemController;
 
 /**
@@ -9,7 +10,7 @@ public abstract class AssemblyComponent {
 
     protected SystemController sysCon;
 
-    public abstract void update(String currentLine, int lineNumber);
+    public abstract void update(CalvisFormattedInstruction currentInstruction, int lineNumber);
 
     public abstract void refresh();
 

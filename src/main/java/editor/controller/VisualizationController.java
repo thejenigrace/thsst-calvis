@@ -2,15 +2,13 @@ package editor.controller;
 
 import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.scene.Group;
+import javafx.application.Platform;
 import javafx.scene.control.Tab;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
+import simulatorvisualizer.model.CalvisAnimation;
+import simulatorvisualizer.model.instructionanimation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jennica on 07/02/2016.
@@ -21,16 +19,13 @@ public class VisualizationController extends AssemblyComponent {
     private static final double animationY = 130;
 
     private Tab tab;
-    private Group root;
-    private int lineBefore;
     private CalvisFormattedInstruction currentInstruction;
+    private HashMap<String, CalvisAnimation> animationMap;
+
 
     public VisualizationController() {
-        this.lineBefore = 0;
         this.tab = new Tab();
         this.tab.setText("Visualization");
-        this.root = new Group();
-        this.tab.setContent(root);
     }
 
     public Tab getTab() {
@@ -38,70 +33,49 @@ public class VisualizationController extends AssemblyComponent {
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
-        System.out.println(currentInstruction);
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
+        attachCalvisInstruction(currentInstruction);
+        Platform.runLater(
+                new Thread() {
+                    public void run() {
+                        tab.setContent(null);
+                        animate();
+                    }
+                }
+        );
+
+    }
+
+    public void animate() {
+        // traverse through the list
+        // find the appropriate animation for currentInstruction
+        String name = this.currentInstruction.getName();
+
+        CalvisAnimation animation = this.animationMap.get(name);
+
+        if ( animation == null ) {
+            // no animation
+        } else {
+            animation.setCurrentInstruction(this.currentInstruction);
+            animation.animate(tab);
+        }
     }
 
     @Override
     public void refresh() {
+//        this.tab.setContent(root);
     }
 
     @Override
     public void build() {
-//        Group circles = new Group();
-//        for ( int i = 0; i < 30; i++ ) {
-//            Circle circle = new Circle(30, Color.web("white", 0.05));
-//            circle.setStrokeType(StrokeType.OUTSIDE);
-//            circle.setStroke(Color.web("blue", 0.16));
-//            circle.setStrokeWidth(4);
-//            circles.getChildren().add(circle);
-//        }
+        // instantiate animation classes
+        buildAnimations();
+    }
 
-//        root.getChildren().add(circles);
-
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.setAutoReverse(true);
-
-        Rectangle destination = new Rectangle(100, 40, Color.AQUA);
-        Rectangle source = new Rectangle(100, 40, Color.FUCHSIA);
-
-        destination.setY(100);
-        destination.setX(100);
-
-        root.getChildren().add(destination);
-        root.getChildren().add(source);
-
-        Text destinationText = new Text("EAX: 0x1234ABCD");
-        destinationText.setX(100);
-        destinationText.setY(100);
-
-        root.getChildren().add(destinationText);
-
-        timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, // set start position at 0
-                        new KeyValue(source.translateXProperty(), 300),
-                        new KeyValue(source.translateYProperty(), 100)
-                ),
-                new KeyFrame(new Duration(3000), // set end position at 40s
-                        new KeyValue(source.translateXProperty(), 100),
-                        new KeyValue(source.translateYProperty(), 100)
-                )
-        );
-//        for ( Node circle : circles.getChildren() ) {
-//            timeline.getKeyFrames().addAll(
-//                    new KeyFrame(Duration.ZERO, // set start position at 0
-//                            new KeyValue(circle.translateXProperty(), random() * animationX),
-//                            new KeyValue(circle.translateYProperty(), random() * animationY)
-//                    ),
-//                    new KeyFrame(new Duration(40000), // set end position at 40s
-//                            new KeyValue(circle.translateXProperty(), random() * animationX),
-//                            new KeyValue(circle.translateYProperty(), random() * animationY)
-//                    )
-//            );
-//        }
-        // play 40s of animation
-        timeline.play();
+    private void buildAnimations() {
+        // LIST
+        this.animationMap = new HashMap<>();
+        this.animationMap.put("MOV", new Mov());
     }
 
     public void attachCalvisInstruction(CalvisFormattedInstruction CalvisInstruction) {

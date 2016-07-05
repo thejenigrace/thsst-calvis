@@ -3,8 +3,6 @@ execute(des, src, registers, memory) {
 		String effectiveAddress = src.getValue();
 		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
 
-		System.out.println("effectiveAddress: " + effectiveAddress);
-
 		int desRegSize = registers.getBitSize(des);
 
 		if ( (desRegSize == 32 || desRegSize == 16)

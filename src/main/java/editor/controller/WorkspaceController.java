@@ -166,6 +166,11 @@ public class WorkspaceController implements Initializable {
         this.consoleAndErrorLoggerTabPane.getTabs().add(createErrorLoggerTab(null));
         this.sysCon.attach(consoleController);
         consoleController.build();
+
+        VisualizationController visualizationController = new VisualizationController();
+        this.consoleAndErrorLoggerTabPane.getTabs().add(visualizationController.getTab());
+        this.sysCon.attach(visualizationController);
+        visualizationController.build();
     }
 
     private void showFileEditorPane() {

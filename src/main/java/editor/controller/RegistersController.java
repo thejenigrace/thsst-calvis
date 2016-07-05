@@ -1,5 +1,6 @@
 package editor.controller;
 
+import configuration.model.engine.CalvisFormattedInstruction;
 import configuration.model.engine.Register;
 import editor.model.AssemblyComponent;
 import editor.model.Flag;
@@ -130,7 +131,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     }
 
     @Override
-    public void update(String currentLine, int lineNumber) {
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         treeTableViewRegister.refresh();
         tableViewFlags1.refresh();
         tableViewFlags2.refresh();
