@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
  */
 public class TextEditorPane extends AssemblyComponent {
 
-    //    private WorkspaceController workspaceController;
     private CodeArea codeArea;
     private Pattern lineByLinePattern;
 
@@ -48,7 +47,7 @@ public class TextEditorPane extends AssemblyComponent {
 
     public TextEditorPane() {
         System.out.println("Initialize TextEditorPane!");
-//        this.workspaceController = workspaceController;
+        
         this.codeArea = new CodeArea();
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
@@ -144,13 +143,10 @@ public class TextEditorPane extends AssemblyComponent {
     }
 
     private void autocomplete(String text, int start, int end) {
-        System.out.println("text = " + text + "; text.length() = " + text.length());
         text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
         if ( text.length() == 0 || this.entries.contains(text) ) {
-            System.out.println("HIDE!");
             this.entriesPopup.hide();
         } else {
-            System.out.println("SHOW!");
             LinkedList<String> searchResult = new LinkedList<>();
             searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
             if ( this.entries.size() > 0 ) {
@@ -172,14 +168,6 @@ public class TextEditorPane extends AssemblyComponent {
             final String result = searchResult.get(i);
             Label entryLabel = new Label(result);
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-//            item.setOnAction(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent event) {
-//                    // TODO: Replace the word being completed in the codeArea
-//                    codeArea.replaceText(start, end, result);
-//                    entriesPopup.hide();
-//                }
-//            });
             item.setOnAction((event) -> {
                 // TODO: Replace the word being completed in the codeArea
                 this.codeArea.replaceText(start, end, result.toUpperCase());
