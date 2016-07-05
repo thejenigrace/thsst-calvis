@@ -9,11 +9,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import org.fxmisc.undo.UndoManager;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Jennica on 02/07/2016.
@@ -34,7 +32,6 @@ public class FileEditor {
     private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
     public FileEditor(WorkspaceController workspaceController, Path path) {
-        System.out.println("Initialize FileEditor!");
         this.workspaceController = workspaceController;
 
         this.tab.setUserData(this);
@@ -46,11 +43,11 @@ public class FileEditor {
 
         this.tab.setOnSelectionChanged(e -> {
             if ( tab.isSelected() )
-                this.activated();
+                this.activate();
         });
         this.tab.setContent(textEditorPane.getCodeArea());
 
-        this.activated();
+        this.activate();
     }
 
     public Tab getTab() {
@@ -84,10 +81,14 @@ public class FileEditor {
     }
 
     // 'canUndo' property
-    public BooleanProperty canUndoProperty() { return canUndo; }
+    public BooleanProperty canUndoProperty() {
+        return canUndo;
+    }
 
     // 'canRedo' property
-    public BooleanProperty canRedoProperty() { return canRedo; }
+    public BooleanProperty canRedoProperty() {
+        return canRedo;
+    }
 
     private void updateTab() {
         Path path = this.path.get();
@@ -96,9 +97,7 @@ public class FileEditor {
         this.tab.setGraphic(isModified() ? new Text("*") : null);
     }
 
-    private void activated() {
-        System.out.println("Activated TextEditorPane!");
-
+    private void activate() {
 //        if( this.tab.getTabPane() == null || !tab.isSelected() )
 //            return; // Tab is already closed or no longer active
 
@@ -107,10 +106,10 @@ public class FileEditor {
 //            return;
 //        }
 
-        // Load file and create UI when the tab becomes visible the first time
         this.textEditorPane = new TextEditorPane();
         this.textEditorPane.pathProperty().bind(path);
 
+        // Load file and Create UI when the tab becomes visible the first time
         this.load();
 
         // Clear undo history after first load
@@ -128,17 +127,12 @@ public class FileEditor {
 
     private void load() {
         Path path = this.path.get();
-        System.out.println("path = " + path);
-        if(path == null)
+        if ( path == null )
             return;
 
         try {
             byte[] bytes = Files.readAllBytes(path);
-
             String text = new String(bytes);
-
-            System.out.println("load text = " + text);
-
             this.textEditorPane.setCodeAreaText(text);
             this.textEditorPane.getUndoManager().mark();
         } catch ( IOException ex ) {
@@ -150,7 +144,6 @@ public class FileEditor {
 
     public boolean save() {
         String text = textEditorPane.getCodeAreaText();
-
         byte[] bytes = text.getBytes();
 
         try {
@@ -162,42 +155,6 @@ public class FileEditor {
                     "Failed to save ''{0}''.\n\nReason: {1}", path.get(), ex.getMessage());
             alert.showAndWait();
             return false;
-        }
-    }
-
-    private String readFile(File file) {
-        StringBuilder stringBuffer = new StringBuilder();
-        BufferedReader bufferedReader = null;
-
-        try {
-            bufferedReader = new BufferedReader(new FileReader(file));
-            String text;
-            while ((text = bufferedReader.readLine()) != null) {
-                stringBuffer.append(text + "\n");
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                bufferedReader.close();
-            } catch (IOException ex) {
-                Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return stringBuffer.toString();
-    }
-
-    private void writeFile(String content, File file) {
-        try {
-            FileWriter fileWriter = null;
-            fileWriter = new FileWriter(file);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch (IOException ex) {
-            Logger.getLogger(WorkspaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -36,7 +36,6 @@ public class FileEditorTabPane {
     private int currentFindRangeIndex;
 
     public FileEditorTabPane(WorkspaceController workspaceController, ReadOnlyDoubleProperty width, ReadOnlyDoubleProperty height) {
-        System.out.println("Initialize FileEditorTabPane!");
         this.workspaceController = workspaceController;
         this.tabPane = new TabPane();
         this.tabPane.setFocusTraversable(false);
