@@ -63,10 +63,10 @@
                                                             shortcut="UP"/>
                                     </accelerator>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + ;" mnemonicParsing="true"
+                                <MenuItem accelerator="Shortcut + A" mnemonicParsing="true"
                                           onAction="#handleSaveAll" text="Save All">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"
+                                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN"
                                                             shortcut="UP"/>
                                     </accelerator>
                                 </MenuItem>
@@ -79,17 +79,17 @@
                                 <!--</accelerator>-->
                                 <!--</MenuItem>-->
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem accelerator="Shortcut + C" mnemonicParsing="false" onAction="#handleCloseFile"
+                                <MenuItem accelerator="Shortcut + Q" mnemonicParsing="false" onAction="#handleCloseFile"
                                           text="Close">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP"
+                                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"
                                                             shortcut="UP"/>
                                     </accelerator>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + X" mnemonicParsing="false" onAction="#handleCloseAllFile"
+                                <MenuItem accelerator="Shortcut + W" mnemonicParsing="false" onAction="#handleCloseAllFile"
                                           text="Close All">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP"
+                                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"
                                                             shortcut="UP"/>
                                     </accelerator>
                                 </MenuItem>

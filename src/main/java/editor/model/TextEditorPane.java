@@ -62,6 +62,8 @@ public class TextEditorPane extends AssemblyComponent {
                     wordCount++;
                 }
 
+//                System.out.println("KeyCode: " + event.getCode());
+
                 if ( !event.getCode().equals(KeyCode.UP) && !event.getCode().equals(KeyCode.DOWN) &&
                         !event.getCode().equals(KeyCode.LEFT) && !event.getCode().equals(KeyCode.RIGHT)
                         && !event.getCode().equals(KeyCode.ENTER) && !event.getCode().equals(KeyCode.TAB) ) {
@@ -142,8 +144,10 @@ public class TextEditorPane extends AssemblyComponent {
     private void autocomplete(String text, int start, int end) {
         text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
         if ( text.length() == 0 || this.entries.contains(text) ) {
+//            System.out.println("Hide Autocomplete!");
             this.entriesPopup.hide();
         } else {
+//            System.out.println("Show Autocomplete!");
             LinkedList<String> searchResult = new LinkedList<>();
             searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
             if ( this.entries.size() > 0 ) {
