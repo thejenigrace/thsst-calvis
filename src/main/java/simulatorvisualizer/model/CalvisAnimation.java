@@ -23,5 +23,7 @@ public abstract class CalvisAnimation {
         this.currentInstruction = currentInstruction;
     }
 
-    public abstract void animate(Tab tab, EnvironmentBag oldEnvironment);
+//    public abstract void animate(Tab tab, EnvironmentBag oldEnvironment);
+
+    public abstract void animate(Tab tab);
 }
