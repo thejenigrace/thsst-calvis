@@ -127,8 +127,8 @@ public class FileEditorTabPane {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CALVIS Files (*.calvis)", "*.calvis"),
                 new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"),
+                new FileChooser.ExtensionFilter("CALVIS Files (*.calvis)", "*.calvis"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
 
         String lastDirectory = MainApp.getState().get("lastDirectory", null);
