@@ -25,7 +25,7 @@ execute(registers, memory) {
 		} else {	
 			registers.set("ESP", stackAddress.toString(16));
 			String stackEntry = registers.get("ESP");
-			memory.write(stackEntry, generalRegisters[i], size);
+			memory.writeToStack(stackEntry, generalRegisters[i], size);
 		}
 	}
 	

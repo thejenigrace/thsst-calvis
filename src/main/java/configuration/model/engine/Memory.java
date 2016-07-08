@@ -1,6 +1,7 @@
 package configuration.model.engine;
 
 import configuration.model.exceptions.DuplicateVariableException;
+import configuration.model.exceptions.MemoryAlignmentException;
 import configuration.model.exceptions.MemoryReadException;
 import configuration.model.exceptions.MemoryWriteException;
 
@@ -18,8 +19,10 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * Memory - Protected Mode Flat Model address size - 32-bit starts from - 0x0000
- * 0000 ends at - 0x0000 FFFF
+ * Memory model:    Protected Mode Flat Model
+ * address size:    32-bit
+ * starts from:     0x0000 0000
+ * ends at:         0x0000 FFFF
  */
 public class Memory {
 
@@ -36,20 +39,32 @@ public class Memory {
     private HashMap<String, String> variableMap;
     private String variablePointer;
 
+    private boolean isAligned;
+    private boolean isInitialized;
+    private String variablePointerStartingAddress;
+
     public Memory(int bitSize, int bitEndLength, String csvFile) {
         MAX_ADDRESS_SIZE = bitSize;
         DEFAULT_RELATIVE_SIZE = bitEndLength;
         this.mem = new TreeMap<>(Collections.reverseOrder());
         this.labelMap = new HashMap<>();
         this.variableMap = new HashMap<>();
+
+        this.isAligned = true;
+        this.isInitialized = false;
+        this.variablePointerStartingAddress = MemoryAddressCalculator.extend("0000", Memory.MAX_ADDRESS_SIZE, "0");
+
         resetVariablePointer();
 
         String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
         int end = Integer.parseInt(lastAddress, 16);
         for ( int i = 0x0; i <= end; i++ ) {
             String address = MemoryAddressCalculator.extend(Integer.toHexString(i), bitSize, "0");
-            mem.put(address, "00");
-//            mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            if ( isInitialized ) {
+                mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            } else {
+                mem.put(address, "00");
+            }
         }
 
         BufferedReader br = null;
@@ -106,15 +121,18 @@ public class Memory {
         return MemoryAddressCalculator.extend(add, Memory.MAX_ADDRESS_SIZE, "0");
     }
 
-    public void write(Token baseAddressToken, String value, Token des) throws MemoryWriteException {
+    public void write(Token baseAddressToken, String value, Token des)
+            throws MemoryWriteException, MemoryAlignmentException {
         write(baseAddressToken.getValue(), value, des);
     }
 
-    public void write(Token baseAddressToken, String value, int offset) throws MemoryWriteException {
+    public void write(Token baseAddressToken, String value, int offset)
+            throws MemoryWriteException, MemoryAlignmentException {
         write(baseAddressToken.getValue(), value, offset);
     }
 
-    public void write(String wholeMemoryString, String value, Token des) throws MemoryWriteException {
+    public void write(String wholeMemoryString, String value, Token des)
+            throws MemoryWriteException, MemoryAlignmentException {
         // des contains our offset.
         String desValue = des.getValue();
         String[] memoryArray = desValue.split("/");
@@ -126,35 +144,62 @@ public class Memory {
         write(baseAddress, reformattedValue, offset);
     }
 
-    public void write(String baseAddress, String value, int offset) throws MemoryWriteException {
+    public void write(String baseAddress, String value, int offset)
+            throws MemoryWriteException, MemoryAlignmentException {
         String memoryBaseAddress = baseAddress;
         if ( baseAddress.contains("/") ) {
             memoryBaseAddress = baseAddress.split("/")[1];
         }
         if ( this.mem.containsKey(memoryBaseAddress) ) {
-
-            Integer inc;
-            inc = Integer.parseInt(memoryBaseAddress, 16);
-            int offsetHex = offset / 4;
-            value = value.toUpperCase();
-            value = MemoryAddressCalculator.extend(value, offset, "0");
-            if ( value.length() > offsetHex ) {
-                throw new MemoryWriteException(baseAddress, value);
-            }
-            for ( int i = 0; i < offsetHex / 2; i++ ) {
-                String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
-                if ( this.mem.containsKey(succeedingAddress) ) {
-                    this.mem.put(succeedingAddress,
-                            value.substring((value.length() - 2) - (i * 2), value.length() - (i * 2)));
-                    inc++;
+            Integer inc = Integer.parseInt(memoryBaseAddress, 16);
+            if ( isAligned ) {
+                int memoryBlocks = offset / 8;
+                if ( inc % memoryBlocks == 0 ) {
+                    writeToMap(baseAddress, value, offset, inc);
                 } else {
-                    throw new MemoryWriteException(succeedingAddress);
+                    throw new MemoryAlignmentException(memoryBaseAddress);
                 }
+            } else {
+                writeToMap(baseAddress, value, offset, inc);
             }
-            //System.out.println("Memory read in little endian starting at: " + baseAddr);
         } else {
             throw new MemoryWriteException(memoryBaseAddress);
         }
+    }
+
+    // Used by PUSH instructions
+    public void writeToStack(String baseAddress, String value, int offset)
+            throws MemoryWriteException, MemoryAlignmentException {
+        String memoryBaseAddress = baseAddress;
+        if ( baseAddress.contains("/") ) {
+            memoryBaseAddress = baseAddress.split("/")[1];
+        }
+        if ( this.mem.containsKey(memoryBaseAddress) ) {
+            Integer inc = Integer.parseInt(memoryBaseAddress, 16);
+            writeToMap(baseAddress, value, offset, inc);
+        } else {
+            throw new MemoryWriteException(memoryBaseAddress);
+        }
+    }
+
+    private void writeToMap(String baseAddress, String value, int offset, int inc) throws MemoryWriteException {
+        int offsetHex = offset / 4;
+        value = value.toUpperCase();
+        value = MemoryAddressCalculator.extend(value, offset, "0");
+        if ( value.length() > offsetHex ) {
+            throw new MemoryWriteException(baseAddress, value);
+        }
+        for ( int i = 0; i < offsetHex / 2; i++ ) {
+            String succeedingAddress = Memory.reformatAddress(Integer.toHexString(inc));
+            if ( this.mem.containsKey(succeedingAddress) ) {
+                this.mem.put(succeedingAddress,
+                        value.substring((value.length() - 2) - (i * 2), value.length() - (i * 2)));
+                inc++;
+            } else {
+                throw new MemoryWriteException(succeedingAddress);
+            }
+        }
+        //System.out.println("Memory read in little endian starting at: " + baseAddr);
     }
 
     public String read(String address) {
@@ -232,9 +277,12 @@ public class Memory {
     public void clear() {
         Iterator<String> keys = this.mem.keySet().iterator();
         while ( keys.hasNext() ) {
-            this.mem.put((keys.next()), "00" );
-//            String address = keys.next();
-//            this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            if ( isInitialized ) {
+                String address = keys.next();
+                this.mem.put(address, "" + address.charAt(address.length() - 1) + address.charAt(address.length() - 1));
+            } else {
+                this.mem.put((keys.next()), "00" );
+            }
         }
         this.labelMap.clear();
         this.variableMap.clear();
@@ -327,10 +375,6 @@ public class Memory {
         }
     }
 
-    public HashMap getVariableMap() {
-        return this.variableMap;
-    }
-
     public String getCorrespondingLabel(String addressKey) {
         for ( Map.Entry<String, String> entry : variableMap.entrySet() ) {
             if ( Objects.equals(addressKey, entry.getValue()) ) {
@@ -371,8 +415,22 @@ public class Memory {
     }
 
     private void resetVariablePointer() {
-//        this.variablePointer = MemoryAddressCalculator.extend("4000", Memory.MAX_ADDRESS_SIZE, "0");
-        this.variablePointer = MemoryAddressCalculator.extend("0000", Memory.MAX_ADDRESS_SIZE, "0");
+        this.variablePointer = variablePointerStartingAddress;
     }
 
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        isInitialized = initialized;
+    }
+
+    public boolean isAligned() {
+        return isAligned;
+    }
+
+    public void setAligned(boolean aligned) {
+        isAligned = aligned;
+    }
 }

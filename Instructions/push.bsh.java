@@ -1,4 +1,4 @@
-execute(src, registers, memory) {
+execute(src, registers, memory) throws Exception {
 	int size = Memory.MAX_ADDRESS_SIZE; // 32
 	String stackPointer = registers.get("ESP");
 	String val = "";
@@ -25,6 +25,6 @@ execute(src, registers, memory) {
 	} else {
 		registers.set("ESP",stackAddress.toString(16));
 		String stackEntry = registers.get("ESP");
-		memory.write(stackEntry, val, size);
+		memory.writeToStack(stackEntry, val, size);
 	}
 }

@@ -52,9 +52,8 @@ public class CalvisFormattedInstruction {
         try {
             switch ( tokens.length ) {
                 case 0:
-                    if ( name.equalsIgnoreCase("printf")
-                            || name.equalsIgnoreCase("scanf")
-                            || name.equalsIgnoreCase("cls") ) {
+                    String bigName = name.toUpperCase();
+                    if ( bigName.matches("PRINTF|SCANF|CLS") ) {
                         // Execution is at System Controller
                     } else {
                         visualizationController.attachCalvisInstruction(this);
@@ -84,7 +83,7 @@ public class CalvisFormattedInstruction {
     }
 
     public void executeScan() throws StackPopException, MemoryReadException,
-            MemoryWriteException, DataTypeMismatchException {
+            MemoryWriteException, DataTypeMismatchException, MemoryAlignmentException {
         String input = console.retrieveScanned();
 
         String stackPointer = registers.get("ESP");
@@ -115,7 +114,7 @@ public class CalvisFormattedInstruction {
     }
 
     private void storeToMemory(String format, String input, String baseAddress)
-            throws MemoryWriteException, DataTypeMismatchException, MemoryReadException {
+            throws MemoryWriteException, DataTypeMismatchException, MemoryReadException, MemoryAlignmentException {
         if ( format.matches("%d") ) {
             Short realShort = Short.parseShort(input);
             String shortToHex = Integer.toHexString(realShort.intValue());

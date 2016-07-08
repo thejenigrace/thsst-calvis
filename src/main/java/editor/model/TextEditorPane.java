@@ -222,7 +222,7 @@ public class TextEditorPane extends AssemblyComponent {
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        System.out.println("Update TextEditorPane!");
+//        System.out.println("Update TextEditorPane!");
         String currentLine = currentInstruction.toString();
         if ( currentLine != null ) {
             String codeAreaText = this.codeArea.getText();
@@ -247,7 +247,7 @@ public class TextEditorPane extends AssemblyComponent {
                 this.codeArea.redo();
             }
         } else {
-            System.out.println("null highlight currentLine");
+//            System.out.println("null highlight currentLine");
             this.codeArea.selectRange(0, 0);
             this.redo();
         }

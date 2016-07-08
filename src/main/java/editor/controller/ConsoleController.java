@@ -5,6 +5,7 @@ import configuration.model.exceptions.MemoryReadException;
 import configuration.model.exceptions.StackPopException;
 import editor.model.AssemblyComponent;
 import editor.model.ConsoleTextArea;
+import javafx.application.Platform;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyCode;
 import org.fxmisc.richtext.StyleClassedTextArea;
@@ -39,7 +40,6 @@ public class ConsoleController extends AssemblyComponent {
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        // Re-Execute Console instructions
     }
 
     @Override
@@ -69,10 +69,9 @@ public class ConsoleController extends AssemblyComponent {
     }
 
     public void scanf(){
-        this.textArea.setState(true);
         this.sysCon.pauseFromConsole();
+        this.textArea.setState(true);
         lineBefore = textArea.getText().length();
-        this.textArea.requestFocus();
     }
 
     public String retrieveScanned() {

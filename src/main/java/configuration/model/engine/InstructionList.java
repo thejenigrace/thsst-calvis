@@ -338,6 +338,8 @@ public class InstructionList {
         sb.append("import configuration.model.exceptions.InvalidArithmeticOperandException;");
         sb.append("import configuration.model.exceptions.IncorrectParameterException;");
         sb.append("import configuration.model.exceptions.ValueExceedException;");
+        sb.append("import configuration.model.exceptions.MemoryWriteException;");
+        sb.append("import configuration.model.exceptions.MemoryReadException;");
         sb.append("import java.math.BigInteger;");
         sb.append("import java.math.BigDecimal;");
         sb.append("import javafx.application.Platform;");

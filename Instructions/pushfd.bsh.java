@@ -13,6 +13,6 @@ execute(registers, memory) {
 	} else {	
 		registers.set("ESP", stackAddress.toString(16));
 		String stackEntry = registers.get("ESP");
-		memory.write(stackEntry, val, size);
+		memory.writeToStack(stackEntry, val, size);
 	}
 }

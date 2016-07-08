@@ -59,10 +59,11 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
             ObservableList<ErrorLog> items = FXCollections.observableArrayList();
             String type = e.getClass().getSimpleName();
             String cause = "N/A";
-            if (e.getCause() != null) {
-                cause = e.getCause().getLocalizedMessage();
-            }
             String message = "N/A";
+            if (e.getCause() != null) {
+                cause = e.getCause().getClass().getSimpleName();
+                message = e.getCause().getLocalizedMessage();
+            }
             if (e.getMessage() != null) {
                 message = e.getMessage();
             }

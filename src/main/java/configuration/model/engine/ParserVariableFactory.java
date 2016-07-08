@@ -105,7 +105,7 @@ public class ParserVariableFactory {
                                         tokenValue = MemoryAddressCalculator.extend(tokenValue, prefixSize, "0");
                                         memory.write(memory.getVariablePointer(), tokenValue, prefixSize);
                                         memory.incrementVariablePointer(prefixSize);
-                                    } catch ( MemoryWriteException e ) {
+                                    } catch ( Exception e ) {
                                         exceptions.add(e);
                                     }
                                 }
@@ -152,7 +152,7 @@ public class ParserVariableFactory {
                                     try {
                                         memory.write(memory.getVariablePointer(), representation, prefixSize);
                                         memory.incrementVariablePointer(prefixSize);
-                                    } catch ( MemoryWriteException e ) {
+                                    } catch ( Exception e ) {
                                         exceptions.add(e);
                                     }
                                 } else {

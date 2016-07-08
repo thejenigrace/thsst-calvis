@@ -387,7 +387,7 @@ public class FileEditorTabPane {
     }
 
     public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-        System.out.println("Launch onActionFind!");
+//        System.out.println("Launch onActionFind!");
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
 
         this.findHighlightRanges = findHighlightRanges;
@@ -404,16 +404,16 @@ public class FileEditorTabPane {
             CodeArea codeArea = (CodeArea) tab.getContent();
             String find_pattern = "\\b(" + newValue + ")\\b";
             Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
-            System.out.println("PATTERN: " + pattern.toString());
+//            System.out.println("PATTERN: " + pattern.toString());
 
             Matcher matcher = pattern.matcher(codeArea.getText());
 
             findHighlightRanges = new HashMap<>();
             int c = 0;
             while ( matcher.find() ) {
-                System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
-                System.out.println("matcher.end() " + matcher.end());
-                System.out.println("matcher.start() " + matcher.start());
+//                System.out.println("matcher.group(\"FIND\"): " + matcher.group("FIND"));
+//                System.out.println("matcher.end() " + matcher.end());
+//                System.out.println("matcher.start() " + matcher.start());
 
                 int[] arrRange = new int[2];
                 arrRange[0] = matcher.start();
@@ -441,10 +441,10 @@ public class FileEditorTabPane {
                 CodeArea codeArea = (CodeArea) tab.getContent();
                 int[] range;
                 if ( findHighlightRanges.size() > 0 ) {
-                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
                     if ( currentFindRangeIndex > 0 ) {
                         currentFindRangeIndex--;
-                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
                         range = findHighlightRanges.get(currentFindRangeIndex);
                         codeArea.selectRange(range[0], range[1]);
                     }
@@ -462,12 +462,12 @@ public class FileEditorTabPane {
                 CodeArea codeArea = (CodeArea) tab.getContent();
                 int[] range;
                 if ( findHighlightRanges.size() > 1 ) {
-                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
-                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
+//                    System.out.println("currentFindRangeIndex: " + currentFindRangeIndex);
+//                    System.out.println("findHiglightRanges.size() = " + findHighlightRanges.size());
 
                     if ( currentFindRangeIndex < findHighlightRanges.size() - 1 ) {
                         currentFindRangeIndex++;
-                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
+//                        System.out.println("u currentFindRangeIndex: " + currentFindRangeIndex);
                         range = findHighlightRanges.get(currentFindRangeIndex);
                         codeArea.selectRange(range[0], range[1]);
                     }
@@ -479,8 +479,8 @@ public class FileEditorTabPane {
     }
 
     public void onActionFindAndReplace(String find, String replace) {
-        System.out.println("BTW find: " + find);
-        System.out.println("BTW replace: " + replace);
+//        System.out.println("BTW find: " + find);
+//        System.out.println("BTW replace: " + replace);
 
         Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
 
@@ -497,9 +497,9 @@ public class FileEditorTabPane {
                 c++;
             }
 
-            System.out.println("count: " + c);
+//            System.out.println("count: " + c);
             m.appendTail(sb);
-            System.out.println("sb: " + sb);
+//            System.out.println("sb: " + sb);
             codeArea.replaceText(sb.toString());
         }
     }

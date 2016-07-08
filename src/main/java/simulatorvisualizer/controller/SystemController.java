@@ -20,7 +20,7 @@ import java.util.*;
  */
 public class SystemController {
 
-    static long SIMULATION_DELAY = 500;
+    static long SIMULATION_DELAY = 700;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;
@@ -79,10 +79,10 @@ public class SystemController {
     public void notifyAllObservers(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         for ( AssemblyComponent a : observerList ) {
             // Execute console instructions here
-            if ( a instanceof ConsoleController ) {
-                String name = currentInstruction.getName();
-                if ( name.equalsIgnoreCase("printf") || name.equalsIgnoreCase("scanf")
-                        || name.equalsIgnoreCase("cls") ) {
+            if ( a instanceof ConsoleController && currentInstruction != null) {
+                String name = currentInstruction.getName().toUpperCase();
+                String bigName = name.toUpperCase();
+                if ( bigName.matches("PRINTF|SCANF|CLS") ) {
                     this.console.attachCalvisInstruction(currentInstruction);
                     currentInstruction.setConsole(this.console);
                     currentInstruction.getInstruction().consoleExecute(this.registerList, this.memory, this.console);
@@ -290,6 +290,19 @@ public class SystemController {
         try {
             // EXECUTE THE CALVIS INSTRUCTION
             flag = executionMap.get(currentLine).execute(console, visualizer);
+
+            // 3. Parse currentLine to int @var value
+            int value = Integer.parseInt(currentLine, 16);
+            // 4. Notify all observers that an instruction has been executed
+            notifyAllObservers(executionMap.get(currentLine), value);
+            // 5. Increment @var currentLine and store it to EIP register
+            if ( flag ) {
+                value++;
+                registerList.setInstructionPointer(Integer.toHexString(value));
+            }
+            this.stackCount++;
+            push();
+
         } catch ( Exception e ) {
             e.printStackTrace();
             Platform.runLater(
@@ -306,17 +319,6 @@ public class SystemController {
                     }
             );
         }
-        // 3. Parse currentLine to int @var value
-        int value = Integer.parseInt(currentLine, 16);
-        // 4. Notify all observers that an instruction has been executed
-        notifyAllObservers(executionMap.get(currentLine), value);
-        // 5. Increment @var currentLine and store it to EIP register
-        if ( flag ) {
-            value++;
-            registerList.setInstructionPointer(Integer.toHexString(value));
-        }
-        this.stackCount++;
-        push();
     }
 
     private void push() {
