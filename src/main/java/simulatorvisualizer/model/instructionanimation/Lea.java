@@ -14,7 +14,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Mov extends CalvisAnimation {
+public class Lea extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -50,16 +50,10 @@ public class Mov extends CalvisAnimation {
 
             root.getChildren().addAll(desRectangle, srcRectangle);
 
-            int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
-            else
-                desSize = memory.getBitSize(tokens[0]);
+            int desSize = registers.getBitSize(tokens[0]);
 
             Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
+            Text desValueText = new Text(registers.get(tokens[0]));
             Text srcLabelText = this.createLabelText(tokens[1]);
             Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
 
@@ -102,6 +96,7 @@ public class Mov extends CalvisAnimation {
             desTransition.toXProperty().bind(desRectangle.translateXProperty()
                     .add(10 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.toYProperty().bind(desTransition.fromYProperty());
+
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);

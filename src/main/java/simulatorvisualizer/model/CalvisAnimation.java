@@ -6,7 +6,7 @@ import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.scene.control.Tab;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -25,7 +25,7 @@ public abstract class CalvisAnimation {
         this.root = new Group();
     }
 
-    public abstract void animate(Tab tab);
+    public abstract void animate(ScrollPane scrollPane);
 
     public void setCurrentInstruction(CalvisFormattedInstruction currentInstruction) {
         this.currentInstruction = currentInstruction;
@@ -34,6 +34,23 @@ public abstract class CalvisAnimation {
     protected Rectangle createRectangle(Token token, int width, int height) {
         // Check token type
         switch ( token.getType() ) {
+            case Token.REG:
+                System.out.println("REG");
+                return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
+            case Token.MEM:
+                System.out.println("MEM");
+                return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
+            case Token.HEX:
+                System.out.println("HEX");
+                return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
+            default:
+                return null;
+        }
+    }
+
+    protected Rectangle createRectangle(String token, int width, int height) {
+        // Check token type
+        switch ( token ) {
             case Token.REG:
                 System.out.println("REG");
                 return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
@@ -61,6 +78,19 @@ public abstract class CalvisAnimation {
         }
     }
 
+    protected Text createLabelText(double x, double y, Token token) {
+        switch ( token.getType() ) {
+            case Token.REG:
+                return new Text(x, y, token.getValue());
+            case Token.MEM:
+                return new Text(x, y, "[" + token.getValue() + "]");
+            case Token.HEX:
+                return new Text(x, y, "HEX");
+            default:
+                return null;
+        }
+    }
+
     protected Text createValueText(Token token, RegisterList registers, Memory memory, int size) {
         try {
             switch ( token.getType() ) {
@@ -74,6 +104,28 @@ public abstract class CalvisAnimation {
                 case Token.HEX:
                     System.out.println("HEX");
                     return new Text("0x" + token.getValue());
+                default:
+                    return null;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    protected Text createValueText(double x, double y, Token token, RegisterList registers, Memory memory, int size) {
+        try {
+            switch ( token.getType() ) {
+                case Token.REG:
+                    System.out.println("REG");
+                    return new Text(x, y, registers.get(token));
+                case Token.MEM:
+                    System.out.println("MEM");
+
+                    return new Text(x, y, memory.read(token, size));
+                case Token.HEX:
+                    System.out.println("HEX");
+                    return new Text(x, y, "0x" + token.getValue());
                 default:
                     return null;
             }

@@ -44,9 +44,16 @@ execute(des, src, registers, memory) {
 			if(ef.getOverflowFlag().equals("1"))
 				result = result.add(new BigInteger("1"));
 
-			registers.set(des,c.binaryToHexString(result.toString(2),des));
+
 			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),c.binaryZeroExtend(result, src).charAt(0), ef.getOverflowFlag()));
 			}
+			if(result.toString(16).length() > registers.getHexSize(des)){
+				registers.set(des,c.binaryToHexString(result.toString(2).substring(1),des));
+			}
+			else{
+				registers.set(des,c.binaryToHexString(result.toString(2),des));
+			}
+
  		}
  	}
  	else if ( des.isMemory() ){
@@ -68,8 +75,16 @@ execute(des, src, registers, memory) {
 			System.out.println("Add Overflow Flag");
 				result = result.add(new BigInteger("1"));
 			}
+			if(result.toString(16).length() > registers.getHexSize(des)){
+//			registers.set(des,c.binaryToHexString(result.toString(2),des));
+				memory.write(des,c.binaryToHexString(result.toString(2).substring(1),des), desSize);
+			}
+			else{
+				memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
+			}
 
-			memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
+
+
 			ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),c.binaryZeroExtend(result, src).charAt(0), ef.getOverflowFlag()));
 			}
  		}

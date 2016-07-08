@@ -3,6 +3,7 @@ package editor.controller;
 import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
 import javafx.application.Platform;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import simulatorvisualizer.model.AnimationMap;
 import simulatorvisualizer.model.CalvisAnimation;
@@ -14,6 +15,7 @@ import simulatorvisualizer.model.EnvironmentBag;
 public class VisualizationController extends AssemblyComponent {
 
     private Tab tab;
+    private ScrollPane scrollPane;
     private CalvisFormattedInstruction currentInstruction;
     private AnimationMap animationMap;
     private EnvironmentBag oldEnvironment;
@@ -21,6 +23,11 @@ public class VisualizationController extends AssemblyComponent {
     public VisualizationController() {
         this.tab = new Tab();
         this.tab.setText("Visualization");
+        this.scrollPane = new ScrollPane();
+        this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.tab.setContent(scrollPane);
+
     }
 
     public Tab getTab() {
@@ -33,7 +40,8 @@ public class VisualizationController extends AssemblyComponent {
         Platform.runLater(
                 new Thread() {
                     public void run() {
-                        tab.setContent(null);
+//                        tab.setContent(null);
+                        scrollPane.setContent(null);
                         animate();
                     }
                 }
@@ -44,14 +52,18 @@ public class VisualizationController extends AssemblyComponent {
     public void animate() {
         // find the appropriate animation for currentInstruction
         String name = this.currentInstruction.getName();
+
+        System.out.println("name: " + name);
+
         // get CalvisAnimation from the Animation Map
         CalvisAnimation animation = this.animationMap.get(name);
 
         if ( animation == null ) {
             // no animation
+            System.out.println("no animation");
         } else {
             animation.setCurrentInstruction(this.currentInstruction);
-            animation.animate(tab);
+            animation.animate(scrollPane);
         }
     }
 
