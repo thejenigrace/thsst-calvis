@@ -374,9 +374,9 @@ public class FileEditorTabPane {
 
     public void formatCode(String codeBlock) {
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        String[] arr = this.workspaceController.getSysCon().getInstructionKeywords();
+        String[] arr = this.workspaceController.getSysCon().getKeywordBuilder().getInstructionKeywords();
         String expression = String.join("|", arr);
-        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?(" + expression + ")))";
+        String pat = "[^\\S\\n]+(?=(([a-zA-Z_][a-zA-Z\\d_]*:\\s*)?\\b(" + expression + ")\\b))";
         Pattern pattern = Pattern.compile(pat);
         Matcher matcher = pattern.matcher(codeBlock);
         String replacedCodeAreaText = matcher.replaceAll("\r\n");

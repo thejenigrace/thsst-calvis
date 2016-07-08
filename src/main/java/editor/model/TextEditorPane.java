@@ -98,11 +98,11 @@ public class TextEditorPane extends AssemblyComponent {
      * Method for configuring the highlighted keywords within the text editor
      */
     private void setCodeEnvironment() {
-        INSTRUCTION_KEYWORDS = this.sysCon.getInstructionKeywords();
+        INSTRUCTION_KEYWORDS = this.sysCon.getKeywordBuilder().getInstructionKeywords();
         INSTRUCTION_PATTERN = "\\b(" + String.join("|", INSTRUCTION_KEYWORDS) + ")\\b";
-        REGISTER_KEYWORDS = this.sysCon.getRegisterKeywords();
+        REGISTER_KEYWORDS = this.sysCon.getKeywordBuilder().getRegisterKeywords();
         REGISTER_PATTERN = "\\b(" + String.join("|", REGISTER_KEYWORDS) + ")\\b";
-        MEMORY_KEYWORDS = this.sysCon.getMemoryKeywords();
+        MEMORY_KEYWORDS = this.sysCon.getKeywordBuilder().getMemoryKeywords();
         MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
         PATTERN = Pattern.compile(
                 "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
@@ -184,8 +184,8 @@ public class TextEditorPane extends AssemblyComponent {
         this.entries = new TreeSet<>();
         this.entriesPopup = new ContextMenu();
 
-        this.entries.addAll(Arrays.asList(this.sysCon.getInstructionKeywords()));
-        this.entries.addAll(Arrays.asList(this.sysCon.getRegisterKeywords()));
+        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getInstructionKeywords()));
+        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getRegisterKeywords()));
 
         this.codeArea.setPopupWindow(entriesPopup);
         this.codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
@@ -263,7 +263,7 @@ public class TextEditorPane extends AssemblyComponent {
     public void build() {
         this.setCodeEnvironment();
 
-        String[] arr = this.sysCon.getInstructionKeywords();
+        String[] arr = this.sysCon.getKeywordBuilder().getInstructionKeywords();
         String expression = String.join("|", arr);
         expression = "((.*)\\b(" + expression + ")\\b(.*)(?=;))|((.*)\\b(" + expression + ")\\b(.*))";
         this.lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");

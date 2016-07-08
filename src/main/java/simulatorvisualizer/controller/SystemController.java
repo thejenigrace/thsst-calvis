@@ -9,6 +9,8 @@ import editor.controller.VisualizationController;
 import editor.controller.WorkspaceController;
 import editor.model.AssemblyComponent;
 import javafx.application.Platform;
+import simulatorvisualizer.model.EnvironmentBag;
+import simulatorvisualizer.model.KeywordBuilder;
 import simulatorvisualizer.model.SimulationState;
 
 import java.util.*;
@@ -18,7 +20,7 @@ import java.util.*;
  */
 public class SystemController {
 
-    static long SIMULATION_DELAY = 1000;
+    static long SIMULATION_DELAY = 500;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;
@@ -30,6 +32,7 @@ public class SystemController {
     private ConsoleController console;
     private VisualizationController visualizer;
     private SimulationState state;
+    private SimulationState consoleState;
     private Thread thread;
     private WorkspaceController workspaceController;
     private String parsedCode;
@@ -41,6 +44,8 @@ public class SystemController {
     private HashMap<Integer, String[][]> memoryStackMap;
     private Integer stackCount;
 
+    private KeywordBuilder keywordBuilder;
+
     public SystemController(ConfiguratorEnvironment ec, WorkspaceController wc) {
         this.environment = ec;
         this.workspaceController = wc;
@@ -50,12 +55,15 @@ public class SystemController {
         this.memory = environment.getMemory();
         this.observerList = new ArrayList<>();
         this.state = SimulationState.STOP;
+        this.consoleState = SimulationState.STOP;
 
         this.registerStackMap = new HashMap<>();
         this.flagsStackMap = new HashMap<>();
         this.mxscrStackMap = new HashMap<>();
         this.memoryStackMap = new HashMap<>();
         this.stackCount = 0;
+
+        this.keywordBuilder = new KeywordBuilder(registerList, memory, instructionList);
     }
 
     public void attach(AssemblyComponent observer) {
@@ -69,13 +77,18 @@ public class SystemController {
     }
 
     public void notifyAllObservers(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        if (currentInstruction != null) {
-            for (AssemblyComponent a : observerList) {
+        for ( AssemblyComponent a : observerList ) {
+            // Execute console instructions here
+            if ( a instanceof ConsoleController ) {
+                String name = currentInstruction.getName();
+                if ( name.equalsIgnoreCase("printf") || name.equalsIgnoreCase("scanf")
+                        || name.equalsIgnoreCase("cls") ) {
+                    this.console.attachCalvisInstruction(currentInstruction);
+                    currentInstruction.setConsole(this.console);
+                    currentInstruction.getInstruction().consoleExecute(this.registerList, this.memory, this.console);
+                }
+            } else {
                 a.update(currentInstruction, lineNumber);
-            }
-        } else {
-            for (AssemblyComponent a : observerList) {
-                a.update(null, lineNumber);
             }
         }
     }
@@ -84,26 +97,21 @@ public class SystemController {
         observerList.forEach(AssemblyComponent::refresh);
     }
 
-    public RegisterList getRegisterState() {
-        return this.registerList;
-    }
-
-    public Memory getMemoryState() {
-        return this.memory;
-    }
-
     public void pauseFromConsole() {
+        this.consoleState = this.state;
         this.state = SimulationState.PAUSE;
+        this.workspaceController.disablePlayNextPrevious(true);
         thread.interrupt();
     }
 
     public void resumeFromConsole() {
-        this.state = SimulationState.PLAY;
+        this.state = this.consoleState;
+        this.workspaceController.disablePlayNextPrevious(false);
         beginSimulation();
     }
 
     public void play(String code) {
-        switch (this.state) {
+        switch ( this.state ) {
             case PLAY: // System is running, so we pause
                 this.state = SimulationState.PAUSE;
                 workspaceController.changeIconToPlay();
@@ -119,7 +127,7 @@ public class SystemController {
                 workspaceController.formatCodeArea(code);
                 workspaceController.changeIconToPause();
                 boolean isSuccessful = parse(code);
-                if (isSuccessful) {
+                if ( isSuccessful ) {
                     this.state = SimulationState.PLAY;
                     beginSimulation();
                 } else {
@@ -131,7 +139,9 @@ public class SystemController {
 
     public void end() {
         this.state = SimulationState.STOP;
-        if (thread != null) {
+        if ( thread != null ) {
+            this.console.stopConsole();
+            this.workspaceController.disablePlayNextPrevious(false);
             thread.interrupt();
         }
         Platform.runLater(
@@ -162,45 +172,54 @@ public class SystemController {
         refreshAllObservers();
     }
 
+    public void reportError(Exception e) {
+        try {
+            end();
+            workspaceController.handleErrorLoggerTab(e);
+        } catch ( Exception e1 ) {
+            e1.printStackTrace();
+        }
+    }
+
     public void previous() {
-        if (executionMap != null) {
-            if (state == SimulationState.PAUSE) {
-                //System.out.println("previous");
-                stackCount--;
-                if (stackCount > 0) {
-                    //1. Revert Environment back by one pop
-                    String[][] registerStringArray = registerStackMap.get(stackCount);
-                    for (int i = 0; i < registerStringArray.length; i++) {
-//			            System.out.println(registerStringArray[i][0] + " : " + registerStringArray[i][1]);
-                        //1.2 Set registerList with values from pop
+        if ( this.executionMap != null ) {
+            if ( this.state == SimulationState.PAUSE ) {
+                this.stackCount--;
+                if ( this.stackCount > 0 ) {
+                    //1. Revert Environment back by 1 pop
+                    String[][] registerStringArray = this.registerStackMap.get(this.stackCount);
+                    for ( int i = 0; i < registerStringArray.length; i++ ) {
+                        //1.1 Registers
                         try {
                             this.registerList.set(registerStringArray[i][0], registerStringArray[i][1]);
-                        } catch (DataTypeMismatchException e) {
+                        } catch ( DataTypeMismatchException e ) {
                             try {
-                                workspaceController.handleErrorLoggerTab(e);
-                            } catch (Exception e1) {
+                                this.workspaceController.handleErrorLoggerTab(e);
+                            } catch ( Exception e1 ) {
                                 e1.printStackTrace();
                             }
                         }
                     }
+                    // 1.2 Revert EFlags back by 1 pop
                     EFlags flags = this.registerList.getEFlags();
-                    String flagsValue = flagsStackMap.get(stackCount);
+                    String flagsValue = this.flagsStackMap.get(this.stackCount);
                     flags.setValue(flagsValue);
                     flags.refreshFlags();
-
+                    // 1.3 Revert Mxscr back by 1 pop
                     Mxscr mxscr = this.registerList.getMxscr();
-                    String mxscrValue = mxscrStackMap.get(stackCount);
+                    String mxscrValue = this.mxscrStackMap.get(this.stackCount);
                     mxscr.setValue(mxscrValue);
                     mxscr.refreshFlags();
-
-                    String[][] memoryArray = memoryStackMap.get(stackCount);
+                    // 1.4 Revert Memory back by 1 pop
+                    String[][] memoryArray = this.memoryStackMap.get(this.stackCount);
                     Map memoryMap = this.memory.getMemoryMap();
-                    for (int i = 0; i < memoryArray.length; i++) {
+                    for ( int i = 0; i < memoryArray.length; i++ ) {
                         memoryMap.put(memoryArray[i][0], memoryArray[i][1]);
                     }
 
                     // 2. Retrieve EIP value and store it to @var currentLine
                     String currentLine = registerList.getInstructionPointer();
+
                     // 3. Parse currentLine to int @var value
                     int value = Integer.parseInt(currentLine, 16);
                     value--;
@@ -217,15 +236,15 @@ public class SystemController {
     }
 
     public void next() {
-        if (executionMap != null) {
-            if (state == SimulationState.PAUSE) {
-                if (executionMap.containsKey(registerList.getInstructionPointer())) {
+        if ( executionMap != null ) {
+            if ( state == SimulationState.PAUSE ) {
+                if ( executionMap.containsKey(registerList.getInstructionPointer()) ) {
                     try {
                         executeOneLine();
-                    } catch (DataTypeMismatchException e) {
+                    } catch ( DataTypeMismatchException e ) {
                         try {
                             workspaceController.handleErrorLoggerTab(e);
-                        } catch (Exception e1) {
+                        } catch ( Exception e1 ) {
                             e1.printStackTrace();
                         }
                     }
@@ -240,22 +259,22 @@ public class SystemController {
         workspaceController.disableCodeArea(true);
         thread = new Thread() {
             public void run() {
-                while ((state == SimulationState.PLAY)
-                        && executionMap.containsKey(registerList.getInstructionPointer())) {
+                while ( (state == SimulationState.PLAY)
+                        && executionMap.containsKey(registerList.getInstructionPointer()) ) {
                     try {
                         Thread.sleep(SIMULATION_DELAY);
                         executeOneLine();
-                    } catch (InterruptedException e) {
-                        System.out.println("Simulation Thread interrupted");
-                    } catch (DataTypeMismatchException e) {
+                    } catch ( InterruptedException e ) {
+//                        System.out.println("Simulation Thread interrupted");
+                    } catch ( DataTypeMismatchException e ) {
                         try {
                             workspaceController.handleErrorLoggerTab(e);
-                        } catch (Exception e1) {
+                        } catch ( Exception e1 ) {
                             e1.printStackTrace();
                         }
                     }
                 }
-                if (state == SimulationState.PLAY) {
+                if ( state == SimulationState.PLAY ) {
                     end();
                 }
             }
@@ -266,29 +285,25 @@ public class SystemController {
     private void executeOneLine() throws DataTypeMismatchException {
         // 1. Retrieve EIP value and store it to @var currentLine
         String currentLine = registerList.getInstructionPointer();
-        //System.out.println(currentLine);
-
         // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
         boolean flag = true;
         try {
-            flag = executionMap.get(currentLine).execute(console, visualizer); // EXECUTE THE CALVIS INSTRUCTION
-        } catch (Exception e) {
-            System.out.println("INSTRUCTION EXECUTION ERROR MESSAGE: " + e.getMessage());
-            System.out.println("INSTRUCTION EXECUTION ERROR CAUSE: " + e.getCause());
-			e.printStackTrace();
-
+            // EXECUTE THE CALVIS INSTRUCTION
+            flag = executionMap.get(currentLine).execute(console, visualizer);
+        } catch ( Exception e ) {
+            e.printStackTrace();
             Platform.runLater(
                     new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        workspaceController.handleErrorLoggerTab(e);
-                        end();
-                    } catch (Exception someOtherException) {
-                        someOtherException.printStackTrace();
+                        @Override
+                        public void run() {
+                            try {
+                                workspaceController.handleErrorLoggerTab(e);
+                                end();
+                            } catch ( Exception someOtherException ) {
+                                someOtherException.printStackTrace();
+                            }
+                        }
                     }
-                }
-            }
             );
         }
         // 3. Parse currentLine to int @var value
@@ -296,72 +311,12 @@ public class SystemController {
         // 4. Notify all observers that an instruction has been executed
         notifyAllObservers(executionMap.get(currentLine), value);
         // 5. Increment @var currentLine and store it to EIP register
-        if (flag) {
+        if ( flag ) {
             value++;
             registerList.setInstructionPointer(Integer.toHexString(value));
         }
-        stackCount++;
+        this.stackCount++;
         push();
-    }
-
-    private boolean parse(String code) {
-        boolean isSuccessful = true;
-        String[] codeLines = code.split("\n");
-        try {
-            this.executionMap = parser.parse(code);
-            for (String lineNumber : this.executionMap.keySet()) {
-                CalvisFormattedInstruction CalvisInstruction = this.executionMap.get(lineNumber);
-                /**
-                 * Compute for the equivalent linenumber in textEditor of the
-                 * calvis instructions
-                 */
-                int lineCounter = 0;
-                int mappedLine = Integer.parseInt(lineNumber, 16);
-                for (int i = 0; i < codeLines.length; i++) {
-                    if (!codeLines[i].matches("[;].*") && !codeLines[i].trim().equals("")) {
-                        if (mappedLine == lineCounter) {
-                            lineCounter = i;
-                            break;
-                        } else {
-                            lineCounter++;
-                        }
-                    }
-                }
-                CalvisInstruction.verifyParameters(lineCounter);
-            }
-        } catch (Exception e) {
-            if (e instanceof DuplicateLabelException) {
-                DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
-                int labelOccurrence = 0;
-                for (int i = 0; i < codeLines.length; i++) {
-                    if (codeLines[i].contains(duplicateLabelException.getLabel())) {
-                        if (!codeLines[i].matches("[;].*" + duplicateLabelException.getLabel())) {
-                            labelOccurrence++;
-                        }
-                    }
-                    if (labelOccurrence == 2) {
-                        duplicateLabelException.setLineNumber(i + 1);
-                        break;
-                    }
-                }
-            }
-            isSuccessful = false;
-            e.printStackTrace();
-            Platform.runLater(
-                    new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        workspaceController.handleErrorLoggerTab(e);
-                    } catch (Exception viewException) {
-                        viewException.printStackTrace();
-                    }
-                }
-            }
-            );
-        }
-        this.parsedCode = code;
-        return isSuccessful;
     }
 
     private void push() {
@@ -369,7 +324,7 @@ public class SystemController {
         Iterator<String> iterator = registerMap.keySet().iterator();
         String[][] registerStringArray = new String[registerMap.size()][2];
         int i = 0;
-        while (iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             String registerName = iterator.next();
             registerStringArray[i][0] = registerName;
             registerStringArray[i][1] = registerList.get(registerName);
@@ -389,7 +344,7 @@ public class SystemController {
         Iterator<String> iterator2 = memoryMap.keySet().iterator();
         String[][] memoryArray = new String[memoryMap.size()][2];
         int k = 0;
-        while (iterator2.hasNext()) {
+        while ( iterator2.hasNext() ) {
             String memoryAddress = iterator2.next();
             memoryArray[k][0] = memoryAddress;
             memoryArray[k][1] = memoryMap.get(memoryAddress);
@@ -397,60 +352,92 @@ public class SystemController {
         }
         this.memoryStackMap.put(stackCount, memoryArray);
 
-        //System.out.println(registerStringArray);
-//		for (int n = 0; n < registerStringArray.length; n++) {
-//			System.out.println(registerStringArray[n][0] + " : " + registerStringArray[n][1]);
-//		}
+        // FOR PREVIOUS VALUES OF STACK
+//        setOldEnvironment(registerStringArray, flagsValue, mxscrValue, memoryArray);
+    }
+
+    private boolean parse(String code) {
+        boolean isSuccessful = true;
+        String[] codeLines = code.split("\n");
+        try {
+            this.executionMap = parser.parse(code);
+            for ( String lineNumber : this.executionMap.keySet() ) {
+                CalvisFormattedInstruction calvisInstruction = this.executionMap.get(lineNumber);
+                /**
+                 * Compute for the equivalent linenumber in textEditor of the calvis instructions
+                 */
+                int lineCounter = 0;
+                int mappedLine = Integer.parseInt(lineNumber, 16);
+                for ( int i = 0; i < codeLines.length; i++ ) {
+                    if ( !codeLines[i].matches("[;].*") && !codeLines[i].trim().equals("") ) {
+                        if ( mappedLine == lineCounter ) {
+                            lineCounter = i;
+                            break;
+                        } else {
+                            lineCounter++;
+                        }
+                    }
+                }
+                /**
+                 *  Verify Parameters of each instruction
+                 */
+                calvisInstruction.verifyParameters(lineCounter);
+            }
+        } catch ( Exception e ) {
+            if ( e instanceof DuplicateLabelException ) {
+                DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
+                int labelOccurrence = 0;
+                for ( int i = 0; i < codeLines.length; i++ ) {
+                    if ( codeLines[i].contains(duplicateLabelException.getLabel()) ) {
+                        if ( !codeLines[i].matches("[;].*" + duplicateLabelException.getLabel()) ) {
+                            labelOccurrence++;
+                        }
+                    }
+                    if ( labelOccurrence == 2 ) {
+                        duplicateLabelException.setLineNumber(i + 1);
+                        break;
+                    }
+                }
+            }
+            isSuccessful = false;
+//            e.printStackTrace();
+            Platform.runLater(
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                workspaceController.handleErrorLoggerTab(e);
+                            } catch ( Exception viewException ) {
+                                viewException.printStackTrace();
+                            }
+                        }
+                    }
+            );
+        }
+        this.parsedCode = code;
+        return isSuccessful;
     }
 
     public String getParsedCode() {
         return this.parsedCode;
     }
 
-    public String[] getRegisterKeywords() {
-        List<String> keywordsList = new ArrayList<>();
-
-        Iterator<String> registerIterator = registerList.getRegisterKeys();
-
-        populateKeywords(keywordsList, registerIterator);
-
-        String[] keywordsArray = new String[keywordsList.size()];
-        keywordsArray = keywordsList.toArray(keywordsArray);
-        return keywordsArray;
+    public KeywordBuilder getKeywordBuilder() {
+        return this.keywordBuilder;
     }
 
-    public String[] getMemoryKeywords() {
-        List<String> keywordsList = new ArrayList<>();
-
-        Iterator<String> registerIterator = memory.getMemoryKeys();
-
-        populateKeywords(keywordsList, registerIterator);
-
-        String[] keywordsArray = new String[keywordsList.size()];
-        keywordsArray = keywordsList.toArray(keywordsArray);
-        return keywordsArray;
+    public RegisterList getRegisterState() {
+        return this.registerList;
     }
 
-    public String[] getInstructionKeywords() {
-        List<String> keywordsList = new ArrayList<>();
-        Iterator<String> instructionIterator = instructionList.getInstructionKeys();
-        populateKeywords(keywordsList, instructionIterator);
-
-        String[] instructionKeywords = new String[keywordsList.size()];
-        instructionKeywords = keywordsList.toArray(instructionKeywords);
-        return instructionKeywords;
+    public Memory getMemoryState() {
+        return this.memory;
     }
 
-    /**
-     * Method used to populate @param keywordsList with both upper case and
-     * lower case keywords from @param iterator
-     */
-    private void populateKeywords(List keywordsList, Iterator<String> iterator) {
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            keywordsList.add(key.toUpperCase());
-            keywordsList.add(key.toLowerCase());
-        }
+    private void setOldEnvironment(String[][] registerStringArray, String flagsValue,
+                                   String mxscrValue, String[][] memoryArray) {
+        EnvironmentBag bag = new EnvironmentBag(registerStringArray, flagsValue, mxscrValue, memoryArray);
+        visualizer.setOldEnvironment(bag);
     }
 
 }

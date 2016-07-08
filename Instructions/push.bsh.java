@@ -25,11 +25,6 @@ execute(src, registers, memory) {
 	} else {
 		registers.set("ESP",stackAddress.toString(16));
 		String stackEntry = registers.get("ESP");
-		memory.write(stackEntry,val,size);
-		if ( src.isLabel() ) {
-			memory.push(1);
-		} else {
-			memory.push(0);
-		}
+		memory.write(stackEntry, val, size);
 	}
 }

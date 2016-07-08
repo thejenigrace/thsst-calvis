@@ -6,10 +6,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Tab;
 import simulatorvisualizer.model.AnimationMap;
 import simulatorvisualizer.model.CalvisAnimation;
-import simulatorvisualizer.model.instructionanimation.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import simulatorvisualizer.model.EnvironmentBag;
 
 /**
  * Created by Jennica on 07/02/2016.
@@ -19,6 +16,7 @@ public class VisualizationController extends AssemblyComponent {
     private Tab tab;
     private CalvisFormattedInstruction currentInstruction;
     private AnimationMap animationMap;
+    private EnvironmentBag oldEnvironment;
 
     public VisualizationController() {
         this.tab = new Tab();
@@ -69,6 +67,10 @@ public class VisualizationController extends AssemblyComponent {
 
     public void attachCalvisInstruction(CalvisFormattedInstruction CalvisInstruction) {
         this.currentInstruction = CalvisInstruction;
+    }
+
+    public void setOldEnvironment(EnvironmentBag environment){
+        this.oldEnvironment = environment;
     }
 
 }

@@ -35,7 +35,6 @@ public class Memory {
     private HashMap<String, String> labelMap;
     private HashMap<String, String> variableMap;
     private String variablePointer;
-    private ArrayList<Integer> stackType;
 
     public Memory(int bitSize, int bitEndLength, String csvFile) {
         MAX_ADDRESS_SIZE = bitSize;
@@ -43,7 +42,6 @@ public class Memory {
         this.mem = new TreeMap<>(Collections.reverseOrder());
         this.labelMap = new HashMap<>();
         this.variableMap = new HashMap<>();
-        this.stackType = new ArrayList<>();
         resetVariablePointer();
 
         String lastAddress = MemoryAddressCalculator.extend("F", bitEndLength, "F");
@@ -134,6 +132,7 @@ public class Memory {
             memoryBaseAddress = baseAddress.split("/")[1];
         }
         if ( this.mem.containsKey(memoryBaseAddress) ) {
+
             Integer inc;
             inc = Integer.parseInt(memoryBaseAddress, 16);
             int offsetHex = offset / 4;
@@ -230,15 +229,6 @@ public class Memory {
         }
     }
 
-    public void push(int type) {
-        stackType.add(type);
-    }
-
-    public int pop() {
-        System.out.println("what" + stackType.size());
-        return stackType.remove(0);
-    }
-
     public void clear() {
         Iterator<String> keys = this.mem.keySet().iterator();
         while ( keys.hasNext() ) {
@@ -249,18 +239,12 @@ public class Memory {
         this.labelMap.clear();
         this.variableMap.clear();
         resetVariablePointer();
-        stackType.clear();
     }
 
     public Iterator<String[]> getLookup() {
         return lookup.iterator();
     }
 
-    /**
-     * getMemoryKeys() is used for getting all size directives to be highlighted
-     *
-     * @return
-     */
     public Iterator<String> getMemoryKeys() {
         List memoryKeys = new ArrayList<>();
         Iterator<String[]> iterator = getLookup();

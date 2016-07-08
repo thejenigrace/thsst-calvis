@@ -1,15 +1,11 @@
 package configuration.model.engine;
 
 import bsh.EvalError;
-import configuration.model.exceptions.DataTypeMismatchException;
-import configuration.model.exceptions.IncorrectParameterException;
-import configuration.model.exceptions.InvalidSourceOperandException;
-import configuration.model.exceptions.MemoryRestrictedAccessException;
-import configuration.model.exceptions.MemoryToMemoryException;
-import configuration.model.exceptions.MissingSizeDirectiveException;
+import configuration.model.exceptions.*;
 import editor.controller.ConsoleController;
 import editor.controller.VisualizationController;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
@@ -56,11 +52,10 @@ public class CalvisFormattedInstruction {
         try {
             switch ( tokens.length ) {
                 case 0:
-                    if ( name.equalsIgnoreCase("printf") ||
-                            name.equalsIgnoreCase("scanf") || name.equalsIgnoreCase("cls") ) {
-                        consoleController.attachCalvisInstruction(this);
-                        this.console = consoleController;
-                        this.ins.consoleExecute(registers, memory, consoleController);
+                    if ( name.equalsIgnoreCase("printf")
+                            || name.equalsIgnoreCase("scanf")
+                            || name.equalsIgnoreCase("cls") ) {
+                        // Execution is at System Controller
                     } else {
                         visualizationController.attachCalvisInstruction(this);
                         this.ins.execute(registers, memory);
@@ -88,9 +83,137 @@ public class CalvisFormattedInstruction {
         return !nameCopy.matches("J.*|LOOP.*|CALL|RET");
     }
 
-    public void executeScan() {
-        String text = console.retrieveScanned();
-        System.out.println(text);
+    public void executeScan() throws StackPopException, MemoryReadException,
+            MemoryWriteException, DataTypeMismatchException {
+        String input = console.retrieveScanned();
+
+        String stackPointer = registers.get("ESP");
+        String pointingTo = memory.read(stackPointer, 32);
+        BigInteger pointer = new BigInteger(pointingTo, 16);
+
+        String scanFormat = "";
+        // Read the format; assume it's only 1
+        while ( !memory.read(pointer.toString(16), 8).equals("00") ) {
+            // get one byte
+            String first = memory.read(pointer.toString(16), 8);
+            char ascii = (char) Integer.parseInt(first, 16);
+            pointer = pointer.add(new BigInteger("1"));
+            scanFormat += ascii;
+        }
+        // Get base address of where we store the scanned number
+        // always add 4 to stack pointer since we're dealing with addresses
+        BigInteger stackAddress = new BigInteger(stackPointer, 16);
+        BigInteger offset = new BigInteger("4");
+        stackAddress = stackAddress.add(offset);
+
+        if ( stackAddress.compareTo(new BigInteger("FFFE", 16)) == 1 ) {
+            throw new StackPopException(offset.intValue());
+        } else {
+            String storeToAddress = memory.read(stackAddress.toString(16), 32);
+            storeToMemory(scanFormat, input, storeToAddress);
+        }
+    }
+
+    private void storeToMemory(String format, String input, String baseAddress)
+            throws MemoryWriteException, DataTypeMismatchException, MemoryReadException {
+        if ( format.matches("%d") ) {
+            Short realShort = Short.parseShort(input);
+            String shortToHex = Integer.toHexString(realShort.intValue());
+            memory.write(baseAddress, shortToHex, 16);
+        } else if ( format.matches("%ld") ) {
+            BigInteger realInt = new BigInteger(input);
+            String intToHex = Integer.toHexString(realInt.intValue());
+            memory.write(baseAddress, intToHex, 32);
+        } else if ( format.matches("%u") ) {
+            BigInteger b = new BigInteger(input);
+            String unsigned = getUnsigned(16, b.toString(2));
+            BigInteger b2 = new BigInteger(unsigned);
+            if ( b2.compareTo(new BigInteger("65535")) == 1 || b2.signum() == -1 ) {
+                throw new NumberFormatException("Value out of range. Value:" + input + " Type: %u");
+            }
+            String unsigned16 = Integer.toHexString(b2.intValue());
+            memory.write(baseAddress, unsigned16, 16);
+        } else if ( format.matches("%lu") ) {
+            BigInteger b = new BigInteger(input);
+            String unsigned = getUnsigned(32, b.toString(2));
+            BigInteger b2 = new BigInteger(unsigned);
+            if ( b2.compareTo(new BigInteger("4,294,967,295")) == 1 || b2.signum() == -1 ) {
+                throw new NumberFormatException("Value out of range. Value:" + input + " Type: %lu");
+            } else {
+                String unsigned32 = Long.toHexString(b2.longValue());
+                memory.write(baseAddress, unsigned32, 32);
+            }
+        } else if ( format.matches("%x") ) {
+            if ( !input.matches(PatternList.hexPattern) ) {
+                throw new NumberFormatException("Value is not a hex Value:" + input + " Type: %x");
+            } else if ( input.length() > 6 ) {
+                throw new NumberFormatException("Value out of range. Value:" + input + " Type: %x");
+            } else {
+                String formatHex = input.substring(2);
+                memory.write(baseAddress, formatHex, 16);
+            }
+        } else if ( format.matches("%lx") ) {
+            if ( !input.matches(PatternList.hexPattern) ) {
+                throw new NumberFormatException("Value is not a hex Value:" + input + " Type: %lx");
+            } else if ( input.length() > 10 ) {
+                throw new NumberFormatException("Value out of range. Value:" + input + " Type: %lx");
+            } else {
+                String formatHex = input.substring(2);
+                memory.write(baseAddress, formatHex, 32);
+            }
+        } else if ( format.matches("%f") ) {
+            float floatValue = Float.parseFloat(input);
+            String representation = Integer.toHexString(Float.floatToIntBits(floatValue));
+            memory.write(baseAddress, representation, 32);
+        } else if ( format.matches("%lf") ) {
+            Double doubleValue = Double.parseDouble(input);
+            String representation = Long.toHexString(Double.doubleToLongBits(doubleValue));
+            memory.write(baseAddress, representation, 64);
+        } else if ( format.matches("%c") ) {
+            if ( input.length() > 1 ) {
+                throw new NumberFormatException("Not a character: " + input + " Type: %c");
+            } else {
+                byte[] realChar = input.getBytes();
+                String asciiHexValue = String.format("%2X", realChar[0]);
+                memory.write(baseAddress, asciiHexValue, 16);
+            }
+        } else if ( format.matches("%s") ) {
+            byte[] bytes = input.getBytes();
+            BigInteger stringPointer = new BigInteger(baseAddress, 16);
+            for ( int i = 0; i < bytes.length; i++ ) {
+                String asciiHexValue = String.format("%2X", bytes[i]);
+                String address = stringPointer.toString(16);
+                address = MemoryAddressCalculator.extend(address, 32, "0");
+                memory.write(address, asciiHexValue, 8);
+                stringPointer = stringPointer.add(new BigInteger("1"));
+            }
+            // add last 0 to end of scanned string
+            String lastAddress = stringPointer.toString(16);
+            lastAddress = MemoryAddressCalculator.extend(lastAddress, 32, "0");
+            memory.write(lastAddress, "00", 8);
+        }
+    }
+
+    private String getUnsigned(int size, String stringBits) {
+        String temp = stringBits;
+        // zero extend
+        while ( temp.length() < 16 ) {
+            temp = "0" + temp;
+        }
+
+        StringBuilder tempBit = new StringBuilder(temp);
+        String returnable = "";
+
+        if ( tempBit.charAt(0) == '1' ) {
+            tempBit.setCharAt(0, '0');
+            tempBit.insert(1, "1");
+            BigInteger bi = new BigInteger(tempBit.toString(), 2);
+            returnable = bi.toString(10);
+        } else {
+            BigInteger bi = new BigInteger(tempBit.toString(), 2);
+            returnable = bi.toString(10);
+        }
+        return returnable;
     }
 
     public void verifyParameters(int lineNumber) throws MemoryRestrictedAccessException, EvalError,
@@ -302,11 +425,11 @@ public class CalvisFormattedInstruction {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.name + " : " + this.tokens.toString();
     }
 
-    public String getName(){
+    public String getName() {
         return this.name.toUpperCase();
     }
 
@@ -320,6 +443,14 @@ public class CalvisFormattedInstruction {
 
     public Memory getMemory() {
         return this.memory;
+    }
+
+    public void setConsole(ConsoleController console) {
+        this.console = console;
+    }
+
+    public Instruction getInstruction() {
+        return this.ins;
     }
 
 }

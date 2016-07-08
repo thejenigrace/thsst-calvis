@@ -30,6 +30,7 @@ import simulatorvisualizer.controller.SystemController;
 
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -460,6 +461,11 @@ public class WorkspaceController implements Initializable {
 
     public void changeIconToShow() {
         this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
+    }
+
+    public void disablePlayNextPrevious(boolean flag){
+        disableStepMode(flag);
+        this.btnPlay.setDisable(flag);
     }
 
     public void disableStepMode(boolean flag) {

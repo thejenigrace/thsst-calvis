@@ -52,7 +52,7 @@ public class Parser {
         Grule label = lang.newGrule();
 
         TokenDef colon = lang.newToken(":");
-        TokenDef sectionData = lang.newToken("SECTION .DATA");
+        TokenDef sectionData = lang.newToken("(SECTION|section) [.](DATA|data)");
         TokenDef hex = lang.newToken(PatternList.hexPattern);
         TokenDef floatingPoint = lang.newToken(PatternList.floatingPointPattern);
         TokenDef dec = lang.newToken(PatternList.decPattern);
