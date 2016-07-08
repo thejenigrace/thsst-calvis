@@ -6,7 +6,6 @@ import configuration.model.engine.Token;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Tab;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -32,8 +31,10 @@ public class Mov extends CalvisAnimation {
         }
 
         // CODE HERE
-        Rectangle desRectangle = this.createRectangle(tokens[0]);
-        Rectangle srcRectangle = this.createRectangle(tokens[1]);
+        int width = 140;
+        int height = 70;
+        Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
+        Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(110);
@@ -126,59 +127,6 @@ public class Mov extends CalvisAnimation {
             srcTransition.play();
         }
     }
-
-    private Rectangle createRectangle(Token token) {
-        // Check token type
-        switch ( token.getType() ) {
-            case Token.REG:
-                System.out.println("REG");
-                return new Rectangle(140, 70, Color.web("#FCBD6D", 1.0));
-            case Token.MEM:
-                System.out.println("MEM");
-                return new Rectangle(140, 70, Color.web("#79CFCE", 1.0));
-            case Token.HEX:
-                System.out.println("HEX");
-                return new Rectangle(140, 70, Color.web("#7BB88C", 1.0));
-            default:
-                return null;
-        }
-    }
-
-    private Text createLabelText(Token token) {
-        switch ( token.getType() ) {
-            case Token.REG:
-                return new Text(token.getValue());
-            case Token.MEM:
-                return new Text("[" + token.getValue() + "]");
-            case Token.HEX:
-                return new Text("HEX");
-            default:
-                return null;
-        }
-    }
-
-    private Text createValueText(Token token, RegisterList registers, Memory memory, int size) {
-        try {
-            switch ( token.getType() ) {
-                case Token.REG:
-                    System.out.println("REG");
-                    return new Text(registers.get(token));
-                case Token.MEM:
-                    System.out.println("MEM");
-
-                    return new Text(memory.read(token, size));
-                case Token.HEX:
-                    System.out.println("HEX");
-                    return new Text("0x" + token.getValue());
-                default:
-                    return null;
-            }
-        } catch ( Exception e ) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }
 
 //       timeline.getKeyFrames().addAll(
