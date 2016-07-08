@@ -17,7 +17,8 @@ execute(des, src, registers, memory) {
             String y = registers.get(des);
 
 			if(registers.getBitSize(des) == registers.getBitSize(src) && registers.getBitSize(des) == 32){
-                Calculator c = new Calculator(registers,memory);
+
+				Calculator c = new Calculator(registers,memory);
                 EFlags ef = registers.getEFlags();
 
 				// Addition in Binary Format
@@ -31,18 +32,20 @@ execute(des, src, registers, memory) {
                 }
 				if(result.toString(16).length() > registers.getHexSize(des)){
 					resultingValue = result.toString(2).substring(1);
+//					registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
 				}
 				else{
 					resultingValue = result.toString(2);
-//				}registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
+				}
 				registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
+//				registers.set(des,c.binaryToHexString(c.binaryZeroExtend(resultingValue, des),des));
 
 				BigInteger biC=new BigInteger(numberOfF,16);
 				if(result.compareTo(biC)==1)
 					ef.setCarryFlag("1");
 				else
 					ef.setCarryFlag("0");
-				ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, src).charAt(0)));
+//				ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, src).charAt(0)));
 			}
  		}
  		else if ( src.isMemory() ){
@@ -76,8 +79,8 @@ execute(des, src, registers, memory) {
 			else
 				ef.setCarryFlag("0");
 
-		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
-		c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getCarryFlag()));
+//		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
+//		c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getCarryFlag()));
  		}
  	}
  	else if ( des.isMemory() ){
@@ -118,10 +121,10 @@ execute(des, src, registers, memory) {
 				ef.setCarryFlag("1");
 			else
 				ef.setCarryFlag("0");
-		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
-		c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getCarryFlag()));
-			}
- 		}
- 	}
-		}
- }
+//		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
+//		c.binaryZeroExtend(resultingValue, src).charAt(0), ef.getCarryFlag()));
+				}
+	        }
+	    }
+	}
+// }
