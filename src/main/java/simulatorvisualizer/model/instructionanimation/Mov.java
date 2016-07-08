@@ -25,89 +25,163 @@ public class Mov extends CalvisAnimation {
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
 
-        // CODE HERE
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
         }
 
-        Rectangle desRectangle = new Rectangle(120, 60, Color.web("#FCBD6D", 1.0));
-        Rectangle srcRectangle = new Rectangle(120, 60, Color.web("#FCBD6D", 1.0));
-//        Rectangle srcRectangle = new Rectangle(120, 60, Color.web("#79CFCE", 1.0));
+        // CODE HERE
+        Rectangle desRectangle = this.createRectangle(tokens[0]);
+        Rectangle srcRectangle = this.createRectangle(tokens[1]);
 
-        desRectangle.setX(110);
-        desRectangle.setY(100);
-        desRectangle.setArcWidth(10);
-        desRectangle.setArcHeight(10);
+        if ( desRectangle != null && srcRectangle != null ) {
+            desRectangle.setX(110);
+            desRectangle.setY(100);
+            desRectangle.setArcWidth(10);
+            desRectangle.setArcHeight(10);
 
-        srcRectangle.setX(desRectangle.xProperty().getValue() +
-                desRectangle.widthProperty().getValue() + 100);
-        srcRectangle.setY(100);
-        srcRectangle.setArcWidth(10);
-        srcRectangle.setArcHeight(10);
+            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.widthProperty().getValue() + 100);
+            srcRectangle.setY(100);
+            srcRectangle.setArcWidth(10);
+            srcRectangle.setArcHeight(10);
 
-        root.getChildren().addAll(desRectangle, srcRectangle);
+            root.getChildren().addAll(desRectangle, srcRectangle);
 
-        String desLabel = tokens[0].getValue();
-        String srcLabel = tokens[1].getValue();
+            int desSize = 0;
+            if ( tokens[0].getType() == Token.REG )
+                desSize = registers.getBitSize(tokens[0]);
+            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
+                desSize = registers.getBitSize(tokens[1]);
+            else
+                desSize = memory.getBitSize(tokens[0]);
 
-        Text desLabelText = new Text(desLabel + ": ");
-        Text desValueText = new Text(registers.get(desLabel));
-        Text srcValueText = new Text(srcLabel + ": " + registers.get(srcLabel));
+            Text desLabelText = this.createLabelText(tokens[0]);
+            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
+            Text srcLabelText = this.createLabelText(tokens[1]);
+            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
 
-        desLabelText.setX(100);
-        desLabelText.setY(100);
+            desLabelText.setX(100);
+            desLabelText.setY(100);
 
-        desValueText.setX(100);
-        desValueText.setY(100);
+            desValueText.setX(100);
+            desValueText.setY(100);
 
-        srcValueText.setX(100);
-        srcValueText.setY(100);
+            srcLabelText.setX(100);
+            srcLabelText.setY(100);
 
-        root.getChildren().addAll(desLabelText, desValueText, srcValueText);
+            srcValueText.setX(100);
+            srcValueText.setY(100);
 
-        // ANIMATION LOGIC
-        TranslateTransition desLabelTransition = new TranslateTransition();
-        TranslateTransition desTransition = new TranslateTransition(new Duration(1000), desValueText);
-        TranslateTransition srcTransition = new TranslateTransition();
+            root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
 
-        // label not moving
-        desLabelTransition.setNode(desLabelText);
-        desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty().add(20));
-        desLabelTransition.fromYProperty().bind(desRectangle.translateYProperty()
-                .add(desRectangle.getLayoutBounds().getHeight() / 2));
-        desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
-        desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
+            // ANIMATION LOGIC
+            TranslateTransition desLabelTransition = new TranslateTransition();
+            TranslateTransition desTransition = new TranslateTransition(new Duration(1000), desValueText);
+            TranslateTransition srcLabelTransition = new TranslateTransition();
+            TranslateTransition srcTransition = new TranslateTransition();
 
-        // values moving
-        desTransition.setInterpolator(Interpolator.LINEAR);
-        desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                .add(srcRectangle.getLayoutBounds().getWidth() + 120));
-        desTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
-        desTransition.toXProperty().bind(desRectangle.translateXProperty().add(50));
-        desTransition.toYProperty().bind(desTransition.fromYProperty());
+            // Destination label static
+            desLabelTransition.setNode(desLabelText);
+            desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
+            desLabelTransition.fromYProperty().bind(desRectangle.translateYProperty()
+                    .add(desRectangle.getLayoutBounds().getHeight() / 3));
+            desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
+            desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
-        // label & value not moving
-        srcTransition.setNode(srcValueText);
-        srcTransition.fromXProperty().bind(desTransition.fromXProperty());
-        srcTransition.fromYProperty().bind(desTransition.fromYProperty());
-        srcTransition.toXProperty().bind(srcTransition.fromXProperty());
-        srcTransition.toYProperty().bind(srcTransition.fromYProperty());
+            // Destination value moving
+            desTransition.setInterpolator(Interpolator.LINEAR);
+            desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                    .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+            desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+                    .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
+            desTransition.toXProperty().bind(desRectangle.translateXProperty()
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+            desTransition.toYProperty().bind(desTransition.fromYProperty());
 
-        // Play 1000 milliseconds of animation
-        desLabelTransition.play();
-        desTransition.play();
-        srcTransition.play();
+            // Source label static
+            srcLabelTransition.setNode(srcLabelText);
+            srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                    .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
+            srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
+            srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
+            srcLabelTransition.toYProperty().bind(srcLabelTransition.fromYProperty());
+
+            // Source value static
+            srcTransition.setNode(srcValueText);
+            srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                    .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
+            srcTransition.fromYProperty().bind(desTransition.fromYProperty());
+            srcTransition.toXProperty().bind(srcTransition.fromXProperty());
+            srcTransition.toYProperty().bind(srcTransition.fromYProperty());
+
+            // Play 1000 milliseconds of animation
+            desLabelTransition.play();
+            srcLabelTransition.play();
+            desTransition.play();
+            srcTransition.play();
+        }
     }
 
-    private void formatDisplayValue(Token[] tokens) {
-        // Check
+    private Rectangle createRectangle(Token token) {
+        // Check token type
+        switch ( token.getType() ) {
+            case Token.REG:
+                System.out.println("REG");
+                return new Rectangle(140, 70, Color.web("#FCBD6D", 1.0));
+            case Token.MEM:
+                System.out.println("MEM");
+                return new Rectangle(140, 70, Color.web("#79CFCE", 1.0));
+            case Token.HEX:
+                System.out.println("HEX");
+                return new Rectangle(140, 70, Color.web("#7BB88C", 1.0));
+            default:
+                return null;
+        }
+    }
+
+    private Text createLabelText(Token token) {
+        switch ( token.getType() ) {
+            case Token.REG:
+                return new Text(token.getValue());
+            case Token.MEM:
+                return new Text("[" + token.getValue() + "]");
+            case Token.HEX:
+                return new Text("HEX");
+            default:
+                return null;
+        }
+    }
+
+    private Text createValueText(Token token, RegisterList registers, Memory memory, int size) {
+        try {
+            switch ( token.getType() ) {
+                case Token.REG:
+                    System.out.println("REG");
+                    return new Text(registers.get(token));
+                case Token.MEM:
+                    System.out.println("MEM");
+
+                    return new Text(memory.read(token, size));
+                case Token.HEX:
+                    System.out.println("HEX");
+                    return new Text("0x" + token.getValue());
+                default:
+                    return null;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
 
-//      timeline.getKeyFrames().addAll(
+//       timeline.getKeyFrames().addAll(
 //                new KeyFrame(Duration.ZERO, // set start position at 0
 //                        new KeyValue(srcRectangle.translateXProperty(), 300),
 //                        new KeyValue(srcRectangle.translateYProperty(), 100)
@@ -118,6 +192,7 @@ public class Mov extends CalvisAnimation {
 //                        // ADD NEW KEY VALUES IF NEEDED HERE
 //                )
 //        );
+
 //        for ( Node circle : circles.getChildren() ) {
 //            timeline.getKeyFrames().addAll(
 //                    new KeyFrame(Duration.ZERO, // set start position at 0

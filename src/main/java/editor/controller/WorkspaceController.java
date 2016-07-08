@@ -160,7 +160,7 @@ public class WorkspaceController implements Initializable {
         }
     }
 
-    private void showConsoleAndErrorLoggerPane() throws Exception {
+    private void showBottomTabPane() throws Exception {
         ConsoleController consoleController = new ConsoleController();
         this.consoleAndErrorLoggerTabPane.getTabs().add(consoleController.getTab());
         this.consoleAndErrorLoggerTabPane.getTabs().add(createErrorLoggerTab(null));
@@ -496,7 +496,7 @@ public class WorkspaceController implements Initializable {
         try {
             this.showRegisterPane();
             this.showMemoryPane();
-            this.showConsoleAndErrorLoggerPane();
+            this.showBottomTabPane();
             this.showFileEditorPane();
             this.disableSaveMode(true);
             this.disableFindButton(true);
