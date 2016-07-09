@@ -1,9 +1,6 @@
 package simulatorvisualizer.model.instructionanimation;
 
-import configuration.model.engine.Calculator;
-import configuration.model.engine.Memory;
-import configuration.model.engine.RegisterList;
-import configuration.model.engine.Token;
+import configuration.model.engine.*;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -54,24 +51,14 @@ public class Cmov extends CalvisAnimation {
 
             int desSize = registers.getBitSize(tokens[1]);
 
-            Text desLabelText = this.createLabelText(tokens[1]);
-            Text desValueText = this.createValueText(tokens[1], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(tokens[2]);
-            Text srcValueText = this.createValueText(tokens[2], registers, memory, desSize);
+            String flagsAffected = getConditionReminder(tokens[0].getValue(), registers);
+            Text detailsText = new Text(X, Y * 2, flagsAffected);
+            Text desLabelText = this.createLabelText(X, Y, tokens[1]);
+            Text desValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
+            Text srcLabelText = this.createLabelText(X, Y, tokens[2]);
+            Text srcValueText = this.createValueText(X, Y, tokens[2], registers, memory, desSize);
 
-            desLabelText.setX(100);
-            desLabelText.setY(100);
-
-            desValueText.setX(100);
-            desValueText.setY(100);
-
-            srcLabelText.setX(100);
-            srcLabelText.setY(100);
-
-            srcValueText.setX(100);
-            srcValueText.setY(100);
-
-            root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
+            root.getChildren().addAll(detailsText, desLabelText, desValueText, srcLabelText, srcValueText);
 
             // ANIMATION LOGIC
             TranslateTransition desLabelTransition = new TranslateTransition();
@@ -89,7 +76,6 @@ public class Cmov extends CalvisAnimation {
             desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
             // Destination value moving
-            System.out.println("calculator: " + calculator.evaluateCondition(tokens[0].getValue()));
             if ( calculator.evaluateCondition(tokens[0].getValue()) ) {
                 desTransition.setInterpolator(Interpolator.LINEAR);
                 desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
@@ -110,7 +96,6 @@ public class Cmov extends CalvisAnimation {
                 desTransition.toXProperty().bind(desTransition.fromXProperty());
                 desTransition.toYProperty().bind(desTransition.fromYProperty());
             }
-
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
@@ -135,6 +120,70 @@ public class Cmov extends CalvisAnimation {
             srcLabelTransition.play();
             desTransition.play();
             srcTransition.play();
+        }
+    }
+
+    public String getConditionReminder(String condition, RegisterList registers) {
+        String con = condition.toUpperCase();
+        EFlags flags = registers.getEFlags();
+        String CF = flags.getCarryFlag();
+        String ZF = flags.getZeroFlag();
+        String OF = flags.getOverflowFlag();
+        //String AF = flags.getAuxiliaryFlag();
+        String PF = flags.getParityFlag();
+        String SF = flags.getSignFlag();
+
+        switch ( con ) {
+            case "A":
+            case "NBE": // fall through
+                return "Check if: CF = 0 or ZF = 0";
+            case "AE":
+            case "NB": // fall through
+                return "Check if: CF = 0";
+            case "B":
+            case "NAE": // fall through
+                return "CF = 1";
+            case "BE":
+            case "NA": // fall through
+                return "Check if: CF = 1 or ZF = 1";
+            case "G":
+            case "NLE": // fall through
+                return "Check if: SF == OF or ZF = 0";
+            case "GE":
+            case "NL": // fall through
+                return "Check if: SF == OF";
+            case "L":
+            case "NGE": // fall through
+                return "Check if: SF != OF";
+            case "LE":
+            case "NG": // fall through
+                return "Check if: SF != OF or ZF = 1";
+            case "E":
+            case "Z": // fall through
+                return "Check if: ZF = 1";
+            case "NE":
+            case "NZ": // fall through
+                return "Check if: ZF = 0";
+            case "P":
+            case "PE": // fall through
+                return "Check if: PF = 1";
+            case "NP":
+            case "PO": // fall through
+                return "Check if: PF = 0";
+            case "O":
+                return "Check if: OF = 1";
+            case "NO":
+                return "Check if: OF = 0";
+            case "C":
+                return "Check if: CF = 1";
+            case "NC":
+                return "Check if: CF = 0";
+            case "S":
+                return "Check if: SF = 1";
+            case "NS":
+                return "Check if: SF = 0";
+            default:
+                return "Condition not found";
         }
     }
 }
