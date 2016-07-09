@@ -17,11 +17,12 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Add extends CalvisAnimation {
+public class Inc extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
         this.root.getChildren().clear();
+//        tab.setContent(root);
         scrollPane.setContent(root);
 
         RegisterList registers = this.currentInstruction.getRegisters();
@@ -38,21 +39,21 @@ public class Add extends CalvisAnimation {
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle augendRectangle = this.createRectangle(tokens[0], width, height);
-        Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
+        Rectangle srcRectangle = this.createRectangle(Token.HEX, width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(X);
-            desRectangle.setY(Y);
+            desRectangle.setX(100);
+            desRectangle.setY(100);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
 
-            augendRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + X);
-            augendRectangle.setY(Y);
+            augendRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + 100);
+            augendRectangle.setY(100);
             augendRectangle.setArcWidth(10);
             augendRectangle.setArcHeight(10);
 
-            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X * 2);
-            srcRectangle.setY(Y);
+            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + 200);
+            srcRectangle.setY(100);
             srcRectangle.setArcWidth(10);
             srcRectangle.setArcHeight(10);
 
@@ -69,25 +70,38 @@ public class Add extends CalvisAnimation {
             int desSize = 0;
             if ( tokens[0].getType() == Token.REG )
                 desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
-            else
+            else if ( tokens[0].getType() == Token.MEM )
                 desSize = memory.getBitSize(tokens[0]);
 
-            String flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF, OF";
-            Text detailsText = new Text(X, Y*2, flagsAffected);
-            Text desLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
-            Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text augendValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
-            Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
+            double x = 100;
+            double y = 100;
+            String flagsAffected = "Flags Affected: PF, AF, ZF, SF, OF";
+            Text detailsText = new Text(100, 200, flagsAffected);
+            Text desLabelText = this.createLabelText(x, y, tokens[0]);
+            Text desValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
+            Text augendLabelText = this.createLabelText(x, y, tokens[0]);
+            Text augendValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
+            Text srcLabelText = new Text(x, y, "IMMEDIATE");
+            Text srcValueText;
+            switch ( desSize ) {
+                case 8:
+                    srcValueText = new Text(x, y, "0x01");
+                    break;
+                case 16:
+                    srcValueText = new Text(x, y, "0x0001");
+                    break;
+                case 32:
+                    srcValueText = new Text(x, y, "0x00000001");
+                    break;
+                default:
+                    srcValueText = new Text(x, y, "0x01");
+            }
 
-            Text plusText = new Text(X, Y, "+");
+            Text plusText = new Text(x, y, "+");
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            Text equalText = new Text(X, Y, "=");
+            Text equalText = new Text(x, y, "=");
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 
@@ -116,7 +130,7 @@ public class Add extends CalvisAnimation {
             // Destination value moving
             desTransition.setInterpolator(Interpolator.LINEAR);
             desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
                     .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                     .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
@@ -137,7 +151,7 @@ public class Add extends CalvisAnimation {
             // Augend label static
             augendLabelTransition.setNode(augendLabelText);
             augendLabelTransition.fromXProperty().bind(augendRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
                     .add((augendRectangle.getLayoutBounds().getWidth() - augendLabelText.getLayoutBounds().getWidth()) / 2));
             augendLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             augendLabelTransition.toXProperty().bind(augendLabelTransition.fromXProperty());
@@ -146,7 +160,7 @@ public class Add extends CalvisAnimation {
             // Augend value static
             augendTransition.setNode(augendValueText);
             augendTransition.fromXProperty().bind(augendRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
                     .add((augendRectangle.getLayoutBounds().getWidth() - augendValueText.getLayoutBounds().getWidth()) / 2));
             augendTransition.fromYProperty().bind(augendRectangle.translateYProperty()
                     .add(augendRectangle.getLayoutBounds().getHeight() / 1.5));
@@ -156,7 +170,7 @@ public class Add extends CalvisAnimation {
             // Plus sign label static
             plusTransition.setNode(plusText);
             plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 35));
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100 + augendRectangle.getLayoutBounds().getWidth() + 35));
             plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
             plusTransition.toXProperty().bind(plusTransition.fromXProperty());
             plusTransition.toYProperty().bind(plusTransition.fromYProperty());
@@ -164,7 +178,7 @@ public class Add extends CalvisAnimation {
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100 + augendRectangle.getLayoutBounds().getWidth() + 100)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
@@ -173,7 +187,7 @@ public class Add extends CalvisAnimation {
             // Source value static
             srcTransition.setNode(srcValueText);
             srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 100 + augendRectangle.getLayoutBounds().getWidth() + 100)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
             srcTransition.toXProperty().bind(srcTransition.fromXProperty());

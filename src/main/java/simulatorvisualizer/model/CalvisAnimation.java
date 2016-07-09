@@ -20,6 +20,9 @@ public abstract class CalvisAnimation {
     protected Group root;
     protected CalvisFormattedInstruction currentInstruction;
 
+    protected static final double X = 100;
+    protected static final double Y = 100;
+
     public CalvisAnimation() {
         this.timeline = new Timeline();
         this.root = new Group();
@@ -41,7 +44,7 @@ public abstract class CalvisAnimation {
                 System.out.println("MEM");
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-                System.out.println("HEX");
+                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return null;
@@ -58,7 +61,7 @@ public abstract class CalvisAnimation {
                 System.out.println("MEM");
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-                System.out.println("HEX");
+                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return null;
@@ -72,7 +75,7 @@ public abstract class CalvisAnimation {
             case Token.MEM:
                 return new Text("[" + token.getValue() + "]");
             case Token.HEX:
-                return new Text("HEX");
+                return new Text("IMMEDIATE");
             default:
                 return null;
         }
@@ -85,7 +88,7 @@ public abstract class CalvisAnimation {
             case Token.MEM:
                 return new Text(x, y, "[" + token.getValue() + "]");
             case Token.HEX:
-                return new Text(x, y, "HEX");
+                return new Text(x, y, "IMMEDIATE");
             default:
                 return null;
         }
@@ -96,13 +99,13 @@ public abstract class CalvisAnimation {
             switch ( token.getType() ) {
                 case Token.REG:
                     System.out.println("REG");
-                    return new Text(registers.get(token));
+                    return new Text("0x" + registers.get(token));
                 case Token.MEM:
                     System.out.println("MEM");
 
                     return new Text(memory.read(token, size));
                 case Token.HEX:
-                    System.out.println("HEX");
+                    System.out.println("IMMEDIATE");
                     return new Text("0x" + token.getValue());
                 default:
                     return null;
@@ -118,13 +121,13 @@ public abstract class CalvisAnimation {
             switch ( token.getType() ) {
                 case Token.REG:
                     System.out.println("REG");
-                    return new Text(x, y, registers.get(token));
+                    return new Text(x, y, "0x" + registers.get(token));
                 case Token.MEM:
                     System.out.println("MEM");
 
                     return new Text(x, y, memory.read(token, size));
                 case Token.HEX:
-                    System.out.println("HEX");
+                    System.out.println("IMMEDIATE");
                     return new Text(x, y, "0x" + token.getValue());
                 default:
                     return null;
