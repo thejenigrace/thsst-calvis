@@ -28,10 +28,18 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateGPBinaryArithmetic() {
         this.put("ADD", new Add());
+        this.put("ADC", new Ad("CF", true));
+        this.put("ADCX", new Ad("CF", false));
+        this.put("ADOX", new Ad("OF", false));
         this.put("SUB", new Sub());
+        this.put("SBB", new Sbb());
         this.put("INC", new Inc());
         this.put("DEC", new Dec());
         this.put("CMP", new Cmp());
         this.put("NEG", new Neg());
+        this.put("MUL", new Mul());
+        this.put("IMUL", new Imul());
+        this.put("DIV", new Div());
+        this.put("IDIV", new Div());
     }
 }

@@ -40,7 +40,7 @@ public class Cmov extends CalvisAnimation {
         Rectangle srcRectangle = this.createRectangle(tokens[2], width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(110);
+            desRectangle.setX(100);
             desRectangle.setY(100);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
@@ -82,7 +82,7 @@ public class Cmov extends CalvisAnimation {
             // Destination label static
             desLabelTransition.setNode(desLabelText);
             desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
+                    .add((desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
             desLabelTransition.fromYProperty().bind(desRectangle.translateYProperty()
                     .add(desRectangle.getLayoutBounds().getHeight() / 3));
             desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
@@ -93,22 +93,29 @@ public class Cmov extends CalvisAnimation {
             if ( calculator.evaluateCondition(tokens[0].getValue()) ) {
                 desTransition.setInterpolator(Interpolator.LINEAR);
                 desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                        .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                        .add(desRectangle.getLayoutBounds().getWidth() + X)
                         .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
                 desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                         .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
                 desTransition.toXProperty().bind(desRectangle.translateXProperty()
-                        .add(10 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                        .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
                 desTransition.toYProperty().bind(desTransition.fromYProperty());
-            } else {
-
+            }
+            // Destination value static
+            else {
+                desTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                        .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+                        .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
+                desTransition.toXProperty().bind(desTransition.fromXProperty());
+                desTransition.toYProperty().bind(desTransition.fromYProperty());
             }
 
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                    .add(desRectangle.getLayoutBounds().getWidth() + X)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
@@ -117,7 +124,7 @@ public class Cmov extends CalvisAnimation {
             // Source value static
             srcTransition.setNode(srcValueText);
             srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
+                    .add(desRectangle.getLayoutBounds().getWidth() + X)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
             srcTransition.toXProperty().bind(srcTransition.fromXProperty());

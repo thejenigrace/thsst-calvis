@@ -1,5 +1,6 @@
 package simulatorvisualizer.model.instructionanimation;
 
+import configuration.model.engine.EFlags;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
@@ -17,7 +18,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Add extends CalvisAnimation {
+public class Sbb extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -26,6 +27,7 @@ public class Add extends CalvisAnimation {
 
         RegisterList registers = this.currentInstruction.getRegisters();
         Memory memory = this.currentInstruction.getMemory();
+        EFlags eFlags = registers.getEFlags();
 
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
@@ -39,6 +41,7 @@ public class Add extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle augendRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
+        Rectangle flagRectangle = this.createRectangle(Token.REG, width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(X);
@@ -51,20 +54,29 @@ public class Add extends CalvisAnimation {
             augendRectangle.setArcWidth(10);
             augendRectangle.setArcHeight(10);
 
-            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X * 2);
+            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth()
+                    + augendRectangle.getLayoutBounds().getWidth() + X * 2);
             srcRectangle.setY(Y);
             srcRectangle.setArcWidth(10);
             srcRectangle.setArcHeight(10);
 
-            Circle equalCircle = new Circle(desRectangle.xProperty().getValue() +
-                    desRectangle.getLayoutBounds().getWidth() + 50,
+            flagRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth()
+                    + augendRectangle.getLayoutBounds().getWidth() + srcRectangle.getLayoutBounds().getWidth() + X * 3);
+            flagRectangle.setY(Y);
+            flagRectangle.setArcWidth(10);
+            flagRectangle.setArcHeight(10);
+
+            Circle equalCircle = new Circle(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + 50,
                     135, 30, Color.web("#798788", 1.0));
+
+            Circle minusCircle = new Circle(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth()
+                    + augendRectangle.getLayoutBounds().getWidth() + 150, 135, 30, Color.web("#798788", 1.0));
 
             Circle plusCircle = new Circle(desRectangle.xProperty().getValue() +
-                    desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + 150,
-                    135, 30, Color.web("#798788", 1.0));
+                    desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() +
+                    srcRectangle.getLayoutBounds().getWidth() + 250, 135, 30, Color.web("#798788", 1.0));
 
-            root.getChildren().addAll(desRectangle, augendRectangle, srcRectangle, equalCircle, plusCircle);
+            root.getChildren().addAll(desRectangle, augendRectangle, srcRectangle, flagRectangle, equalCircle, minusCircle, plusCircle);
 
             int desSize = 0;
             if ( tokens[0].getType() == Token.REG )
@@ -74,6 +86,7 @@ public class Add extends CalvisAnimation {
             else
                 desSize = memory.getBitSize(tokens[0]);
 
+           
             String flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF, OF";
             Text detailsText = new Text(X, Y*2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -82,26 +95,35 @@ public class Add extends CalvisAnimation {
             Text augendValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
+            Text flagLabelText = new Text(X, Y, "CF");
+            Text flagValueText = new Text(X, Y, eFlags.getCarryFlag());
 
             Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 
+            Text minusText = new Text(X, Y, "-");
+            minusText.setFont(Font.font(48));
+            minusText.setFill(Color.WHITESMOKE);
+
             Text plusText = new Text(X, Y, "+");
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            root.getChildren().addAll(detailsText, equalText, plusText, desLabelText, desValueText,
-                    augendLabelText, augendValueText, srcLabelText, srcValueText);
+            root.getChildren().addAll(detailsText, equalText, minusText, plusText, desLabelText, desValueText,
+                    augendLabelText, augendValueText, srcLabelText, srcValueText, flagLabelText, flagValueText);
 
             // ANIMATION LOGIC
             TranslateTransition desLabelTransition = new TranslateTransition();
-            TranslateTransition desTransition = new TranslateTransition(new Duration(1000), desValueText);
+            TranslateTransition desValueTransition = new TranslateTransition(new Duration(1000), desValueText);
             TranslateTransition srcLabelTransition = new TranslateTransition();
-            TranslateTransition srcTransition = new TranslateTransition();
+            TranslateTransition srcValueTransition = new TranslateTransition();
             TranslateTransition augendLabelTransition = new TranslateTransition();
-            TranslateTransition augendTransition = new TranslateTransition();
+            TranslateTransition augendValueTransition = new TranslateTransition();
+            TranslateTransition flagLabelTransition = new TranslateTransition();
+            TranslateTransition flagValueTransition = new TranslateTransition();
             TranslateTransition equalTransition = new TranslateTransition();
+            TranslateTransition minusTransition = new TranslateTransition();
             TranslateTransition plusTransition = new TranslateTransition();
 
             // Destination label static
@@ -114,15 +136,15 @@ public class Add extends CalvisAnimation {
             desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
             // Destination value moving
-            desTransition.setInterpolator(Interpolator.LINEAR);
-            desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+            desValueTransition.setInterpolator(Interpolator.LINEAR);
+            desValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + X)
                     .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-            desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+            desValueTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                     .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
-            desTransition.toXProperty().bind(desRectangle.translateXProperty()
+            desValueTransition.toXProperty().bind(desRectangle.translateXProperty()
                     .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-            desTransition.toYProperty().bind(desTransition.fromYProperty());
+            desValueTransition.toYProperty().bind(desValueTransition.fromYProperty());
 
             // Equal sign label static
             equalTransition.setNode(equalText);
@@ -144,50 +166,82 @@ public class Add extends CalvisAnimation {
             augendLabelTransition.toYProperty().bind(augendLabelTransition.fromYProperty());
 
             // Augend value static
-            augendTransition.setNode(augendValueText);
-            augendTransition.fromXProperty().bind(augendRectangle.translateXProperty()
+            augendValueTransition.setNode(augendValueText);
+            augendValueTransition.fromXProperty().bind(augendRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + X)
                     .add((augendRectangle.getLayoutBounds().getWidth() - augendValueText.getLayoutBounds().getWidth()) / 2));
-            augendTransition.fromYProperty().bind(augendRectangle.translateYProperty()
+            augendValueTransition.fromYProperty().bind(augendRectangle.translateYProperty()
                     .add(augendRectangle.getLayoutBounds().getHeight() / 1.5));
-            augendTransition.toXProperty().bind(augendTransition.fromXProperty());
-            augendTransition.toYProperty().bind(augendTransition.fromYProperty());
+            augendValueTransition.toXProperty().bind(augendValueTransition.fromXProperty());
+            augendValueTransition.toYProperty().bind(augendValueTransition.fromYProperty());
 
-            // Plus sign label static
-            plusTransition.setNode(plusText);
-            plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 35));
-            plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
-            plusTransition.toXProperty().bind(plusTransition.fromXProperty());
-            plusTransition.toYProperty().bind(plusTransition.fromYProperty());
+            // Plus sign 1 label static
+            minusTransition.setNode(minusText);
+            minusTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X + 35));
+            minusTransition.fromYProperty().bind(equalTransition.fromYProperty());
+            minusTransition.toXProperty().bind(minusTransition.fromXProperty());
+            minusTransition.toYProperty().bind(minusTransition.fromYProperty());
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X * 2)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
             srcLabelTransition.toYProperty().bind(srcLabelTransition.fromYProperty());
 
             // Source value static
-            srcTransition.setNode(srcValueText);
-            srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+            srcValueTransition.setNode(srcValueText);
+            srcValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X * 2)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
-            srcTransition.fromYProperty().bind(desTransition.fromYProperty());
-            srcTransition.toXProperty().bind(srcTransition.fromXProperty());
-            srcTransition.toYProperty().bind(srcTransition.fromYProperty());
+            srcValueTransition.fromYProperty().bind(desValueTransition.fromYProperty());
+            srcValueTransition.toXProperty().bind(srcValueTransition.fromXProperty());
+            srcValueTransition.toYProperty().bind(srcValueTransition.fromYProperty());
+
+            // Plus sign 2 label static
+            plusTransition.setNode(plusText);
+            plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth())
+                    .add(srcRectangle.getLayoutBounds().getWidth() + X * 2 + 35));
+            plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
+            plusTransition.toXProperty().bind(plusTransition.fromXProperty());
+            plusTransition.toYProperty().bind(plusTransition.fromYProperty());
+
+            // Source label static
+            flagLabelTransition.setNode(flagLabelText);
+            flagLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth())
+                    .add(srcRectangle.getLayoutBounds().getWidth() + X * 3)
+                    .add((flagRectangle.getLayoutBounds().getWidth() - flagLabelText.getLayoutBounds().getWidth()) / 2));
+            flagLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
+            flagLabelTransition.toXProperty().bind(flagLabelTransition.fromXProperty());
+            flagLabelTransition.toYProperty().bind(flagLabelTransition.fromYProperty());
+
+            // Source value static
+            flagValueTransition.setNode(flagValueText);
+            flagValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth())
+                    .add(srcRectangle.getLayoutBounds().getWidth() + X * 3)
+                    .add((flagRectangle.getLayoutBounds().getWidth() - flagValueText.getLayoutBounds().getWidth()) / 2));
+            flagValueTransition.fromYProperty().bind(desValueTransition.fromYProperty());
+            flagValueTransition.toXProperty().bind(flagValueTransition.fromXProperty());
+            flagValueTransition.toYProperty().bind(flagValueTransition.fromYProperty());
 
             // Play 1000 milliseconds of animation
             desLabelTransition.play();
-            desTransition.play();
+            desValueTransition.play();
             equalTransition.play();
             augendLabelTransition.play();
-            augendTransition.play();
-            plusTransition.play();
+            augendValueTransition.play();
+            minusTransition.play();
             srcLabelTransition.play();
-            srcTransition.play();
+            srcValueTransition.play();
+            plusTransition.play();
+            flagLabelTransition.play();
+            flagValueTransition.play();
         }
     }
 }
