@@ -27,9 +27,9 @@ public class Mov extends CalvisAnimation {
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
-        }
+//        for ( int i = 0; i < tokens.length; i++ ) {
+//            // System.out.println(tokens[i] + " : " + tokens[i].getClass());
+//        }
 
         // CODE HERE
         Rectangle desRectangle = this.createRectangle(tokens[0]);
@@ -131,13 +131,13 @@ public class Mov extends CalvisAnimation {
         // Check token type
         switch ( token.getType() ) {
             case Token.REG:
-                System.out.println("REG");
+                // System.out.println("REG");
                 return new Rectangle(140, 70, Color.web("#FCBD6D", 1.0));
             case Token.MEM:
-                System.out.println("MEM");
+                // System.out.println("MEM");
                 return new Rectangle(140, 70, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-                System.out.println("HEX");
+                // System.out.println("HEX");
                 return new Rectangle(140, 70, Color.web("#7BB88C", 1.0));
             default:
                 return null;
@@ -161,14 +161,14 @@ public class Mov extends CalvisAnimation {
         try {
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG");
+                    // System.out.println("REG");
                     return new Text(registers.get(token));
                 case Token.MEM:
-                    System.out.println("MEM");
+                    // System.out.println("MEM");
 
                     return new Text(memory.read(token, size));
                 case Token.HEX:
-                    System.out.println("HEX");
+                    // System.out.println("HEX");
                     return new Text("0x" + token.getValue());
                 default:
                     return null;
