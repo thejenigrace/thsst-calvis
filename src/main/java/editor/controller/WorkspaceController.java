@@ -30,7 +30,6 @@ import simulatorvisualizer.controller.SystemController;
 
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -177,7 +176,6 @@ public class WorkspaceController implements Initializable {
     private void showFileEditorPane() {
         this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
         this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getNode());
-        this.fileEditorTabPane.newFileEditor();
     }
 
     @FXML
@@ -282,7 +280,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleOpenFile(ActionEvent event) {
-        this.fileEditorTabPane.openEditor();
+        this.fileEditorTabPane.openFileEditor();
     }
 
     /**
@@ -292,7 +290,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleSaveFile(ActionEvent event) {
-        this.fileEditorTabPane.saveEditor(this.fileEditorTabPane.getActiveFileEditor());
+        this.fileEditorTabPane.saveFileEditor(this.fileEditorTabPane.getActiveFileEditor());
     }
 
     /**
@@ -302,7 +300,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleSaveAsFile(ActionEvent event) {
-        this.fileEditorTabPane.saveEditor(this.fileEditorTabPane.getActiveFileEditor());
+        this.fileEditorTabPane.saveAsFileEditor(this.fileEditorTabPane.getActiveFileEditor());
     }
 
     /**
@@ -515,16 +513,16 @@ public class WorkspaceController implements Initializable {
 
     @FXML
     private void handleSaveAll(ActionEvent event) {
-        this.fileEditorTabPane.saveAllEditors();
+        this.fileEditorTabPane.saveAllFileEditors();
     }
 
     @FXML
     private void handleCloseFile(ActionEvent event) {
-        this.fileEditorTabPane.closeEditor(this.fileEditorTabPane.getActiveFileEditor(), true);
+        this.fileEditorTabPane.closeFileEditor(this.fileEditorTabPane.getActiveFileEditor(), true);
     }
 
     @FXML
     private void handleCloseAllFile(ActionEvent event) {
-        this.fileEditorTabPane.closeAllEditors();
+        this.fileEditorTabPane.closeAllFileEditors();
     }
 }
