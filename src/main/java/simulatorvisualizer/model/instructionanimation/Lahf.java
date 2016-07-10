@@ -2,6 +2,7 @@ package simulatorvisualizer.model.instructionanimation;
 
 import configuration.model.engine.*;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,7 +15,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 public class Lahf extends CalvisAnimation {
 
     @Override
-    public void animate(Tab tab) {
+    public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
 

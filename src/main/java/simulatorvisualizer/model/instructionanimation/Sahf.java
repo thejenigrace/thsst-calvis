@@ -5,6 +5,7 @@ import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
@@ -20,7 +21,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 public class Sahf extends CalvisAnimation {
 
     @Override
-    public void animate(Tab tab) {
+    public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
 

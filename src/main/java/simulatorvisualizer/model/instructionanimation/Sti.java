@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.text.Text;
 import simulatorvisualizer.model.CalvisAnimation;
@@ -13,7 +14,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 public class Sti extends CalvisAnimation {
 
     @Override
-    public void animate(Tab tab) {
+    public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
 
