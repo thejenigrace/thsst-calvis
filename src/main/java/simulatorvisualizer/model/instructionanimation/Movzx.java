@@ -12,9 +12,9 @@ import javafx.util.Duration;
 import simulatorvisualizer.model.CalvisAnimation;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Mov extends CalvisAnimation {
+public class Movzx extends CalvisAnimation {
 
     @Override
     public void animate(Tab tab) {
@@ -26,9 +26,9 @@ public class Mov extends CalvisAnimation {
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
-//        for ( int i = 0; i < tokens.length; i++ ) {
-//            // System.out.println(tokens[i] + " : " + tokens[i].getClass());
-//        }
+        for ( int i = 0; i < tokens.length; i++ ) {
+            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+        }
 
         // CODE HERE
         int width = 140;
@@ -36,18 +36,21 @@ public class Mov extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
+        Text text = new Text("The content of " + tokens[1].getValue() + " is copied to " + tokens[0].getValue() + ". Then, zero extended.\n" +
+                "Affected flags: none");
+
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(110);
-            desRectangle.setY(100);
+            desRectangle.setX(100);
+            desRectangle.setY(50);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
 
             srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.widthProperty().getValue() + 100);
-            srcRectangle.setY(100);
+            srcRectangle.setY(50);
             srcRectangle.setArcWidth(10);
             srcRectangle.setArcHeight(10);
 
-            root.getChildren().addAll(desRectangle, srcRectangle);
+            root.getChildren().addAll(text, desRectangle, srcRectangle);
 
             int desSize = 0;
             if ( tokens[0].getType() == Token.REG )
@@ -62,17 +65,17 @@ public class Mov extends CalvisAnimation {
             Text srcLabelText = this.createLabelText(tokens[1]);
             Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
 
-            desLabelText.setX(100);
-            desLabelText.setY(100);
+            desLabelText.setX(90);
+            desLabelText.setY(50);
 
-            desValueText.setX(100);
-            desValueText.setY(100);
+            desValueText.setX(90);
+            desValueText.setY(50);
 
-            srcLabelText.setX(100);
-            srcLabelText.setY(100);
+            srcLabelText.setX(90);
+            srcLabelText.setY(50);
 
-            srcValueText.setX(100);
-            srcValueText.setY(100);
+            srcValueText.setX(90);
+            srcValueText.setY(50);
 
             root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
 
@@ -128,28 +131,3 @@ public class Mov extends CalvisAnimation {
         }
     }
 }
-
-//       timeline.getKeyFrames().addAll(
-//                new KeyFrame(Duration.ZERO, // set start position at 0
-//                        new KeyValue(srcRectangle.translateXProperty(), 300),
-//                        new KeyValue(srcRectangle.translateYProperty(), 100)
-//                ),
-//                new KeyFrame(new Duration(1000), // set end position at 3s (3000 milliseconds)
-//                        new KeyValue(srcRectangle.translateXProperty(), 100),
-//                        new KeyValue(srcRectangle.translateYProperty(), 100)
-//                        // ADD NEW KEY VALUES IF NEEDED HERE
-//                )
-//        );
-
-//        for ( Node circle : circles.getChildren() ) {
-//            timeline.getKeyFrames().addAll(
-//                    new KeyFrame(Duration.ZERO, // set start position at 0
-//                            new KeyValue(circle.translateXProperty(), random() * animationX),
-//                            new KeyValue(circle.translateYProperty(), random() * animationY)
-//                    ),
-//                    new KeyFrame(new Duration(40000), // set end position at 40s
-//                            new KeyValue(circle.translateXProperty(), random() * animationX),
-//                            new KeyValue(circle.translateYProperty(), random() * animationY)
-//                    )
-//            );
-//        }
