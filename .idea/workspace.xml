@@ -7,23 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/AAd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/AAd.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aaa.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aaa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ad.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Add.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Add.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/DIv.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/DIv.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Dec.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Dec.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Imul.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Imul.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Inc.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Inc.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mul.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mul.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Neg.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Neg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sbb.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sbb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sub.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -459,7 +444,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorType.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorInvalidMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorMissingMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterFileErrorInvalidMessage.java" />
@@ -510,6 +494,7 @@
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mul.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Imul.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Div.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
       </list>
     </option>
   </component>
@@ -587,6 +572,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="thsst-calvis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -992,12 +987,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00083" summary="Added PCMPGT(B/W/D) Instructions">
-      <created>1457108548766</created>
-      <option name="number" value="00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1457108548766</updated>
-    </task>
     <task id="LOCAL-00084" summary="Added PCMPGT(B/W/D) Instructions">
       <created>1457108577150</created>
       <option name="number" value="00084" />
@@ -1286,7 +1275,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467949209295</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
+      <created>1468154121534</created>
+      <option name="number" value="00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1468154121535</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1319,11 +1314,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24473684" sideWeight="0.5078684" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24342105" sideWeight="0.49213162" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24342105" sideWeight="0.49213162" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.30921054" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20886981" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20886981" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18884121" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1381,7 +1376,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Refactored configuration module" />
     <MESSAGE value="Changes in Memory" />
     <MESSAGE value="CALVIS version 1.0.7" />
     <MESSAGE value="Fixed GP Instructions (Ivan)" />
@@ -1406,7 +1400,8 @@
     <MESSAGE value="Comment-out EnvironmentBag -&gt; CalvisAnimation" />
     <MESSAGE value="Fix open file order" />
     <MESSAGE value="Added helper methods in CalvisAnimation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added helper methods in CalvisAnimation" />
+    <MESSAGE value="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1600,13 +1595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18169399">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/animation/TranslateTransition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28142077">
@@ -1661,16 +1649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8165138">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.043956">
-          <caret line="244" column="5" selection-start-line="244" selection-start-column="5" selection-end-line="244" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1820,13 +1798,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Div.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.557377">
-          <caret line="104" column="57" selection-start-line="104" selection-start-column="57" selection-end-line="104" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.4986339">
+          <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
