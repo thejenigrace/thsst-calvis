@@ -17,7 +17,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Daa extends CalvisAnimation {
+public class Aaa extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -64,21 +64,14 @@ public class Daa extends CalvisAnimation {
                     desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + 150,
                     135, 30, Color.web("#798788", 1.0));
 
-            String flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF";
+            String flagsAffected = "Flags Affected: CF, AF";
             Text detailsText = new Text(X, Y*2, flagsAffected);
-            Text desLabelText = new Text(X, Y, "AL");
-            Text desValueText = new Text(X, Y, "0x" + registers.get("AL"));
-            Text augendLabelText = new Text(X, Y, "AL");
-            Text augendValueText = new Text(X, Y, "0x" + registers.get("AL"));
+            Text desLabelText = new Text(X, Y, "AX");
+            Text desValueText = new Text(X, Y, "0x" + registers.get("AX"));
+            Text augendLabelText = new Text(X, Y, "AX");
+            Text augendValueText = new Text(X, Y, "0x" + registers.get("AX"));
             Text srcLabelText = new Text(X, Y, "IMMEDIATE");
-            String value = "0x66";
-
-            // If oldValue of AL == newValue of AL - 0x66
-                // value = "0x66"
-            // Else if oldValue of AL == newValue of AL - 0x06
-                // value = "0x06"
-            // Else if oldValue of AL == newValue of AL - 0x60
-                // value = "0x60"
+            String value = "0x0106";
 
             Text srcValueText = new Text(X, Y, value);
 
@@ -90,7 +83,7 @@ public class Daa extends CalvisAnimation {
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            // If oldValue == newValue of AL
+            // If oldValue of AX == newValue of AX
             boolean equal = false;
             if(equal)
                 this.root.getChildren().addAll(desRectangle, desLabelText, desValueText);

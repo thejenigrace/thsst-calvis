@@ -8,19 +8,19 @@ execute(registers, memory) {
     String sAL = calculator.hexToBinaryString(registers.get("AL"), tokenAL);
     String sAH = calculator.hexToBinaryString(registers.get("AH"), tokenAH);
 
-    BigInteger biLowerAL = new BigInteger(sAL.substring(4), 2);
     BigInteger biUpperAL = new BigInteger(sAL.substring(0, 4), 2);
+    BigInteger biLowerAL = new BigInteger(sAL.substring(4), 2);
     BigInteger biAL = new BigInteger(sAL, 2);
     BigInteger biAH = new BigInteger(sAH, 2);
-    BigInteger toAddAF = new BigInteger("0110", 2);
-    BigInteger toAddAH = new BigInteger("000000001", 2);
+    BigInteger toAddAL = new BigInteger("0110", 2);
+    BigInteger toAddAH = new BigInteger("0001", 2);
 
     String oldAF = flags.getAuxiliaryFlag();
     String oldCF = flags.getCarryFlag();
     flags.setCarryFlag("0");
 
     if( oldAF.equals("1") || biLowerAL.intValue() > 9 ) {
-        biAL = biAL.add(toAddAF);
+        biAL = biAL.add(toAddAL);
         biAH = biAH.add(toAddAH);
         storeResultInDes(registers, calculator, biAL, biAH, tokenAL, tokenAH);
 

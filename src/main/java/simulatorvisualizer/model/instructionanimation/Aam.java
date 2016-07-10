@@ -17,7 +17,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Daa extends CalvisAnimation {
+public class Aam extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -37,7 +37,7 @@ public class Daa extends CalvisAnimation {
         int width = 140;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(Token.REG, width, height);
-        Rectangle augendRectangle = this.createRectangle(Token.REG, width, height);
+        Rectangle minuendRectangle = this.createRectangle(Token.REG, width, height);
         Rectangle srcRectangle = this.createRectangle(Token.HEX, width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
@@ -46,12 +46,12 @@ public class Daa extends CalvisAnimation {
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
 
-            augendRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + X);
-            augendRectangle.setY(Y);
-            augendRectangle.setArcWidth(10);
-            augendRectangle.setArcHeight(10);
+            minuendRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + X);
+            minuendRectangle.setY(Y);
+            minuendRectangle.setArcWidth(10);
+            minuendRectangle.setArcHeight(10);
 
-            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + X * 2);
+            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + minuendRectangle.getLayoutBounds().getWidth() + X * 2);
             srcRectangle.setY(Y);
             srcRectangle.setArcWidth(10);
             srcRectangle.setArcHeight(10);
@@ -61,53 +61,53 @@ public class Daa extends CalvisAnimation {
                     135, 30, Color.web("#798788", 1.0));
 
             Circle plusCircle = new Circle(desRectangle.xProperty().getValue() +
-                    desRectangle.getLayoutBounds().getWidth() + augendRectangle.getLayoutBounds().getWidth() + 150,
+                    desRectangle.getLayoutBounds().getWidth() + minuendRectangle.getLayoutBounds().getWidth() + 150,
                     135, 30, Color.web("#798788", 1.0));
 
-            String flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF";
+            String flagsAffected = "Flags Affected: PF, ZF, SF";
             Text detailsText = new Text(X, Y*2, flagsAffected);
-            Text desLabelText = new Text(X, Y, "AL");
-            Text desValueText = new Text(X, Y, "0x" + registers.get("AL"));
-            Text augendLabelText = new Text(X, Y, "AL");
-            Text augendValueText = new Text(X, Y, "0x" + registers.get("AL"));
-            Text srcLabelText = new Text(X, Y, "IMMEDIATE");
-            String value = "0x66";
+            Text desLabelText = new Text(X, Y, "AX");
+            Text desValueText = new Text(X, Y, "0x" + registers.get("AX"));
+            Text minuendLabelText = new Text(X, Y, "AL");
+            Text minuendValueText = new Text(X, Y, "0x" + registers.get("AL"));
+            Text srcLabelText, srcValueText;
 
-            // If oldValue of AL == newValue of AL - 0x66
-                // value = "0x66"
-            // Else if oldValue of AL == newValue of AL - 0x06
-                // value = "0x06"
-            // Else if oldValue of AL == newValue of AL - 0x60
-                // value = "0x60"
-
-            Text srcValueText = new Text(X, Y, value);
+            if(tokens.length == 1) {
+                int bitSize = 8;
+                srcLabelText = createLabelText(X, Y, tokens[0]);
+                srcValueText = createValueText(X, Y, tokens[0], registers, memory, bitSize);
+            } else {
+                srcLabelText = new Text(X, Y, "IMMEDIATE");
+                String value = "0x0A";
+                srcValueText = new Text(X, Y, value);
+            }
 
             Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 
-            Text plusText = new Text(X, Y, "+");
-            plusText.setFont(Font.font(48));
-            plusText.setFill(Color.WHITESMOKE);
+            Text minusText = new Text(X, Y, "/");
+            minusText.setFont(Font.font(48));
+            minusText.setFill(Color.WHITESMOKE);
 
-            // If oldValue == newValue of AL
+            // If oldValue == newValue of EAX
             boolean equal = false;
             if(equal)
                 this.root.getChildren().addAll(desRectangle, desLabelText, desValueText);
             else
-                this.root.getChildren().addAll(desRectangle, augendRectangle, srcRectangle, equalCircle, plusCircle,
-                        detailsText, equalText, plusText, desLabelText, desValueText,
-                        augendLabelText, augendValueText, srcLabelText, srcValueText);
+                this.root.getChildren().addAll(desRectangle, minuendRectangle, srcRectangle, equalCircle, plusCircle,
+                        detailsText, equalText, minusText, desLabelText, desValueText,
+                        minuendLabelText, minuendValueText, srcLabelText, srcValueText);
 
             // ANIMATION LOGIC
             TranslateTransition desLabelTransition = new TranslateTransition();
             TranslateTransition desTransition = new TranslateTransition(new Duration(1000), desValueText);
             TranslateTransition srcLabelTransition = new TranslateTransition();
             TranslateTransition srcTransition = new TranslateTransition();
-            TranslateTransition augendLabelTransition = new TranslateTransition();
-            TranslateTransition augendTransition = new TranslateTransition();
+            TranslateTransition minuendLabelTransition = new TranslateTransition();
+            TranslateTransition minuendValueTransition = new TranslateTransition();
             TranslateTransition equalTransition = new TranslateTransition();
-            TranslateTransition plusTransition = new TranslateTransition();
+            TranslateTransition minusTransition = new TranslateTransition();
 
             // Destination label static
             desLabelTransition.setNode(desLabelText);
@@ -148,37 +148,37 @@ public class Daa extends CalvisAnimation {
             equalTransition.toXProperty().bind(equalTransition.fromXProperty());
             equalTransition.toYProperty().bind(equalTransition.fromYProperty());
 
-            // Augend label static
-            augendLabelTransition.setNode(augendLabelText);
-            augendLabelTransition.fromXProperty().bind(augendRectangle.translateXProperty()
+            // Minuend label static
+            minuendLabelTransition.setNode(minuendLabelText);
+            minuendLabelTransition.fromXProperty().bind(minuendRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + X)
-                    .add((augendRectangle.getLayoutBounds().getWidth() - augendLabelText.getLayoutBounds().getWidth()) / 2));
-            augendLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
-            augendLabelTransition.toXProperty().bind(augendLabelTransition.fromXProperty());
-            augendLabelTransition.toYProperty().bind(augendLabelTransition.fromYProperty());
+                    .add((minuendRectangle.getLayoutBounds().getWidth() - minuendLabelText.getLayoutBounds().getWidth()) / 2));
+            minuendLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
+            minuendLabelTransition.toXProperty().bind(minuendLabelTransition.fromXProperty());
+            minuendLabelTransition.toYProperty().bind(minuendLabelTransition.fromYProperty());
 
-            // Augend value static
-            augendTransition.setNode(augendValueText);
-            augendTransition.fromXProperty().bind(augendRectangle.translateXProperty()
+            // Minuend value static
+            minuendValueTransition.setNode(minuendValueText);
+            minuendValueTransition.fromXProperty().bind(minuendRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + X)
-                    .add((augendRectangle.getLayoutBounds().getWidth() - augendValueText.getLayoutBounds().getWidth()) / 2));
-            augendTransition.fromYProperty().bind(augendRectangle.translateYProperty()
-                    .add(augendRectangle.getLayoutBounds().getHeight() / 1.5));
-            augendTransition.toXProperty().bind(augendTransition.fromXProperty());
-            augendTransition.toYProperty().bind(augendTransition.fromYProperty());
+                    .add((minuendRectangle.getLayoutBounds().getWidth() - minuendValueText.getLayoutBounds().getWidth()) / 2));
+            minuendValueTransition.fromYProperty().bind(minuendRectangle.translateYProperty()
+                    .add(minuendRectangle.getLayoutBounds().getHeight() / 1.5));
+            minuendValueTransition.toXProperty().bind(minuendValueTransition.fromXProperty());
+            minuendValueTransition.toYProperty().bind(minuendValueTransition.fromYProperty());
 
-            // Plus sign label static
-            plusTransition.setNode(plusText);
-            plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 35));
-            plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
-            plusTransition.toXProperty().bind(plusTransition.fromXProperty());
-            plusTransition.toYProperty().bind(plusTransition.fromYProperty());
+            // Minus sign label static
+            minusTransition.setNode(minusText);
+            minusTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                    .add(desRectangle.getLayoutBounds().getWidth() + X + minuendRectangle.getLayoutBounds().getWidth() + 40));
+            minusTransition.fromYProperty().bind(equalTransition.fromYProperty());
+            minusTransition.toXProperty().bind(minusTransition.fromXProperty());
+            minusTransition.toYProperty().bind(minusTransition.fromYProperty());
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + X + minuendRectangle.getLayoutBounds().getWidth() + X)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
@@ -187,7 +187,7 @@ public class Daa extends CalvisAnimation {
             // Source value static
             srcTransition.setNode(srcValueText);
             srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + X)
+                    .add(desRectangle.getLayoutBounds().getWidth() + X + minuendRectangle.getLayoutBounds().getWidth() + X)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
             srcTransition.toXProperty().bind(srcTransition.fromXProperty());
@@ -197,9 +197,9 @@ public class Daa extends CalvisAnimation {
             desLabelTransition.play();
             desTransition.play();
             equalTransition.play();
-            augendLabelTransition.play();
-            augendTransition.play();
-            plusTransition.play();
+            minuendLabelTransition.play();
+            minuendValueTransition.play();
+            minusTransition.play();
             srcLabelTransition.play();
             srcTransition.play();
         }

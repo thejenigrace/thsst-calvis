@@ -46,5 +46,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateGPDecimalArithmetic() {
         this.put("DAA", new Daa());
+        this.put("DAS", new Das());
+        this.put("AAA", new Aaa());
+        this.put("AAS", new Aas());
+        this.put("AAM", new Aam());
+        this.put("AAD", new Aad());
     }
 }
