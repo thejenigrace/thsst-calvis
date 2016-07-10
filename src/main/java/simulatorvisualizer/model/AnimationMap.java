@@ -1,6 +1,6 @@
 package simulatorvisualizer.model;
 
-import simulatorvisualizer.model.instructionanimation.Mov;
+import simulatorvisualizer.model.instructionanimation.*;
 
 import java.util.HashMap;
 
@@ -19,7 +19,12 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateGPDataTransfer(){
+
         this.put("MOV", new Mov());
+        this.put("XCHG", new Xchg());
+        this.put("BSWAP", new Bswap());
+        this.put("XADD", new Xadd());
+        this.put("CMPXCHG", new Cmpxchg());
     }
 
 }

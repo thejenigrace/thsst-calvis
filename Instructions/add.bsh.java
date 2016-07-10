@@ -108,6 +108,7 @@ execute(des, src, registers, memory) {
             BigInteger biX = new BigInteger(x, 16);
             BigInteger biY = new BigInteger(y, 16);
             BigInteger result = biY.add(biX);
+            resultingValue = result.toString(2);
 
             Calculator c = new Calculator(registers, memory);
             registers.set(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des));
