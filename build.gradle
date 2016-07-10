@@ -32,4 +32,6 @@ dependencies {
     compile group: 'org.beanshell', name: 'bsh', version: '2.0b5'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.10'
     compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
+    compile group: 'com.fifesoft', name: 'rsyntaxtextarea', version: '2.5.8'
+    compile group: 'com.fifesoft', name: 'autocomplete', version: '2.5.8'
 }
