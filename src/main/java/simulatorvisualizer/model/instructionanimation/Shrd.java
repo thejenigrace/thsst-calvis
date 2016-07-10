@@ -63,7 +63,8 @@ public class Shrd extends CalvisAnimation {
 
         Text text = new Text(value0 + " is shifted to the left by " + biValue.intValue() + " bit(s).\n" +
                 tokens[1].getValue() + " provides bits to shift in from the left. \n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+                "The result is stored to " + address +
+                "\nAffected flags: CF, OF, SF, PF, ZF, AF");
 
         root.getChildren().addAll(text);
 

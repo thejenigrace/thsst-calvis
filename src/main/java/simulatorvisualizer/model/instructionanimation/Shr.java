@@ -64,7 +64,7 @@ public class Shr extends CalvisAnimation {
         Text text = new Text(value0 + " is shifted to the right by " + biValue.intValue() + " bit(s).\n" +
                 "As the bits are shifted, zeroes are shifted in on the left. \n" +
                 "The result is stored to " + address +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+                "\nAffected flags: CF, OF, SF, PF, ZF, AF");
 
         root.getChildren().addAll(text);
 
