@@ -74,13 +74,15 @@ execute(des,src,registers,memory){
 				BigInteger addResult = biY.add(biX);
 
 				Calculator c=new Calculator(registers,memory);
-				memory.write(src,c.binaryToHexString(registers.get(des), des), registers.getBitSize(des));
-				if(addResult.toString(16).length() > registers.getBitSize(src)/4){
+				memory.write(src, registers.get(des), registers.getBitSize(des));
+
+				if(addResult.toString(16).length() > registers.getBitSize(des)/4){
 					resultingValue = addResult.toString(2).substring(1);
 				}
 				else{
 					resultingValue = addResult.toString(2);
 				}
+
 				registers.set(des,c.binaryToHexString(resultingValue, des));
 
 				EFlags ef = registers.getEFlags();
@@ -105,8 +107,8 @@ execute(des,src,registers,memory){
 				else
 					ef.setZeroFlag("0");
 
-
-				ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0),
+//				System.out.println("saan gago");
+				ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), des).charAt(0), c.binaryZeroExtend(biX.toString(2), des).charAt(0),
 				c.binaryZeroExtend(resultingValue, des).charAt(0)));
 			}
 		}

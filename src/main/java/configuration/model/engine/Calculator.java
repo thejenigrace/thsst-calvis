@@ -548,8 +548,10 @@ public class Calculator {
     }
 
     public String checkOverflowAddWithFlag(char src, char des, char res, String flag) {
-        if ( (src == '0' && des == '0' && res == '1' && flag.charAt(0) == '1')
-                || (src == '1' && des == '1' && res == '0' && flag.charAt(0) == '1') ) {
+        if ( (src == '0' && des == '0' && res == '1' && flag.charAt(0) == '0')
+                || (src == '1' && des == '1' && res == '0' && flag.charAt(0) == '0')
+                || (src == '0' && des == '0' && res == '1' && flag.charAt(0) == '1')
+                ) {
             return "1";
         }
         return "0";

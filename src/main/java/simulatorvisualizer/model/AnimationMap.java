@@ -11,7 +11,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     public AnimationMap() {
         super();
-        this.generateGP();
+        generateGP();
     }
 
     private void generateGP() {
@@ -62,6 +62,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("SHLD", new Shld());
         this.put("SHRD", new Shrd());
         this.put("SET", new Set());
+        this.put("XCHG", new Xchg());
+        this.put("BSWAP", new Bswap());
+        this.put("XADD", new Xadd());
+        this.put("CMPXCHG", new Cmpxchg());
     }
 
     private void generateGPBinaryArithmetic() {

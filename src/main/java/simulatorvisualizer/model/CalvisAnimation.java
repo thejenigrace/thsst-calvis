@@ -103,6 +103,19 @@ public abstract class CalvisAnimation {
         }
     }
 
+    protected Text createLabelText(double x, double y, Token token) {
+        switch ( token.getType() ) {
+            case Token.REG:
+                return new Text(x, y, token.getValue());
+            case Token.MEM:
+                return new Text(x, y, "[" + token.getValue() + "]");
+            case Token.HEX:
+                return new Text(x, y, "IMMEDIATE");
+            default:
+                return null;
+        }
+    }
+
     protected Text createValueText(Token token, RegisterList registers, Memory memory, int size) {
         try {
             switch ( token.getType() ) {
