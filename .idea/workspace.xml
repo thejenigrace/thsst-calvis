@@ -7,21 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="CALVIS version finale">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bswap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xadd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xchg.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/adcx.bsh.java" afterPath="$PROJECT_DIR$/Instructions/adcx.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/add.bsh.java" afterPath="$PROJECT_DIR$/Instructions/add.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/adox.bsh.java" afterPath="$PROJECT_DIR$/Instructions/adox.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/xadd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/xadd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.38825756">
-              <caret line="112" column="56" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
+              <caret line="112" column="32" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -1133,12 +1120,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00062" summary="Fix DIV &amp; IDIV Instructions">
-      <created>1455770877493</created>
-      <option name="number" value="00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1455770877493</updated>
-    </task>
     <task id="LOCAL-00063" summary="Fix DIV &amp; IDIV Instructions;&#10;Fix Calculator">
       <created>1455973719936</created>
       <option name="number" value="00063" />
@@ -1427,7 +1408,13 @@
       <option name="project" value="LOCAL" />
       <updated>1467385711714</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="CALVIS version finale">
+      <created>1468134259373</created>
+      <option name="number" value="00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1468134259386</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1794,6 +1781,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="129" column="4" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1823,6 +1811,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="21.103449">
           <caret line="24" column="53" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1830,6 +1819,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1845,6 +1835,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6018018">
           <caret line="75" column="62" selection-start-line="75" selection-start-column="62" selection-end-line="75" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1938,7 +1929,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38825756">
-          <caret line="112" column="56" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
+          <caret line="112" column="32" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="32" />
           <folding />
         </state>
       </provider>

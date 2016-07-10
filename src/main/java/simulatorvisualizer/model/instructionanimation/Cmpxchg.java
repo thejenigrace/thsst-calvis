@@ -81,6 +81,9 @@ public class Cmpxchg extends CalvisAnimation {
         root.getChildren().add(desLabel);
         root.getChildren().add(aLabel);
 
+        Text equalSign = new Text("=");
+        timeFunc.editText(equalSign, 30, "#3d2b1f");
+
         Text srcValue = this.createValueText(tokens[0], registers, memory, desSize);
         timeFunc.editText(srcValue, 12, "#3d2b1f");
 
@@ -106,6 +109,8 @@ public class Cmpxchg extends CalvisAnimation {
         timeFunc.addTimeline(100, 110, 100, plusCircle);
         timeFunc.addTimeline(345, 100, Duration.ZERO, equalCircle);
         timeFunc.addTimeline(345, 100, 100, equalCircle);
+        timeFunc.addTimeline(340, 105, Duration.ZERO, equalSign);
+        timeFunc.addTimeline(340, 105, 100, equalSign);
         timeFunc.addTimeline(400, 50, Duration.ZERO, desRectangle);
         timeFunc.addTimeline(400, 50, 100, desRectangle);
         timeFunc.addTimeline(30, 80, Duration.ZERO, srcLabel);
