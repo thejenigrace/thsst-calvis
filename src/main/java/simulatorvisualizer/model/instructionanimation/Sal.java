@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
@@ -36,18 +37,34 @@ public class Sal extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
-        String value = "";
+        String value0 = "";
+        String value1 = "";
+        String address = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            value0 = finder.getRegister(tokens[0].getValue());
+            address = tokens[0].getValue();
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            try {
+                value0 = finder.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+            address = "[" + tokens[0].getValue() + "]";
+        }
 
         if ( tokens[1].getType() == Token.REG)
-            value = registers.get(tokens[1].getValue() + "");
+            value1 = registers.get(tokens[1].getValue() + "");
         else if ( tokens[1].getType() == Token.HEX)
-            value = tokens[1].getValue();
+            value1 = tokens[1].getValue();
 
-        BigInteger biValue = new BigInteger(value, 16);
+        BigInteger biValue = new BigInteger(value1, 16);
 
-        Text text = new Text("The content of " + tokens[0].getValue() + " is shifted to the left by " + biValue.intValue() + " bit(s).\n" +
+        Text text = new Text(value0 + " is shifted to the left by " + biValue.intValue() + " bit(s).\n" +
                 "As the bits are shifted, zeroes are shifted in on the right. \n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+                "The result is stored to " + address +
+                "\nAffected flags: CF, OF, SF, PF, ZF, AF");
 
         root.getChildren().addAll(text);
 

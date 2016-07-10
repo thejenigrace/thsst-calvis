@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -37,8 +38,46 @@ public class Or extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
-        Text text = new Text("Value of " + tokens[0].getValue() + " | value of " + tokens[1].getValue() + ". Result is stored to " + tokens[0].getValue() + "\n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+        String value0 = "";
+        String value1 = "";
+        String result = "";
+        String address = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            value0 = finder.getRegister(tokens[0].getValue());
+            address = tokens[0].getValue();
+            result = registers.get(tokens[0].getValue());
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            try {
+                value0 = finder.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+
+            address = "[" + tokens[0].getValue() + "]";
+
+            try {
+                result = memory.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if( tokens[1].getType() == Token.REG )
+            value1 = finder.getRegister(tokens[1].getValue());
+        else if( tokens[1].getType() == Token.MEM )
+            try {
+                value1 = finder.read(tokens[1].getValue(), tokens[1]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        else
+            value1 = tokens[1].getValue();
+
+        Text text = new Text(value0 + " | " + value1 + " = " + result + "\n" +
+                "Affected flags: CF, OF, SF, PF, ZF, AF\n\n" +
+                "The result is stored to " + address);
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(100);

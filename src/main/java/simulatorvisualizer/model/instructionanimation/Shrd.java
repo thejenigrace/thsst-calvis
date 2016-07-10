@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
@@ -37,6 +38,21 @@ public class Shrd extends CalvisAnimation {
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
         String value = "";
+        String value0 = "";
+        String address = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            value0 = finder.getRegister(tokens[0].getValue());
+            address = tokens[0].getValue();
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            try {
+                value0 = finder.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+            address = "[" + tokens[0].getValue() + "]";
+        }
 
         if ( tokens[2].getType() == Token.REG)
             value = registers.get(tokens[2].getValue() + "");
@@ -45,7 +61,7 @@ public class Shrd extends CalvisAnimation {
 
         BigInteger biValue = new BigInteger(value, 16);
 
-        Text text = new Text("The content of " + tokens[0].getValue() + " is shifted to the left by " + biValue.intValue() + " bit(s).\n" +
+        Text text = new Text(value0 + " is shifted to the left by " + biValue.intValue() + " bit(s).\n" +
                 tokens[1].getValue() + " provides bits to shift in from the left. \n" +
                 "Affected flags: CF, OF, SF, PF, ZF, AF");
 
