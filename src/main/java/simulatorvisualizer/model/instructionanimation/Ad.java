@@ -105,7 +105,7 @@ public class Ad extends CalvisAnimation {
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text augendValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+            Text augendValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
             Text flagLabelText = new Text(X, Y, flag);

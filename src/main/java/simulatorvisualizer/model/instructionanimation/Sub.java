@@ -79,7 +79,7 @@ public class Sub extends CalvisAnimation {
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text minuendLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text minuendValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+            Text minuendValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
 

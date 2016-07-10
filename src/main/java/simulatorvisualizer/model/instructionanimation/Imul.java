@@ -225,7 +225,7 @@ public class Imul extends CalvisAnimation {
                 value = "0x" + registers.get("AX");
                 this.desValueText = new Text(X, Y, value);
                 this.multiplierLabelText = new Text(X, Y, "AL");
-                value = "0x" + registers.get("AL");
+                value = "0x" + this.finder.getRegister("AL");
                 this.multiplierValueText = new Text(X, Y, value);
                 break;
             case 16:
@@ -233,7 +233,7 @@ public class Imul extends CalvisAnimation {
                 value = "0x" + registers.get("DX") + ", 0x" + registers.get("AX");
                 this.desValueText = new Text(X, Y, value);
                 this.multiplierLabelText = new Text(X, Y, "AX");
-                value = "0x" + registers.get("AX");
+                value = "0x" + this.finder.getRegister("AX");
                 this.multiplierValueText = new Text(X, Y, value);
                 break;
             case 32:
@@ -241,7 +241,7 @@ public class Imul extends CalvisAnimation {
                 value = "0x" + registers.get("EDX") + ", 0x" + registers.get("EAX");
                 this.desValueText = new Text(X, Y, value);
                 this.multiplierLabelText = new Text(X, Y, "EAX");
-                value = "0x" + registers.get("EAX");
+                value = "0x" + this.finder.getRegister("EAX");
                 this.multiplierValueText = new Text(X, Y, value);
                 break;
             default:
@@ -271,7 +271,7 @@ public class Imul extends CalvisAnimation {
         this.desLabelText = this.createLabelText(X, Y, tokens[0]);
         this.desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
         this.multiplierLabelText = this.createLabelText(X, Y, tokens[0]);
-        this.multiplierValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+        this.multiplierValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
         this.srcLabelText = this.createLabelText(X, Y, tokens[1]);
         this.srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
     }
@@ -295,7 +295,7 @@ public class Imul extends CalvisAnimation {
         this.multiplierLabelText = this.createLabelText(X, Y, tokens[1]);
         this.multiplierValueText = this.createValueText(X, Y, tokens[1], registers, memory, multiplierSize);
         this.srcLabelText = this.createLabelText(X, Y, tokens[2]);
-        this.srcValueText = new Text(X, Y, tokens[2].getValue());
+        this.srcValueText = new Text(X, Y, "0x" + tokens[2].getValue());
     }
 }
 

@@ -146,4 +146,26 @@ public abstract class CalvisAnimation {
             return null;
         }
     }
+
+    protected Text createValueTextUsingFinder(double x, double y, Token token, int size) {
+        try {
+            System.out.println("Using Finder!");
+            switch ( token.getType() ) {
+                case Token.REG:
+                    System.out.println("REG");
+                    return new Text(x, y, "0x" + this.finder.getRegister(token.getValue()));
+                case Token.MEM:
+                    System.out.println("MEM");
+                    return new Text(x, y, this.finder.read(token, size));
+                case Token.HEX:
+                    System.out.println("IMMEDIATE");
+                    return new Text(x, y, "0x" + token.getValue());
+                default:
+                    return null;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

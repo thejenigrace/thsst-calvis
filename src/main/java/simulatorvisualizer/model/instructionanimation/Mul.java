@@ -89,7 +89,7 @@ public class Mul extends CalvisAnimation {
                     value = "0x" + registers.get("AX");
                     desValueText = new Text(X, Y, value);
                     multiplierLabelText = new Text(X, Y, "AL");
-                    value = "0x" + registers.get("AL");
+                    value = "0x" + this.finder.getRegister("AL");
                     multiplierValueText = new Text(X, Y, value);
                     break;
                 case 16:
@@ -97,7 +97,7 @@ public class Mul extends CalvisAnimation {
                     value = "0x" + registers.get("DX") + ", 0x" + registers.get("AX");
                     desValueText = new Text(X, Y, value);
                     multiplierLabelText = new Text(X, Y, "AX");
-                    value = "0x" + registers.get("AX");
+                    value = "0x" + this.finder.getRegister("AX");
                     multiplierValueText = new Text(X, Y, value);
                     break;
                 case 32:
@@ -105,7 +105,7 @@ public class Mul extends CalvisAnimation {
                     value = "0x" + registers.get("EDX") + ", 0x" + registers.get("EAX");
                     desValueText = new Text(X, Y, value);
                     multiplierLabelText = new Text(X, Y, "EAX");
-                    value = "0x" + registers.get("EAX");
+                    value = "0x" + this.finder.getRegister("EAX");
                     multiplierValueText = new Text(X, Y, value);
                     break;
                 default:

@@ -15,7 +15,7 @@ import javafx.util.Duration;
 import simulatorvisualizer.model.CalvisAnimation;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Jennica on 10/07/2016.
  */
 public class Aaa extends CalvisAnimation {
 
@@ -112,24 +112,24 @@ public class Aaa extends CalvisAnimation {
             desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
             // Destination value moving
-           if(equal) {
-               desTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                       .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-               desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
-                       .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
-               desTransition.toXProperty().bind(desTransition.fromXProperty());
-               desTransition.toYProperty().bind(desTransition.fromYProperty());
-           } else {
-               desTransition.setInterpolator(Interpolator.LINEAR);
-               desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                       .add(desRectangle.getLayoutBounds().getWidth() + X)
-                       .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-               desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
-                       .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
-               desTransition.toXProperty().bind(desRectangle.translateXProperty()
-                       .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-               desTransition.toYProperty().bind(desTransition.fromYProperty());
-           }
+            if(equal) {
+                desTransition.fromXProperty().bind(desRectangle.translateXProperty()
+                        .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+                        .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
+                desTransition.toXProperty().bind(desTransition.fromXProperty());
+                desTransition.toYProperty().bind(desTransition.fromYProperty());
+            } else {
+                desTransition.setInterpolator(Interpolator.LINEAR);
+                desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+                        .add(desRectangle.getLayoutBounds().getWidth() + X)
+                        .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+                        .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
+                desTransition.toXProperty().bind(desRectangle.translateXProperty()
+                        .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                desTransition.toYProperty().bind(desTransition.fromYProperty());
+            }
 
             // Equal sign label static
             equalTransition.setNode(equalText);
@@ -198,4 +198,3 @@ public class Aaa extends CalvisAnimation {
         }
     }
 }
-

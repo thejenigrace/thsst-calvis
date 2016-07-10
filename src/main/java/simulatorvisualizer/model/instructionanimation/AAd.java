@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import simulatorvisualizer.model.CalvisAnimation;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Jennica on 10/07/2016.
  */
 public class Aad extends CalvisAnimation {
 
@@ -78,7 +78,7 @@ public class Aad extends CalvisAnimation {
 
             root.getChildren().addAll(desRectangle, augendRectangle, srcRectangle, flagRectangle, equalCircle, minusCircle, plusCircle);
 
-           
+
             String flagsAffected = "Flags Affected: PF, ZF, SF";
             Text detailsText = new Text(X, Y*2, flagsAffected);
             Text desLabelText = new Text(X, Y, "AX");
@@ -244,4 +244,3 @@ public class Aad extends CalvisAnimation {
         }
     }
 }
-

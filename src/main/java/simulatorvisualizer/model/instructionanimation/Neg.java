@@ -73,35 +73,33 @@ public class Neg extends CalvisAnimation {
             else if ( tokens[0].getType() == Token.MEM )
                 desSize = memory.getBitSize(tokens[0]);
 
-            double x = 100;
-            double y = 100;
             String flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF, OF";
             Text detailsText = new Text(110, 200, flagsAffected);
-            Text desLabelText = this.createLabelText(x, y, tokens[0]);
-            Text desValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
-            Text minuendLabelText = new Text(x, y, "IMMEDIATE");
+            Text desLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+            Text minuendLabelText = new Text(X, Y, "IMMEDIATE");
             Text minuendValueText;
             switch ( desSize ) {
                 case 8:
-                    minuendValueText = new Text(x, y, "0x00");
+                    minuendValueText = new Text(X, Y, "0x00");
                     break;
                 case 16:
-                    minuendValueText = new Text(x, y, "0x0000");
+                    minuendValueText = new Text(X, Y, "0x0000");
                     break;
                 case 32:
-                    minuendValueText = new Text(x, y, "0x00000000");
+                    minuendValueText = new Text(X, Y, "0x00000000");
                     break;
                 default:
-                    minuendValueText = new Text(x, y, "0x00");
+                    minuendValueText = new Text(X, Y, "0x00");
             }
-            Text srcLabelText = this.createLabelText(x, y, tokens[0]);
-            Text srcValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
+            Text srcLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text srcValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
 
-            Text minusText = new Text(x, y, "-");
+            Text minusText = new Text(X, Y, "-");
             minusText.setFont(Font.font(48));
             minusText.setFill(Color.WHITESMOKE);
 
-            Text equalText = new Text(x, y, "=");
+            Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 

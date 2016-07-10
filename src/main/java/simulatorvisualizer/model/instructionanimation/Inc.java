@@ -73,35 +73,33 @@ public class Inc extends CalvisAnimation {
             else if ( tokens[0].getType() == Token.MEM )
                 desSize = memory.getBitSize(tokens[0]);
 
-            double x = 100;
-            double y = 100;
             String flagsAffected = "Flags Affected: PF, AF, ZF, SF, OF";
             Text detailsText = new Text(100, 200, flagsAffected);
-            Text desLabelText = this.createLabelText(x, y, tokens[0]);
-            Text desValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
-            Text augendLabelText = this.createLabelText(x, y, tokens[0]);
-            Text augendValueText = this.createValueText(x, y, tokens[0], registers, memory, desSize);
-            Text srcLabelText = new Text(x, y, "IMMEDIATE");
+            Text desLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+            Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text augendValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
+            Text srcLabelText = new Text(X, Y, "IMMEDIATE");
             Text srcValueText;
             switch ( desSize ) {
                 case 8:
-                    srcValueText = new Text(x, y, "0x01");
+                    srcValueText = new Text(X, Y, "0x01");
                     break;
                 case 16:
-                    srcValueText = new Text(x, y, "0x0001");
+                    srcValueText = new Text(X, Y, "0x0001");
                     break;
                 case 32:
-                    srcValueText = new Text(x, y, "0x00000001");
+                    srcValueText = new Text(X, Y, "0x00000001");
                     break;
                 default:
-                    srcValueText = new Text(x, y, "0x01");
+                    srcValueText = new Text(X, Y, "0x01");
             }
 
-            Text plusText = new Text(x, y, "+");
+            Text plusText = new Text(X, Y, "+");
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            Text equalText = new Text(x, y, "=");
+            Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 

@@ -17,10 +17,9 @@ import simulatorvisualizer.model.CalvisAnimation;
 import java.util.Objects;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Jennica on 10/07/2016.
  */
 public class Div extends CalvisAnimation {
-
     @Override
     public void animate(ScrollPane scrollPane) {
         this.root.getChildren().clear();
@@ -89,7 +88,7 @@ public class Div extends CalvisAnimation {
                     value = "0x" + registers.get("AX");
                     desValueText = new Text(X, Y, value);
                     dividendLabelText = new Text(X, Y, "AL");
-                    value = "0x" + registers.get("AL");
+                    value = "0x" + this.finder.getRegister("AL");
                     dividendValueText = new Text(X, Y, value);
                     break;
                 case 16:
@@ -97,7 +96,7 @@ public class Div extends CalvisAnimation {
                     value = "0x" + registers.get("DX") + ", 0x" + registers.get("AX");
                     desValueText = new Text(X, Y, value);
                     dividendLabelText = new Text(X, Y, "AX");
-                    value = "0x" + registers.get("AX");
+                    value = "0x" + this.finder.getRegister("AX");
                     dividendValueText = new Text(X, Y, value);
                     break;
                 case 32:
@@ -105,7 +104,7 @@ public class Div extends CalvisAnimation {
                     value = "0x" + registers.get("EDX") + ", 0x" + registers.get("EAX");
                     desValueText = new Text(X, Y, value);
                     dividendLabelText = new Text(X, Y, "EAX");
-                    value = "0x" + registers.get("EAX");
+                    value = "0x" + this.finder.getRegister("EAX");
                     dividendValueText = new Text(X, Y, value);
                     break;
                 default:
@@ -223,4 +222,3 @@ public class Div extends CalvisAnimation {
         }
     }
 }
-
