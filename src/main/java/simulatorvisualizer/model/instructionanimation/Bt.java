@@ -46,7 +46,7 @@ public class Bt extends CalvisAnimation {
         String value = "";
 
         if ( tokens[1].getType() == Token.REG)
-            value = registers.get(tokens[1].getValue() + "");
+            value = finder.getRegister(tokens[1].getValue());
         else if ( tokens[1].getType() == Token.HEX)
             value = tokens[1].getValue();
 
@@ -78,7 +78,7 @@ public class Bt extends CalvisAnimation {
 
             Text desLabelText = new Text("Carry Flag");
             Text desValueText = new Text(flags.getCarryFlag());
-            Text srcLabelText = new Text("Value of Bitbase: " + tokens[0].getValue());
+            Text srcLabelText = new Text(tokens[0].getValue());
             Text srcValueText = this.createValueText(tokens[0], registers, memory, desSize);
 
             desLabelText.setX(90);

@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.text.Text;
@@ -28,7 +29,28 @@ public class Not extends CalvisAnimation {
         }
 
         // CODE HERE
-        Text description = new Text("The value of " + tokens[0].getValue() + " performed a bitwise negation." + "\n" +
+        String value0 = "";
+        String result = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            value0 = finder.getRegister(tokens[0].getValue());
+            result = registers.get(tokens[0].getValue());
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            try {
+                value0 = finder.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                result = memory.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Text description = new Text("!" + value0 + " = " +  result + "\n" +
                 "Affected flags: none");
         description.setX(100);
         description.setY(100);

@@ -3,6 +3,7 @@ package simulatorvisualizer.model.instructionanimation;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.text.Text;
@@ -28,7 +29,45 @@ public class Test extends CalvisAnimation {
         }
 
         // CODE HERE
-        Text description = new Text("Value of " + tokens[0].getValue() + " & value of " + tokens[1].getValue() + ", but result is discarded." + "\n" +
+        String value0 = "";
+        String value1 = "";
+        String result = "";
+        String address = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            value0 = finder.getRegister(tokens[0].getValue());
+            address = tokens[0].getValue();
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            try {
+                value0 = finder.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+            address = "[" + tokens[0].getValue() + "]";
+        }
+
+        if( tokens[1].getType() == Token.REG )
+            value1 = finder.getRegister(tokens[1].getValue());
+        else if( tokens[1].getType() == Token.MEM )
+            try {
+                value1 = finder.read(tokens[1].getValue(), tokens[1]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        else
+            value1 = tokens[1].getValue();
+
+        if( tokens[0].getType() == Token.REG )
+            result = registers.get(tokens[0].getValue());
+        else if( tokens[0].getType() == Token.MEM )
+            try {
+                result = memory.read(tokens[0].getValue(), tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+
+        Text description = new Text(value0 + " & " + value1 + " = " + result + ", but result is discarded." + "\n" +
                 "Affected flags: CF, OF, SF, PF, ZF, AF");
         description.setX(100);
         description.setY(100);
