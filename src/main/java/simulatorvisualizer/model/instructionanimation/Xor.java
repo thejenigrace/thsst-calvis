@@ -36,7 +36,7 @@ public class Xor extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
-        Text text = new Text("Value of " + tokens[0].getValue() + " ⊕ value of " + tokens[1].getValue() + "\n" +
+        Text text = new Text("Value of " + tokens[0].getValue() + " ⊕ value of " + tokens[1].getValue() + ". Result is stored to " + tokens[0].getValue() + "\n" +
                 "Affected flags: CF, OF, SF, PF, ZF, AF");
 
         if ( desRectangle != null && srcRectangle != null ) {

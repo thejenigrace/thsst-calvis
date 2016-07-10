@@ -38,6 +38,25 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("XOR", new Xor());
         this.put("NOT", new Not());
         this.put("TEST", new Test());
+        this.put("BT", new Bt());
+        this.put("BTS", new Bts());
+        this.put("BTR", new Btr());
+        this.put("BTC", new Btc());
+        this.put("BSF", new Bsf());
+        this.put("BSR", new Bsr());
+        this.put("CBW", new Cbw());
+        this.put("CWDE", new Cwde());
+        this.put("CWD", new Cwd());
+        this.put("CDQ", new Cdq());
+        this.put("MOVSX", new Movsx());
+        this.put("MOVZX", new Movzx());
+        this.put("SHL", new Shl());
+        this.put("SAL", new Sal());
+        this.put("SHR", new Shr());
+        this.put("SAR", new Sar());
+        this.put("SHLD", new Shld());
+        this.put("SHRD", new Shrd());
+        this.put("SET", new Set());
     }
 
 }

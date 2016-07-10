@@ -14,7 +14,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class And extends CalvisAnimation {
+public class Cdq extends CalvisAnimation {
 
     @Override
     public void animate(Tab tab) {
@@ -25,19 +25,21 @@ public class And extends CalvisAnimation {
         Memory memory = currentInstruction.getMemory();
 
         // ANIMATION ASSETS
-        Token[] tokens = currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
-        }
+//        Token[] tokens = currentInstruction.getParameterTokens();
+//        for ( int i = 0; i < tokens.length; i++ ) {
+//            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+//        }
 
         // CODE HERE
         int width = 140;
         int height = 70;
-        Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
-        Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
+        Token tokenEAX = new Token(Token.REG, "EAX");
+        Token tokenEDX = new Token(Token.REG, "EDX");
+        Rectangle desRectangle = this.createRectangle(tokenEDX, width, height);
+        Rectangle srcRectangle = this.createRectangle(tokenEAX, width, height);
 
-        Text text = new Text("Value of " + tokens[0].getValue() + " & value of " + tokens[1].getValue() + ". Result is stored to " + tokens[0].getValue() + "\n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+        Text text = new Text("The sign of register EAX is extended to register EDX.\n" +
+                "Affected flags: none");
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(100);
@@ -53,17 +55,17 @@ public class And extends CalvisAnimation {
             root.getChildren().addAll(text, desRectangle, srcRectangle);
 
             int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
+            if ( tokenEDX.getType() == Token.REG )
+                desSize = registers.getBitSize(tokenEDX);
+            else if ( tokenEDX.getType() == Token.MEM && tokenEAX.getType() == Token.REG )
+                desSize = registers.getBitSize(tokenEAX);
             else
-                desSize = memory.getBitSize(tokens[0]);
+                desSize = memory.getBitSize(tokenEDX);
 
-            Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(tokens[1]);
-            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
+            Text desLabelText = new Text("EDX");
+            Text desValueText = new Text(registers.get(tokenEDX.getValue() + ""));
+            Text srcLabelText = new Text("EAX");
+            Text srcValueText = new Text(registers.get(tokenEAX.getValue() + ""));
 
             desLabelText.setX(90);
             desLabelText.setY(50);

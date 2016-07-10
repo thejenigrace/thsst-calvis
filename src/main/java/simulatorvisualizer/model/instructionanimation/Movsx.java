@@ -14,7 +14,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class And extends CalvisAnimation {
+public class Movsx extends CalvisAnimation {
 
     @Override
     public void animate(Tab tab) {
@@ -36,8 +36,8 @@ public class And extends CalvisAnimation {
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
-        Text text = new Text("Value of " + tokens[0].getValue() + " & value of " + tokens[1].getValue() + ". Result is stored to " + tokens[0].getValue() + "\n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+        Text text = new Text("The content of " + tokens[1].getValue() + " is copied to " + tokens[0].getValue() + ". Then, sign extended.\n" +
+                "Affected flags: none");
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(100);

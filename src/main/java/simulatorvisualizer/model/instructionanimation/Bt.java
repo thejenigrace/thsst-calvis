@@ -1,5 +1,6 @@
 package simulatorvisualizer.model.instructionanimation;
 
+import configuration.model.engine.EFlags;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
@@ -11,10 +12,13 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import simulatorvisualizer.model.CalvisAnimation;
 
+import java.math.BigInteger;
+import java.util.BitSet;
+
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class And extends CalvisAnimation {
+public class Bt extends CalvisAnimation {
 
     @Override
     public void animate(Tab tab) {
@@ -23,6 +27,7 @@ public class And extends CalvisAnimation {
 
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
+        EFlags flags = registers.getEFlags();
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
@@ -33,11 +38,21 @@ public class And extends CalvisAnimation {
         // CODE HERE
         int width = 140;
         int height = 70;
-        Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
-        Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
+        Token tokenAL = new Token(Token.REG, "AL");
+        Rectangle desRectangle = this.createRectangle(tokenAL, width, height);
+        Rectangle srcRectangle = this.createRectangle(tokens[0], width, height);
 
-        Text text = new Text("Value of " + tokens[0].getValue() + " & value of " + tokens[1].getValue() + ". Result is stored to " + tokens[0].getValue() + "\n" +
-                "Affected flags: CF, OF, SF, PF, ZF, AF");
+        String value = "";
+
+        if ( tokens[1].getType() == Token.REG)
+            value = registers.get(tokens[1].getValue() + "");
+        else if ( tokens[1].getType() == Token.HEX)
+            value = tokens[1].getValue();
+
+        BigInteger biValue = new BigInteger(value, 16);
+
+        Text text = new Text("Bit " + biValue.intValue() + " of " + tokens[0].getValue() + " is stored as the value of the carry flag.\n" +
+                "Affected flags: CF, OF, SF, AF, PF");
 
         if ( desRectangle != null && srcRectangle != null ) {
             desRectangle.setX(100);
@@ -60,10 +75,10 @@ public class And extends CalvisAnimation {
             else
                 desSize = memory.getBitSize(tokens[0]);
 
-            Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(tokens[1]);
-            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
+            Text desLabelText = new Text("Carry Flag");
+            Text desValueText = new Text(flags.getCarryFlag());
+            Text srcLabelText = new Text("Value of Bitbase: " + tokens[0].getValue());
+            Text srcValueText = this.createValueText(tokens[0], registers, memory, desSize);
 
             desLabelText.setX(90);
             desLabelText.setY(50);
