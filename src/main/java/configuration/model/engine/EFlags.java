@@ -8,7 +8,7 @@ public class EFlags extends Register {
 
     private ArrayList<Flag> flags;
 
-    public EFlags(String name, int size) {
+    public EFlags() {
         this.value = "00000002";
         buildFlags();
         initializeValue();

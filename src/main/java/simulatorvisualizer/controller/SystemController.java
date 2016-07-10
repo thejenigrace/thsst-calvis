@@ -78,18 +78,7 @@ public class SystemController {
 
     public void notifyAllObservers(CalvisFormattedInstruction currentInstruction, int lineNumber) {
         for ( AssemblyComponent a : observerList ) {
-            // Execute console instructions here
-            if ( a instanceof ConsoleController && currentInstruction != null) {
-                String name = currentInstruction.getName().toUpperCase();
-                String bigName = name.toUpperCase();
-                if ( bigName.matches("PRINTF|SCANF|CLS") ) {
-                    this.console.attachCalvisInstruction(currentInstruction);
-                    currentInstruction.setConsole(this.console);
-                    currentInstruction.getInstruction().consoleExecute(this.registerList, this.memory, this.console);
-                }
-            } else {
-                a.update(currentInstruction, lineNumber);
-            }
+            a.update(currentInstruction, lineNumber);
         }
     }
 
@@ -129,6 +118,8 @@ public class SystemController {
                 boolean isSuccessful = parse(code);
                 if ( isSuccessful ) {
                     this.state = SimulationState.PLAY;
+                    push();
+                    pushOldEnvironment(0);
                     beginSimulation();
                 } else {
                     end();
@@ -289,7 +280,7 @@ public class SystemController {
         boolean flag = true;
         try {
             // EXECUTE THE CALVIS INSTRUCTION
-            flag = executionMap.get(currentLine).execute(console, visualizer);
+            flag = executionMap.get(currentLine).execute(visualizer);
 
             // 3. Parse currentLine to int @var value
             int value = Integer.parseInt(currentLine, 16);
@@ -302,7 +293,7 @@ public class SystemController {
             }
             this.stackCount++;
             push();
-
+            pushOldEnvironment(this.stackCount - 1);
         } catch ( Exception e ) {
             e.printStackTrace();
             Platform.runLater(
@@ -353,9 +344,16 @@ public class SystemController {
             k++;
         }
         this.memoryStackMap.put(stackCount, memoryArray);
+    }
 
-        // FOR PREVIOUS VALUES OF STACK
-//        setOldEnvironment(registerStringArray, flagsValue, mxscrValue, memoryArray);
+    private void pushOldEnvironment(int i) {
+        String[][] registerStringArray = this.registerStackMap.get(i);
+        String eflags = this.flagsStackMap.get(i);
+        String mxscr = this.mxscrStackMap.get(i);
+        String[][] memoryArray = this.memoryStackMap.get(i);
+
+        EnvironmentBag bag = new EnvironmentBag(registerStringArray, eflags, mxscr, memoryArray);
+        visualizer.setOldEnvironment(bag);
     }
 
     private boolean parse(String code) {
@@ -434,12 +432,6 @@ public class SystemController {
 
     public Memory getMemoryState() {
         return this.memory;
-    }
-
-    private void setOldEnvironment(String[][] registerStringArray, String flagsValue,
-                                   String mxscrValue, String[][] memoryArray) {
-        EnvironmentBag bag = new EnvironmentBag(registerStringArray, flagsValue, mxscrValue, memoryArray);
-        visualizer.setOldEnvironment(bag);
     }
 
 }

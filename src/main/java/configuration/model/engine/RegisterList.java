@@ -41,8 +41,8 @@ public class RegisterList {
         MAX_SIZE = maxSize;
         this.childMap = new TreeMap<>(orderedComparator);
 
-        this.flags = new EFlags("EFLAGS", 32);
-        this.mxscr = new Mxscr("MXSCR", 32);
+        this.flags = new EFlags();
+        this.mxscr = new Mxscr();
         this.x87 = new X87Handler(this);
 
         BufferedReader br = null;

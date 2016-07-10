@@ -51,6 +51,7 @@ public class VisualizationController extends AssemblyComponent {
             // no animation
         } else {
             animation.setCurrentInstruction(this.currentInstruction);
+            animation.setOldEnvironment(oldEnvironment);
             animation.animate(tab);
         }
     }

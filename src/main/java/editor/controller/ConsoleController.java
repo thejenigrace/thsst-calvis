@@ -40,6 +40,15 @@ public class ConsoleController extends AssemblyComponent {
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
+        if ( currentInstruction != null) {
+            String name = currentInstruction.getName();
+            if ( name.matches("PRINTF|SCANF|CLS") ) {
+                attachCalvisInstruction(currentInstruction);
+                currentInstruction.setConsole(this);
+                currentInstruction.getInstruction().consoleExecute(sysCon.getRegisterState(),
+                        sysCon.getMemoryState(), this);
+            }
+        }
     }
 
     @Override

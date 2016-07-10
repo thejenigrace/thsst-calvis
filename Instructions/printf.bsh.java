@@ -78,7 +78,6 @@ consoleExecute(registers, memory, console) {
 				short s = (short) Integer.parseInt(bits, 16);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = s;
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 16;
 			} else if ( format.matches("%[0-9]*ld") ) {
                 // 32 bit signed int
@@ -89,7 +88,6 @@ consoleExecute(registers, memory, console) {
 				BigInteger s = new BigInteger(bits, 16);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = s.intValue();
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 32;
 
 			} else if ( format.matches("%[0-9]*u") ) {
@@ -103,7 +101,6 @@ consoleExecute(registers, memory, console) {
 				BigInteger b2 = new BigInteger(unsigned);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = b2.intValueExact();
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 16;
 
 			} else if ( format.matches("%[0-9]*lu") ) {
@@ -118,7 +115,6 @@ consoleExecute(registers, memory, console) {
 				BigInteger b2 = new BigInteger(unsigned);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = b2.longValue();
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 32;
 
 			} else if ( format.matches("%[0-9]*x") ) {
@@ -127,7 +123,6 @@ consoleExecute(registers, memory, console) {
 				short s = (short) Integer.parseInt(bits, 16);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = s;
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 16;
 
 			} else if ( format.matches("%[0-9]*lx") ) {
@@ -139,7 +134,6 @@ consoleExecute(registers, memory, console) {
 				BigInteger s = new BigInteger(bits, 16);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = s.intValue();
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 32;
 
 			} else if ( format.matches("%[0-9]*([.][0-9]*)?f") ) {
@@ -150,7 +144,6 @@ consoleExecute(registers, memory, console) {
 				float f = Float.intBitsToFloat(hex);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = f;
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 32;
 
 			} else if ( format.matches("%[0-9]*([.][0-9]*)?lf") ) {
@@ -165,7 +158,6 @@ consoleExecute(registers, memory, console) {
 
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = d;
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 64;
 
 			} else if ( format.matches("%[0-9]*c") ) {
@@ -174,7 +166,6 @@ consoleExecute(registers, memory, console) {
 				char s = (char) Integer.parseInt(bits, 16);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = s;
-				registers.set("ESP", stackAddress.toString(16));
 				initialOffset = 16;
 			} else if ( format.matches("%[0-9]*s") ) {
 			    // String

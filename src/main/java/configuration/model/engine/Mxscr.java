@@ -8,7 +8,7 @@ public class Mxscr extends Register {
 
     private ArrayList<Flag> flags;
 
-    public Mxscr(String name, int size) {
+    public Mxscr() {
         this.value = "00000000";
         buildFlags();
         initializeValue();

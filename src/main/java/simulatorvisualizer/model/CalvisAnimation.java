@@ -13,17 +13,24 @@ public abstract class CalvisAnimation {
     protected Timeline timeline;
     protected Group root;
     protected CalvisFormattedInstruction currentInstruction;
+    protected EnvironmentBag oldEnvironment;
+    protected EnvironmentBagFinder finder;
 
     public CalvisAnimation() {
         this.timeline = new Timeline();
         this.root = new Group();
+        this.finder = new EnvironmentBagFinder();
     }
 
     public void setCurrentInstruction(CalvisFormattedInstruction currentInstruction) {
         this.currentInstruction = currentInstruction;
     }
 
-//    public abstract void animate(Tab tab, EnvironmentBag oldEnvironment);
+    public void setOldEnvironment(EnvironmentBag environment) {
+        this.oldEnvironment = environment;
+        this.finder.setEnvironmentBag(environment);
+        this.finder.setLookup(currentInstruction.getMemory().getLookupTable());
+    }
 
     public abstract void animate(Tab tab);
 }

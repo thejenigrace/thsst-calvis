@@ -28,10 +28,9 @@ public class Memory {
 
     public static int MAX_ADDRESS_SIZE;
     public static int DEFAULT_RELATIVE_SIZE;
-
-    static final int SIZE_DIRECTIVE_NAME = 0;
-    static final int SIZE_DIRECTIVE_PREFIX = 1;
-    static final int SIZE_DIRECTIVE_SIZE = 2;
+    public static final int SIZE_DIRECTIVE_NAME = 0;
+    public static final int SIZE_DIRECTIVE_PREFIX = 1;
+    public static final int SIZE_DIRECTIVE_SIZE = 2;
 
     private TreeMap<String, String> mem;
     private ArrayList<String[]> lookup;
@@ -50,7 +49,7 @@ public class Memory {
         this.labelMap = new HashMap<>();
         this.variableMap = new HashMap<>();
 
-        this.isAligned = true;
+        this.isAligned = false;
         this.isInitialized = false;
         this.variablePointerStartingAddress = MemoryAddressCalculator.extend("0000", Memory.MAX_ADDRESS_SIZE, "0");
 
@@ -224,7 +223,7 @@ public class Memory {
         int offset = 0; //default offset = 0;
         for ( String[] x : this.lookup ) {
             if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ) {
-                offset = Integer.valueOf(x[SIZE_DIRECTIVE_SIZE]);
+                offset = Integer.valueOf(x[Memory.SIZE_DIRECTIVE_SIZE]);
                 break;
             }
         }
@@ -291,6 +290,10 @@ public class Memory {
 
     public Iterator<String[]> getLookup() {
         return lookup.iterator();
+    }
+
+    public ArrayList<String[]> getLookupTable(){
+        return this.lookup;
     }
 
     public Iterator<String> getMemoryKeys() {
