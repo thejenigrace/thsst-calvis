@@ -135,11 +135,11 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    static private Preferences getPrefsRoot() {
+    private static Preferences getPrefsRoot() {
         return Preferences.userRoot().node("calvis");
     }
 
-    static Preferences getOptions() {
+    private static Preferences getOptions() {
         return getPrefsRoot().node("options");
     }
 

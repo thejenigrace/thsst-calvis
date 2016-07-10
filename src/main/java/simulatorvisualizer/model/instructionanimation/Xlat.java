@@ -12,9 +12,9 @@ import javafx.util.Duration;
 import simulatorvisualizer.model.CalvisAnimation;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Jennica on 08/07/2016.
  */
-public class Mov extends CalvisAnimation {
+public class Xlat extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -25,20 +25,14 @@ public class Mov extends CalvisAnimation {
         RegisterList registers = this.currentInstruction.getRegisters();
         Memory memory = this.currentInstruction.getMemory();
 
-        // ANIMATION ASSETS
-        Token[] tokens = this.currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ ) {
-//            System.out.println(tokens[i] + " : " + tokens[i].getClass());
-        }
-
-        // CODE HERE
         int width = 140;
         int height = 70;
-        Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
-        Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
+
+        Rectangle desRectangle = this.createRectangle(Token.REG, width, height);
+        Rectangle srcRectangle = this.createRectangle(Token.REG, width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(100);
+            desRectangle.setX(110);
             desRectangle.setY(100);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
@@ -50,18 +44,16 @@ public class Mov extends CalvisAnimation {
 
             root.getChildren().addAll(desRectangle, srcRectangle);
 
-            int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
-            else
-                desSize = memory.getBitSize(tokens[0]);
+            String desRegisterName = "AL";
+            String srcRegisterName = "BX";
 
-            Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(tokens[1]);
-            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
+            int desSize = registers.getBitSize(desRegisterName);
+            int srcSize = registers.getBitSize(srcRegisterName);
+
+            Text desLabelText = new Text(desRegisterName);
+            Text desValueText = new Text(registers.get(desRegisterName));
+            Text srcLabelText = new Text(srcRegisterName);
+            Text srcValueText = new Text(registers.get(srcRegisterName));
 
             desLabelText.setX(100);
             desLabelText.setY(100);
@@ -86,7 +78,7 @@ public class Mov extends CalvisAnimation {
             // Destination label static
             desLabelTransition.setNode(desLabelText);
             desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add((desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
             desLabelTransition.fromYProperty().bind(desRectangle.translateYProperty()
                     .add(desRectangle.getLayoutBounds().getHeight() / 3));
             desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
@@ -95,18 +87,18 @@ public class Mov extends CalvisAnimation {
             // Destination value moving
             desTransition.setInterpolator(Interpolator.LINEAR);
             desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                     .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
             desTransition.toXProperty().bind(desRectangle.translateXProperty()
-                    .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.toYProperty().bind(desTransition.fromYProperty());
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
@@ -115,7 +107,7 @@ public class Mov extends CalvisAnimation {
             // Source value static
             srcTransition.setNode(srcValueText);
             srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
             srcTransition.toXProperty().bind(srcTransition.fromXProperty());
@@ -129,4 +121,3 @@ public class Mov extends CalvisAnimation {
         }
     }
 }
-

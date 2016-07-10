@@ -25,13 +25,13 @@ public class EFlags extends Register {
     public void buildFlags() {
         this.flags = new ArrayList<>();
         this.flags.add(new Flag("Carry", getCarryFlag()));
-        this.flags.add(new Flag("Sign", getSignFlag()));
-        this.flags.add(new Flag("Overflow", getOverflowFlag()));
-        this.flags.add(new Flag("Zero", getZeroFlag()));
         this.flags.add(new Flag("Parity", getParityFlag()));
         this.flags.add(new Flag("Auxiliary", getAuxiliaryFlag()));
-        this.flags.add(new Flag("Direction", getDirectionFlag()));
+        this.flags.add(new Flag("Zero", getZeroFlag()));
+        this.flags.add(new Flag("Sign", getSignFlag()));
+        this.flags.add(new Flag("Overflow", getOverflowFlag()));
         this.flags.add(new Flag("Interrupt", getInterruptFlag()));
+        this.flags.add(new Flag("Direction", getDirectionFlag()));
     }
 
     public void refreshFlags() {

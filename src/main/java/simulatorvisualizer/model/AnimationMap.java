@@ -9,17 +9,22 @@ import java.util.HashMap;
  */
 public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
-    public AnimationMap(){
+    public AnimationMap() {
         super();
-        generateGP();
+        this.generateGP();
     }
 
     private void generateGP() {
-        generateGPDataTransfer();
+        this.generateGPDataTransfer();
+        this.generateGPBinaryArithmetic();
+        this.generateGPDecimalArithmetic();
     }
 
-    private void generateGPDataTransfer(){
+    private void generateGPDataTransfer() {
         this.put("MOV", new Mov());
+        this.put("LEA", new Lea());
+        this.put("XLAT", new Xlat());
+        this.put("CMOV", new Cmov());
         this.put("STC", new Stc());
         this.put("CLC", new Clc());
         this.put("CMC", new Cmc());
@@ -59,4 +64,29 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("SET", new Set());
     }
 
+    private void generateGPBinaryArithmetic() {
+        this.put("ADD", new Add());
+        this.put("ADC", new Ad("CF", true));
+        this.put("ADCX", new Ad("CF", false));
+        this.put("ADOX", new Ad("OF", false));
+        this.put("SUB", new Sub());
+        this.put("SBB", new Sbb());
+        this.put("INC", new Inc());
+        this.put("DEC", new Dec());
+        this.put("CMP", new Cmp());
+        this.put("NEG", new Neg());
+        this.put("MUL", new Mul());
+        this.put("IMUL", new Imul());
+        this.put("DIV", new Div());
+        this.put("IDIV", new Div());
+    }
+
+    private void generateGPDecimalArithmetic() {
+        this.put("DAA", new Daa());
+        this.put("DAS", new Das());
+        this.put("AAA", new Aaa());
+        this.put("AAS", new Aas());
+        this.put("AAM", new Aam());
+        this.put("AAD", new Aad());
+    }
 }

@@ -150,11 +150,16 @@ public class TextEditorPane extends AssemblyComponent {
 //            System.out.println("Show Autocomplete!");
             LinkedList<String> searchResult = new LinkedList<>();
             searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
-            if ( this.entries.size() > 0 ) {
-                populatePopupItems(searchResult, start, end);
+            if ( searchResult.size() > 0 ) {
+//                System.out.println("POPULATE");
+                this.populatePopupItems(searchResult, start, end);
                 if ( !entriesPopup.isShowing() ) {
+//                    System.out.println("SHOW POPUP");
                     this.entriesPopup.show(MainApp.primaryStage);
                 }
+            } else {
+//                System.out.println("HIDE DUMDUM!");
+                this.entriesPopup.hide();
             }
         }
     }
@@ -162,7 +167,7 @@ public class TextEditorPane extends AssemblyComponent {
     private void populatePopupItems(List<String> searchResult, int start, int end) {
         List<CustomMenuItem> menuItems = new LinkedList<>();
 
-        // If you'd life more entries, modify this line.
+        // If you'd like more entries, modify this line.
         int maxEntries = 10;
         int count = Math.min(searchResult.size(), maxEntries);
         for ( int i = 0; i < count; i++ ) {

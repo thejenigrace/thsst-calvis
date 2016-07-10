@@ -14,7 +14,7 @@ import simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Mov extends CalvisAnimation {
+public class Lea extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -28,7 +28,7 @@ public class Mov extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
-//            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+            System.out.println(tokens[i] + " : " + tokens[i].getClass());
         }
 
         // CODE HERE
@@ -38,7 +38,7 @@ public class Mov extends CalvisAnimation {
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(100);
+            desRectangle.setX(110);
             desRectangle.setY(100);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
@@ -50,16 +50,10 @@ public class Mov extends CalvisAnimation {
 
             root.getChildren().addAll(desRectangle, srcRectangle);
 
-            int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
-            else
-                desSize = memory.getBitSize(tokens[0]);
+            int desSize = registers.getBitSize(tokens[0]);
 
             Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
+            Text desValueText = new Text(registers.get(tokens[0]));
             Text srcLabelText = this.createLabelText(tokens[1]);
             Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
 
@@ -86,7 +80,7 @@ public class Mov extends CalvisAnimation {
             // Destination label static
             desLabelTransition.setNode(desLabelText);
             desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add((desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
             desLabelTransition.fromYProperty().bind(desRectangle.translateYProperty()
                     .add(desRectangle.getLayoutBounds().getHeight() / 3));
             desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
@@ -95,18 +89,19 @@ public class Mov extends CalvisAnimation {
             // Destination value moving
             desTransition.setInterpolator(Interpolator.LINEAR);
             desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                     .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
             desTransition.toXProperty().bind(desRectangle.translateXProperty()
-                    .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
+                    .add(10 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
             desTransition.toYProperty().bind(desTransition.fromYProperty());
+
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
             srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcLabelText.getLayoutBounds().getWidth()) / 2));
             srcLabelTransition.fromYProperty().bind(desLabelTransition.fromYProperty());
             srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
@@ -115,7 +110,7 @@ public class Mov extends CalvisAnimation {
             // Source value static
             srcTransition.setNode(srcValueText);
             srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + 100)
+                    .add(desRectangle.getLayoutBounds().getWidth() + 110)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
             srcTransition.toXProperty().bind(srcTransition.fromXProperty());
