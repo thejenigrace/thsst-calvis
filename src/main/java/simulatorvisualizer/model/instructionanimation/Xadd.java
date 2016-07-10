@@ -6,6 +6,7 @@ import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,7 +24,7 @@ import java.math.BigInteger;
 public class Xadd extends CalvisAnimation {
 
     @Override
-    public void animate(Tab tab) {
+    public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
 

@@ -5,6 +5,7 @@ import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -22,7 +23,7 @@ import javafx.scene.paint.Color;
 public class Bswap extends CalvisAnimation {
 
     @Override
-    public void animate(Tab tab) {
+    public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
 
