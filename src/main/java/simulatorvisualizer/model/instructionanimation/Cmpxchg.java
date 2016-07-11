@@ -1,8 +1,10 @@
 package simulatorvisualizer.model.instructionanimation;
 
+import configuration.model.engine.Calculator;
 import configuration.model.engine.Memory;
 import configuration.model.engine.RegisterList;
 import configuration.model.engine.Token;
+import configuration.model.exceptions.MemoryReadException;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.scene.control.ScrollPane;
@@ -29,8 +31,8 @@ public class Cmpxchg extends CalvisAnimation {
 
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
-        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root);
-
+        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory);
+        Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
 
         int desSize = 0;
@@ -42,13 +44,11 @@ public class Cmpxchg extends CalvisAnimation {
             desSize = memory.getBitSize(tokens[0]);
 
         // ANIMATION ASSETS
-        Rectangle srcRectangle = this.createRectangle(tokens[0], 90, 110);
+        Rectangle srcRectangle = this.createRectangle(tokens[0], 100, 110);
         Rectangle fake = new Rectangle(1, 1, Color.WHITE);
-        Rectangle eaxRectangle = new Rectangle(90, 110, Color.web("#e32636"));
-        Rectangle desRectangle = this.createRectangle(tokens[1], 90, 110);
+        Rectangle eaxRectangle = new Rectangle(100, 110, Color.web("#e32636"));
+        Rectangle desRectangle = this.createRectangle(tokens[1], 100, 110);
         Text plusCircle = new Text("Compare");
-        plusCircle.setFont(Font.font(24));
-        plusCircle.setFill(Color.web("#3d2b1f"));
 
         Circle equalCircle = new Circle(30, Color.web("#ffe135"));
         Text srcLabel = this.createLabelText(tokens[0]);
@@ -57,6 +57,9 @@ public class Cmpxchg extends CalvisAnimation {
         Text desLabel = this.createLabelText(tokens[1]);
         desLabel.setFont(Font.font(15));
         desLabel.setFill(Color.web("#3d2b1f"));
+        Text zeroValue = new Text("Zero Flag Value is set to: " + registers.getEFlags().getZeroFlag());
+        timeFunc.editText(zeroValue, 24, "#3d2b1f");
+
 
         Text aLabel = new Text("");
         switch(desSize){
@@ -75,7 +78,7 @@ public class Cmpxchg extends CalvisAnimation {
         root.getChildren().add(srcRectangle);
         root.getChildren().add(fake);
         root.getChildren().add(eaxRectangle);
-        root.getChildren().add(plusCircle);
+//        root.getChildren().add(plusCircle);
         root.getChildren().add(equalCircle);
         root.getChildren().add(desRectangle);
         root.getChildren().add(srcLabel);
@@ -85,18 +88,44 @@ public class Cmpxchg extends CalvisAnimation {
         Text equalSign = new Text("=");
         timeFunc.editText(equalSign, 30, "#3d2b1f");
 
-        Text srcValue = this.createValueText(tokens[0], registers, memory, desSize);
+        Text srcValue = new Text("0x" + finder.getRegister(tokens[1].getValue()));
         timeFunc.editText(srcValue, 12, "#3d2b1f");
 
-        Text desValue = this.createValueText(tokens[1], registers, memory, desSize);
-        timeFunc.editText(desValue, 12, "#3d2b1f");
+        String desVal = "";
+        if(tokens[0].isMemory()){
+            try{
+                desVal = finder.read(tokens[0], desSize);
+            } catch(MemoryReadException e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            desVal = finder.getRegister(tokens[0].getValue());
+        }
 
-        Text eaxValue = new Text(registers.get(aLabel.getText()));
+        Text desValue = new Text("0x" + desVal);
+        timeFunc.editText(desValue, 12, "#3d2b1f");
+        Text eaxValue = new Text("0x" + finder.getRegister(aLabel.getText()));
         timeFunc.editText(eaxValue, 12, "#3d2b1f");
 
         aLabel.setFont(Font.font(14));
         aLabel.setFill(Color.web("#3d2b1f"));
 
+        if(eaxValue.getText().equals(desValue.getText())){
+            timeFunc.editText(plusCircle, 22, "#3d2b1f", "Is Equal");
+            srcValue.setText("0x0" + registers.get(tokens[1].getValue()));
+//            desLabel.setText(desLabel.getText());
+//            srcLabel.setText(desLabel.getText());
+            desLabel.setText(srcLabel.getText());
+            desRectangle.setFill(srcRectangle.getFill());
+
+        }
+        else{
+            timeFunc.editText(plusCircle, 22, "#3d2b1f", "Not Equal");
+            srcValue.setText(desValue.getText());
+            desRectangle.setFill(eaxRectangle.getFill());
+            desLabel.setText(aLabel.getText());
+        }
 
 
         // Basic timeline
@@ -104,28 +133,33 @@ public class Cmpxchg extends CalvisAnimation {
         timeFunc.addTimeline(0, 0, 100, fake);
         timeFunc.addTimeline(200, 50, Duration.ZERO, eaxRectangle);
         timeFunc.addTimeline(200, 50, 100, eaxRectangle);
+        timeFunc.addTimeline(50, 220, Duration.ZERO, zeroValue);
+        timeFunc.addTimeline(50, 220, 100, zeroValue);
         timeFunc.addTimeline(0, 50, Duration.ZERO, srcRectangle);
         timeFunc.addTimeline(0, 50, 100, srcRectangle);
         timeFunc.addTimeline(100, 110, Duration.ZERO, plusCircle);
         timeFunc.addTimeline(100, 110, 100, plusCircle);
         timeFunc.addTimeline(345, 100, Duration.ZERO, equalCircle);
         timeFunc.addTimeline(345, 100, 100, equalCircle);
-        timeFunc.addTimeline(340, 105, Duration.ZERO, equalSign);
-        timeFunc.addTimeline(340, 105, 100, equalSign);
+        timeFunc.addTimeline(335, 110, Duration.ZERO, equalSign);
+        timeFunc.addTimeline(335, 110, 100, equalSign);
         timeFunc.addTimeline(400, 50, Duration.ZERO, desRectangle);
         timeFunc.addTimeline(400, 50, 100, desRectangle);
-        timeFunc.addTimeline(30, 80, Duration.ZERO, srcLabel);
-        timeFunc.addTimeline(30, 80, 100, srcLabel);
-        timeFunc.addTimeline(230, 80, Duration.ZERO, aLabel);
-        timeFunc.addTimeline(230, 80, 100, aLabel);
-        timeFunc.addTimeline(430, 80, Duration.ZERO, desLabel);
-        timeFunc.addTimeline(430, 80, 100, desLabel);
-        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75, 110, Duration.ZERO, srcValue);
-        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75, 110, 100, srcValue);
+        timeFunc.addTimeline(20, 80, Duration.ZERO, srcLabel);
+        timeFunc.addTimeline(20, 80, 100, srcLabel);
+        timeFunc.addTimeline(220, 80, Duration.ZERO, aLabel);
+        timeFunc.addTimeline(220, 80, 100, aLabel);
+        timeFunc.addTimeline(420, 80, Duration.ZERO, desLabel);
+        timeFunc.addTimeline(420, 80, 100, desLabel);
+        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75, 110, Duration.ZERO, desValue);
+        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75, 110, 100, desValue);
         timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75 + 200, 110, Duration.ZERO, eaxValue);
         timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75 + 200, 110, 100, eaxValue);
-        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75 + 400, 110, Duration.ZERO, desValue);
-        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75 + 400, 110, 100, desValue);
+        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75 + 400, 110, Duration.ZERO, srcValue);
+        timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75 + 400, 110, 100, srcValue);
+        System.out.println(srcLabel.getText() + " putangina");
         timeline.play();
+
+
     }
 }

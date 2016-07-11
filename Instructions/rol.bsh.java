@@ -43,13 +43,13 @@ execute(des, src, registers, memory) {
                 }
                 flags.setCarryFlag(carryFlagValue);
                 String result = calculator.binaryToHexString(calculator.binaryZeroExtend(biResult.toString(2), des), des);
-                if (result.length() > 8) {
-                    int cut = result.length() - 8;
-                    String t = result.substring(cut);
-                    registers.set(des, t);
-                } else {
-                    registers.set(des, result);
-                }
+				if (registers.getHexSize(des) < result.length()) {
+				int cut = result.length() - registers.getHexSize(des);
+				String t = result.substring(cut);
+				registers.set(des, t);
+				} else {
+				registers.set(des, result);
+				}
 
                 //FLAGS
                 if (limit == 0) {
@@ -172,8 +172,8 @@ execute(des, src, registers, memory) {
 		}
 		flags.setCarryFlag(carryFlagValue);
 		String result = calculator.binaryToHexString(calculator.binaryZeroExtend(biResult.toString(2), des), des);
-		if (result.length() > 8) {
-		int cut = result.length() - 8;
+		if (registers.getHexSize(des) < result.length()) {
+		int cut = result.length() - registers.getHexSize(des);
 		String t = result.substring(cut);
 		registers.set(des, t);
 		} else {
@@ -206,7 +206,7 @@ execute(des, src, registers, memory) {
 		}
             }
         }
-    } else if (des.isMemory()) {
+    } else if (des.isMemory() && memory.getBitSize(des) < 0) {
         if (src.isRegister() && src.getValue().equals("CL")) {
 
             int desSize = memory.getBitSize(des);

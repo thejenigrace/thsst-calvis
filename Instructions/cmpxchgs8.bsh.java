@@ -17,7 +17,7 @@ execute(des, registers, memory) {
         else{
         registers.set("EDX", memoryData.substring(0, 8));
         registers.set("EAX", memoryData.substring(8, 16));
-        ef.setZeroFlag("1");
+        ef.setZeroFlag("0");
         }
         //}
         }
