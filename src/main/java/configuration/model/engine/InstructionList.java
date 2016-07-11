@@ -29,7 +29,8 @@ public class InstructionList {
 
     private ArrayList<String> appendType1;
     private ArrayList<String> appendType2;
-//    private ArrayList<String> appendType3;
+    private ArrayList<String> appendType3;
+    private ArrayList<String> appendType4;
 
     private String conditionsRegEx;
     private String equalityRegEx;
@@ -42,9 +43,9 @@ public class InstructionList {
             "L", "NGE", "LE", "NG", "E", "Z",
             "NE", "NZ", "P", "PE", "NP", "PO",
             "O", "NO", "C", "NC", "S", "NS"};
-    private final String[] equalityConditionsArray = {"E", "Z", "NE", "NZ"};
     private final String[] fcmovConditions = {"B", "E", "BE", "U", "NB", "NE", "NBE", "NU"};
     private final String[] sizeRelatedConditionsArray = {"B", "W", "D"};
+    private final String[] equalityConditionsArray = {"E", "Z", "NE", "NZ"};
 
     public InstructionList(String csvFile) {
         this.conditionsRegEx = String.join("|", conditionsArray);
@@ -53,12 +54,13 @@ public class InstructionList {
         this.equalityRegEx += "|" + String.join("|", equalityConditionsArray).toLowerCase();
         this.fcmovRegEx = String.join("|", fcmovConditions);
         this.fcmovRegEx += "|" + String.join("|", fcmovConditions).toLowerCase();
-
         this.sizeRelatedRegEx = String.join("|", sizeRelatedConditionsArray);
         this.sizeRelatedRegEx += "|" + String.join("|", sizeRelatedConditionsArray).toLowerCase();
 
         this.appendType1 = new ArrayList<>();
         this.appendType2 = new ArrayList<>();
+        this.appendType3 = new ArrayList<>();
+        this.appendType4 = new ArrayList<>();
 
         ArrayList<ErrorMessage> errorMessages = new ArrayList<>();
         BufferedReader br = null;
@@ -201,6 +203,10 @@ public class InstructionList {
                             this.appendType1.add(inst[0].toLowerCase());
                         } else if ( inst[3].equals("2") ) {
                             this.appendType2.add(inst[0].toLowerCase());
+                        } else if ( inst[3].equals("3") ) {
+                            this.appendType3.add(inst[0].toLowerCase());
+                        } else if ( inst[3].equals("4") ) {
+                            this.appendType4.add(inst[0].toLowerCase());
                         }
 //							System.out.println("Loaded: " + inst[0]);
                     }
@@ -276,6 +282,14 @@ public class InstructionList {
                 for ( int i = 0; i < fcmovConditions.length; i++ ) {
                     highlightedWords.add(instruction + fcmovConditions[i]);
                 }
+            } else if ( appendType == 3 ) {
+                for ( int i = 0; i < sizeRelatedConditionsArray.length; i++ ) {
+                    highlightedWords.add(instruction + sizeRelatedConditionsArray[i]);
+                }
+            } else if ( appendType == 4 ) {
+                for ( int i = 0; i < equalityConditionsArray.length; i++ ) {
+                    highlightedWords.add(instruction + equalityConditionsArray[i]);
+                }
             } else {
                 highlightedWords.add(instruction);
             }
@@ -313,6 +327,22 @@ public class InstructionList {
                     }
                 }
                 break;
+            case "3":
+                for ( String element : appendType3 ) {
+                    String pattern = "(" + element + "|" + element.toUpperCase() + ")(" + sizeRelatedRegEx + ")";
+                    if ( instruction.matches(pattern) ) {
+                        return element;
+                    }
+                }
+                break;
+            case "4":
+                for ( String element : appendType4 ) {
+                    String pattern = "(" + element + "|" + element.toUpperCase() + ")(" + equalityRegEx + ")";
+                    if ( instruction.matches(pattern) ) {
+                        return element;
+                    }
+                }
+                break;
         }
         return instruction;
     }
@@ -322,8 +352,13 @@ public class InstructionList {
             return conditionsRegEx;
         } else if ( appendType.equals("2") ) {
             return fcmovRegEx;
+        } else if ( appendType.equals("3") ) {
+            return sizeRelatedRegEx;
+        } else if ( appendType.equals("4") ) {
+            return equalityRegEx;
         }
-        return conditionsRegEx;
+        // invalid append type
+        return "";
     }
 
     private String prepareImportStatements() {

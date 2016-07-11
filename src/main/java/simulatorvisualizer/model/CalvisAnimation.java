@@ -40,7 +40,8 @@ public abstract class CalvisAnimation {
     public void setOldEnvironment(EnvironmentBag environment) {
         this.oldEnvironment = environment;
         this.finder.setEnvironmentBag(environment);
-        this.finder.setLookup(currentInstruction.getMemory().getLookupTable());
+        this.finder.setMemoryLookup(currentInstruction.getMemory().getLookupTable());
+        this.finder.setRegisterLookup(currentInstruction.getRegisters().getRegisterLookup());
     }
 
     protected Rectangle createRectangle(Token token, int width, int height) {

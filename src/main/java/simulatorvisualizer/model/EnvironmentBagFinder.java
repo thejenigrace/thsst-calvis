@@ -1,9 +1,6 @@
 package simulatorvisualizer.model;
 
-import configuration.model.engine.EFlags;
-import configuration.model.engine.Memory;
-import configuration.model.engine.Mxscr;
-import configuration.model.engine.Token;
+import configuration.model.engine.*;
 import configuration.model.exceptions.MemoryReadException;
 
 import java.util.ArrayList;
@@ -14,25 +11,43 @@ import java.util.ArrayList;
 public class EnvironmentBagFinder {
 
     private EnvironmentBag bag;
-    private ArrayList<String[]> lookup;
-
-    public void setLookup(ArrayList<String[]> lookup){
-        this.lookup = lookup;
-    }
+    private ArrayList<String[]> memoryLookup;
+    private ArrayList<String[]> registerLookup;
 
     public void setEnvironmentBag(EnvironmentBag bag) {
         this.bag = bag;
     }
 
+    public void setMemoryLookup(ArrayList<String[]> lookup) {
+        this.memoryLookup = lookup;
+    }
+
+    public void setRegisterLookup(ArrayList<String[]> lookup) {
+        this.registerLookup = lookup;
+    }
+
     public String getRegister(String registerName) {
         String key = registerName.toUpperCase(); // just in case
         String[][] registerMap = bag.getRegisterStringArray();
+
+        String[] registerArray = find(registerName);
+        String sourceRegister = registerArray[RegisterList.SOURCE];
+        int startIndex = Integer.parseInt(registerArray[RegisterList.START]);
+        int endIndex = Integer.parseInt(registerArray[RegisterList.END]);
+
         for ( int i = 0; i < registerMap.length; i++ ) {
-            if ( registerMap[i][0].equals(key) ) {
-                return registerMap[i][1];
+            if ( registerMap[i][0].equals(sourceRegister) ) {
+                String value = registerMap[i][1];
+                if ( sourceRegister.matches("ST[0-7]") ) {
+                    return value;
+                } else {
+                    value = value.substring(startIndex, endIndex + 1);
+                    return value;
+                }
             }
         }
-        return "Register does not exist;";
+
+        return "Register does not exist";
     }
 
     public EFlags getEflags(String flagValues) {
@@ -47,7 +62,16 @@ public class EnvironmentBagFinder {
         return oldFlags;
     }
 
-    public String read(String address) {
+    private String[] find(String registerName) {
+        for ( String[] x : this.registerLookup ) {
+            if ( x[0].equalsIgnoreCase(registerName) ) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    private String read(String address) {
         String[][] memoryMap = bag.getMemoryArray();
         for ( int i = 0; i < memoryMap.length; i++ ) {
             if ( memoryMap[i][0].equals(address) ) {
@@ -73,7 +97,7 @@ public class EnvironmentBagFinder {
         String baseAddress = memoryArray[1];
 
         int offset = 0; //default offset = 0;
-        for ( String[] x : this.lookup ) {
+        for ( String[] x : this.memoryLookup ) {
             if ( sizeDirective.equalsIgnoreCase(x[Memory.SIZE_DIRECTIVE_NAME]) ) {
                 offset = Integer.valueOf(x[Memory.SIZE_DIRECTIVE_SIZE]);
                 break;

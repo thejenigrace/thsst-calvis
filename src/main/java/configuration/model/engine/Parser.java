@@ -166,17 +166,20 @@ public class Parser {
         Grule threeParameterInstruction = lang.newGrule();
 
         noParameterInstruction.define(elementConcatenator.concatenateOrSubRules(noParameterTokens))
-                .action((Action<Object>) args -> {
-                    String anInstruction = ((Token) args).getValue();
-                    Instruction someInstruction = instructions.getInstruction(anInstruction);
-                    CalvisFormattedInstruction CalvisInstruction
-                            = new CalvisFormattedInstruction(someInstruction, anInstruction, registers, memory);
-                    String instructionAdd = Integer.toHexString(lineNumber);
-                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-                            RegisterList.instructionPointerSize, "0"), CalvisInstruction);
-                    lineNumber++;
-                    return CalvisInstruction;
-                });
+                .action((Action<Object>) args -> prepareCalvisInstruction(new Object[]{args}));
+
+//        noParameterInstruction.define(elementConcatenator.concatenateOrSubRules(noParameterTokens))
+//                .action((Action<Object>) args -> {
+//                    String anInstruction = ((Token) args).getValue();
+//                    Instruction someInstruction = instructions.getInstruction(anInstruction);
+//                    CalvisFormattedInstruction CalvisInstruction
+//                            = new CalvisFormattedInstruction(someInstruction, anInstruction, registers, memory);
+//                    String instructionAdd = Integer.toHexString(lineNumber);
+//                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
+//                            RegisterList.instructionPointerSize, "0"), CalvisInstruction);
+//                    lineNumber++;
+//                    return CalvisInstruction;
+//                });
 
         oneParameterInstruction.define(elementConcatenator.concatenateOrSubRules(oneParameterTokens),
                 getAllParameters(true)).action((Action<Object[]>) args -> prepareCalvisInstruction(args));
@@ -204,21 +207,19 @@ public class Parser {
             anInstruction = (String) args[0];
         }
 
-//		String anInstruction = ((Token) args[0]).getValue();
-
         ArrayList<Object> tokenArr = new ArrayList<>();
 
         boolean isAppended = false;
         String base = instructions.getBaseConditionalInstruction("1", anInstruction);
 
-        if ( !anInstruction.equals(base) ) {
-            isAppended = true;
-        } else {
-            base = instructions.getBaseConditionalInstruction("2", anInstruction);
+        for ( int i = 1; i <= 4; i++ ) {
+            base = instructions.getBaseConditionalInstruction(i + "", anInstruction);
             if ( !anInstruction.equals(base) ) {
                 isAppended = true;
+                break;
             }
         }
+
         if ( isAppended ) {
             String replaced = anInstruction.replaceAll(base, "");
             replaced = replaced.replaceAll(base.toUpperCase(), "");
@@ -300,8 +301,10 @@ public class Parser {
                     }
                 }
             }
-//				System.out.println(result);
+
         }
+
+//        System.out.println(result);
 
         CalvisFormattedInstruction CalvisInstruction
                 = new CalvisFormattedInstruction(someInstruction, anInstruction,
