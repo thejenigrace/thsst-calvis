@@ -220,16 +220,6 @@ public class Parser {
             }
         }
 
-//        if ( !anInstruction.equals(base) ) {
-//            isAppended = true;
-//        } else {
-//            base = instructions.getBaseConditionalInstruction("2", anInstruction);
-//            if ( !anInstruction.equals(base) ) {
-//                isAppended = true;
-//            }
-//        }
-
-
         if ( isAppended ) {
             String replaced = anInstruction.replaceAll(base, "");
             replaced = replaced.replaceAll(base.toUpperCase(), "");
@@ -238,7 +228,6 @@ public class Parser {
         }
 
         String[] prodRule = instructions.find(anInstruction, numParameters);
-        System.out.println(prodRule.toString());
 
         Instruction someInstruction = instructions.getInstruction(anInstruction);
         for ( int i = 0; i < numParameters; i++ ) {

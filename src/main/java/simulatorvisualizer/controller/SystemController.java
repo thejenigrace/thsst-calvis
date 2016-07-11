@@ -408,7 +408,7 @@ public class SystemController {
                 }
             }
             isSuccessful = false;
-//            e.printStackTrace();
+            e.printStackTrace();
             Platform.runLater(
                     new Thread() {
                         @Override

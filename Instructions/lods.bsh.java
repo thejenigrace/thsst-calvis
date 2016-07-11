@@ -3,22 +3,23 @@ execute(cc, registers, memory) {
     EFlags flags = registers.getEFlags();
     String conditionSize = cc.getValue().toUpperCase();
 
-    Token tokenX = new Token(Token.REG, "ESI");
-    Token tokenY = new Token(Token.REG, "EDI");
-
+    String source = "";
     int size = 0;
     BigInteger offset;
 
     switch ( conditionSize ) {
         case "B": 
+            source = "AL";
             size = 8;
             offset = new BigInteger("1");
             break;
         case "W":
+            source = "AX";
             size = 16;
             offset = new BigInteger("2");
             break;
         case "D":
+            source = "EAX";
             size = 32;
             offset = new BigInteger("4");
             break;
@@ -26,24 +27,20 @@ execute(cc, registers, memory) {
             // invalid 
     }
 
-    memory.write(registers.get("EDI"), memory.read(registers.get("ESI"), size), size);
+    Token token = new Token(Token.REG, source);
+
+    registers.set(token, memory.read(registers.get("ESI"), size));
 
     if( flags.getDirectionFlag().equals("0") ) {
         BigInteger x = new BigInteger(registers.get("ESI"), 16);
-        BigInteger y = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.add(offset);
-        BigInteger result1 = y.add(offset);
 
-        registers.set("ESI", calculator.binaryToHexString(result.toString(2), tokenX));
-        registers.set("EDI", calculator.binaryToHexString(result1.toString(2), tokenY));
+        registers.set("ESI", calculator.binaryToHexString(result.toString(2), token));
     }
     else if( flags.getDirectionFlag().equals("1") ) {
         BigInteger x = new BigInteger(registers.get("ESI"), 16);
-        BigInteger y = new BigInteger(registers.get("EDI"), 16);
         BigInteger result = x.subtract(offset);
-        BigInteger result1 = y.subtract(offset);
 
-        registers.set("ESI", calculator.binaryToHexString(result.toString(2), tokenX));
-        registers.set("EDI", calculator.binaryToHexString(result1.toString(2), tokenY));
+        registers.set("ESI", calculator.binaryToHexString(result.toString(2), token));
     }
 }
