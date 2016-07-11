@@ -50,7 +50,8 @@ execute(des, src, registers, memory) {
 				System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
 				}
 
-                String result = calculator.binaryToHexString(biResult.toString(2), des);if (registers.getHexSize(des) < result.length()) {
+                String result = calculator.binaryToHexString(biResult.toString(2), des);
+			if (registers.getHexSize(des) < result.length()) {
 				int cut = result.length() - registers.getHexSize(des);
 				String t = result.substring(cut);
 				registers.set(des, t);
@@ -165,8 +166,8 @@ execute(des, src, registers, memory) {
                 }
             }
         }
-    } else if (des.isMemory()) {
-        if (src.isRegister() && src.getValue().equals("CL")) {
+    } else if (des.isMemory() && memory.getBitSize(des) < 0) {
+        if (src.isRegister() && src.getValue().equals("CL") && memory.getBitSize(des) < 0) {
             System.out.println("ROL memory and CL");
 
             //get size of des

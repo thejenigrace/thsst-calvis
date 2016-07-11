@@ -18,6 +18,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPDataTransfer();
         this.generateGPBinaryArithmetic();
         this.generateGPDecimalArithmetic();
+        this.generateGPRotate();
+        this.generateGPStack();
+        this.generateGPJump();
     }
 
     private void generateGPDataTransfer() {
@@ -66,6 +69,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("BSWAP", new Bswap());
         this.put("XADD", new Xadd());
         this.put("CMPXCHG", new Cmpxchg());
+        this.put("CMPXCHGS8", new Cmpxchgs8());
     }
 
     private void generateGPBinaryArithmetic() {
@@ -92,5 +96,26 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("AAS", new Aas());
         this.put("AAM", new Aam());
         this.put("AAD", new Aad());
+    }
+
+    private void generateGPRotate(){
+        this.put("ROR", new Ror());
+        this.put("ROL", new Rol());
+        this.put("RCR", new Rcr());
+        this.put("RCL", new Rcl());
+    }
+
+    private void generateGPStack(){
+        this.put("PUSH", new Push());
+        this.put("PUSHA", new Pusha());
+        this.put("PUSHAD", new Pushad());
+        this.put("POP", new Pop());
+        this.put("POPA", new Popa());
+        this.put("POPAD", new Popad());
+    }
+
+    private void generateGPJump(){
+        this.put("JMP", new Jmp());
+        this.put("JE", new Je());
     }
 }
