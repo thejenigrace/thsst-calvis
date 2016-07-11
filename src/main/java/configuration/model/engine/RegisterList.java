@@ -223,6 +223,10 @@ public class RegisterList {
         return this.lookup.iterator();
     }
 
+    public ArrayList<String[]> getRegisterLookup() {
+        return this.lookup;
+    }
+
     public Iterator<String> getRegisterKeys() {
         List registerKeys = new ArrayList<>();
         Iterator<String[]> iterator = getRegisterList();

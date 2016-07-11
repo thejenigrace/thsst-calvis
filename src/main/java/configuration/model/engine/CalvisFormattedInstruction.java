@@ -264,6 +264,7 @@ public class CalvisFormattedInstruction {
         }
 
         boolean parameterCheck = false;
+
         // instruction must have parameters if we want to verify it
         if ( allowable != null && tokens.length > 0 ) {
             for ( String specification : allowable ) {
@@ -277,7 +278,13 @@ public class CalvisFormattedInstruction {
             }
         }
 
+        // instruction has no parameters
         if ( tokens.length == 0 ) {
+            parameterCheck = true;
+        }
+
+        // instruction has no specifications
+        if ( allowable != null && allowable.size() == 0 ) {
             parameterCheck = true;
         }
 
@@ -406,7 +413,7 @@ public class CalvisFormattedInstruction {
             MemoryRestrictedAccessException {
         Token[] tokens = new Token[size];
         for ( int i = 0; i < size; i++ ) {
-            // System.out.println(params[i] + " : " + params[i].getClass());
+//             System.out.println(params[i] + " : " + params[i].getClass());
             if ( params[i] instanceof String ) {
                 tokens[i] = new Token(Token.CC, params[i].toString());
             } else if ( params[i] instanceof Token ) {
