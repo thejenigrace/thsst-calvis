@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Tooltip?>
 <BorderPane fx:id="root" stylesheets="@../css/assembly-keywords.css" xmlns="http://javafx.com/javafx/8.0.65"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.WorkspaceController">
     <top>
@@ -239,78 +240,122 @@
                         </Menu>
                     </menus>
                 </MenuBar>
+
+                <!--Toolbar Buttons-->
                 <ToolBar fx:id="toolbarMain">
                     <items>
                         <Button mnemonicParsing="false" onAction="#handleNewFile">
                             <graphic>
                                 <FontAwesomeIconView glyphName="FILE_ALT"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="New File" />
+                            </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleOpenFile">
                             <graphic>
                                 <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Open File" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleSaveFile">
                             <graphic>
                                 <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Save File" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnUndo" mnemonicParsing="false" onAction="#handleUndo">
                             <graphic>
                                 <FontAwesomeIconView glyphName="UNDO"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Undo" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnRedo" mnemonicParsing="false" onAction="#handleRedo">
                             <graphic>
                                 <FontAwesomeIconView glyphName="REPEAT"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Redo" />
+                            </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCut">
                             <graphic>
                                 <FontAwesomeIconView glyphName="SCISSORS"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Cut" />
+                            </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCopy">
                             <graphic>
                                 <FontAwesomeIconView glyphName="FILES_ALT"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Copy" />
+                            </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handlePaste">
                             <graphic>
                                 <FontAwesomeIconView glyphName="CLIPBOARD"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Paste" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#handlePrevious">
                             <graphic>
                                 <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Execute Previous Line" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handlePlay">
                             <graphic>
                                 <FontAwesomeIconView glyphName="PLAY"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Play" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnNext" mnemonicParsing="false" onAction="#handleNext">
                             <graphic>
                                 <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Execute Next Line" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnStop" mnemonicParsing="false" onAction="#handleStop">
                             <graphic>
                                 <FontAwesomeIconView glyphName="STOP"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Stop" />
+                            </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleReset">
                             <graphic>
                                 <FontAwesomeIconView glyphName="REFRESH"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Reset" />
+                            </tooltip>
                         </Button>
                         <Pane HBox.hgrow="ALWAYS"/>
                         <Label>
                             <graphic>
                                 <FontAwesomeIconView glyphName="SEARCH"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Search" />
+                            </tooltip>
                         </Label>
                         <!--<CustomTextField fx:id="textFieldFind" prefWidth="250.0" />-->
                         <!--<TextField fx:id="textFieldFind" prefWidth="250.0" />-->
@@ -318,11 +363,17 @@
                             <graphic>
                                 <FontAwesomeIconView glyphName="ARROW_UP"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Previous" />
+                            </tooltip>
                         </Button>
                         <Button fx:id="btnFindDown" mnemonicParsing="false" onAction="#handleFindDown">
                             <graphic>
                                 <FontAwesomeIconView glyphName="ARROW_DOWN"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Next" />
+                            </tooltip>
                         </Button>
                     </items>
                 </ToolBar>
@@ -359,6 +410,9 @@
                                                             <graphic>
                                                                 <FontAwesomeIconView glyphName="DOWNLOAD"/>
                                                             </graphic>
+                                                            <tooltip>
+                                                                <Tooltip text="Hide Tab Pane" />
+                                                            </tooltip>
                                                         </Button>
                                                     </items>
                                                 </ToolBar>
@@ -370,7 +424,7 @@
                                             prefHeight="100.0" prefWidth="160.0">
                                     <children>
                                         <TabPane fx:id="consoleAndErrorLoggerTabPane" prefHeight="178.0"
-                                                 prefWidth="880.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE"
+                                                 prefWidth="880.0" side="TOP" tabClosingPolicy="UNAVAILABLE"
                                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         </TabPane>
