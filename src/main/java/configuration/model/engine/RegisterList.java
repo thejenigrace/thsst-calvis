@@ -134,10 +134,13 @@ public class RegisterList {
                             case "1": // fall through
                             case "2": // fall through
                             case "4": // fall through
-                            case "5": // fall through
                             case "6": // fall through
                                 Register g = new Register(reg[NAME], regSize);
                                 this.map.put(reg[NAME], g);
+                                break;
+                            case "5":
+                                FpuRegister st0 = new FpuRegister(reg[NAME], regSize);
+                                this.map.put(reg[NAME], st0);
                                 break;
                             case "7":
                                 X87Register fpu = null;
@@ -311,8 +314,11 @@ public class RegisterList {
         int startIndex = Integer.parseInt(register[START]);
         int endIndex = Integer.parseInt(register[END]);
 
-        if ( mother.getName().matches("ST[0-7]") ) {
+        String sourceName = mother.getName();
+
+        if ( sourceName.matches("ST[0-7]") ) {
             mother.setValue(hexString);
+            this.x87().setStackValue(sourceName.charAt(2) + "", hexString);
         } else {
             //check for mismatch between parameter hexString and child register value
             String child = mother.getValue().substring(startIndex, endIndex + 1);

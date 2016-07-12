@@ -66,7 +66,7 @@ public class X87Handler {
         String popped = peek();
         // remove TOP contents
         int top = this.status.getTop();
-        barrel[top] = 0;
+        barrel[top] = 0.0;
 
         if ( top == 7 ) {
             top = 0;
@@ -80,11 +80,25 @@ public class X87Handler {
             index++;
         }
 
-        this.registerList.set("ST" + index, "00000000000000000000");
+        if ( index < 8 ) {
+            this.registerList.set("ST" + index, "0.0");
+        }
 
         this.status.setBinaryTop(top);
 
         return popped;
+    }
+
+    public void setStackValue(String stIndex, String value) {
+        int index = Integer.parseInt(stIndex);
+        int top = this.status.getTop();
+        int barrelIndex = top + index;
+        if ( barrelIndex < 8 ) {
+            barrel[barrelIndex] = Double.parseDouble(value);
+        } else {
+            barrelIndex = 7 - index;
+            barrel[barrelIndex] = Double.parseDouble(value);
+        }
     }
 
     public X87StatusRegister status() {
