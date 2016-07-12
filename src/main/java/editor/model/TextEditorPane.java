@@ -86,9 +86,9 @@ public class TextEditorPane extends AssemblyComponent {
 //
 //                    System.out.println("text = " + text.substring(caretPosition-wordCount-1, caretPosition));
 
-//                    if ( caretPosition > 0 && codeArea.getText(caretPosition - wordCount - 1, caretPosition - wordCount).equals(" ") )
+//                    if ( caretPosition > 1 && codeArea.getText(caretPosition - wordCount - 1, caretPosition - wordCount).equals(" ") )
 //                        this.autocomplete(codeArea.getText(caretPosition - wordCount, caretPosition), caretPosition - wordCount, caretPosition);
-//                    else if( caretPosition > 0 && codeArea.getText(caretPosition - afterEnter - 1, caretPosition - afterEnter).equals("\n") )
+//                    else if( caretPosition > 1 && codeArea.getText(caretPosition - afterEnter - 1, caretPosition - afterEnter).equals("\n") )
 //                        this.autocomplete(codeArea.getText(caretPosition - afterEnter, caretPosition), caretPosition - wordCount, caretPosition);
                     if( caretPosition > 1 && text.substring(caretPosition-wordCount-1, caretPosition-wordCount).equals(" "))
                         this.autocomplete(text.substring(caretPosition-wordCount, caretPosition), caretPosition-wordCount, caretPosition);

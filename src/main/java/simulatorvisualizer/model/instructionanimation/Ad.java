@@ -78,7 +78,7 @@ public class Ad extends CalvisAnimation {
             Circle equalCircle = new Circle(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() + 50,
                     135, 30, Color.web("#798788", 1.0));
 
-            Circle plus1Circle = new Circle(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth() 
+            Circle plus1Circle = new Circle(desRectangle.xProperty().getValue() + desRectangle.getLayoutBounds().getWidth()
                     + augendRectangle.getLayoutBounds().getWidth() + 150, 135, 30, Color.web("#798788", 1.0));
 
             Circle plus2Circle = new Circle(desRectangle.xProperty().getValue() +
@@ -96,12 +96,12 @@ public class Ad extends CalvisAnimation {
                 desSize = memory.getBitSize(tokens[0]);
 
             String flagsAffected;
-            if(isSigned)
+            if ( isSigned )
                 flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF, OF";
             else
                 flagsAffected = "Flags Affected: CF";
 
-            Text detailsText = new Text(X, Y*2, flagsAffected);
+            Text detailsText = new Text(X, Y * 2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -109,7 +109,11 @@ public class Ad extends CalvisAnimation {
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
             Text flagLabelText = new Text(X, Y, flag);
-            Text flagValueText = new Text(X, Y, eFlags.getCarryFlag());
+            Text flagValueText;
+            if ( flag.equals("CF") )
+                flagValueText = new Text(X, Y, this.finder.getEflags(flag).getCarryFlag());
+            else
+                flagValueText = new Text(X, Y, this.finder.getEflags(flag).getOverflowFlag());
 
             Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));

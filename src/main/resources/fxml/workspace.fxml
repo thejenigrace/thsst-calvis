@@ -49,26 +49,26 @@
                                 <MenuItem accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
                                           text="Save">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                    shortcut="UP"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + Shift + S" mnemonicParsing="true"
+                                <MenuItem mnemonicParsing="true"
                                           onAction="#handleSaveAsFile" text="Save As">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"
-                                                            shortcut="UP"/>
-                                    </accelerator>
+                                    <!--<accelerator>-->
+                                    <!--<KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"-->
+                                    <!--shortcut="UP"/>-->
+                                    <!--</accelerator>-->
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + A" mnemonicParsing="true"
+                                <MenuItem mnemonicParsing="true"
                                           onAction="#handleSaveAll" text="Save All">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN"
-                                                            shortcut="UP"/>
-                                    </accelerator>
+                                    <!--<accelerator>-->
+                                    <!--<KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN"-->
+                                    <!--shortcut="UP"/>-->
+                                    <!--</accelerator>-->
                                 </MenuItem>
                                 <!--<SeparatorMenuItem mnemonicParsing="false"/>-->
                                 <!--<MenuItem accelerator="Shortcut + ," mnemonicParsing="false" onAction="#handleSettings"-->
@@ -82,15 +82,15 @@
                                 <MenuItem mnemonicParsing="false" onAction="#handleCloseFile"
                                           text="Close">
                                     <!--<accelerator>-->
-                                        <!--<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"-->
-                                                            <!--shortcut="UP"/>-->
+                                    <!--<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"-->
+                                    <!--shortcut="UP"/>-->
                                     <!--</accelerator>-->
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="false" onAction="#handleCloseAllFile"
                                           text="Close All">
                                     <!--<accelerator>-->
-                                        <!--<KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"-->
-                                                            <!--shortcut="UP"/>-->
+                                    <!--<KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"-->
+                                    <!--shortcut="UP"/>-->
                                     <!--</accelerator>-->
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
@@ -210,7 +210,8 @@
                                         <FontAwesomeIconView glyphName="REFRESH"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious" text="Execute Previous Line">
+                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious"
+                                          text="Execute Previous Line">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
                                     </graphic>
@@ -220,7 +221,7 @@
                                         <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="false" text="Jump To"/>
+                                <!--<MenuItem mnemonicParsing="false" text="Jump To"/>-->
                             </items>
                         </Menu>
                         <!--<Menu mnemonicParsing="false" text="Window">-->
@@ -231,7 +232,7 @@
                         <!--</Menu>-->
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Documentation"/>
+                                <!--<MenuItem mnemonicParsing="false" text="Documentation"/>-->
                                 <MenuItem mnemonicParsing="false" onAction="#handleHelpAbout" text="About"/>
                             </items>
                         </Menu>

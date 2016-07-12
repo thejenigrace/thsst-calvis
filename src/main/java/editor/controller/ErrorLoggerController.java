@@ -1,9 +1,9 @@
 package editor.controller;
 
+import com.github.pfmiles.dropincc.DropinccException;
 import configuration.model.engine.CalvisFormattedInstruction;
 import editor.model.AssemblyComponent;
 import editor.model.ErrorLog;
-import com.github.pfmiles.dropincc.DropinccException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,21 +55,21 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
     }
 
     public void build(Exception e) {
-        if (e != null) {
+        if ( e != null ) {
             ObservableList<ErrorLog> items = FXCollections.observableArrayList();
             String type = e.getClass().getSimpleName();
             String cause = "N/A";
             String message = "N/A";
-            if (e.getCause() != null) {
+            if ( e.getCause() != null ) {
                 cause = e.getCause().getClass().getSimpleName();
                 message = e.getCause().getLocalizedMessage();
             }
-            if (e.getMessage() != null) {
+            if ( e.getMessage() != null ) {
                 message = e.getMessage();
             }
-            if (e instanceof DropinccException) {
+            if ( e instanceof DropinccException ) {
                 type = "SyntaxError";
-                if (message.contains("position")) {
+                if ( message.contains("position") ) {
                     cause = message.substring(message.indexOf("position:"));
                     cause = cause.replaceAll(",.*", "");
                     cause = cause.replaceAll(".*: ", "");
@@ -77,11 +77,11 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                     String[] lines = parsedCode.split("\n");
                     int causePosition = Integer.parseInt(cause);
                     int linesRead = 0;
-                    for (int i = 0; i < lines.length; i++) {
-                        if (lines[i].length() + linesRead < causePosition) {
+                    for ( int i = 0; i < lines.length; i++ ) {
+                        if ( lines[i].length() + linesRead < causePosition ) {
                             linesRead += lines[i].length();
                         } else {
-                            if (causePosition - 1 >= 0 && parsedCode.charAt(causePosition - 1) == '\n') {
+                            if ( causePosition - 1 >= 0 && parsedCode.charAt(causePosition - 1) == '\n' ) {
                                 cause = "Line number: " + i;
                             } else {
                                 cause = "Line number: " + (i + 1);
@@ -89,12 +89,12 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                             break;
                         }
                     }
-                    if (!cause.contains("number")) {
+                    if ( !cause.contains("number") ) {
                         cause = "position: " + cause;
                     }
-                    if (message.indexOf("upcoming sequence:") != -1) {
+                    if ( message.indexOf("upcoming sequence:") != -1 ) {
                         message = "Unknown " + message.substring(message.indexOf("upcoming sequence:"));
-                        if (message.contains("'['") && message.contains("']'")) {
+                        if ( message.contains("'['") && message.contains("']'") ) {
                             message += " ; Missing size directive ";
                         }
                     }

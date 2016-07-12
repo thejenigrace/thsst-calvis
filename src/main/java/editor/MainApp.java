@@ -10,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.util.prefs.Preferences;
-
 /**
  * Created by Jennica Alcalde on 10/1/2015.
  */
@@ -129,21 +127,25 @@ public class MainApp extends Application {
 //            System.out.println("C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
             System.setProperty("java.home", "C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
         } else if ( OS.contains("mac") ) {
-            System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") + ".jdk/Contents/Home");
+            System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") + ".jdk/Contents/Home/");
         }
 
-        launch(args);
+        try {
+            launch(args);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
     }
 
-    private static Preferences getPrefsRoot() {
-        return Preferences.userRoot().node("calvis");
-    }
-
-    private static Preferences getOptions() {
-        return getPrefsRoot().node("options");
-    }
-
-    public static Preferences getState() {
-        return getPrefsRoot().node("state");
-    }
+//    private static Preferences getPrefsRoot() {
+//        return Preferences.userRoot().node("calvis");
+//    }
+//
+//    private static Preferences getOptions() {
+//        return getPrefsRoot().node("options");
+//    }
+//
+//    public static Preferences getState() {
+//        return getPrefsRoot().node("state");
+//    }
 }

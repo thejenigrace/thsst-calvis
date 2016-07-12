@@ -19,12 +19,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,7 +80,7 @@ public class FileEditorTabPane {
         });
 
         // re-open files
-        restoreState();
+//        restoreState();
     }
 
     public Node getNode() {
@@ -108,7 +106,7 @@ public class FileEditorTabPane {
     }
 
     public void newFileEditor() {
-        FileEditor fileEditor = createFileEditor(null);
+        FileEditor fileEditor = this.createFileEditor(null);
         Tab tab = fileEditor.getTab();
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
@@ -141,10 +139,12 @@ public class FileEditorTabPane {
                 new FileChooser.ExtensionFilter("CALVIS Files (*.txt, *.calvis)", "*.txt", "*.calvis"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
 
-        String lastDirectory = MainApp.getState().get("lastDirectory", null);
-        File file = new File((lastDirectory != null) ? lastDirectory : ".");
-        if ( !file.isDirectory() )
-            file = new File(".");
+//        String lastDirectory = MainApp.getState().get("lastDirectory", null);
+//        File file = new File((lastDirectory != null) ? lastDirectory : ".");
+//        if ( !file.isDirectory() )
+//            file = new File(".");
+
+        File file = new File(".");
         fileChooser.setInitialDirectory(file);
         return fileChooser;
     }
@@ -174,7 +174,8 @@ public class FileEditorTabPane {
             // check whether file is already opened
             FileEditor fileEditor = findEditor(path);
             if ( fileEditor == null ) {
-                fileEditor = createFileEditor(path);
+                System.out.println("Already Open!");
+                fileEditor = this.createFileEditor(path);
 
                 this.tabPane.getTabs().add(fileEditor.getTab());
             }
@@ -208,16 +209,16 @@ public class FileEditorTabPane {
             if ( file == null )
                 return false;
 
-            this.saveLastDirectory(file);
+//            this.saveLastDirectory(file);
             fileEditor.setPath(file.toPath());
         }
 
         return fileEditor.save();
     }
 
-    private void saveLastDirectory(File file) {
-        MainApp.getState().put("lastDirectory", file.getParent());
-    }
+//    private void saveLastDirectory(File file) {
+//        MainApp.getState().put("lastDirectory", file.getParent());
+//    }
 
     public boolean saveAllFileEditors() {
         FileEditor[] allEditors = getAllEditors();
@@ -241,7 +242,7 @@ public class FileEditorTabPane {
         if ( file == null )
            return false;
 
-        this.saveLastDirectory(file);
+//        this.saveLastDirectory(file);
         fileEditor.setPath(file.toPath());
 
         return fileEditor.save();
@@ -324,7 +325,7 @@ public class FileEditorTabPane {
                 return false;
         }
 
-        saveState(allEditors, activeEditor);
+//        saveState(allEditors, activeEditor);
 
         return tabPane.getTabs().isEmpty();
     }
@@ -346,45 +347,45 @@ public class FileEditorTabPane {
         return null;
     }
 
-    private void restoreState() {
-        Preferences state = MainApp.getState();
-        String[] fileNames = Utility.getPrefsStrings(state, "file");
-        String activeFileName = state.get("activeFile", null);
+//    private void restoreState() {
+//        Preferences state = MainApp.getState();
+//        String[] fileNames = Utility.getPrefsStrings(state, "file");
+//        String activeFileName = state.get("activeFile", null);
+//
+//        int activeIndex = 0;
+//        ArrayList<File> files = new ArrayList<>(fileNames.length);
+//        for ( String fileName : fileNames ) {
+//            File file = new File(fileName);
+//            if ( file.exists() ) {
+//                files.add(file);
+//
+//                if ( fileName.equals(activeFileName) )
+//                    activeIndex = files.size() - 1;
+//            }
+//        }
+//
+//        if ( files.isEmpty() ) {
+//            this.newFileEditor();
+//            return;
+//        }
+//
+//        this.openFileEditors(files, activeIndex);
+//    }
 
-        int activeIndex = 0;
-        ArrayList<File> files = new ArrayList<>(fileNames.length);
-        for ( String fileName : fileNames ) {
-            File file = new File(fileName);
-            if ( file.exists() ) {
-                files.add(file);
-
-                if ( fileName.equals(activeFileName) )
-                    activeIndex = files.size() - 1;
-            }
-        }
-
-        if ( files.isEmpty() ) {
-            this.newFileEditor();
-            return;
-        }
-
-        this.openFileEditors(files, activeIndex);
-    }
-
-    private void saveState(FileEditor[] allEditors, FileEditor activeEditor) {
-        ArrayList<String> fileNames = new ArrayList<>(allEditors.length);
-        for ( FileEditor fileEditor : allEditors ) {
-            if ( fileEditor.getPath() != null )
-                fileNames.add(fileEditor.getPath().toString());
-        }
-
-        Preferences state = MainApp.getState();
-        Utility.putPrefsStrings(state, "file", fileNames.toArray(new String[fileNames.size()]));
-        if ( activeEditor != null && activeEditor.getPath() != null )
-            state.put("activeFile", activeEditor.getPath().toString());
-        else
-            state.remove("activeFile");
-    }
+//    private void saveState(FileEditor[] allEditors, FileEditor activeEditor) {
+//        ArrayList<String> fileNames = new ArrayList<>(allEditors.length);
+//        for ( FileEditor fileEditor : allEditors ) {
+//            if ( fileEditor.getPath() != null )
+//                fileNames.add(fileEditor.getPath().toString());
+//        }
+//
+//        Preferences state = MainApp.getState();
+//        Utility.putPrefsStrings(state, "file", fileNames.toArray(new String[fileNames.size()]));
+//        if ( activeEditor != null && activeEditor.getPath() != null )
+//            state.put("activeFile", activeEditor.getPath().toString());
+//        else
+//            state.remove("activeFile");
+//    }
 
     /**
      * MARK --

@@ -176,6 +176,7 @@ public class WorkspaceController implements Initializable {
     private void showFileEditorPane() {
         this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
         this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getNode());
+        this.fileEditorTabPane.newFileEditor();
     }
 
     @FXML

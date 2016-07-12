@@ -1,6 +1,7 @@
 package editor.model;
 
 import editor.controller.WorkspaceController;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ public class FileEditor {
     private WorkspaceController workspaceController;
     private Tab tab = new Tab();
     private TextEditorPane textEditorPane = new TextEditorPane();
+    private boolean isLoaded = false;
 
     // 'path' property
     private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
@@ -43,11 +45,11 @@ public class FileEditor {
 
         this.tab.setOnSelectionChanged(e -> {
             if ( tab.isSelected() )
-                this.activate();
+                Platform.runLater(() -> activate());
         });
-        this.tab.setContent(textEditorPane.getCodeArea());
 
-        this.activate();
+        this.tab.setContent(textEditorPane.getCodeArea());
+//        this.activate();
     }
 
     public Tab getTab() {
@@ -98,19 +100,25 @@ public class FileEditor {
     }
 
     private void activate() {
-//        if( this.tab.getTabPane() == null || !tab.isSelected() )
-//            return; // Tab is already closed or no longer active
+        System.out.println("tabPane = " + this.tab.getTabPane());
+        System.out.println("tabContent = " + this.tab.getContent());
 
-//        if ( this.tab.getContent() != null ) {
-//            this.textEditorPane.requestFocus();
+        if( this.tab.getTabPane() == null || !tab.isSelected() )
+            return; // Tab is already closed or no longer active
+
+        if ( this.tab.getContent() != null ) {
+            this.textEditorPane.requestFocus();
 //            return;
-//        }
+        } else {
+            this.textEditorPane = new TextEditorPane();
+            this.tab.setContent(this.textEditorPane.getCodeArea());
+        }
 
-        this.textEditorPane = new TextEditorPane();
         this.textEditorPane.pathProperty().bind(path);
 
         // Load file and Create UI when the tab becomes visible the first time
-        this.load();
+        if( !this.isLoaded )
+            this.isLoaded = this.load();
 
         // Clear undo history after first load
         this.textEditorPane.getUndoManager().forgetHistory();
@@ -121,25 +129,27 @@ public class FileEditor {
         this.canUndo.bind(undoManager.undoAvailableProperty());
         this.canRedo.bind(undoManager.redoAvailableProperty());
 
-        this.tab.setContent(this.textEditorPane.getCodeArea());
         this.textEditorPane.requestFocus();
     }
 
-    private void load() {
+    private boolean load() {
+        System.out.println("load text");
         Path path = this.path.get();
         if ( path == null )
-            return;
+            return false;
 
         try {
             byte[] bytes = Files.readAllBytes(path);
             String text = new String(bytes);
             this.textEditorPane.setCodeAreaText(text);
             this.textEditorPane.getUndoManager().mark();
+            return  true;
         } catch ( IOException ex ) {
             Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Load",
                     "Failed to load ''{0}''.\n\nReason: {1}", path, ex.getMessage());
             alert.showAndWait();
         }
+        return false;
     }
 
     public boolean save() {
