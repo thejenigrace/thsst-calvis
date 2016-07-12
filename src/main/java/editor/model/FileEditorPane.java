@@ -17,11 +17,11 @@ import java.nio.file.Path;
 /**
  * Created by Jennica on 02/07/2016.
  */
-public class FileEditor {
+public class FileEditorPane {
 
     private WorkspaceController workspaceController;
     private Tab tab = new Tab();
-    private TextEditorPane textEditorPane = new TextEditorPane();
+    private TextEditor textEditor = new TextEditor();
     private boolean isLoaded = false;
 
     // 'path' property
@@ -33,7 +33,7 @@ public class FileEditor {
     // 'canRedo' property
     private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
-    public FileEditor(WorkspaceController workspaceController, Path path) {
+    public FileEditorPane(WorkspaceController workspaceController, Path path) {
         this.workspaceController = workspaceController;
 
         this.tab.setUserData(this);
@@ -48,7 +48,7 @@ public class FileEditor {
                 Platform.runLater(() -> activate());
         });
 
-        this.tab.setContent(textEditorPane.getCodeArea());
+        this.tab.setContent(textEditor.getCodeArea());
 //        this.activate();
     }
 
@@ -56,8 +56,8 @@ public class FileEditor {
         return tab;
     }
 
-    public TextEditorPane getTextEditor() {
-        return textEditorPane;
+    public TextEditor getTextEditor() {
+        return textEditor;
     }
 
     // Path Property
@@ -107,29 +107,29 @@ public class FileEditor {
             return; // Tab is already closed or no longer active
 
         if ( this.tab.getContent() != null ) {
-            this.textEditorPane.requestFocus();
+            this.textEditor.requestFocus();
 //            return;
         } else {
-            this.textEditorPane = new TextEditorPane();
-            this.tab.setContent(this.textEditorPane.getCodeArea());
+            this.textEditor = new TextEditor();
+            this.tab.setContent(this.textEditor.getCodeArea());
         }
 
-        this.textEditorPane.pathProperty().bind(path);
+        this.textEditor.pathProperty().bind(path);
 
         // Load file and Create UI when the tab becomes visible the first time
         if( !this.isLoaded )
             this.isLoaded = this.load();
 
         // Clear undo history after first load
-        this.textEditorPane.getUndoManager().forgetHistory();
+        this.textEditor.getUndoManager().forgetHistory();
 
         // Bind the text editor undo manager to the properties
-        UndoManager undoManager = textEditorPane.getUndoManager();
+        UndoManager undoManager = textEditor.getUndoManager();
         this.modified.bind(Bindings.not(undoManager.atMarkedPositionProperty()));
         this.canUndo.bind(undoManager.undoAvailableProperty());
         this.canRedo.bind(undoManager.redoAvailableProperty());
 
-        this.textEditorPane.requestFocus();
+        this.textEditor.requestFocus();
     }
 
     private boolean load() {
@@ -141,8 +141,8 @@ public class FileEditor {
         try {
             byte[] bytes = Files.readAllBytes(path);
             String text = new String(bytes);
-            this.textEditorPane.setCodeAreaText(text);
-            this.textEditorPane.getUndoManager().mark();
+            this.textEditor.setCodeAreaText(text);
+            this.textEditor.getUndoManager().mark();
             return  true;
         } catch ( IOException ex ) {
             Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Load",
@@ -153,12 +153,12 @@ public class FileEditor {
     }
 
     public boolean save() {
-        String text = textEditorPane.getCodeAreaText();
+        String text = textEditor.getCodeAreaText();
         byte[] bytes = text.getBytes();
 
         try {
             Files.write(path.get(), bytes);
-            this.textEditorPane.getUndoManager().mark();
+            this.textEditor.getUndoManager().mark();
             return true;
         } catch ( IOException ex ) {
             Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Save",

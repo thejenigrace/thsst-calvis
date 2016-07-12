@@ -99,6 +99,14 @@ public class SystemController {
         beginSimulation();
     }
 
+    public void pause() {
+        if ( this.state == SimulationState.PLAY ) {
+            this.state = SimulationState.PAUSE;
+            workspaceController.changeIconToPlay();
+            thread.interrupt();
+        }
+    }
+
     public void play(String code) {
         switch ( this.state ) {
             case PLAY: // System is running, so we pause

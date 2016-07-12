@@ -4,9 +4,9 @@ import configuration.controller.ConfiguratorEnvironment;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import editor.MainApp;
-import editor.model.FileEditor;
+import editor.model.FileEditorPane;
 import editor.model.FileEditorTabPane;
-import editor.model.TextEditorPane;
+import editor.model.TextEditor;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -109,9 +109,9 @@ public class WorkspaceController implements Initializable {
     }
 
     private void init() {
-        this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditor::modifiedProperty).not());
-        this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditor::canUndoProperty).not());
-        this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditor::canRedoProperty).not());
+        this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::modifiedProperty).not());
+        this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::canUndoProperty).not());
+        this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::canRedoProperty).not());
 
         this.textFieldFind.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -222,6 +222,11 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handlePlay(ActionEvent event) {
         this.fileEditorTabPane.play();
+    }
+
+    @FXML
+    private void handlePause(ActionEvent event) {
+        this.fileEditorTabPane.pause();
     }
 
     /**
@@ -421,7 +426,7 @@ public class WorkspaceController implements Initializable {
         alert.showAndWait();
     }
 
-    private TextEditorPane getActiveEditor() {
+    private TextEditor getActiveEditor() {
         return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
     }
 
@@ -429,11 +434,11 @@ public class WorkspaceController implements Initializable {
      * Creates a boolean property that is bound to another boolean value
      * of the active editor.
      */
-    private BooleanProperty createActiveBooleanProperty(Function<FileEditor, ObservableBooleanValue> func) {
+    private BooleanProperty createActiveBooleanProperty(Function<FileEditorPane, ObservableBooleanValue> func) {
         BooleanProperty bp = new SimpleBooleanProperty();
-        FileEditor fileEditor = this.fileEditorTabPane.getActiveFileEditor();
-        if ( fileEditor != null )
-            bp.bind(func.apply(fileEditor));
+        FileEditorPane fileEditorPane = this.fileEditorTabPane.getActiveFileEditor();
+        if ( fileEditorPane != null )
+            bp.bind(func.apply(fileEditorPane));
         this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
             bp.unbind();
             if ( newFileEditor != null )

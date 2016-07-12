@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Jennica on 04/02/2016.
  */
-public class TextEditorPane extends AssemblyComponent {
+public class TextEditor extends AssemblyComponent {
 
     private CodeArea codeArea;
     private Pattern lineByLinePattern;
@@ -45,7 +45,7 @@ public class TextEditorPane extends AssemblyComponent {
     private static String MEMORY_PATTERN;
     private static Pattern PATTERN;
 
-    public TextEditorPane() {
+    public TextEditor() {
         this.codeArea = new CodeArea();
         codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
@@ -258,7 +258,7 @@ public class TextEditorPane extends AssemblyComponent {
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-//        System.out.println("Update TextEditorPane!");
+//        System.out.println("Update TextEditor!");
         String currentLine = currentInstruction.toString();
         if ( currentLine != null ) {
             String codeAreaText = this.codeArea.getText();

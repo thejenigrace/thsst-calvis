@@ -29,8 +29,8 @@
                                 <MenuItem accelerator="Shortcut + N" mnemonicParsing="true" onAction="#handleNewFile"
                                           text="New File">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="N" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="FILE_ALT"/>
@@ -39,8 +39,8 @@
                                 <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile"
                                           text="Open File">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
@@ -49,19 +49,19 @@
                                 <MenuItem accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
                                           text="Save">
                                     <accelerator>
-                                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
-                                    shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="true"
+                                <MenuItem accelerator="Shift + Shortcut + S" mnemonicParsing="true"
                                           onAction="#handleSaveAsFile" text="Save As">
-                                    <!--<accelerator>-->
-                                    <!--<KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"-->
-                                    <!--shortcut="UP"/>-->
-                                    <!--</accelerator>-->
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="DOWN"
+                                                            shortcut="DOWN"/>
+                                    </accelerator>
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="true"
                                           onAction="#handleSaveAll" text="Save All">
@@ -94,11 +94,11 @@
                                     <!--</accelerator>-->
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem accelerator="Shortcut + E" mnemonicParsing="false" onAction="#handleExitApp"
+                                <MenuItem accelerator="Shortcut + E" mnemonicParsing="true" onAction="#handleExitApp"
                                           text="Exit">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                             </items>
@@ -108,8 +108,8 @@
                                 <MenuItem accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
                                           text="Undo">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="UNDO"/>
@@ -118,8 +118,8 @@
                                 <MenuItem accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo"
                                           text="Redo">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="REPEAT"/>
@@ -129,8 +129,8 @@
                                 <MenuItem accelerator="Shortcut + X" mnemonicParsing="false" onAction="#handleCut"
                                           text="Cut">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="SCISSORS"/>
@@ -139,8 +139,8 @@
                                 <MenuItem accelerator="Shortcut + C" mnemonicParsing="false" onAction="#handleCopy"
                                           text="Copy">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="FILES_ALT"/>
@@ -149,8 +149,8 @@
                                 <MenuItem accelerator="Shortcut + V" mnemonicParsing="false" onAction="#handlePaste"
                                           text="Paste">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="CLIPBOARD"/>
@@ -163,8 +163,8 @@
                                 <MenuItem accelerator="Shortcut + R" mnemonicParsing="false"
                                           onAction="#handleFindAndReplace" text="Find &amp; Replace">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="R" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                             </items>
@@ -174,37 +174,38 @@
                                 <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay"
                                           text="Play">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="PLAY"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + U" mnemonicParsing="false" text="Pause">
+                                <MenuItem accelerator="Shortcut + U" mnemonicParsing="false" text="Pause"
+                                          onAction="#handlePause">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="U" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="U" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="PAUSE"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + S" mnemonicParsing="false" onAction="#handleStop"
+                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleStop"
                                           text="Stop">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="STOP"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleReset"
+                                <MenuItem accelerator="Shortcut + G" mnemonicParsing="false" onAction="#handleReset"
                                           text="Reset">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
+                                        <KeyCodeCombination alt="UP" code="G" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="REFRESH"/>
