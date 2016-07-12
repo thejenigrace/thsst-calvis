@@ -42,7 +42,7 @@ public class CalvisFormattedInstruction {
         this.allowable = allowable;
     }
 
-    public boolean execute(VisualizationController visualizationController) throws Exception {
+    public boolean execute() throws Exception {
         int numParameters = 0;
         if ( params != null ) {
             numParameters = params.length;
@@ -52,9 +52,8 @@ public class CalvisFormattedInstruction {
             switch ( tokens.length ) {
                 case 0:
                     String bigName = name.toUpperCase();
-                    if ( bigName.matches("PRINTF|SCANF|CLS") ) {
-                        // Execution is at Console Controller
-                    } else {
+                    if ( !bigName.matches("PRINTF|SCANF|CLS") ) {
+                        // console execution is at Console Controller
                         this.ins.execute(registers, memory);
                     }
                     break;

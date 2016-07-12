@@ -279,7 +279,7 @@ public class SystemController {
         boolean flag = true;
         try {
             // EXECUTE THE CALVIS INSTRUCTION
-            flag = executionMap.get(currentLine).execute(visualizer);
+            flag = executionMap.get(currentLine).execute();
 
             // 3. Parse currentLine to int @var value
             int value = Integer.parseInt(currentLine, 16);
@@ -321,14 +321,10 @@ public class SystemController {
         Iterator<String> iterator = registerMap.keySet().iterator();
         String[][] registerStringArray = new String[registerMap.size()][2];
         int i = 0;
-        String eaxVal = "";
         while ( iterator.hasNext() ) {
             String registerName = iterator.next();
             registerStringArray[i][0] = registerName;
             registerStringArray[i][1] = registerList.get(registerName);
-            if ( registerName.equals("EAX") ) {
-                eaxVal = registerList.get(registerName);
-            }
             i++;
         }
         this.registerStackMap.put(stackCount, registerStringArray);

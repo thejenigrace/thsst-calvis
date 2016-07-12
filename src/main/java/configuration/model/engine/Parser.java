@@ -7,10 +7,12 @@ import com.github.pfmiles.dropincc.Exe;
 import com.github.pfmiles.dropincc.Grule;
 import com.github.pfmiles.dropincc.Lang;
 import com.github.pfmiles.dropincc.TokenDef;
+import com.github.pfmiles.dropincc.impl.Alternative;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class Parser {
 
@@ -105,7 +107,12 @@ public class Parser {
         this.mappedInstruction.clear();
         this.exceptions.clear();
         this.lineNumber = 0;
-        this.exe.eval(code);
+        try {
+            this.exe.eval(code);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
         if ( !exceptions.isEmpty() ) {
             throw exceptions.get(0);
         }
@@ -158,42 +165,42 @@ public class Parser {
         }
 
         TokenDef comma = lang.newToken(",");
-
+        List<Alternative> alternativeList = new ArrayList<>();
         Grule instruction = lang.newGrule();
-        Grule noParameterInstruction = lang.newGrule();
-        Grule oneParameterInstruction = lang.newGrule();
-        Grule twoParameterInstruction = lang.newGrule();
-        Grule threeParameterInstruction = lang.newGrule();
 
-        noParameterInstruction.define(elementConcatenator.concatenateOrSubRules(noParameterTokens))
-                .action((Action<Object>) args -> prepareCalvisInstruction(new Object[]{args}));
+        if ( noParameterTokens.size() != 0 ) {
+            Alternative alternative = new Alternative(
+                    new Element[]{elementConcatenator.concatenateOrSubRules(noParameterTokens)});
+            alternative.setAction((Action<Object>) args -> prepareCalvisInstruction(new Object[]{args}));
+            alternativeList.add(alternative);
+        }
 
-//        noParameterInstruction.define(elementConcatenator.concatenateOrSubRules(noParameterTokens))
-//                .action((Action<Object>) args -> {
-//                    String anInstruction = ((Token) args).getValue();
-//                    Instruction someInstruction = instructions.getInstruction(anInstruction);
-//                    CalvisFormattedInstruction CalvisInstruction
-//                            = new CalvisFormattedInstruction(someInstruction, anInstruction, registers, memory);
-//                    String instructionAdd = Integer.toHexString(lineNumber);
-//                    mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,
-//                            RegisterList.instructionPointerSize, "0"), CalvisInstruction);
-//                    lineNumber++;
-//                    return CalvisInstruction;
-//                });
+        if ( oneParameterTokens.size() != 0 ) {
+            Alternative alternative = new Alternative(
+                    new Element[]{elementConcatenator.concatenateOrSubRules(oneParameterTokens),
+                            getAllParameters(true)});
+            alternative.setAction((Action<Object[]>) args -> prepareCalvisInstruction(args));
+            alternativeList.add(alternative);
+        }
 
-        oneParameterInstruction.define(elementConcatenator.concatenateOrSubRules(oneParameterTokens),
-                getAllParameters(true)).action((Action<Object[]>) args -> prepareCalvisInstruction(args));
-        twoParameterInstruction.define(elementConcatenator.concatenateOrSubRules(twoParameterTokens),
-                getAllParameters(false), comma, getAllParameters(false))
-                .action((Action<Object[]>) args -> prepareCalvisInstruction(args));
-        threeParameterInstruction.define(elementConcatenator.concatenateOrSubRules(threeParameterTokens),
-                getAllParameters(false), comma, getAllParameters(false), comma, getAllParameters(true))
-                .action((Action<Object[]>) args -> prepareCalvisInstruction(args));
+        if ( twoParameterTokens.size() != 0 ) {
+            Alternative alternative = new Alternative(
+                    new Element[]{elementConcatenator.concatenateOrSubRules(twoParameterTokens),
+                            getAllParameters(false), comma, getAllParameters(false)});
+            alternative.setAction((Action<Object[]>) args -> prepareCalvisInstruction(args));
+            alternativeList.add(alternative);
+        }
 
-        instruction.define(noParameterInstruction)
-                .alt(oneParameterInstruction)
-                .alt(twoParameterInstruction)
-                .alt(threeParameterInstruction);
+        if ( threeParameterTokens.size() != 0 ){
+            Alternative alternative = new Alternative(
+                    new Element[]{elementConcatenator.concatenateOrSubRules(threeParameterTokens),
+                            getAllParameters(false), comma, getAllParameters(false), comma, getAllParameters(true)});
+            alternative.setAction((Action<Object[]>) args -> prepareCalvisInstruction(args));
+            alternativeList.add(alternative);
+
+        }
+
+        instruction.setAlts(alternativeList);
 
         return instruction;
     }

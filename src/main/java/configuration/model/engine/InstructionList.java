@@ -45,7 +45,7 @@ public class InstructionList {
             "O", "NO", "C", "NC", "S", "NS"};
     private final String[] fcmovConditions = {"B", "E", "BE", "U", "NB", "NE", "NBE", "NU"};
     private final String[] sizeRelatedConditionsArray = {"B", "W", "D"};
-    private final String[] equalityConditionsArray = {"E", "Z", "NE", "NZ"};
+    private final String[] equalityConditionsArray = {"", "E", "Z", "NE", "NZ"};
 
     public InstructionList(String csvFile) {
         this.conditionsRegEx = String.join("|", conditionsArray);
