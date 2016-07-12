@@ -3,8 +3,8 @@ execute(registers, memory) {
 	Calculator c = new Calculator(registers, memory);
 	String desValue = registers.get(des);
             String srcValue = registers.get(src);
-			double dbDes = c.convertHexToDoublePrecision("ST1");
-			double dbSrc = c.convertHexToDoublePrecision("ST0");
+			double dbDes = Double.parseDouble(registers.get("ST1"));
+			double dbSrc = Double.parseDouble(registers.get("ST0"));
 			
 			double resultingValue = dbSrc - dbDes;
 			
@@ -16,7 +16,7 @@ execute(registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set("ST1", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+				registers.set("ST1", resultingValue + "");
 			}
 		
 		registers.x87().status().set("C3",'0');

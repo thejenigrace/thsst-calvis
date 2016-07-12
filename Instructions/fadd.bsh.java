@@ -16,8 +16,10 @@ execute(src, registers, memory) {
         }
 		
         String st0 = registers.get("ST0");
-        double stValue = c.convertHexToDoublePrecision(st0);
+
+        double stValue = Double.parseDouble(st0);
 		double resultingValue = stValue + spValue;
+
 		if(resultingValue > Math.pow(2,64)){
 			registers.mxscr.setOverflowFlag("1");
 		}
@@ -25,8 +27,8 @@ execute(src, registers, memory) {
 			registers.mxscr.setUnderflowFlag("1");
 		}
 		else{
-			//System.out.println(resultingValue + " value");
-			registers.set("ST0", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+			System.out.println(resultingValue + " value");
+			registers.set("ST0", Double.toString(resultingValue));
 		}
         
 		registers.x87().status().set("C3",'0');
@@ -52,8 +54,8 @@ execute(des, src, registers, memory) {
 				throw new IncorrectParameterException("FADD"); 
 			}
 			
-			double dbDes = c.convertHexToDoublePrecision(desValue);
-			double dbSrc = c.convertHexToDoublePrecision(srcValue);
+			double dbDes = Double.parseDouble(desValue);
+			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc + dbDes;
 			
@@ -65,7 +67,7 @@ execute(des, src, registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set(des.getValue(), c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+				registers.set(des.getValue(), resultingValue + "");
 			}
 		
 		registers.x87().status().set("C3",'0');

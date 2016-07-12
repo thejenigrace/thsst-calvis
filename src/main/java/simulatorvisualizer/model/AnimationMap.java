@@ -116,6 +116,13 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateGPJump(){
         this.put("JMP", new Jmp());
-        this.put("JE", new Je());
+        this.put("J", new J());
+        this.put("JECXZ", new Jecxz());
+        this.put("JCXZ", new Jcxz());
+        this.put("LOOPE", new Loope());
+        this.put("LOOPNE", new Loopne());
+        this.put("LOOPZ", new Loopz());
+        this.put("LOOPNZ", new Loopnz());
+        this.put("LOOP", new Loop());
     }
 }

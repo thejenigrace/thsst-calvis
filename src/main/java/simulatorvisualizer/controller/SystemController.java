@@ -220,7 +220,7 @@ public class SystemController {
                     String currentLine = registerList.getInstructionPointer();
 
                     // 3. Parse currentLine to int @var value
-                    int value = Integer.parseInt(currentLine, 16);
+                    int value = Integer.parseInt(currentLine, 16) - 1;
                     currentLine = Integer.toHexString(value);
                     currentLine = MemoryAddressCalculator.extend(currentLine, RegisterList.instructionPointerSize, "0");
                     // 4. Notify all observers that an instruction has been reverted
@@ -287,24 +287,24 @@ public class SystemController {
         boolean flag = true;
         try {
             // EXECUTE THE CALVIS INSTRUCTION
-            flag = executionMap.get(currentLine).execute(visualizer);
+            flag = executionMap.get(currentLine).execute();
 
             // 3. Parse currentLine to int @var value
             int value = Integer.parseInt(currentLine, 16);
 
-            // 4. Push to stackMap
-            this.stackCount++;
-            push();
-            pushOldEnvironment(this.stackCount - 1);
-
-            // 5. Notify all observers that an instruction has been executed
-            notifyAllObservers(executionMap.get(currentLine), value);
-
-            // 6. Increment @var currentLine and store it to EIP register
+            // 4. Increment @var currentLine and store it to EIP register
             if ( flag ) {
                 value++;
                 registerList.setInstructionPointer(Integer.toHexString(value));
             }
+
+            // 5. Push to stackMap
+            this.stackCount++;
+            push();
+            pushOldEnvironment(this.stackCount - 1);
+
+            // 6. Notify all observers that an instruction has been executed
+            notifyAllObservers(executionMap.get(currentLine), value - 1);
 
         } catch ( Exception e ) {
             e.printStackTrace();
@@ -329,14 +329,10 @@ public class SystemController {
         Iterator<String> iterator = registerMap.keySet().iterator();
         String[][] registerStringArray = new String[registerMap.size()][2];
         int i = 0;
-        String eaxVal = "";
         while ( iterator.hasNext() ) {
             String registerName = iterator.next();
             registerStringArray[i][0] = registerName;
             registerStringArray[i][1] = registerList.get(registerName);
-            if ( registerName.equals("EAX") ) {
-                eaxVal = registerList.get(registerName);
-            }
             i++;
         }
         this.registerStackMap.put(stackCount, registerStringArray);

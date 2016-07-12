@@ -3,7 +3,6 @@ package configuration.model.engine;
 import bsh.EvalError;
 import configuration.model.exceptions.*;
 import editor.controller.ConsoleController;
-import editor.controller.VisualizationController;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class CalvisFormattedInstruction {
         this.allowable = allowable;
     }
 
-    public boolean execute(VisualizationController visualizationController) throws Exception {
+    public boolean execute() throws Exception {
         int numParameters = 0;
         if ( params != null ) {
             numParameters = params.length;
@@ -52,9 +51,8 @@ public class CalvisFormattedInstruction {
             switch ( tokens.length ) {
                 case 0:
                     String bigName = name.toUpperCase();
-                    if ( bigName.matches("PRINTF|SCANF|CLS") ) {
-                        // Execution is at Console Controller
-                    } else {
+                    if ( !bigName.matches("PRINTF|SCANF|CLS") ) {
+                        // console execution is at Console Controller
                         this.ins.execute(registers, memory);
                     }
                     break;
@@ -289,15 +287,17 @@ public class CalvisFormattedInstruction {
         }
 
         if ( parameterCheck ) {
-            String upperCaseName = name.toUpperCase();
-            // special check for FCMOV
-            if ( upperCaseName.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)") ) {
-                if ( !tokens[1].getValue().equals("ST0") ) {
-                    throw new IncorrectParameterException(name, line);
-                }
-            } else if ( upperCaseName.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ) {
-                if ( !tokens[0].getValue().equals("ST0") ) {
-                    throw new IncorrectParameterException(name, line);
+            if ( tokens.length != 0 ) {
+                String upperCaseName = name.toUpperCase();
+                // special check for FCMOV
+                if ( upperCaseName.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)") ) {
+                    if ( !tokens[1].getValue().equals("ST0") ) {
+                        throw new IncorrectParameterException(name, line);
+                    }
+                } else if ( upperCaseName.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ) {
+                    if ( !tokens[0].getValue().equals("ST0") ) {
+                        throw new IncorrectParameterException(name, line);
+                    }
                 }
             } else {
                 int clIndex = 0;

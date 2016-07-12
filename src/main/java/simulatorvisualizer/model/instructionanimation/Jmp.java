@@ -38,11 +38,11 @@ public class Jmp extends CalvisAnimation {
         Rectangle fromRec = timeFunc.createRectangle(140, 130, Color.web("#002e63"));
         Text conditionLabel = timeFunc.generateText(new Text("Condition"), 15, "#fffaf0", FontWeight.EXTRA_BOLD, "Georgia");
         Text conditionVal = timeFunc.generateText(new Text("No Conditions Needed"), 14, "#fffaf0", FontWeight.NORMAL, "Georgia");
-        Text acceptanceVal = timeFunc.generateText(new Text("Proceed To"), 20, "#fcc200", FontWeight.EXTRA_BOLD, "Georgia");
+        Text acceptanceVal = timeFunc.generateText(new Text("Proceed To"), 20, "#0bda51", FontWeight.EXTRA_BOLD, "Georgia");
         parent.addAll(fake, fromRec, conditionLabel, conditionVal, acceptanceVal);
 
         //label functions
-        Rectangle labelRec = timeFunc.createRectangle(140, 130, Color.web("#355e3b"));
+        Rectangle labelRec = timeFunc.createRectangle(140, 130, Color.web("#c04000"));
         Text conditionLabelLabel = timeFunc.generateText(new Text("Label Name"), 15, "#fffaf0", FontWeight.EXTRA_BOLD, "Georgia");
         Text conditioLabelnVal = timeFunc.generateText(new Text(labelName), 14, "#fffaf0", FontWeight.NORMAL, "Georgia");
 

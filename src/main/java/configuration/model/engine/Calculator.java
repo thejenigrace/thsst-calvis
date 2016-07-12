@@ -838,6 +838,7 @@ public class Calculator {
     }
 
     private long parseUnsignedHex(String text) {
+        text = "00003FE0000000000000";
         if ( text.length() == 16 ) {
             return (parseUnsignedHex(text.substring(0, 1)) << 60)
                     | parseUnsignedHex(text.substring(1));
