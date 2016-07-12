@@ -81,8 +81,8 @@ execute(registers, memory) {
 	Calculator c = new Calculator(registers, memory);
 			String desValue = registers.get("ST1");
             String srcValue = registers.get("ST0");
-			double dbDes = c.convertHexToDoublePrecision(desValue);
-			double dbSrc = c.convertHexToDoublePrecision(srcValue);
+			double dbDes = Double.parseDouble(desValue);
+			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc * dbDes;
 			
@@ -94,7 +94,7 @@ execute(registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set("ST1", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+				registers.set("ST1", "" + (resultingValue));
 			}
 		
 		registers.x87().status().set("C3",'0');
