@@ -3,7 +3,6 @@ package configuration.model.engine;
 import bsh.EvalError;
 import configuration.model.exceptions.*;
 import editor.controller.ConsoleController;
-import editor.controller.VisualizationController;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -288,15 +287,17 @@ public class CalvisFormattedInstruction {
         }
 
         if ( parameterCheck ) {
-            String upperCaseName = name.toUpperCase();
-            // special check for FCMOV
-            if ( upperCaseName.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)") ) {
-                if ( !tokens[1].getValue().equals("ST0") ) {
-                    throw new IncorrectParameterException(name, line);
-                }
-            } else if ( upperCaseName.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ) {
-                if ( !tokens[0].getValue().equals("ST0") ) {
-                    throw new IncorrectParameterException(name, line);
+            if ( tokens.length != 0 ) {
+                String upperCaseName = name.toUpperCase();
+                // special check for FCMOV
+                if ( upperCaseName.matches("(FCMOV|FADDP|FSUBP|FSUBRP|FMULP|FDIVP|FDIVRP)") ) {
+                    if ( !tokens[1].getValue().equals("ST0") ) {
+                        throw new IncorrectParameterException(name, line);
+                    }
+                } else if ( upperCaseName.matches("(FCOMI|FCOMIP|FUCOMI|FUCOMIP)") ) {
+                    if ( !tokens[0].getValue().equals("ST0") ) {
+                        throw new IncorrectParameterException(name, line);
+                    }
                 }
             } else {
                 int clIndex = 0;
