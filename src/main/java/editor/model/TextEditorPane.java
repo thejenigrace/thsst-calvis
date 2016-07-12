@@ -54,25 +54,53 @@ public class TextEditorPane extends AssemblyComponent {
         });
         codeArea.setOnKeyReleased(event -> {
             try {
-                int caret = codeArea.getCaretPosition();
+                String text = codeArea.getText();
+                int caretPosition = codeArea.getCaretPosition();
+                int caretColumn = codeArea.getCaretColumn();
+                System.out.println("caretPosition = " + caretPosition);
+                System.out.println("caretColumn = " + caretColumn);
+
+                text = text.replaceAll("[\\t\\n\\r\\f\\v]", " ");
+
                 int wordCount = 0;
-                for ( int i = caret - 1; i > 0; i-- ) {
-                    if ( codeArea.getText(i, caret - wordCount).equals(" ") )
+                for ( int i = caretPosition - 1; i > 0; i-- ) {
+
+                    if ( text.substring(i, caretPosition - wordCount).equals(" ") )
                         break;
                     wordCount++;
                 }
 
-//                System.out.println("KeyCode: " + event.getCode());
+                int afterEnter = 0;
+                for ( int i = caretPosition - 1; i > 0; i-- ) {
+                    if ( codeArea.getText(i, caretPosition - afterEnter).equals("\n") )
+                        break;
+                    afterEnter++;
+                }
 
                 if ( !event.getCode().equals(KeyCode.UP) && !event.getCode().equals(KeyCode.DOWN) &&
                         !event.getCode().equals(KeyCode.LEFT) && !event.getCode().equals(KeyCode.RIGHT)
                         && !event.getCode().equals(KeyCode.ENTER) && !event.getCode().equals(KeyCode.TAB) ) {
                     // Check if the current character is whitespace; start autocomplete after the whitespace
-                    if ( caret > 1 && codeArea.getText(caret - wordCount - 1, caret - wordCount).equals(" ") )
-                        this.autocomplete(codeArea.getText(caret - wordCount, caret), caret - wordCount, caret);
+
+//                    System.out.println("wordCount = " + wordCount);
+//
+//                    System.out.println("text = " + text.substring(caretPosition-wordCount-1, caretPosition));
+
+//                    if ( caretPosition > 0 && codeArea.getText(caretPosition - wordCount - 1, caretPosition - wordCount).equals(" ") )
+//                        this.autocomplete(codeArea.getText(caretPosition - wordCount, caretPosition), caretPosition - wordCount, caretPosition);
+//                    else if( caretPosition > 0 && codeArea.getText(caretPosition - afterEnter - 1, caretPosition - afterEnter).equals("\n") )
+//                        this.autocomplete(codeArea.getText(caretPosition - afterEnter, caretPosition), caretPosition - wordCount, caretPosition);
+                    if( caretPosition > 0 && text.substring(caretPosition-wordCount-1, caretPosition-wordCount).equals(" "))
+                        this.autocomplete(text.substring(caretPosition-wordCount, caretPosition), caretPosition-wordCount, caretPosition);
                     else
-                        this.autocomplete(codeArea.getText(), 0, caret);
+                        this.autocomplete(codeArea.getText(0, caretPosition), 0, caretPosition);
                 }
+
+//                } else if ( event.getCode().equals(KeyCode.ENTER) ) {
+//                    System.out.println("catch enter");
+//                    System.out.println(caretPosition-afterEnter);
+//                    this.autocomplete(codeArea.getText(caretPosition-afterEnter, caretPosition), caretPosition-1, caretPosition);
+//                }
             } catch ( Exception e ) {
                 e.printStackTrace();
             }
@@ -143,6 +171,7 @@ public class TextEditorPane extends AssemblyComponent {
 
     private void autocomplete(String text, int start, int end) {
         text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
+//        System.out.println("in text = " + text);
         if ( text.length() == 0 || this.entries.contains(text) ) {
 //            System.out.println("Hide Autocomplete!");
             this.entriesPopup.hide();
@@ -150,6 +179,8 @@ public class TextEditorPane extends AssemblyComponent {
 //            System.out.println("Show Autocomplete!");
             LinkedList<String> searchResult = new LinkedList<>();
             searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
+//            System.out.println("text = " + text);
+//            System.out.println("searchResult = " + searchResult.size());
             if ( searchResult.size() > 0 ) {
 //                System.out.println("POPULATE");
                 this.populatePopupItems(searchResult, start, end);

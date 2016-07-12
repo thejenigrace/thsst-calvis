@@ -79,19 +79,19 @@
                                 <!--</accelerator>-->
                                 <!--</MenuItem>-->
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem accelerator="Shortcut + Q" mnemonicParsing="false" onAction="#handleCloseFile"
+                                <MenuItem mnemonicParsing="false" onAction="#handleCloseFile"
                                           text="Close">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
-                                    </accelerator>
+                                    <!--<accelerator>-->
+                                        <!--<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"-->
+                                                            <!--shortcut="UP"/>-->
+                                    <!--</accelerator>-->
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + W" mnemonicParsing="false" onAction="#handleCloseAllFile"
+                                <MenuItem mnemonicParsing="false" onAction="#handleCloseAllFile"
                                           text="Close All">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"
-                                                            shortcut="UP"/>
-                                    </accelerator>
+                                    <!--<accelerator>-->
+                                        <!--<KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"-->
+                                                            <!--shortcut="UP"/>-->
+                                    <!--</accelerator>-->
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
                                 <MenuItem accelerator="Shortcut + E" mnemonicParsing="false" onAction="#handleExitApp"
