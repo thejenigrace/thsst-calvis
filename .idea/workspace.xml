@@ -7,34 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="ok animation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/PushModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/RotateModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popad.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/push.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperFunction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/cmpxchgs8.bsh.java" afterPath="$PROJECT_DIR$/Instructions/cmpxchgs8.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcl.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rol.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rol.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ror.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ror.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBagFinder.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBagFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,17 +69,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CalvisAnimation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3793104">
-              <caret line="18" column="31" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="TimeLineFunction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -108,32 +83,106 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Je.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.54937166">
-              <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AnimationMap.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.185185">
-              <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="39" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="J.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JumperFunction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperFunction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="92" column="99" selection-start-line="92" selection-start-column="99" selection-end-line="92" selection-end-column="99" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loope.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="79" selection-start-line="81" selection-start-column="77" selection-end-line="81" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loopne.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loopnz.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loopz.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.51541096">
+              <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Jecxz.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,7 +207,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="full-animation-gp" />
+        <entry key="$PROJECT_DIR$" value="july-11-ivan" />
       </map>
     </option>
   </component>
@@ -524,16 +573,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Or.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Stc.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Std.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cwd.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Btc.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Clc.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sahf.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Lahf.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushfd.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cbw.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sti.java" />
@@ -573,8 +612,18 @@
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperFunction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" />
       </list>
     </option>
   </component>
@@ -644,6 +693,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -727,10 +777,6 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -753,6 +799,10 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -770,9 +820,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1169,12 +1218,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00084" summary="Added PCMPGT(B/W/D) Instructions">
-      <created>1457108577150</created>
-      <option name="number" value="00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1457108577150</updated>
-    </task>
     <task id="LOCAL-00085" summary="Merge with marielle-mmx">
       <created>1457108847088</created>
       <option name="number" value="00085" />
@@ -1463,7 +1506,13 @@
       <option name="project" value="LOCAL" />
       <updated>1468135091446</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="ok animation">
+      <created>1468223064192</created>
+      <option name="number" value="00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1468223064193</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1492,29 +1541,29 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30228758" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2894309" sideWeight="0.50532484" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24715447" sideWeight="0.4946752" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4493464" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="22" y="313" width="1322" height="102" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22919819" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32352942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23298033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18884121" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39736843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39736843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30228758" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4493464" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="22" y="313" width="1322" height="102" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32352942" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1589,78 +1638,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cbw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sti.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cli.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cdq.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Shld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bsr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42394015">
@@ -1712,7 +1689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6507666">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1736,7 +1712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="24" column="68" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1744,10 +1719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="151" column="41" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="41" />
-          <folding>
-            <element signature="e#4175#4176#0" expanded="false" />
-            <element signature="e#4217#4218#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1755,7 +1726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1763,7 +1733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.2791096">
           <caret line="63" column="85" selection-start-line="63" selection-start-column="85" selection-end-line="63" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1772,7 +1741,7 @@
         <state vertical-scroll-proportion="0.33333334">
           <caret line="50" column="34" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1781,20 +1750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20376712">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="e#318#319#0" expanded="false" />
-            <element signature="e#338#339#0" expanded="false" />
-            <element signature="e#365#366#0" expanded="false" />
-            <element signature="e#387#388#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.37931">
-          <caret line="119" column="3" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1802,7 +1757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1810,7 +1764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.551724">
           <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1818,7 +1771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.448276">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1826,7 +1778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6396396">
           <caret line="189" column="29" selection-start-line="189" selection-start-column="29" selection-end-line="189" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1834,7 +1785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1884,10 +1834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40753424">
           <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding>
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#355#356#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1911,7 +1857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1951,7 +1896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32020548">
           <caret line="11" column="59" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1959,7 +1903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1968,24 +1911,31 @@
         <state vertical-scroll-proportion="-8.137931">
           <caret line="42" column="89" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="89" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3793104">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62657094">
-          <caret line="67" column="72" selection-start-line="67" selection-start-column="72" selection-end-line="67" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.296296">
+          <caret line="69" column="32" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.072072074">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -2000,18 +1950,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.185185">
-          <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="32" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="3" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17636986">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54937166">
-          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="39" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="99" selection-start-line="92" selection-start-column="99" selection-end-line="92" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="79" selection-start-line="81" selection-start-column="77" selection-end-line="81" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="79" selection-start-line="81" selection-start-column="79" selection-end-line="81" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51541096">
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
           <folding />
         </state>
       </provider>
