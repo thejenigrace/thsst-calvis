@@ -1,12 +1,6 @@
 package configuration.model.engine;
 
-import com.github.pfmiles.dropincc.Action;
-import com.github.pfmiles.dropincc.CC;
-import com.github.pfmiles.dropincc.Element;
-import com.github.pfmiles.dropincc.Exe;
-import com.github.pfmiles.dropincc.Grule;
-import com.github.pfmiles.dropincc.Lang;
-import com.github.pfmiles.dropincc.TokenDef;
+import com.github.pfmiles.dropincc.*;
 import com.github.pfmiles.dropincc.impl.Alternative;
 
 import java.util.ArrayList;
@@ -107,11 +101,7 @@ public class Parser {
         this.mappedInstruction.clear();
         this.exceptions.clear();
         this.lineNumber = 0;
-        try {
-            this.exe.eval(code);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
+        this.exe.eval(code);
 
         if ( !exceptions.isEmpty() ) {
             throw exceptions.get(0);
@@ -191,7 +181,7 @@ public class Parser {
             alternativeList.add(alternative);
         }
 
-        if ( threeParameterTokens.size() != 0 ){
+        if ( threeParameterTokens.size() != 0 ) {
             Alternative alternative = new Alternative(
                     new Element[]{elementConcatenator.concatenateOrSubRules(threeParameterTokens),
                             getAllParameters(false), comma, getAllParameters(false), comma, getAllParameters(true)});
