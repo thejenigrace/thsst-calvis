@@ -21,6 +21,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPRotate();
         this.generateGPStack();
         this.generateGPJump();
+        this.generateDataTransfer();
     }
 
     private void generateGPDataTransfer() {
@@ -124,5 +125,29 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("LOOPZ", new Loopz());
         this.put("LOOPNZ", new Loopnz());
         this.put("LOOP", new Loop());
+    }
+
+    private void generateDataTransfer(){
+        this.put("MOVD", new Movd());
+        this.put("MOVQ", new Movq());
+        this.put("MAXSS", new Maxss());
+        this.put("MAXPS", new Maxps());
+//        this.put("MOVDQ2Q", new Movdq2q());
+//        this.put("MOVDQA", new Movdqa());
+//        this.put("MOVDQU", new Movdqu());
+//        this.put("MOVHLPS", new Movhlps());
+//        this.put("MOVHLPD", new Movhlpd());
+//        this.put("MOVHPD", new Movhpd());
+//        this.put("MOVHPS", new Movhps());
+//        this.put("MOVLPD", new Movlpd());
+//        this.put("MOVLPS", new Movlps());
+//        this.put("MOVMSKPD", new Movmskpd());
+//        this.put("MOVMSKPS", new Movmskps());
+//        this.put("MOVQ2DQ", new Movq2dq());
+//        this.put("MOVSB", new Movsb());
+//        this.put("MOVSD", new Movsd());
+//        this.put("MOVSS", new Movss());
+//        this.put("MOVSW", new Movsw());
+        this.put("MINSD", new Minsd());
     }
 }
