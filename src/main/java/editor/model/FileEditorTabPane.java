@@ -46,6 +46,7 @@ public class FileEditorTabPane {
         this.tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         this.tabPane.prefWidthProperty().bind(width);
         this.tabPane.prefHeightProperty().bind(height);
+//        this.tabPane.getStylesheets().add("others-tab-pane.css");
         // Update activeFileEditor property
         this.tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
             activeFileEditor.set((newTab != null) ? (FileEditorPane) newTab.getUserData() : null);

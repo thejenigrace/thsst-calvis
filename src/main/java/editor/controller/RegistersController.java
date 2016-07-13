@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -23,19 +22,14 @@ import java.util.ResourceBundle;
  */
 public class RegistersController extends AssemblyComponent implements Initializable {
 
-//    @FXML
-//    private ComboBox conversionTypeComboBox;
-
-    @FXML
-    private GridPane gridPaneRegister;
     @FXML
     private TreeTableView<Register> treeTableViewRegister;
     @FXML
     private TreeTableColumn<Register, String> colRegisterName;
     @FXML
     private TreeTableColumn<Register, String> colRegisterHexValue;
-    @FXML
-    private TreeTableColumn<Register, String> colRegisterInfo;
+//    @FXML
+//    private TreeTableColumn<Register, String> colRegisterInfo;
 
     @FXML
     private TableView<Flag> tableViewFlags1;
@@ -61,17 +55,15 @@ public class RegistersController extends AssemblyComponent implements Initializa
         colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
                 p.getValue().getValue().getValue().toString()
         ));
-        colRegisterInfo.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-                convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
-        ));
+//        colRegisterInfo.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
+//                convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
+//        ));
 
         flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         flagsValue1.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
 
         flagsName2.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         flagsValue2.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
-
-
     }
 
 
@@ -118,13 +110,11 @@ public class RegistersController extends AssemblyComponent implements Initializa
             this.treeTableViewRegister.setRoot(dummyRoot);
             this.treeTableViewRegister.setShowRoot(false);
 
-//            createTreeTableView(map);
             flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
             tableViewFlags1.setItems(flagList1);
 
             flagList2 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
             tableViewFlags2.setItems(flagList2);
-
         } catch ( Exception e ) {
             e.printStackTrace();
         }
