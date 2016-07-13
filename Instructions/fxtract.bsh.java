@@ -22,8 +22,8 @@ execute(registers, memory) {
 	double manResult = floatToBinaryString(mantissa, origValue);
 	String hexResExp = c.convertDoublePrecisionToHexString(deciExp);
 	String hexResMan = c.convertDoublePrecisionToHexString(manResult);
-	registers.set("ST1", c.hexZeroExtend(hexResExp,20) );
-	registers.set("ST0", c.hexZeroExtend(hexResMan, 20) );
+	registers.set("ST1", deciExp + "");
+	registers.set("ST0", manResult + "" );
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 }

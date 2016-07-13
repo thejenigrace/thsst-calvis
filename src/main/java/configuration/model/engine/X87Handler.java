@@ -73,7 +73,7 @@ public class X87Handler {
         } else {
             top++; // go up the stack
         }
-
+        System.out.println(this.registerList.get("ST1") + " value");
         int index = 0;
         for ( int i = top; i < 8; i++ ) {
             this.registerList.set("ST" + index, String.valueOf(barrel[i]));

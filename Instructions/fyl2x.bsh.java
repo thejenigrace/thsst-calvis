@@ -32,7 +32,7 @@ execute(registers, memory) {
 	
 	
 	String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-	registers.set("ST0", c.hexZeroExtend(hexConvertedVal,20));
+	registers.set("ST0", resultVal + "");
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 	registers.x87().status().set("C2",'0');

@@ -15,10 +15,10 @@ execute(registers, memory) {
 	}
 	else{
 		registers.x87().status().set("C2",'0');
-		String hexConvertedCosVal = c.convertDoublePrecisionToHexString(resultCosVal);
-		String hexConvertedSinVal = c.convertDoublePrecisionToHexString(resultSinVal);
-		registers.x87().push(c.hexZeroExtend(hexConvertedCosVal,20));
-		registers.x87().push(c.hexZeroExtend(hexConvertedSinVal, 20));
+//		String hexConvertedCosVal = c.convertDoublePrecisionToHexString(resultCosVal);
+//		String hexConvertedSinVal = c.convertDoublePrecisionToHexString(resultSinVal);
+		registers.x87().push(resultCosVal + "");
+		registers.x87().push(resultSinVal + "");
 	}
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');

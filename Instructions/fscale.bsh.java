@@ -8,7 +8,7 @@ execute(registers, memory) {
 	double mantissa = c.convertHexToDoublePrecision(st0);
 	double resultPow = Math.pow(2, exponent.intValue());
 	double resultingAnswer = resultPow * mantissa;
-    registers.set("ST0", st0);
+    registers.set("ST0", resultingAnswer + "");
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 }
