@@ -13,7 +13,7 @@ execute(registers, memory) {
 
 	registers.x87().status().set("C2",'0');
 	String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-	registers.set("ST1", c.hexZeroExtend(hexConvertedVal,20));
+	registers.set("ST1", resultVal + "");
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 	registers.x87().status().set("C2",'0');

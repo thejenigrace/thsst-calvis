@@ -12,8 +12,8 @@ execute(registers, memory) {
 	}
 	else{
 		registers.x87().status().set("C2",'0');
-		String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-		registers.set("ST0", c.hexZeroExtend(hexConvertedVal,20));
+		String hexConvertedVal = "" + (resultVal);
+		registers.set("ST0", hexConvertedVal,20);
 	}
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');

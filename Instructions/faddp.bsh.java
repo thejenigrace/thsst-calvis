@@ -93,12 +93,16 @@ execute(registers, memory) {
 				registers.mxscr.setUnderflowFlag("1");
 			}
 			else{
-				//System.out.println(resultingValue + " value");
+				System.out.println(resultingValue + " value");
 				registers.set("ST1", Double.toString(resultingValue));
+		System.out.println(" wow");
 			}
 		
 		registers.x87().status().set("C3",'0');
 		registers.x87().status().set("C2",'0');
 		registers.x87().status().set("C0",'0');
+		System.out.println("wowowwww");
 		registers.x87().pop();
+		System.out.println("sana eto na:" + registers.get("ST0"));
+		System.out.println("podepe");
 }

@@ -1,4 +1,5 @@
 execute(registers, memory) {
+		//ayusin pa to
     String st0 = registers.get("ST0");
     
     // examine st0
