@@ -71,12 +71,10 @@ public class WorkspaceController implements Initializable {
     private SplitPane fileEditorSplitPane;
 
     @FXML
-    private TabPane consoleAndErrorLoggerTabPane;
+    private TabPane bottomTabPane;
 
     @FXML
     private ToolBar toolbarMain;
-    @FXML
-    private ToolBar toolbarHide;
 
     @FXML
     private VBox fileEditorVBox;
@@ -85,10 +83,8 @@ public class WorkspaceController implements Initializable {
 
     private SystemController sysCon;
 
-
-
     private TextField textFieldFind;
-    private boolean hide = false;
+    private boolean isHide = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -162,15 +158,30 @@ public class WorkspaceController implements Initializable {
 
     private void showBottomTabPane() throws Exception {
         ConsoleController consoleController = new ConsoleController();
-        this.consoleAndErrorLoggerTabPane.getTabs().add(consoleController.getTab());
-        this.consoleAndErrorLoggerTabPane.getTabs().add(createErrorLoggerTab(null));
+        this.bottomTabPane.getTabs().add(consoleController.getTab());
+        this.bottomTabPane.getTabs().add(createErrorLoggerTab(null));
         this.sysCon.attach(consoleController);
         consoleController.build();
 
         VisualizationController visualizationController = new VisualizationController();
-        this.consoleAndErrorLoggerTabPane.getTabs().add(visualizationController.getTab());
+        this.bottomTabPane.getTabs().add(visualizationController.getTab());
         this.sysCon.attach(visualizationController);
         visualizationController.build();
+    }
+
+    @FXML
+    private void handleConsole(ActionEvent event) {
+        this.bottomTabPane.getSelectionModel().select(0);
+    }
+
+    @FXML
+    private void handleErrorLogger(ActionEvent event) {
+        this.bottomTabPane.getSelectionModel().select(1);
+    }
+
+    @FXML
+    private void handleVisualizer(ActionEvent event) {
+        this.bottomTabPane.getSelectionModel().select(2);
     }
 
     private void showFileEditorPane() {
@@ -181,12 +192,12 @@ public class WorkspaceController implements Initializable {
 
     @FXML
     private void handleHide(ActionEvent event) {
-        if ( !hide ) {
-            hide = true;
+        if ( !isHide ) {
+            isHide = true;
             this.fileEditorSplitPane.setDividerPositions(1);
             this.changeIconToShow();
         } else {
-            hide = false;
+            isHide = false;
             this.fileEditorSplitPane.setDividerPositions(0.65);
             this.changeIconToHide();
         }
@@ -209,8 +220,8 @@ public class WorkspaceController implements Initializable {
     }
 
     public void handleErrorLoggerTab(Exception e) throws Exception {
-        this.consoleAndErrorLoggerTabPane.getTabs().set(1, createErrorLoggerTab(e));
-        this.consoleAndErrorLoggerTabPane.getSelectionModel().select(1);
+        this.bottomTabPane.getTabs().set(1, createErrorLoggerTab(e));
+        this.bottomTabPane.getSelectionModel().select(1);
     }
 
 
@@ -410,7 +421,7 @@ public class WorkspaceController implements Initializable {
     }
 
     public void onActionFindAndReplace(String find, String replace) {
-       this.fileEditorTabPane.onActionFindAndReplace(find, replace);
+        this.fileEditorTabPane.onActionFindAndReplace(find, replace);
     }
 
     /**
@@ -467,7 +478,7 @@ public class WorkspaceController implements Initializable {
         this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
     }
 
-    public void disablePlayNextPrevious(boolean flag){
+    public void disablePlayNextPrevious(boolean flag) {
         disableStepMode(flag);
         this.btnPlay.setDisable(flag);
     }

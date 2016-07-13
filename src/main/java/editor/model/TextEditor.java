@@ -57,8 +57,8 @@ public class TextEditor extends AssemblyComponent {
                 String text = codeArea.getText();
                 int caretPosition = codeArea.getCaretPosition();
                 int caretColumn = codeArea.getCaretColumn();
-                System.out.println("caretPosition = " + caretPosition);
-                System.out.println("caretColumn = " + caretColumn);
+//                System.out.println("caretPosition = " + caretPosition);
+//                System.out.println("caretColumn = " + caretColumn);
 
                 text = text.replaceAll("[\\t\\n\\r\\f\\v]", " ");
 

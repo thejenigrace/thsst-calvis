@@ -22,7 +22,7 @@ public class VisualizationController extends AssemblyComponent {
 
     public VisualizationController() {
         this.tab = new Tab();
-        this.tab.setText("Visualization");
+        this.tab.setText("Visualizer");
         this.scrollPane = new ScrollPane();
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);

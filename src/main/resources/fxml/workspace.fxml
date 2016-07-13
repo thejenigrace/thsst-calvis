@@ -19,7 +19,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editor.controller.WorkspaceController">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="editor.controller.WorkspaceController">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -27,33 +28,41 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem accelerator="Shortcut + N" mnemonicParsing="true" onAction="#handleNewFile" text="New File">
+                                <MenuItem accelerator="Shortcut + N" mnemonicParsing="true" onAction="#handleNewFile"
+                                          text="New File">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="N" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="N" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FILE_ALT" />
+                                        <FontAwesomeIconView glyphName="FILE_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile" text="Open File">
+                                <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile"
+                                          text="Open File">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT" />
+                                        <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile" text="Save">
+                                <MenuItem accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
+                                          text="Save">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FLOPPY_ALT" />
+                                        <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shift + Shortcut + S" mnemonicParsing="true" onAction="#handleSaveAsFile" text="Save As">
+                                <MenuItem accelerator="Shift + Shortcut + S" mnemonicParsing="true"
+                                          onAction="#handleSaveAsFile" text="Save As">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="DOWN" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="DOWN"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="true" onAction="#handleSaveAll" text="Save All">
@@ -70,7 +79,7 @@
                                 <!--shortcut="UP"/>-->
                                 <!--</accelerator>-->
                                 <!--</MenuItem>-->
-                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <SeparatorMenuItem mnemonicParsing="false"/>
                                 <MenuItem mnemonicParsing="false" onAction="#handleCloseFile" text="Close">
                                     <!--<accelerator>-->
                                     <!--<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"-->
@@ -83,110 +92,151 @@
                                     <!--shortcut="UP"/>-->
                                     <!--</accelerator>-->
                                 </MenuItem>
-                                <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem accelerator="Shortcut + E" mnemonicParsing="true" onAction="#handleExitApp" text="Exit">
+                                <SeparatorMenuItem mnemonicParsing="false"/>
+                                <MenuItem accelerator="Shortcut + E" mnemonicParsing="true" onAction="#handleExitApp"
+                                          text="Exit">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
-                                <MenuItem accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo" text="Undo">
+                                <MenuItem accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
+                                          text="Undo">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="UNDO" />
+                                        <FontAwesomeIconView glyphName="UNDO"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo" text="Redo">
+                                <MenuItem accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo"
+                                          text="Redo">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="REPEAT" />
+                                        <FontAwesomeIconView glyphName="REPEAT"/>
                                     </graphic>
                                 </MenuItem>
-                                <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem accelerator="Shortcut + X" mnemonicParsing="false" onAction="#handleCut" text="Cut">
+                                <SeparatorMenuItem mnemonicParsing="false"/>
+                                <MenuItem accelerator="Shortcut + R" mnemonicParsing="false"
+                                          onAction="#handleFindAndReplace" text="Find &amp; Replace">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="R" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
+                                    </accelerator>
+                                </MenuItem>
+                                <SeparatorMenuItem mnemonicParsing="false"/>
+                                <MenuItem accelerator="Shortcut + X" mnemonicParsing="false" onAction="#handleCut"
+                                          text="Cut">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="SCISSORS" />
+                                        <FontAwesomeIconView glyphName="SCISSORS"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + C" mnemonicParsing="false" onAction="#handleCopy" text="Copy">
+                                <MenuItem accelerator="Shortcut + C" mnemonicParsing="false" onAction="#handleCopy"
+                                          text="Copy">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FILES_ALT" />
+                                        <FontAwesomeIconView glyphName="FILES_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + V" mnemonicParsing="false" onAction="#handlePaste" text="Paste">
+                                <MenuItem accelerator="Shortcut + V" mnemonicParsing="false" onAction="#handlePaste"
+                                          text="Paste">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="CLIPBOARD" />
+                                        <FontAwesomeIconView glyphName="CLIPBOARD"/>
                                     </graphic>
                                 </MenuItem>
                             </items>
                         </Menu>
+                        <!--NAVIGATE MENU-->
                         <Menu mnemonicParsing="false" text="Navigate">
-                            <items>
-                                <MenuItem accelerator="Shortcut + R" mnemonicParsing="false" onAction="#handleFindAndReplace" text="Find &amp; Replace">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="R" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
-                                    </accelerator>
-                                </MenuItem>
-                            </items>
+                            <MenuItem accelerator="Shift + Shortcut + C" mnemonicParsing="false" text="Console" onAction="#handleConsole">
+                                <accelerator>
+                                    <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="DOWN"
+                                                        shortcut="DOWN"/>
+                                </accelerator>
+                            </MenuItem>
+                            <MenuItem accelerator="Shift + Shortcut + E" mnemonicParsing="false" text="Error Logger" onAction="#handleErrorLogger">
+                                <accelerator>
+                                    <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="DOWN"
+                                                        shortcut="DOWN"/>
+                                </accelerator>
+                            </MenuItem>
+                            <MenuItem accelerator="Shift + Shortcut + V" mnemonicParsing="false" text="Visualizer" onAction="#handleVisualizer">
+                                <accelerator>
+                                    <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="DOWN"
+                                                        shortcut="DOWN"/>
+                                </accelerator>
+                            </MenuItem>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Execute">
                             <items>
-                                <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay" text="Play">
+                                <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay"
+                                          text="Play">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="PLAY" />
+                                        <FontAwesomeIconView glyphName="PLAY"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + U" mnemonicParsing="false" onAction="#handlePause" text="Pause">
+                                <MenuItem accelerator="Shortcut + U" mnemonicParsing="false" onAction="#handlePause"
+                                          text="Pause">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="U" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="U" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="PAUSE" />
+                                        <FontAwesomeIconView glyphName="PAUSE"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleStop" text="Stop">
+                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleStop"
+                                          text="Stop">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="STOP" />
+                                        <FontAwesomeIconView glyphName="STOP"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + G" mnemonicParsing="false" onAction="#handleReset" text="Reset">
+                                <MenuItem accelerator="Shortcut + G" mnemonicParsing="false" onAction="#handleReset"
+                                          text="Reset">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="G" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                                        <KeyCodeCombination alt="UP" code="G" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="REFRESH" />
+                                        <FontAwesomeIconView glyphName="REFRESH"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious" text="Execute Previous Line">
+                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious"
+                                          text="Execute Previous Line">
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="STEP_BACKWARD" />
+                                        <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
                                     </graphic>
                                 </MenuItem>
                                 <MenuItem mnemonicParsing="false" onAction="#handleNext" text="Execute Next Line">
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="STEP_FORWARD" />
+                                        <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                                     </graphic>
                                 </MenuItem>
                                 <!--<MenuItem mnemonicParsing="false" text="Jump To"/>-->
@@ -201,7 +251,7 @@
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <!--<MenuItem mnemonicParsing="false" text="Documentation"/>-->
-                                <MenuItem mnemonicParsing="false" onAction="#handleHelpAbout" text="About" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleHelpAbout" text="About"/>
                             </items>
                         </Menu>
                     </menus>
@@ -212,133 +262,133 @@
                     <items>
                         <Button mnemonicParsing="false" onAction="#handleNewFile">
                             <graphic>
-                                <FontAwesomeIconView glyphName="FILE_ALT" />
+                                <FontAwesomeIconView glyphName="FILE_ALT"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="New File" />
+                                <Tooltip text="New File"/>
                             </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleOpenFile">
                             <graphic>
-                                <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT" />
+                                <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Open File" />
+                                <Tooltip text="Open File"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleSaveFile">
                             <graphic>
-                                <FontAwesomeIconView glyphName="FLOPPY_ALT" />
+                                <FontAwesomeIconView glyphName="FLOPPY_ALT"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Save File" />
+                                <Tooltip text="Save File"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnUndo" mnemonicParsing="false" onAction="#handleUndo">
                             <graphic>
-                                <FontAwesomeIconView glyphName="UNDO" />
+                                <FontAwesomeIconView glyphName="UNDO"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Undo" />
+                                <Tooltip text="Undo"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnRedo" mnemonicParsing="false" onAction="#handleRedo">
                             <graphic>
-                                <FontAwesomeIconView glyphName="REPEAT" />
+                                <FontAwesomeIconView glyphName="REPEAT"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Redo" />
+                                <Tooltip text="Redo"/>
                             </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCut">
                             <graphic>
-                                <FontAwesomeIconView glyphName="SCISSORS" />
+                                <FontAwesomeIconView glyphName="SCISSORS"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Cut" />
+                                <Tooltip text="Cut"/>
                             </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleCopy">
                             <graphic>
-                                <FontAwesomeIconView glyphName="FILES_ALT" />
+                                <FontAwesomeIconView glyphName="FILES_ALT"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Copy" />
+                                <Tooltip text="Copy"/>
                             </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handlePaste">
                             <graphic>
-                                <FontAwesomeIconView glyphName="CLIPBOARD" />
+                                <FontAwesomeIconView glyphName="CLIPBOARD"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Paste" />
+                                <Tooltip text="Paste"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#handlePrevious">
                             <graphic>
-                                <FontAwesomeIconView glyphName="STEP_BACKWARD" />
+                                <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Execute Previous Line" />
+                                <Tooltip text="Execute Previous Line"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handlePlay">
                             <graphic>
-                                <FontAwesomeIconView glyphName="PLAY" />
+                                <FontAwesomeIconView glyphName="PLAY"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Play" />
+                                <Tooltip text="Play"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnNext" mnemonicParsing="false" onAction="#handleNext">
                             <graphic>
-                                <FontAwesomeIconView glyphName="STEP_FORWARD" />
+                                <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Execute Next Line" />
+                                <Tooltip text="Execute Next Line"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnStop" mnemonicParsing="false" onAction="#handleStop">
                             <graphic>
-                                <FontAwesomeIconView glyphName="STOP" />
+                                <FontAwesomeIconView glyphName="STOP"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Stop" />
+                                <Tooltip text="Stop"/>
                             </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#handleReset">
                             <graphic>
-                                <FontAwesomeIconView glyphName="REFRESH" />
+                                <FontAwesomeIconView glyphName="REFRESH"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Reset" />
+                                <Tooltip text="Reset"/>
                             </tooltip>
                         </Button>
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
                         <Label>
                             <graphic>
-                                <FontAwesomeIconView glyphName="SEARCH" />
+                                <FontAwesomeIconView glyphName="SEARCH"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Search" />
+                                <Tooltip text="Find"/>
                             </tooltip>
                         </Label>
                         <!--<CustomTextField fx:id="textFieldFind" prefWidth="250.0" />-->
                         <!--<TextField fx:id="textFieldFind" prefWidth="250.0" />-->
                         <Button fx:id="btnFindUp" mnemonicParsing="false" onAction="#handleFindUp">
                             <graphic>
-                                <FontAwesomeIconView glyphName="ARROW_UP" />
+                                <FontAwesomeIconView glyphName="ARROW_UP"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Previous" />
+                                <Tooltip text="Previous"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnFindDown" mnemonicParsing="false" onAction="#handleFindDown">
                             <graphic>
-                                <FontAwesomeIconView glyphName="ARROW_DOWN" />
+                                <FontAwesomeIconView glyphName="ARROW_DOWN"/>
                             </graphic>
                             <tooltip>
-                                <Tooltip text="Next" />
+                                <Tooltip text="Next"/>
                             </tooltip>
                         </Button>
                     </items>
@@ -353,24 +403,31 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <SplitPane fx:id="fileEditorSplitPane" dividerPositions="0.65" orientation="VERTICAL" prefHeight="730.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="fileEditorSplitPane" dividerPositions="0.65" orientation="VERTICAL"
+                                   prefHeight="730.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane fx:id="fileEditorAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <AnchorPane fx:id="fileEditorAnchorPane" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <VBox fx:id="fileEditorVBox" layoutY="429.0" prefHeight="469.0" prefWidth="878.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <VBox fx:id="fileEditorVBox" layoutY="429.0" prefHeight="469.0"
+                                              prefWidth="878.0" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
                                             <children>
                                                 <!--<TabPane fx:id="fileEditorTabPane" focusTraversable="false"-->
                                                 <!--prefHeight="730.0" prefWidth="886.0"-->
                                                 <!--tabClosingPolicy="ALL_TABS"/>-->
                                                 <ToolBar fx:id="toolbarHide">
                                                     <items>
-                                                        <Pane HBox.hgrow="ALWAYS" />
-                                                        <Button fx:id="btnHide" mnemonicParsing="false" onAction="#handleHide">
+                                                        <Pane HBox.hgrow="ALWAYS"/>
+                                                        <Button fx:id="btnHide" mnemonicParsing="false"
+                                                                onAction="#handleHide">
                                                             <graphic>
-                                                                <FontAwesomeIconView glyphName="DOWNLOAD" />
+                                                                <FontAwesomeIconView glyphName="DOWNLOAD"/>
                                                             </graphic>
                                                             <tooltip>
-                                                                <Tooltip text="Hide Tab Pane" />
+                                                                <Tooltip text="Hide Tab Pane"/>
                                                             </tooltip>
                                                         </Button>
                                                     </items>
@@ -379,9 +436,13 @@
                                         </VBox>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="consoleAndErrorLoggerAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <AnchorPane fx:id="bottomAnchorPane" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <TabPane fx:id="consoleAndErrorLoggerTabPane" prefHeight="178.0" prefWidth="880.0" side="TOP" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <TabPane fx:id="bottomTabPane" prefHeight="178.0"
+                                                 prefWidth="880.0" side="TOP" tabClosingPolicy="UNAVAILABLE"
+                                                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         </TabPane>
                                     </children>
                                 </AnchorPane>
@@ -389,12 +450,12 @@
                         </SplitPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="paneMemory" />
+                <AnchorPane fx:id="paneMemory"/>
             </items>
         </SplitPane>
     </center>
-   <stylesheets>
-      <URL value="@../css/assembly-keywords.css" />
-      <URL value="@../css/others-tab-pane.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@../css/assembly-keywords.css"/>
+        <URL value="@../css/others-tab-pane.css"/>
+    </stylesheets>
 </BorderPane>

@@ -7,6 +7,7 @@ import javafx.beans.property.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.fxmisc.undo.UndoManager;
 
@@ -23,6 +24,7 @@ public class FileEditorPane {
     private Tab tab = new Tab();
     private TextEditor textEditor = new TextEditor();
     private boolean isLoaded = false;
+//    private boolean isCodeTemplateExist = false;
 
     // 'path' property
     private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
@@ -48,7 +50,7 @@ public class FileEditorPane {
                 Platform.runLater(() -> activate());
         });
 
-        this.tab.setContent(textEditor.getCodeArea());
+        this.tab.setContent(this.textEditor.getCodeArea());
 //        this.activate();
     }
 
@@ -96,12 +98,14 @@ public class FileEditorPane {
         Path path = this.path.get();
         this.tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
         this.tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
-        this.tab.setGraphic(isModified() ? new Text("*") : null);
+        Text text = new Text("*");
+        text.setFill(Color.web("#86A4BA", 1.0));
+        this.tab.setGraphic(isModified() ? text : null);
     }
 
     private void activate() {
-        System.out.println("tabPane = " + this.tab.getTabPane());
-        System.out.println("tabContent = " + this.tab.getContent());
+//        System.out.println("tabPane = " + this.tab.getTabPane());
+//        System.out.println("tabContent = " + this.tab.getContent());
 
         if( this.tab.getTabPane() == null || !tab.isSelected() )
             return; // Tab is already closed or no longer active
@@ -117,8 +121,14 @@ public class FileEditorPane {
         this.textEditor.pathProperty().bind(path);
 
         // Load file and Create UI when the tab becomes visible the first time
-        if( !this.isLoaded )
+        if( !this.isLoaded ) {
             this.isLoaded = this.load();
+        }
+
+        if ( !this.isLoaded ) {
+            this.textEditor.setCodeAreaText(this.getCodeTemplate());
+            this.isLoaded = true;
+        }
 
         // Clear undo history after first load
         this.textEditor.getUndoManager().forgetHistory();
@@ -132,12 +142,17 @@ public class FileEditorPane {
         this.textEditor.requestFocus();
     }
 
-    private boolean load() {
-        System.out.println("load text");
-        Path path = this.path.get();
-        if ( path == null )
-            return false;
+    private String getCodeTemplate() {
+        return ";write code here \n\n\n\n\n" +
+                "SECTION .DATA";
+    }
 
+    private boolean load() {
+//        System.out.println("load text");
+        Path path = this.path.get();
+        if ( path == null ) {
+            return false;
+        }
         try {
             byte[] bytes = Files.readAllBytes(path);
             String text = new String(bytes);

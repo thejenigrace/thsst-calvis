@@ -24,7 +24,8 @@
 .tab-pane .tab:selected
 {
     /*-fx-background-color: #3c3c3c;*/
-    -fx-background-color: #567B98;
+    /*-fx-background-color: #567B98;*/
+    -fx-background-color: #355F7F;
 }
 
 .tab .tab-label {
