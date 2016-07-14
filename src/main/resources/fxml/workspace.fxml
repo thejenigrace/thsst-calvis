@@ -35,7 +35,7 @@
                                                             shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FILE_ALT"/>
+                                        <FontAwesomeIconView glyphName="FILE_ALT" style="-fx-text-fill: white;"/>
                                     </graphic>
                                 </MenuItem>
                                 <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile"
@@ -65,11 +65,11 @@
                                                             shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="true" onAction="#handleSaveAll" text="Save All">
-                                    <!--<accelerator>-->
-                                    <!--<KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN"-->
-                                    <!--shortcut="UP"/>-->
-                                    <!--</accelerator>-->
+                                <MenuItem accelerator="Ctrl + Shortcut + S" mnemonicParsing="true" onAction="#handleSaveAll" text="Save All">
+                                    <accelerator>
+                                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                    shortcut="DOWN"/>
+                                    </accelerator>
                                 </MenuItem>
                                 <!--<SeparatorMenuItem mnemonicParsing="false"/>-->
                                 <!--<MenuItem accelerator="Shortcut + ," mnemonicParsing="false" onAction="#handleSettings"-->
@@ -80,17 +80,17 @@
                                 <!--</accelerator>-->
                                 <!--</MenuItem>-->
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem mnemonicParsing="false" onAction="#handleCloseFile" text="Close">
-                                    <!--<accelerator>-->
-                                    <!--<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP"-->
-                                    <!--shortcut="UP"/>-->
-                                    <!--</accelerator>-->
+                                <MenuItem accelerator="Shortcut + L" mnemonicParsing="false" onAction="#handleCloseFile" text="Close">
+                                    <accelerator>
+                                    <KeyCodeCombination alt="UP" code="L" control="UP" meta="UP" shift="UP"
+                                    shortcut="DOWN"/>
+                                    </accelerator>
                                 </MenuItem>
-                                <MenuItem mnemonicParsing="false" onAction="#handleCloseAllFile" text="Close All">
-                                    <!--<accelerator>-->
-                                    <!--<KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP"-->
-                                    <!--shortcut="UP"/>-->
-                                    <!--</accelerator>-->
+                                <MenuItem accelerator="Ctrl + Shortcut + L" mnemonicParsing="false" onAction="#handleCloseAllFile" text="Close All">
+                                    <accelerator>
+                                    <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP"
+                                    shortcut="DOWN"/>
+                                    </accelerator>
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
                                 <MenuItem accelerator="Shortcut + E" mnemonicParsing="true" onAction="#handleExitApp"
@@ -167,19 +167,22 @@
                         </Menu>
                         <!--NAVIGATE MENU-->
                         <Menu mnemonicParsing="false" text="Navigate">
-                            <MenuItem accelerator="Shift + Shortcut + C" mnemonicParsing="false" text="Console" onAction="#handleConsole">
+                            <MenuItem accelerator="Shift + Shortcut + C" mnemonicParsing="false" text="Console"
+                                      onAction="#handleConsole">
                                 <accelerator>
                                     <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
                                 </accelerator>
                             </MenuItem>
-                            <MenuItem accelerator="Shift + Shortcut + E" mnemonicParsing="false" text="Error Logger" onAction="#handleErrorLogger">
+                            <MenuItem accelerator="Shift + Shortcut + E" mnemonicParsing="false" text="Error Logger"
+                                      onAction="#handleErrorLogger">
                                 <accelerator>
                                     <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
                                 </accelerator>
                             </MenuItem>
-                            <MenuItem accelerator="Shift + Shortcut + V" mnemonicParsing="false" text="Visualizer" onAction="#handleVisualizer">
+                            <MenuItem accelerator="Shift + Shortcut + V" mnemonicParsing="false" text="Visualizer"
+                                      onAction="#handleVisualizer">
                                 <accelerator>
                                     <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
@@ -397,7 +400,7 @@
         </VBox>
     </top>
     <center>
-        <SplitPane fx:id="rootSplitPane" dividerPositions="0.325, 0.875" BorderPane.alignment="CENTER">
+        <SplitPane fx:id="rootSplitPane" dividerPositions="0.275, 0.850" BorderPane.alignment="CENTER">
             <items>
                 <AnchorPane fx:id="registerPane">
                 </AnchorPane>
@@ -457,5 +460,6 @@
     <stylesheets>
         <URL value="@../css/assembly-keywords.css"/>
         <URL value="@../css/others-tab-pane.css"/>
+        <URL value="@../css/workspace.css"/>
     </stylesheets>
 </BorderPane>

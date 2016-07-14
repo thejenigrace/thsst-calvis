@@ -1,0 +1,56 @@
+/*.menu-bar {
+  -fx-background-color: #355F7F;
+}
+
+.menu-bar .label {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.menu:hover {
+    -fx-background-color: #86A4BB;
+}
+
+.menu-item {
+  -fx-background-color: #355F7F;
+}
+
+.menu-item .label{
+    -fx-font-size: 10pt;
+    -fx-font-famliy: "Segoe UI Light";
+    -fx-label-line-length: 8;
+    -fx-background-color: white;
+    -fx-text-fill: white;
+}*/
+
+/*.tool-bar {
+    -fx-background-color: #355F7F;
+}*/
+
+.menu-bar {
+  -fx-background-color: #d5d5d5;
+  /*-fx-background-color: #8a98b2;*/
+}
+
+.menu:hover {
+  -fx-background-color: #8a98b2;
+}
+
+/*.menu-bar .label {
+  -fx-text-fill: white;
+}
+
+.menu-item .label {
+  -fx-text-fill: black;
+}*/
+
+.tool-bar {
+  -fx-background-color: #ECECEC
+  /*-fx-background-color: #cbd4e4;*/
+}
+
+/*.button {
+  -fx-background-color: #8A9EB2;
+}*/

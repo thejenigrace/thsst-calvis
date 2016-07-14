@@ -1,5 +1,5 @@
 group 'org.thsst.calvis'
-version '1.3.3'
+version '1.3.4'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -39,6 +39,7 @@ dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
 //    testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'com.github.pfmiles', name: 'dropincc.java', version: '0.2.2'
+//    compile group: 'de.jensd', name: 'fontawesomefx-commons', version:'8.11’
     compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'org.beanshell', name: 'bsh', version: '2.0b5'

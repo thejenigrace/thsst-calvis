@@ -9,9 +9,9 @@
             <children>
                 <TableView fx:id="tableViewErrorLogger" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="errorType" sortable="false" minWidth="0" text="Error Type" />
-                        <TableColumn fx:id="errorCause" sortable="false" minWidth="0" text="Error Cause" />
-                        <TableColumn fx:id="errorMessage" sortable="false" minWidth="0" text="Error Message" />
+                        <TableColumn fx:id="errorType" sortable="false" minWidth="20" text="Error Type" />
+                        <TableColumn fx:id="errorCause" sortable="false" minWidth="20" text="Error Cause" />
+                        <TableColumn fx:id="errorMessage" sortable="false" minWidth="50" text="Error Message" />
                     </columns>
                 </TableView>
             </children>

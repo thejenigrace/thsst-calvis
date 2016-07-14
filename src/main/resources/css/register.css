@@ -1,7 +1,42 @@
+.tree-table-view .column-header{
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-font-size: 12;
+    -fx-font-family: "Consolas";
+    -fx-background-color: transparent;
+}
+
+.tree-table-view .column-header-background{
+    /*-fx-background-color: #355F7F;*/
+    -fx-background-color: #b9b9b9;
+}
+
+.tree-table-view .column-header-background .label{
+    /*-fx-text-fill: white;*/
+    -fx-text-fill: #1d1d1d;
+}
+
+.tree-table-view .table-column{
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-font-size: 12;
+    -fx-font-family: "Consolas";
+    /*-fx-background-color: white;*/
+}
+
 .table-view .column-header{
     -fx-text-fill: -fx-selection-bar-text;
     -fx-font-size: 12;
     -fx-font-family: "Consolas";
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    /*-fx-background-color: #355F7F;*/
+    -fx-background-color: #b9b9b9;
+}
+
+.table-view .column-header-background .label{
+    /*-fx-text-fill: white;*/
+    -fx-text-fill: #1d1d1d;
 }
 
 .table-view .table-column{

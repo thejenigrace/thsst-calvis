@@ -25,7 +25,7 @@ public class LoaderController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            Image image = new Image(MainApp.class.getResourceAsStream("/img/splash_screen.png"));
+            Image image = new Image(MainApp.class.getResourceAsStream("/img/splash_screen_1.png"));
             this.imageViewCalvis.setImage(image);
         } catch (Exception e) {
             e.printStackTrace();
