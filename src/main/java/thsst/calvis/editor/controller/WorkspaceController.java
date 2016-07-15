@@ -220,12 +220,12 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handlePlay(ActionEvent event) {
-        this.fileEditorTabPane.play();
+        this.fileEditorTabPane.simulationAction("PLAY");
     }
 
     @FXML
     private void handlePause(ActionEvent event) {
-        this.fileEditorTabPane.pause();
+        this.fileEditorTabPane.simulationAction("PAUSE");
     }
 
     /**
@@ -235,7 +235,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleStop(ActionEvent event) {
-        this.fileEditorTabPane.stop();
+        this.fileEditorTabPane.simulationAction("STOP");
     }
 
     /**
@@ -245,7 +245,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handlePrevious(ActionEvent event) {
-        this.fileEditorTabPane.previous();
+        this.fileEditorTabPane.simulationAction("PREVIOUS");
     }
 
     /**
@@ -255,7 +255,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleNext(ActionEvent event) {
-        this.fileEditorTabPane.next();
+        this.fileEditorTabPane.simulationAction("NEXT");
     }
 
     /**
@@ -265,7 +265,7 @@ public class WorkspaceController implements Initializable {
      */
     @FXML
     private void handleReset(ActionEvent event) {
-        this.fileEditorTabPane.reset();
+        this.fileEditorTabPane.simulationAction("RESET");
     }
 
     /**

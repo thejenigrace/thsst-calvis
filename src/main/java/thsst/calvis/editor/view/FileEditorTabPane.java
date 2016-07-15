@@ -15,13 +15,9 @@ import thsst.calvis.MainApp;
 import thsst.calvis.editor.controller.WorkspaceController;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -168,7 +164,7 @@ public class FileEditorTabPane {
             Path path = files.get(i).toPath();
 
             // check whether file is already opened
-            FileEditorTab fileEditorTab = findEditor(path);
+            FileEditorTab fileEditorTab = this.findFileEditor(path);
             if ( fileEditorTab == null ) {
                 System.out.println("Already Open!");
                 fileEditorTab = this.createFileEditor(path);
@@ -217,7 +213,7 @@ public class FileEditorTabPane {
 //    }
 
     public boolean saveAllFileEditors() {
-        FileEditorTab[] allEditors = getAllEditors();
+        FileEditorTab[] allEditors = this.getAllFileEditors();
 
         boolean success = true;
         for ( FileEditorTab fileEditorTab : allEditors ) {
@@ -244,18 +240,6 @@ public class FileEditorTabPane {
         return fileEditorTab.save();
     }
 
-    private void writeFile(String content, File file) {
-        try {
-            FileWriter fileWriter = null;
-            fileWriter = new FileWriter(file);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch ( IOException ex ) {
-            Logger.getLogger(WorkspaceController.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-    }
-
     public boolean canCloseFileEditor(FileEditorTab fileEditorTab) {
         if ( !fileEditorTab.isModified() )
             return true;
@@ -271,13 +255,13 @@ public class FileEditorTabPane {
         return saveFileEditor(fileEditorTab);
     }
 
-    public boolean closeFileEditor(FileEditorTab fileEditorTab, boolean save) {
+    public boolean closeFileEditor(FileEditorTab fileEditorTab, boolean isSave) {
         if ( fileEditorTab == null )
             return true;
 
         Tab tab = fileEditorTab.getTab();
 
-        if ( save ) {
+        if ( isSave ) {
             Event event = new Event(tab, tab, Tab.TAB_CLOSE_REQUEST_EVENT);
             Event.fireEvent(tab, event);
             if ( event.isConsumed() )
@@ -292,7 +276,7 @@ public class FileEditorTabPane {
     }
 
     public boolean closeAllFileEditors() {
-        FileEditorTab[] allEditors = getAllEditors();
+        FileEditorTab[] allEditors = this.getAllFileEditors();
         FileEditorTab activeEditor = activeFileEditor.get();
 
         // try to save active tab first because in case the user decides to cancel,
@@ -326,7 +310,7 @@ public class FileEditorTabPane {
         return tabPane.getTabs().isEmpty();
     }
 
-    private FileEditorTab[] getAllEditors() {
+    private FileEditorTab[] getAllFileEditors() {
         ObservableList<Tab> tabs = tabPane.getTabs();
         FileEditorTab[] allEditors = new FileEditorTab[tabs.size()];
         for ( int i = 0; i < tabs.size(); i++ )
@@ -334,7 +318,7 @@ public class FileEditorTabPane {
         return allEditors;
     }
 
-    private FileEditorTab findEditor(Path path) {
+    private FileEditorTab findFileEditor(Path path) {
         for ( Tab tab : tabPane.getTabs() ) {
             FileEditorTab fileEditorTab = (FileEditorTab) tab.getUserData();
             if ( path.equals(fileEditorTab.getPath()) )
@@ -344,49 +328,28 @@ public class FileEditorTabPane {
     }
 
     /**
-     * MARK --
+     * MARK -- SIMULATION METHODS
      */
-    public void play() {
+
+    public void simulationAction(String action) {
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
 
         if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().play(codeArea.getText());
-    }
-
-    public void pause() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().pause();
-    }
-
-
-    public void stop() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().end();
-    }
-
-    public void previous() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().previous();
-    }
-
-    public void next() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().next();
-    }
-
-    public void reset() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
-            this.workspaceController.getSysCon().reset();
+            switch ( action ) {
+                case "PLAY": this.workspaceController.getSysCon().play(codeArea.getText());
+                    break;
+                case "PAUSE": this.workspaceController.getSysCon().pause();
+                    break;
+                case "STOP": this.workspaceController.getSysCon().end();
+                    break;
+                case "PREVIOUS": this.workspaceController.getSysCon().previous();
+                    break;
+                case "NEXT": this.workspaceController.getSysCon().next();
+                    break;
+                case "RESET": this.workspaceController.getSysCon().reset();
+                    break;
+                default: System.out.println("None");
+            }
     }
 
     public void disableCodeArea(boolean flag) {
