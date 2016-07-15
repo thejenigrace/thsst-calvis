@@ -350,28 +350,28 @@ public class WorkspaceController implements Initializable {
     }
 
     @FXML
-    private void handleCut(ActionEvent event) {
-        this.fileEditorTabPane.cut();
-    }
-
-    @FXML
-    private void handleCopy(ActionEvent event) {
-        this.fileEditorTabPane.copy();
-    }
-
-    @FXML
-    private void handlePaste(ActionEvent event) {
-        this.fileEditorTabPane.paste();
-    }
-
-    @FXML
     private void handleUndo(ActionEvent event) {
-        this.fileEditorTabPane.undo();
+        this.getActiveEditor().undo();
     }
 
     @FXML
     private void handleRedo(ActionEvent event) {
-        this.fileEditorTabPane.redo();
+        this.getActiveEditor().redo();
+    }
+
+    @FXML
+    private void handleCut(ActionEvent event) {
+        this.getActiveEditor().cut();
+    }
+
+    @FXML
+    private void handleCopy(ActionEvent event) {
+        this.getActiveEditor().copy();
+    }
+
+    @FXML
+    private void handlePaste(ActionEvent event) {
+        this.getActiveEditor().paste();
     }
 
     @FXML

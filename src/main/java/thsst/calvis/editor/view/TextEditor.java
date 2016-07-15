@@ -253,6 +253,18 @@ public class TextEditor extends AssemblyComponent {
         codeArea.getUndoManager().redo();
     }
 
+    public void cut() {
+        codeArea.cut();
+    }
+
+    public void copy() {
+        codeArea.copy();
+    }
+
+    public void paste() {
+        codeArea.paste();
+    }
+
     public void requestFocus() {
         Platform.runLater(() -> codeArea.requestFocus());
     }

@@ -439,31 +439,6 @@ public class FileEditorTabPane {
         codeArea.setDisable(flag);
     }
 
-    public void undo() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.getUndoManager().undo();
-    }
-
-    public void redo() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.getUndoManager().redo();
-    }
-
-    public void cut() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.cut();
-    }
-
-    public void copy() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.copy();
-    }
-
-    public void paste() {
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-        codeArea.paste();
-    }
-
     public void formatCode(String codeBlock) {
         CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
         String[] arr = this.workspaceController.getSysCon().getKeywordBuilder().getInstructionKeywords();
