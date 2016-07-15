@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="configuration.controller.ConfigurationEnvironmentController">
+            fx:controller="thsst.calvis.configuration.controller.ConfigurationEnvironmentController">
     <top>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
@@ -25,7 +25,7 @@
                         <HBox>
                             <children>
                                 <Pane prefWidth="10.0"/>
-                                <Label alignment="CENTER" text="Select a custom configuration" textAlignment="CENTER">
+                                <Label alignment="CENTER" text="Select a custom thsst.calvis.configuration" textAlignment="CENTER">
                                     <font>
                                         <Font name="Trebuchet MS Bold" size="15.0"/>
                                     </font>
@@ -37,7 +37,7 @@
                             <children>
                                 <TextArea editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0"
                                           prefWidth="610.0"
-                                          text="The CALVIS sytem requires you to define your environment configuration file paths for CALVIS to work based on your preference."
+                                          text="The CALVIS sytem requires you to define your environment thsst.calvis.configuration file paths for CALVIS to work based on your preference."
                                           wrapText="true">
                                     <font>
                                         <Font name="Trebuchet MS" size="13.0"/>

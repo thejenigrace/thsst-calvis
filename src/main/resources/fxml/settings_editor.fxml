@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
       prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="editor.controller.SettingsEditor">
+      fx:controller="thsst.calvis.editor.controller.SettingsEditor">
     <children>
         <Pane prefHeight="40.0"/>
         <HBox>
