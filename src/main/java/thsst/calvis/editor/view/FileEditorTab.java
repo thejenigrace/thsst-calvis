@@ -18,7 +18,7 @@ import java.nio.file.Path;
 /**
  * Created by Jennica on 02/07/2016.
  */
-public class FileEditorPane {
+public class FileEditorTab {
 
     private WorkspaceController workspaceController;
     private Tab tab = new Tab();
@@ -35,7 +35,7 @@ public class FileEditorPane {
     // 'canRedo' property
     private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
-    public FileEditorPane(WorkspaceController workspaceController, Path path) {
+    public FileEditorTab(WorkspaceController workspaceController, Path path) {
         this.workspaceController = workspaceController;
 
         this.tab.setUserData(this);

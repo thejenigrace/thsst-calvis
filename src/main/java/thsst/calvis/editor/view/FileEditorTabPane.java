@@ -33,7 +33,7 @@ public class FileEditorTabPane {
 
     private WorkspaceController workspaceController;
     private TabPane tabPane;
-    private final ReadOnlyObjectWrapper<FileEditorPane> activeFileEditor = new ReadOnlyObjectWrapper<>();
+    private final ReadOnlyObjectWrapper<FileEditorTab> activeFileEditor = new ReadOnlyObjectWrapper<>();
     private final ReadOnlyBooleanWrapper anyFileEditorModified = new ReadOnlyBooleanWrapper();
 
     private HashMap<Integer, int[]> findHighlightRanges;
@@ -49,14 +49,14 @@ public class FileEditorTabPane {
 //        this.tabPane.getStylesheets().add("others-tab-pane.css");
         // Update activeFileEditor property
         this.tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
-            activeFileEditor.set((newTab != null) ? (FileEditorPane) newTab.getUserData() : null);
+            activeFileEditor.set((newTab != null) ? (FileEditorTab) newTab.getUserData() : null);
         });
 
         // Update anyFileEditorModified property
         ChangeListener<Boolean> modifiedListener = (observable, oldValue, newValue) -> {
             boolean modified = false;
             for ( Tab tab : tabPane.getTabs() ) {
-                if ( ((FileEditorPane) tab.getUserData()).isModified() ) {
+                if ( ((FileEditorTab) tab.getUserData()).isModified() ) {
                     modified = true;
                     break;
                 }
@@ -68,10 +68,10 @@ public class FileEditorTabPane {
             while ( c.next() ) {
                 if ( c.wasAdded() ) {
                     for ( Tab tab : c.getAddedSubList() )
-                        ((FileEditorPane) tab.getUserData()).modifiedProperty().addListener(modifiedListener);
+                        ((FileEditorTab) tab.getUserData()).modifiedProperty().addListener(modifiedListener);
                 } else if ( c.wasRemoved() ) {
                     for ( Tab tab : c.getRemoved() )
-                        ((FileEditorPane) tab.getUserData()).modifiedProperty().removeListener(modifiedListener);
+                        ((FileEditorTab) tab.getUserData()).modifiedProperty().removeListener(modifiedListener);
                 }
             }
 
@@ -93,11 +93,11 @@ public class FileEditorTabPane {
     }
 
     // 'activeFileEditor' property
-    public FileEditorPane getActiveFileEditor() {
+    public FileEditorTab getActiveFileEditor() {
         return activeFileEditor.get();
     }
 
-    public ReadOnlyObjectProperty<FileEditorPane> activeFileEditorProperty() {
+    public ReadOnlyObjectProperty<FileEditorTab> activeFileEditorProperty() {
         return activeFileEditor.getReadOnlyProperty();
     }
 
@@ -107,28 +107,28 @@ public class FileEditorTabPane {
     }
 
     public void newFileEditor() {
-        FileEditorPane fileEditorPane = this.createFileEditor(null);
-        Tab tab = fileEditorPane.getTab();
+        FileEditorTab fileEditorTab = this.createFileEditor(null);
+        Tab tab = fileEditorTab.getTab();
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
 
         try {
-            this.workspaceController.getSysCon().attach(fileEditorPane.getTextEditor());
-            fileEditorPane.getTextEditor().build();
+            this.workspaceController.getSysCon().attach(fileEditorTab.getTextEditor());
+            fileEditorTab.getTextEditor().build();
             this.workspaceController.getSysCon().clear();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
     }
 
-    private FileEditorPane createFileEditor(Path path) {
-        FileEditorPane fileEditorPane = new FileEditorPane(workspaceController, path);
-        fileEditorPane.getTab().setOnCloseRequest(e -> {
-            if ( !this.canCloseFileEditor(fileEditorPane) )
+    private FileEditorTab createFileEditor(Path path) {
+        FileEditorTab fileEditorTab = new FileEditorTab(workspaceController, path);
+        fileEditorTab.getTab().setOnCloseRequest(e -> {
+            if ( !this.canCloseFileEditor(fileEditorTab) )
                 e.consume();
         });
 
-        return fileEditorPane;
+        return fileEditorTab;
     }
 
     private FileChooser createFileChooser(String title) {
@@ -150,7 +150,7 @@ public class FileEditorTabPane {
         return fileChooser;
     }
 
-    public FileEditorPane[] openFileEditor() {
+    public FileEditorTab[] openFileEditor() {
         FileChooser fileChooser = createFileChooser("Open CALVIS File");
         List<File> selectedFiles = fileChooser.showOpenMultipleDialog(MainApp.primaryStage);
         if ( selectedFiles == null )
@@ -160,30 +160,30 @@ public class FileEditorTabPane {
         return openFileEditors(selectedFiles, 0);
     }
 
-    private FileEditorPane[] openFileEditors(List<File> files, int activeIndex) {
+    private FileEditorTab[] openFileEditors(List<File> files, int activeIndex) {
         // close single unmodified "Untitled" tab
         if ( this.tabPane.getTabs().size() == 1 ) {
-            FileEditorPane fileEditorPane = (FileEditorPane) this.tabPane.getTabs().get(0).getUserData();
-            if ( fileEditorPane.getPath() == null && !fileEditorPane.isModified() )
-                this.closeFileEditor(fileEditorPane, false);
+            FileEditorTab fileEditorTab = (FileEditorTab) this.tabPane.getTabs().get(0).getUserData();
+            if ( fileEditorTab.getPath() == null && !fileEditorTab.isModified() )
+                this.closeFileEditor(fileEditorTab, false);
         }
 
-        FileEditorPane[] fileEditorPanes = new FileEditorPane[files.size()];
+        FileEditorTab[] fileEditorTabs = new FileEditorTab[files.size()];
         for ( int i = 0; i < files.size(); i++ ) {
             Path path = files.get(i).toPath();
 
             // check whether file is already opened
-            FileEditorPane fileEditorPane = findEditor(path);
-            if ( fileEditorPane == null ) {
+            FileEditorTab fileEditorTab = findEditor(path);
+            if ( fileEditorTab == null ) {
                 System.out.println("Already Open!");
-                fileEditorPane = this.createFileEditor(path);
+                fileEditorTab = this.createFileEditor(path);
 
-                this.tabPane.getTabs().add(fileEditorPane.getTab());
+                this.tabPane.getTabs().add(fileEditorTab.getTab());
             }
 
             try {
-                this.workspaceController.getSysCon().attach(fileEditorPane.getTextEditor());
-                fileEditorPane.getTextEditor().build();
+                this.workspaceController.getSysCon().attach(fileEditorTab.getTextEditor());
+                fileEditorTab.getTextEditor().build();
                 this.workspaceController.getSysCon().clear();
             } catch ( Exception e ) {
                 e.printStackTrace();
@@ -191,19 +191,19 @@ public class FileEditorTabPane {
 
             // select first file
             if ( i == activeIndex )
-                this.tabPane.getSelectionModel().select(fileEditorPane.getTab());
+                this.tabPane.getSelectionModel().select(fileEditorTab.getTab());
 
-            fileEditorPanes[i] = fileEditorPane;
+            fileEditorTabs[i] = fileEditorTab;
         }
-        return fileEditorPanes;
+        return fileEditorTabs;
     }
 
-    public boolean saveFileEditor(FileEditorPane fileEditorPane) {
-        if ( fileEditorPane == null || !fileEditorPane.isModified() )
+    public boolean saveFileEditor(FileEditorTab fileEditorTab) {
+        if ( fileEditorTab == null || !fileEditorTab.isModified() )
             return true;
 
-        if ( fileEditorPane.getPath() == null ) {
-            this.tabPane.getSelectionModel().select(fileEditorPane.getTab());
+        if ( fileEditorTab.getPath() == null ) {
+            this.tabPane.getSelectionModel().select(fileEditorTab.getTab());
 
             FileChooser fileChooser = createFileChooser("Save CALVIS File");
             File file = fileChooser.showSaveDialog(MainApp.primaryStage);
@@ -211,10 +211,10 @@ public class FileEditorTabPane {
                 return false;
 
 //            this.saveLastDirectory(file);
-            fileEditorPane.setPath(file.toPath());
+            fileEditorTab.setPath(file.toPath());
         }
 
-        return fileEditorPane.save();
+        return fileEditorTab.save();
     }
 
 //    private void saveLastDirectory(File file) {
@@ -222,19 +222,19 @@ public class FileEditorTabPane {
 //    }
 
     public boolean saveAllFileEditors() {
-        FileEditorPane[] allEditors = getAllEditors();
+        FileEditorTab[] allEditors = getAllEditors();
 
         boolean success = true;
-        for ( FileEditorPane fileEditorPane : allEditors ) {
-            if ( !saveFileEditor(fileEditorPane) )
+        for ( FileEditorTab fileEditorTab : allEditors ) {
+            if ( !saveFileEditor(fileEditorTab) )
                 success = false;
         }
 
         return success;
     }
 
-    public boolean saveAsFileEditor(FileEditorPane fileEditorPane) {
-        this.tabPane.getSelectionModel().select(fileEditorPane.getTab());
+    public boolean saveAsFileEditor(FileEditorTab fileEditorTab) {
+        this.tabPane.getSelectionModel().select(fileEditorTab.getTab());
 
         FileChooser fileChooser =  createFileChooser("Save CALVIS File");
         // Show save file dialog
@@ -244,9 +244,9 @@ public class FileEditorTabPane {
            return false;
 
 //        this.saveLastDirectory(file);
-        fileEditorPane.setPath(file.toPath());
+        fileEditorTab.setPath(file.toPath());
 
-        return fileEditorPane.save();
+        return fileEditorTab.save();
     }
 
     private void writeFile(String content, File file) {
@@ -261,26 +261,26 @@ public class FileEditorTabPane {
         }
     }
 
-    public boolean canCloseFileEditor(FileEditorPane fileEditorPane) {
-        if ( !fileEditorPane.isModified() )
+    public boolean canCloseFileEditor(FileEditorTab fileEditorTab) {
+        if ( !fileEditorTab.isModified() )
             return true;
 
         Alert alert = this.workspaceController.createAlert(Alert.AlertType.CONFIRMATION, "Close",
-                "''{0}'' has been modifiedc. Save changes?", fileEditorPane.getTab().getText());
+                "''{0}'' has been modifiedc. Save changes?", fileEditorTab.getTab().getText());
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
         ButtonType result = alert.showAndWait().get();
         if ( result != ButtonType.YES )
             return (result == ButtonType.NO);
 
-        return saveFileEditor(fileEditorPane);
+        return saveFileEditor(fileEditorTab);
     }
 
-    public boolean closeFileEditor(FileEditorPane fileEditorPane, boolean save) {
-        if ( fileEditorPane == null )
+    public boolean closeFileEditor(FileEditorTab fileEditorTab, boolean save) {
+        if ( fileEditorTab == null )
             return true;
 
-        Tab tab = fileEditorPane.getTab();
+        Tab tab = fileEditorTab.getTab();
 
         if ( save ) {
             Event event = new Event(tab, tab, Tab.TAB_CLOSE_REQUEST_EVENT);
@@ -297,8 +297,8 @@ public class FileEditorTabPane {
     }
 
     public boolean closeAllFileEditors() {
-        FileEditorPane[] allEditors = getAllEditors();
-        FileEditorPane activeEditor = activeFileEditor.get();
+        FileEditorTab[] allEditors = getAllEditors();
+        FileEditorTab activeEditor = activeFileEditor.get();
 
         // try to save active tab first because in case the user decides to cancel,
         // then it stays active
@@ -307,22 +307,22 @@ public class FileEditorTabPane {
 
         // save modified tabs
         for ( int i = 0; i < allEditors.length; i++ ) {
-            FileEditorPane fileEditorPane = allEditors[i];
-            if ( fileEditorPane == activeEditor )
+            FileEditorTab fileEditorTab = allEditors[i];
+            if ( fileEditorTab == activeEditor )
                 continue;
 
-            if ( fileEditorPane.isModified() ) {
+            if ( fileEditorTab.isModified() ) {
                 // activate the modified tab to make its modified content visible to the user
                 tabPane.getSelectionModel().select(i);
 
-                if ( !canCloseFileEditor(fileEditorPane) )
+                if ( !canCloseFileEditor(fileEditorTab) )
                     return false;
             }
         }
 
         // close all tabs
-        for ( FileEditorPane fileEditorPane : allEditors ) {
-            if ( !closeFileEditor(fileEditorPane, false) )
+        for ( FileEditorTab fileEditorTab : allEditors ) {
+            if ( !closeFileEditor(fileEditorTab, false) )
                 return false;
         }
 
@@ -331,19 +331,19 @@ public class FileEditorTabPane {
         return tabPane.getTabs().isEmpty();
     }
 
-    private FileEditorPane[] getAllEditors() {
+    private FileEditorTab[] getAllEditors() {
         ObservableList<Tab> tabs = tabPane.getTabs();
-        FileEditorPane[] allEditors = new FileEditorPane[tabs.size()];
+        FileEditorTab[] allEditors = new FileEditorTab[tabs.size()];
         for ( int i = 0; i < tabs.size(); i++ )
-            allEditors[i] = (FileEditorPane) tabs.get(i).getUserData();
+            allEditors[i] = (FileEditorTab) tabs.get(i).getUserData();
         return allEditors;
     }
 
-    private FileEditorPane findEditor(Path path) {
+    private FileEditorTab findEditor(Path path) {
         for ( Tab tab : tabPane.getTabs() ) {
-            FileEditorPane fileEditorPane = (FileEditorPane) tab.getUserData();
-            if ( path.equals(fileEditorPane.getPath()) )
-                return fileEditorPane;
+            FileEditorTab fileEditorTab = (FileEditorTab) tab.getUserData();
+            if ( path.equals(fileEditorTab.getPath()) )
+                return fileEditorTab;
         }
         return null;
     }
@@ -373,9 +373,9 @@ public class FileEditorTabPane {
 //        this.openFileEditors(files, activeIndex);
 //    }
 
-//    private void saveState(FileEditorPane[] allEditors, FileEditorPane activeEditor) {
+//    private void saveState(FileEditorTab[] allEditors, FileEditorTab activeEditor) {
 //        ArrayList<String> fileNames = new ArrayList<>(allEditors.length);
-//        for ( FileEditorPane fileEditor : allEditors ) {
+//        for ( FileEditorTab fileEditor : allEditors ) {
 //            if ( fileEditor.getPath() != null )
 //                fileNames.add(fileEditor.getPath().toString());
 //        }

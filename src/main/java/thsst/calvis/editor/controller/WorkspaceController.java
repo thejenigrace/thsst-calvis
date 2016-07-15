@@ -4,7 +4,7 @@ import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import thsst.calvis.MainApp;
-import thsst.calvis.editor.view.FileEditorPane;
+import thsst.calvis.editor.view.FileEditorTab;
 import thsst.calvis.editor.view.FileEditorTabPane;
 import thsst.calvis.editor.view.TextEditor;
 import javafx.beans.property.BooleanProperty;
@@ -105,9 +105,9 @@ public class WorkspaceController implements Initializable {
     }
 
     private void init() {
-        this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::modifiedProperty).not());
-        this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::canUndoProperty).not());
-        this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorPane::canRedoProperty).not());
+        this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::modifiedProperty).not());
+        this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canUndoProperty).not());
+        this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canRedoProperty).not());
 
         this.textFieldFind.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -445,11 +445,11 @@ public class WorkspaceController implements Initializable {
      * Creates a boolean property that is bound to another boolean value
      * of the active thsst.calvis.editor.
      */
-    private BooleanProperty createActiveBooleanProperty(Function<FileEditorPane, ObservableBooleanValue> func) {
+    private BooleanProperty createActiveBooleanProperty(Function<FileEditorTab, ObservableBooleanValue> func) {
         BooleanProperty bp = new SimpleBooleanProperty();
-        FileEditorPane fileEditorPane = this.fileEditorTabPane.getActiveFileEditor();
-        if ( fileEditorPane != null )
-            bp.bind(func.apply(fileEditorPane));
+        FileEditorTab fileEditorTab = this.fileEditorTabPane.getActiveFileEditor();
+        if ( fileEditorTab != null )
+            bp.bind(func.apply(fileEditorTab));
         this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
             bp.unbind();
             if ( newFileEditor != null )

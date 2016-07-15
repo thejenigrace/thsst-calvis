@@ -169,6 +169,19 @@ public class TextEditor extends AssemblyComponent {
         return spansBuilder.create();
     }
 
+    private void setCodeAutocomplete() {
+        this.entries = new TreeSet<>();
+        this.entriesPopup = new ContextMenu();
+
+        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getInstructionKeywords()));
+        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getRegisterKeywords()));
+
+        this.codeArea.setPopupWindow(entriesPopup);
+        this.codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
+        this.codeArea.setPopupAnchorOffset(new Point2D(4, 4));
+    }
+
+
     private void autocomplete(String text, int start, int end) {
         text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
 //        System.out.println("in text = " + text);
@@ -214,18 +227,6 @@ public class TextEditor extends AssemblyComponent {
         }
         this.entriesPopup.getItems().clear();
         this.entriesPopup.getItems().addAll(menuItems);
-    }
-
-    private void setCodeAreaAutocomplete() {
-        this.entries = new TreeSet<>();
-        this.entriesPopup = new ContextMenu();
-
-        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getInstructionKeywords()));
-        this.entries.addAll(Arrays.asList(this.sysCon.getKeywordBuilder().getRegisterKeywords()));
-
-        this.codeArea.setPopupWindow(entriesPopup);
-        this.codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
-        this.codeArea.setPopupAnchorOffset(new Point2D(4, 4));
     }
 
     public void setCodeAreaText(String text) {
@@ -304,6 +305,6 @@ public class TextEditor extends AssemblyComponent {
         expression = "((.*)\\b(" + expression + ")\\b(.*)(?=;))|((.*)\\b(" + expression + ")\\b(.*))";
         this.lineByLinePattern = Pattern.compile("(?<FIND>" + expression + ")");
 
-        this.setCodeAreaAutocomplete();
+        this.setCodeAutocomplete();
     }
 }

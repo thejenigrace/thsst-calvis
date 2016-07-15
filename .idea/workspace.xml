@@ -6,211 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Merge with the new workspace layout">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/PopupDemo.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/api/DoubleDouble.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/api/DoubleDouble.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfigurationEnvironmentController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/ConfigurationEnvironmentController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/ConfiguratorEnvironment.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/ConfiguratorEnvironment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/FileHandlerController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/FileHandlerController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/HandleConfigFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/HandleConfigFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/controller/VerifierController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/VerifierController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Calculator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/CalvisFormattedInstruction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/EFlags.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/EFlags.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ElementConcatenator.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ElementConcatenator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/FpuRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/FpuRegister.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Instruction.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Instruction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/InstructionList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Memory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryAddressCalculator.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/MemoryAddressCalculator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Mxscr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Mxscr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserLabelFactory.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserLabelFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserMemoryFactory.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserMemoryFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserRegisterFactory.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserRegisterFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/PatternList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/PatternList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Register.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Register.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/RegisterList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Token.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Token.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/TokenBag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87Handler.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87Register.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Register.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87StatusRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87TagRegister.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorLogger.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/ErrorLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessage.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/ErrorMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessageList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/ErrorMessageList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorMessageListWithSize.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/ErrorMessageListWithSize.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorType.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/ErrorType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/FilePathLogger.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/FilePathLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorInvalidMessage.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/InstructionFileErrorInvalidMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionFileErrorMissingMessage.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/InstructionFileErrorMissingMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionInvalid.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/InstructionInvalid.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/InstructionMissing.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/InstructionMissing.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterFileErrorInvalidMessage.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/RegisterFileErrorInvalidMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterFileErrorMissingMessage.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/RegisterFileErrorMissingMessage.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterInvalid.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/RegisterInvalid.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/RegisterMissing.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/RegisterMissing.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/Types.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/Types.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DataTypeMismatchException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/DataTypeMismatchException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DuplicateLabelException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/DuplicateLabelException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DuplicateVariableException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/DuplicateVariableException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/IncorrectParameterException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/IncorrectParameterException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/InvalidArithmeticOperandException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/InvalidArithmeticOperandException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/InvalidSourceOperandException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/InvalidSourceOperandException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/JumpOutOfBoundsException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/JumpOutOfBoundsException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryAlignmentException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MemoryAlignmentException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryReadException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MemoryReadException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryRestrictedAccessException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MemoryRestrictedAccessException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MemoryToMemoryException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryWriteException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MemoryWriteException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MissingSizeDirectiveException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/MissingSizeDirectiveException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPopException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/StackPopException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/StackPushException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/StackPushException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/ValueExceedException.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/exceptions/ValueExceedException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/ChoiceBoxLogger.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/filehandling/ChoiceBoxLogger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePath.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/filehandling/FilePath.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathHandler.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/filehandling/FilePathHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/filehandling/FilePathList.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/filehandling/SaveFile.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/filehandling/SaveFile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/PreloaderApp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/PreloaderApp.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ConsoleController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConsoleController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ErrorLoggerController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/FindAndReplaceDialogController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/FindAndReplaceDialogController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/FindDialogController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/FindDialogController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/LoaderController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/LoaderController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/MemoryController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/MemoryController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/RegistersController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/RegistersController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/SettingsController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/SettingsEditor.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/SettingsEditor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/StringCollectionContainer.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/StringCollectionContainer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/VisualizationController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/VisualizationController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/AssemblyComponent.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/AssemblyComponent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/ConsoleTextArea.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/ConsoleTextArea.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/ErrorLog.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/model/ErrorLog.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorPane.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/Flag.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/model/Flag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/TextEditor.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/editor/model/Utility.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/model/Utility.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/AnimationMap.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/CalvisAnimation.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/CalvisAnimation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBag.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBagFinder.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBagFinder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/JumperFunction.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/JumperFunction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/KeywordBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/model/KeywordBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/PushModel.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/PushModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/RotateModel.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/RotateModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/SimulationState.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/SimulationState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/TimeLineFunction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aaa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aaa.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aad.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aam.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aam.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Aas.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aas.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Add.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Add.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/And.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/And.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bsf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bsf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bsr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bsr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bswap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bswap.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bt.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bt.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Btc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Btc.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Btr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Btr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Bts.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bts.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cbw.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cbw.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cdq.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cdq.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Clc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Clc.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cld.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cli.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cli.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmc.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmov.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmov.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmp.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cwd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cwd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cwde.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cwde.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Daa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Daa.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Das.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Das.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Dec.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Dec.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Div.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Div.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Imul.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Imul.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Inc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Inc.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/J.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jcxz.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Je.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jecxz.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jmp.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Lahf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Lahf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Lea.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Lea.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loop.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loope.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopne.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopnz.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopz.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxpd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxpd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxps.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxps.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxsd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxsd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxss.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxss.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minsd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Minsd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mov.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Mov.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movq.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movq.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movsx.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movsx.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movzx.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movzx.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mul.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Mul.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Neg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Neg.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Not.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Not.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Or.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Or.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pop.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popa.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popad.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popfd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popfd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Push.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Push.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pusha.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushad.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushfd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushfd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rcl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rcr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rol.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ror.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sahf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sahf.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sal.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sal.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sar.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sar.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sbb.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sbb.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Set.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Set.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Shl.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Shld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shld.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Shr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Shrd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shrd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Stc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Stc.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Std.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Std.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sti.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sti.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sub.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sub.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Test.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Test.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xadd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xadd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xchg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xchg.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xlat.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xlat.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Xor.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xor.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Fix package naming and contents">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/configuratio_environment.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/configuratio_environment.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/error_logger.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/error_logger.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/find.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/find.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/find_and_replace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/find_and_replace.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/loader.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loader.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/memory.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/memory.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/registers.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/settings_editor.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/settings_editor.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -260,7 +61,53 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="FileEditorTabPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileEditorTab.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextEditor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5901814">
+              <caret line="256" column="24" selection-start-line="256" selection-start-column="24" selection-end-line="256" selection-end-column="24" />
+              <folding>
+                <element signature="e#10567#10568#0" expanded="true" />
+                <element signature="e#10614#10615#0" expanded="true" />
+                <element signature="e#10647#10648#0" expanded="true" />
+                <element signature="e#10678#10679#0" expanded="true" />
+                <element signature="e#10717#10718#0" expanded="true" />
+                <element signature="e#10758#10759#0" expanded="true" />
+                <element signature="e#10801#10802#0" expanded="true" />
+                <element signature="e#10849#10850#0" expanded="true" />
+                <element signature="e#10875#10876#0" expanded="true" />
+                <element signature="e#10923#10924#0" expanded="true" />
+                <element signature="e#10949#10950#0" expanded="true" />
+                <element signature="e#10997#10998#0" expanded="true" />
+                <element signature="e#11031#11032#0" expanded="true" />
+                <element signature="e#11095#11096#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -678,7 +525,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Instructions/fidiv.bsh.java" />
         <option value="$PROJECT_DIR$/Instructions/fidivr.bsh.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/FindDialogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mov.java" />
@@ -729,6 +575,7 @@
         <option value="$PROJECT_DIR$/src/main/java/calvis/PreloaderApp.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
       </list>
     </option>
   </component>
@@ -740,9 +587,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
+    <option name="x" value="-960" />
     <option name="y" value="23" />
-    <option name="width" value="1920" />
+    <option name="width" value="960" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -1239,12 +1086,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00096" summary="FIx SSE2 Comparison Instructions">
-      <created>1459264656455</created>
-      <option name="number" value="00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1459264656456</updated>
-    </task>
     <task id="LOCAL-00097" summary="Fix GP Instructions">
       <created>1459273965463</created>
       <option name="number" value="00097" />
@@ -1533,7 +1374,13 @@
       <option name="project" value="LOCAL" />
       <updated>1468556207526</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="Fix package naming and contents">
+      <created>1468565869684</created>
+      <option name="number" value="00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1468565869684</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1557,22 +1404,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1057" extended-state="6" />
-    <editor active="false" />
+    <frame x="-960" y="23" width="960" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32677165" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30394736" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30362695" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24473684" sideWeight="0.5078684" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23626943" sideWeight="0.5101172" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23626943" sideWeight="0.49213162" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23626943" sideWeight="0.48988286" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.2746114" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31398964" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21352503" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4738562" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32331607" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0037273695" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0076252725" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1628,7 +1475,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Merge with conversion" />
     <MESSAGE value="Fixed x87 Instructions" />
     <MESSAGE value="Fixed Calvis/Text File Editor Implementation" />
     <MESSAGE value="Fixed Open File Editor&#10;" />
@@ -1653,7 +1499,8 @@
     <MESSAGE value="Added Toolbar Buttons Tooltip &amp; Fix Others Tab Pane Orientation" />
     <MESSAGE value="Added css to customize look and feel for TabPane" />
     <MESSAGE value="Merge with the new workspace layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge with the new workspace layout" />
+    <MESSAGE value="Fix package naming and contents" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix package naming and contents" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1665,7 +1512,7 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorPane.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java</url>
           <line>99</line>
           <properties />
           <option name="timeStamp" value="43" />
@@ -1857,14 +1704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/VisualizationController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1877,12 +1716,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="35" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
           <folding>
-            <element signature="e#6070#6071#0" expanded="false" />
-            <element signature="e#6141#6142#0" expanded="false" />
-            <element signature="e#6201#6202#0" expanded="false" />
-            <element signature="e#6272#6273#0" expanded="false" />
-            <element signature="e#6331#6332#0" expanded="false" />
-            <element signature="e#6395#6396#0" expanded="false" />
+            <element signature="e#6066#6067#0" expanded="false" />
+            <element signature="e#6137#6138#0" expanded="false" />
+            <element signature="e#6197#6198#0" expanded="false" />
+            <element signature="e#6268#6269#0" expanded="false" />
+            <element signature="e#6327#6328#0" expanded="false" />
+            <element signature="e#6391#6392#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1940,14 +1779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32017076">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2037,7 +1868,7 @@
         <state vertical-scroll-proportion="0.21237993">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2074,11 +1905,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/TextEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27748132">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
-          <folding />
+        <state vertical-scroll-proportion="0.5901814">
+          <caret line="256" column="24" selection-start-line="256" selection-start-column="24" selection-end-line="256" selection-end-column="24" />
+          <folding>
+            <element signature="e#10567#10568#0" expanded="true" />
+            <element signature="e#10614#10615#0" expanded="true" />
+            <element signature="e#10647#10648#0" expanded="true" />
+            <element signature="e#10678#10679#0" expanded="true" />
+            <element signature="e#10717#10718#0" expanded="true" />
+            <element signature="e#10758#10759#0" expanded="true" />
+            <element signature="e#10801#10802#0" expanded="true" />
+            <element signature="e#10849#10850#0" expanded="true" />
+            <element signature="e#10875#10876#0" expanded="true" />
+            <element signature="e#10923#10924#0" expanded="true" />
+            <element signature="e#10949#10950#0" expanded="true" />
+            <element signature="e#10997#10998#0" expanded="true" />
+            <element signature="e#11031#11032#0" expanded="true" />
+            <element signature="e#11095#11096#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
