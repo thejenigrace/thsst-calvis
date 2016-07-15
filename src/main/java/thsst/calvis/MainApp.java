@@ -1,5 +1,6 @@
 package thsst.calvis;
 
+import javafx.scene.control.Alert;
 import thsst.calvis.configuration.controller.ConfigurationEnvironmentController;
 import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
 import thsst.calvis.editor.controller.WorkspaceController;
@@ -9,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.text.MessageFormat;
 
 /**
  * Created by Jennica Alcalde on 10/1/2015.
@@ -115,6 +118,16 @@ public class MainApp extends Application {
         }
     }
 
+    public static Alert createAlert(Alert.AlertType alertType, String title, String contentTextFormat,
+                                    Object... contentTextArgs) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(MessageFormat.format(contentTextFormat, contentTextArgs));
+        alert.initOwner(primaryStage);
+        return alert;
+    }
+
     /**
      * Main method to run the application.
      *
@@ -136,16 +149,4 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-
-//    private static Preferences getPrefsRoot() {
-//        return Preferences.userRoot().node("thsst.calvis");
-//    }
-//
-//    private static Preferences getOptions() {
-//        return getPrefsRoot().node("options");
-//    }
-//
-//    public static Preferences getState() {
-//        return getPrefsRoot().node("state");
-//    }
 }

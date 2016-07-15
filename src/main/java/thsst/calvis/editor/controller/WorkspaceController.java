@@ -1,12 +1,7 @@
 package thsst.calvis.editor.controller;
 
-import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import thsst.calvis.MainApp;
-import thsst.calvis.editor.view.FileEditorTab;
-import thsst.calvis.editor.view.FileEditorTabPane;
-import thsst.calvis.editor.view.TextEditor;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -26,10 +21,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
+import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
+import thsst.calvis.editor.view.FileEditorTab;
+import thsst.calvis.editor.view.FileEditorTabPane;
+import thsst.calvis.editor.view.TextEditor;
 import thsst.calvis.simulatorvisualizer.controller.SystemController;
 
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -92,16 +90,6 @@ public class WorkspaceController implements Initializable {
         this.textFieldFind = TextFields.createClearableTextField();
         this.textFieldFind.setPrefWidth(250.0);
         this.toolbarMain.getItems().add(15, textFieldFind);
-    }
-
-    public Alert createAlert(AlertType alertType, String title, String contentTextFormat,
-                             Object... contentTextArgs) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(MessageFormat.format(contentTextFormat, contentTextArgs));
-        alert.initOwner(MainApp.primaryStage);
-        return alert;
     }
 
     private void init() {
@@ -186,7 +174,7 @@ public class WorkspaceController implements Initializable {
 
     private void showFileEditorPane() {
         this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
-        this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getNode());
+        this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getTabPane());
         this.fileEditorTabPane.newFileEditor();
     }
 

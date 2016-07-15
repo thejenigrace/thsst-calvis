@@ -29,7 +29,7 @@
                         <Menu mnemonicParsing="false" text="File">
                             <items>
                                 <MenuItem accelerator="Shortcut + N" mnemonicParsing="true" onAction="#handleNewFile"
-                                          text="New File">
+                                          text="New">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="N" control="UP" meta="UP" shift="UP"
                                                             shortcut="DOWN"/>
@@ -39,7 +39,7 @@
                                     </graphic>
                                 </MenuItem>
                                 <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile"
-                                          text="Open File">
+                                          text="Open">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP"
                                                             shortcut="DOWN"/>
@@ -65,10 +65,11 @@
                                                             shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
-                                <MenuItem accelerator="Ctrl + Shortcut + S" mnemonicParsing="true" onAction="#handleSaveAll" text="Save All">
+                                <MenuItem accelerator="Ctrl + Shortcut + S" mnemonicParsing="true"
+                                          onAction="#handleSaveAll" text="Save All">
                                     <accelerator>
-                                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
-                                    shortcut="DOWN"/>
+                                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                                 <!--<SeparatorMenuItem mnemonicParsing="false"/>-->
@@ -80,16 +81,21 @@
                                 <!--</accelerator>-->
                                 <!--</MenuItem>-->
                                 <SeparatorMenuItem mnemonicParsing="false"/>
-                                <MenuItem accelerator="Shortcut + L" mnemonicParsing="false" onAction="#handleCloseFile" text="Close">
+                                <MenuItem accelerator="Shortcut + L" mnemonicParsing="false" onAction="#handleCloseFile"
+                                          text="Close">
                                     <accelerator>
-                                    <KeyCodeCombination alt="UP" code="L" control="UP" meta="UP" shift="UP"
-                                    shortcut="DOWN"/>
+                                        <KeyCodeCombination alt="UP" code="L" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="TIMES_CIRCLE_ALT"/>
+                                    </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Ctrl + Shortcut + L" mnemonicParsing="false" onAction="#handleCloseAllFile" text="Close All">
+                                <MenuItem accelerator="Ctrl + Shortcut + L" mnemonicParsing="false"
+                                          onAction="#handleCloseAllFile" text="Close All">
                                     <accelerator>
-                                    <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP"
-                                    shortcut="DOWN"/>
+                                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
                                     </accelerator>
                                 </MenuItem>
                                 <SeparatorMenuItem mnemonicParsing="false"/>
@@ -99,6 +105,9 @@
                                         <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="UP"
                                                             shortcut="DOWN"/>
                                     </accelerator>
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="SIGN_OUT"/>
+                                    </graphic>
                                 </MenuItem>
                             </items>
                         </Menu>

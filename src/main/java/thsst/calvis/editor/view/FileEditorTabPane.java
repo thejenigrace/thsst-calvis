@@ -1,19 +1,18 @@
 package thsst.calvis.editor.view;
 
-import thsst.calvis.MainApp;
-import thsst.calvis.editor.controller.WorkspaceController;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 import org.fxmisc.richtext.CodeArea;
+import thsst.calvis.MainApp;
+import thsst.calvis.editor.controller.WorkspaceController;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,13 +38,13 @@ public class FileEditorTabPane {
     private HashMap<Integer, int[]> findHighlightRanges;
     private int currentFindRangeIndex;
 
-    public FileEditorTabPane(WorkspaceController workspaceController, ReadOnlyDoubleProperty width, ReadOnlyDoubleProperty height) {
+    public FileEditorTabPane(WorkspaceController workspaceController, ReadOnlyDoubleProperty paneWidth, ReadOnlyDoubleProperty paneHeight) {
         this.workspaceController = workspaceController;
         this.tabPane = new TabPane();
         this.tabPane.setFocusTraversable(false);
         this.tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
-        this.tabPane.prefWidthProperty().bind(width);
-        this.tabPane.prefHeightProperty().bind(height);
+        this.tabPane.prefWidthProperty().bind(paneWidth);
+        this.tabPane.prefHeightProperty().bind(paneHeight);
 //        this.tabPane.getStylesheets().add("others-tab-pane.css");
         // Update activeFileEditor property
         this.tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
@@ -84,10 +83,6 @@ public class FileEditorTabPane {
 //        restoreState();
     }
 
-    public Node getNode() {
-        return this.tabPane;
-    }
-
     public TabPane getTabPane() {
         return this.tabPane;
     }
@@ -122,7 +117,7 @@ public class FileEditorTabPane {
     }
 
     private FileEditorTab createFileEditor(Path path) {
-        FileEditorTab fileEditorTab = new FileEditorTab(workspaceController, path);
+        FileEditorTab fileEditorTab = new FileEditorTab(path);
         fileEditorTab.getTab().setOnCloseRequest(e -> {
             if ( !this.canCloseFileEditor(fileEditorTab) )
                 e.consume();
@@ -265,7 +260,7 @@ public class FileEditorTabPane {
         if ( !fileEditorTab.isModified() )
             return true;
 
-        Alert alert = this.workspaceController.createAlert(Alert.AlertType.CONFIRMATION, "Close",
+        Alert alert = MainApp.createAlert(Alert.AlertType.CONFIRMATION, "Close",
                 "''{0}'' has been modifiedc. Save changes?", fileEditorTab.getTab().getText());
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
@@ -347,46 +342,6 @@ public class FileEditorTabPane {
         }
         return null;
     }
-
-//    private void restoreState() {
-//        Preferences state = MainApp.getState();
-//        String[] fileNames = Utility.getPrefsStrings(state, "file");
-//        String activeFileName = state.get("activeFile", null);
-//
-//        int activeIndex = 0;
-//        ArrayList<File> files = new ArrayList<>(fileNames.length);
-//        for ( String fileName : fileNames ) {
-//            File file = new File(fileName);
-//            if ( file.exists() ) {
-//                files.add(file);
-//
-//                if ( fileName.equals(activeFileName) )
-//                    activeIndex = files.size() - 1;
-//            }
-//        }
-//
-//        if ( files.isEmpty() ) {
-//            this.newFileEditor();
-//            return;
-//        }
-//
-//        this.openFileEditors(files, activeIndex);
-//    }
-
-//    private void saveState(FileEditorTab[] allEditors, FileEditorTab activeEditor) {
-//        ArrayList<String> fileNames = new ArrayList<>(allEditors.length);
-//        for ( FileEditorTab fileEditor : allEditors ) {
-//            if ( fileEditor.getPath() != null )
-//                fileNames.add(fileEditor.getPath().toString());
-//        }
-//
-//        Preferences state = MainApp.getState();
-//        Utility.putPrefsStrings(state, "file", fileNames.toArray(new String[fileNames.size()]));
-//        if ( activeEditor != null && activeEditor.getPath() != null )
-//            state.put("activeFile", activeEditor.getPath().toString());
-//        else
-//            state.remove("activeFile");
-//    }
 
     /**
      * MARK --

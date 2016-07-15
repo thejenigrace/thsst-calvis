@@ -1,6 +1,5 @@
 package thsst.calvis.editor.view;
 
-import thsst.calvis.editor.controller.WorkspaceController;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
@@ -10,6 +9,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.fxmisc.undo.UndoManager;
+import thsst.calvis.MainApp;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,10 +20,10 @@ import java.nio.file.Path;
  */
 public class FileEditorTab {
 
-    private WorkspaceController workspaceController;
+//    private WorkspaceController workspaceController;
     private Tab tab = new Tab();
     private TextEditor textEditor = new TextEditor();
-    private boolean isLoaded = false;
+    private boolean isCodeLoaded = false;
 //    private boolean isCodeTemplateExist = false;
 
     // 'path' property
@@ -35,8 +35,8 @@ public class FileEditorTab {
     // 'canRedo' property
     private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
-    public FileEditorTab(WorkspaceController workspaceController, Path path) {
-        this.workspaceController = workspaceController;
+    public FileEditorTab(Path path) {
+//        this.workspaceController = workspaceController;
 
         this.tab.setUserData(this);
 
@@ -94,6 +94,11 @@ public class FileEditorTab {
         return canRedo;
     }
 
+    private String getCodeTemplate() {
+        return ";write code here \n\n\n\n\n" +
+                "SECTION .DATA";
+    }
+
     private void updateTab() {
         Path path = this.path.get();
         this.tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
@@ -121,13 +126,13 @@ public class FileEditorTab {
         this.textEditor.pathProperty().bind(path);
 
         // Load file and Create UI when the tab becomes visible the first time
-        if( !this.isLoaded ) {
-            this.isLoaded = this.load();
+        if( !this.isCodeLoaded ) {
+            this.isCodeLoaded = this.load();
         }
 
-        if ( !this.isLoaded ) {
+        if ( !this.isCodeLoaded ) {
             this.textEditor.setCodeAreaText(this.getCodeTemplate());
-            this.isLoaded = true;
+            this.isCodeLoaded = true;
         }
 
         // Clear undo history after first load
@@ -140,11 +145,6 @@ public class FileEditorTab {
         this.canRedo.bind(undoManager.redoAvailableProperty());
 
         this.textEditor.requestFocus();
-    }
-
-    private String getCodeTemplate() {
-        return ";write code here \n\n\n\n\n" +
-                "SECTION .DATA";
     }
 
     private boolean load() {
@@ -160,7 +160,7 @@ public class FileEditorTab {
             this.textEditor.getUndoManager().mark();
             return  true;
         } catch ( IOException ex ) {
-            Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Load",
+            Alert alert = MainApp.createAlert(Alert.AlertType.ERROR, "Load",
                     "Failed to load ''{0}''.\n\nReason: {1}", path, ex.getMessage());
             alert.showAndWait();
         }
@@ -176,7 +176,7 @@ public class FileEditorTab {
             this.textEditor.getUndoManager().mark();
             return true;
         } catch ( IOException ex ) {
-            Alert alert = workspaceController.createAlert(Alert.AlertType.ERROR, "Save",
+            Alert alert = MainApp.createAlert(Alert.AlertType.ERROR, "Save",
                     "Failed to save ''{0}''.\n\nReason: {1}", path.get(), ex.getMessage());
             alert.showAndWait();
             return false;
