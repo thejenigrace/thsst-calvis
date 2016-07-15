@@ -28,7 +28,6 @@ import thsst.calvis.editor.view.TextEditor;
 import thsst.calvis.simulatorvisualizer.controller.SystemController;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -52,8 +51,6 @@ public class WorkspaceController implements Initializable {
     private Button btnRedo;
     @FXML
     private Button btnPlay;
-    @FXML
-    private Button btnStop;
     @FXML
     private Button btnNext;
     @FXML
@@ -100,7 +97,7 @@ public class WorkspaceController implements Initializable {
         this.textFieldFind.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                fileEditorTabPane.findTextFieldChange(newValue);
+                fileEditorTabPane.onActionFind(newValue);
             }
         });
     }
@@ -380,8 +377,8 @@ public class WorkspaceController implements Initializable {
             findAndReplaceDialogStage.setTitle("Find & Replace");
             findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
             findAndReplaceDialogStage.setResizable(false);
-            findAndReplaceDialogStage.setX(root.getWidth() / 3);
-            findAndReplaceDialogStage.setY(root.getHeight() / 3);
+            findAndReplaceDialogStage.setX(this.root.getWidth() / 3);
+            findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
             findAndReplaceDialogStage.show();
 
             // Pass the current code in the text thsst.calvis.editor to FindDialogController
@@ -393,23 +390,18 @@ public class WorkspaceController implements Initializable {
         }
     }
 
-
-    @FXML
-    public void handleFindUp(ActionEvent event) {
-        this.fileEditorTabPane.onFindUp();
-    }
-
-    @FXML
-    public void handleFindDown(ActionEvent event) {
-        this.fileEditorTabPane.onFindDown();
-    }
-
-    public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-        this.fileEditorTabPane.onActionFind(findHighlightRanges);
-    }
-
     public void onActionFindAndReplace(String find, String replace) {
         this.fileEditorTabPane.onActionFindAndReplace(find, replace);
+    }
+
+    @FXML
+    public void handleFindUpward(ActionEvent event) {
+        this.fileEditorTabPane.onActionFindMoveUpward();
+    }
+
+    @FXML
+    public void handleFindDownward(ActionEvent event) {
+        this.fileEditorTabPane.onActionFindMoveDownward();
     }
 
     /**

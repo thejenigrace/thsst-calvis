@@ -387,7 +387,7 @@
                         </Label>
                         <!--<CustomTextField fx:id="textFieldFind" prefWidth="250.0" />-->
                         <!--<TextField fx:id="textFieldFind" prefWidth="250.0" />-->
-                        <Button fx:id="btnFindUp" mnemonicParsing="false" onAction="#handleFindUp">
+                        <Button fx:id="btnFindUp" mnemonicParsing="false" onAction="#handleFindUpward">
                             <graphic>
                                 <FontAwesomeIconView glyphName="ARROW_UP"/>
                             </graphic>
@@ -395,7 +395,7 @@
                                 <Tooltip text="Previous"/>
                             </tooltip>
                         </Button>
-                        <Button fx:id="btnFindDown" mnemonicParsing="false" onAction="#handleFindDown">
+                        <Button fx:id="btnFindDown" mnemonicParsing="false" onAction="#handleFindDownward">
                             <graphic>
                                 <FontAwesomeIconView glyphName="ARROW_DOWN"/>
                             </graphic>

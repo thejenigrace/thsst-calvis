@@ -27,11 +27,11 @@ public class FindAndReplaceDialogController {
     }
 
     public String getFindField() {
-        return textFieldFind.getText();
+        return this.textFieldFind.getText();
     }
 
     public String getReplaceField() {
-        return textFieldReplace.getText();
+        return this.textFieldReplace.getText();
     }
 
     @FXML
@@ -41,10 +41,10 @@ public class FindAndReplaceDialogController {
 
     @FXML
     private void handleFindAndReplace(ActionEvent event) throws Exception {
-        System.out.println("FIND: " + getFindField());
-        System.out.println("REPLACE: " + getReplaceField());
+        System.out.println("FIND: " + this.getFindField());
+        System.out.println("REPLACE: " + this.getReplaceField());
 
-        workspaceController.onActionFindAndReplace(getFindField(), getReplaceField());
+        this.workspaceController.onActionFindAndReplace(this.getFindField(), this.getReplaceField());
     }
 
 }

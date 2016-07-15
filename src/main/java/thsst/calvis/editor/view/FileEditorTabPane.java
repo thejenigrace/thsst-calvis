@@ -371,23 +371,11 @@ public class FileEditorTabPane {
         codeArea.redo();
     }
 
-    public void onActionFind(HashMap<Integer, int[]> findHighlightRanges) {
-//        System.out.println("Launch onActionFind!");
-        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
-
-        this.findHighlightRanges = findHighlightRanges;
-        if ( findHighlightRanges.size() != 0 ) {
-            currentFindRangeIndex = 0;
-            int[] range = findHighlightRanges.get(0);
-            codeArea.selectRange(range[0], range[1]);
-        }
-    }
-
-    public void findTextFieldChange(String newValue) {
+    public void onActionFind(String find) {
         Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
-        if ( !newValue.isEmpty() && tab != null ) {
+        if ( !find.isEmpty() && tab != null ) {
             CodeArea codeArea = (CodeArea) tab.getContent();
-            String find_pattern = "\\b(" + newValue + ")\\b";
+            String find_pattern = "\\b(" + find + ")\\b";
             Pattern pattern = Pattern.compile("(?<FIND>" + find_pattern + ")");
 //            System.out.println("PATTERN: " + pattern.toString());
 
@@ -409,7 +397,7 @@ public class FileEditorTabPane {
             }
 
             if ( c > 0 ) {
-                onActionFind(findHighlightRanges);
+                this.highlightsSelected(findHighlightRanges);
                 this.workspaceController.disableFindButton(false);
             } else {
                 this.workspaceController.disableFindButton(true);
@@ -419,7 +407,18 @@ public class FileEditorTabPane {
         }
     }
 
-    public void onFindUp() {
+    public void highlightsSelected(HashMap<Integer, int[]> findHighlightRanges) {
+        CodeArea codeArea = (CodeArea) this.tabPane.getSelectionModel().getSelectedItem().getContent();
+
+        this.findHighlightRanges = findHighlightRanges;
+        if ( findHighlightRanges.size() != 0 ) {
+            currentFindRangeIndex = 0;
+            int[] range = findHighlightRanges.get(0);
+            codeArea.selectRange(range[0], range[1]);
+        }
+    }
+
+    public void onActionFindMoveUpward() {
         try {
             Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
             if ( tab != null ) {
@@ -440,7 +439,7 @@ public class FileEditorTabPane {
         }
     }
 
-    public void onFindDown() {
+    public void onActionFindMoveDownward() {
         try {
             Tab tab = this.tabPane.getSelectionModel().getSelectedItem();
             if ( tab != null ) {
