@@ -36,7 +36,6 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                 p -> p.getValue().errorCauseProperty());
         errorMessage.setCellValueFactory(
                 p -> p.getValue().errorMessageProperty());
-
     }
 
     @Override

@@ -427,7 +427,7 @@
                                                         <Button fx:id="btnHide" mnemonicParsing="false"
                                                                 onAction="#handleHide">
                                                             <graphic>
-                                                                <FontAwesomeIconView glyphName="DOWNLOAD"/>
+                                                                <FontAwesomeIconView glyphName="COMPRESS"/>
                                                             </graphic>
                                                             <tooltip>
                                                                 <Tooltip text="Hide Tab Pane"/>

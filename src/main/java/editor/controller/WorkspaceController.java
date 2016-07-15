@@ -471,11 +471,13 @@ public class WorkspaceController implements Initializable {
     }
 
     public void changeIconToHide() {
-        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.DOWNLOAD));
+        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.COMPRESS));
+        this.btnHide.setTooltip(new Tooltip("Hide Tab Pane"));
     }
 
     public void changeIconToShow() {
-        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.UPLOAD));
+        this.btnHide.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.EXPAND));
+        this.btnHide.setTooltip(new Tooltip("Show Tab Pane"));
     }
 
     public void disablePlayNextPrevious(boolean flag) {
