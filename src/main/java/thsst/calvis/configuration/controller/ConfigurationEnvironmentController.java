@@ -10,7 +10,7 @@ import thsst.calvis.configuration.model.filehandling.FilePathList;
 import thsst.calvis.configuration.model.filehandling.SaveFile;
 import thsst.calvis.MainApp;
 import thsst.calvis.editor.controller.LoaderController;
-import thsst.calvis.editor.controller.StringCollectionContainer;
+import thsst.calvis.configuration.model.filehandling.StringCollectionContainer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;

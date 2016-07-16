@@ -1,4 +1,4 @@
-package thsst.calvis.editor.controller;
+package thsst.calvis.configuration.model.filehandling;
 
 import java.util.ArrayList;
 
