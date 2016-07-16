@@ -22,6 +22,7 @@ public class FileEditorTab {
 
 //    private WorkspaceController workspaceController;
     private Tab tab = new Tab();
+//    private DraggableTab tab = new DraggableTab("Untitled");
     private TextEditor textEditor = new TextEditor();
     private boolean isCodeLoaded = false;
 //    private boolean isCodeTemplateExist = false;
@@ -38,6 +39,7 @@ public class FileEditorTab {
     public FileEditorTab(Path path) {
 //        this.workspaceController = workspaceController;
 
+//        this.tab = new DraggableTab("Untitled");
         this.tab.setUserData(this);
 
         this.path.set(path);
@@ -102,6 +104,7 @@ public class FileEditorTab {
     private void updateTab() {
         Path path = this.path.get();
         this.tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
+//        this.tab.setLabelText((path != null) ? path.getFileName().toString() : "Untitled");
         this.tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
         Text text = new Text("*");
         text.setFill(Color.web("#86A4BA", 1.0));

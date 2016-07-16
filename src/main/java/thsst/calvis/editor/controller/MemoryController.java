@@ -25,17 +25,15 @@ public class MemoryController extends AssemblyComponent implements Initializable
 
     @FXML
     private AnchorPane paneMemoryFilter;
-    @FXML
-    private AnchorPane paneMemoryTableView;
 
     @FXML
     private TableView<Map.Entry<String, String>> tableViewMemory;
     @FXML
-    private TableColumn<Map.Entry<String, String>, String> memoryLabel;
+    private TableColumn<Map.Entry<String, String>, String> colMemoryLabel;
     @FXML
-    private TableColumn<Map.Entry<String, String>, String> memoryAddress;
+    private TableColumn<Map.Entry<String, String>, String> colMemoryAddress;
     @FXML
-    private TableColumn<Map.Entry<String, String>, String> memoryRepresentation;
+    private TableColumn<Map.Entry<String, String>, String> colMemoryRepresentation;
 
     private Memory memory;
 
@@ -43,22 +41,22 @@ public class MemoryController extends AssemblyComponent implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        memoryLabel.setCellValueFactory(
+        this.colMemoryLabel.setCellValueFactory(
                 p -> new SimpleStringProperty(this.memory.getCorrespondingLabel(p.getValue().getKey())));
-        memoryAddress.setCellValueFactory(
+        this.colMemoryAddress.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getKey()));
-        memoryRepresentation.setCellValueFactory(
+        this.colMemoryRepresentation.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().getValue()));
     }
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        tableViewMemory.refresh();
+        this.tableViewMemory.refresh();
     }
 
     @Override
     public void refresh() {
-        tableViewMemory.refresh();
+        this.tableViewMemory.refresh();
     }
 
     @Override
@@ -66,19 +64,19 @@ public class MemoryController extends AssemblyComponent implements Initializable
         this.memory = this.sysCon.getMemoryState();
         Map map = this.memory.getMemoryMap();
         ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(map.entrySet());
-        tableViewMemory.setItems(items);
-        tableViewMemory.scrollTo(tableViewMemory.getItems().size());
+        this.tableViewMemory.setItems(items);
+        this.tableViewMemory.scrollTo(this.tableViewMemory.getItems().size());
 
-        textFieldFilter = TextFields.createClearableTextField();
-        textFieldFilter.setPromptText("Memory Filter");
-        textFieldFilter.textProperty().addListener((o) -> {
+        this.textFieldFilter = TextFields.createClearableTextField();
+        this.textFieldFilter.setPromptText("Memory Filter");
+        this.textFieldFilter.textProperty().addListener((o) -> {
             if(textFieldFilter.textProperty().get().isEmpty()) {
                 tableViewMemory.setItems(items);
                 return;
             }
 
             ObservableList<Map.Entry<String, String>> tableItems = FXCollections.observableArrayList();
-            ObservableList<TableColumn<Map.Entry<String, String>, ?>> cols = tableViewMemory.getColumns();
+            ObservableList<TableColumn<Map.Entry<String, String>, ?>> cols = this.tableViewMemory.getColumns();
             for(int i=0; i<items.size(); i++) {
                 for(int j=0; j<cols.size(); j++) {
                     TableColumn col = cols.get(j);
@@ -91,12 +89,12 @@ public class MemoryController extends AssemblyComponent implements Initializable
                 }
 
             }
-            tableViewMemory.setItems(tableItems);
+            this.tableViewMemory.setItems(tableItems);
         });
         AnchorPane.setTopAnchor(textFieldFilter, 0.0);
         AnchorPane.setBottomAnchor(textFieldFilter, 0.0);
         AnchorPane.setLeftAnchor(textFieldFilter, 0.0);
         AnchorPane.setRightAnchor(textFieldFilter, 0.0);
-        paneMemoryFilter.getChildren().add(textFieldFilter);
+        this.paneMemoryFilter.getChildren().add(this.textFieldFilter);
     }
 }

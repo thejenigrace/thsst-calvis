@@ -1,6 +1,7 @@
 package thsst.calvis;
 
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import thsst.calvis.configuration.controller.ConfigurationEnvironmentController;
 import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
 import thsst.calvis.editor.controller.WorkspaceController;
@@ -38,6 +39,7 @@ public class MainApp extends Application {
         try {
             MainApp.primaryStage = primaryStage;
             MainApp.primaryStage.setTitle("CALVIS Configuration");
+            MainApp.primaryStage.getIcons().add(new Image("/img/calvis_logo.png"));
 
             initRootLayout();
         } catch ( Exception e ) {

@@ -39,9 +39,9 @@ public class WorkspaceController implements Initializable {
     @FXML
     private BorderPane root;
     @FXML
-    private AnchorPane registerPane;
+    private AnchorPane anchorPaneRegister;
     @FXML
-    private AnchorPane paneMemory;
+    private AnchorPane anchorPaneMemory;
 
     @FXML
     private Button btnSave;
@@ -63,23 +63,23 @@ public class WorkspaceController implements Initializable {
     private Button btnHide;
 
     @FXML
-    private SplitPane fileEditorSplitPane;
+    private SplitPane splitPaneFileEditor;
 
     @FXML
-    private TabPane bottomTabPane;
+    private TabPane tabPaneBottom;
 
     @FXML
     private ToolBar toolbarMain;
 
     @FXML
-    private VBox fileEditorVBox;
+    private VBox vBoxFileEditor;
+
+    private TextField textFieldFind;
+    private boolean isHideTabPaneBottom = false;
 
     private FileEditorTabPane fileEditorTabPane;
 
     private SystemController sysCon;
-
-    private TextField textFieldFind;
-    private boolean isHide = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,11 +107,12 @@ public class WorkspaceController implements Initializable {
         loader.setLocation(getClass().getResource("/fxml/registers.fxml"));
         SplitPane registersView = loader.load();
         SplitPane.setResizableWithParent(registersView, Boolean.TRUE);
-        registerPane.getChildren().add(registersView);
         AnchorPane.setTopAnchor(registersView, 0.0);
         AnchorPane.setBottomAnchor(registersView, 0.0);
         AnchorPane.setLeftAnchor(registersView, 0.0);
         AnchorPane.setRightAnchor(registersView, 0.0);
+
+        this.anchorPaneRegister.getChildren().add(registersView);
 
         // Attach registersController to SystemController
         RegistersController registersController = loader.getController();
@@ -130,7 +131,7 @@ public class WorkspaceController implements Initializable {
             AnchorPane.setLeftAnchor(memoryView, 0.0);
             AnchorPane.setRightAnchor(memoryView, 0.0);
 
-            paneMemory.getChildren().add(memoryView);
+            this.anchorPaneMemory.getChildren().add(memoryView);
 
             // Attach memoryController to SystemController
             MemoryController memoryController = loader.getController();
@@ -143,47 +144,41 @@ public class WorkspaceController implements Initializable {
 
     private void showBottomTabPane() throws Exception {
         ConsoleController consoleController = new ConsoleController();
-        this.bottomTabPane.getTabs().add(consoleController.getTab());
-        this.bottomTabPane.getTabs().add(createErrorLoggerTab(null));
+        this.tabPaneBottom.getTabs().add(consoleController.getTab());
+        this.tabPaneBottom.getTabs().add(createErrorLoggerTab(null));
         this.sysCon.attach(consoleController);
         consoleController.build();
 
         VisualizationController visualizationController = new VisualizationController();
-        this.bottomTabPane.getTabs().add(visualizationController.getTab());
+        this.tabPaneBottom.getTabs().add(visualizationController.getTab());
         this.sysCon.attach(visualizationController);
         visualizationController.build();
     }
 
     @FXML
     private void handleConsole(ActionEvent event) {
-        this.bottomTabPane.getSelectionModel().select(0);
+        this.tabPaneBottom.getSelectionModel().select(0);
     }
 
     @FXML
     private void handleErrorLogger(ActionEvent event) {
-        this.bottomTabPane.getSelectionModel().select(1);
+        this.tabPaneBottom.getSelectionModel().select(1);
     }
 
     @FXML
     private void handleVisualizer(ActionEvent event) {
-        this.bottomTabPane.getSelectionModel().select(2);
-    }
-
-    private void showFileEditorPane() {
-        this.fileEditorTabPane = new FileEditorTabPane(this, this.fileEditorSplitPane.widthProperty(), this.fileEditorSplitPane.heightProperty());
-        this.fileEditorVBox.getChildren().add(0, this.fileEditorTabPane.getTabPane());
-        this.fileEditorTabPane.newFileEditor();
+        this.tabPaneBottom.getSelectionModel().select(2);
     }
 
     @FXML
     private void handleHide(ActionEvent event) {
-        if ( !isHide ) {
-            isHide = true;
-            this.fileEditorSplitPane.setDividerPositions(1);
+        if ( !this.isHideTabPaneBottom ) {
+            this.isHideTabPaneBottom = true;
+            this.splitPaneFileEditor.setDividerPositions(1);
             this.changeIconToShow();
         } else {
-            isHide = false;
-            this.fileEditorSplitPane.setDividerPositions(0.65);
+            this.isHideTabPaneBottom = false;
+            this.splitPaneFileEditor.setDividerPositions(0.65);
             this.changeIconToHide();
         }
     }
@@ -205,10 +200,169 @@ public class WorkspaceController implements Initializable {
     }
 
     public void handleErrorLoggerTab(Exception e) throws Exception {
-        this.bottomTabPane.getTabs().set(1, createErrorLoggerTab(e));
-        this.bottomTabPane.getSelectionModel().select(1);
+        this.tabPaneBottom.getTabs().set(1, createErrorLoggerTab(e));
+        this.tabPaneBottom.getSelectionModel().select(1);
     }
 
+    private void showFileEditorTabPane() {
+        this.fileEditorTabPane = new FileEditorTabPane(this, this.splitPaneFileEditor.widthProperty(), this.splitPaneFileEditor.heightProperty());
+        this.vBoxFileEditor.getChildren().add(0, this.fileEditorTabPane.getTabPane());
+        this.fileEditorTabPane.newFileEditor();
+    }
+
+    /**
+     * Action for New File; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleNewFile(ActionEvent event) {
+        this.fileEditorTabPane.newFileEditor();
+    }
+
+    /**
+     * Action for Open File; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleOpenFile(ActionEvent event) {
+        this.fileEditorTabPane.openFileEditor();
+    }
+
+    /**
+     * Action for Save; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleSaveFile(ActionEvent event) {
+        this.fileEditorTabPane.saveFileEditor(this.fileEditorTabPane.getActiveFileEditor());
+    }
+
+    /**
+     * Action for Save As; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleSaveAsFile(ActionEvent event) {
+        this.fileEditorTabPane.saveAsFileEditor(this.fileEditorTabPane.getActiveFileEditor());
+    }
+
+    @FXML
+    private void handleSaveAllFile(ActionEvent event) {
+        this.fileEditorTabPane.saveAllFileEditors();
+    }
+
+    @FXML
+    private void handleCloseFile(ActionEvent event) {
+        this.fileEditorTabPane.closeFileEditor(this.fileEditorTabPane.getActiveFileEditor(), true);
+    }
+
+    @FXML
+    private void handleCloseAllFile(ActionEvent event) {
+        this.fileEditorTabPane.closeAllFileEditors();
+    }
+
+    /**
+     * Action for Settings; a MenuItem in File.
+     *
+     * @param event
+     */
+    @FXML
+    private void handleSettings(ActionEvent event) {
+        try {
+            // Load root layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/settings.fxml"));
+            Parent settingsView = (BorderPane) loader.load();
+
+            Stage settingsDialogStage = new Stage();
+            settingsDialogStage.initModality(Modality.APPLICATION_MODAL);
+            settingsDialogStage.setTitle("Settings");
+            settingsDialogStage.setScene(new Scene(settingsView));
+            settingsDialogStage.setResizable(false);
+            settingsDialogStage.centerOnScreen();
+            settingsDialogStage.show();
+
+            SettingsController settingsController = loader.getController();
+            settingsController.setWorkspaceController(this);
+            settingsController.setDialogStage(settingsDialogStage);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleExitApp(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void handleUndo(ActionEvent event) {
+        this.getActiveEditor().undo();
+    }
+
+    @FXML
+    private void handleRedo(ActionEvent event) {
+        this.getActiveEditor().redo();
+    }
+
+    @FXML
+    private void handleCut(ActionEvent event) {
+        this.getActiveEditor().cut();
+    }
+
+    @FXML
+    private void handleCopy(ActionEvent event) {
+        this.getActiveEditor().copy();
+    }
+
+    @FXML
+    private void handlePaste(ActionEvent event) {
+        this.getActiveEditor().paste();
+    }
+
+    @FXML
+    private void handleFindAndReplace(ActionEvent event) {
+        try {
+            // Load root layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
+            Parent findAndReplaceView = (BorderPane) loader.load();
+
+            Stage findAndReplaceDialogStage = new Stage();
+            findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
+            findAndReplaceDialogStage.setTitle("Find & Replace");
+            findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
+            findAndReplaceDialogStage.setResizable(false);
+            findAndReplaceDialogStage.setX(this.root.getWidth() / 3);
+            findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
+            findAndReplaceDialogStage.show();
+
+            // Pass the current code in the text thsst.calvis.editor to FindDialogController
+            FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
+            findAndReplaceDialogController.setWorkspaceController(this);
+            findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onActionFindAndReplace(String find, String replace) {
+        this.fileEditorTabPane.onActionFindAndReplace(find, replace);
+    }
+
+    @FXML
+    public void handleFindUpward(ActionEvent event) {
+        this.fileEditorTabPane.onActionFindMoveUpward();
+    }
+
+    @FXML
+    public void handleFindDownward(ActionEvent event) {
+        this.fileEditorTabPane.onActionFindMoveDownward();
+    }
 
     /**
      * Action for Play Simulation; a MenuItem in Execute.
@@ -265,148 +419,6 @@ public class WorkspaceController implements Initializable {
         this.fileEditorTabPane.simulationAction("RESET");
     }
 
-    /**
-     * Action for New File; a MenuItem in File.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleNewFile(ActionEvent event) {
-        this.fileEditorTabPane.newFileEditor();
-    }
-
-    /**
-     * Action for Open File; a MenuItem in File.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleOpenFile(ActionEvent event) {
-        this.fileEditorTabPane.openFileEditor();
-    }
-
-    /**
-     * Action for Save; a MenuItem in File.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleSaveFile(ActionEvent event) {
-        this.fileEditorTabPane.saveFileEditor(this.fileEditorTabPane.getActiveFileEditor());
-    }
-
-    /**
-     * Action for Save As; a MenuItem in File.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleSaveAsFile(ActionEvent event) {
-        this.fileEditorTabPane.saveAsFileEditor(this.fileEditorTabPane.getActiveFileEditor());
-    }
-
-    /**
-     * Action for Settings; a MenuItem in File.
-     *
-     * @param event
-     */
-    @FXML
-    private void handleSettings(ActionEvent event) {
-        try {
-            // Load root layout from fxml file
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/settings.fxml"));
-            Parent settingsView = (BorderPane) loader.load();
-
-            Stage settingsDialogStage = new Stage();
-            settingsDialogStage.initModality(Modality.APPLICATION_MODAL);
-            settingsDialogStage.setTitle("Settings");
-            settingsDialogStage.setScene(new Scene(settingsView));
-            settingsDialogStage.setResizable(false);
-            settingsDialogStage.centerOnScreen();
-            settingsDialogStage.show();
-
-            SettingsController settingsController = loader.getController();
-            settingsController.setWorkspaceController(this);
-            settingsController.setDialogStage(settingsDialogStage);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleUndo(ActionEvent event) {
-        this.getActiveEditor().undo();
-    }
-
-    @FXML
-    private void handleRedo(ActionEvent event) {
-        this.getActiveEditor().redo();
-    }
-
-    @FXML
-    private void handleCut(ActionEvent event) {
-        this.getActiveEditor().cut();
-    }
-
-    @FXML
-    private void handleCopy(ActionEvent event) {
-        this.getActiveEditor().copy();
-    }
-
-    @FXML
-    private void handlePaste(ActionEvent event) {
-        this.getActiveEditor().paste();
-    }
-
-    @FXML
-    private void handleExitApp(ActionEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
-    private void handleFindAndReplace(ActionEvent event) {
-        try {
-            // Load root layout from fxml file
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/find_and_replace.fxml"));
-            Parent findAndReplaceView = (BorderPane) loader.load();
-
-            Stage findAndReplaceDialogStage = new Stage();
-            findAndReplaceDialogStage.initModality(Modality.APPLICATION_MODAL);
-            findAndReplaceDialogStage.setTitle("Find & Replace");
-            findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
-            findAndReplaceDialogStage.setResizable(false);
-            findAndReplaceDialogStage.setX(this.root.getWidth() / 3);
-            findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
-            findAndReplaceDialogStage.show();
-
-            // Pass the current code in the text thsst.calvis.editor to FindDialogController
-            FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
-            findAndReplaceDialogController.setWorkspaceController(this);
-            findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-    }
-
-    public void onActionFindAndReplace(String find, String replace) {
-        this.fileEditorTabPane.onActionFindAndReplace(find, replace);
-    }
-
-    @FXML
-    public void handleFindUpward(ActionEvent event) {
-        this.fileEditorTabPane.onActionFindMoveUpward();
-    }
-
-    @FXML
-    public void handleFindDownward(ActionEvent event) {
-        this.fileEditorTabPane.onActionFindMoveDownward();
-    }
-
-    /**
-     * Help Actions
-     */
     @FXML
     private void handleHelpAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -417,29 +429,10 @@ public class WorkspaceController implements Initializable {
         alert.showAndWait();
     }
 
-    private TextEditor getActiveEditor() {
-        return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
-    }
 
     /**
-     * Creates a boolean property that is bound to another boolean value
-     * of the active thsst.calvis.editor.
+     * MARK -- Helper Methods --
      */
-    private BooleanProperty createActiveBooleanProperty(Function<FileEditorTab, ObservableBooleanValue> func) {
-        BooleanProperty bp = new SimpleBooleanProperty();
-        FileEditorTab fileEditorTab = this.fileEditorTabPane.getActiveFileEditor();
-        if ( fileEditorTab != null )
-            bp.bind(func.apply(fileEditorTab));
-        this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
-            bp.unbind();
-            if ( newFileEditor != null )
-                bp.bind(func.apply(newFileEditor));
-            else
-                bp.set(false);
-        });
-        return bp;
-    }
-
     public void changeIconToPause() {
         this.btnPlay.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.PAUSE));
         this.disableStepMode(true);
@@ -487,12 +480,35 @@ public class WorkspaceController implements Initializable {
         this.fileEditorTabPane.formatCode(codeBlock);
     }
 
+    private TextEditor getActiveEditor() {
+        return this.fileEditorTabPane.getActiveFileEditor().getTextEditor();
+    }
+
+    /**
+     * Creates a boolean property that is bound to another boolean value
+     * of the active editor.
+     */
+    private BooleanProperty createActiveBooleanProperty(Function<FileEditorTab, ObservableBooleanValue> func) {
+        BooleanProperty bp = new SimpleBooleanProperty();
+        FileEditorTab fileEditorTab = this.fileEditorTabPane.getActiveFileEditor();
+        if ( fileEditorTab != null )
+            bp.bind(func.apply(fileEditorTab));
+        this.fileEditorTabPane.activeFileEditorProperty().addListener((observable, oldFileEditor, newFileEditor) -> {
+            bp.unbind();
+            if ( newFileEditor != null )
+                bp.bind(func.apply(newFileEditor));
+            else
+                bp.set(false);
+        });
+        return bp;
+    }
+
     public SystemController getSysCon() {
         return this.sysCon;
     }
 
-    public void buildSystem(ConfiguratorEnvironment env) {
-        this.sysCon = new SystemController(env, this);
+    public void buildSystem(ConfiguratorEnvironment configEnv) {
+        this.sysCon = new SystemController(configEnv, this);
     }
 
     public void displayDefaultWindows() {
@@ -500,7 +516,7 @@ public class WorkspaceController implements Initializable {
             this.showRegisterPane();
             this.showMemoryPane();
             this.showBottomTabPane();
-            this.showFileEditorPane();
+            this.showFileEditorTabPane();
             this.disableSaveMode(true);
             this.disableFindButton(true);
             this.initBinding();
@@ -508,20 +524,5 @@ public class WorkspaceController implements Initializable {
             e.printStackTrace();
         }
         this.disableStepMode(true);
-    }
-
-    @FXML
-    private void handleSaveAll(ActionEvent event) {
-        this.fileEditorTabPane.saveAllFileEditors();
-    }
-
-    @FXML
-    private void handleCloseFile(ActionEvent event) {
-        this.fileEditorTabPane.closeFileEditor(this.fileEditorTabPane.getActiveFileEditor(), true);
-    }
-
-    @FXML
-    private void handleCloseAllFile(ActionEvent event) {
-        this.fileEditorTabPane.closeAllFileEditors();
     }
 }

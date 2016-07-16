@@ -10,14 +10,14 @@
       fx:controller="thsst.calvis.editor.controller.MemoryController">
     <children>
         <AnchorPane fx:id="paneMemoryFilter" prefHeight="28.0"/>
-        <AnchorPane fx:id="paneMemoryTableView" VBox.vgrow="ALWAYS">
+        <AnchorPane VBox.vgrow="ALWAYS">
             <children>
                 <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="memoryLabel" minWidth="50" text="Label"/>
-                        <TableColumn fx:id="memoryAddress" maxWidth="100" minWidth="100" text="Address"/>
-                        <TableColumn fx:id="memoryRepresentation" sortable="false" text="Value"/>
+                        <TableColumn fx:id="colMemoryLabel" minWidth="50" text="Label"/>
+                        <TableColumn fx:id="colMemoryAddress" maxWidth="100" minWidth="100" text="Address"/>
+                        <TableColumn fx:id="colMemoryRepresentation" sortable="false" text="Value"/>
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

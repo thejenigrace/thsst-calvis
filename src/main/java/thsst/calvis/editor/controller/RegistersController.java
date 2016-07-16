@@ -1,9 +1,5 @@
 package thsst.calvis.editor.controller;
 
-import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
-import thsst.calvis.configuration.model.engine.Register;
-import thsst.calvis.editor.view.AssemblyComponent;
-import thsst.calvis.editor.model.Flag;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,9 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
+import thsst.calvis.configuration.model.engine.Register;
+import thsst.calvis.editor.model.Flag;
+import thsst.calvis.editor.view.AssemblyComponent;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -32,20 +31,20 @@ public class RegistersController extends AssemblyComponent implements Initializa
 //    private TreeTableColumn<Register, String> colRegisterInfo;
 
     @FXML
-    private TableView<Flag> tableViewFlags1;
+    private TableView<Flag> tableViewMxcsrFlags;
     @FXML
-    private TableColumn flagsName1;
+    private TableColumn colMxcsrFlagsName;
     @FXML
-    private TableColumn flagsValue1;
+    private TableColumn colMxcsrFlagsValue;
     @FXML
-    private TableView<Flag> tableViewFlags2;
+    private TableView<Flag> tableViewEFlags;
     @FXML
-    private TableColumn flagsName2;
+    private TableColumn colEFlagsName;
     @FXML
-    private TableColumn flagsValue2;
+    private TableColumn colEFlagsValue;
 
-    private ObservableList<Flag> flagList1;
-    private ObservableList<Flag> flagList2;
+    private ObservableList<Flag> mxcsrFlagList;
+    private ObservableList<Flag> eFlagsList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,26 +58,40 @@ public class RegistersController extends AssemblyComponent implements Initializa
 //                convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
 //        ));
 
-        flagsName1.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        flagsValue1.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+        colMxcsrFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
 
-        flagsName2.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        flagsValue2.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+        colEFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
     }
 
 
-    public String convert(String registerName, String hexValue) throws NumberFormatException {
-//        System.out.println(registerName + ": " + hexValue);
+//    public String convert(String registerName, String hexValue) throws NumberFormatException {
+////        System.out.println(registerName + ": " + hexValue);
+//
+//        String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
+//        String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
+//
+//        if ( Arrays.asList(gpRegisters).contains(registerName) || Arrays.asList(mmxRegisters).contains(registerName) ) {
+//            Long longValue = Long.parseLong(hexValue, 16);
+//            return longValue.toString();
+//        }
+//
+//        return "";
+//    }
 
-        String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
-        String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
+    @Override
+    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
+        treeTableViewRegister.refresh();
+        tableViewMxcsrFlags.refresh();
+        tableViewEFlags.refresh();
+    }
 
-        if ( Arrays.asList(gpRegisters).contains(registerName) || Arrays.asList(mmxRegisters).contains(registerName) ) {
-            Long longValue = Long.parseLong(hexValue, 16);
-            return longValue.toString();
-        }
-
-        return "";
+    @Override
+    public void refresh() {
+        treeTableViewRegister.refresh();
+        tableViewMxcsrFlags.refresh();
+        tableViewEFlags.refresh();
     }
 
     @Override
@@ -103,35 +116,17 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 dummyRoot.getChildren().add(motherRegister);
             }
 
-//            for (int i = 0; i < dummyRoot.getChildren().size(); i++) {
-//                System.out.println("INSIDE DUMMY: " + dummyRoot.getChildren().get(i).getValue().getName());
-//            }
-
             this.treeTableViewRegister.setRoot(dummyRoot);
             this.treeTableViewRegister.setShowRoot(false);
 
-            flagList1 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
-            tableViewFlags1.setItems(flagList1);
+            this.mxcsrFlagList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
+            tableViewMxcsrFlags.setItems(this.mxcsrFlagList);
 
-            flagList2 = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
-            tableViewFlags2.setItems(flagList2);
+            this.eFlagsList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
+            this.tableViewEFlags.setItems(this.eFlagsList);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        treeTableViewRegister.refresh();
-        tableViewFlags1.refresh();
-        tableViewFlags2.refresh();
-    }
-
-    @Override
-    public void refresh() {
-        treeTableViewRegister.refresh();
-        tableViewFlags1.refresh();
-        tableViewFlags2.refresh();
     }
 
 }

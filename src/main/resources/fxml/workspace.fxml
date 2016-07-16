@@ -24,8 +24,9 @@
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
-                <MenuBar id="MenuBar">
+                <MenuBar>
                     <menus>
+                        <!--FILE MENU-->
                         <Menu mnemonicParsing="false" text="File">
                             <items>
                                 <MenuItem accelerator="Shortcut + N" mnemonicParsing="true" onAction="#handleNewFile"
@@ -66,7 +67,7 @@
                                     </accelerator>
                                 </MenuItem>
                                 <MenuItem accelerator="Ctrl + Shortcut + S" mnemonicParsing="true"
-                                          onAction="#handleSaveAll" text="Save All">
+                                          onAction="#handleSaveAllFile" text="Save All">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
                                                             shortcut="DOWN"/>
@@ -111,6 +112,7 @@
                                 </MenuItem>
                             </items>
                         </Menu>
+                        <!--EDIT MENU-->
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
                                 <MenuItem accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
@@ -198,6 +200,7 @@
                                 </accelerator>
                             </MenuItem>
                         </Menu>
+                        <!--EXECUTE MENU-->
                         <Menu mnemonicParsing="false" text="Execute">
                             <items>
                                 <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay"
@@ -269,7 +272,7 @@
                     </menus>
                 </MenuBar>
 
-                <!--Toolbar Buttons-->
+                <!--MAIN TOOLBAR-->
                 <ToolBar fx:id="toolbarMain">
                     <items>
                         <Button mnemonicParsing="false" onAction="#handleNewFile">
@@ -385,8 +388,6 @@
                                 <Tooltip text="Find"/>
                             </tooltip>
                         </Label>
-                        <!--<CustomTextField fx:id="textFieldFind" prefWidth="250.0" />-->
-                        <!--<TextField fx:id="textFieldFind" prefWidth="250.0" />-->
                         <Button fx:id="btnFindMoveUpward" mnemonicParsing="false" onAction="#handleFindUpward">
                             <graphic>
                                 <FontAwesomeIconView glyphName="ARROW_UP"/>
@@ -409,27 +410,24 @@
         </VBox>
     </top>
     <center>
-        <SplitPane fx:id="rootSplitPane" dividerPositions="0.275, 0.850" BorderPane.alignment="CENTER">
+        <SplitPane fx:id="splitPaneRoot" dividerPositions="0.275, 0.850" BorderPane.alignment="CENTER">
             <items>
-                <AnchorPane fx:id="registerPane">
+                <AnchorPane fx:id="anchorPaneRegister">
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <SplitPane fx:id="fileEditorSplitPane" dividerPositions="0.65" orientation="VERTICAL"
+                        <SplitPane fx:id="splitPaneFileEditor" dividerPositions="0.65" orientation="VERTICAL"
                                    prefHeight="730.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0"
                                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane fx:id="fileEditorAnchorPane" minHeight="0.0" minWidth="0.0"
+                                <AnchorPane minHeight="0.0" minWidth="0.0"
                                             prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <VBox fx:id="fileEditorVBox" layoutY="429.0" prefHeight="469.0"
+                                        <VBox fx:id="vBoxFileEditor" layoutY="429.0" prefHeight="469.0"
                                               prefWidth="878.0" AnchorPane.bottomAnchor="0.0"
                                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                                               AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <!--<TabPane fx:id="fileEditorTabPane" focusTraversable="false"-->
-                                                <!--prefHeight="730.0" prefWidth="886.0"-->
-                                                <!--tabClosingPolicy="ALL_TABS"/>-->
                                                 <ToolBar fx:id="toolbarHide">
                                                     <items>
                                                         <Pane HBox.hgrow="ALWAYS"/>
@@ -448,10 +446,10 @@
                                         </VBox>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="bottomAnchorPane" minHeight="0.0" minWidth="0.0"
+                                <AnchorPane minHeight="0.0" minWidth="0.0"
                                             prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <TabPane fx:id="bottomTabPane" prefHeight="178.0"
+                                        <TabPane fx:id="tabPaneBottom" prefHeight="178.0"
                                                  prefWidth="880.0" side="TOP" tabClosingPolicy="UNAVAILABLE"
                                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -462,7 +460,7 @@
                         </SplitPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="paneMemory"/>
+                <AnchorPane fx:id="anchorPaneMemory"/>
             </items>
         </SplitPane>
     </center>
