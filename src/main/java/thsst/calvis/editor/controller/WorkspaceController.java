@@ -56,9 +56,9 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnPrevious;
     @FXML
-    private Button btnFindUp;
+    private Button btnFindMoveUpward;
     @FXML
-    private Button btnFindDown;
+    private Button btnFindMoveDownward;
     @FXML
     private Button btnHide;
 
@@ -475,8 +475,8 @@ public class WorkspaceController implements Initializable {
     }
 
     public void disableFindButton(boolean flag) {
-        this.btnFindUp.setDisable(flag);
-        this.btnFindDown.setDisable(flag);
+        this.btnFindMoveUpward.setDisable(flag);
+        this.btnFindMoveDownward.setDisable(flag);
     }
 
     public void disableCodeArea(boolean flag) {
