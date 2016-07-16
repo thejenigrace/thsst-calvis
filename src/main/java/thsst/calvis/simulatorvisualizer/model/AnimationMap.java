@@ -86,8 +86,6 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("NEG", new Neg());
         this.put("MUL", new Mul());
         this.put("IMUL", new Imul());
-        this.put("DIV", new Div());
-        this.put("IDIV", new Div());
     }
 
     private void generateGPDecimalArithmetic() {
@@ -96,7 +94,6 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("AAA", new Aaa());
         this.put("AAS", new Aas());
         this.put("AAM", new Aam());
-        this.put("AAD", new Aad());
     }
 
     private void generateGPRotate(){
