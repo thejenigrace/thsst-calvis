@@ -17,9 +17,8 @@ public class Mxscr extends Register {
     @Override
     public void initializeValue() {
         this.value = "00000000";
-        for ( Flag f : flags ) {
-            f.setFlagValue("0");
-        }
+        for ( Flag flag : flags )
+            flag.setValue("0");
     }
 
     public void buildFlags() {
@@ -46,49 +45,49 @@ public class Mxscr extends Register {
             String flagName = flags.get(i).getName();
             switch ( flagName ) {
                 case "Invalid Operation":
-                    flags.get(i).setFlagValue(getInvalidOperationFlag());
+                    flags.get(i).setValue(getInvalidOperationFlag());
                     break;
                 case "Denormal":
-                    flags.get(i).setFlagValue(getDenormalFlag());
+                    flags.get(i).setValue(getDenormalFlag());
                     break;
                 case "Divide-by-Zero":
-                    flags.get(i).setFlagValue(getDivideByZeroFlag());
+                    flags.get(i).setValue(getDivideByZeroFlag());
                     break;
                 case "Overflow":
-                    flags.get(i).setFlagValue(getOverflowFlag());
+                    flags.get(i).setValue(getOverflowFlag());
                     break;
                 case "Underflow":
-                    flags.get(i).setFlagValue(getUnderflowFlag());
+                    flags.get(i).setValue(getUnderflowFlag());
                     break;
                 case "Precision":
-                    flags.get(i).setFlagValue(getPrecisionFlag());
+                    flags.get(i).setValue(getPrecisionFlag());
                     break;
                 case "Denormals are Zeroes":
-                    flags.get(i).setFlagValue(getDenormalsAreZeroes());
+                    flags.get(i).setValue(getDenormalsAreZeroes());
                     break;
                 case "Invalid Operation Mask":
-                    flags.get(i).setFlagValue(getInvalidOperationMask());
+                    flags.get(i).setValue(getInvalidOperationMask());
                     break;
                 case "Denormal Operation Mask":
-                    flags.get(i).setFlagValue(getDenormalOperationMask());
+                    flags.get(i).setValue(getDenormalOperationMask());
                     break;
                 case "Divide-by-Zero Mask":
-                    flags.get(i).setFlagValue(getDivideByZeroMask());
+                    flags.get(i).setValue(getDivideByZeroMask());
                     break;
                 case "Overflow Mask":
-                    flags.get(i).setFlagValue(getOverflowMask());
+                    flags.get(i).setValue(getOverflowMask());
                     break;
                 case "Underflow Mask":
-                    flags.get(i).setFlagValue(getUnderflowMask());
+                    flags.get(i).setValue(getUnderflowMask());
                     break;
                 case "Precision Mask":
-                    flags.get(i).setFlagValue(getPrecisionMask());
+                    flags.get(i).setValue(getPrecisionMask());
                     break;
                 case "Rounding Control":
-                    flags.get(i).setFlagValue(getRoundingControl());
+                    flags.get(i).setValue(getRoundingControl());
                     break;
                 case "Flush to Zero":
-                    flags.get(i).setFlagValue(getFlushToZero());
+                    flags.get(i).setValue(getFlushToZero());
                     break;
                 default:
             }
@@ -277,7 +276,7 @@ public class Mxscr extends Register {
     private void setFlag(String name, String value) {
         for ( int i = 0; i < flags.size(); i++ ) {
             if ( flags.get(i).getName().equals(name) ) {
-                flags.get(i).setFlagValue(value);
+                flags.get(i).setValue(value);
                 break;
             }
         }

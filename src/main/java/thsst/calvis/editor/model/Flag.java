@@ -8,19 +8,11 @@ import javafx.beans.property.SimpleStringProperty;
 public class Flag {
 
     private SimpleStringProperty name;
-    private SimpleStringProperty flagValue;
+    private SimpleStringProperty value;
 
-    public Flag(String name, String flagValue) {
+    public Flag(String name, String value) {
         this.name = new SimpleStringProperty(name);
-        this.flagValue = new SimpleStringProperty(flagValue);
-    }
-
-    public String getFlagValue() {
-        return this.flagValue.get();
-    }
-
-    public void setFlagValue(String val) {
-        this.flagValue.set(val);
+        this.value = new SimpleStringProperty(value);
     }
 
     public String getName() {
@@ -31,9 +23,17 @@ public class Flag {
         this.name.set(name);
     }
 
+    public String getValue() {
+        return this.value.get();
+    }
+
+    public void setValue(String value) {
+        this.value.set(value);
+    }
+
     @Override
     public String toString() {
-        return (name.get() + " : " + flagValue.get());
+        return (name.get() + " : " + value.get());
     }
 
 }

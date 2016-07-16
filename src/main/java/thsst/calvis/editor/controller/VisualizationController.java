@@ -27,7 +27,6 @@ public class VisualizationController extends AssemblyComponent {
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         this.tab.setContent(scrollPane);
-
     }
 
     public Tab getTab() {
@@ -74,12 +73,12 @@ public class VisualizationController extends AssemblyComponent {
     }
 
 
-    public void attachCalvisInstruction(CalvisFormattedInstruction CalvisInstruction) {
-        this.currentInstruction = CalvisInstruction;
+    public void attachCalvisInstruction(CalvisFormattedInstruction currentInstruction) {
+        this.currentInstruction = currentInstruction;
     }
 
-    public void setOldEnvironment(EnvironmentBag environment){
-        this.oldEnvironment = environment;
+    public void setOldEnvironment(EnvironmentBag oldEnvironment){
+        this.oldEnvironment = oldEnvironment;
     }
 
 }

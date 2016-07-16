@@ -59,10 +59,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
 //        ));
 
         colMxcsrFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+        colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
 
         colEFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("flagValue"));
+        colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
     }
 
 

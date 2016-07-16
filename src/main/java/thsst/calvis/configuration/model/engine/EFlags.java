@@ -17,9 +17,8 @@ public class EFlags extends Register {
     @Override
     public void initializeValue() {
         this.value = "00000002";
-        for ( Flag f : flags ) {
-            f.setFlagValue("0");
-        }
+        for ( Flag flag : flags )
+            flag.setValue("0");
     }
 
     public void buildFlags() {
@@ -39,28 +38,28 @@ public class EFlags extends Register {
             String flagName = flags.get(i).getName();
             switch ( flagName ) {
                 case "Carry":
-                    flags.get(i).setFlagValue(getCarryFlag());
+                    flags.get(i).setValue(getCarryFlag());
                     break;
                 case "Sign":
-                    flags.get(i).setFlagValue(getSignFlag());
+                    flags.get(i).setValue(getSignFlag());
                     break;
                 case "Overflow":
-                    flags.get(i).setFlagValue(getOverflowFlag());
+                    flags.get(i).setValue(getOverflowFlag());
                     break;
                 case "Zero":
-                    flags.get(i).setFlagValue(getZeroFlag());
+                    flags.get(i).setValue(getZeroFlag());
                     break;
                 case "Parity":
-                    flags.get(i).setFlagValue(getParityFlag());
+                    flags.get(i).setValue(getParityFlag());
                     break;
                 case "Auxiliary":
-                    flags.get(i).setFlagValue(getAuxiliaryFlag());
+                    flags.get(i).setValue(getAuxiliaryFlag());
                     break;
                 case "Direction":
-                    flags.get(i).setFlagValue(getDirectionFlag());
+                    flags.get(i).setValue(getDirectionFlag());
                     break;
                 case "Interrupt":
-                    flags.get(i).setFlagValue(getInterruptFlag());
+                    flags.get(i).setValue(getInterruptFlag());
                     break;
                 default:
             }
@@ -185,7 +184,7 @@ public class EFlags extends Register {
     private void setFlag(String name, String value) {
         for ( int i = 0; i < flags.size(); i++ ) {
             if ( flags.get(i).getName().equals(name) ) {
-                flags.get(i).setFlagValue(value);
+                flags.get(i).setValue(value);
                 break;
             }
         }
