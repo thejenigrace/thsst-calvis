@@ -24,6 +24,14 @@ public class ConsoleTextArea extends StyleClassedTextArea {
         this.textState = false;
     }
 
+    public boolean getState() {
+        return this.textState;
+    }
+
+    public void setState(boolean state) {
+        this.textState = state;
+    }
+
     @Override
     public void replaceText(int start, int end, String text) {
         String current = getText();
@@ -52,13 +60,4 @@ public class ConsoleTextArea extends StyleClassedTextArea {
         spansBuilder.add(Collections.singleton("console-font-color"), text.length());
         return spansBuilder.create();
     }
-
-    public boolean getState() {
-        return this.textState;
-    }
-
-    public void setState(boolean flag) {
-        this.textState = flag;
-    }
-
 }

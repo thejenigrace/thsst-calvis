@@ -22,19 +22,19 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
     @FXML
     private TableView<ErrorLog> tableViewErrorLogger;
     @FXML
-    private TableColumn<ErrorLog, String> errorType;
+    private TableColumn<ErrorLog, String> colErrorType;
     @FXML
-    private TableColumn<ErrorLog, String> errorCause;
+    private TableColumn<ErrorLog, String> colErrorCause;
     @FXML
-    private TableColumn<ErrorLog, String> errorMessage;
+    private TableColumn<ErrorLog, String> colErrorMessage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        errorType.setCellValueFactory(
+        this.colErrorType.setCellValueFactory(
                 p -> p.getValue().errorTypeProperty());
-        errorCause.setCellValueFactory(
+        this.colErrorCause.setCellValueFactory(
                 p -> p.getValue().errorCauseProperty());
-        errorMessage.setCellValueFactory(
+        this.colErrorMessage.setCellValueFactory(
                 p -> p.getValue().errorMessageProperty());
     }
 
@@ -100,7 +100,7 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
                 }
             }
             items.add(new ErrorLog(type, cause, message));
-            tableViewErrorLogger.setItems(items);
+            this.tableViewErrorLogger.setItems(items);
         }
     }
 }
