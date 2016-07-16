@@ -22,6 +22,8 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPStack();
         this.generateGPJump();
         this.generateDataTransfer();
+        this.generateSSELogical();
+        this.generateSSE2Logical();
     }
 
     private void generateGPDataTransfer() {
@@ -146,5 +148,19 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 //        this.put("MOVSS", new Movss());
 //        this.put("MOVSW", new Movsw());
         this.put("MINSD", new Minsd());
+    }
+
+    private void generateSSELogical() {
+        this.put("ANDPS", new Andps());
+        this.put("ANDNPS", new Andnps());
+        this.put("ORPS", new Orps());
+        this.put("XORPS", new Xorps());
+    }
+
+    private void generateSSE2Logical() {
+        this.put("ANDPD", new Andpd());
+        this.put("ANDNPD", new Andnpd());
+        this.put("ORPD", new Orpd());
+        this.put("XORPD", new Xorpd());
     }
 }
