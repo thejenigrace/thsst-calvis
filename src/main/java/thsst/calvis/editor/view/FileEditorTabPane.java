@@ -128,8 +128,9 @@ public class FileEditorTabPane {
 
         // Set extension filter
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CALVIS Files (*.txt, *.thsst.calvis)", "*.txt", "*.thsst.calvis"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
+                new FileChooser.ExtensionFilter("CALVIS Files (*.txt, *.calvis)", "*.txt", "*.calvis")
+//                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
 
 //        String lastDirectory = MainApp.getState().get("lastDirectory", null);
 //        File file = new File((lastDirectory != null) ? lastDirectory : ".");
@@ -227,7 +228,7 @@ public class FileEditorTabPane {
     public boolean saveAsFileEditor(FileEditorTab fileEditorTab) {
         this.tabPane.getSelectionModel().select(fileEditorTab.getTab());
 
-        FileChooser fileChooser =  createFileChooser("Save CALVIS File");
+        FileChooser fileChooser =  createFileChooser("Save As CALVIS File");
         // Show save file dialog
         File file = fileChooser.showSaveDialog(MainApp.primaryStage);
 

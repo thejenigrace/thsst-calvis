@@ -89,7 +89,7 @@ public class WorkspaceController implements Initializable {
         this.toolbarMain.getItems().add(15, textFieldFind);
     }
 
-    private void init() {
+    private void initBinding() {
         this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::modifiedProperty).not());
         this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canUndoProperty).not());
         this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canRedoProperty).not());
@@ -503,7 +503,7 @@ public class WorkspaceController implements Initializable {
             this.showFileEditorPane();
             this.disableSaveMode(true);
             this.disableFindButton(true);
-            this.init();
+            this.initBinding();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
