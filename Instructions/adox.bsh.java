@@ -1,92 +1,53 @@
 execute(des, src, registers, memory) {
- 	if ( des.isRegister() ){
- 		if ( src.isRegister() ){
- 			System.out.println("ADOX register to register");
+  int DWORD = 32;
+  // Destination is always r32
+  String desValue = registers.get(des);
+  String srcValue = "";
+  // Check if the src is either r32 or m32
+  if ( src.isRegister() ) {
+    System.out.println("ADOX: reg to reg");
+    srcValue = registers.get(src);
+  } else if ( src.isMemory() ) {
+    System.out.println("ADOX: mem to reg");
+    srcValue = memory.read(src, DWORD);
+  }
 
-            String x = registers.get(src);
-            String y = registers.get(des);
+  Calculator calculator = new Calculator(registers, memory);
+  EFlags eFlags = registers.getEFlags();
 
-			if(registers.getBitSize(des) == registers.getBitSize(src) && registers.getBitSize(des) == 32){
-                Calculator c = new Calculator(registers,memory);
-                EFlags ef = registers.getEFlags();
+  // Addition of Unsigned plus Overflow Flag
+  BigInteger biDesValue = new BigInteger(desValue, 16);
+  BigInteger biSrcValue = new BigInteger(srcValue, 16);
+  BigInteger biResult = biDesValue.add(biSrcValue);
 
-				// Addition in Binary Format
-				BigInteger biX=new BigInteger(x,16);
-				BigInteger biY=new BigInteger(y,16);
-				BigInteger result=biX.add(biY);
+  System.out.println(biDesValue.toString(16) + ": " + biDesValue.toString());
+  System.out.println(biSrcValue.toString(16) + ": " + biSrcValue.toString());
 
-                if(ef.getOverflowFlag().equals("1")) {
-                    System.out.println("Add Overflow Flag");
-                    result = result.add(new BigInteger("1"));
-                }
+  // Check if Overflow Flag == 1
+  if ( eFlags.getOverflowFlag().equals("1") ) {
+      BigInteger biAddPlusOne = BigInteger.valueOf(new Integer(1).intValue());
+      biResult = biResult.add(biAddPlusOne);
 
-				registers.set(des,c.binaryToHexString(result.toString(2),des));
+      System.out.println(biAddPlusOne.toString(16) + ": " + biAddPlusOne.toString());
+  }
 
-		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0), ef.getOverflowFlag()));
-			}
- 		}
+  System.out.println(biResult.toString(16) + ": " + biResult.toString());
 
- 		else if ( src.isMemory() && registers.getBitSize(des) == memory.getBitSize(src) && memory.getBitSize(src) == 32){
-			System.out.println("ADOX immediate to register");
-			int srcSize = memory.getBitSize(src);
-			String x = memory.read(srcSize);
-			String y = registers.get(des);
+  // Checks the length of the result to fit the destination
+  if ( biResult.toString(16).length() > DWORD/4 ) {
+    registers.set( des, biResult.toString(16).substring(1) );
+  } else {
+    registers.set( des, biResult.toString(16) );
+  }
 
-			if(x.length() == y.length()){
-			Calculator c = new Calculator(registers,memory);
-			EFlags ef = registers.getEFlags();
+  // Checks if Overflow Flag is affected
+  String desBinaryValue = biDesValue.toString(2);
+  String srcBinaryValue = biSrcValue.toString(2);
+  String resultBinaryValue = biResult.toString(2);
+  char desMSB = calculator.binaryZeroExtend(desBinaryValue, des).charAt(0);
+  char srcMSB = calculator.binaryZeroExtend(srcBinaryValue, src).charAt(0);
+  char resultMSB = calculator.binaryZeroExtend(resultBinaryValue, des).charAt(0);
 
-			// Addition in Binary Format
-			BigInteger biX=new BigInteger(x,16);
-			BigInteger biY=new BigInteger(y,16);
-			BigInteger result=biX.add(biY);
-
-			if(ef.getOverflowFlag().equals("1"))
-				result = result.add(new BigInteger("1"));
-
-
-		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0), ef.getOverflowFlag()));
-			}
-			if(result.toString(16).length() > registers.getHexSize(des)){
-				registers.set(des,c.binaryToHexString(result.toString(2).substring(1),des));
-			}
-			else{
-				registers.set(des,c.binaryToHexString(result.toString(2),des));
-			}
-
- 		}
- 	}
- 	else if ( des.isMemory() ){
-		int desSize = memory.getBitSize(des);
- 		if ( src.isRegister() && registers.getBitSize(src) == 32){
-			String x = registers.get(src);
-			String y = memory.read(des, desSize);
-
-			if(desSize == registers.getBitSize(src)){
-			Calculator c = new Calculator(registers,memory);
-			EFlags ef = registers.getEFlags();
-
-			// Addition in Binary Format
-			BigInteger biX=new BigInteger(x,16);
-			BigInteger biY=new BigInteger(y,16);
-			BigInteger result=biX.add(biY);
-
-			if(ef.getOverflowFlag().equals("1")) {
-			System.out.println("Add Overflow Flag");
-				result = result.add(new BigInteger("1"));
-			}
-			if(result.toString(16).length() > registers.getHexSize(des)){
-//			registers.set(des,c.binaryToHexString(result.toString(2),des));
-				memory.write(des,c.binaryToHexString(result.toString(2).substring(1),des), desSize);
-			}
-			else{
-				memory.write(des,c.binaryToHexString(result.toString(2),des), desSize);
-			}
-
-
-
-		ef.setOverflowFlag(c.checkOverflowAddWithFlag(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(result.toString(2), des).charAt(0), ef.getOverflowFlag()));
-			}
- 		}
- 	}
- }
+  String overflowFlag = calculator.checkOverflowAddWithFlag( srcMSB, desMSB, resultMSB, eFlags.getOverflowFlag() );
+  eFlags.setOverflowFlag( overflowFlag );
+}

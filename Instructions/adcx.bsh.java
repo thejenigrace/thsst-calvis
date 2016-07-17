@@ -21,27 +21,27 @@ execute(des, src, registers, memory) {
 	BigInteger biSrcValue = new BigInteger(srcValue, 16);
 	BigInteger biResult = biDesValue.add(biSrcValue);
 
-  System.out.println(biDesValue.toString(16) + ": " + biDesValue.toString());
-  System.out.println(biSrcValue.toString(16) + ": " + biSrcValue.toString());
+  // System.out.println(biDesValue.toString(16) + ": " + biDesValue.toString());
+  // System.out.println(biSrcValue.toString(16) + ": " + biSrcValue.toString());
 
   // Check if Carry Flag == 1
   if ( eFlags.getCarryFlag().equals("1") ) {
       BigInteger biAddPlusOne = BigInteger.valueOf(new Integer(1).intValue());
       biResult = biResult.add(biAddPlusOne);
 
-      System.out.println(biAddPlusOne.toString(16) + ": " + biAddPlusOne.toString());
+      // System.out.println(biAddPlusOne.toString(16) + ": " + biAddPlusOne.toString());
   }
 
-  System.out.println(biResult.toString(16) + ": " + biResult.toString());
+  // System.out.println(biResult.toString(16) + ": " + biResult.toString());
 
-  // Check the length of the result to fit the destination
+  // Checks the length of the result to fit the destination
   if ( biResult.toString(16).length() > DWORD/4 ) {
     registers.set( des, biResult.toString(16).substring(1) );
   } else {
     registers.set( des, biResult.toString(16) );
   }
 
-  // Check if Carry Flag is affected when resultValue > FFFFFFFF 
+  // Checks if Carry Flag is affected when resultValue > FFFFFFFF
   BigInteger biCF = new BigInteger(maxHexValue, 16);
   if ( biResult.compareTo(biCF) == 1 )
     eFlags.setCarryFlag("1");

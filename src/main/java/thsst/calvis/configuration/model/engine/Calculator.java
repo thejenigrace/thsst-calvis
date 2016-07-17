@@ -191,7 +191,7 @@ public class Calculator {
         String result = "";
         System.out.println(destination + " destination");
 
-        for(int x = 0; x < destination.length(); x = x + count){
+        for ( int x = 0; x < destination.length(); x = x + count ) {
 //            System.out.println(x + count + " : count");
             String subDes = destination.substring(x, x + count);
             String subSrc = source.substring(x, x + count);
@@ -410,6 +410,17 @@ public class Calculator {
         return value;
     }
 
+    public String binaryZeroExtend(String value, int size) {
+        if ( value.length() > size ) {
+            return value.substring(1);
+        } else {
+            int difference = size - value.length();
+            for ( int i = 0; i < difference; i++ )
+                value = "0" + value;
+        }
+        return value;
+    }
+
     public String binarySignExtend(String value, Token des) {
         if ( des.isRegister() ) {
             int missingZeroes = registers.getBitSize(des) - value.length();
@@ -565,18 +576,6 @@ public class Calculator {
         return bits.toString();
     }
 
-    public String binaryZeroExtend(String value, int count) {
-        if ( value.length() > count ) {
-            return value.substring(1);
-        } else {
-            int y = count - value.length();
-            for ( int x = 0; x < y; x++ ) {
-                value = "0" + value;
-            }
-        }
-        return value;
-    }
-
     public String hexFExtend(String value, int count) {
         if ( value.length() > count ) {
             return value.substring(1);
@@ -589,11 +588,11 @@ public class Calculator {
         return value;
     }
 
-    public String binaryZeroFPExtend(String value){
+    public String binaryZeroFPExtend(String value) {
         if ( value.length() > 80 ) {
             return value.substring(1);
         } else {
-            String sign = value.substring(0,1);
+            String sign = value.substring(0, 1);
             String subs = value.substring(1);
             int y = 79 - value.length();
             for ( int x = 0; x < y; x++ ) {

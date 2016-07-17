@@ -96,10 +96,11 @@ public class Ad extends CalvisAnimation {
                 desSize = memory.getBitSize(tokens[0]);
 
             String flagsAffected;
-            if ( isSigned )
+
+           if ( isSigned )
                 flagsAffected = "Flags Affected: CF, PF, AF, ZF, SF, OF";
-            else
-                flagsAffected = "Flags Affected: CF";
+           else
+               flagsAffected = "Flags Affected: " + flag;
 
             Text detailsText = new Text(X, Y * 2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
