@@ -7,9 +7,100 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Remove unneccessary class and methods">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aaa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Aaa.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Aad.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aam.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Aam.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Aas.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Aas.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ad.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Add.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Add.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/And.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/And.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bsf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Bsf.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bsr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Bsr.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bswap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Bswap.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bt.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Bt.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Btc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Btc.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Btr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Btr.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Bts.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Bts.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cbw.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cbw.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cdq.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cdq.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Clc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Clc.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cld.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cli.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cli.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmc.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmov.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmov.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmpxchg.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmpxchgs8.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cwd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cwd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Cwde.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cwde.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Daa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Daa.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Das.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Das.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Dec.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Dec.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Div.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Div.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Imul.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Imul.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Inc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Inc.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/J.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/J.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jcxz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Jcxz.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Je.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Je.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jecxz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Jecxz.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Jmp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Jmp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Lahf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Lahf.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Lea.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Lea.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loop.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Loop.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loope.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Loope.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopne.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Loopne.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopnz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Loopnz.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Loopz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Loopz.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxpd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Maxpd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxps.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Maxps.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxsd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Maxsd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Maxss.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Maxss.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Minsd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Minsd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Mov.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Mov.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Movd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movq.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Movq.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movsx.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Movsx.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Movzx.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Movzx.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Mul.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Mul.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Neg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Neg.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Not.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Not.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Or.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Or.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pop.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pop.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popa.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Popa.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Popad.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Popf.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Popfd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Popfd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Push.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Push.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pusha.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pusha.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pushad.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pushf.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Pushfd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pushfd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rcl.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rcr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcr.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Rol.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rol.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ror.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ror.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sahf.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sahf.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sal.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sal.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sar.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sar.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sbb.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sbb.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Set.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Set.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shl.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Shl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Shld.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shr.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Shr.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Shrd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Shrd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Stc.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Stc.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Std.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Std.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sti.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sti.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Sub.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sub.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Test.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Test.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xadd.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Xadd.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xchg.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Xchg.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xlat.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Xlat.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Xor.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Xor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/adcx.bsh.java" afterPath="$PROJECT_DIR$/Instructions/adcx.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/VisualizationController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/VisualizationController.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,18 +150,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Ad.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6010929">
-              <caret line="115" column="96" selection-start-line="112" selection-start-column="14" selection-end-line="115" selection-end-column="96" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -488,9 +568,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserMemoryFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/ElementConcatenator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserVariableFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/controller/ErrorLoggerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/TextEditorPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/editor/model/FileEditor.java" />
@@ -539,6 +616,9 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sbb.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/AnimationMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
       </list>
     </option>
   </component>
@@ -623,6 +703,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Memory" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1012,12 +1106,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00110" summary="Fixed GP Instructions (Ivan)">
-      <created>1460128804966</created>
-      <option name="number" value="00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1460128804967</updated>
-    </task>
     <task id="LOCAL-00111" summary="Fixed GP Instructions">
       <created>1467153207086</created>
       <option name="number" value="00111" />
@@ -1306,7 +1394,13 @@
       <option name="project" value="LOCAL" />
       <updated>1468730885721</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="Remove unneccessary class and methods">
+      <created>1468744790051</created>
+      <option name="number" value="00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1468744790051</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1331,19 +1425,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="852" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32677165" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3015544" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30131578" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23419689" sideWeight="0.5149095" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23289473" sideWeight="0.48509052" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23289473" sideWeight="0.48509052" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.275" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3131579" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20171674" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18597998" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18097281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1459,34 +1553,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/SimulationState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1280683">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.106723584">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/JumperFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14941302">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/TimeLineFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14941302">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/InstructionList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1582,16 +1648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.533334">
           <caret line="72" column="65" selection-start-line="72" selection-start-column="65" selection-end-line="72" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/memory.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7411631">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1770,30 +1826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/CalvisFormattedInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/AnimationMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="35" selection-start-line="83" selection-start-column="7" selection-end-line="84" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/VisualizationController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1840,10 +1872,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/instructionanimation/Ad.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6010929">
-          <caret line="115" column="96" selection-start-line="112" selection-start-column="14" selection-end-line="115" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.43715847">
+          <caret line="109" column="98" selection-start-line="109" selection-start-column="98" selection-end-line="109" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sbb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7103825">
+          <caret line="105" column="45" selection-start-line="105" selection-start-column="45" selection-end-line="105" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19125684">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/CalvisFormattedInstruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41530055">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/memory.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Memory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2882883">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Memory/config.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

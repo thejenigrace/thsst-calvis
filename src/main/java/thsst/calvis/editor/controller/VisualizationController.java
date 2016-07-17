@@ -5,7 +5,7 @@ import thsst.calvis.editor.view.AssemblyComponent;
 import javafx.application.Platform;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import thsst.calvis.simulatorvisualizer.model.AnimationMap;
+import thsst.calvis.simulatorvisualizer.animation.AnimationMap;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 import thsst.calvis.simulatorvisualizer.model.EnvironmentBag;
 
