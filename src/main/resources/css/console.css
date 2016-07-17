@@ -1,7 +1,7 @@
 .console {
-    -fx-font-size: 12px;
     -fx-background-color: #3D3C3A;
-    -fx-font: 14px Consolas;
+    -fx-font-size: 14;
+    -fx-font-family: "Consolas";
 }
 
 .console-font-color {

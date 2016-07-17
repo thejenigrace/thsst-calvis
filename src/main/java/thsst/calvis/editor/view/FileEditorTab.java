@@ -20,12 +20,9 @@ import java.nio.file.Path;
  */
 public class FileEditorTab {
 
-//    private WorkspaceController workspaceController;
     private Tab tab = new Tab();
-//    private DraggableTab tab = new DraggableTab("Untitled");
     private TextEditor textEditor = new TextEditor();
     private boolean isCodeLoaded = false;
-//    private boolean isCodeTemplateExist = false;
 
     // 'path' property
     private final ObjectProperty<Path> path = new SimpleObjectProperty<>();
@@ -37,9 +34,6 @@ public class FileEditorTab {
     private final BooleanProperty canRedo = new SimpleBooleanProperty();
 
     public FileEditorTab(Path path) {
-//        this.workspaceController = workspaceController;
-
-//        this.tab = new DraggableTab("Untitled");
         this.tab.setUserData(this);
 
         this.path.set(path);
@@ -53,7 +47,6 @@ public class FileEditorTab {
         });
 
         this.tab.setContent(this.textEditor.getCodeArea());
-//        this.activate();
     }
 
     public Tab getTab() {
@@ -104,7 +97,6 @@ public class FileEditorTab {
     private void updateTab() {
         Path path = this.path.get();
         this.tab.setText((path != null) ? path.getFileName().toString() : "Untitled");
-//        this.tab.setLabelText((path != null) ? path.getFileName().toString() : "Untitled");
         this.tab.setTooltip((path != null) ? new Tooltip(path.toString()) : null);
         Text text = new Text("*");
         text.setFill(Color.web("#86A4BA", 1.0));
@@ -129,9 +121,8 @@ public class FileEditorTab {
         this.textEditor.pathProperty().bind(path);
 
         // Load file and Create UI when the tab becomes visible the first time
-        if( !this.isCodeLoaded ) {
+        if( !this.isCodeLoaded )
             this.isCodeLoaded = this.load();
-        }
 
         if ( !this.isCodeLoaded ) {
             this.textEditor.setCodeAreaText(this.getCodeTemplate());
@@ -141,7 +132,7 @@ public class FileEditorTab {
         // Clear undo history after first load
         this.textEditor.getUndoManager().forgetHistory();
 
-        // Bind the text thsst.calvis.editor undo manager to the properties
+        // Bind the text editor undo manager to the properties
         UndoManager undoManager = textEditor.getUndoManager();
         this.modified.bind(Bindings.not(undoManager.atMarkedPositionProperty()));
         this.canUndo.bind(undoManager.undoAvailableProperty());
