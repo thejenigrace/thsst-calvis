@@ -109,11 +109,11 @@ public class Ad extends CalvisAnimation {
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
             Text flagLabelText = new Text(X, Y, flag);
-            Text flagValueText;
-            if ( flag.equals("CF") )
-                flagValueText = new Text(X, Y, this.finder.getEflags(flag).getCarryFlag());
-            else
-                flagValueText = new Text(X, Y, this.finder.getEflags(flag).getOverflowFlag());
+            Text flagValueText = new Text();
+//            if ( flag.equals("CF") )
+//                flagValueText = new Text(X, Y, this.finder.getEflags().getCarryFlag());
+//            else if ( flag.equals("OF") )
+//                flagValueText = new Text(X, Y, this.finder.getEflags(flag).getOverflowFlag());
 
             Text equalText = new Text(X, Y, "=");
             equalText.setFont(Font.font(48));

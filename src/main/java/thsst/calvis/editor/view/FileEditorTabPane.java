@@ -138,7 +138,7 @@ public class FileEditorTabPane {
 //            file = new File(".");
 
         File file = new File(".");
-        fileChooser.setInitialDirectory(file);
+//        fileChooser.setInitialDirectory(file);
         return fileChooser;
     }
 
