@@ -50,14 +50,16 @@ public class EnvironmentBagFinder {
         return "Register does not exist";
     }
 
-    public EFlags getEflags(String flagValues) {
+    public EFlags getEflags() {
         EFlags oldFlags = new EFlags();
+        String flagValues = bag.getFlagsValue();
         oldFlags.setValue(flagValues);
         return oldFlags;
     }
 
-    public Mxscr getMxscr(String flagValues) {
+    public Mxscr getMxscr() {
         Mxscr oldFlags = new Mxscr();
+        String flagValues = bag.getMxscrValue();
         oldFlags.setValue(flagValues);
         return oldFlags;
     }
