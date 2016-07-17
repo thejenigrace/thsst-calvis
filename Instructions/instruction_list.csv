@@ -121,3 +121,10 @@ pand,Instructions/pand.bsh.java,1,0,2,d/x,d/x/m64/m128,
 pandn,Instructions/pandn.bsh.java,1,0,2,d/x,d/x/m64/m128,
 por,Instructions/por.bsh.java,1,0,2,d/x,d/x/m64/m128,
 pxor,Instructions/pxor.bsh.java,1,0,2,d/x,d/x/m64/m128,
+shufpd,Instructions/shufpd.bsh.java,1,0,3,x,x/m128,i
+shufps,Instructions/shufps.bsh.java,1,0,3,x,x/m128,i
+unpckhpd,Instructions/unpckhpd.bsh.java,1,0,2,x,x/m128,
+unpckhps,Instructions/unpckhps.bsh.java,1,0,2,x,x/m128,
+unpcklpd,Instructions/unpcklpd.bsh.java,1,0,2,x,x/m128,
+unpcklps,Instructions/unpcklps.bsh.java,1,0,2,x,x/m128,
+movups,Instructions/movups.bsh.java,0,0,2,x/m128,x/m128,
