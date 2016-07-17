@@ -148,7 +148,7 @@ public class Cmov extends CalvisAnimation {
                 return "Check if: CF = 1 or ZF = 1";
             case "G":
             case "NLE": // fall through
-                return "Check if: SF == OF or ZF = 0";
+                return "Check if: SF == OF and ZF = 0";
             case "GE":
             case "NL": // fall through
                 return "Check if: SF == OF";
