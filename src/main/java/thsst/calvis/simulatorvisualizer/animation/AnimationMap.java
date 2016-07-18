@@ -25,6 +25,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateDataTransfer();
     }
 
+    private void generateMMXComparison() {
+//        this.put();
+    }
+
     private void generateGPDataTransfer() {
         this.put("MOV", new Mov());
         this.put("LEA", new Lea());
