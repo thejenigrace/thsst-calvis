@@ -26,7 +26,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateMMXComparison() {
-//        this.put();
+        this.put("PCMPEQB", new Pcmpeq());
     }
 
     private void generateGPDataTransfer() {

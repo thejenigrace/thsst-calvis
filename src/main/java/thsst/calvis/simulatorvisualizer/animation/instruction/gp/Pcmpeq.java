@@ -59,7 +59,8 @@ public class Pcmpeq extends CalvisAnimation {
                 desSize = memory.getBitSize(tokens[0]);
 
             Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
+//            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
+            Text desValueText = new Text(X, Y, "00   00   00   00   FF   FF   00   FF");
             Text srcLabelText = this.createLabelText(tokens[1]);
             Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
 
