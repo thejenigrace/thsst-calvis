@@ -16,13 +16,19 @@ execute(des,src,registers,memory) {
 		desHexSize = 32;
 		desValue = memory.read(des, desBitSize);
 		isDesSizeNotNull = false;
+		System.out.println(des.getValue() + " wow");
+		if(des.getValue().substring(des.getValue().length() - 1).equals("0") && !des.getValue().equals("00000000"))
+			throw new MemoryAlignmentException(des.getValue());
 	}
 
 	if( src.isRegister() ) {
 			srcValue = registers.get(src);
 			srcHexSize = registers.getBitSize(src);
-	} else if( src.isMemory() ) {
-			srcValue = memory.read(src, desBitSize);
+	} else if( src.isMemory() ){
+		srcValue=memory.read(src,desBitSize);
+		if(src.getValue().substring(src.getValue().length()-1).equals("0") && !src.getValue().equals("00000000")){
+			throw new MemoryAlignmentException(src.getValue());
+		}
 	}
 
 	if( des.isRegister() ) {
@@ -38,7 +44,7 @@ execute(des,src,registers,memory) {
 	} else if( des.isMemory() ) {
 		String effectiveAddress = des.getValue();
 		effectiveAddress = memory.removeSizeDirectives(effectiveAddress);
-		if(!isDesSizeNotNull && effectiveAddress.substring(effectiveAddress.length() - 1).equals("0")){
+		if(!isDesSizeNotNull){
 			memory.write(des, srcValue ,128);
 		}
 	}

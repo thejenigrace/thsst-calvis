@@ -50,7 +50,7 @@ execute(des, src, ctr, registers, memory) {
 			for(int x = 0; x < 4; x++){
 				int sourceIndex = Integer.parseInt(countArr[x], 2);
 				System.out.println(sourceIndex + "sourceIndex");
-				resultingStr += source.substring(sourceIndex * countImmediate, sourceIndex * countImmediate + countImmediate );
+				resultingStr += source.substring((srcSize / 4) - 8 - (sourceIndex * 8), (srcSize / 4) - (sourceIndex * 8));
 
 			}
 

@@ -49,11 +49,11 @@ execute(des, src, ctr, registers, memory) {
 
 			for(int x = 0; x < 4; x++){
 				int sourceIndex = Integer.parseInt(countArr[x], 2);
-				resultingStr += source.substring(sourceIndex * countImmediate, sourceIndex * countImmediate + countImmediate );
+				resultingStr += source.substring((srcSize / 4) - 4 - (sourceIndex * 4), (srcSize / 4) - (sourceIndex * 4));
 
 			}
 
-			registers.set(des, source.substring(0, 16) + resultingStr.substring(16, 32));
+			registers.set(des, source.substring(0, 16) + resultingStr);
 		}
 	}
 }

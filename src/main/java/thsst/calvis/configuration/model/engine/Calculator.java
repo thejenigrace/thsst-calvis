@@ -410,6 +410,10 @@ public class Calculator {
         return value;
     }
 
+    public String convertHexToBits(String source, int size){
+        return binaryZeroExtend(new BigInteger(source, 16).toString(2), size);
+    }
+
     public String binaryZeroExtend(String value, int size) {
         if ( value.length() > size ) {
             return value.substring(1);
@@ -846,3 +850,5 @@ public class Calculator {
         return Long.parseLong(text, 16);
     }
 }
+
+

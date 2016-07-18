@@ -13,7 +13,7 @@ execute(des, src, ctr, registers, memory) {
 		countStr = new BigInteger(ctr.getValue(), 16).toString(2);
 		String toBeZeroes = "";
 
-		for(int x =0; x < 8 - countStr.length(); x++){
+		for(int x = 0; x < 8 - countStr.length(); x++){
 			toBeZeroes += "0";
 		}
 		countStr = toBeZeroes + countStr;
@@ -29,6 +29,7 @@ execute(des, src, ctr, registers, memory) {
 		if(registers.getBitSize(src) == 128){
 			srcSize = registers.getBitSize(src);
 			source = registers.get(src);
+
 		}
 	}
 	
@@ -50,11 +51,11 @@ execute(des, src, ctr, registers, memory) {
 			for(int x = 0; x < 4; x++){
 				int sourceIndex = Integer.parseInt(countArr[x], 2);
 				System.out.println(sourceIndex + "sourceIndex");
-				resultingStr += source.substring(sourceIndex * countImmediate, sourceIndex * countImmediate + countImmediate );
+				resultingStr += source.substring(((srcSize / 4) / 2) - 4 - (sourceIndex * 4), ((srcSize / 4) / 2) - (sourceIndex * 4));
 
 			}
 
-		registers.set(des, resultingStr.substring(0, 16) + source.substring(16, 32));
+		registers.set(des, resultingStr + source.substring(16, 32));
 		}
 	}
 }

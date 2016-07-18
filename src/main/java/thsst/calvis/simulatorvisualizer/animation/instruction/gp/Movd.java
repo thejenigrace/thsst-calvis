@@ -68,12 +68,14 @@ public class Movd extends CalvisAnimation {
 
             desValueText.setX(100);
             desValueText.setY(100);
+            desValueText.setWrappingWidth(desRectangle.getLayoutBounds().getWidth() - 20);
 
             srcLabelText.setX(100);
             srcLabelText.setY(100);
 
             srcValueText.setX(100);
             srcValueText.setY(100);
+            srcValueText.setWrappingWidth(srcRectangle.getLayoutBounds().getWidth() - 20);
 
             root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
 

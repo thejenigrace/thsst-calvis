@@ -27,12 +27,22 @@ public class TimeLineFunction{
 	private Group root;
 	private RegisterList registers;
 	private Memory memory;
+	private EnvironmentBagFinder finder;
+
+	public TimeLineFunction(Timeline timeline, Group root, RegisterList registers, Memory memory, EnvironmentBagFinder finder){
+		tl = timeline;
+		this.root = root;
+		this.registers = registers;
+		this.memory = memory;
+		this.finder = finder;
+	}
 
 	public TimeLineFunction(Timeline timeline, Group root, RegisterList registers, Memory memory){
 		tl = timeline;
 		this.root = root;
 		this.registers = registers;
 		this.memory = memory;
+		this.finder = finder;
 	}
 
 	public void addTimeline(double xProperty, double yProperty, double duration, Shape shape){
@@ -189,5 +199,19 @@ public class TimeLineFunction{
 
 	public String getValue(Token token){
 		return registers.get(token);
+	}
+
+	public String getPreviousValue(Token token, int desSize){
+		if(token.isMemory()){
+			try{
+				return memory.read(token, desSize);
+			} catch(MemoryReadException e){
+				e.printStackTrace();
+			}
+		}
+		else if(token.isRegister()){
+			return finder.getRegister(token.getValue());
+		}
+		return null;
 	}
 }

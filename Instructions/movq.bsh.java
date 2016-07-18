@@ -22,7 +22,12 @@ execute(des, src, registers, memory) {
 				sourceReg = c.hexZeroExtend(memory.read(src, 64), des);
 			}
 			else{
-				sourceReg = c.hexZeroExtend(registers.get(src), des);
+				if(desSize == 64){
+					sourceReg = c.hexZeroExtend(registers.get(src),des);
+				}
+				else{
+					sourceReg = c.hexZeroExtend(registers.get(src).substring(16, 32), 128);
+				}
 			}
 		}
 		registers.set(des, sourceReg);
