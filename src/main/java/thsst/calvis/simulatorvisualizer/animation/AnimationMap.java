@@ -1,5 +1,6 @@
 package thsst.calvis.simulatorvisualizer.animation;
 
+import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
@@ -26,6 +27,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateDataTransfer();
         this.generateMMX();
         this.generateSSE();
+        this.generateMMXComparison();
     }
 
     private void generateMMX(){
@@ -84,7 +86,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("MINSS", new Maxss());
     }
 
-    private void generateSSE(){
+    private void generateSSE() {
         this.generateSSEDataTransfer();
         this.generateSSEFPArith();
         this.generateSSEIntArith();

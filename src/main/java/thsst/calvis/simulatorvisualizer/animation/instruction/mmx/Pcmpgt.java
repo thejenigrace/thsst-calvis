@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -14,12 +14,11 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Pcmpeq extends CalvisAnimation {
+public class Pcmpgt extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
         this.root.getChildren().clear();
-//        tab.setContent(root);
         scrollPane.setContent(root);
 
         RegisterList registers = this.currentInstruction.getRegisters();
@@ -32,7 +31,7 @@ public class Pcmpeq extends CalvisAnimation {
         }
 
         // CODE HERE
-        int width = 140;
+        int width = 280;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
@@ -50,19 +49,23 @@ public class Pcmpeq extends CalvisAnimation {
 
             root.getChildren().addAll(desRectangle, srcRectangle);
 
-            int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-                desSize = registers.getBitSize(tokens[1]);
-            else
-                desSize = memory.getBitSize(tokens[0]);
+            int desBitSize = 64;
+
+            System.out.println("PCMPEQB");
+
+//            int desSize = 0;
+//            if ( tokens[0].getType() == Token.REG )
+//                desSize = registers.getBitSize(tokens[0]);
+//            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
+//                desSize = registers.getBitSize(tokens[1]);
+//            else
+//                desSize = memory.getBitSize(tokens[0]);
 
             Text desLabelText = this.createLabelText(tokens[0]);
 //            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
             Text desValueText = new Text(X, Y, "00   00   00   00   FF   FF   00   FF");
             Text srcLabelText = this.createLabelText(tokens[1]);
-            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
+            Text srcValueText = this.createValueText(tokens[1], registers, memory, desBitSize);
 
             desLabelText.setX(100);
             desLabelText.setY(100);
