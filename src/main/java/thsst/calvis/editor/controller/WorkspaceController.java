@@ -50,6 +50,8 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnRedo;
     @FXML
+    private Button btnPlayStepMode;
+    @FXML
     private Button btnPlay;
     @FXML
     private Button btnNext;
@@ -86,7 +88,7 @@ public class WorkspaceController implements Initializable {
         // Initialize find text field
         this.textFieldFind = TextFields.createClearableTextField();
         this.textFieldFind.setPrefWidth(250.0);
-        this.toolbarMain.getItems().add(15, textFieldFind);
+        this.toolbarMain.getItems().add(21, textFieldFind);
     }
 
     private void initBinding() {
