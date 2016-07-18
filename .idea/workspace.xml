@@ -7,102 +7,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added css to customize look and feel for TabPane">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movaps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movhlps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movhps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movlhps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movlps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movmskps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movups.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddq.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddsb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddsw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddusb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddusw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pavgb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pavgw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pextrw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pinsrw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaxsw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaxub.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pminsw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pminub.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmovmskb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmulhuw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmulhw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmullw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psadbw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubq.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubsb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubsw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubusb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubusw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubw.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/RCPSS.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcpps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rsqrtps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rsqrtss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtss.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subps.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subss.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movapd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdq2q.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqa.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqu.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movhpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movlpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movmskpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movq2dq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movupd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmuludq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufhw.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshuflw.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pslldq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psrldq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpckhqdq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpcklqdq.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subsd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/TrashMaxpd.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/TrashMinsd.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movapd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movapd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movaps.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movaps.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movdqa.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movdqa.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movdqu.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movdqu.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/paddb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/paddb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/paddq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/paddq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/paddw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/paddw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pextrw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pextrw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pmovmskb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pmovmskb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pmullw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pmullw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pshufd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pshufd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pshufhw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pshufhw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pshuflw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pshuflw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/pshufw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/pshufw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psubb.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psubb.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psubq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psubq.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psubw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psubw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcl.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcl.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rcr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rcr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/rol.bsh.java" afterPath="$PROJECT_DIR$/Instructions/rol.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ror.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ror.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Registers/register_list.csv" afterPath="$PROJECT_DIR$/Registers/register_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/movupd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/movupd.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/psrldq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/psrldq.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java" afterPath="$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" afterPath="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBagFinder.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/EnvironmentBagFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/J.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loope.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopnz.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxps.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxps.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxss.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxss.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movd.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popad.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Push.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Push.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxpd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxpd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxsd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxsd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minsd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minsd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddq.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddq.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubq.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubq.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java" afterPath="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -153,48 +124,84 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ElementConcatenator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/ElementConcatenator.java">
+      <file leaf-file-name="Punpckhqdq.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpckhqdq.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="65" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="65" />
+            <state vertical-scroll-proportion="-7.017857">
+              <caret line="92" column="58" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FpuRegister.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/FpuRegister.java">
+      <file leaf-file-name="instruction_list.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.9310346">
+              <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Punpcklqdq.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpcklqdq.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="33" />
+              <caret line="88" column="58" selection-start-line="88" selection-start-column="58" selection-end-line="88" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pmaddwd.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.8275862">
+              <caret line="53" column="71" selection-start-line="53" selection-start-column="71" selection-end-line="53" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Push.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Push.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.11971831">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimationMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.4074073">
+              <caret line="101" column="43" selection-start-line="101" selection-start-column="43" selection-end-line="101" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rcl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.413793">
+              <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
               <folding>
-                <element signature="e#179#180#0" expanded="true" />
-                <element signature="e#212#213#0" expanded="true" />
-                <element signature="e#262#263#0" expanded="true" />
-                <element signature="e#296#297#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java">
+      <file leaf-file-name="punpckhqdq.bsh.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43133804">
-              <caret line="330" column="59" selection-start-line="330" selection-start-column="59" selection-end-line="330" selection-end-column="59" />
-              <folding>
-                <element signature="e#3749#3750#0" expanded="true" />
-                <element signature="e#3787#3788#0" expanded="true" />
-                <element signature="e#7741#7742#0" expanded="true" />
-                <element signature="e#7785#7786#0" expanded="true" />
-                <element signature="e#10921#10922#0" expanded="true" />
-                <element signature="e#10961#10962#0" expanded="true" />
-                <element signature="e#11011#11012#0" expanded="true" />
-                <element signature="e#11045#11046#0" expanded="true" />
-                <element signature="e#12004#12005#0" expanded="true" />
-                <element signature="e#12044#12045#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -219,7 +226,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="7/18/2016-ivan" />
       </map>
     </option>
   </component>
@@ -617,57 +624,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Divps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/RCPSS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcpss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcpps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rsqrtps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rsqrtss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Maxss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minps.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pavgb.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pavgw.java" />
-        <option value="$PROJECT_DIR$/Instructions/pextrw.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pinsrw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pextrw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/FilePathLogger.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmasw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaxub.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pminsw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaxsw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pminub.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmovmskb.java" />
-        <option value="$PROJECT_DIR$/Instructions/pmovmskb.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmulhuw.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psadbw.java" />
-        <option value="$PROJECT_DIR$/Instructions/movq.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/pshufw.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufw.java" />
-        <option value="$PROJECT_DIR$/Instructions/movd.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java" />
-        <option value="$PROJECT_DIR$/Instructions/pshuflw.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/pshufhw.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/pshufd.bsh.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java" />
-        <option value="$PROJECT_DIR$/Registers/register_list.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Minsd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulpd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Mulsd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtpd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Sqrtsd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Subpd.java" />
         <option value="$PROJECT_DIR$/Instructions/instruction_list.csv" />
-        <option value="$PROJECT_DIR$/Instructions/daddu.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movhpd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movlpd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movapd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movsd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movupd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqa.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java" />
         <option value="$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java" />
-        <option value="$PROJECT_DIR$/Instructions/movaps.bsh.java" />
-        <option value="$PROJECT_DIR$/Instructions/movapd.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/movdqu.bsh.java" />
+        <option value="$PROJECT_DIR$/Instructions/movdqa.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movq2dq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdq2q.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmuludq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufd.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufhw.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshuflw.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pslldq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java" />
+        <option value="$PROJECT_DIR$/Instructions/psrldq.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psrldq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java" />
+        <option value="$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpckhqdq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpcklqdq.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java" />
       </list>
     </option>
   </component>
@@ -793,6 +800,10 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="instructionanimation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -817,6 +828,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -908,7 +941,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Registers" />
+              <option name="myItemId" value="Instructions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -949,8 +982,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="configuration.model.engine" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
+      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ivan\Desktop\thsst-calvis-calvis\Instructions" />
@@ -963,10 +998,8 @@
       <recent name="simulatorvisualizer.model.instructionanimation" />
       <recent name="configuration.model.engine" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
-      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="configuration.model.engine" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
@@ -1332,12 +1365,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00095" summary="Merge">
-      <created>1459258934861</created>
-      <option name="number" value="00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1459258934861</updated>
-    </task>
     <task id="LOCAL-00096" summary="FIx SSE2 Comparison Instructions">
       <created>1459264656455</created>
       <option name="number" value="00096" />
@@ -1626,7 +1653,13 @@
       <option name="project" value="LOCAL" />
       <updated>1468370758605</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="Added css to customize look and feel for TabPane">
+      <created>1468838641726</created>
+      <option name="number" value="00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1468838641743</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1655,10 +1688,10 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251634" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30392158" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30369127" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24473684" sideWeight="0.5078684" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.49213162" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.49213162" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.6409396" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3137255" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1779,159 +1812,15 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/ChoiceBoxLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20376712">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePath.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movapd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="48" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/FilePathList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="21" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/filehandling/SaveFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="55" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmovmskb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4464285">
-          <caret line="82" column="191" selection-start-line="82" selection-start-column="191" selection-end-line="82" selection-end-column="191" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/pmovmskb.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <caret line="51" column="80" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmulhuw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/psadbw.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="57" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psadbw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.178571">
-          <caret line="130" column="122" selection-start-line="130" selection-start-column="122" selection-end-line="130" selection-end-column="122" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/movq.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="71" selection-start-line="21" selection-start-column="71" selection-end-line="21" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="37" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/movd.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/pshufw.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="59" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/pshuflw.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="86" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/pshufhw.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="13" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/pshufd.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29484537">
-          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/psrldq.bsh.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1939,270 +1828,401 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movupd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="62" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/RegisterList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.931034">
-          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-          <folding>
-            <element signature="e#11248#11249#0" expanded="true" />
-            <element signature="e#11317#11318#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/errorlogging/ErrorLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24536082">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/DataTypeMismatchException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17525773">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/TokenBag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24536082">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Registers/register_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/X87ControlRegister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14712153">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/daddu.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.108742006">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/daddiu.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39872068">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryWriteException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39872068">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryAlignmentException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="35" />
-          <folding>
-            <element signature="e#207#208#0" expanded="true" />
-            <element signature="e#276#277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/CalvisFormattedInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="341" column="50" selection-start-line="341" selection-start-column="50" selection-end-line="341" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.034483">
-          <caret line="48" column="6" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/javafx-src.zip!/com/sun/javafx/scene/control/behavior/ButtonBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3314121">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/PushModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29929578">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/RotateModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/EFlags.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.862069">
-          <caret line="184" column="51" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="51" />
-          <folding>
-            <element signature="e#2281#2282#0" expanded="true" />
-            <element signature="e#2314#2315#0" expanded="true" />
-            <element signature="e#3657#3658#0" expanded="true" />
-            <element signature="e#3700#3701#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/ElementConcatenator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="65" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="65" />
+          <caret line="51" column="80" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/InstructionList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26757812">
-          <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.71484375">
+          <caret line="378" column="80" selection-start-line="378" selection-start-column="80" selection-end-line="378" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/exceptions/MemoryToMemoryException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movlpd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="71" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdqa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4066901">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movsd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="80" selection-start-line="51" selection-start-column="80" selection-end-line="51" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/movdqu.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Instructions/movaps.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5387324">
-          <caret line="30" column="9" selection-start-line="28" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Instructions/movapd.bsh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47887325">
-          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Instruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4190141">
-          <caret line="14" column="70" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/X87TagRegister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14964789">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserMemoryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5862676">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/ParserLabelFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4190141">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Mxscr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.1126761">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/MemoryAddressCalculator.java">
+    <entry file="file://$PROJECT_DIR$/Instructions/movdqa.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <caret line="15" column="126" selection-start-line="15" selection-start-column="126" selection-end-line="15" selection-end-column="126" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/FpuRegister.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movq2dq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.089285">
+          <caret line="65" column="88" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Movdq2q.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0357144">
+          <caret line="65" column="59" selection-start-line="65" selection-start-column="59" selection-end-line="65" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Paddq.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="33" />
+          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pshufd.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.62852114">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="129" selection-start-line="113" selection-start-column="129" selection-end-line="113" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshufhw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4444447">
+          <caret line="44" column="61" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/pslldq.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.4827585">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pslldq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6543438">
+          <caret line="61" column="106" selection-start-line="61" selection-start-column="106" selection-end-line="61" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pshuflw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.592592">
+          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Addps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20950705">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74823946">
+          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psubd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20950705">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Ror.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/psrldq.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Psrldq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jecxz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jmp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="98" selection-start-line="30" selection-start-column="98" selection-end-line="30" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Je.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="98" selection-start-line="29" selection-start-column="98" selection-end-line="29" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pusha.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchgs8.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="98" selection-start-line="34" selection-start-column="98" selection-end-line="34" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Loopne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="98" selection-start-line="28" selection-start-column="98" selection-end-line="28" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Popa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Jcxz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Cmpxchg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="98" selection-start-line="33" selection-start-column="98" selection-end-line="33" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pushad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.827587">
+          <caret line="65" column="115" selection-start-line="65" selection-start-column="115" selection-end-line="65" selection-end-column="115" />
           <folding>
-            <element signature="e#179#180#0" expanded="true" />
-            <element signature="e#212#213#0" expanded="true" />
-            <element signature="e#262#263#0" expanded="true" />
-            <element signature="e#296#297#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/configuration/model/engine/Memory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/TimeLineFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43133804">
-          <caret line="330" column="59" selection-start-line="330" selection-start-column="59" selection-end-line="330" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
           <folding>
-            <element signature="e#3749#3750#0" expanded="true" />
-            <element signature="e#3787#3788#0" expanded="true" />
-            <element signature="e#7741#7742#0" expanded="true" />
-            <element signature="e#7785#7786#0" expanded="true" />
-            <element signature="e#10921#10922#0" expanded="true" />
-            <element signature="e#10961#10962#0" expanded="true" />
-            <element signature="e#11011#11012#0" expanded="true" />
-            <element signature="e#11045#11046#0" expanded="true" />
-            <element signature="e#12004#12005#0" expanded="true" />
-            <element signature="e#12044#12045#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Rcl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.413793">
+          <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmuludq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29929578">
+          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/punpckhqdq.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/instruction_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.9310346">
+          <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/AnimationMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.4074073">
+          <caret line="101" column="43" selection-start-line="101" selection-start-column="43" selection-end-line="101" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpckhqdq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.017857">
+          <caret line="92" column="58" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Punpcklqdq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="58" selection-start-line="88" selection-start-column="58" selection-end-line="88" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Pmaddwd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.8275862">
+          <caret line="53" column="71" selection-start-line="53" selection-start-column="71" selection-end-line="53" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulatorvisualizer/model/instructionanimation/Push.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11971831">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

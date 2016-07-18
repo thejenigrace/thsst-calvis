@@ -26,7 +26,7 @@ execute(des, src, registers, memory) {
 					sourceReg = c.hexZeroExtend(registers.get(src),des);
 				}
 				else{
-					sourceReg = c.hexZeroExtend(registers.get(src).substring(16, 32), 128);
+					sourceReg = c.hexZeroExtend(registers.get(src).substring(16, 32), 128 / 16);
 				}
 			}
 		}

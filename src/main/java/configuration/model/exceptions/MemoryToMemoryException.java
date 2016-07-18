@@ -9,4 +9,8 @@ public class MemoryToMemoryException extends Exception {
         super("No memory to memory: " + first + " " + second + " at line number: " + line);
     }
 
+    public MemoryToMemoryException(String first, String second) {
+        super("No memory to memory: " + first + " " + second);
+    }
+
 }

@@ -12,6 +12,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     public AnimationMap() {
         super();
         generateGP();
+        this.generateMMX();
+        this.generateSSE();
+        this.generateSSE2();
     }
 
     private void generateGP() {
@@ -22,21 +25,26 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPStack();
         this.generateGPJump();
         this.generateDataTransfer();
-        this.generateMMX();
-        this.generateSSE();
+
     }
 
     private void generateMMX(){
         this.generateArithMMX();
     }
 
+    private void generateSSE2(){
+        this.generateSSE2FPArith();
+        this.generateSSE2DataTransfer();
+        this.generateSSE2Integer();
+    }
+
     private void generateArithMMX(){
         this.put("PADDB", new Paddb());
         this.put("PADDW", new Paddw());
-        this.put("PADDQ", new Paddq());
+        this.put("PADDD", new Paddd());
         this.put("PSUBB", new Psubb());
         this.put("PSUBW", new Psubw());
-        this.put("PSUBQ", new Psubq());
+        this.put("PSUBD", new Psubd());
         this.put("PMULLW", new Pmullw());
         this.put("PMULHW", new Pmulhw());
         this.put("PMADDWD", new Pmaddwd());
@@ -59,6 +67,49 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("MOVLHPS", new Movlhps());
         this.put("MOVHLPS", new Movhlps());
         this.put("MOVMSKPS", new Movmskps());
+    }
+
+    private void generateSSE2DataTransfer(){
+        this.put("MOVAPD", new Movapd());
+        this.put("MOVUPD", new Movupd());
+        this.put("MOVSD", new Movsd());
+        this.put("MOVLPD", new Movlpd());
+        this.put("MOVHPD", new Movhpd());
+        this.put("MOVMSKPD", new Movmskpd());
+    }
+
+    private void generateSSE2FPArith(){
+        this.put("ADDPD", new Addpd());
+        this.put("SUBPD", new Subpd());
+        this.put("ADDSD", new Addsd());
+        this.put("SUBSD", new Subsd());
+        this.put("MULPD", new Mulpd());
+        this.put("MULSD", new Mulsd());
+        this.put("DIVPD", new Divpd());
+        this.put("DIVSD", new Divsd());
+        this.put("SQRTPD", new Sqrtpd());
+        this.put("SQRTSD", new Sqrtsd());
+        this.put("MAXPD", new Maxpd());
+        this.put("MAXSD", new Maxsd());
+        this.put("MINPD", new Minpd());
+        this.put("MINSD", new Minsd());
+    }
+
+    private void generateSSE2Integer(){
+        this.put("MOVDQA", new Movdqa());
+        this.put("MOVDQU", new Movdqu());
+        this.put("MOVQ2DQ", new Movq2dq());
+        this.put("MOVDQ2Q", new Movdq2q());
+        this.put("PADDQ", new Paddq());
+        this.put("PSUBQ", new Psubq());
+        this.put("PMULUDQ", new Pmuludq());
+        this.put("PSHUFD", new Pshufd());
+        this.put("PSHUFHW", new Pshufhw());
+        this.put("PSHUFLW", new Pshuflw());
+        this.put("PSLLDQ", new Pslldq());
+        this.put("PSRLDQ", new Psrldq());
+        this.put("PUNPCKHQDQ", new Punpckhqdq());
+        this.put("PUNPCKLQDQ", new Punpcklqdq());
     }
 
     private void generateSSEFPArith(){
@@ -227,6 +278,6 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 //        this.put("MOVSD", new Movsd());
 //        this.put("MOVSS", new Movss());
 //        this.put("MOVSW", new Movsw());
-        this.put("MINSD", new Minsd());
+        this.put("MINSD", new TrashMinsd());
     }
 }

@@ -35,7 +35,7 @@ public class Psubq extends CalvisAnimation {
         String srcStr = timeFunc.getPreviousValue(src, size);
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
-        int operationSize = 8;
+        int operationSize = 16;
         Text sign = timeFunc.generateText(new Text("-"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";

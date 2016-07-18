@@ -7,6 +7,9 @@ execute(des, src, registers, memory) {
 	String destination = "";
 	String source = "";
 	String resultingHex = "";
+	if(des.isMemory() && src.isMemory()){
+		throw new MemoryToMemoryException("[" + des.getValue() + "]", "[" + src.getValue() + "]");
+	}
 	if(des.isRegister()){
 		desSize = registers.getBitSize(des);
 		isRegisterDes = true;
