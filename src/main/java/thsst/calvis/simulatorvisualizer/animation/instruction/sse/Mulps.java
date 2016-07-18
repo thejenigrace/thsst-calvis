@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Maxps extends CalvisAnimation {
+public class Mulps extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -36,7 +36,7 @@ public class Maxps extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 8;
-        Text sign = timeFunc.generateText(new Text("Extract Max Value"), 2, "#98777b");
+        Text sign = timeFunc.generateText(new Text("*"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";

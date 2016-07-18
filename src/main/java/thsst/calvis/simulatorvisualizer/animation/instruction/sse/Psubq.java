@@ -1,4 +1,5 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -16,7 +17,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Maxps extends CalvisAnimation {
+public class Psubq extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -36,27 +37,16 @@ public class Maxps extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 8;
-        Text sign = timeFunc.generateText(new Text("Extract Max Value"), 2, "#98777b");
+        Text sign = timeFunc.generateText(new Text("-"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";
         String dividedStrRes = "";
-        String dividedConvertedSrc = "";
-        String dividedConvertedDes = "";
-        String dividedConvertedRes = "";
 
         for(int x = 0; x < (size/2) / 2; x = x + operationSize){
-            String extractedHexDes = desStr.substring(0 + x, operationSize + x);
-            String extractedHexSrc = (srcStr.substring(0 + x, operationSize + x));
-            String extractedHexRes = (resultStr.substring(0 + x, operationSize + x));
-
-            dividedStrDes += extractedHexDes + "     ";
-            dividedStrSrc += extractedHexSrc + "     ";
+            dividedStrDes += desStr.substring(0 + x, operationSize + x) + "     ";
+            dividedStrSrc += (srcStr.substring(0 + x, operationSize + x)) + "     ";
             dividedStrRes += (resultStr.substring(0 + x, operationSize + x)) + "     ";
-
-            dividedConvertedDes += c.convertHexToSinglePrecision(extractedHexDes) + "      ";
-            dividedConvertedSrc += c.convertHexToSinglePrecision(extractedHexSrc) + "      ";
-            dividedConvertedRes += c.convertHexToSinglePrecision(extractedHexRes) + "      ";
         }
 
         Rectangle fake = new Rectangle(0,0, Color.web("#4b5320"));
@@ -67,9 +57,9 @@ public class Maxps extends CalvisAnimation {
         double cordX = 200;
         double cordY = 25;
 
-        Rectangle desRec = this.createRectangle(des, 500, 90);
-        Rectangle srcRec = this.createRectangle(src, 500, 90);
-        Rectangle resRec = this.createRectangle(des, 500, 90);
+        Rectangle desRec = this.createRectangle(des, 500, 60);
+        Rectangle srcRec = this.createRectangle(src, 500, 60);
+        Rectangle resRec = this.createRectangle(des, 500, 60);
         parent.addAll(fake, desRec, srcRec, resRec, sign, equal);
 
         Text desLabel = this.createLabelText(des);
@@ -79,7 +69,6 @@ public class Maxps extends CalvisAnimation {
         Text desVals = new Text();
         Text srcVals = new Text();
         Text resVals = new Text();
-
 
         desRec.setX(cordX);
         desRec.setY(cordY);
@@ -100,44 +89,38 @@ public class Maxps extends CalvisAnimation {
         resLabel.setY(srcRec.getY() + 50 + srcRec.getLayoutBounds().getHeight() + 20);
 
 
-        Text desSinglePresVal = new Text(dividedConvertedDes);
-        Text srcSinglePresVal = new Text(dividedConvertedSrc);
-        Text resSinglePresVal = new Text(dividedConvertedRes);
+
+
+
+
+
+
 
         desVals.setText(dividedStrDes);
         srcVals.setText(dividedStrSrc);
         resVals.setText(dividedStrRes);
-        parent.addAll(desVals, srcVals, resVals, srcSinglePresVal, resSinglePresVal);
+        parent.addAll(desVals, srcVals, resVals);
 
 
-        parent.addAll(resLabel, srcLabel, desLabel, desSinglePresVal);
+        parent.addAll(resLabel, srcLabel, desLabel);
 
         double desComp = desRec.getLayoutBounds().getWidth() / 2 - desVals.getLayoutBounds().getWidth() / 2 + desRec.getX();
         desVals.setX( desComp);
         desVals.setY(cordY + 40);
 
-        desSinglePresVal.setX(desRec.getLayoutBounds().getWidth() / 2 - desSinglePresVal.getLayoutBounds().getWidth() / 2 + desRec.getX());
-        desSinglePresVal.setY(desVals.getY() + 20);
-
         double srcComp = srcRec.getLayoutBounds().getWidth() / 2 - srcVals.getLayoutBounds().getWidth() / 2 + srcRec.getX();
         srcVals.setX(srcComp);
         srcVals.setY(cordY + 50 + srcRec.getLayoutBounds().getHeight() + 40);
-
-        srcSinglePresVal.setX(desRec.getLayoutBounds().getWidth() / 2 - srcSinglePresVal.getLayoutBounds().getWidth() / 2 + desRec.getX());
-        srcSinglePresVal.setY(srcVals.getY() + 20);
 
         double resComp = resRec.getLayoutBounds().getWidth() / 2 - resVals.getLayoutBounds().getWidth() / 2 + resRec.getX();
         resVals.setX(resComp);
         resVals.setY(srcRec.getY() + 50 + srcRec.getLayoutBounds().getHeight() + 40);
 
-        resSinglePresVal.setX(desRec.getLayoutBounds().getWidth() / 2 - resSinglePresVal.getLayoutBounds().getWidth() / 2 + desRec.getX());
-        resSinglePresVal.setY(resVals.getY() + 20);
-
         sign.setX(desRec.getLayoutBounds().getWidth() / 2 - sign.getLayoutBounds().getWidth() / 2 + desRec.getX());
-        sign.setY(cordY + 120);
+        sign.setY(cordY + 90);
 
         equal.setX(desRec.getLayoutBounds().getWidth() / 2 - equal.getLayoutBounds().getWidth() / 2 + desRec.getX());
-        equal.setY(cordY + 260);
+        equal.setY(cordY + 200);
 
     }
 }

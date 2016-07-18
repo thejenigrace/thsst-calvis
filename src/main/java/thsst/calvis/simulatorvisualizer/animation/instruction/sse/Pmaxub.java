@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Maxps extends CalvisAnimation {
+public class Pmaxub extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -35,8 +35,8 @@ public class Maxps extends CalvisAnimation {
         String srcStr = timeFunc.getPreviousValue(src, size);
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
-        int operationSize = 8;
-        Text sign = timeFunc.generateText(new Text("Extract Max Value"), 2, "#98777b");
+        int operationSize = 2;
+        Text sign = timeFunc.generateText(new Text("Return Max Value Using Destination and Source (Unsigned)"), 20, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";
@@ -107,10 +107,10 @@ public class Maxps extends CalvisAnimation {
         desVals.setText(dividedStrDes);
         srcVals.setText(dividedStrSrc);
         resVals.setText(dividedStrRes);
-        parent.addAll(desVals, srcVals, resVals, srcSinglePresVal, resSinglePresVal);
+        parent.addAll(desVals, srcVals, resVals);
 
 
-        parent.addAll(resLabel, srcLabel, desLabel, desSinglePresVal);
+        parent.addAll(resLabel, srcLabel, desLabel);
 
         double desComp = desRec.getLayoutBounds().getWidth() / 2 - desVals.getLayoutBounds().getWidth() / 2 + desRec.getX();
         desVals.setX( desComp);

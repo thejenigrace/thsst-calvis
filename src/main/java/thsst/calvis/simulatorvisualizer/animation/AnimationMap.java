@@ -1,5 +1,6 @@
 package thsst.calvis.simulatorvisualizer.animation;
 
+import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
@@ -72,7 +73,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("DIVPS", new Divps());
         this.put("DIVSS", new Divss());
         this.put("RCPPS", new Rcpps());
-        this.put("RCPSS", new Rcpss());
+//        this.put("RCPSS", new Rcpss());
         this.put("SQRTPS", new Sqrtps());
         this.put("SQRTSS", new Sqrtss());
         this.put("RSQRTPS", new Rsqrtss());
