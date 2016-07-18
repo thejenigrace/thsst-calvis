@@ -20,7 +20,8 @@ execute(des, src, registers, memory) {
 		String sourceInBits = c.binaryZeroExtend(new BigInteger(source, 16).toString(2), srcSize);
 		StringBuilder myResultString = new StringBuilder(desIntBits);
 		for(int y = 0; y < (srcSize / 4) / 2; y++){
-			myResultString.setCharAt(y, sourceInBits.charAt( 7 + a ));
+
+			myResultString.setCharAt(31 - y, sourceInBits.charAt( 127 - (7 + a )));
 			a += 8;
 		}
 

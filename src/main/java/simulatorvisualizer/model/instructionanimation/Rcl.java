@@ -29,7 +29,7 @@ public class Rcl extends CalvisAnimation {
         tab.setContent(root);
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
-        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory);
+        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory, finder);
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         Token des = tokens[0];
@@ -39,11 +39,13 @@ public class Rcl extends CalvisAnimation {
         ObservableList<Node> parent = this.root.getChildren();
 
         ArrayList<RotateModel> rotateModels = new ArrayList<>();
-        String destination = timeFunc.getValue(des, operandSize);
+        String destination = timeFunc.getPreviousValue(des, timeFunc.getBitSize(des));
         BigInteger biDes = new BigInteger(destination, 16);
         BigInteger biResult = biDes;
         boolean bitSet = false;
 
+        System.out.println(biDes);
+        System.out.println(biResult + " result");
         String carryFlagValue = "";
         for (int x = 0; x < counter; x++) {
             bitSet = biResult.testBit(operandSize - 1);
@@ -55,6 +57,7 @@ public class Rcl extends CalvisAnimation {
                 biResult = biResult.clearBit(0);
                 carryFlagValue = "0";
             }
+            System.out.println(biResult.toString(2) + " cheese");
             if (operandSize < c.binaryZeroExtend(biResult.toString(2), operandSize).length()) {
                 int cut = c.binaryZeroExtend(biResult.toString(2), operandSize).length() - operandSize;
                 String t = c.binaryZeroExtend(biResult.toString(2), operandSize).substring(cut);
@@ -62,6 +65,7 @@ public class Rcl extends CalvisAnimation {
             }
             else
                 rotateModels.add(new RotateModel(c.binaryZeroExtend(biResult.toString(2), operandSize), carryFlagValue));
+            System.out.println(c.binaryZeroExtend(biResult.toString(2), operandSize) + " wtf");
         }
 
         ArrayList<Text> rotateResults = new ArrayList<>();
@@ -78,6 +82,7 @@ public class Rcl extends CalvisAnimation {
             zeroFlags.add(timeFunc.generateText(new Text(rotateModels.get(x).getFlag()), 20, "#5d8aa8", FontWeight.EXTRA_BOLD, "Elephant"));
             resultLabel.add(timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
             cfLabel.add(timeFunc.generateText(new Text("CF"), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
+            System.out.println(rotateResults.get(0).getText() + " wtf");
             parent.addAll(rotateResults.get(x), zeroFlags.get(x), cfLabel.get(x), resultLabel.get(x), numberLabel.get(x));
         }
 

@@ -49,7 +49,8 @@ execute(des, src, ctr, registers, memory) {
 
 			for(int x = 0; x < 4; x++){
 				int sourceIndex = Integer.parseInt(countArr[x], 2);
-				resultingStr += source.substring(sourceIndex * countImmediate, sourceIndex * countImmediate + countImmediate );
+				System.out.println(sourceIndex + " value");
+				resultingStr += source.substring( (srcSize / 4 ) - (sourceIndex * countImmediate) - 4, (srcSize / 4 ) - sourceIndex * countImmediate );
 
 			}
 

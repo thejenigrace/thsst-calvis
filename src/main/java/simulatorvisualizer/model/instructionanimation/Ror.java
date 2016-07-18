@@ -40,7 +40,7 @@ public class Ror extends CalvisAnimation {
         ObservableList<Node> parent = this.root.getChildren();
 
         ArrayList<RotateModel> rotateModels = new ArrayList<>();
-        String destination = timeFunc.getValue(des, operandSize);
+        String destination = timeFunc.getPreviousValue(des, timeFunc.getBitSize(des));
         BigInteger biDes = new BigInteger(destination, 16);
         BigInteger biResult = biDes;
         boolean bitSet = false;

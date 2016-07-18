@@ -29,7 +29,6 @@ public class EnvironmentBagFinder {
     public String getRegister(String registerName) {
         String key = registerName.toUpperCase(); // just in case
         String[][] registerMap = bag.getRegisterStringArray();
-
         String[] registerArray = find(registerName);
         String sourceRegister = registerArray[RegisterList.SOURCE];
         int startIndex = Integer.parseInt(registerArray[RegisterList.START]);
@@ -42,6 +41,7 @@ public class EnvironmentBagFinder {
                     return value;
                 } else {
                     value = value.substring(startIndex, endIndex + 1);
+
                     return value;
                 }
             }
@@ -86,6 +86,7 @@ public class EnvironmentBagFinder {
     }
 
     public String read(Token baseAddressToken, int offset) throws MemoryReadException {
+        System.out.println("value eto:" + baseAddressToken.getValue());
         return read(baseAddressToken.getValue(), offset);
     }
 

@@ -414,6 +414,10 @@ public class Calculator {
         return value;
     }
 
+    public String convertHexToBits(String source, int size){
+        return binaryZeroExtend(new BigInteger(source, 16).toString(2), size);
+    }
+
     public String binarySignExtend(String value, Token des) {
         if ( des.isRegister() ) {
             int missingZeroes = registers.getBitSize(des) - value.length();
@@ -966,4 +970,19 @@ public class Calculator {
 
         return bcd;
     }
+
+    public String cutSomething(String source, int bound){
+        if(source.length() == bound){
+            return source.substring(1);
+        }
+        else{
+            return source;
+        }
+    }
+
+
+
+
 }
+
+

@@ -22,7 +22,7 @@ execute(des, src, registers, memory) {
 				sourceReg = c.hexZeroExtend(registers.get(src), des);
 			}
 			else if (src.isMemory()){
-				sourceReg = c.hexZeroExtend(memory.read(src, 32), des);
+				sourceReg = c.hexZeroExtend(memory.read(src, desSize).substring((desSize / 4) - 8, (desSize / 4)), des);
 			}
 		}
 		else if(desSize == 32){

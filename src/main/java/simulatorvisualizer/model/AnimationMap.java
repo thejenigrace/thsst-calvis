@@ -22,6 +22,85 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPStack();
         this.generateGPJump();
         this.generateDataTransfer();
+        this.generateMMX();
+        this.generateSSE();
+    }
+
+    private void generateMMX(){
+        this.generateArithMMX();
+    }
+
+    private void generateArithMMX(){
+        this.put("PADDB", new Paddb());
+        this.put("PADDW", new Paddw());
+        this.put("PADDQ", new Paddq());
+        this.put("PSUBB", new Psubb());
+        this.put("PSUBW", new Psubw());
+        this.put("PSUBQ", new Psubq());
+        this.put("PMULLW", new Pmullw());
+        this.put("PMULHW", new Pmulhw());
+        this.put("PMADDWD", new Pmaddwd());
+        this.put("PSUBSB", new Psubsb());
+        this.put("PSUBSW", new Psubsw());
+        this.put("PADDSB", new Paddsb());
+        this.put("PADDSW", new Paddsw());
+        this.put("PADDUSB", new Paddusb());
+        this.put("PADDUSW", new Paddusw());
+        this.put("PSUBUSB", new Psubusb());
+        this.put("PSUBUSW", new Psubusw());
+    }
+
+    private void generateSSEDataTransfer(){
+        this.put("MOVAPS", new Movaps());
+        this.put("MOVUPS", new Movups());
+        this.put("MOVSS", new Movss());
+        this.put("MOVLPS", new Movlps());
+        this.put("MOVHPS", new Movhps());
+        this.put("MOVLHPS", new Movlhps());
+        this.put("MOVHLPS", new Movhlps());
+        this.put("MOVMSKPS", new Movmskps());
+    }
+
+    private void generateSSEFPArith(){
+        this.put("ADDPS", new Addps());
+        this.put("SUBPS", new Subps());
+        this.put("ADDSS", new Addss());
+        this.put("SUBSS", new Subss());
+        this.put("MULPS", new Mulps());
+        this.put("MULSS", new Mulss());
+        this.put("DIVPS", new Divps());
+        this.put("DIVSS", new Divss());
+        this.put("RCPPS", new Rcpps());
+        this.put("RCPSS", new Rcpss());
+        this.put("SQRTPS", new Sqrtps());
+        this.put("SQRTSS", new Sqrtss());
+        this.put("RSQRTPS", new Rsqrtss());
+        this.put("RSQRTSS", new Rsqrtss());
+        this.put("MAXPS", new Maxps());
+        this.put("MAXSS", new Maxss());
+        this.put("MINPS", new Maxps());
+        this.put("MINSS", new Maxss());
+    }
+
+    private void generateSSE(){
+        this.generateSSEDataTransfer();
+        this.generateSSEFPArith();
+        this.generateSSEIntArith();
+    }
+
+    private void generateSSEIntArith(){
+        this.put("PAVGB", new Pavgb());
+        this.put("PAVGW", new Pavgw());
+        this.put("PEXTRW", new Pextrw());
+        this.put("PINSRW", new Pinsrw());
+        this.put("PMAXSW", new Pmaxsw());
+        this.put("PMINSW", new Pminsw());
+        this.put("PMAXUB", new Pmaxub());
+        this.put("PMINUB", new Pminub());
+        this.put("PMOVMSKB", new Pmovmskb());
+        this.put("PMULHUW", new Pmulhuw());
+        this.put("PSADBW", new Psadbw());
+        this.put("PSHUFW", new Pshufw());
     }
 
     private void generateGPDataTransfer() {

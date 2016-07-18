@@ -29,7 +29,7 @@ public class Rcr extends CalvisAnimation {
         tab.setContent(root);
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
-        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory);
+        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory, finder);
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         Token des = tokens[0];
@@ -39,7 +39,7 @@ public class Rcr extends CalvisAnimation {
         ObservableList<Node> parent = this.root.getChildren();
 
         ArrayList<RotateModel> rotateModels = new ArrayList<>();
-        String destination = timeFunc.getValue(des, operandSize);
+        String destination = timeFunc.getPreviousValue(des, timeFunc.getBitSize(des));
         BigInteger biDes = new BigInteger(destination, 16);
         BigInteger biResult = biDes;
         boolean bitSet = false;

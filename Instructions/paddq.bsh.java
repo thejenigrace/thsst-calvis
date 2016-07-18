@@ -19,28 +19,30 @@ execute(des, src, registers, memory) {
 		srcSize = registers.getBitSize(des);
 		}
 	}
-	String sourceReg = "";
-	String desStr = "";
-	String srcStr = "";
-	///end of defining sizes///
-	if(des.isRegister()){
-		if(desSize == srcSize && (srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
-			desStr = registers.get(des);
-			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
+	if(srcSize == desSize){
+		String sourceReg = "";
+		String desStr = "";
+		String srcStr = "";
+		///end of defining sizes///
+		if(des.isRegister()){
+			if(desSize == srcSize && (srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
+				desStr = registers.get(des);
+				srcStr = registers.get(src);
+				sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
+			}
+			if((srcSize == 64  || srcSize == 128 ) && src.isMemory() ){
+				desStr = registers.get(des);
+				srcStr = memory.read(src, desSize);
+				sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
+			}
+			registers.set(des, sourceReg);
 		}
-		if((srcSize == 64  || srcSize == 128 ) && src.isMemory() ){
-			desStr = registers.get(des);
-			srcStr = memory.read(src, desSize);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
-		}
-		registers.set(des, sourceReg);
-	}
-	if(des.isMemory()){
-		if(desSize == srcSize && ( srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
-			desStr = memory.read(des, desSize);
-			srcStr = registers.get(src);
-			sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
+		if(des.isMemory()){
+			if(desSize == srcSize && ( srcSize == 64  || srcSize == 128 ) && src.isRegister() ){
+				desStr = memory.read(des, desSize);
+				srcStr = registers.get(src);
+				sourceReg = executeAdd(des, src, registers, memory, c, desSize, srcSize, desStr, srcStr, sizeOfHex);
+			}
 		}
 	}
 }

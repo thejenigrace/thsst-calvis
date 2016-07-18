@@ -102,9 +102,9 @@ String executeMultiply(des, src, registers, memory, c, desSize, srcSize, desStr,
 
 	}
 		if(desSize == 64)
-			resultingMultiply = arrBi[0].substring(0, 4) + arrBi[1].substring(0, 4) + arrBi[2].substring(0, 4) + arrBi[3].substring(0, 4);
+			resultingMultiply = arrBi[0].substring(4, 8) + arrBi[1].substring(4, 8) + arrBi[2].substring(4, 8) + arrBi[3].substring(4, 8);
 		else
-			resultingMultiply = arrBi[0].substring(0, 4) + arrBi[1].substring(0, 4) + arrBi[2].substring(0, 4) + arrBi[3].substring(0, 4) + resultingMultiply + arrBi[4].substring(0, 4) + arrBi[5].substring(0, 4) + arrBi[6].substring(0, 4) + arrBi[7].substring(0, 4);
+			resultingMultiply = arrBi[0].substring(4, 8) + arrBi[1].substring(4, 8) + arrBi[2].substring(4, 8) + arrBi[3].substring(4, 8) + resultingMultiply + arrBi[4].substring(4, 8) + arrBi[5].substring(4, 8) + arrBi[6].substring(4, 8) + arrBi[7].substring(4, 8);
 	return resultingMultiply;
 }
 

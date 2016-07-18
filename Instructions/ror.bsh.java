@@ -154,7 +154,7 @@ execute(des, src, registers, memory) {
                 }
             }
         }
-    } else if (des.isMemory() && memory.getBitSize(des) < 0) {
+    } else if (des.isMemory() && memory.getBitSize(des) > 0) {
         if (src.isRegister() && src.getValue().equals("CL")) {
             System.out.println("ROL memory and CL");
             //get size of des
