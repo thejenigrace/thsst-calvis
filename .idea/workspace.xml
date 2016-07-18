@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Change caret color for console">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pcmpeq.java" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Added PCMPEQ(B/W/D)">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1002,12 +1000,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00115" summary="Merge with conversion">
-      <created>1467385059851</created>
-      <option name="number" value="00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1467385059851</updated>
-    </task>
     <task id="LOCAL-00116" summary="Merge with conversion">
       <created>1467385080270</created>
       <option name="number" value="00116" />
@@ -1296,7 +1288,13 @@
       <option name="project" value="LOCAL" />
       <updated>1468843142473</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="Added PCMPEQ(B/W/D)">
+      <created>1468844373292</created>
+      <option name="number" value="00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1468844373292</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1391,7 +1389,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed MOV Animation" />
     <MESSAGE value="Comment-out EnvironmentBag -&gt; CalvisAnimation" />
     <MESSAGE value="Fix open file order" />
     <MESSAGE value="Added helper methods in CalvisAnimation" />
@@ -1416,7 +1413,8 @@
     <MESSAGE value="Fix ADCX and CMOVG / CMOVNLE" />
     <MESSAGE value="Fix adc, adcx and adox instructions" />
     <MESSAGE value="Change caret color for console" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change caret color for console" />
+    <MESSAGE value="Added PCMPEQ(B/W/D)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added PCMPEQ(B/W/D)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
