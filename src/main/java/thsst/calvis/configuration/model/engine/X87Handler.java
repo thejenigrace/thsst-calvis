@@ -7,6 +7,9 @@ import thsst.calvis.configuration.model.exceptions.DataTypeMismatchException;
  */
 public class X87Handler {
 
+    private final int LEFT = 0;
+    private final int RIGHT = 1;
+
     private RegisterList registerList;
     private X87StatusRegister status;
     private X87TagRegister tag;
@@ -32,6 +35,8 @@ public class X87Handler {
             top--; // go down the stack
         }
 
+        rotateBarrel(LEFT);
+
         Double converted = Double.parseDouble(value);
 
         if ( tag.getTag(String.valueOf(top)).equals(X87TagRegister.EMPTY) ) {
@@ -49,7 +54,7 @@ public class X87Handler {
         }
 
         int index = 0;
-        for ( int i = top; i < 8; i++ ) {
+        for ( int i = 7; i >= 0; i-- ) {
             this.registerList.set("ST" + index, String.valueOf(barrel[i]));
             index++;
         }
@@ -66,22 +71,19 @@ public class X87Handler {
         String popped = peek();
         // remove TOP contents
         int top = this.status.getTop();
-        barrel[top] = 0.0;
+
+        rotateBarrel(RIGHT);
 
         if ( top == 7 ) {
             top = 0;
         } else {
             top++; // go up the stack
         }
-        System.out.println(this.registerList.get("ST1") + " value");
+
         int index = 0;
-        for ( int i = top; i < 8; i++ ) {
+        for ( int i = 7; i >= 0; i-- ) {
             this.registerList.set("ST" + index, String.valueOf(barrel[i]));
             index++;
-        }
-
-        if ( index < 8 ) {
-            this.registerList.set("ST" + index, "0.0");
         }
 
         this.status.setBinaryTop(top);
@@ -90,15 +92,25 @@ public class X87Handler {
     }
 
     public void setStackValue(String stIndex, String value) {
-        int index = Integer.parseInt(stIndex);
-        int top = this.status.getTop();
-        int barrelIndex = top + index;
-        if ( barrelIndex < 8 ) {
-            barrel[barrelIndex] = Double.parseDouble(value);
-        } else {
-            barrelIndex = 7 - index;
-            barrel[barrelIndex] = Double.parseDouble(value);
+        double val = Double.parseDouble(value);
+        int barrelIndex = 7 - Integer.parseInt(stIndex);
+        barrel[barrelIndex] = val;
+
+    }
+
+    private void rotateBarrel(int direction) {
+        if ( direction == LEFT ){
+            // to the left
+            for ( int i = 0; i < barrel.length - 1; i++ ) {
+                barrel[i] = barrel[i+1];
+            }
+        } else { // to the right
+            for ( int i = barrel.length - 1; i > 0; i-- ) {
+                barrel[i] = barrel[i-1];
+            }
+            barrel[0] = 0.0;
         }
+
     }
 
     public X87StatusRegister status() {
