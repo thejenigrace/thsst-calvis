@@ -5,11 +5,11 @@ package thsst.calvis.simulatorvisualizer.model;
  */
 public class RotateModel{
 	private String result;
-	private String zeroFlag;
+	private String carryFlag;
 
-	public RotateModel(String result, String zeroFlag){
+	public RotateModel(String result, String carryFlag){
 		this.result = result;
-		this.zeroFlag = zeroFlag;
+		this.carryFlag = carryFlag;
 	}
 
 	public String getResult(){
@@ -17,6 +17,6 @@ public class RotateModel{
 	}
 
 	public String getFlag(){
-		return zeroFlag;
+		return carryFlag;
 	}
 }
