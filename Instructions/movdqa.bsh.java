@@ -7,6 +7,15 @@ execute(des, src, registers, memory) {
 	String destination = "";
 	String source = "";
 	String resultingHex = "";
+	if(des.isMemory() && src.isMemory()){
+		throw new MemoryToMemoryException("[" + des.getValue() + "]", "[" + src.getValue() + "]");
+	}
+	if(src.getValue().substring(src.getValue().length()-1).equals("0") && !src.getValue().equals("00000000") && src.isMemory()){
+		throw new MemoryAlignmentException(src.getValue());
+	}
+	if(des.getValue().substring(des.getValue().length()-1).equals("0") && !des.getValue().equals("00000000") && des.isMemory()){
+		throw new MemoryAlignmentException(des.getValue());
+	}
 	if(des.isRegister()){
 		desSize = registers.getBitSize(des);
 		isRegisterDes = true;
@@ -37,14 +46,14 @@ execute(des, src, registers, memory) {
 
 	if(desSize == srcSize && srcSize == 128){
 		if(isRegisterDes){
-			if(source.charAt(srcSize/4 -1) != '0'){
-				registers.set(des, source);
-			}
+			registers.set(des, source);
 		}
 		else {
-			if(source.charAt(srcSize/4 - 1) != '0'){
+			if(isRegisterDes)
 				memory.write(des, source, desSize);
-			}
+			else
+				throw new MemoryToMemoryException("[" + des.getValue() + "]", "[" + src.getValue() + "]");
+
 		}
 		
 

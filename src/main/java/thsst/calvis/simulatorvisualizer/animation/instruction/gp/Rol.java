@@ -34,7 +34,7 @@ public class Rol extends CalvisAnimation {
         Token[] tokens = currentInstruction.getParameterTokens();
         Token des = tokens[0];
         Token count = tokens[1];
-        int counter = timeFunc.parseHex(count);
+        int counter = timeFunc.parseHex(count) % 32;
         int operandSize = timeFunc.getBitSize(des);
         ObservableList<Node> parent = this.root.getChildren();
 
@@ -70,15 +70,15 @@ public class Rol extends CalvisAnimation {
         ArrayList<Text> resultLabel = new ArrayList<>();
         ArrayList<Text> cfLabel = new ArrayList<>();
         ArrayList<Text> numberLabel = new ArrayList<>();
-        Text resultText = timeFunc.generateText(new Text("Final Result"), 20, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant");
+        Text resultText = timeFunc.generateText(new Text("Final Result"), 20, "#3d2b1f", FontWeight.NORMAL, "System");
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         parent.add(fake);
         for(int x = 0; x < counter; x++){
-            numberLabel.add(timeFunc.generateText(new Text(Integer.toString(x + 1)), 20, "#a4c639", FontWeight.EXTRA_BOLD, "Elephant"));
-            rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(x).getResult()), 20, "#5d8aa8", FontWeight.EXTRA_BOLD, "Elephant"));
-            zeroFlags.add(timeFunc.generateText(new Text(rotateModels.get(x).getFlag()), 20, "#5d8aa8", FontWeight.EXTRA_BOLD, "Elephant"));
-            resultLabel.add(timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
-            cfLabel.add(timeFunc.generateText(new Text("CF"), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
+            numberLabel.add(timeFunc.generateText(new Text(Integer.toString(x + 1)), 20, "#a4c639", FontWeight.NORMAL, "System"));
+            rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(x).getResult()), 20, "#5d8aa8", FontWeight.NORMAL, "System"));
+            zeroFlags.add(timeFunc.generateText(new Text(rotateModels.get(x).getFlag()), 20, "#5d8aa8", FontWeight.NORMAL, "System"));
+            resultLabel.add(timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.NORMAL, "System"));
+            cfLabel.add(timeFunc.generateText(new Text("CF"), 15, "#3d2b1f", FontWeight.NORMAL, "System"));
             parent.addAll(rotateResults.get(x), zeroFlags.get(x), cfLabel.get(x), resultLabel.get(x), numberLabel.get(x));
         }
 

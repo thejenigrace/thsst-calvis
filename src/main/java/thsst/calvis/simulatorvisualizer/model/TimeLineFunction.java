@@ -11,12 +11,16 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Transform;
 import javafx.util.Duration;
 
 /**
@@ -37,13 +41,7 @@ public class TimeLineFunction{
 		this.finder = finder;
 	}
 
-	public TimeLineFunction(Timeline timeline, Group root, RegisterList registers, Memory memory){
-		tl = timeline;
-		this.root = root;
-		this.registers = registers;
-		this.memory = memory;
-		this.finder = finder;
-	}
+
 
 	public void addTimeline(double xProperty, double yProperty, double duration, Shape shape){
 		tl.getKeyFrames().add(new KeyFrame(new Duration(duration),
@@ -213,5 +211,11 @@ public class TimeLineFunction{
 			return finder.getRegister(token.getValue());
 		}
 		return null;
+	}
+
+	public Line drawLine(int x1, int y1, int x2, int y2) {
+		Line line1 = new Line(x1, y1, x2, y2);
+		line1.setStroke(Color.BLACK);
+		return line1;
 	}
 }

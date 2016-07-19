@@ -27,7 +27,7 @@ public class Jmp extends CalvisAnimation {
         tab.setContent(root);
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
-        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory);
+        TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory, finder);
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         Token des = tokens[0];

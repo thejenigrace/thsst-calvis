@@ -31,7 +31,6 @@ execute(des, src, registers, memory) {
 			resultingHex = temp;
 		}
 
-		System.out.println(resultingHex + " temp :)");
 		registers.set(des, resultingHex);
 	}
 	

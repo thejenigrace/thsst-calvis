@@ -51,12 +51,12 @@ public class Pmaddwd extends CalvisAnimation {
         ArrayList<String> resultingMultiply = new ArrayList<>();
 
 
-        for(int x = 0; x < (size/4) / 2; x = x + operationSize){
+        for(int x = 0; x < (size/4) / 2; x = x + operationSize / 2){
             String strDes = desStr.substring(0 + x, operationSize + x);
             String strSrc = (srcStr.substring(0 + x, operationSize + x));
             dividedStrDes += strDes + "     ";
             dividedStrSrc += strSrc + "     ";
-            resultingMultiply.add(c.hexZeroExtend(new BigInteger(strDes, 16).multiply(new BigInteger(strSrc, 16)).toString(16), operationSize * 2));
+            resultingMultiply.add(c.hexZeroExtend(new BigInteger(strDes, 16).multiply(new BigInteger(strSrc, 16)).toString(16).toUpperCase(), operationSize * 2));
 
         }
 

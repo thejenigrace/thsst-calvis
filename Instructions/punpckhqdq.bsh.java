@@ -35,7 +35,7 @@ execute(des, src, registers, memory) {
 	if(desSize == 128 && srcSize == 128){
 		String parDes = destination.substring(0, 16);
 		String parSource = source.substring(0,16);
-		for(int x = 0; x < (srcSize/4) / 8; x++){;
+		for(int x = 0; x < 4; x++){;
 			resultingHex += parSource.substring(x * 4, x * 4 + 4);
 			resultingHex += parDes.substring(x * 4, x * 4 + 4);
 		}

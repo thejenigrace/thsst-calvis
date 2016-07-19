@@ -14,12 +14,13 @@ execute(des,src,registers,memory) {
     if( des.isRegister() ) {
         System.out.println("srcValue = " + srcValue);
         registers.set(des, srcValue);
+		System.out.println(registers.get("XMM1") + " value");
     } else if( des.isMemory() ) {
         String desEffectiveAddress = memory.removeSizeDirectives(des.getValue());
         System.out.println("desEffectiveAddress = " + desEffectiveAddress);
-        if(desEffectiveAddress.substring(desEffectiveAddress.length() - 1).equals("0")) {
+
             System.out.println("srcValue = " + srcValue);
             memory.write(des, srcValue, desBitSize);
-        }
+
     }
 }
