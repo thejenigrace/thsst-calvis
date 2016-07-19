@@ -1,9 +1,5 @@
 package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
 
-import thsst.calvis.configuration.model.engine.Calculator;
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
-import thsst.calvis.configuration.model.engine.Token;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +7,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import thsst.calvis.configuration.model.engine.Calculator;
+import thsst.calvis.configuration.model.engine.Memory;
+import thsst.calvis.configuration.model.engine.RegisterList;
+import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 import thsst.calvis.simulatorvisualizer.model.RotateModel;
 import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
@@ -66,6 +66,21 @@ public class Rcr extends CalvisAnimation {
         Text resultText = timeFunc.generateText(new Text("Final Result"), 20, "#3d2b1f", FontWeight.NORMAL, "System");
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         parent.add(fake);
+        if(counter == 0){
+            String resultBit = c.binaryZeroExtend(new BigInteger(timeFunc.getValue(des), 16).toString(2), operandSize);
+            rotateModels.add(new RotateModel(resultBit, registers.getEFlags().getCarryFlag()));
+            resultLabel.add(timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.NORMAL, "System"));
+            rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(0).getResult()), 20, "#5d8aa8", FontWeight.NORMAL, "System"));
+            zeroFlags.add(timeFunc.generateText(new Text(), 20, "#5d8aa8", FontWeight.NORMAL, "System"));
+            cfLabel.add(timeFunc.generateText(new Text("CF"), 15, "#3d2b1f", FontWeight.NORMAL, "System"));
+            numberLabel.add(timeFunc.generateText(new Text(Integer.toString(0)), 20, "#a4c639", FontWeight.NORMAL, "System"));
+            parent.addAll(rotateResults.get(0), zeroFlags.get(0), cfLabel.get(0), resultLabel.get(0), numberLabel.get(0));
+            timeFunc.setTimelinePosition(60 + rotateResults.get(0).getLayoutBounds().getWidth(), 20 + 50 * 0, zeroFlags.get(0));
+            timeFunc.setTimelinePosition(20 + 30, 20 + 50 * 0, rotateResults.get(0));
+            timeFunc.setTimelinePosition(60 + rotateResults.get(0).getLayoutBounds().getWidth() , 40 + 50 * 0, cfLabel.get(0));
+            timeFunc.setTimelinePosition(20 + 30 , 40 + 50 * 0, resultLabel.get(0));
+            timeFunc.setTimelinePosition(10 , 20 + 50 * 0, numberLabel.get(0));
+        }
         for(int x = 0; x < counter; x++){
             rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(x).getResult()), 20, "#5d8aa8", FontWeight.NORMAL, "System"));
             numberLabel.add(timeFunc.generateText(new Text(Integer.toString(x + 1)), 20, "#a4c639", FontWeight.NORMAL, "System"));
@@ -86,6 +101,8 @@ public class Rcr extends CalvisAnimation {
         timeFunc.setTimelinePosition(20 + 60 + resultLabel.get(0).getLayoutBounds().getWidth(), 40 + 50 * (counter  - 1), resultText);
         Text reminder = timeFunc.generateText(new Text("*Carry Flag is now part of the whole rotation"), 20, "#5d8aa8", FontWeight.NORMAL, "System");
         parent.add(reminder);
+        if(counter == 0)
+            counter = 1;
         timeFunc.setTimelinePosition(20 + 30 , 40 + 50 * ( counter - 1) + 40, reminder);
         timeline.play();
     }

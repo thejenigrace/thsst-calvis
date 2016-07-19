@@ -39,7 +39,7 @@ public class Pcmpeq extends CalvisAnimation {
         desRectangle.setArcHeight(10);
 
         srcRectangle.setX(100);
-        srcRectangle.setY(150);
+        srcRectangle.setY(200);
         srcRectangle.setArcWidth(10);
         srcRectangle.setArcHeight(10);
 
