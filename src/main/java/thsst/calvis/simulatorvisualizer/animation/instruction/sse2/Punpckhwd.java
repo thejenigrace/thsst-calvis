@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Punpcklwd extends CalvisAnimation {
+public class Punpckhwd extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -59,15 +59,15 @@ public class Punpcklwd extends CalvisAnimation {
         if( desSize == 64) {
             int width = 60;
             int height = 30;
-            Rectangle des1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des3 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
-            Rectangle des4 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des1 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle des4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
 
-            Rectangle src1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src3 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-            Rectangle src4 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src2 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle src4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
 
             Rectangle res1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
             Rectangle res2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
@@ -290,23 +290,23 @@ public class Punpcklwd extends CalvisAnimation {
         else {
             int width = 60;
             int height = 30;
-            Rectangle des1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle des5 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
-            Rectangle des6 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
-            Rectangle des7 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
-            Rectangle des8 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des1 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des3 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des4 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            Rectangle des5 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle des6 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle des7 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle des8 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
 
-            Rectangle src1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-            Rectangle src5 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-            Rectangle src6 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-            Rectangle src7 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-            Rectangle src8 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src2 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src3 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src4 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            Rectangle src5 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle src6 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle src7 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            Rectangle src8 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
 
             Rectangle res1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
             Rectangle res2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));

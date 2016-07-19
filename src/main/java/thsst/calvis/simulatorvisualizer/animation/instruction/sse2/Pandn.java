@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -9,15 +9,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Calculator;
 import thsst.calvis.configuration.model.engine.Memory;
 import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
+import thsst.calvis.configuration.model.exceptions.MemoryReadException;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Andps extends CalvisAnimation {
+public class Pandn extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -26,11 +28,55 @@ public class Andps extends CalvisAnimation {
 
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
+        Calculator calculator = new Calculator(registers, memory);
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
+        }
+
+        String value = "";
+        String result = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            int desSize = registers.getBitSize(tokens[0]);
+
+            value = finder.getRegister(tokens[0].getValue());
+            value = calculator.hexToBinaryString(value, tokens[0]);
+
+            for (int i = 0; i < desSize; i++) {
+                if (value.charAt(i) == '1') {
+                    result = result.concat("0");
+                }
+                else if (value.charAt(i) == '0') {
+                    result = result.concat("1");
+                }
+            }
+
+            result = calculator.binaryToHexString(result, tokens[0]);
+            value = calculator.binaryToHexString(value, tokens[0]);
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            int desSize = memory.getBitSize(tokens[0]);
+            try {
+                value = finder.read(tokens[0].getValue(), tokens[0]);
+                value = calculator.hexToBinaryString(value, tokens[0]);
+
+                for (int i = 0; i < desSize; i++) {
+                    if (value.charAt(i) == '1') {
+                        result = result.concat("0");
+                    }
+                    else if (value.charAt(i) == '0') {
+                        result = result.concat("1");
+                    }
+                }
+
+                result = calculator.binaryToHexString(result, tokens[0]);
+                value = calculator.binaryToHexString(value, tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
         }
 
         // CODE HERE
@@ -77,7 +123,7 @@ public class Andps extends CalvisAnimation {
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text augendValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
+            Text augendValueText = new Text(X, Y, "!" + value + "\n= 0x" + result.toUpperCase());
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
 

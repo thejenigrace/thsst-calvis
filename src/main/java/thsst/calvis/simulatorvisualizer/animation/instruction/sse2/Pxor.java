@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -17,7 +17,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Por extends CalvisAnimation {
+public class Pxor extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -85,7 +85,7 @@ public class Por extends CalvisAnimation {
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 
-            Text plusText = new Text(X, Y, "|");
+            Text plusText = new Text(X, Y, "⊕");
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
@@ -154,7 +154,7 @@ public class Por extends CalvisAnimation {
             // Plus sign label static
             plusTransition.setNode(plusText);
             plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 43));
+                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 32));
             plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
             plusTransition.toXProperty().bind(plusTransition.fromXProperty());
             plusTransition.toYProperty().bind(plusTransition.fromYProperty());

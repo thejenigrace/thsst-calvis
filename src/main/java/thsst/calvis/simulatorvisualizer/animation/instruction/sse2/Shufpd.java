@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Unpckhpd extends CalvisAnimation {
+public class Shufpd extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -56,10 +56,31 @@ public class Unpckhpd extends CalvisAnimation {
         // CODE HERE
         int width = 290;
         int height = 30;
-        Rectangle des1 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
-        Rectangle des3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-        Rectangle src1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-        Rectangle src3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+
+        String i = calculator.hexToBinaryString(tokens[2].getValue(), 8);
+        String i1 = i.charAt(7) + "";
+        String i0 = i.charAt(6) + "";
+
+        Rectangle des1;
+        Rectangle des3;
+        Rectangle src1;
+        Rectangle src3;
+
+        if( i1.equals("0") ) {
+            des1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            des3 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+        } else {
+            des1 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+            des3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+        }
+
+        if( i0.equals("0") ) {
+            src1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+            src3 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+        } else {
+            src1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+            src3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+        }
 
         Rectangle res1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
         Rectangle res2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
@@ -82,13 +103,19 @@ public class Unpckhpd extends CalvisAnimation {
 
         Text label3 = new Text("Result: (stored in " + tokens[0].getValue() + ")");
 
+        String text = "Bit 0 selects which value is moved from the destination operand to the result and bit 1 selects which value is moved from the source operand to the result.\n" +
+                "If the value of the bit is 0, get the lower half. Else, get the upper half.";
+        Text label4 = new Text(text);
+
         label1.setX(X);
         label1.setY(Y);
         label2.setX(X);
         label2.setY(Y + 50);
         label3.setX(X);
         label3.setY(Y + 100);
-        this.root.getChildren().addAll(des1, des3, src1, src3, res1, res2, label1, label2, label3);
+        label4.setX(X);
+        label4.setY(Y + 150);
+        this.root.getChildren().addAll(des1, des3, src1, src3, res1, res2, label1, label2, label3, label4);
 
         Text textBit7 = new Text(X, Y + 10, "" + value0.substring(0, 16));
         Text textBit5 = new Text(X + 300, Y + 10, "" + value0.substring(16));

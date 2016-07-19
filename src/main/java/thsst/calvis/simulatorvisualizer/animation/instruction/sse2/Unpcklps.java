@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Shufps extends CalvisAnimation {
+public class Unpcklps extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -53,25 +53,22 @@ public class Shufps extends CalvisAnimation {
         if ( tokens[0].getType() == Token.REG )
             result = registers.get(tokens[0].getValue());
 
-
-        String imm = calculator.hexToBinaryString(tokens[2].getValue(), 8);
-
         // CODE HERE
         int width = 140;
-        int height = 50;
+        int height = 30;
         Rectangle des1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
         Rectangle des2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-        Rectangle des3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-        Rectangle des4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-//        Rectangle src1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-//        Rectangle src2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-//        Rectangle src3 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
-//        Rectangle src4 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+        Rectangle des3 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+        Rectangle des4 = new Rectangle(width, height, Color.web("#2ecc71", 1.0));
+        Rectangle src1 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+        Rectangle src2 = new Rectangle(width, height, Color.web("#7f8c8d", 1.0));
+        Rectangle src3 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+        Rectangle src4 = new Rectangle(width, height, Color.web("#9b59b6", 1.0));
 
         Rectangle res1 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-        Rectangle res2 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-        Rectangle res3 = new Rectangle(width, height, Color.web("#3498db", 1.0));
-        Rectangle res4 = new Rectangle(width, height, Color.web("#3498db", 1.0));
+        Rectangle res2 = new Rectangle(width, height, Color.web("#1abc9c", 1.0));
+        Rectangle res3 = new Rectangle(width, height, Color.web("#9b59b6", 1.0));
+        Rectangle res4 = new Rectangle(width, height, Color.web("#2ecc71", 1.0));
 
         des1.setX(X);
         des1.setY(Y);
@@ -81,42 +78,50 @@ public class Shufps extends CalvisAnimation {
         des3.setY(Y);
         des4.setX(X + 450);
         des4.setY(Y);
+        src1.setX(X);
+        src1.setY(Y + 51);
+        src2.setX(X + 150);
+        src2.setY(Y + 51);
+        src3.setX(X + 300);
+        src3.setY(Y + 51);
+        src4.setX(X + 450);
+        src4.setY(Y + 51);
         res1.setX(X);
-        res1.setY(Y + 151);
+        res1.setY(Y + 101);
         res2.setX(X + 150);
-        res2.setY(Y + 151);
+        res2.setY(Y + 101);
         res3.setX(X + 300);
-        res3.setY(Y + 151);
+        res3.setY(Y + 101);
         res4.setX(X + 450);
-        res4.setY(Y + 151);
+        res4.setY(Y + 101);
 
-        Text label1 = new Text("Value of the immediate");
+        Text label1 = new Text(tokens[0].getValue());
+        Text label2 = new Text(l);
+        
         Text label3 = new Text("Result: (stored in " + tokens[0].getValue() + ")");
-
-        String text = "*\n00 - get the value of bit 0 to 31\n" +
-                "01 - get the value of bit 32 to 63\n" +
-                "10 - get the value of bit 64 to 95\n" +
-                "11 - get the value of bit 96 to 127";
-        Text label4 = new Text(text);
 
         label1.setX(X);
         label1.setY(Y);
+        label2.setX(X);
+        label2.setY(Y + 50);
         label3.setX(X);
-        label3.setY(Y + 150);
-        label4.setX(X);
-        label4.setY(Y + 70);
-        this.root.getChildren().addAll(des1, des2, des3, des4, res1, res2, res3, res4, label1, label3, label4);
+        label3.setY(Y + 100);
+        this.root.getChildren().addAll(des1, des2, des3, des4, src1, src2, src3, src4, res1, res2, res3, res4, label1, label2, label3);
 
-        Text textBit7 = new Text(X, Y + 10, "Bit 6 and 7 = " + imm.substring(0, 2) + "\n     from SRC*");
-        Text textBit6 = new Text(X + 150, Y + 10, "Bit 4 and 5 = " + imm.substring(2, 4) + "\n     from SRC*");
-        Text textBit5 = new Text(X + 300, Y + 10, "Bit 2 and 3 = " + imm.substring(4, 6) + "\n     from DES*");
-        Text textBit4 = new Text(X + 450, Y + 10, "Bit 0 and 1 = " + imm.substring(6) + "\n     from DES*");
-        Text text0 = new Text(X, Y + 165, "" + result.substring(0, 8));
-        Text text1 = new Text(X + 150, Y + 165, "" + result.substring(8, 16));
-        Text text2 = new Text(X + 300, Y + 165, "" + result.substring(16, 24));
-        Text text3 = new Text(X + 450, Y + 165, "" + result.substring(24));
+        Text textBit7 = new Text(X, Y + 10, "" + value0.substring(0, 8));
+        Text textBit6 = new Text(X + 150, Y + 10, "" + value0.substring(8, 16));
+        Text textBit5 = new Text(X + 300, Y + 10, "" + value0.substring(16, 24));
+        Text textBit4 = new Text(X + 450, Y + 10, "" + value0.substring(24));
+        Text textBit3 = new Text(X, Y + 60, "" + value1.substring(0, 8));
+        Text textBit2 = new Text(X + 150, Y + 60, "" + value1.substring(8, 16));
+        Text textBit1 = new Text(X + 300, Y + 60, "" + value1.substring(16, 24));
+        Text textBit0 = new Text(X + 450, Y + 60, "" + value1.substring(24));
+        Text text0 = new Text(X, Y + 110, "" + result.substring(0, 8));
+        Text text1 = new Text(X + 150, Y + 110, "" + result.substring(8, 16));
+        Text text2 = new Text(X + 300, Y + 110, "" + result.substring(16, 24));
+        Text text3 = new Text(X + 450, Y + 110, "" + result.substring(24));
 
-        this.root.getChildren().addAll(textBit7, textBit6, textBit5, textBit4, text0, text1, text2, text3);
+        this.root.getChildren().addAll(textBit7, textBit6, textBit5, textBit4, textBit3, textBit2, textBit1, textBit0, text0, text1, text2, text3);
 
         TranslateTransition bit11Transition = new TranslateTransition();
         TranslateTransition bit10Transition = new TranslateTransition();
@@ -167,41 +172,41 @@ public class Shufps extends CalvisAnimation {
         bit4Transition.toXProperty().bind(bit4Transition.fromXProperty());
         bit4Transition.toYProperty().bind(bit4Transition.fromYProperty());
 
-//        bit3Transition.setNode(textBit3);
-//        bit3Transition.fromXProperty().bind(src1.translateXProperty()
-//                .add(src1.getLayoutBounds().getWidth() - 140)
-//                .add((src1.getLayoutBounds().getWidth() - textBit3.getLayoutBounds().getWidth()) / 2));
-//        bit3Transition.fromYProperty().bind(src1.translateYProperty()
-//                .add(src1.getLayoutBounds().getHeight() / 3));
-//        bit3Transition.toXProperty().bind(bit3Transition.fromXProperty());
-//        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty());
-//
-//        bit2Transition.setNode(textBit2);
-//        bit2Transition.fromXProperty().bind(src2.translateXProperty()
-//                .add(src2.getLayoutBounds().getWidth() - 140)
-//                .add((src2.getLayoutBounds().getWidth() - textBit2.getLayoutBounds().getWidth()) / 2));
-//        bit2Transition.fromYProperty().bind(src2.translateYProperty()
-//                .add(src2.getLayoutBounds().getHeight() / 3));
-//        bit2Transition.toXProperty().bind(bit2Transition.fromXProperty());
-//        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty());
-//
-//        bit1Transition.setNode(textBit1);
-//        bit1Transition.fromXProperty().bind(src3.translateXProperty()
-//                .add(src3.getLayoutBounds().getWidth() - 140)
-//                .add((src3.getLayoutBounds().getWidth() - textBit1.getLayoutBounds().getWidth()) / 2));
-//        bit1Transition.fromYProperty().bind(src3.translateYProperty()
-//                .add(src3.getLayoutBounds().getHeight() / 3));
-//        bit1Transition.toXProperty().bind(bit1Transition.fromXProperty());
-//        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty());
-//
-//        bit0Transition.setNode(textBit0);
-//        bit0Transition.fromXProperty().bind(src4.translateXProperty()
-//                .add(src4.getLayoutBounds().getWidth() - 140)
-//                .add((src4.getLayoutBounds().getWidth() - textBit0.getLayoutBounds().getWidth()) / 2));
-//        bit0Transition.fromYProperty().bind(src4.translateYProperty()
-//                .add(src4.getLayoutBounds().getHeight() / 3));
-//        bit0Transition.toXProperty().bind(bit0Transition.fromXProperty());
-//        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty());
+        bit3Transition.setNode(textBit3);
+        bit3Transition.fromXProperty().bind(src1.translateXProperty()
+                .add(src1.getLayoutBounds().getWidth() - 140)
+                .add((src1.getLayoutBounds().getWidth() - textBit3.getLayoutBounds().getWidth()) / 2));
+        bit3Transition.fromYProperty().bind(src1.translateYProperty()
+                .add(src1.getLayoutBounds().getHeight() / 3));
+        bit3Transition.toXProperty().bind(bit3Transition.fromXProperty());
+        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty());
+
+        bit2Transition.setNode(textBit2);
+        bit2Transition.fromXProperty().bind(src2.translateXProperty()
+                .add(src2.getLayoutBounds().getWidth() - 140)
+                .add((src2.getLayoutBounds().getWidth() - textBit2.getLayoutBounds().getWidth()) / 2));
+        bit2Transition.fromYProperty().bind(src2.translateYProperty()
+                .add(src2.getLayoutBounds().getHeight() / 3));
+        bit2Transition.toXProperty().bind(bit2Transition.fromXProperty());
+        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty());
+
+        bit1Transition.setNode(textBit1);
+        bit1Transition.fromXProperty().bind(src3.translateXProperty()
+                .add(src3.getLayoutBounds().getWidth() - 140)
+                .add((src3.getLayoutBounds().getWidth() - textBit1.getLayoutBounds().getWidth()) / 2));
+        bit1Transition.fromYProperty().bind(src3.translateYProperty()
+                .add(src3.getLayoutBounds().getHeight() / 3));
+        bit1Transition.toXProperty().bind(bit1Transition.fromXProperty());
+        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty());
+
+        bit0Transition.setNode(textBit0);
+        bit0Transition.fromXProperty().bind(src4.translateXProperty()
+                .add(src4.getLayoutBounds().getWidth() - 140)
+                .add((src4.getLayoutBounds().getWidth() - textBit0.getLayoutBounds().getWidth()) / 2));
+        bit0Transition.fromYProperty().bind(src4.translateYProperty()
+                .add(src4.getLayoutBounds().getHeight() / 3));
+        bit0Transition.toXProperty().bind(bit0Transition.fromXProperty());
+        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty());
 
         bit8Transition.setNode(text0);
         bit8Transition.fromXProperty().bind(res1.translateXProperty()

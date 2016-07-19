@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Packsswb extends CalvisAnimation {
+public class Packuswb extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -124,7 +124,7 @@ public class Packsswb extends CalvisAnimation {
             Text label2 = new Text(l);
 
             Text label3 = new Text(X, Y, "Result: (stored in " + tokens[0].getValue() + ")\n" +
-                    "Check per word if the value is > 0x7F for positive integer, then replace the integer as 0x7F or < 0x80 for negative integer, then replace the integer as 0x80, else copy the original value.");
+                    "Check per word if the value is > 0xFF or < 0x00, then replace the integer as 0xFF and 0x00, respectively, else copy the original value.");
 
             label1.setX(X);
             label1.setY(Y);
@@ -468,7 +468,7 @@ public class Packsswb extends CalvisAnimation {
             Text label2 = new Text(l);
 
             Text label3 = new Text("Result: (stored in " + tokens[0].getValue() + ")\n" +
-                    "Check per word if the value is > 0x7F for positive integer, then replace the integer as 0x7F or < 0x80 for negative integer, then replace the integer as 0x80, else copy the original value.");
+                    "Check per word if the value is > 0xFF or < 0x00, then replace the integer as 0xFF and 0x00, respectively, else copy the original value.");
 
             label1.setX(X);
             label1.setY(Y);

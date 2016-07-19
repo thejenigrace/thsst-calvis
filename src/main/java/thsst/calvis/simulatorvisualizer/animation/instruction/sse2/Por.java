@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.model.instructionanimation;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -17,7 +17,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Orps extends CalvisAnimation {
+public class Por extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {

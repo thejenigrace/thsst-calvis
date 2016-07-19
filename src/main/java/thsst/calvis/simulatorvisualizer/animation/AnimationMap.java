@@ -5,10 +5,8 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpgt;
-import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
-
 import java.util.HashMap;
 
 /**
@@ -18,7 +16,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     public AnimationMap() {
         super();
-        generateGP();
+        this.generateGP();
         this.generateMMX();
         this.generateSSE();
         this.generateSSE2();
@@ -31,141 +29,23 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPRotate();
         this.generateGPStack();
         this.generateGPJump();
-        this.generateDataTransfer();
-        this.generateMMX();
-        this.generateSSE();
+    }
+
+    private void generateMMX() {
+        this.generateMMXDataTransfer();
         this.generateMMXComparison();
-    }
-
-    private void generateMMX(){
-        this.generateArithMMX();
-    }
-
-    private void generateSSE2(){
-        this.generateSSE2FPArith();
-        this.generateSSE2DataTransfer();
-        this.generateSSE2Integer();
-    }
-
-    private void generateArithMMX(){
-        this.put("PADDB", new Paddb());
-        this.put("PADDW", new Paddw());
-        this.put("PADDD", new Paddd());
-        this.put("PSUBB", new Psubb());
-        this.put("PSUBW", new Psubw());
-        this.put("PSUBD", new Psubd());
-        this.put("PMULLW", new Pmullw());
-        this.put("PMULHW", new Pmulhw());
-        this.put("PMADDWD", new Pmaddwd());
-        this.put("PSUBSB", new Psubsb());
-        this.put("PSUBSW", new Psubsw());
-        this.put("PADDSB", new Paddsb());
-        this.put("PADDSW", new Paddsw());
-        this.put("PADDUSB", new Paddusb());
-        this.put("PADDUSW", new Paddusw());
-        this.put("PSUBUSB", new Psubusb());
-        this.put("PSUBUSW", new Psubusw());
-    }
-
-    private void generateSSEDataTransfer(){
-        this.put("MOVAPS", new Movaps());
-        this.put("MOVUPS", new Movups());
-        this.put("MOVSS", new Movss());
-        this.put("MOVLPS", new Movlps());
-        this.put("MOVHPS", new Movhps());
-        this.put("MOVLHPS", new Movlhps());
-        this.put("MOVHLPS", new Movhlps());
-        this.put("MOVMSKPS", new Movmskps());
-    }
-
-    private void generateSSE2DataTransfer(){
-        this.put("MOVAPD", new Movapd());
-        this.put("MOVUPD", new Movupd());
-        this.put("MOVSD", new Movsd());
-        this.put("MOVLPD", new Movlpd());
-        this.put("MOVHPD", new Movhpd());
-        this.put("MOVMSKPD", new Movmskpd());
-    }
-
-    private void generateSSE2FPArith(){
-        this.put("ADDPD", new Addpd());
-        this.put("SUBPD", new Subpd());
-        this.put("ADDSD", new Addsd());
-        this.put("SUBSD", new Subsd());
-        this.put("MULPD", new Mulpd());
-        this.put("MULSD", new Mulsd());
-        this.put("DIVPD", new Divpd());
-        this.put("DIVSD", new Divsd());
-        this.put("SQRTPD", new Sqrtpd());
-        this.put("SQRTSD", new Sqrtsd());
-        this.put("MAXPD", new Maxpd());
-        this.put("MAXSD", new Maxsd());
-        this.put("MINPD", new Minpd());
-        this.put("MINSD", new Minsd());
-    }
-
-    private void generateSSE2Integer(){
-        this.put("MOVDQA", new Movdqa());
-        this.put("MOVDQU", new Movdqu());
-        this.put("MOVQ2DQ", new Movq2dq());
-        this.put("MOVDQ2Q", new Movdq2q());
-        this.put("PADDQ", new Paddq());
-        this.put("PSUBQ", new Psubq());
-        this.put("PMULUDQ", new Pmuludq());
-        this.put("PSHUFD", new Pshufd());
-        this.put("PSHUFHW", new Pshufhw());
-        this.put("PSHUFLW", new Pshuflw());
-        this.put("PSLLDQ", new Pslldq());
-        this.put("PSRLDQ", new Psrldq());
-        this.put("PUNPCKHQDQ", new Punpckhqdq());
-        this.put("PUNPCKLQDQ", new Punpcklqdq());
-    }
-
-    private void generateSSEFPArith(){
-        this.put("ADDPS", new Addps());
-        this.put("SUBPS", new Subps());
-        this.put("ADDSS", new Addss());
-        this.put("SUBSS", new Subss());
-        this.put("MULPS", new Mulps());
-        this.put("MULSS", new Mulss());
-        this.put("DIVPS", new Divps());
-        this.put("DIVSS", new Divss());
-        this.put("RCPPS", new Rcpps());
-//        this.put("RCPSS", new Rcpss());
-        this.put("SQRTPS", new Sqrtps());
-        this.put("SQRTSS", new Sqrtss());
-        this.put("RSQRTPS", new Rsqrtss());
-        this.put("RSQRTSS", new Rsqrtss());
-        this.put("MAXPS", new Maxps());
-        this.put("MAXSS", new Maxss());
-        this.put("MINPS", new Maxps());
-        this.put("MINSS", new Maxss());
     }
 
     private void generateSSE() {
         this.generateSSEDataTransfer();
-        this.generateSSEFPArith();
-        this.generateSSEIntArith();
+        this.generateSSEUnpacked();
+        this.generateSSELogical();
     }
 
-    private void generateSSEIntArith(){
-        this.put("PAVGB", new Pavgb());
-        this.put("PAVGW", new Pavgw());
-        this.put("PEXTRW", new Pextrw());
-        this.put("PINSRW", new Pinsrw());
-        this.put("PMAXSW", new Pmaxsw());
-        this.put("PMINSW", new Pminsw());
-        this.put("PMAXUB", new Pmaxub());
-        this.put("PMINUB", new Pminub());
-        this.put("PMOVMSKB", new Pmovmskb());
-        this.put("PMULHUW", new Pmulhuw());
-        this.put("PSADBW", new Psadbw());
-        this.put("PSHUFW", new Pshufw());
-    }
-
-    private void generateMMXComparison() {
-        this.put("PCMPEQB", new Pcmpeq());
-        this.put("PCMPGTB", new Pcmpgt());
+    private void generateSSE2() {
+        this.generateSSE2DataTransfer();
+        this.generateSSE2Unpacked();
+        this.generateSSE2Logical();
     }
 
     private void generateGPDataTransfer() {
@@ -230,8 +110,6 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("NEG", new Neg());
         this.put("MUL", new Mul());
         this.put("IMUL", new Imul());
-        this.put("DIV", new Div());
-        this.put("IDIV", new Div());
     }
 
     private void generateGPDecimalArithmetic() {
@@ -240,17 +118,16 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("AAA", new Aaa());
         this.put("AAS", new Aas());
         this.put("AAM", new Aam());
-        this.put("AAD", new Aad());
     }
 
-    private void generateGPRotate(){
+    private void generateGPRotate() {
         this.put("ROR", new Ror());
         this.put("ROL", new Rol());
         this.put("RCR", new Rcr());
         this.put("RCL", new Rcl());
     }
 
-    private void generateGPStack(){
+    private void generateGPStack() {
         this.put("PUSH", new Push());
         this.put("PUSHA", new Pusha());
         this.put("PUSHAD", new Pushad());
@@ -259,7 +136,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("POPAD", new Popad());
     }
 
-    private void generateGPJump(){
+    private void generateGPJump() {
         this.put("JMP", new Jmp());
         this.put("J", new J());
         this.put("JECXZ", new Jecxz());
@@ -271,27 +148,87 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("LOOP", new Loop());
     }
 
-    private void generateDataTransfer(){
+    private void generateMMXDataTransfer() {
         this.put("MOVD", new Movd());
         this.put("MOVQ", new Movq());
         this.put("MAXSS", new Maxss());
         this.put("MAXPS", new Maxps());
+        this.put("MINSD", new Minsd());
+    }
+
+    private void generateMMXComparison() {
+        this.put("PCMPEQB", new Pcmpeq());
+        this.put("PCMPGTB", new Pcmpgt());
+    }
+
+    private void generateMMXPacked() {
+        this.put("PACKSSWB", new Packsswb());
+        this.put("PACKSSDW", new Packssdw());
+        this.put("PACKUSWB", new Packuswb());
+    }
+
+    private void generateMMXUnpacked() {
+        this.put("PUNPCKHBW", new Punpckhbw());
+        this.put("PUNPCKHWD", new Punpckhwd());
+        this.put("PUNPCKHDQ", new Punpckhdq());
+        this.put("PUNPCKLBW", new Punpcklbw());
+        this.put("PUNPCKLWD", new Punpcklwd());
+        this.put("PUNPCKLDQ", new Punpckldq());
+    }
+
+    private void generateMMXLogical() {
+        this.put("PAND", new Pand());
+        this.put("PANDN", new Pandn());
+        this.put("POR", new Por());
+        this.put("PXOR", new Pxor());
+    }
+
+    private void generateSSEDataTransfer() {
 //        this.put("MOVDQ2Q", new Movdq2q());
 //        this.put("MOVDQA", new Movdqa());
 //        this.put("MOVDQU", new Movdqu());
 //        this.put("MOVHLPS", new Movhlps());
-//        this.put("MOVHLPD", new Movhlpd());
-//        this.put("MOVHPD", new Movhpd());
 //        this.put("MOVHPS", new Movhps());
-//        this.put("MOVLPD", new Movlpd());
 //        this.put("MOVLPS", new Movlps());
-//        this.put("MOVMSKPD", new Movmskpd());
 //        this.put("MOVMSKPS", new Movmskps());
 //        this.put("MOVQ2DQ", new Movq2dq());
 //        this.put("MOVSB", new Movsb());
-//        this.put("MOVSD", new Movsd());
 //        this.put("MOVSS", new Movss());
 //        this.put("MOVSW", new Movsw());
-        this.put("MINSD", new TrashMinsd());
     }
+
+    private void generateSSELogical() {
+        this.put("ANDPS", new Andps());
+        this.put("ANDNPS", new Andnps());
+        this.put("ORPS", new Orps());
+        this.put("XORPS", new Xorps());
+    }
+
+    private void generateSSEUnpacked() {
+        this.put("SHUFPS", new Shufps());
+        this.put("UNPCKHPS", new Unpckhps());
+        this.put("UNPCKLPS", new Unpcklps());
+    }
+
+    private void generateSSE2DataTransfer() {
+//        this.put("MOVHLPD", new Movhlpd());
+//        this.put("MOVHPD", new Movhpd())
+//        this.put("MOVLPD", new Movlpd());
+//        this.put("MOVMSKPD", new Movmskpd());
+//        this.put("MOVSD", new Movsd());
+    }
+
+    private void generateSSE2Logical() {
+        this.put("ANDPD", new Andpd());
+        this.put("ANDNPD", new Andnpd());
+        this.put("ORPD", new Orpd());
+        this.put("XORPD", new Xorpd());
+    }
+
+    private void generateSSE2Unpacked() {
+        this.put("SHUFPD", new Shufpd());
+        this.put("UNPCKHPD", new Unpckhpd());
+        this.put("UNPCKLPD", new Unpcklpd());
+    }
+
 }
