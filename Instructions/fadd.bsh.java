@@ -84,9 +84,9 @@ execute(registers, memory) {
             String srcValue = registers.get(src);
 			double dbDes = c.convertHexToDoublePrecision(desValue);
 			double dbSrc = c.convertHexToDoublePrecision(srcValue);
-			
+
 			double resultingValue = dbSrc + dbDes;
-			
+
 			if(resultingValue > Math.pow(2,64)){
 				registers.mxscr.setOverflowFlag("1");
 			}
@@ -97,7 +97,7 @@ execute(registers, memory) {
 				//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
 			}
-		
+
 		registers.x87().status().set("C3",'0');
 		registers.x87().status().set("C2",'0');
 		registers.x87().status().set("C0",'0');

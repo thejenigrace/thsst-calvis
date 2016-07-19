@@ -65,7 +65,7 @@ execute(des, src, registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set("" + (resultingValue));
+				registers.set(des.getValue(), "" + (resultingValue));
 			}
 		
 		registers.x87().status().set("C3",'0');
