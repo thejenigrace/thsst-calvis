@@ -1,15 +1,13 @@
 package thsst.calvis.simulatorvisualizer.model.instructionanimation;
 
-import thsst.calvis.configuration.model.engine.EFlags;
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
-import thsst.calvis.configuration.model.engine.Token;
+import thsst.calvis.configuration.model.engine.*;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.exceptions.MemoryReadException;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 import java.math.BigInteger;
@@ -27,6 +25,7 @@ public class Bts extends CalvisAnimation {
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
         EFlags flags = registers.getEFlags();
+        Calculator calculator = new Calculator(registers, memory);
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
@@ -39,9 +38,24 @@ public class Bts extends CalvisAnimation {
         int height = 70;
         Token tokenAL = new Token(Token.REG, "AL");
         Rectangle desRectangle = this.createRectangle(tokenAL, width, height);
-        Rectangle srcRectangle = this.createRectangle(tokens[0], width, height);
+        Rectangle srcRectangle = this.createRectangle(tokens[0], 300, height);
 
         String value = "";
+        String value1 = "";
+        int size = 0;
+
+        if ( tokens[0].getType() == Token.REG) {
+            value1 = registers.get(tokens[0].getValue());
+            size = registers.getBitSize(tokens[0].getValue());
+        }
+        else if ( tokens[0].getType() == Token.HEX) {
+            try {
+                value1 = memory.read(tokens[0], tokens[0]);
+            }
+            catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        }
 
         if ( tokens[1].getType() == Token.REG)
             value = finder.getRegister(tokens[1].getValue());
@@ -75,10 +89,12 @@ public class Bts extends CalvisAnimation {
             else
                 desSize = memory.getBitSize(tokens[0]);
 
+            String src = calculator.hexToBinaryString(value1, size);
+
             Text desLabelText = new Text("Carry Flag");
             Text desValueText = new Text(flags.getCarryFlag());
             Text srcLabelText = new Text(tokens[0].getValue());
-            Text srcValueText = this.createValueText(tokens[0], registers, memory, desSize);
+            Text srcValueText = new Text(src);
 
             desLabelText.setX(90);
             desLabelText.setY(50);
