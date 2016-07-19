@@ -25,6 +25,7 @@ public class X87Handler {
         this.status.initializeValue();
         this.control.initializeValue();
         this.tag.initializeValue();
+        this.barrel = new double[8];
     }
 
     public void push(String value) throws DataTypeMismatchException {
@@ -40,7 +41,7 @@ public class X87Handler {
         Double converted = Double.parseDouble(value);
 
         if ( tag.getTag(String.valueOf(top)).equals(X87TagRegister.EMPTY) ) {
-            barrel[top] = converted;
+            barrel[barrel.length - 1] = converted;
             String tagMode = X87TagRegister.VALID;
             if ( converted.isNaN() || converted.isInfinite() ) {
                 tagMode = X87TagRegister.SPECIAL;
@@ -71,8 +72,14 @@ public class X87Handler {
         String popped = peek();
         // remove TOP contents
         int top = this.status.getTop();
-
         rotateBarrel(RIGHT);
+
+        for ( int i = 0; i < barrel.length; i++ ) {
+            if ( barrel[i] == 0.0 ) {
+                this.tag.setTag(String.valueOf(i), X87TagRegister.EMPTY);
+            }
+        }
+        this.tag.setTag(String.valueOf(top), X87TagRegister.EMPTY);
 
         if ( top == 7 ) {
             top = 0;
@@ -92,21 +99,20 @@ public class X87Handler {
     }
 
     public void setStackValue(String stIndex, String value) {
-        double val = Double.parseDouble(value);
+        Double val = Double.parseDouble(value);
         int barrelIndex = 7 - Integer.parseInt(stIndex);
         barrel[barrelIndex] = val;
-
     }
 
     private void rotateBarrel(int direction) {
-        if ( direction == LEFT ){
+        if ( direction == LEFT ) {
             // to the left
             for ( int i = 0; i < barrel.length - 1; i++ ) {
-                barrel[i] = barrel[i+1];
+                barrel[i] = barrel[i + 1];
             }
         } else { // to the right
             for ( int i = barrel.length - 1; i > 0; i-- ) {
-                barrel[i] = barrel[i-1];
+                barrel[i] = barrel[i - 1];
             }
             barrel[0] = 0.0;
         }

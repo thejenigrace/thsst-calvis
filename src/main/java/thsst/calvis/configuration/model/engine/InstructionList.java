@@ -368,6 +368,7 @@ public class InstructionList {
         sb.append("import thsst.calvis.configuration.model.engine.Memory;");
         sb.append("import thsst.calvis.configuration.model.engine.EFlags;");
         sb.append("import thsst.calvis.configuration.model.engine.Calculator;");
+        sb.append("import thsst.calvis.configuration.model.engine.Converter;");
         sb.append("import thsst.calvis.configuration.model.exceptions.JumpOutOfBoundsException;");
         sb.append("import thsst.calvis.configuration.model.exceptions.StackPopException;");
         sb.append("import thsst.calvis.configuration.model.exceptions.InvalidArithmeticOperandException;");
