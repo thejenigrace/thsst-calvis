@@ -63,15 +63,15 @@ public class Rcr extends CalvisAnimation {
         ArrayList<Text> resultLabel = new ArrayList<>();
         ArrayList<Text> cfLabel = new ArrayList<>();
         ArrayList<Text> numberLabel = new ArrayList<>();
-        Text resultText = timeFunc.generateText(new Text("Final Result"), 20, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant");
+        Text resultText = timeFunc.generateText(new Text("Final Result"), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant");
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         parent.add(fake);
         for(int x = 0; x < counter; x++){
-            rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(x).getResult()), 20, "#5d8aa8", FontWeight.EXTRA_BOLD, "Elephant"));
-            numberLabel.add(timeFunc.generateText(new Text(Integer.toString(x + 1)), 20, "#a4c639", FontWeight.EXTRA_BOLD, "Elephant"));
-            zeroFlags.add(timeFunc.generateText(new Text(rotateModels.get(x).getFlag()), 20, "#5d8aa8", FontWeight.EXTRA_BOLD, "Elephant"));
-            resultLabel.add(timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
-            cfLabel.add(timeFunc.generateText(new Text("CF"), 15, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant"));
+            rotateResults.add(timeFunc.generateText(new Text(rotateModels.get(x).getResult()), 13, "#5d8aa8", FontWeight.NORMAL, "Elephant"));
+            numberLabel.add(timeFunc.generateText(new Text(Integer.toString(x + 1)), 13, "#a4c639", FontWeight.NORMAL, "Elephant"));
+            zeroFlags.add(timeFunc.generateText(new Text(rotateModels.get(x).getFlag()), 13, "#5d8aa8", FontWeight.NORMAL, "Elephant"));
+            resultLabel.add(timeFunc.generateText(new Text(tokens[0].getValue()), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant"));
+            cfLabel.add(timeFunc.generateText(new Text("CF"), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant"));
             parent.addAll(rotateResults.get(x), zeroFlags.get(x), cfLabel.get(x), resultLabel.get(x), numberLabel.get(x));
         }
 
