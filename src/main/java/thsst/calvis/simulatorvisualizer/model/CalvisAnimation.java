@@ -126,7 +126,7 @@ public abstract class CalvisAnimation {
         }
     }
 
-    protected Text createValueText(double x, double y, Token token, RegisterList registers, Memory memory, int size) {
+    protected Text createValueText(double x, double y, Token token, RegisterList registers, Memory memory, int bitSize) {
         try {
             switch ( token.getType() ) {
                 case Token.REG:
@@ -135,7 +135,7 @@ public abstract class CalvisAnimation {
                 case Token.MEM:
                     System.out.println("MEM");
 
-                    return new Text(x, y, memory.read(token, size));
+                    return new Text(x, y, memory.read(token, bitSize));
                 case Token.HEX:
                     System.out.println("IMMEDIATE");
                     return new Text(x, y, "0x" + token.getValue());
@@ -168,5 +168,46 @@ public abstract class CalvisAnimation {
             e.printStackTrace();
             return null;
         }
+    }
+
+    protected String getValueString(Token token, RegisterList registers, Memory memory, int bitSize) {
+        try {
+            switch ( token.getType() ) {
+                case Token.REG:
+                    System.out.println("REG");
+                    return registers.get(token);
+                case Token.MEM:
+                    System.out.println("MEM");
+                    return memory.read(token, bitSize);
+                case Token.HEX:
+                    System.out.println("IMMEDIATE");
+                    return token.getValue();
+                default:
+                    return null;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    protected String chopHexValue(String hexValue, int packedSize) {
+        // Chop hex value into certain given packed size
+        String desValueWithDesign = "";
+
+        if ( packedSize == 2 || packedSize == 4 )
+            for ( int i = 1; i <= hexValue.length(); i++ ) {
+                if ( i % packedSize == 0 )
+                    desValueWithDesign += hexValue.charAt(i - 1) + "    ";
+                else
+                    desValueWithDesign += hexValue.charAt(i - 1);
+            }
+        else {
+            int halfIndexPosition = hexValue.length() / 2 - 1;
+            desValueWithDesign += hexValue.substring(0, halfIndexPosition + 1) +
+                    "       " + hexValue.substring(halfIndexPosition);
+        }
+
+        return desValueWithDesign;
     }
 }

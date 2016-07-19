@@ -87,6 +87,7 @@ public class WorkspaceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize find text field
         this.textFieldFind = TextFields.createClearableTextField();
+        this.textFieldFind.setPromptText("Find");
         this.textFieldFind.setPrefWidth(250.0);
         this.toolbarMain.getItems().add(21, textFieldFind);
     }

@@ -32,7 +32,7 @@ public class Movd extends CalvisAnimation {
         }
 
         // CODE HERE
-        int width = 140;
+        int width = 180;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);

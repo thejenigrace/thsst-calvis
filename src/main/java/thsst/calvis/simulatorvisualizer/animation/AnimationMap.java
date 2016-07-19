@@ -157,8 +157,12 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateMMXComparison() {
-        this.put("PCMPEQB", new Pcmpeq());
-        this.put("PCMPGTB", new Pcmpgt());
+        this.put("PCMPEQB", new Pcmpeq(2));
+        this.put("PCMPEQW", new Pcmpeq(4));
+        this.put("PCMPEQD", new Pcmpeq(16));
+        this.put("PCMPGTB", new Pcmpgt(2));
+        this.put("PCMPGTW", new Pcmpgt(4));
+        this.put("PCMPGTD", new Pcmpgt(16));
     }
 
     private void generateMMXPacked() {
