@@ -343,7 +343,7 @@ public class WorkspaceController implements Initializable {
             findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
             findAndReplaceDialogStage.show();
 
-            // Pass the current code in the text thsst.calvis.editor to FindDialogController
+            // Pass the current code in the text editor to FindDialogController
             FindAndReplaceDialogController findAndReplaceDialogController = loader.getController();
             findAndReplaceDialogController.setWorkspaceController(this);
             findAndReplaceDialogController.setDialogStage(findAndReplaceDialogStage);
@@ -419,6 +419,32 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handleReset(ActionEvent event) {
         this.fileEditorTabPane.simulationAction("RESET");
+    }
+
+    @FXML
+    private void handleConverter(ActionEvent event) {
+        try {
+            // Load root layout from fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/converter.fxml"));
+            Parent converterView = (BorderPane) loader.load();
+
+            Stage converterStage = new Stage();
+            converterStage.initModality(Modality.WINDOW_MODAL);
+            converterStage.setTitle("Converter Calculator");
+            converterStage.setScene(new Scene(converterView));
+            converterStage.setResizable(false);
+            converterStage.setX(this.root.getWidth() / 3);
+            converterStage.setY(this.root.getHeight() / 3);
+            converterStage.show();
+
+            // Pass the current code in the text editor to ConverterController
+            ConverterController converterController = loader.getController();
+            converterController.setWorkspaceController(this);
+            converterController.setDialogStage(converterStage);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

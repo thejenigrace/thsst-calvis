@@ -220,6 +220,15 @@
                         <!--<MenuItem mnemonicParsing="false" onAction="#handleWindowVisualizer" text="Visualizer"/>-->
                         <!--</items>-->
                         <!--</Menu>-->
+
+                        <!--TOOLS MENU-->
+                        <Menu mnemonicParsing="false" text="Tools">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#handleConverter" text="Converter" />
+                            </items>
+                        </Menu>
+
+                        <!--HELP MENU-->
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <!--<MenuItem mnemonicParsing="false" text="Documentation"/>-->

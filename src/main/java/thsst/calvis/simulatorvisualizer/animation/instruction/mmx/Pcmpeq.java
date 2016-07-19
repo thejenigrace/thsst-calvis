@@ -42,13 +42,14 @@ public class Pcmpeq extends CalvisAnimation {
         int desBitSize = registers.getBitSize(tokens[0]);
 
         // Cut per byte
-        String desValue = registers.get(tokens[0]);
+        String desValue = this.finder.getRegister(tokens[0].getValue());
+        System.out.println("desValue = " + desValue);
         String desValueDesign = "";
         for ( int i = 0; i <= desValue.length(); i++ ) {
             if ( i % 2 != 0)
                 desValueDesign += "" + desValue.charAt(i) + "   ";
             else
-                desValueDesign += "" + desValueDesign.charAt(i);
+                desValueDesign += "" + desValue.charAt(i);
         }
 
         System.out.println(desValueDesign);
