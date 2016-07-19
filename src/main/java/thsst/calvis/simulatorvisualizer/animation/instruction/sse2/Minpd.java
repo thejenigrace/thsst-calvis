@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Maxsd extends CalvisAnimation {
+public class Minpd extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -36,7 +36,7 @@ public class Maxsd extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 16;
-        Text sign = timeFunc.generateText(new Text("Extract Max Value"), 2, "#98777b");
+        Text sign = timeFunc.generateText(new Text("Extract Min Value"), 2, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";
@@ -54,9 +54,9 @@ public class Maxsd extends CalvisAnimation {
             dividedStrSrc += extractedHexSrc + "     ";
             dividedStrRes += (resultStr.substring(0 + x, operationSize + x)) + "     ";
 
-            dividedConvertedDes += c.hexToDoublePrecisionFloatingPoint(extractedHexDes) + "      ";
-            dividedConvertedSrc += c.hexToDoublePrecisionFloatingPoint(extractedHexSrc) + "      ";
-            dividedConvertedRes += c.hexToDoublePrecisionFloatingPoint(extractedHexRes) + "      ";
+            dividedConvertedDes += c.convertHexToDoublePrecision(extractedHexDes) + "      ";
+            dividedConvertedSrc += c.convertHexToDoublePrecision(extractedHexSrc) + "      ";
+            dividedConvertedRes += c.convertHexToDoublePrecision(extractedHexRes) + "      ";
         }
 
         Rectangle fake = new Rectangle(0,0, Color.web("#4b5320"));

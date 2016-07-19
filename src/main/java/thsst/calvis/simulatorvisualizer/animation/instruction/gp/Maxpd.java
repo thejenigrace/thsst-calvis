@@ -1,16 +1,17 @@
 package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
 
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
-import thsst.calvis.configuration.model.engine.Token;
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Calculator;
+import thsst.calvis.configuration.model.engine.Memory;
+import thsst.calvis.configuration.model.engine.RegisterList;
+import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
+import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
