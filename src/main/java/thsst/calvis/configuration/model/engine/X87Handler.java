@@ -25,6 +25,7 @@ public class X87Handler {
         this.status.initializeValue();
         this.control.initializeValue();
         this.tag.initializeValue();
+        this.barrel = new double[8];
     }
 
     public void push(String value) throws DataTypeMismatchException {
@@ -40,7 +41,7 @@ public class X87Handler {
         Double converted = Double.parseDouble(value);
 
         if ( tag.getTag(String.valueOf(top)).equals(X87TagRegister.EMPTY) ) {
-            barrel[top] = converted;
+            barrel[barrel.length - 1] = converted;
             String tagMode = X87TagRegister.VALID;
             if ( converted.isNaN() || converted.isInfinite() ) {
                 tagMode = X87TagRegister.SPECIAL;
@@ -49,7 +50,7 @@ public class X87Handler {
             }
             this.tag.setTag(String.valueOf(top), tagMode);
         } else {
-            barrel[top] = Double.NaN;
+            barrel[barrel.length - 1] = Double.NaN;
             this.tag.setTag(String.valueOf(top), X87TagRegister.SPECIAL);
         }
 
@@ -73,6 +74,13 @@ public class X87Handler {
         int top = this.status.getTop();
 
         rotateBarrel(RIGHT);
+        barrel[0] = 0.0;
+
+        for ( int i = 0; i < barrel.length; i++ ) {
+            if ( barrel[i] == 0.0 ) {
+                this.tag.setTag(String.valueOf(i), X87TagRegister.EMPTY);
+            }
+        }
 
         if ( top == 7 ) {
             top = 0;
@@ -108,7 +116,6 @@ public class X87Handler {
             for ( int i = barrel.length - 1; i > 0; i-- ) {
                 barrel[i] = barrel[i-1];
             }
-            barrel[0] = 0.0;
         }
 
     }
