@@ -363,6 +363,7 @@ public class InstructionList {
 
     private String prepareImportStatements() {
         StringBuilder sb = new StringBuilder();
+        sb.append("import thsst.calvis.configuration.model.engine.Converter;");
         sb.append("import thsst.calvis.configuration.model.engine.Token;");
         sb.append("import thsst.calvis.configuration.model.engine.RegisterList;");
         sb.append("import thsst.calvis.configuration.model.engine.Memory;");
