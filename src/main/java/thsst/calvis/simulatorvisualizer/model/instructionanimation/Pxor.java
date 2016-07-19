@@ -1,24 +1,23 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.model.instructionanimation;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
-import thsst.calvis.configuration.model.engine.Token;
-import thsst.calvis.configuration.model.exceptions.MemoryReadException;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Memory;
+import thsst.calvis.configuration.model.engine.RegisterList;
+import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Xor extends CalvisAnimation {
+public class Pxor extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -35,7 +34,7 @@ public class Xor extends CalvisAnimation {
         }
 
         // CODE HERE
-        int width = 140;
+        int width = 320;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
@@ -75,8 +74,6 @@ public class Xor extends CalvisAnimation {
             else
                 desSize = memory.getBitSize(tokens[0]);
 
-            String flagsAffected = "Affected flags: CF, OF, SF, PF, ZF, AF";
-            Text detailsText = new Text(X, Y*2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -92,7 +89,7 @@ public class Xor extends CalvisAnimation {
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            root.getChildren().addAll(detailsText, equalText, plusText, desLabelText, desValueText,
+            root.getChildren().addAll(equalText, plusText, desLabelText, desValueText,
                     augendLabelText, augendValueText, srcLabelText, srcValueText);
 
             // ANIMATION LOGIC

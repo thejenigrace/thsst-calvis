@@ -1,24 +1,25 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
+package thsst.calvis.simulatorvisualizer.model.instructionanimation;
 
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Calculator;
 import thsst.calvis.configuration.model.engine.Memory;
 import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.configuration.model.exceptions.MemoryReadException;
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Xor extends CalvisAnimation {
+public class Andnpd extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -27,6 +28,7 @@ public class Xor extends CalvisAnimation {
 
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
+        Calculator calculator = new Calculator(registers, memory);
 
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
@@ -34,8 +36,51 @@ public class Xor extends CalvisAnimation {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
         }
 
+        String value = "";
+        String result = "";
+
+        if( tokens[0].getType() == Token.REG ) {
+            int desSize = registers.getBitSize(tokens[0]);
+
+            value = finder.getRegister(tokens[0].getValue());
+            value = calculator.hexToBinaryString(value, tokens[0]);
+
+            for (int i = 0; i < desSize; i++) {
+                if (value.charAt(i) == '1') {
+                    result = result.concat("0");
+                }
+                else if (value.charAt(i) == '0') {
+                    result = result.concat("1");
+                }
+            }
+
+            result = calculator.binaryToHexString(result, tokens[0]);
+            value = calculator.binaryToHexString(value, tokens[0]);
+        }
+        else if( tokens[0].getType() == Token.MEM ) {
+            int desSize = memory.getBitSize(tokens[0]);
+            try {
+                value = finder.read(tokens[0].getValue(), tokens[0]);
+                value = calculator.hexToBinaryString(value, tokens[0]);
+
+                for (int i = 0; i < desSize; i++) {
+                    if (value.charAt(i) == '1') {
+                        result = result.concat("0");
+                    }
+                    else if (value.charAt(i) == '0') {
+                        result = result.concat("1");
+                    }
+                }
+
+                result = calculator.binaryToHexString(result, tokens[0]);
+                value = calculator.binaryToHexString(value, tokens[0]);
+            } catch (MemoryReadException e) {
+                e.printStackTrace();
+            }
+        }
+
         // CODE HERE
-        int width = 140;
+        int width = 320;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
@@ -75,12 +120,10 @@ public class Xor extends CalvisAnimation {
             else
                 desSize = memory.getBitSize(tokens[0]);
 
-            String flagsAffected = "Affected flags: CF, OF, SF, PF, ZF, AF";
-            Text detailsText = new Text(X, Y*2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[0]);
             Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
             Text augendLabelText = this.createLabelText(X, Y, tokens[0]);
-            Text augendValueText = this.createValueTextUsingFinder(X, Y, tokens[0], desSize);
+            Text augendValueText = new Text(X, Y, "!" + value + "\n= 0x" + result.toUpperCase());
             Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
             Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
 
@@ -88,11 +131,11 @@ public class Xor extends CalvisAnimation {
             equalText.setFont(Font.font(48));
             equalText.setFill(Color.WHITESMOKE);
 
-            Text plusText = new Text(X, Y, "⊕");
+            Text plusText = new Text(X, Y, "&");
             plusText.setFont(Font.font(48));
             plusText.setFill(Color.WHITESMOKE);
 
-            root.getChildren().addAll(detailsText, equalText, plusText, desLabelText, desValueText,
+            root.getChildren().addAll(equalText, plusText, desLabelText, desValueText,
                     augendLabelText, augendValueText, srcLabelText, srcValueText);
 
             // ANIMATION LOGIC
@@ -157,7 +200,7 @@ public class Xor extends CalvisAnimation {
             // Plus sign label static
             plusTransition.setNode(plusText);
             plusTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 32));
+                    .add(desRectangle.getLayoutBounds().getWidth() + X + augendRectangle.getLayoutBounds().getWidth() + 33));
             plusTransition.fromYProperty().bind(equalTransition.fromYProperty());
             plusTransition.toXProperty().bind(plusTransition.fromXProperty());
             plusTransition.toYProperty().bind(plusTransition.fromYProperty());
