@@ -195,19 +195,26 @@ public abstract class CalvisAnimation {
         // Chop hex value into certain given packed size
         String desValueWithDesign = "";
 
-        if ( packedSize == 2 || packedSize == 4 )
+        System.out.println(packedSize);
+
+        if ( packedSize != hexValue.length() / 2 ) {
+            System.out.println("IF");
             for ( int i = 1; i <= hexValue.length(); i++ ) {
                 if ( i % packedSize == 0 )
                     desValueWithDesign += hexValue.charAt(i - 1) + "    ";
                 else
                     desValueWithDesign += hexValue.charAt(i - 1);
             }
-        else {
+        } else {
+            System.out.println("ELSE");
             int halfIndexPosition = hexValue.length() / 2 - 1;
             desValueWithDesign += hexValue.substring(0, halfIndexPosition + 1) +
                     "       " + hexValue.substring(halfIndexPosition);
         }
 
+        System.out.println("desValueWithDesign: " + desValueWithDesign);
+
         return desValueWithDesign;
     }
+
 }

@@ -14,10 +14,13 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
  */
 public class Pcmpeq extends CalvisAnimation {
 
+    int packedType;
     int packedSize;
 
-    public Pcmpeq(int packedSize) {
-        this.packedSize = packedSize;
+    public Pcmpeq(int packedType) {
+        super();
+        this.packedType = packedType;
+        this.packedSize = 0;
     }
 
     @Override
@@ -65,7 +68,21 @@ public class Pcmpeq extends CalvisAnimation {
         String desValue = this.finder.getRegister(tokens[0].getValue());
         System.out.println("desValue = " + desValue);
 
-        String desValueChop = this.chopHexValue(desValue, packedSize);
+        switch ( packedType ) {
+            case 1:
+                this.packedSize = 2;
+                break;
+            case 2:
+                this.packedSize = 4;
+                break;
+            case 3:
+                this.packedSize = desBitSize / 4 / 2;
+                break;
+            default:
+                this.packedSize = 0;
+        }
+
+        String desValueChop = this.chopHexValue(desValue, this.packedSize);
         System.out.println(desValueChop);
 
         Text desLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -76,8 +93,8 @@ public class Pcmpeq extends CalvisAnimation {
         String srcValueChop = this.chopHexValue(srcValueString, packedSize);
         Text srcValueText = new Text(X, Y, srcValueChop);
 
-        Text lineText = new Text(X-15, 237.5, "---------------------------------------------------");
-        Text noteText = new Text(X, Y-10, "Note: " + tokens[0].getValue() + " <-- " + tokens[0].getValue() +
+        Text lineText = new Text(X - 15, 237.5, "---------------------------------------------------");
+        Text noteText = new Text(X, Y - 10, "Note: " + tokens[0].getValue() + " <-- " + tokens[0].getValue() +
                 " = " + tokens[1].getValue() + "?");
 
         Text resultLabelText = this.createLabelText(X, Y, tokens[0]);

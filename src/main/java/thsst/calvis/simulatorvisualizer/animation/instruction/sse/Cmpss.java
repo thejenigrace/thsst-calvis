@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -12,16 +12,9 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Jennica on 19/07/2016.
  */
-public class Pcmpgt extends CalvisAnimation {
+public class Cmpss extends CalvisAnimation {
 
-    int packedType;
-    int packedSize;
-
-    public Pcmpgt(int packedType) {
-        super();
-        this.packedType = packedType;
-        this.packedSize = 0;
-    }
+    int packedSize = 0;
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -37,7 +30,7 @@ public class Pcmpgt extends CalvisAnimation {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
 
         // CODE HERE
-        int width = 280;
+        int width = 320;
         int height = 60;
 
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
@@ -68,21 +61,10 @@ public class Pcmpgt extends CalvisAnimation {
         String desValue = this.finder.getRegister(tokens[0].getValue());
         System.out.println("desValue = " + desValue);
 
-        switch ( packedType ) {
-            case 1:
-                this.packedSize = 2;
-                break;
-            case 2:
-                this.packedSize = 4;
-                break;
-            case 3:
-                this.packedSize = desBitSize / 4 / 2;
-                break;
-            default:
-                this.packedSize = 0;
-        }
+        this.packedSize = 8;
+        String space = "      ";
 
-        String desValueChop = this.chopHexValue(desValue, this.packedSize);
+        String desValueChop = desValue.substring(0, 24) + space + desValue.substring(24);
         System.out.println(desValueChop);
 
         Text desLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -90,16 +72,16 @@ public class Pcmpgt extends CalvisAnimation {
 
         Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
         String srcValueString = this.getValueString(tokens[1], registers, memory, desBitSize);
-        String srcValueChop = this.chopHexValue(srcValueString, packedSize);
+        String srcValueChop = srcValueString.substring(0, 24) + space + srcValueString.substring(24);
         Text srcValueText = new Text(X, Y, srcValueChop);
 
-        Text lineText = new Text(X - 15, 237.5, "---------------------------------------------------");
+        Text lineText = new Text(X - 15, 237.5, "---------------------------------------------------------");
         Text noteText = new Text(X, Y - 10, "Note: " + tokens[0].getValue() + " <-- " + tokens[0].getValue() +
-                " > " + tokens[1].getValue() + "?");
+                "[31:0] " + getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[31:0]");
 
         Text resultLabelText = this.createLabelText(X, Y, tokens[0]);
         String resultValueString = this.getValueString(tokens[0], registers, memory, desBitSize);
-        String resultValueChop = this.chopHexValue(resultValueString, packedSize);
+        String resultValueChop = resultValueString.substring(0, 24) + space + resultValueString.substring(24);
         Text resultValueText = new Text(X, Y, resultValueChop);
 
         root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText,
@@ -125,7 +107,7 @@ public class Pcmpgt extends CalvisAnimation {
         // DES VALUE -- STATIC
         desValueTransition.setNode(desValueText);
         desValueTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
         desValueTransition.fromYProperty().bind(desRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() / 1.5));
         desValueTransition.toXProperty().bind(desValueTransition.fromXProperty());
@@ -144,7 +126,7 @@ public class Pcmpgt extends CalvisAnimation {
         // SRC VALUE -- STATIC
         srcValueTransition.setNode(srcValueText);
         srcValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
         srcValueTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() + 10)
                 .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
@@ -165,7 +147,7 @@ public class Pcmpgt extends CalvisAnimation {
         // RESULT VALUE -- STATIC
         resultValueTransition.setNode(resultValueText);
         resultValueTransition.fromXProperty().bind(resultRectangle.translateXProperty()
-                .add((resultRectangle.getLayoutBounds().getWidth() - resultValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((resultRectangle.getLayoutBounds().getWidth() - resultValueText.getLayoutBounds().getWidth()) / 2));
         resultValueTransition.fromYProperty().bind(resultRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() + 10)
                 .add(srcRectangle.getLayoutBounds().getHeight() + 10)
@@ -180,6 +162,30 @@ public class Pcmpgt extends CalvisAnimation {
         srcValueTransition.play();
         resultLabelTransition.play();
         resultValueTransition.play();
+    }
+
+    private String getOperandString(String operand) {
+        int op3 = Integer.parseInt(operand);
+        switch ( op3 ) {
+            case 0:
+                return "==";
+            case 1:
+                return "<";
+            case 2:
+                return "<=";
+            case 3:
+                return "unordered";
+            case 4:
+                return "!=";
+            case 5:
+                return ">=";
+            case 6:
+                return ">";
+            case 7:
+                return "ordered";
+            default:
+                return null;
+        }
     }
 }
 

@@ -5,8 +5,11 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpgt;
+import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpps;
+import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpss;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
+
 import java.util.HashMap;
 
 /**
@@ -38,12 +41,14 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateSSE() {
         this.generateSSEDataTransfer();
+        this.generateSSEComparison();
         this.generateSSEUnpacked();
         this.generateSSELogical();
     }
 
     private void generateSSE2() {
         this.generateSSE2DataTransfer();
+        this.generateSSE2Comparison();
         this.generateSSE2Unpacked();
         this.generateSSE2Logical();
     }
@@ -157,12 +162,12 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateMMXComparison() {
-        this.put("PCMPEQB", new Pcmpeq(2));
-        this.put("PCMPEQW", new Pcmpeq(4));
-        this.put("PCMPEQD", new Pcmpeq(16));
-        this.put("PCMPGTB", new Pcmpgt(2));
-        this.put("PCMPGTW", new Pcmpgt(4));
-        this.put("PCMPGTD", new Pcmpgt(16));
+        this.put("PCMPEQB", new Pcmpeq(1));
+        this.put("PCMPEQW", new Pcmpeq(2));
+        this.put("PCMPEQD", new Pcmpeq(3));
+        this.put("PCMPGTB", new Pcmpgt(1));
+        this.put("PCMPGTW", new Pcmpgt(2));
+        this.put("PCMPGTD", new Pcmpgt(3));
     }
 
     private void generateMMXPacked() {
@@ -199,6 +204,16 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 //        this.put("MOVSB", new Movsb());
 //        this.put("MOVSS", new Movss());
 //        this.put("MOVSW", new Movsw());
+    }
+
+    private void generateSSEComparison() {
+        this.put("CMPSS", new Cmpss());
+        this.put("CMPPS", new Cmpps());
+    }
+
+    private void generateSSE2Comparison() {
+        this.put("CMPSD", new Cmpsd());
+        this.put("CMPPD", new Cmpsd());
     }
 
     private void generateSSELogical() {
