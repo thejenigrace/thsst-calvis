@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Psllw extends CalvisAnimation {
+public class Psrad extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -57,7 +57,7 @@ public class Psllw extends CalvisAnimation {
         }
 
         int counter = count.intValue();
-        int operandSize = 16;
+        int operandSize = 32;
         ObservableList<Node> parent = this.root.getChildren();
         ArrayList<RotateModel> rotateModels4 = new ArrayList<>();
 
@@ -68,19 +68,29 @@ public class Psllw extends CalvisAnimation {
             for (int x = 1; x <= counter; x++) {
                 r = "";
 
-                for (int j = 0; j <= 12; j += 4) {
+                for (int j = 0; j <= 8; j += 8) {
                     String w = "";
-                    if (j == 12) {
+                    if (j == 8) {
                         w = des.substring(j);
                     } else {
-                        w = des.substring(j, j + 4);
+                        w = des.substring(j, j + 8);
                     }
+
+                    Token tokenAX = new Token(Token.REG, "EAX");
+                    String sign = c.hexToBinaryString(w, tokenAX);
+                    String bitSet = sign.charAt(0) + "";
 
                     BigInteger biW = new BigInteger(w, 16);
 
                     for (int k = 1; k <= counter; k++) {
-                        biW = biW.shiftLeft(1);
+                        biW = biW.shiftRight(1);
                         biW = biW.clearBit(0);
+
+                        if (bitSet.equals("1")) {
+                            biW = biW.setBit(31);
+                        } else {
+                            biW = biW.clearBit(31);
+                        }
                     }
 
                     if (operandSize < c.binaryZeroExtend(biW.toString(2), operandSize).length()) {
@@ -105,19 +115,29 @@ public class Psllw extends CalvisAnimation {
             for (int x = 1; x <= counter; x++) {
                 r = "";
 
-                for (int j = 0; j <= 28; j += 4) {
+                for (int j = 0; j <= 24; j += 8) {
                     String w = "";
-                    if (j == 28) {
+                    if (j == 24) {
                         w = des.substring(j);
                     } else {
-                        w = des.substring(j, j + 4);
+                        w = des.substring(j, j + 8);
                     }
+
+                    Token tokenAX = new Token(Token.REG, "EAX");
+                    String sign = c.hexToBinaryString(w, tokenAX);
+                    String bitSet = sign.charAt(0) + "";
 
                     BigInteger biW = new BigInteger(w, 16);
 
                     for (int k = 1; k <= counter; k++) {
-                        biW = biW.shiftLeft(1);
+                        biW = biW.shiftRight(1);
                         biW = biW.clearBit(0);
+
+                        if (bitSet.equals("1")) {
+                            biW = biW.setBit(31);
+                        } else {
+                            biW = biW.clearBit(31);
+                        }
                     }
 
                     if (operandSize < c.binaryZeroExtend(biW.toString(2), operandSize).length()) {

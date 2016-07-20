@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Psllw extends CalvisAnimation {
+public class Psllq extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -35,11 +35,10 @@ public class Psllw extends CalvisAnimation {
         Token[] tokens = currentInstruction.getParameterTokens();
         String des = "";
         int choice = 0;
-        if ( tokens[0].getType() == Token.REG ) {
+        if (tokens[0].getType() == Token.REG) {
             des = finder.getRegister(tokens[0].getValue());
             choice = registers.getBitSize(tokens[0].getValue());
-        }
-        else if ( tokens[0].getType() == Token.MEM ) {
+        } else if (tokens[0].getType() == Token.MEM) {
             try {
                 des = finder.read(tokens[0], registers.getBitSize(tokens[0]));
             } catch (MemoryReadException e) {
@@ -49,15 +48,14 @@ public class Psllw extends CalvisAnimation {
 
         BigInteger count = new BigInteger("0", 16);
 
-        if(tokens[1].isRegister()){
+        if (tokens[1].isRegister()) {
             count = new BigInteger(registers.get(tokens[1]), 16);
-        }
-        else if(tokens[1].isHex()){
+        } else if (tokens[1].isHex()) {
             count = new BigInteger(tokens[1].getValue(), 16);
         }
 
         int counter = count.intValue();
-        int operandSize = 16;
+        int operandSize = 64;
         ObservableList<Node> parent = this.root.getChildren();
         ArrayList<RotateModel> rotateModels4 = new ArrayList<>();
 
@@ -68,12 +66,12 @@ public class Psllw extends CalvisAnimation {
             for (int x = 1; x <= counter; x++) {
                 r = "";
 
-                for (int j = 0; j <= 12; j += 4) {
+                for (int j = 0; j < 16; j += 16) {
                     String w = "";
-                    if (j == 12) {
+                    if (j == 16) {
                         w = des.substring(j);
                     } else {
-                        w = des.substring(j, j + 4);
+                        w = des.substring(j, j + 16);
                     }
 
                     BigInteger biW = new BigInteger(w, 16);
@@ -105,12 +103,12 @@ public class Psllw extends CalvisAnimation {
             for (int x = 1; x <= counter; x++) {
                 r = "";
 
-                for (int j = 0; j <= 28; j += 4) {
+                for (int j = 0; j <= 16; j += 16) {
                     String w = "";
-                    if (j == 28) {
+                    if (j == 16) {
                         w = des.substring(j);
                     } else {
-                        w = des.substring(j, j + 4);
+                        w = des.substring(j, j + 16);
                     }
 
                     BigInteger biW = new BigInteger(w, 16);

@@ -206,9 +206,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateMMXShift() {
         this.put("PSLLW", new Psllw());
-//        this.put("PSLLD", new Pslld());
-//        this.put("PSLLQ", new Psllq());
-//        this.put("PSRAW", new Psraw());
-//        this.put("PSRAD", new Psrad());
+        this.put("PSLLD", new Pslld());
+        this.put("PSLLQ", new Psllq());
+        this.put("PSRAW", new Psraw());
+        this.put("PSRAD", new Psrad());
     }
 }

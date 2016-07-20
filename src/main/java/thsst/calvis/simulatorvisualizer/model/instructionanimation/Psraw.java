@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Psllw extends CalvisAnimation {
+public class Psraw extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -76,11 +76,21 @@ public class Psllw extends CalvisAnimation {
                         w = des.substring(j, j + 4);
                     }
 
+                    Token tokenAX = new Token(Token.REG, "AX");
+                    String sign = c.hexToBinaryString(w, tokenAX);
+                    String bitSet = sign.charAt(0) + "";
+
                     BigInteger biW = new BigInteger(w, 16);
 
                     for (int k = 1; k <= counter; k++) {
-                        biW = biW.shiftLeft(1);
+                        biW = biW.shiftRight(1);
                         biW = biW.clearBit(0);
+
+                        if (bitSet.equals("1")) {
+                            biW = biW.setBit(15);
+                        } else {
+                            biW = biW.clearBit(15);
+                        }
                     }
 
                     if (operandSize < c.binaryZeroExtend(biW.toString(2), operandSize).length()) {
@@ -113,11 +123,21 @@ public class Psllw extends CalvisAnimation {
                         w = des.substring(j, j + 4);
                     }
 
+                    Token tokenAX = new Token(Token.REG, "AX");
+                    String sign = c.hexToBinaryString(w, tokenAX);
+                    String bitSet = sign.charAt(0) + "";
+
                     BigInteger biW = new BigInteger(w, 16);
 
                     for (int k = 1; k <= counter; k++) {
-                        biW = biW.shiftLeft(1);
+                        biW = biW.shiftRight(1);
                         biW = biW.clearBit(0);
+
+                        if (bitSet.equals("1")) {
+                            biW = biW.setBit(15);
+                        } else {
+                            biW = biW.clearBit(15);
+                        }
                     }
 
                     if (operandSize < c.binaryZeroExtend(biW.toString(2), operandSize).length()) {

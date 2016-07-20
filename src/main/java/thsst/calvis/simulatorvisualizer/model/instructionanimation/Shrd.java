@@ -109,8 +109,14 @@ public class Shrd extends CalvisAnimation {
             timeFunc.setTimelinePosition(20 + 30 , 40 + 50 * x, resultLabel.get(x));
             timeFunc.setTimelinePosition(10 , 20 + 50 * x, numberLabel.get(x));
         }
-        parent.add(resultText);
-        timeFunc.setTimelinePosition(20 + 60 + resultLabel.get(0).getLayoutBounds().getWidth(), 40 + 50 * (counter  - 1), resultText);
-        timeline.play();
+
+        if(counter == 0) {
+            //do nothing
+        }
+        else {
+            parent.add(resultText);
+            timeFunc.setTimelinePosition(20 + 60 + resultLabel.get(0).getLayoutBounds().getWidth(), 40 + 50 * (counter  - 1), resultText);
+            timeline.play();
+        }
     }
 }
