@@ -21,6 +21,36 @@ public class Converter {
         return Long.parseLong(text, 16);
     }
 
+    private String getUnsigned(int size, String stringBits){
+        String temp = stringBits;
+        // zero extend
+        while ( temp.length() < size ) {
+            temp = "0" + temp;
+        }
+
+        StringBuilder tempBit = new StringBuilder(temp);
+        String returnable = "";
+
+        if (tempBit.charAt(0) == '1') {
+            tempBit.setCharAt(0, '0');
+            tempBit.insert(1, "1");
+            BigInteger bi = new BigInteger(tempBit.toString(), 2);
+            returnable = bi.toString(10);
+        } else {
+            BigInteger bi = new BigInteger(tempBit.toString(), 2);
+            returnable = bi.toString(10);
+        }
+        return returnable;
+    }
+
+    private String zeroExtendHex(String value, int bitLength) {
+        String result = value;
+        while ( result.length() != bitLength / 4  ) {
+            result = "0" + result;
+        }
+        return result;
+    }
+
     public float toSinglePrecision() {
         BigInteger s = new BigInteger(value, 16);
         int hex = s.intValue();
@@ -50,6 +80,68 @@ public class Converter {
         }
         String value = Long.toHexString(Double.doubleToLongBits(doublePrecision));
         return value;
+    }
+
+    public short to16BitSignedInteger() {
+        short s = (short) Integer.parseInt(value, 16);
+        return s;
+    }
+
+    public String to16BitSignedIntegerHex() {
+        Short realShort = Short.parseShort(value);
+        String shortToHex = Integer.toHexString(realShort.intValue());
+        shortToHex = zeroExtendHex(shortToHex, 16);
+        return shortToHex;
+    }
+
+    public int to32BitSignedInteger() {
+        BigInteger s = new BigInteger(value, 16);
+        return s.intValue();
+    }
+
+    public String to32BitSignedIntegerHex() {
+        BigInteger realInt = new BigInteger(value);
+        String intToHex = Integer.toHexString(realInt.intValue());
+        intToHex = zeroExtendHex(intToHex, 32);
+        return intToHex;
+    }
+
+    public int to16BitUnsignedInteger() {
+        BigInteger b = new BigInteger(value, 16);
+        String unsigned = getUnsigned(16, b.toString(2));
+        BigInteger b2 = new BigInteger(unsigned);
+        return b2.intValueExact();
+    }
+
+    public String to16BitUnsignedIntegerHex() {
+        BigInteger b = new BigInteger(value);
+        String unsigned = getUnsigned(16, b.toString(2));
+        BigInteger b2 = new BigInteger(unsigned);
+        if ( b2.compareTo(new BigInteger("65535")) == 1 || b2.signum() == -1 ) {
+            throw new NumberFormatException("Value out of range for 16 bit Unsigned Integer value:" + value);
+        }
+        String unsigned16 = Integer.toHexString(b2.intValue());
+        unsigned16 = zeroExtendHex(unsigned16, 16);
+        return unsigned16;
+    }
+
+    public long to32BitUnsignedInteger() {
+        BigInteger b = new BigInteger(value, 16);
+        String unsigned = getUnsigned(32, b.toString(2));
+        BigInteger b2 = new BigInteger(unsigned);
+        return b2.longValue();
+    }
+
+    public String to32BitUnsignedIntegerHex() {
+        BigInteger b = new BigInteger(value);
+        String unsigned = getUnsigned(32, b.toString(2));
+        BigInteger b2 = new BigInteger(unsigned);
+        if ( b2.compareTo(new BigInteger("4,294,967,295")) == 1 || b2.signum() == -1 ) {
+            throw new NumberFormatException("Value out of range for 32 bit Unsigned Integer value:" + value);
+        }
+        String unsigned32 = Long.toHexString(b2.longValue());
+        unsigned32 = zeroExtendHex(unsigned32, 32);
+        return unsigned32;
     }
 
 }

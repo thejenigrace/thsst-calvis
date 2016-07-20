@@ -1,61 +1,23 @@
 execute(des, src, registers, memory) {
-    Calculator calculator = new Calculator(registers, memory);
+    String source;
 
-    int desSize = 0;
-    int srcSize = 0;
-
-    if( des.isRegister() ) {
-		desSize = registers.getBitSize(des);
-	}
-	if( src.isRegister() ) {
-		srcSize = registers.getBitSize(src);
-	}
-
-    if( des.isRegister() && checkSizeOfDestination(registers, desSize) ) {
-        if( src.isRegister() ) {
-            if( checkSizeOfSource(registers, srcSize) ) {
-                String srcValue = registers.get(src);
-                String desValue = registers.get(des);
-                storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
-            }
-            else {
-                //throw exception
-            }
-        }
-        else if( src.isMemory() ) {
-            String srcValue = memory.read(src, 128);
-            String desValue = registers.get(des);
-            storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize);
-        }
-    }
-    else {
-        //throw exception
-    }
-}
-
-storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String sUpper = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(16,24));
-    String sLower = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(24,32));
-
-    registers.set(des, sUpper + sLower);
-}
-
-boolean checkSizeOfDestination(registers, desSize) {
-    boolean checkSize = false;
-
-    if( 64 == desSize ) {
-        checkSize = true;
+    if ( src.isRegister() ) {
+        source = registers.get(src);
+    } else if ( src.isMemory() ) {
+        source = memory.read(src, 128);
     }
 
-    return checkSize;
-}
+    Converter con1 = new Converter(source.substring(16));
+    Double lLower = con1.toDoublePrecision();
+    int iLower = lLower.intValue();
+    con1 = new Converter(iLower + "");
+    String rLower = con1.to32BitSignedIntegerHex();
 
-boolean checkSizeOfSource(registers, srcSize) {
-    boolean checkSize = false;
+    Converter con2 = new Converter(source.substring(0, 16));
+    Double lUpper = con2.toDoublePrecision();
+    int iUpper = lUpper.intValue();
+    con2 = new Converter(iUpper + "");
+    String rUpper = con2.to32BitSignedIntegerHex();
 
-    if( 128 == srcSize ) {
-        checkSize = true;
-    }
-
-    return checkSize;
+    registers.set(des, rUpper + rLower);
 }

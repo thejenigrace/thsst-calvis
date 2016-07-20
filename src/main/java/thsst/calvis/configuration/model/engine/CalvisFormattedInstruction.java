@@ -299,45 +299,44 @@ public class CalvisFormattedInstruction {
                         throw new IncorrectParameterException(name, line);
                     }
                 }
-            } else {
-                int clIndex = 0;
-                if ( allowable != null ) {
-                    for ( String parameterSpecification : allowable ) {
-                        String[] instance = parameterSpecification.split("/");
-                        for ( int i = 0; i < instance.length; i++ ) {
-                            if ( instance[i].equals("c") ) {
-                                clIndex = i;
-//							System.out.println("found CL");
-                                break;
-                            }
+            }
+            int clIndex = 0;
+            if ( allowable != null ) {
+                for ( String parameterSpecification : allowable ) {
+                    String[] instance = parameterSpecification.split("/");
+                    for ( int i = 0; i < instance.length; i++ ) {
+                        if ( instance[i].equals("c") ) {
+                            clIndex = i;
+                            break;
                         }
-                    }
-                }
-
-                if ( tokens.length > 1 & appendType == 0 ) {
-                    Token first = tokens[0];
-                    Token second = tokens[1];
-
-                    if ( first.isMemory() && second.isMemory() ) {
-                        throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
-                    } else {
-                        if ( isVerifiable ) {
-                            enforce2ParameterValidation(first, second, line, clIndex);
-                        } else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ) {
-                            enforce2ParameterValidation(first, second, line, clIndex);
-                        }
-                    }
-                } else if ( tokens.length > 2 && appendType != 0 ) { //for cmov
-                    Token first = tokens[1];
-                    Token second = tokens[2];
-
-                    if ( first.isMemory() && second.isMemory() ) {
-                        throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
-                    } else {
-                        enforce2ParameterValidation(first, second, line, clIndex);
                     }
                 }
             }
+
+            if ( tokens.length > 1 & appendType == 0 ) {
+                Token first = tokens[0];
+                Token second = tokens[1];
+
+                if ( first.isMemory() && second.isMemory() ) {
+                    throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
+                } else {
+                    if ( isVerifiable ) {
+                        enforce2ParameterValidation(first, second, line, clIndex);
+                    } else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ) {
+                        enforce2ParameterValidation(first, second, line, clIndex);
+                    }
+                }
+            } else if ( tokens.length > 2 && appendType != 0 ) { //for cmov
+                Token first = tokens[1];
+                Token second = tokens[2];
+
+                if ( first.isMemory() && second.isMemory() ) {
+                    throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
+                } else {
+                    enforce2ParameterValidation(first, second, line, clIndex);
+                }
+            }
+
         } else {
             throw new IncorrectParameterException(name, line);
         }

@@ -1,66 +1,18 @@
 execute(des, src, registers, memory) {
-    Calculator calculator = new Calculator(registers, memory);
-
-    int desSize = 0;
-    int srcSize = 0;
-
     if( des.isRegister() ) {
-		desSize = registers.getBitSize(des);
-	}
-	if( src.isRegister() ) {
-		srcSize = registers.getBitSize(src);
-	}
-
-    if( des.isRegister() && checkSizeOfDestination(registers, desSize) ) {
-        if( src.isRegister() ) {
-            if( checkSizeOfSource(registers, srcSize) ) {
-                String source = registers.get(src);
-                String destination = registers.get(des);
-                storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            }
-            else {
-                //throw exception
-            }
+        String source;
+        if ( src.isRegister() ) {
+            source = registers.get(src).substring(16);
+        } else if ( src.isMemory() ) {
+            source = memory.read(src, 64);
         }
-        else if( src.isMemory() ) {
-            String source = memory.read(src, 128);
-            String destination = registers.get(des);
-            storeResultToRegister(registers, calculator, des, source, destination, desSize);
-        }
+
+        Converter con1 = new Converter(source);
+        Double lLower = con1.toDoublePrecision();
+        int iLower = lLower.intValue();
+        con1 = new Converter(iLower + "");
+        String rLower = con1.to32BitSignedIntegerHex();
+
+        registers.set(des, rLower);
     }
-    else {
-        //throw exception
-    }
-}
-
-storeResultToRegister(registers, calculator, des, srcValue, desValue, desSize) {
-    String value = "";
-    if ( srcValue.length() == 16 ){
-        value = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(8));
-    } else {
-        value = calculator.convertHexDoublePrecisionToHexInteger(srcValue.substring(16));
-    }
-
-
-    registers.set(des, value);
-}
-
-boolean checkSizeOfDestination(registers, desSize) {
-    boolean checkSize = false;
-
-    if( 32 == desSize ) {
-        checkSize = true;
-    }
-
-    return checkSize;
-}
-
-boolean checkSizeOfSource(registers, srcSize) {
-    boolean checkSize = false;
-
-    if( 64 = srcSize || 128 == srcSize ) {
-        checkSize = true;
-    }
-
-    return checkSize;
 }
