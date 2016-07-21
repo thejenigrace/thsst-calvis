@@ -4,8 +4,8 @@ execute(registers, memory) {
     String st1 = registers.get("ST1");
     // scale st0 by st1
     // st0 = st0 * 2 ^ roundtowardszero(st1)
-    double exponent = c.convertHexToDoublePrecision(st1);
-	double mantissa = c.convertHexToDoublePrecision(st0);
+    double exponent = Double.parseDouble(st1);
+	double mantissa = Double.parseDouble(st0);
 	double resultPow = Math.pow(2, exponent.intValue());
 	double resultingAnswer = resultPow * mantissa;
     registers.set("ST0", resultingAnswer + "");

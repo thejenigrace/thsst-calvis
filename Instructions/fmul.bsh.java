@@ -6,14 +6,7 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-        if ( size == 32 ) {
-            // conversion to extended precision
-			spValue = c.convertHexToSinglePrecision(value);
-			
-        } else if ( size == 64 ) {
-            // conversion
-			spValue = c.convertHexToDoublePrecision(value);
-        }
+        spValue = Integer.parseInt(value, 16) + 0.0;
 		
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
@@ -52,9 +45,10 @@ execute(des, src, registers, memory) {
 				throw new IncorrectParameterException("FADD"); 
 			}
 			
-			double dbDes = c.convertHexToDoublePrecision(desValue);
-			double dbSrc = c.convertHexToDoublePrecision(srcValue);
-			
+			double dbDes = Double.parseDouble(desValue);
+			double dbSrc = Double.parseDouble(srcValue);
+			System.out.println(dbDes + " wow");
+			System.out.println(dbSrc + " wow");
 			double resultingValue = dbSrc * dbDes;
 			
 			if(resultingValue > Math.pow(2,64)){
@@ -65,7 +59,7 @@ execute(des, src, registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set(des.getValue(), c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+				registers.set(des.getValue(), resultingValue + "" );
 			}
 		
 		registers.x87().status().set("C3",'0');

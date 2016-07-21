@@ -4,10 +4,11 @@ execute(registers, memory) {
     // st0 = gets exponent
     // significand is pushed
 	Calculator c = new Calculator(registers, memory);
-	String value = "C05EDCCCCCCCCCCD";
-	double origValue = c.convertHexToDoublePrecision(value);
+//	String value = "C05EDCCCCCCCCCCD";
+	double origValue = Double.parseDouble(registers.get("ST0"));
 	//System.out.println(origValue);
-	BigInteger biSrc = new BigInteger(value, 16);
+	String hexValNow = c.convertDoublePrecisionToHexString(Double.parseDouble(registers.get("ST0")));
+	BigInteger biSrc = new BigInteger(hexValNow, 16);
 	//System.out.println(biSrc.toString(16) + " hex form");
 	String bitVal = c.binaryZeroExtend(biSrc.toString(2), 64);
 	
