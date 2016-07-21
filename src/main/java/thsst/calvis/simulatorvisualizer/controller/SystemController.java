@@ -291,7 +291,7 @@ public class SystemController {
 
             // 3. Parse currentLine to int @var value
             int value = Integer.parseInt(currentLine, 16);
-
+            int highlightedLine = value;
             // 4. Increment @var currentLine and store it to EIP register
             if ( flag ) {
                 value++;
@@ -304,7 +304,8 @@ public class SystemController {
             pushOldEnvironment(this.stackCount - 1);
 
             // 6. Notify all observers that an instruction has been executed
-            notifyAllObservers(executionMap.get(currentLine), value - 1);
+
+            notifyAllObservers(executionMap.get(currentLine), highlightedLine);
 
         } catch ( Exception e ) {
             e.printStackTrace();
