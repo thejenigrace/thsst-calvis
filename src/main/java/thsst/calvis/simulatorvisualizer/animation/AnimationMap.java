@@ -7,6 +7,7 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpgt;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpps;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpss;
+import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Comiss;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
@@ -209,11 +210,15 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generateSSEComparison() {
         this.put("CMPSS", new Cmpss());
         this.put("CMPPS", new Cmpps());
+        this.put("COMISS", new Comiss());
+        this.put("UCOMISS", new Comiss());
     }
 
     private void generateSSE2Comparison() {
         this.put("CMPSD", new Cmpsd());
         this.put("CMPPD", new Cmppd());
+        this.put("COMISD", new Comisd());
+        this.put("UCOMISD", new Comisd());
     }
 
     private void generateSSELogical() {
