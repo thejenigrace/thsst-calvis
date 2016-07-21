@@ -51,12 +51,22 @@ public class RegistersController extends AssemblyComponent implements Initializa
         colRegisterName.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
                 p.getValue().getValue().getName()
         ));
-        colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-                p.getValue().getValue().getValue().toString()
-        ));
-//        colRegisterInfo.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-//                convert(p.getValue().getValue().getName(), p.getValue().getValue().toString())
-//        ));
+        colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> {
+            String registerValue = p.getValue().getValue().getValue().toString();
+            String registerName = p.getValue().getValue().getName();
+
+            if ( registerName.startsWith("XMM") && registerValue.length() == 32 ) {
+                registerValue = registerValue.substring(0, 8) + " "
+                        + registerValue.substring(8, 16) + " "
+                        + registerValue.substring(16, 24) + " "
+                        + registerValue.substring(24);
+            } else if ( registerName.startsWith("MM") && registerValue.length() == 16 ) {
+                registerValue = registerValue.substring(0, 8) + " "
+                        + registerValue.substring(8);
+            }
+            ReadOnlyStringWrapper stringWrapper = new ReadOnlyStringWrapper(registerValue);
+            return stringWrapper;
+        });
 
         colMxcsrFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
@@ -64,21 +74,6 @@ public class RegistersController extends AssemblyComponent implements Initializa
         colEFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
         colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
     }
-
-
-//    public String convert(String registerName, String hexValue) throws NumberFormatException {
-////        System.out.println(registerName + ": " + hexValue);
-//
-//        String[] gpRegisters = new String[]{"EAX", "EBX", "ECX", "EDX", "ESI", "EDI", "ESP", "EBP", "EIP", "CS", "SS", "DS", "ES", "FS", "GS"};
-//        String[] mmxRegisters = new String[]{"MM0", "MM1", "MM2", "MM3", "MM4", "MM5", "MM6", "MM7"};
-//
-//        if ( Arrays.asList(gpRegisters).contains(registerName) || Arrays.asList(mmxRegisters).contains(registerName) ) {
-//            Long longValue = Long.parseLong(hexValue, 16);
-//            return longValue.toString();
-//        }
-//
-//        return "";
-//    }
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {

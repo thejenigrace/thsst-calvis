@@ -220,7 +220,7 @@ consoleExecute(registers, memory, console) {
 String getUnsigned(size, stringBits){
 	String temp = stringBits;
 	// zero extend
-	while ( temp.length() < 16 ) {
+	while ( temp.length() < size ) {
 		temp = "0" + temp;
 	}
 
