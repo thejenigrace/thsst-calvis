@@ -89,7 +89,7 @@ public class WorkspaceController implements Initializable {
         this.textFieldFind = TextFields.createClearableTextField();
         this.textFieldFind.setPromptText("Find");
         this.textFieldFind.setPrefWidth(250.0);
-        this.toolbarMain.getItems().add(21, textFieldFind);
+        this.toolbarMain.getItems().add(23, textFieldFind);
     }
 
     private void initBinding() {

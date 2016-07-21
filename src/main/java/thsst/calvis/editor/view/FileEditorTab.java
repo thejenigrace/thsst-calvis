@@ -125,7 +125,7 @@ public class FileEditorTab {
             this.isCodeLoaded = this.load();
 
         if ( !this.isCodeLoaded ) {
-//            this.textEditor.setCodeAreaText(this.getCodeTemplate());
+            this.textEditor.setCodeAreaText(this.getCodeTemplate());
             this.isCodeLoaded = true;
         }
 
