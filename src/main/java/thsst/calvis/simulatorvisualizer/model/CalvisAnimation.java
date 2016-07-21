@@ -48,13 +48,13 @@ public abstract class CalvisAnimation {
         // Check token type
         switch ( token.getType() ) {
             case Token.REG:
-                System.out.println("REG");
+//                System.out.println("REG");
                 return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
             case Token.MEM:
-                System.out.println("MEM");
+//                System.out.println("MEM");
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-                System.out.println("IMMEDIATE");
+//                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return new Rectangle();
@@ -65,13 +65,13 @@ public abstract class CalvisAnimation {
         // Check token type
         switch ( token ) {
             case Token.REG:
-                System.out.println("REG");
+//                System.out.println("REG");
                 return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
             case Token.MEM:
-                System.out.println("MEM");
+//                System.out.println("MEM");
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-                System.out.println("IMMEDIATE");
+//                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return new Rectangle();

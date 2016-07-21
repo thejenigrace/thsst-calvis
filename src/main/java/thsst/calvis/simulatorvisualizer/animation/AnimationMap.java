@@ -213,7 +213,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generateSSE2Comparison() {
         this.put("CMPSD", new Cmpsd());
-        this.put("CMPPD", new Cmpsd());
+        this.put("CMPPD", new Cmppd());
     }
 
     private void generateSSELogical() {

@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+package thsst.calvis.simulatorvisualizer.animation.instruction.sse2;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
@@ -12,7 +12,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Jennica on 19/07/2016.
  */
-public class Cmpps extends CalvisAnimation {
+public class Cmppd extends CalvisAnimation {
 
     int packedSize = 0;
 
@@ -30,7 +30,7 @@ public class Cmpps extends CalvisAnimation {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
 
         // CODE HERE
-        int width = 340;
+        int width = 320;
         int height = 60;
 
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
@@ -61,7 +61,8 @@ public class Cmpps extends CalvisAnimation {
         String desValue = this.finder.getRegister(tokens[0].getValue());
         System.out.println("desValue = " + desValue);
 
-        this.packedSize = 8;
+        this.packedSize = desBitSize / 4 / 2;
+//        String space = "      ";
 
         String desValueChop = this.chopHexValue(desValue, this.packedSize);
         System.out.println(desValueChop);
@@ -74,18 +75,12 @@ public class Cmpps extends CalvisAnimation {
         String srcValueChop = this.chopHexValue(srcValueString, this.packedSize);
         Text srcValueText = new Text(X, Y, srcValueChop);
 
-        Text lineText = new Text(X - 15, 237.5, "------------------------------------------------------------");
-        Text noteText = new Text(X, Y - 70,
-                "Note:\n"
-                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[31:0] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[31:0]\n"
-                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[63:32] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[63:32]\n"
-                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[95:64] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[95:64]\n"
-                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[127:96] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[127:96]"
-
+        Text lineText = new Text(X - 15, 237.5, "---------------------------------------------------------");
+        Text noteText = new Text(X, Y - 40,
+                "Note:\n" + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[63:0] " +
+                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[63:0]\n"
+                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[127:64] " +
+                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[127:64]"
         );
 
         Text resultLabelText = this.createLabelText(X, Y, tokens[0]);
@@ -116,7 +111,7 @@ public class Cmpps extends CalvisAnimation {
         // DES VALUE -- STATIC
         desValueTransition.setNode(desValueText);
         desValueTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
         desValueTransition.fromYProperty().bind(desRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() / 1.5));
         desValueTransition.toXProperty().bind(desValueTransition.fromXProperty());
@@ -135,7 +130,7 @@ public class Cmpps extends CalvisAnimation {
         // SRC VALUE -- STATIC
         srcValueTransition.setNode(srcValueText);
         srcValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
-                .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
         srcValueTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() + 10)
                 .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
@@ -156,7 +151,7 @@ public class Cmpps extends CalvisAnimation {
         // RESULT VALUE -- STATIC
         resultValueTransition.setNode(resultValueText);
         resultValueTransition.fromXProperty().bind(resultRectangle.translateXProperty()
-                .add((resultRectangle.getLayoutBounds().getWidth() - resultValueText.getLayoutBounds().getWidth()) / 2 + 5));
+                .add((resultRectangle.getLayoutBounds().getWidth() - resultValueText.getLayoutBounds().getWidth()) / 2));
         resultValueTransition.fromYProperty().bind(resultRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() + 10)
                 .add(srcRectangle.getLayoutBounds().getHeight() + 10)

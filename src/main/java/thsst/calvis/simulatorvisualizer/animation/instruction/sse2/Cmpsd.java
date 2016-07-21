@@ -78,9 +78,7 @@ public class Cmpsd extends CalvisAnimation {
         Text lineText = new Text(X - 15, 237.5, "---------------------------------------------------------");
         Text noteText = new Text(X, Y - 40,
                 "Note:\n" + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[63:0] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[63:0]\n"
-                        + tokens[0].getValue() + " <-- " + tokens[0].getValue() + "[127:64] " +
-                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[127:64]"
+                        getOperandString(tokens[2].getValue()) + " " + tokens[1].getValue() + "[63:0]"
         );
 
         Text resultLabelText = this.createLabelText(X, Y, tokens[0]);
