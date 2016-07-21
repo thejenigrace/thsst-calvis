@@ -10,6 +10,6 @@ public class IncorrectParameterException extends Exception {
     }
 
     public IncorrectParameterException(String name) {
-        super("Syntax Error: incorrect parameter/s provided for instruction: " + name + ".");
+        super("Syntax Error: incorrect parameter/s provided for instruction: " + name.toUpperCase() + ".");
     }
 }

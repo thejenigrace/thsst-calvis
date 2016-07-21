@@ -35,7 +35,7 @@ execute(src, registers, memory) {
 		registers.x87().pop();
     }
 }
-
+*/
 execute(des, src, registers, memory) {
 	Calculator c = new Calculator(registers, memory);
     if ( des.isRegister() && src.isRegister() ) {
@@ -50,11 +50,11 @@ execute(des, src, registers, memory) {
 				
 			}
 			else{
-				throw new IncorrectParameterException("FADD"); 
+				throw new IncorrectParameterException("FADDP");
 			}
 			
-			double dbDes = c.convertHexToDoublePrecision(desValue);
-			double dbSrc = c.convertHexToDoublePrecision(srcValue);
+			double dbDes = Double.parseDouble(desValue);
+			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc + dbDes;
 			
@@ -66,7 +66,7 @@ execute(des, src, registers, memory) {
 			}
 			else{
 				//System.out.println(resultingValue + " value");
-				registers.set(des.getValue(), c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+				registers.set(des.getValue(), "" + resultingValue);
 			}
 		
 		registers.x87().status().set("C3",'0');
@@ -76,7 +76,7 @@ execute(des, src, registers, memory) {
         }
     }
 }
-*/
+
 execute(registers, memory) {
 	Calculator c = new Calculator(registers, memory);
 			String desValue = registers.get("ST1");

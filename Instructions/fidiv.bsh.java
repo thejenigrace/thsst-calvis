@@ -5,17 +5,10 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-        if ( size == 32 ) {
-            // conversion to extended precision
-			spValue = c.convertHexToSinglePrecision(value);
-			
-        } else if ( size == 64 ) {
-            // conversion
-			spValue = c.convertHexToDoublePrecision(value);
-        }
+		spValue = Integer.parseInt(value, 16) + 0.0;
 		
         String st0 = registers.get("ST0");
-        double stValue = c.convertHexToDoublePrecision(st0);
+        double stValue = Double.parseDouble(st0);
 		double resultingValue = stValue / spValue;
 		if(resultingValue > Math.pow(2,64)){
 			registers.mxscr.setOverflowFlag("1");
@@ -25,7 +18,7 @@ execute(src, registers, memory) {
 		}
 		else{
 			System.out.println(resultingValue + " value");
-			registers.set("ST0", c.hexZeroExtend(c.convertDoublePrecisionToHexString(resultingValue), 20));
+			registers.set("ST0", resultingValue + "");
 		}
         
 		registers.x87().status().set("C3",'0');

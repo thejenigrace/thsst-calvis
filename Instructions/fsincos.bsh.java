@@ -2,11 +2,10 @@ execute(registers, memory) {
     String st0 = registers.get("ST0");
     // st0 = sin(st0)
     // push cos(st0)
-	registers.set("ST0", "00003FE0000000000000");
+//	registers.set("ST0", "00003FE0000000000000");
     String value = registers.get("ST0");
 	Calculator c = new Calculator(registers, memory);
-	BigInteger biSrc = new BigInteger(value, 16);
-	double regVal = c.convertHexToDoublePrecision(biSrc.toString(16));
+	double regVal = Double.parseDouble(value);
 	double resultCosVal = Math.cos(regVal);
 	double resultSinVal = Math.sin(regVal);
 	
