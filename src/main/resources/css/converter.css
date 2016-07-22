@@ -1,0 +1,23 @@
+.converter {
+    -fx-background-color: #c3ddd6;
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-background-radius: 3, 3, 3, 3;
+}
+
+.converter:hover {
+    -fx-background-color: #C4CBDE;
+}
+
+.converter:pressed {
+    -fx-background-color: #76B2A2;
+}
+
+.button:focused {
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-background-radius: 3, 3, 3, 3;
+}
+
+.button:unfocused {
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-background-radius: 3, 3, 3, 3;
+}

@@ -8,20 +8,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="452.0" style="-fx-background-color: #615e5f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thsst.calvis.editor.controller.ConverterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="400.0" style="-fx-background-color: #615e5f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thsst.calvis.editor.controller.ConverterController">
    <center>
-        <VBox prefHeight="180.0" prefWidth="489.0" spacing="2.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="500.0" spacing="2.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="textFieldInput" alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="432.0" promptText="Enter Hex" style="-fx-background-color: #f0eee9; -fx-text-inner-color: #615e5f;">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </TextField>
             <VBox>
                <children>
                   <HBox>
                      <children>
-                        <Label prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #615e5f;" text="Unsigned" textFill="#f6cac9">
+                        <Label prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #615e5f;" text="BINARY" textFill="#f0eee9">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -32,19 +27,28 @@
                               <Insets left="3.0" right="3.0" />
                            </padding>
                         </Label>
-                         <TextField fx:id="textFieldOutput" layoutX="10.0" layoutY="51.0" prefHeight="30.0" prefWidth="296.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f6cac9;" text="32702">
-                                <font>
+                        <VBox>
+                           <children>
+                               <TextField fx:id="textFieldBinaryUpper" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
+                                      <font>
+                                          <Font name="System Bold" size="14.0" />
+                                      </font>
+                               </TextField>
+                              <TextField fx:id="textFieldBinaryLower" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
+                                 <font>
                                     <Font name="System Bold" size="14.0" />
-                                </font>
-                         </TextField>
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
                      </children>
                      <padding>
                         <Insets top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="15.0">
+                  <HBox>
                      <children>
-                        <Label prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #615e5f;" text="Unsigned" textFill="#f6cac9">
+                        <Label prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #615e5f;" text="SIGNED" textFill="#f0eee9">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -55,7 +59,7 @@
                               <Insets right="3.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="textFieldOutput2" layoutX="10.0" layoutY="51.0" prefHeight="30.0" prefWidth="296.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f6cac9;" text="32702">
+                        <TextField fx:id="textFieldSigned" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -65,9 +69,9 @@
                         <Insets top="5.0" />
                      </padding>
                   </HBox>
-                  <HBox layoutX="20.0" layoutY="97.0">
+                  <HBox>
                      <children>
-                        <Label prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #615e5f;" text="Signed" textFill="#f6cac9">
+                        <Label prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #615e5f;" text="UNSIGNED" textFill="#f0eee9">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -75,16 +79,16 @@
                               <Insets left="3.0" right="3.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="textFieldOutput1" layoutX="10.0" layoutY="51.0" prefHeight="39.0" prefWidth="377.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f6cac9;" text="-123">
+                        <TextField fx:id="textFieldUnsigned" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox layoutX="20.0" layoutY="146.0">
+                  <HBox>
                      <children>
-                        <Label prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #615e5f;" text="Single Precision" textFill="#f6cac9">
+                        <Label prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #615e5f;" text="IEEE 32 BIT" textFill="#f0eee9">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -92,16 +96,16 @@
                               <Insets left="3.0" right="3.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="textFieldOutput11" layoutX="10.0" layoutY="51.0" prefHeight="39.0" prefWidth="388.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f6cac9;" text="-12.323e22">
+                        <TextField fx:id="textField32" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox layoutX="20.0" layoutY="192.0">
+                  <HBox>
                      <children>
-                        <Label prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #615e5f;" text="Double Precision" textFill="#f6cac9">
+                        <Label prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #615e5f;" text="IEEE 64 BIT" textFill="#f0eee9">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -109,7 +113,7 @@
                               <Insets left="3.0" right="3.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="textFieldOutput111" layoutX="10.0" layoutY="51.0" prefHeight="39.0" prefWidth="388.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f6cac9;" text="-12.14159623">
+                        <TextField fx:id="textField64" editable="false" prefHeight="30.0" prefWidth="315.0" style="-fx-background-color: #615e5f; -fx-text-inner-color: #f0eee9;" text="0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -127,4 +131,38 @@
          </padding>
         </VBox>
    </center>
+   <top>
+      <VBox prefHeight="0.0" prefWidth="452.0" BorderPane.alignment="CENTER">
+         <children>
+                <TextField fx:id="textFieldInput" alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="432.0" promptText="Enter Hex" style="-fx-background-color: #f0eee9; -fx-text-inner-color: #615e5f;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </TextField>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button fx:id="btnSize" minHeight="30.0" minWidth="80.0" mnemonicParsing="false" onAction="#changeSize" text="QWORD">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                      <font>
+                          <Font name="System Bold" size="14.0" />
+                      </font>
+                  </Button>
+                  <Button fx:id="btnClear" layoutX="10.0" layoutY="10.0" minHeight="30.0" minWidth="80.0" mnemonicParsing="false" onAction="#clear" text="C">
+                     <font>
+                       <Font name="System Bold" size="14.0" />
+                     </font>
+                   </Button>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </top>
 </BorderPane>

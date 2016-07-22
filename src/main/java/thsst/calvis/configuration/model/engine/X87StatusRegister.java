@@ -57,4 +57,20 @@ public class X87StatusRegister extends X87Register {
         charArray[4] = binaryNumber.charAt(2);
     }
 
+    public void setStackFaultFlag() {
+        charArray[9] = '1';
+    }
+
+    public String getStackFaultFlag() {
+        return charArray[9] + "";
+    }
+
+    public void setInvalidOperationFlag() {
+        charArray[15] = '1';
+    }
+
+    public String getInvalidOperationFlag() {
+        return charArray[15] + "";
+    }
+
 }

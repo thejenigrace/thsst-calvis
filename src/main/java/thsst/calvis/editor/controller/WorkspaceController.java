@@ -432,7 +432,7 @@ public class WorkspaceController implements Initializable {
 
             Stage converterStage = new Stage();
             converterStage.initModality(Modality.WINDOW_MODAL);
-            converterStage.setTitle("Converter Calculator");
+            converterStage.setTitle("Converter");
             converterStage.setScene(new Scene(converterView));
             converterStage.setResizable(false);
             converterStage.setX(this.root.getWidth() / 3);

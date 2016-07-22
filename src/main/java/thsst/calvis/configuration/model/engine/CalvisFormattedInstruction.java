@@ -19,7 +19,7 @@ public class CalvisFormattedInstruction {
     private RegisterList registers;
     private Memory memory;
     private int appendType;
-    private boolean isVerifiable = true;
+    private String isVerifiable;
     private ArrayList<String> allowable;
     private ConsoleController console;
 
@@ -71,8 +71,8 @@ public class CalvisFormattedInstruction {
             throw e;
         }
 
-        String nameCopy = name.toUpperCase();
-        return !nameCopy.matches("J.*|LOOP.*|CALL|RET");
+        // 3 isVerifiable = control transfer instructions
+        return !isVerifiable.equals("3");
     }
 
     public void executeScan() throws StackPopException, MemoryReadException,
@@ -320,7 +320,7 @@ public class CalvisFormattedInstruction {
                 if ( first.isMemory() && second.isMemory() ) {
                     throw new MemoryToMemoryException(first.getValue(), second.getValue(), line);
                 } else {
-                    if ( isVerifiable ) {
+                    if ( isVerifiable.equals("1") ) {
                         enforce2ParameterValidation(first, second, line, clIndex);
                     } else if ( name.equalsIgnoreCase("MOVSX") || name.equalsIgnoreCase("MOVZX") ) {
                         enforce2ParameterValidation(first, second, line, clIndex);
@@ -342,7 +342,7 @@ public class CalvisFormattedInstruction {
         }
     }
 
-    public void setVerifiable(boolean verifiable) {
+    public void setVerifiable(String verifiable) {
         isVerifiable = verifiable;
     }
 
@@ -355,7 +355,7 @@ public class CalvisFormattedInstruction {
             if ( second.isRegister() ) {
                 int secondSize = registers.getBitSize(second);
                 if ( clIndex == 0 ) {
-                    if ( isVerifiable ) {
+                    if ( isVerifiable.equals("1") ) {
                         if ( firstSize != secondSize ) {
                             throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
                         }
@@ -368,7 +368,7 @@ public class CalvisFormattedInstruction {
             } else if ( second.isMemory() ) {
                 int secondSize = memory.getBitSize(second);
                 if ( secondSize != 0 ) { // this memory has a size directive
-                    if ( isVerifiable ) {
+                    if ( isVerifiable.equals("1") ) {
                         if ( firstSize != secondSize ) {
                             throw new DataTypeMismatchException(first.getValue(), second.getValue(), line);
                         }
@@ -378,7 +378,7 @@ public class CalvisFormattedInstruction {
                         }
                     }
                 } else {
-                    if ( !isVerifiable ) { // for movsx, movzx
+                    if ( !isVerifiable.equals("1") ) { // for movsx, movzx
                         throw new MissingSizeDirectiveException(second.getValue(), line);
                     }
                 }

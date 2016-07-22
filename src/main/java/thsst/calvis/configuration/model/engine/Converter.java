@@ -144,4 +144,27 @@ public class Converter {
         return unsigned32;
     }
 
+    public long to64BitSignedInteger() {
+        BigInteger b = new BigInteger(value, 16);
+        return b.longValue();
+    }
+
+    public String to64BitUnsignedInteger() {
+        Long l = Long.parseUnsignedLong(value, 16);
+        return Long.toUnsignedString(l);
+    }
+
+    public String toBinaryString() {
+        String result = "";
+        for ( int i = 0; i < value.length(); i++ ){
+            String oneHex = value.charAt(i) + "";
+            oneHex = Integer.toBinaryString(Integer.parseInt(oneHex, 16));
+            while ( oneHex.length() < 4 ) {
+                oneHex = "0" + oneHex;
+            }
+            result = result + oneHex;
+        }
+        return result;
+    }
+
 }
