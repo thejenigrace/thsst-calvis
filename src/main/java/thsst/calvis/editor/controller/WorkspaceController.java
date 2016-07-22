@@ -91,7 +91,7 @@ public class WorkspaceController implements Initializable {
         this.textFieldFind = TextFields.createClearableTextField();
         this.textFieldFind.setPromptText("Find");
         this.textFieldFind.setPrefWidth(250.0);
-        this.toolbarMain.getItems().add(23, textFieldFind);
+        this.toolbarMain.getItems().add(22, textFieldFind);
     }
 
     private void initBinding() {
@@ -380,11 +380,6 @@ public class WorkspaceController implements Initializable {
         this.fileEditorTabPane.simulationAction("PLAY");
     }
 
-    @FXML
-    private void handlePause(ActionEvent event) {
-        this.fileEditorTabPane.simulationAction("PAUSE");
-    }
-
     /**
      * Action for Stop Simulation; a MenuItem in Execute.
      *
@@ -486,12 +481,12 @@ public class WorkspaceController implements Initializable {
     }
 
     public void disablePlayNextPrevious(boolean flag) {
-        disableStepMode(flag);
+        this.disableStepMode(flag);
         this.btnPlay.setDisable(flag);
     }
 
     public void disableAllSimulationButtons(boolean flag) {
-        disablePlayNextPrevious(flag);
+        this.disablePlayNextPrevious(flag);
         this.btnStop.setDisable(flag);
         this.btnReset.setDisable(flag);
     }

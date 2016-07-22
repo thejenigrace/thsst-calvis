@@ -204,6 +204,16 @@
                         <!--EXECUTE MENU-->
                         <Menu mnemonicParsing="false" text="Execute">
                             <items>
+                                <MenuItem accelerator="Shortcut + B" mnemonicParsing="false" onAction="#handleBuild"
+                                          text="Build">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
+                                                            shortcut="DOWN"/>
+                                    </accelerator>
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="GAVEL"/>
+                                    </graphic>
+                                </MenuItem>
                                 <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay"
                                           text="Play">
                                     <accelerator>
@@ -212,16 +222,6 @@
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="PLAY"/>
-                                    </graphic>
-                                </MenuItem>
-                                <MenuItem accelerator="Shortcut + U" mnemonicParsing="false" onAction="#handlePause"
-                                          text="Pause">
-                                    <accelerator>
-                                        <KeyCodeCombination alt="UP" code="U" control="UP" meta="UP" shift="UP"
-                                                            shortcut="DOWN"/>
-                                    </accelerator>
-                                    <graphic>
-                                        <FontAwesomeIconView glyphName="PAUSE"/>
                                     </graphic>
                                 </MenuItem>
                                 <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleStop"
@@ -255,20 +255,17 @@
                                         <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                                     </graphic>
                                 </MenuItem>
-                                <!--<MenuItem mnemonicParsing="false" text="Jump To"/>-->
                             </items>
                         </Menu>
-                        <!--<Menu mnemonicParsing="false" text="Window">-->
-                        <!--<items>-->
-                        <!--<MenuItem mnemonicParsing="false" onAction="#handleWindowConsole" text="Console"/>-->
-                        <!--<MenuItem mnemonicParsing="false" onAction="#handleWindowVisualizer" text="Visualizer"/>-->
-                        <!--</items>-->
-                        <!--</Menu>-->
 
                         <!--TOOLS MENU-->
                         <Menu mnemonicParsing="false" text="Tools">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#handleConverter" text="Converter"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleConverter" text="Converter">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="CALCULATOR"/>
+                                    </graphic>
+                                </MenuItem>
                             </items>
                         </Menu>
 
@@ -352,7 +349,7 @@
                             </tooltip>
                         </Button>
                         <Separator layoutX="382.0" layoutY="10.0" prefHeight="26.0" prefWidth="0.0"/>
-                        <Button fx:id="btnBuild" layoutX="864.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBuild">
+                        <Button fx:id="btnBuild" mnemonicParsing="false" onAction="#handleBuild">
                             <graphic>
                                 <FontAwesomeIconView glyphName="GAVEL"/>
                             </graphic>
@@ -378,10 +375,9 @@
                             </tooltip>
                         </Button>
                         <Separator layoutX="311.0" layoutY="10.0" prefHeight="26.0" prefWidth="0.0"/>
-                        <Button fx:id="btnPlay" layoutX="308.0" layoutY="10.0" mnemonicParsing="false"
-                                onAction="#handlePlay">
+                        <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#handlePlay">
                             <graphic>
-                                <FontAwesomeIconView glyphName="PLAY_CIRCLE"/>
+                                <FontAwesomeIconView glyphName="PLAY"/>
                             </graphic>
                             <tooltip>
                                 <Tooltip text="Play"/>
