@@ -62,10 +62,10 @@ public class Comiss extends CalvisAnimation {
             String flagsAffected = "Flags Affected: ZF, PF, CF";
             Text detailsText = new Text(X, Y * 2, description + flagsAffected);
             Text firstOperandLabelText = this.createLabelText(X, Y, tokens[0]);
-            String firstOperandString = this.getSubHexValueString(tokens[0], registers, memory, desBitSize, desBitSize/4);
+            String firstOperandString = this.getSubLowerHexValueString(tokens[0], registers, memory, desBitSize, desBitSize/4);
             Text firstOperandValueText = new Text(X, Y, firstOperandString);
             Text secondOperandLabelText = this.createLabelText(X, Y, tokens[1]);
-            String secondOperandString = this.getSubHexValueString(tokens[1], registers, memory, desBitSize, desBitSize/4);
+            String secondOperandString = this.getSubLowerHexValueString(tokens[1], registers, memory, desBitSize, desBitSize/4);
             Text secondOperandValueText = new Text(X, Y, secondOperandString);
 
             Text operandText = new Text(X, Y, getOperandString(registers.getEFlags().getZeroFlag(),

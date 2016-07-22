@@ -190,20 +190,36 @@ public abstract class CalvisAnimation {
         }
     }
 
-    protected String getSubHexValueString(Token token, RegisterList registers, Memory memory, int bitSize, int packedSize) {
+    protected String getSubHigherHexValueString(Token token, RegisterList registers, Memory memory, int bitSize, int packedSize) {
         String hexValue = this.getValueString(token, registers, memory, bitSize);
 
         System.out.println("hexValue = " + hexValue);
         System.out.println("bitSize = " + bitSize + "; packedSize = " + packedSize);
 
-        if ( packedSize != hexValue.length() )
+        if ( packedSize != hexValue.length() ) {
+            System.out.println("subHigherHexValue = " + hexValue.substring(0, packedSize));
+            return hexValue.substring(0, packedSize);
+        }
+
+        return hexValue;
+    }
+
+    protected String getSubLowerHexValueString(Token token, RegisterList registers, Memory memory, int bitSize, int packedSize) {
+        String hexValue = this.getValueString(token, registers, memory, bitSize);
+
+        System.out.println("hexValue = " + hexValue);
+        System.out.println("bitSize = " + bitSize + "; packedSize = " + packedSize);
+
+        if ( packedSize != hexValue.length() ) {
+            System.out.println("subLowerHexValue = " + hexValue.substring(hexValue.length()-packedSize, hexValue.length()));
             return hexValue.substring(hexValue.length()-packedSize, hexValue.length());
+        }
 
         return hexValue;
     }
 
     protected String chopHexValue(String hexValue, int packedSize) {
-        // Chop hex value into certain given packed size
+        // Chop hex value into certain given packed size (hex size)
         String desValueWithDesign = "";
 
         System.out.println(packedSize);
@@ -220,7 +236,7 @@ public abstract class CalvisAnimation {
             System.out.println("ELSE");
             int halfIndexPosition = hexValue.length() / 2 - 1;
             desValueWithDesign += hexValue.substring(0, halfIndexPosition + 1) +
-                    "       " + hexValue.substring(halfIndexPosition);
+                    "       " + hexValue.substring(halfIndexPosition + 1);
         }
 
         System.out.println("desValueWithDesign: " + desValueWithDesign);

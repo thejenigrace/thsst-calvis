@@ -5,9 +5,7 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpgt;
-import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpps;
-import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpss;
-import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Comiss;
+import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
@@ -38,6 +36,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generateMMX() {
         this.generateMMXDataTransfer();
         this.generateMMXComparison();
+        this.generateMMXLogical();
+        this.generateMMXPacked();
+        this.generateMMXUnpacked();
     }
 
     private void generateSSE() {
@@ -50,10 +51,14 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generateSSE2() {
         this.generateSSE2DataTransfer();
         this.generateSSE2Comparison();
+        this.generateSSE2Conversion();
         this.generateSSE2Unpacked();
         this.generateSSE2Logical();
     }
 
+    /*
+    * MARKER -- GP Instructions Animation
+    */
     private void generateGPDataTransfer() {
         this.put("MOV", new Mov());
         this.put("LEA", new Lea());
@@ -154,6 +159,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("LOOP", new Loop());
     }
 
+     /*
+     * MARKER -- MMX Instructions Animation
+     */
     private void generateMMXDataTransfer() {
         this.put("MOVD", new Movd());
         this.put("MOVQ", new Movq());
@@ -193,17 +201,20 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("PXOR", new Pxor());
     }
 
+     /*
+     * MARKER -- SSE Instructions Animation
+     */
     private void generateSSEDataTransfer() {
-//        this.put("MOVDQ2Q", new Movdq2q());
-//        this.put("MOVDQA", new Movdqa());
-//        this.put("MOVDQU", new Movdqu());
-//        this.put("MOVHLPS", new Movhlps());
-//        this.put("MOVHPS", new Movhps());
-//        this.put("MOVLPS", new Movlps());
-//        this.put("MOVMSKPS", new Movmskps());
-//        this.put("MOVQ2DQ", new Movq2dq());
+        this.put("MOVDQ2Q", new Movdq2q());
+        this.put("MOVDQA", new Movdqa());
+        this.put("MOVDQU", new Movdqu());
+        this.put("MOVHLPS", new Movhlps());
+        this.put("MOVHPS", new Movhps());
+        this.put("MOVLPS", new Movlps());
+        this.put("MOVMSKPS", new Movmskps());
+        this.put("MOVQ2DQ", new Movq2dq());
 //        this.put("MOVSB", new Movsb());
-//        this.put("MOVSS", new Movss());
+        this.put("MOVSS", new Movss());
 //        this.put("MOVSW", new Movsw());
     }
 
@@ -212,13 +223,6 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("CMPPS", new Cmpps());
         this.put("COMISS", new Comiss());
         this.put("UCOMISS", new Comiss());
-    }
-
-    private void generateSSE2Comparison() {
-        this.put("CMPSD", new Cmpsd());
-        this.put("CMPPD", new Cmppd());
-        this.put("COMISD", new Comisd());
-        this.put("UCOMISD", new Comisd());
     }
 
     private void generateSSELogical() {
@@ -234,12 +238,41 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("UNPCKLPS", new Unpcklps());
     }
 
+    /*
+     * MARKER -- SSE2 Instructions Animation
+     */
     private void generateSSE2DataTransfer() {
 //        this.put("MOVHLPD", new Movhlpd());
 //        this.put("MOVHPD", new Movhpd())
 //        this.put("MOVLPD", new Movlpd());
 //        this.put("MOVMSKPD", new Movmskpd());
 //        this.put("MOVSD", new Movsd());
+    }
+
+    private void generateSSE2Comparison() {
+        this.put("CMPSD", new Cmpsd());
+        this.put("CMPPD", new Cmppd());
+        this.put("COMISD", new Comisd());
+        this.put("UCOMISD", new Comisd());
+    }
+
+    private void generateSSE2Conversion() {
+        this.put("CVTDQ2PD", new Cvtdq2pd());
+        this.put("CVTDQ2PS", new Cvtdq2ps());
+        this.put("CVTPD2DQ", new Cvtpd2dq());
+        this.put("CVTTPD2DQ", new Cvtpd2dq());
+        this.put("CVTPS2DQ", new Cvtps2dq());
+        this.put("CVTTPS2DQ", new Cvtps2dq());
+        this.put("CVTPI2PD", new Cvtpi2pd());
+        this.put("CVTSI2SD", new Cvtsi2sd());
+        this.put("CVTPD2PI", new Cvtpd2pi());
+        this.put("CVTTPD2PI", new Cvtpd2pi());
+        this.put("CVTSD2SI", new Cvtsd2si());
+        this.put("CVTTSD2SI", new Cvtsd2si());
+        this.put("CVTPS2PD", new Cvtps2pd());
+        this.put("CVTPD2PS", new Cvtpd2ps());
+        this.put("CVTSS2SD", new Cvtss2sd());
+        this.put("CVTSD2SS", new Cvtsd2ss());
     }
 
     private void generateSSE2Logical() {
@@ -254,5 +287,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("UNPCKHPD", new Unpckhpd());
         this.put("UNPCKLPD", new Unpcklpd());
     }
+
+     /*
+     * MARKER -- FPU Instructions Animation
+     */
 
 }
