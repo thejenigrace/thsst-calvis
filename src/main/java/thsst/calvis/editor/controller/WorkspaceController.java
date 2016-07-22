@@ -475,7 +475,7 @@ public class WorkspaceController implements Initializable {
     private void handleHelpAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
-        alert.setGraphic(new ImageView(new Image("/img/calvis_logo_98x98.png")));
+        alert.setGraphic(new ImageView(new Image("/img/calvis_logo_96x96.png")));
         alert.setHeaderText("De La Salle University: CALVIS x86-32");
         alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, & Marielle Ong\n All rights reserved.");
         alert.initOwner(MainApp.primaryStage);

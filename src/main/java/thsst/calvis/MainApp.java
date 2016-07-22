@@ -39,7 +39,7 @@ public class MainApp extends Application {
         try {
             MainApp.primaryStage = primaryStage;
             MainApp.primaryStage.setTitle("CALVIS Configuration");
-            MainApp.primaryStage.getIcons().add(new Image("/img/calvis_logo.png"));
+            MainApp.primaryStage.getIcons().add(new Image("/img/calvis_logo_512x512.png"));
 
             initRootLayout();
         } catch ( Exception e ) {
