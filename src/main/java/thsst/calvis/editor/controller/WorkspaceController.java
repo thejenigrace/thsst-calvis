@@ -171,15 +171,21 @@ public class WorkspaceController implements Initializable {
 
     private void showBottomTabPane() throws Exception {
         ConsoleController consoleController = new ConsoleController();
-        this.tabPaneBottom.getTabs().add(consoleController.getTab());
-        this.tabPaneBottom.getTabs().add(createErrorLoggerTab(null));
+        Tab tabConsole = consoleController.getTab();
+        tabConsole.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.TERMINAL));
         this.sysCon.attach(consoleController);
         consoleController.build();
 
+        Tab tabErrorLogger = createErrorLoggerTab(null);
+        tabErrorLogger.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.BUG));
+
         VisualizationController visualizationController = new VisualizationController();
-        this.tabPaneBottom.getTabs().add(visualizationController.getTab());
+        Tab tabVisualizer = visualizationController.getTab();
+        tabVisualizer.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.EYE));
         this.sysCon.attach(visualizationController);
         visualizationController.build();
+
+        this.tabPaneBottom.getTabs().addAll(tabConsole, tabErrorLogger, tabVisualizer);
     }
 
     @FXML
@@ -311,6 +317,7 @@ public class WorkspaceController implements Initializable {
             settingsDialogStage.setScene(new Scene(settingsView));
             settingsDialogStage.setResizable(false);
             settingsDialogStage.centerOnScreen();
+            settingsDialogStage.initOwner(MainApp.primaryStage);
             settingsDialogStage.show();
 
             SettingsController settingsController = loader.getController();
@@ -366,6 +373,7 @@ public class WorkspaceController implements Initializable {
             findAndReplaceDialogStage.setResizable(false);
             findAndReplaceDialogStage.setX(this.root.getWidth() / 3);
             findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
+            findAndReplaceDialogStage.initOwner(MainApp.primaryStage);
             findAndReplaceDialogStage.show();
 
             // Pass the current code in the text editor to FindDialogController
@@ -458,6 +466,7 @@ public class WorkspaceController implements Initializable {
             converterStage.setResizable(false);
             converterStage.setX(this.root.getWidth() / 3);
             converterStage.setY(this.root.getHeight() / 3);
+            converterStage.initOwner(MainApp.primaryStage);
             converterStage.show();
         } catch ( Exception e ) {
             e.printStackTrace();

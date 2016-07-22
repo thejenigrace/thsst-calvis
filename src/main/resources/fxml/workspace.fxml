@@ -504,7 +504,7 @@
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <TabPane fx:id="tabPaneBottom" prefHeight="178.0" prefWidth="880.0" side="TOP"
+                                        <TabPane fx:id="tabPaneBottom" prefHeight="178.0" prefWidth="880.0" side="BOTTOM"
                                                  tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
                                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                                                  AnchorPane.topAnchor="0.0">
