@@ -51,6 +51,8 @@ public class X87Handler {
             this.tag.setTag(String.valueOf(top), tagMode);
         } else {
             barrel[barrel.length - 1] = Double.NaN;
+            this.status.setStackFaultFlag();
+            this.status.setInvalidOperationFlag();
             this.tag.setTag(String.valueOf(top), X87TagRegister.SPECIAL);
         }
 
@@ -72,6 +74,12 @@ public class X87Handler {
         String popped = peek();
         // remove TOP contents
         int top = this.status.getTop();
+
+        if ( this.tag.getTag(String.valueOf(top)).equals(X87TagRegister.EMPTY) ) {
+            // underflow
+            this.status.setStackFaultFlag();
+            this.status.setInvalidOperationFlag();
+        }
 
         rotateBarrel(RIGHT);
         barrel[0] = 0.0;

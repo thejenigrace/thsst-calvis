@@ -337,17 +337,26 @@ public class FileEditorTabPane {
 
         if ( codeArea != null && codeArea.isVisible() && !codeArea.getText().trim().equals("") )
             switch ( action ) {
-                case "PLAY": this.workspaceController.getSysCon().play(codeArea.getText());
+                case "BUILD":
+                    this.workspaceController.getSysCon().build(codeArea.getText());
                     break;
-                case "PAUSE": this.workspaceController.getSysCon().pause();
+                case "PLAY":
+                    this.workspaceController.getSysCon().play();
                     break;
-                case "STOP": this.workspaceController.getSysCon().end();
+                case "PAUSE":
+                    this.workspaceController.getSysCon().pause();
                     break;
-                case "PREVIOUS": this.workspaceController.getSysCon().previous();
+                case "STOP":
+                    this.workspaceController.getSysCon().end();
                     break;
-                case "NEXT": this.workspaceController.getSysCon().next();
+                case "PREVIOUS":
+                    this.workspaceController.getSysCon().previous();
                     break;
-                case "RESET": this.workspaceController.getSysCon().reset();
+                case "NEXT":
+                    this.workspaceController.getSysCon().next();
+                    break;
+                case "RESET":
+                    this.workspaceController.getSysCon().reset();
                     break;
                 default: System.out.println("None");
             }

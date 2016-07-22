@@ -259,9 +259,9 @@ public class InstructionList {
         return null;
     }
 
-    public boolean isVerifiable(String instructionName) {
+    public String getVerifiable(String instructionName) {
         String[] definition = find(instructionName);
-        return definition[2].equals("1");
+        return definition[2];
     }
 
     public Iterator<String[]> getInstructionProductionRules() {

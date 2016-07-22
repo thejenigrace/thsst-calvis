@@ -308,7 +308,7 @@ public class Parser {
                 tokens, registers, memory, Integer.parseInt(prodRule[3]), result);
 
         // Insert special check if instruction should be verified
-        CalvisInstruction.setVerifiable(instructions.isVerifiable(anInstruction));
+        CalvisInstruction.setVerifiable(instructions.getVerifiable(anInstruction));
 
         String instructionAdd = Integer.toHexString(lineNumber);
         mappedInstruction.put(MemoryAddressCalculator.extend(instructionAdd,

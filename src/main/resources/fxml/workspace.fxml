@@ -352,7 +352,7 @@
                             </tooltip>
                         </Button>
                         <Separator layoutX="382.0" layoutY="10.0" prefHeight="26.0" prefWidth="0.0"/>
-                        <Button fx:id="btnBuild" layoutX="864.0" layoutY="10.0" mnemonicParsing="false">
+                        <Button fx:id="btnBuild" layoutX="864.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBuild">
                             <graphic>
                                 <FontAwesomeIconView glyphName="GAVEL"/>
                             </graphic>
@@ -367,14 +367,6 @@
                             </graphic>
                             <tooltip>
                                 <Tooltip text="Execute Previous Line"/>
-                            </tooltip>
-                        </Button>
-                        <Button fx:id="btnPlayStepMode" mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="PLAY"/>
-                            </graphic>
-                            <tooltip>
-                                <Tooltip text="Play Step Mode"/>
                             </tooltip>
                         </Button>
                         <Button fx:id="btnNext" mnemonicParsing="false" onAction="#handleNext">
@@ -403,7 +395,7 @@
                                 <Tooltip text="Stop"/>
                             </tooltip>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleReset">
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#handleReset">
                             <graphic>
                                 <FontAwesomeIconView glyphName="REFRESH"/>
                             </graphic>

@@ -4,9 +4,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,13 +48,17 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnRedo;
     @FXML
-    private Button btnPlayStepMode;
+    private Button btnBuild;
     @FXML
     private Button btnPlay;
     @FXML
     private Button btnNext;
     @FXML
     private Button btnPrevious;
+    @FXML
+    private Button btnStop;
+    @FXML
+    private Button btnReset;
     @FXML
     private Button btnFindMoveUpward;
     @FXML
@@ -97,11 +99,8 @@ public class WorkspaceController implements Initializable {
         this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canUndoProperty).not());
         this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canRedoProperty).not());
 
-        this.textFieldFind.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                fileEditorTabPane.onActionFind(newValue);
-            }
+        this.textFieldFind.textProperty().addListener((observable, oldValue, newValue) -> {
+            fileEditorTabPane.onActionFind(newValue);
         });
     }
 
@@ -367,6 +366,10 @@ public class WorkspaceController implements Initializable {
         this.fileEditorTabPane.onActionFindMoveDownward();
     }
 
+    @FXML
+    public void handleBuild(ActionEvent event) {
+        this.fileEditorTabPane.simulationAction("BUILD");
+    }
     /**
      * Action for Play Simulation; a MenuItem in Execute.
      *
@@ -432,7 +435,7 @@ public class WorkspaceController implements Initializable {
 
             Stage converterStage = new Stage();
             converterStage.initModality(Modality.WINDOW_MODAL);
-            converterStage.setTitle("Converter Calculator");
+            converterStage.setTitle("Converter");
             converterStage.setScene(new Scene(converterView));
             converterStage.setResizable(false);
             converterStage.setX(this.root.getWidth() / 3);
@@ -485,6 +488,16 @@ public class WorkspaceController implements Initializable {
     public void disablePlayNextPrevious(boolean flag) {
         disableStepMode(flag);
         this.btnPlay.setDisable(flag);
+    }
+
+    public void disableAllSimulationButtons(boolean flag) {
+        disablePlayNextPrevious(flag);
+        this.btnStop.setDisable(flag);
+        this.btnReset.setDisable(flag);
+    }
+
+    public void disableBuildButton(boolean flag) {
+        this.btnBuild.setDisable(flag);
     }
 
     public void disableStepMode(boolean flag) {
@@ -552,6 +565,6 @@ public class WorkspaceController implements Initializable {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-        this.disableStepMode(true);
+        this.disableAllSimulationButtons(true);
     }
 }
