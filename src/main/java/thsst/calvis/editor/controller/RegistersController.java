@@ -27,8 +27,6 @@ public class RegistersController extends AssemblyComponent implements Initializa
     private TreeTableColumn<Register, String> colRegisterName;
     @FXML
     private TreeTableColumn<Register, String> colRegisterHexValue;
-//    @FXML
-//    private TreeTableColumn<Register, String> colRegisterInfo;
 
     @FXML
     private TableView<Flag> tableViewMxcsrFlags;
@@ -55,12 +53,14 @@ public class RegistersController extends AssemblyComponent implements Initializa
             String registerValue = p.getValue().getValue().getValue().toString();
             String registerName = p.getValue().getValue().getName();
 
-            if ( registerName.startsWith("XMM") && registerValue.length() == 32 ) {
+            Register someRegister = p.getValue().getValue();
+
+            if ( someRegister.getSize() == 128 && registerValue.length() == 32 ) {
                 registerValue = registerValue.substring(0, 8) + " "
                         + registerValue.substring(8, 16) + " "
                         + registerValue.substring(16, 24) + " "
                         + registerValue.substring(24);
-            } else if ( registerName.startsWith("MM") && registerValue.length() == 16 ) {
+            } else if ( someRegister.getSize() == 64 && registerValue.length() == 16 ) {
                 registerValue = registerValue.substring(0, 8) + " "
                         + registerValue.substring(8);
             }

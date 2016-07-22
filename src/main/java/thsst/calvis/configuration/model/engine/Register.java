@@ -28,6 +28,8 @@ public class Register {
         this.value = regInitialValue;
         if ( this.name.equals("ESP") ) {
             this.value = "0000FFFE";
+        } else if ( this.name.equals("SP") ) {
+            this.value = "FFFE";
         }
     }
 

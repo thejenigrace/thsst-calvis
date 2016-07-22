@@ -78,13 +78,6 @@ public class RegisterList {
                             Integer.toString(lineCounter)));
                 }
 
-//				System.out.println("thsst.calvis.configuration.view.engine.Register [name= " + reg[0]
-//	                                 + " , source=" + reg[1]
-//	                                 + " , size=" + reg[2]
-//	                                 + " , type=" + reg[3]
-//	                                 + " , start=" + reg[4]
-//	                                 + " , end=" + reg[5]+ "]");
-
                 // we need to get the max register size listed in the csv file
                 if ( !isSkipped ) {
                     int regSize = 0;
@@ -169,7 +162,7 @@ public class RegisterList {
                                                 Integer.toString(lineCounter + 1)));
                                 break;
                         }
-                    } else if ( reg[TYPE].equals("2") ) {
+                    } else {
                         Register g = new Register(reg[NAME], regSize);
                         if ( childMap.get(reg[SOURCE]) == null ) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
@@ -187,10 +180,10 @@ public class RegisterList {
                 lineCounter++;
             }
             lookUpCopy.remove(0);
+
             // should check for register thsst.calvis.configuration errors...
             int index = 0;
             for ( String[] lookupEntry : lookUpCopy ) {
-
                 // if all source (mother) registers are existent
                 //System.out.println(lookupEntry[1]);
                 if ( !this.map.containsKey(lookupEntry[1]) ) {
@@ -322,7 +315,7 @@ public class RegisterList {
         } else {
             //check for mismatch between parameter hexString and child register value
             String child = mother.getValue().substring(startIndex, endIndex + 1);
-            
+
             if ( child.length() >= hexString.length() ) {
                 int differenceInLength = child.length() - hexString.length();
                 for ( int i = 0; i < differenceInLength; i++ ) {
@@ -336,20 +329,20 @@ public class RegisterList {
                 newValue = new String(val);
                 newValue = newValue.toUpperCase();
                 mother.setValue(newValue);
+                
+                TreeMap<String, Register> treeMap = childMap.get(register[SOURCE]);
 
-//            System.out.println("register[SOURCE] = " + register[SOURCE]);
-                if ( childMap.get(register[SOURCE]) != null ) {
-//                System.out.println("key = " + key);
-//				System.out.println("newValue = " + newValue.toUpperCase());
-                    int registerType = Integer.parseInt(register[TYPE]);
-                    if ( registerType == 2 || registerType == 1 ) {
-                        String registerCategory = register[SOURCE].charAt(1) + "";
-                        childMap.get(register[SOURCE]).get(registerCategory + "X")
-                                .setValue(get16BitHexString(newValue));
-                        childMap.get(register[SOURCE]).get(registerCategory + "H")
-                                .setValue(get8BitHexString('H', newValue));
-                        childMap.get(register[SOURCE]).get(registerCategory + "L")
-                                .setValue(get8BitHexString('L', newValue));
+                if ( treeMap != null ) {
+                    for( Map.Entry<String, Register> entry : treeMap.entrySet() ) {
+                        String childRegisterName = entry.getKey();
+                        Register value = entry.getValue();
+
+                        String[] childRegister = find(childRegisterName);
+                        int childStartIndex = Integer.parseInt(childRegister[START]);
+                        int childEndIndex = Integer.parseInt(childRegister[END]);
+
+                        String newChildValue = mother.getValue().substring(childStartIndex, childEndIndex + 1);
+                        value.setValue(newChildValue);
                     }
                 }
             } else {
@@ -367,28 +360,6 @@ public class RegisterList {
                 errorLogger.get(0).add(errorMessages);
             }
         }
-    }
-
-    public String get16BitHexString(String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for ( int i = hexString.length() / 2; i < hexString.length(); i++ ) {
-            stringBuilder.append(hexString.charAt(i));
-        }
-
-        return stringBuilder.toString();
-    }
-
-    public String get8BitHexString(char type, String hexString) {
-        StringBuilder stringBuilder = new StringBuilder();
-        if ( type == 'H' ) {
-            stringBuilder.append(hexString.charAt(4));
-            stringBuilder.append(hexString.charAt(5));
-        } else if ( type == 'L' ) {
-            stringBuilder.append(hexString.charAt(6));
-            stringBuilder.append(hexString.charAt(7));
-        }
-
-        return stringBuilder.toString();
     }
 
     public String getInstructionPointer() {
@@ -448,7 +419,7 @@ public class RegisterList {
 
     public ErrorLogger getErrorLogger() {
         if ( errorLogger.get(0).getSizeofErrorMessages() == 0 ) {
-            return new ErrorLogger(new ArrayList<ErrorMessageList>());
+            return new ErrorLogger(new ArrayList<>());
         } else {
             return errorLogger;
         }

@@ -24,14 +24,12 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <!--<ComboBox fx:id="conversionTypeComboBox" maxWidth="Infinity"/>-->
                         <TreeTableView fx:id="treeTableViewRegister" stylesheets="@../css/register.css"
                                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TreeTableColumn fx:id="colRegisterName" minWidth="100" maxWidth="100" text="Register"/>
                                 <TreeTableColumn fx:id="colRegisterHexValue" text="Hex Value"/>
-                                <!--<TreeTableColumn fx:id="colRegisterInfo" maxWidth="80" minWidth="80" text="Info"/>-->
                             </columns>
                             <columnResizePolicy>
                                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
