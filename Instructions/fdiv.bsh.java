@@ -6,18 +6,18 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-        spValue = Integer.parseInt(value, 16) + 0.0;
+		spValue = Long.parseLong(value, 16) + 0.0;
 		
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue = stValue / spValue;
-		if(resultingValue > Math.pow(2,64)){
-			registers.mxscr.setOverflowFlag("1");
+		System.out.println(resultingValue + " result");
+		boolean isException = c.generateFPUExceptions(registers, resultingValue);
+		if(spValue == 0){
+			registers.mxscr.setDivideByZeroFlag("1");
+			isException = true;
 		}
-		else if(resultingValue < Math.pow(2, 64) * -1){
-			registers.mxscr.setUnderflowFlag("1");
-		}
-		else{
+		if(!isException){
 			//System.out.println(resultingValue + " value");
 			registers.set("ST0", "" + (resultingValue));
 		}
@@ -49,14 +49,13 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue =  dbDes / dbSrc;
-			
-			if(resultingValue > Math.pow(2,64)){
-				registers.mxscr.setOverflowFlag("1");
+
+			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			if(dbSrc == 0){
+				registers.mxscr.setDivideByZeroFlag("1");
+				isException = true;
 			}
-			else if(resultingValue < Math.pow(2, 64) * -1){
-				registers.mxscr.setUnderflowFlag("1");
-			}
-			else{
+			if(!isException){
 				//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), "" + (resultingValue));
 			}

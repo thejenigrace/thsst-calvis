@@ -8,6 +8,7 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.x87.*;
+import thsst.calvis.simulatorvisualizer.animation.instruction.x87.Fadd;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 import java.util.HashMap;

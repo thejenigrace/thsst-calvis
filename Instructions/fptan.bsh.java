@@ -11,6 +11,9 @@ execute(registers, memory) {
 
 	if(regVal > Math.pow(2,64) || regVal < Math.pow(2, 64) * -1){
 		registers.x87().status().set("C2",'1');
+		if(regVal < Math.pow(2, 64) * -1){
+			registers.getMxscr().setUnderflowFlag("1");
+		}
 	}
 	else{
 		registers.x87().status().set("C2",'0');

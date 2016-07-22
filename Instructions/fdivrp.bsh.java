@@ -16,14 +16,12 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 
 			double resultingValue =  dbSrc / dbDes;
-
-			if(resultingValue > Math.pow(2,64)){
-				registers.mxscr.setOverflowFlag("1");
+			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			if(dbDes == 0){
+				registers.mxscr.setDivideByZeroFlag("1");
+				isException = true;
 			}
-			else if(resultingValue < Math.pow(2, 64) * -1){
-				registers.mxscr.setUnderflowFlag("1");
-			}
-			else{
+			if(!isException){
 				//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), "" + resultingValue);
 			}
@@ -43,14 +41,12 @@ execute(registers, memory) {
 			double dbSrc = Double.parseDouble(registers.get("ST0"));
 			
 			double resultingValue = dbSrc / dbDes;
-			
-			if(resultingValue > Math.pow(2,64)){
-				registers.mxscr.setOverflowFlag("1");
+			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			if(dbDes == 0){
+				registers.mxscr.setDivideByZeroFlag("1");
+				isException = true;
 			}
-			else if(resultingValue < Math.pow(2, 64) * -1){
-				registers.mxscr.setUnderflowFlag("1");
-			}
-			else{
+			if(!isException){
 				//System.out.println(resultingValue + " value");
 				registers.set("ST1", "" + (resultingValue));
 			}

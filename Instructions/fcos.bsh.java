@@ -8,6 +8,10 @@ execute(registers, memory) {
 
 	if(resultVal > Math.pow(2,64) || resultVal < Math.pow(2, 64) * -1){
 		registers.x87().status().set("C2",'1');
+		registers.x87().status().set("C1",'0');
+	}
+	else if(c.isNan(resultVal) || c.isInfinite(resultVal)){
+		registers.getMxscr().setInvalidOperationFlag("1");
 	}
 	else{
 		registers.x87().status().set("C2",'0');

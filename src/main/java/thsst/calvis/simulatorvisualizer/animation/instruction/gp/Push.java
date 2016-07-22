@@ -30,21 +30,27 @@ public class Push extends CalvisAnimation {
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         Token des = tokens[0];
-        int operandSize = timeFunc.getBitSize(des);
+        int operandSize = 0;
+        String desName = "IMM. " + des.getValue();
+        if(!des.isHex() && !des.isLabel()){
+            operandSize = timeFunc.getBitSize(des);
+            desName = des.getValue();
+        }
+
         String desVal = timeFunc.getValue(des, operandSize);
         ObservableList<Node> parent = this.root.getChildren();
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         Rectangle desRec = timeFunc.createRectangle(140, 90, Color.web("#e9d66b"));
-        Text desLabel = timeFunc.generateText(new Text(des.getValue()), 15, "#3d2b1f", FontWeight.NORMAL, "Elephant");
-        Text desValue = timeFunc.generateText(new Text(desVal), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant");
-        Text desValueMoving = timeFunc.generateText(new Text(desVal), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant");
+        Text desLabel = timeFunc.generateText(new Text(desName), 15, "#3d2b1f", FontWeight.NORMAL, "System");
+        Text desValue = timeFunc.generateText(new Text(desVal), 13, "#3d2b1f", FontWeight.NORMAL, "System");
+        Text desValueMoving = timeFunc.generateText(new Text(desVal), 13, "#3d2b1f", FontWeight.NORMAL, "System");
 
         Rectangle stackRec = timeFunc.createRectangle(140, 90, Color.web("#6e7f80"));
-        Text stackLabel = timeFunc.generateText(new Text("STACK"), 18, "#3d2b1f", FontWeight.EXTRA_BOLD, "Elephant");
-        Text espLabel = timeFunc.generateText(new Text("ESP"), 15, "#b31b1b", FontWeight.BOLD, "Elephant");
-        Text pushLabel = timeFunc.generateText(new Text("PUSHED VALUE"), 14, "#b31b1b", FontWeight.BOLD, "Elephant");
-        Text espVal = timeFunc.generateText(new Text(registers.get("ESP")), 13, "#3d2b1f", FontWeight.NORMAL, "Elephant");
-        Text insLabel = timeFunc.generateText(new Text("Value will be pushed to =>"), 15, "#b31b1b", FontWeight.BOLD, "Elephant");
+        Text stackLabel = timeFunc.generateText(new Text("STACK"), 18, "#3d2b1f", FontWeight.EXTRA_BOLD, "System");
+        Text espLabel = timeFunc.generateText(new Text("ESP"), 15, "#b31b1b", FontWeight.BOLD, "System");
+        Text pushLabel = timeFunc.generateText(new Text("PUSHED VALUE"), 14, "#b31b1b", FontWeight.BOLD, "System");
+        Text espVal = timeFunc.generateText(new Text(registers.get("ESP")), 13, "#3d2b1f", FontWeight.NORMAL, "System");
+        Text insLabel = timeFunc.generateText(new Text("Value will be pushed to =>"), 15, "#b31b1b", FontWeight.BOLD, "System");
         parent.addAll(insLabel, fake, desRec, desValue, desLabel, stackRec, espVal, stackLabel, desValueMoving, espLabel, pushLabel);
         //Timeline animations
         desValue.setX(desRec.getLayoutBounds().getWidth()/2 - desValue.getLayoutBounds().getWidth()/2 + 20);

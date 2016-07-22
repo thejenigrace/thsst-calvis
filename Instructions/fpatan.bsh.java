@@ -12,9 +12,15 @@ execute(registers, memory) {
 	double regValOne = Double.parseDouble(valueOne);
 	double resultVal = Math.atan(regValOne/regValZero);
 
+	if(regValZero < Math.pow(2, 64) * -1 || regValOne < Math.pow(2, 64) * -1){
+		registers.getMxscr().setUnderflowFlag("1");
+	}
+	else{
+		registers.set("ST1", resultVal + "");
+	}
 	registers.x87().status().set("C2",'0');
 //	String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-	registers.set("ST1", resultVal + "");
+
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 	registers.x87().status().set("C2",'0');

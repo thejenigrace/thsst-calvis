@@ -72,7 +72,7 @@ public class CalvisFormattedInstruction {
         }
 
         String nameCopy = name.toUpperCase();
-        return !nameCopy.matches("J.*|LOOP.*|CALL|RET");
+        return !nameCopy.matches("J.*|LOOP.*|CALL|RET|BNE");
     }
 
     public void executeScan() throws StackPopException, MemoryReadException,
