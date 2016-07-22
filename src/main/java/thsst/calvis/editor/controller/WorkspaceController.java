@@ -50,11 +50,11 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnBuild;
     @FXML
-    private Button btnPlay;
+    private Button btnPrevious;
     @FXML
     private Button btnNext;
     @FXML
-    private Button btnPrevious;
+    private Button btnPlay;
     @FXML
     private Button btnStop;
     @FXML
@@ -65,6 +65,25 @@ public class WorkspaceController implements Initializable {
     private Button btnFindMoveDownward;
     @FXML
     private Button btnHide;
+
+    @FXML
+    private MenuItem menuItemSave;
+    @FXML
+    private MenuItem menuItemUndo;
+    @FXML
+    private MenuItem menuItemRedo;
+    @FXML
+    private MenuItem menuItemBuild;
+    @FXML
+    private MenuItem menuItemPrevious;
+    @FXML
+    private MenuItem menuItemNext;
+    @FXML
+    private MenuItem menuItemPlay;
+    @FXML
+    private MenuItem menuItemStop;
+    @FXML
+    private MenuItem menuItemReset;
 
     @FXML
     private SplitPane splitPaneFileEditor;
@@ -94,10 +113,14 @@ public class WorkspaceController implements Initializable {
         this.toolbarMain.getItems().add(22, textFieldFind);
     }
 
-    private void initBinding() {
+    private void initBindingProperties() {
         this.btnSave.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::modifiedProperty).not());
         this.btnUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canUndoProperty).not());
         this.btnRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canRedoProperty).not());
+
+        this.menuItemSave.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::modifiedProperty).not());
+        this.menuItemUndo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canUndoProperty).not());
+        this.menuItemRedo.disableProperty().bind(createActiveBooleanProperty(FileEditorTab::canRedoProperty).not());
 
         this.textFieldFind.textProperty().addListener((observable, oldValue, newValue) -> {
             fileEditorTabPane.onActionFind(newValue);
@@ -480,28 +503,30 @@ public class WorkspaceController implements Initializable {
         this.btnHide.setTooltip(new Tooltip("Show Tab Pane"));
     }
 
-    public void disablePlayNextPrevious(boolean flag) {
-        this.disableStepMode(flag);
-        this.btnPlay.setDisable(flag);
-    }
-
     public void disableAllSimulationButtons(boolean flag) {
         this.disablePlayNextPrevious(flag);
         this.btnStop.setDisable(flag);
         this.btnReset.setDisable(flag);
+        this.menuItemStop.setDisable(flag);
+        this.menuItemReset.setDisable(flag);
     }
 
     public void disableBuildButton(boolean flag) {
         this.btnBuild.setDisable(flag);
+        this.menuItemBuild.setDisable(flag);
+    }
+
+    public void disablePlayNextPrevious(boolean flag) {
+        this.disableStepMode(flag);
+        this.btnPlay.setDisable(flag);
+        this.menuItemPlay.setDisable(flag);
     }
 
     public void disableStepMode(boolean flag) {
-        this.btnNext.setDisable(flag);
         this.btnPrevious.setDisable(flag);
-    }
-
-    public void disableSaveMode(boolean flag) {
-        this.btnSave.setDisable(flag);
+        this.btnNext.setDisable(flag);
+        this.menuItemPrevious.setDisable(flag);
+        this.menuItemNext.setDisable(flag);
     }
 
     public void disableFindButton(boolean flag) {
@@ -554,9 +579,8 @@ public class WorkspaceController implements Initializable {
             this.showMemoryPane();
             this.showBottomTabPane();
             this.showFileEditorTabPane();
-            this.disableSaveMode(true);
             this.disableFindButton(true);
-            this.initBinding();
+            this.initBindingProperties();
         } catch ( Exception e ) {
             e.printStackTrace();
         }

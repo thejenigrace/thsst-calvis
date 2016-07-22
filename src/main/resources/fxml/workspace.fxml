@@ -50,7 +50,7 @@
                                         <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
+                                <MenuItem fx:id="menuItemSave" accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
                                           text="Save">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP"
@@ -116,7 +116,7 @@
                         <!--EDIT MENU-->
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
-                                <MenuItem accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
+                                <MenuItem fx:id="menuItemUndo" accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
                                           text="Undo">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP"
@@ -126,7 +126,7 @@
                                         <FontAwesomeIconView glyphName="UNDO"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo"
+                                <MenuItem fx:id="menuItemRedo" accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo"
                                           text="Redo">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP"
@@ -204,7 +204,7 @@
                         <!--EXECUTE MENU-->
                         <Menu mnemonicParsing="false" text="Execute">
                             <items>
-                                <MenuItem accelerator="Shortcut + B" mnemonicParsing="false" onAction="#handleBuild"
+                                <MenuItem fx:id="menuItemBuild" accelerator="Shortcut + B" mnemonicParsing="false" onAction="#handleBuild"
                                           text="Build">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
@@ -214,7 +214,20 @@
                                         <FontAwesomeIconView glyphName="GAVEL"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + P" mnemonicParsing="false" onAction="#handlePlay"
+                                <MenuItem fx:id="menuItemPrevious" mnemonicParsing="false" onAction="#handlePrevious"
+                                          text="Execute Previous Line">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem fx:id="menuItemNext" mnemonicParsing="false" onAction="#handleNext"
+                                          text="Execute Next Line">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="STEP_FORWARD"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem fx:id="menuItemPlay" accelerator="Shortcut + P" mnemonicParsing="false"
+                                          onAction="#handlePlay"
                                           text="Play">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
@@ -224,7 +237,8 @@
                                         <FontAwesomeIconView glyphName="PLAY"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + T" mnemonicParsing="false" onAction="#handleStop"
+                                <MenuItem fx:id="menuItemStop" accelerator="Shortcut + T" mnemonicParsing="false"
+                                          onAction="#handleStop"
                                           text="Stop">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="UP"
@@ -234,7 +248,8 @@
                                         <FontAwesomeIconView glyphName="STOP"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem accelerator="Shortcut + G" mnemonicParsing="false" onAction="#handleReset"
+                                <MenuItem fx:id="menuItemReset" accelerator="Shortcut + G" mnemonicParsing="false"
+                                          onAction="#handleReset"
                                           text="Reset">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="G" control="UP" meta="UP" shift="UP"
@@ -242,17 +257,6 @@
                                     </accelerator>
                                     <graphic>
                                         <FontAwesomeIconView glyphName="REFRESH"/>
-                                    </graphic>
-                                </MenuItem>
-                                <MenuItem mnemonicParsing="false" onAction="#handlePrevious"
-                                          text="Execute Previous Line">
-                                    <graphic>
-                                        <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
-                                    </graphic>
-                                </MenuItem>
-                                <MenuItem mnemonicParsing="false" onAction="#handleNext" text="Execute Next Line">
-                                    <graphic>
-                                        <FontAwesomeIconView glyphName="STEP_FORWARD"/>
                                     </graphic>
                                 </MenuItem>
                             </items>
