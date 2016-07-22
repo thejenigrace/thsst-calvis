@@ -67,6 +67,12 @@ public class Fldz extends CalvisAnimation {
         label.setX(X);
         label.setY(Y);
 
+        Text labelFlags = new Text("Affected flags:\n" +
+                "C1 = 1, if stack overflow, else 0\n" +
+                "C0, C2, C3 = undefined");
+        labelFlags.setX(X);
+        labelFlags.setY(Y + 380);
+
         Text label0 = new Text("Value pushed: ");
         Text label1 = new Text("ST0");
         Text label2 = new Text("ST1");
@@ -97,7 +103,7 @@ public class Fldz extends CalvisAnimation {
         label8.setY(Y + 350);
 
         this.root.getChildren().addAll(st0, st1, st2, st3, st4, st5, st6, st7, st8,
-                label, label0, label1, label2, label3, label4, label5, label6, label7, label8);
+                label, label0, label1, label2, label3, label4, label5, label6, label7, label8, labelFlags);
 
         Text textBit0a = new Text(X, Y + 10, "" + registers.get("ST0"));
         Text textBit0 = new Text(X, Y + 20, "" + registers.get("ST0"));

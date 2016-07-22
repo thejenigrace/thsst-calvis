@@ -7,10 +7,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Add Visualization for SSE &amp; SSE2 Comparison; Marielle's Visualization">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fcos.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fsin.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcl.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rol.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rol.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ror.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ror.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbstp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbstp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fistp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fistp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld1.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2e.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2e.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldlg2.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldlg2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldln2.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldln2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldz.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldz.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fst.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fst.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fstp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fstp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fxch.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fxch.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,8 +83,18 @@
       <file leaf-file-name="AnimationMap.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30511183">
-              <caret line="266" column="5" selection-start-line="266" selection-start-column="5" selection-end-line="266" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.61661345">
+              <caret line="293" column="37" selection-start-line="293" selection-start-column="37" selection-end-line="293" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fxch.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fxch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -489,8 +518,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Pslldq.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Psrldq.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Movd.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Pcmpeq.java" />
@@ -523,22 +550,24 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rol.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcl.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcr.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fsin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fcos.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fst.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fstp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fistp.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbld.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbstp.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2e.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldlg2.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldln2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldz.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fxch.java" />
       </list>
     </option>
@@ -552,7 +581,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1280" />
+    <option name="width" value="966" />
     <option name="height" value="746" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -787,6 +816,10 @@
               <option name="myItemId" value="instruction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="x87" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -829,10 +862,6 @@
               <option name="myItemId" value="instruction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -872,10 +901,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
-      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="configuration.model.engine" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -894,8 +921,10 @@
       <recent name="thsst.calvis.simulatorvisualizer.animation.instruction.mmx" />
       <recent name="thsst.calvis.simulatorvisualizer.animation.instruction.gp" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="configuration.model.engine" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
+      <recent name="$PROJECT_DIR$/src/main/java/MainEditor" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
@@ -1213,12 +1242,6 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
     </task>
-    <task id="LOCAL-00132" summary="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
-      <created>1468154121534</created>
-      <option name="number" value="00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1468154121535</updated>
-    </task>
     <task id="LOCAL-00133" summary="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
       <created>1468154322318</created>
       <option name="number" value="00133" />
@@ -1507,7 +1530,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469174885514</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="done">
+      <created>1469175157546</created>
+      <option name="number" value="00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1469175157546</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1531,7 +1560,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="746" extended-state="6" />
+    <frame x="0" y="23" width="966" height="746" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1544,7 +1573,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33027524" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3131579" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2253635" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37987012" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18097281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1579,10 +1608,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23289473" sideWeight="0.48211733" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2324159" sideWeight="0.48211733" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33027524" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3131579" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24071082" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3223684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18097281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20886981" sideWeight="0.5105263" order="4" side_tool="true" content_ui="tabs" />
@@ -1602,7 +1631,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix package naming and contents" />
     <MESSAGE value="Move undo, redo, cut, copy &amp; paste method to TextEditor instead from FileEditorTabPane" />
     <MESSAGE value="Fix File Menu Icons &amp; Remove unnecessary files" />
     <MESSAGE value="Remove unnecessary methods" />
@@ -1627,7 +1655,8 @@
     <MESSAGE value="Add PCMPEQ(B/W/D) and PCMPGT(B/W/D)" />
     <MESSAGE value="Add Visualization for SSE &amp; SSE2 Comparison; Marielle's Visualization" />
     <MESSAGE value="fpu visualization" />
-    <option name="LAST_COMMIT_MESSAGE" value="fpu visualization" />
+    <MESSAGE value="done" />
+    <option name="LAST_COMMIT_MESSAGE" value="done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1660,20 +1689,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/TimeLineFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/sse/Cmpss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="75" selection-start-line="79" selection-start-column="75" selection-end-line="79" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/sse2/Cmpsd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1864,54 +1879,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="141" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fstp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="202" column="30" selection-start-line="202" selection-start-column="30" selection-end-line="202" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fistp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="207" column="27" selection-start-line="207" selection-start-column="27" selection-end-line="207" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="23" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3178914">
-          <caret line="65" column="116" selection-start-line="65" selection-start-column="116" selection-end-line="65" selection-end-column="116" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbstp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45527157">
-          <caret line="65" column="110" selection-start-line="65" selection-start-column="110" selection-end-line="65" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/And.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33222038">
@@ -1936,14 +1903,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fst.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="95" selection-start-line="65" selection-start-column="72" selection-end-line="65" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Xchg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64057505">
@@ -1956,70 +1915,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.041533545">
           <caret line="98" column="43" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64057505">
-          <caret line="65" column="69" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2e.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30511183">
-          <caret line="65" column="70" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3290735">
-          <caret line="65" column="41" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="66" selection-start-line="65" selection-start-column="66" selection-end-line="65" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldlg2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4968051">
-          <caret line="65" column="42" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldln2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2571885">
-          <caret line="65" column="70" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldz.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42492014">
-          <caret line="65" column="69" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -2040,18 +1935,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fsin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="86" selection-start-line="65" selection-start-column="86" selection-end-line="65" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fcos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="73" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fstp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7907348">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fbstp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="51" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fistp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6230032">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18530351">
+          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="73" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fld1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2e.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldl2t.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.90415335">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldz.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78434503">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldpi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71884984">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldln2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5926518">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fldlg2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6645367">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fild.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3115016">
+          <caret line="105" column="105" selection-start-line="105" selection-start-column="105" selection-end-line="105" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fxch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19169329">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/AnimationMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30511183">
-          <caret line="266" column="5" selection-start-line="266" selection-start-column="5" selection-end-line="266" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.61661345">
+          <caret line="293" column="37" selection-start-line="293" selection-start-column="37" selection-end-line="293" selection-end-column="37" />
           <folding />
         </state>
       </provider>

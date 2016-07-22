@@ -59,6 +59,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generatex87(){
         this.generatex87DataTransfer();
         this.generatex87Exchange();
+        this.generatex87Transcedental();
     }
 
     private void generateGPDataTransfer() {
@@ -286,6 +287,17 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generatex87Exchange() {
         this.put("FXCH", new Fxch());
+    }
+
+    private void generatex87Transcedental() {
+        this.put("FSIN", new Fsin());
+        this.put("FCOS", new Fcos());
+//        this.put("FSINCOS", new Fsincos());
+//        this.put("FPTAN", new Fptan());
+//        this.put("FPATAN", new Fpatan());
+//        this.put("F2XM1", new F2xm1());
+//        this.put("FYL2X", new Fyl2x());
+//        this.put("FYL2XP1", new Fyl2xp1());
     }
 
 }

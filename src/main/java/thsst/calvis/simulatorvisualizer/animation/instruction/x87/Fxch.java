@@ -92,7 +92,13 @@ public class Fxch extends CalvisAnimation {
             srcValueText.setX(100);
             srcValueText.setY(100);
 
-            root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
+            Text labelFlags = new Text("Affected flags:\n" +
+                    "C1 = 0\n" +
+                    "C0, C2, C3 = undefined");
+            labelFlags.setX(X);
+            labelFlags.setY(Y + 85);
+
+            root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText, labelFlags);
 
             // ANIMATION LOGIC
             TranslateTransition desLabelTransition = new TranslateTransition();
