@@ -324,6 +324,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FLDLN2", new Fldln2());
         this.put("FLDL2T", new Fldl2t());
         this.put("FLDLG2", new Fldlg2());
+        this.put("FCMOV", new Fcmov());
     }
 
     private void generatex87Exchange() {
