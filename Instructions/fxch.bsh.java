@@ -3,8 +3,8 @@ execute(src, registers, memory) {
         if ( registers.getBitSize(src) == 80 ) {
             String stx = registers.get(src);
             String st0 = registers.get("ST0");
-            registers.set("ST1", st0);
-            registers.set("ST0", st1);
+            registers.set(src, st0);
+            registers.set("ST0", stx);
         }
     }
 }

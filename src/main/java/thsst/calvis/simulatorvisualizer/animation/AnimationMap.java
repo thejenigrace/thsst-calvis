@@ -1,13 +1,11 @@
 package thsst.calvis.simulatorvisualizer.animation;
 
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpgt;
+import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpps;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpss;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
+import thsst.calvis.simulatorvisualizer.animation.instruction.x87.*;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 import java.util.HashMap;
@@ -23,6 +21,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateMMX();
         this.generateSSE();
         this.generateSSE2();
+        this.generatex87();
     }
 
     private void generateGP() {
@@ -37,6 +36,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generateMMX() {
         this.generateMMXDataTransfer();
         this.generateMMXComparison();
+        this.generateMMXPacked();
+        this.generateMMXUnpacked();
+        this.generateMMXLogical();
+        this.generateMMXShift();
     }
 
     private void generateSSE() {
@@ -51,6 +54,11 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateSSE2Comparison();
         this.generateSSE2Unpacked();
         this.generateSSE2Logical();
+    }
+
+    private void generatex87(){
+        this.generatex87DataTransfer();
+        this.generatex87Exchange();
     }
 
     private void generateGPDataTransfer() {
@@ -192,6 +200,14 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("PXOR", new Pxor());
     }
 
+    private void generateMMXShift() {
+        this.put("PSLLW", new Psllw());
+        this.put("PSLLD", new Pslld());
+        this.put("PSLLQ", new Psllq());
+        this.put("PSRAW", new Psraw());
+        this.put("PSRAD", new Psrad());
+    }
+
     private void generateSSEDataTransfer() {
 //        this.put("MOVDQ2Q", new Movdq2q());
 //        this.put("MOVDQA", new Movdqa());
@@ -248,6 +264,28 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("SHUFPD", new Shufpd());
         this.put("UNPCKHPD", new Unpckhpd());
         this.put("UNPCKLPD", new Unpcklpd());
+    }
+
+    private void generatex87DataTransfer() {
+        this.put("FLD", new Fld());
+        this.put("FST", new Fst());
+        this.put("FSTP", new Fstp());
+        this.put("FILD", new Fild());
+        this.put("FIST", new Fist());
+        this.put("FISTP", new Fistp());
+        this.put("FBLD", new Fbld());
+        this.put("FBSTP", new Fbstp());
+        this.put("FLD1", new Fld1());
+        this.put("FLDZ", new Fldz());
+        this.put("FLDPI", new Fldpi());
+        this.put("FLDL2E", new Fldl2e());
+        this.put("FLDLN2", new Fldln2());
+        this.put("FLDL2T", new Fldl2t());
+        this.put("FLDLG2", new Fldlg2());
+    }
+
+    private void generatex87Exchange() {
+        this.put("FXCH", new Fxch());
     }
 
 }

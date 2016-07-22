@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Fld1 extends CalvisAnimation {
+public class Fbld extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -63,7 +63,7 @@ public class Fld1 extends CalvisAnimation {
         st8.setX(X);
         st8.setY(Y + 330);
 
-        Text label = new Text("Push +1.0 onto the FPU register stack.");
+        Text label = new Text("Convert the BCD source operand into double-extended-precision floating point and push the value onto the FPU register stack.");
         label.setX(X);
         label.setY(Y);
 
@@ -138,7 +138,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st7.getLayoutBounds().getHeight() / 3));
         bit7Transition.toXProperty().bind(bit7Transition.fromXProperty());
         bit7Transition.toYProperty().bind(bit7Transition.fromYProperty()
-                .add(50));
+                                    .add(50));
 
         bit6Transition.setInterpolator(Interpolator.LINEAR);
         bit6Transition.fromXProperty().bind(st6.translateXProperty()
@@ -148,7 +148,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st6.getLayoutBounds().getHeight() / 3));
         bit6Transition.toXProperty().bind(bit6Transition.fromXProperty());
         bit6Transition.toYProperty().bind(bit6Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit5Transition.setInterpolator(Interpolator.LINEAR);
         bit5Transition.fromXProperty().bind(st5.translateXProperty()
@@ -158,7 +158,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st5.getLayoutBounds().getHeight() / 3));
         bit5Transition.toXProperty().bind(bit5Transition.fromXProperty());
         bit5Transition.toYProperty().bind(bit5Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit4Transition.setInterpolator(Interpolator.LINEAR);
         bit4Transition.fromXProperty().bind(st4.translateXProperty()
@@ -168,7 +168,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st4.getLayoutBounds().getHeight() / 3));
         bit4Transition.toXProperty().bind(bit4Transition.fromXProperty());
         bit4Transition.toYProperty().bind(bit4Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit3Transition.setInterpolator(Interpolator.LINEAR);
         bit3Transition.fromXProperty().bind(st3.translateXProperty()
@@ -178,7 +178,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st3.getLayoutBounds().getHeight() / 3));
         bit3Transition.toXProperty().bind(bit3Transition.fromXProperty());
         bit3Transition.toYProperty().bind(bit3Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit2Transition.setInterpolator(Interpolator.LINEAR);
         bit2Transition.fromXProperty().bind(st2.translateXProperty()
@@ -188,7 +188,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st2.getLayoutBounds().getHeight() / 3));
         bit2Transition.toXProperty().bind(bit2Transition.fromXProperty());
         bit2Transition.toYProperty().bind(bit2Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit1Transition.setInterpolator(Interpolator.LINEAR);
         bit1Transition.fromXProperty().bind(st1.translateXProperty()
@@ -198,7 +198,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st1.getLayoutBounds().getHeight() / 3));
         bit1Transition.toXProperty().bind(bit1Transition.fromXProperty());
         bit1Transition.toYProperty().bind(bit1Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit0Transition.setInterpolator(Interpolator.LINEAR);
         bit0Transition.fromXProperty().bind(st0.translateXProperty()
@@ -208,7 +208,7 @@ public class Fld1 extends CalvisAnimation {
                 .add(st0.getLayoutBounds().getHeight() / 3));
         bit0Transition.toXProperty().bind(bit0Transition.fromXProperty());
         bit0Transition.toYProperty().bind(bit0Transition.fromYProperty()
-                .add(40));
+                                    .add(40));
 
         bit8Transition.play();
         bit7Transition.play();
