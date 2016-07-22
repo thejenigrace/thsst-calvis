@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="Add icons to other menu items">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/img/calvis_logo_128x128.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/img/calvis_logo_98x98.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/x87/Fadd.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/fxml/configuratio_environment.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/configuration_environment.fxml" />
+    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="Add icon to the about dialog box">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fsincos.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fsincos.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fyl2x.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fyl2x.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
@@ -134,6 +131,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Instructions" />
       <recent name="$PROJECT_DIR$/src/main/resources/img" />
     </key>
   </component>
@@ -458,7 +456,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469195816675</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add icon to the about dialog box">
+      <created>1469197453965</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1469197453965</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -481,10 +485,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21888413" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21888413" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -535,7 +539,8 @@
     <MESSAGE value="Fix Workspace UI Changes" />
     <MESSAGE value="Fix Menu Items disable property sync with Main Toolbar buttons" />
     <MESSAGE value="Add icons to other menu items" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add icons to other menu items" />
+    <MESSAGE value="Add icon to the about dialog box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add icon to the about dialog box" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -602,18 +607,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java">
+    <entry file="file://$PROJECT_DIR$/Instructions/fsincos.bsh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66390043">
-          <caret line="482" column="4" selection-start-line="482" selection-start-column="4" selection-end-line="482" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions/fyl2x.bsh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.373444">
-          <caret line="41" column="83" selection-start-line="41" selection-start-column="83" selection-end-line="41" selection-end-column="83" />
+        <state vertical-scroll-proportion="-1.7213115">
+          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.593361">
+          <caret line="473" column="9" selection-start-line="473" selection-start-column="9" selection-end-line="473" selection-end-column="9" />
           <folding />
         </state>
       </provider>

@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
+import thsst.calvis.MainApp;
 import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
 import thsst.calvis.editor.view.FileEditorTab;
 import thsst.calvis.editor.view.FileEditorTabPane;
@@ -477,6 +478,7 @@ public class WorkspaceController implements Initializable {
         alert.setGraphic(new ImageView(new Image("/img/calvis_logo_98x98.png")));
         alert.setHeaderText("De La Salle University: CALVIS x86-32");
         alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, & Marielle Ong\n All rights reserved.");
+        alert.initOwner(MainApp.primaryStage);
 
         alert.showAndWait();
     }

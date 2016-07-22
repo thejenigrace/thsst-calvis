@@ -19,11 +19,11 @@ execute(registers, memory) {
 	double regValOne = Double.parseDouble(valueOne);
 	double resultVal = 0.0;
 	if(regValZero == 0.0 && registers.mxscr.getDivideByZeroMask() == "1"){
-		if(biSrcOne >= 0){
-			resultVal = -0.01;
+		if(regValOne >= 0){
+			resultVal = Double.NEGATIVE_INFINITY_INFINITY;
 		}
 		else{
-			resultVal = 0.01;
+		resultVal = Double.POSITIVE_INFINITY_INFINITY;
 		}
 	}else{
 		resultVal = regValOne * (Math.log(regValZero) / Math.log(2) );
