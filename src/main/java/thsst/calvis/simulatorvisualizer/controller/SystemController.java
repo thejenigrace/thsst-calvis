@@ -107,7 +107,24 @@ public class SystemController {
         }
     }
 
-    public void play(String code) {
+    public void build(String code){
+        clear();
+        workspaceController.formatCodeArea(code);
+        boolean isSuccessful = parse(code);
+        if ( isSuccessful ) {
+            // parse was okay, enter step mode
+            this.state = SimulationState.PAUSE;
+            push();
+            pushOldEnvironment(0);
+            workspaceController.disableBuildButton(true);
+            workspaceController.disableAllSimulationButtons(false);
+        } else {
+            // parse was bad, stop everything
+            end();
+        }
+    }
+
+    public void play() {
         switch ( this.state ) {
             case PLAY: // System is running, so we pause
                 this.state = SimulationState.PAUSE;
@@ -119,20 +136,20 @@ public class SystemController {
                 workspaceController.changeIconToPause();
                 beginSimulation();
                 break;
-            case STOP: // System is not running, so we start playing
-                clear();
-                workspaceController.formatCodeArea(code);
-                workspaceController.changeIconToPause();
-                boolean isSuccessful = parse(code);
-                if ( isSuccessful ) {
-                    this.state = SimulationState.PLAY;
-                    push();
-                    pushOldEnvironment(0);
-                    beginSimulation();
-                } else {
-                    end();
-                }
-                break;
+//            case STOP: // System is not running, so we start playing
+//                clear();
+//                workspaceController.formatCodeArea(code);
+//                workspaceController.changeIconToPause();
+//                boolean isSuccessful = parse(code);
+//                if ( isSuccessful ) {
+//                    this.state = SimulationState.PLAY;
+//                    push();
+//                    pushOldEnvironment(0);
+//                    beginSimulation();
+//                } else {
+//                    end();
+//                }
+//                break;
         }
     }
 
@@ -140,13 +157,14 @@ public class SystemController {
         this.state = SimulationState.STOP;
         if ( thread != null ) {
             this.console.stopConsole();
-            this.workspaceController.disablePlayNextPrevious(false);
             thread.interrupt();
         }
         Platform.runLater(
                 new Thread() {
                     public void run() {
                         workspaceController.changeIconToPlay();
+                        workspaceController.disableAllSimulationButtons(true);
+                        workspaceController.disableBuildButton(false);
                         workspaceController.disableStepMode(true);
                         workspaceController.disableCodeArea(false);
                     }

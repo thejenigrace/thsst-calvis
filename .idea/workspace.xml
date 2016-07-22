@@ -6,26 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="Merge CALVIS version 1.3.5">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/css/converter.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="924bbbf9-7cce-4025-b42c-aac459f76689" name="Default" comment="instructions can now be labeled as control transfer instructions by having isVerifiable = 3">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/FPU_instructions.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/FPU_instructions.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/GP_MMX_SSE_SSE2_instructions.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/GP_MMX_SSE_SSE2_instructions.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/GP_instructions.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/GP_instructions.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Registers/register_list.csv" afterPath="$PROJECT_DIR$/Registers/register_list.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SaveFile/savelist.txt" afterPath="$PROJECT_DIR$/SaveFile/savelist.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/CalvisFormattedInstruction.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/CalvisFormattedInstruction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/InstructionList.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/InstructionList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/converter.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/converter.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,47 +62,7 @@
     <favorites_list name="thsst-calvis" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="converter.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/converter.fxml">
-          <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.769231">
-              <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConverterController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="116" column="42" selection-start-line="116" selection-start-column="42" selection-end-line="116" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#6808#6809#0" expanded="true" />
-                <element signature="e#6854#6855#0" expanded="true" />
-                <element signature="e#8311#8312#0" expanded="true" />
-                <element signature="e#8349#8350#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Converter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.621806">
-              <caret line="164" column="30" selection-start-line="164" selection-start-column="30" selection-end-line="164" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -533,8 +480,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Ror.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Rcr.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Movd.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Pcmpeq.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Pcmpgt.java" />
@@ -569,7 +514,6 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/sse2/Comisd.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/CalvisAnimation.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/PADD.java" />
         <option value="$PROJECT_DIR$/SaveFile/savelist.txt" />
         <option value="$PROJECT_DIR$/build.gradle" />
@@ -580,10 +524,13 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/converter.css" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/converter.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java" />
       </list>
     </option>
   </component>
@@ -715,58 +662,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thsst-calvis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="engine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -776,7 +671,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.1750663" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.16400278" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../thsst-calvis-dropincc/build/libs/thsst-calvis-dropincc-0.0.1.jar!/" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -1109,13 +1004,7 @@
       <option name="number" value="Default" />
       <updated>1453789344795</updated>
       <workItem from="1469107866648" duration="17737000" />
-      <workItem from="1469155470909" duration="26880000" />
-    </task>
-    <task id="LOCAL-00135" summary="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
-      <created>1468154566358</created>
-      <option name="number" value="00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1468154566358</updated>
+      <workItem from="1469155470909" duration="31296000" />
     </task>
     <task id="LOCAL-00136" summary="Use Finder to get old values for the visualizer of the ff: ADD, ADC, ADCX, ADOX, SUB, SBB, INC, DEC, NEG, MUL, IMUL, DIV, IDIV">
       <created>1468154703189</created>
@@ -1405,7 +1294,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469107604486</updated>
     </task>
-    <option name="localTasksCounter" value="184" />
+    <task id="LOCAL-00184" summary="instructions can now be labeled as control transfer instructions by having isVerifiable = 3">
+      <created>1469183413264</created>
+      <option name="number" value="00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1469183413282</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1420,7 +1315,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44617000" />
+    <option name="totallyTimeSpent" value="49033000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1433,31 +1328,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263158" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30081302" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23289473" sideWeight="0.5178827" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23252033" sideWeight="0.48211733" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35930407" sideWeight="0.49546143" order="8" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23146747" sideWeight="0.49546143" order="8" side_tool="false" content_ui="tabs" x="1832" y="314" width="872" height="725" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3131579" sideWeight="0.49574015" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18078668" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20272315" sideWeight="0.48947367" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18097281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20886981" sideWeight="0.5105263" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39605263" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3223684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1503,7 +1398,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Remove unnecessary methods" />
     <MESSAGE value="Rename properties and methods" />
     <MESSAGE value="Rename properties and methods of classes; Add CALVIS logo" />
     <MESSAGE value="Move class to there proper package" />
@@ -1528,7 +1422,8 @@
     <MESSAGE value="Fix SSE and SSE2 Packed Comparison Instructions" />
     <MESSAGE value="Add build button in the workspace main toolbar" />
     <MESSAGE value="Merge CALVIS version 1.3.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge CALVIS version 1.3.5" />
+    <MESSAGE value="instructions can now be labeled as control transfer instructions by having isVerifiable = 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="instructions can now be labeled as control transfer instructions by having isVerifiable = 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1547,7 +1442,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java</url>
-          <line>489</line>
+          <line>502</line>
           <properties class="thsst.calvis.editor.controller.WorkspaceController" method="disableStepMode" />
           <option name="timeStamp" value="45" />
         </line-breakpoint>
@@ -1561,20 +1456,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Psllq.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14617486">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Sal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22814208">
-          <caret line="32" column="103" selection-start-line="32" selection-start-column="103" selection-end-line="32" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/mmx/Psllw.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22814208">
@@ -1701,13 +1582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.76502734">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43715847">
@@ -1772,13 +1646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39182281">
           <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.529813">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1787,6 +1654,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.008517887">
           <caret line="47" column="80" selection-start-line="47" selection-start-column="80" selection-end-line="47" selection-end-column="80" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1819,14 +1687,14 @@
         <state vertical-scroll-proportion="0.14480409">
           <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
           <folding>
-            <element signature="e#1504#1505#0" expanded="true" />
-            <element signature="e#1538#1539#0" expanded="true" />
-            <element signature="e#1579#1580#0" expanded="true" />
-            <element signature="e#1619#1620#0" expanded="true" />
-            <element signature="e#1664#1665#0" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1746#1747#0" expanded="true" />
-            <element signature="e#1787#1788#0" expanded="true" />
+            <element signature="e#1504#1505#0" expanded="false" />
+            <element signature="e#1538#1539#0" expanded="false" />
+            <element signature="e#1579#1580#0" expanded="false" />
+            <element signature="e#1619#1620#0" expanded="false" />
+            <element signature="e#1664#1665#0" expanded="false" />
+            <element signature="e#1699#1700#0" expanded="false" />
+            <element signature="e#1746#1747#0" expanded="false" />
+            <element signature="e#1787#1788#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1843,17 +1711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.967632">
           <caret line="363" column="0" selection-start-line="363" selection-start-column="0" selection-end-line="363" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.7090907">
-          <caret line="375" column="37" selection-start-line="375" selection-start-column="37" selection-end-line="375" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1906,47 +1763,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40545145">
-          <caret line="430" column="62" selection-start-line="430" selection-start-column="62" selection-end-line="430" selection-end-column="62" />
-          <folding>
-            <element signature="e#5940#5941#0" expanded="true" />
-            <element signature="e#6004#6005#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/RegistersController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.637138">
           <caret line="57" column="64" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/converter.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.769231">
-          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="42" selection-start-line="116" selection-start-column="42" selection-end-line="116" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6808#6809#0" expanded="true" />
-            <element signature="e#6854#6855#0" expanded="true" />
-            <element signature="e#8311#8312#0" expanded="true" />
-            <element signature="e#8349#8350#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1963,6 +1784,89 @@
         <state vertical-scroll-proportion="2.621806">
           <caret line="164" column="30" selection-start-line="164" selection-start-column="30" selection-end-line="164" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/ConverterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74616694">
+          <caret line="116" column="42" selection-start-line="116" selection-start-column="42" selection-end-line="116" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6808#6809#0" expanded="true" />
+            <element signature="e#6854#6855#0" expanded="true" />
+            <element signature="e#8311#8312#0" expanded="true" />
+            <element signature="e#8349#8350#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/converter.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.769231">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/SimulationState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1737649">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/workspace.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2644135">
+          <caret line="370" column="33" selection-start-line="370" selection-start-column="33" selection-end-line="370" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7666099">
+          <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.015332198">
+          <caret line="331" column="33" selection-start-line="331" selection-start-column="33" selection-end-line="331" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/controller/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5775127">
+          <caret line="158" column="39" selection-start-line="158" selection-start-column="39" selection-end-line="158" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.274276">
+          <caret line="488" column="30" selection-start-line="488" selection-start-column="30" selection-end-line="488" selection-end-column="30" />
+          <folding>
+            <element signature="e#16109#16110#0" expanded="true" />
+            <element signature="e#16155#16156#0" expanded="true" />
+            <element signature="e#17713#17714#0" expanded="true" />
+            <element signature="e#17747#17748#0" expanded="true" />
+            <element signature="e#17813#17814#0" expanded="true" />
+            <element signature="e#17880#17881#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
