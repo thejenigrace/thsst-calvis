@@ -31,9 +31,15 @@ execute(registers, memory) {
 	
 	
 //	String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-	registers.set("ST1", resultVal + "");
+	boolean isException = c.generateFPUExceptions(registers, resultVal);
+	boolean isZero = Double.parseDouble(registers.get("ST0")) == 0;
+
+	if(!isException && !isZero){
+
+		registers.set("ST1", resultVal + "");
+	}
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 	registers.x87().status().set("C2",'0');
-		registers.x87().pop();
+	registers.x87().pop();
 }

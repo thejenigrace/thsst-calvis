@@ -4,7 +4,6 @@ execute(registers, memory) {
     // st0 = gets exponent
     // significand is pushed
 	Calculator c = new Calculator(registers, memory);
-//	String value = "C05EDCCCCCCCCCCD";
 	double origValue = Double.parseDouble(registers.get("ST0"));
 	//System.out.println(origValue);
 	String hexValNow = c.convertDoublePrecisionToHexString(Double.parseDouble(registers.get("ST0")));
@@ -23,8 +22,15 @@ execute(registers, memory) {
 	double manResult = floatToBinaryString(mantissa, origValue);
 	String hexResExp = c.convertDoublePrecisionToHexString(deciExp);
 	String hexResMan = c.convertDoublePrecisionToHexString(manResult);
-	registers.set("ST1", deciExp + "");
-	registers.set("ST0", manResult + "" );
+	if(Double.parseDouble(registers.get("ST0")) != 0){
+		registers.x87().push(manResult + "");
+		registers.set("ST1",deciExp + "");
+
+//		registers.set("ST0",manResult + "");
+	}
+	else{
+		registers.getMxscr().setDivideByZeroFlag("1");
+	}
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 }

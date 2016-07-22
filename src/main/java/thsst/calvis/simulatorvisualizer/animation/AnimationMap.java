@@ -9,6 +9,7 @@ import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpps;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Cmpss;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.Comiss;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
+import thsst.calvis.simulatorvisualizer.animation.instruction.x87.Fadd;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateMMX();
         this.generateSSE();
         this.generateSSE2();
+        this.generateFPU();
     }
 
     private void generateGP() {
@@ -33,6 +35,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateGPRotate();
         this.generateGPStack();
         this.generateGPJump();
+    }
+
+    private void generateFPU(){
+        this.generateFPUArith();
     }
 
     private void generateMMX() {
@@ -54,6 +60,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generateSSE2Logical();
     }
 
+    private void generateFPUArith(){
+        this.put("FADD", new Fadd());
+    }
     private void generateGPDataTransfer() {
         this.put("MOV", new Mov());
         this.put("LEA", new Lea());

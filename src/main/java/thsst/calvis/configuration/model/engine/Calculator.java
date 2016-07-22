@@ -849,6 +849,32 @@ public class Calculator {
 
         return Long.parseLong(text, 16);
     }
+
+    public boolean generateFPUExceptions(RegisterList registers, double resultingValue){
+        boolean isException = false;
+
+//        registers.getMxscr().setFlushToZero();
+        boolean isSpecialConditions =  !Double.isNaN(resultingValue) && !Double.isInfinite(resultingValue);
+        System.out.println(resultingValue  + " wutthefuck");
+        if(resultingValue > Math.pow(2,64) && isSpecialConditions){
+            registers.getMxscr().setOverflowFlag("1");
+            isException = true;
+
+        }
+        if(resultingValue < Math.pow(2, 64) * -1 && isSpecialConditions){
+            registers.getMxscr().setUnderflowFlag("1");
+            isException = true;
+        }
+        return isException;
+    }
+
+    public boolean isInfinite(double value){
+        return Double.isInfinite(value);
+    }
+
+    public boolean isNan(double value){
+        return Double.isNaN(value);
+    }
 }
 
 

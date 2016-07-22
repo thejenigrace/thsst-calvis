@@ -6,19 +6,27 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-        spValue = Integer.parseInt(value, 16) + 0.0;
-
+		System.out.println("wowwww " + value);
+        spValue = Long.parseLong(value, 16) + 0.0;
+		System.out.println("wowwww");
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue =  spValue / stValue;
+		boolean isException = false;
 		if(resultingValue > Math.pow(2,64)){
 			registers.mxscr.setOverflowFlag("1");
+			isException = true;
 		}
-		else if(resultingValue < Math.pow(2, 64) * -1){
+		if(resultingValue < Math.pow(2, 64) * -1){
 			registers.mxscr.setUnderflowFlag("1");
+			isException = true;
 		}
-		else{
-			//System.out.println(resultingValue + " value");
+		if(stValue == 0){
+			registers.mxscr.setDivideByZeroFlag("1");
+			isException = true;
+		}
+		if(!isException){
+			System.out.println(resultingValue + " value");
 			registers.set("ST0", "" + resultingValue);
 		}
         
@@ -35,6 +43,8 @@ execute(des, src, registers, memory) {
             String desValue = registers.get(des);
             String srcValue = registers.get(src);
 			//String result = desValue;
+		System.out.println(desValue + " des wut");
+		System.out.println(srcValue + " src wut");
             if(des.getValue().equals("ST0")){
 				
 			}
@@ -49,14 +59,13 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc / dbDes;
-			
-			if(resultingValue > Math.pow(2,64)){
-				registers.mxscr.setOverflowFlag("1");
+			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			System.out.println(resultingValue + " wut");
+			if(dbDes == 0){
+				registers.mxscr.setDivideByZeroFlag("1");
+				isException = true;
 			}
-			else if(resultingValue < Math.pow(2, 64) * -1){
-				registers.mxscr.setUnderflowFlag("1");
-			}
-			else{
+			if(!isException){
 				//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), "" + (resultingValue));
 			}

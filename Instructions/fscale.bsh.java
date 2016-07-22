@@ -8,7 +8,10 @@ execute(registers, memory) {
 	double mantissa = Double.parseDouble(st0);
 	double resultPow = Math.pow(2, exponent.intValue());
 	double resultingAnswer = resultPow * mantissa;
-    registers.set("ST0", resultingAnswer + "");
+	boolean isException = c.generateFPUExceptions(registers, resultingAnswer);
+	if(!isException){
+		registers.set("ST0", resultingAnswer + "");
+	}
 	registers.x87().status().set("C3",'0');
 	registers.x87().status().set("C0",'0');
 }

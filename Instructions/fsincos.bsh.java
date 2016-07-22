@@ -9,8 +9,13 @@ execute(registers, memory) {
 	double resultCosVal = Math.cos(regVal);
 	double resultSinVal = Math.sin(regVal);
 	
-	if(regVal > Math.pow(2,64) || regVal < Math.pow(2, 64) * -1){
+	if( (resultCosVal > Math.pow(2,64) || resultCosVal < Math.pow(2, 64) * -1) ||
+		(resultSinVal > Math.pow(2,64) || resultSinVal < Math.pow(2, 64) * -1)){
 		registers.x87().status().set("C2",'1');
+		if(resultCosVal < Math.pow(2, 64) * -1 ||
+		   resultSinVal < Math.pow(2, 64) * -1){
+			registers.getMxscr().setUnderflowFlag("1");
+		}
 	}
 	else{
 		registers.x87().status().set("C2",'0');
