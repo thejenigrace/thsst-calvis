@@ -37,7 +37,7 @@
                                                             shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
-                                        <FontAwesomeIconView glyphName="FILE_ALT" style="-fx-text-fill: white;"/>
+                                        <FontAwesomeIconView glyphName="FILE_ALT"/>
                                     </graphic>
                                 </MenuItem>
                                 <MenuItem accelerator="Shortcut + O" mnemonicParsing="true" onAction="#handleOpenFile"
@@ -50,7 +50,8 @@
                                         <FontAwesomeIconView glyphName="FOLDER_OPEN_ALT"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem fx:id="menuItemSave" accelerator="Shortcut + S" mnemonicParsing="true" onAction="#handleSaveFile"
+                                <MenuItem fx:id="menuItemSave" accelerator="Shortcut + S" mnemonicParsing="true"
+                                          onAction="#handleSaveFile"
                                           text="Save">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP"
@@ -113,10 +114,12 @@
                                 </MenuItem>
                             </items>
                         </Menu>
+
                         <!--EDIT MENU-->
                         <Menu mnemonicParsing="false" text="Edit">
                             <items>
-                                <MenuItem fx:id="menuItemUndo" accelerator="Shortcut + Z" mnemonicParsing="false" onAction="#handleUndo"
+                                <MenuItem fx:id="menuItemUndo" accelerator="Shortcut + Z" mnemonicParsing="false"
+                                          onAction="#handleUndo"
                                           text="Undo">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP"
@@ -126,7 +129,8 @@
                                         <FontAwesomeIconView glyphName="UNDO"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem fx:id="menuItemRedo" accelerator="Shortcut + Y" mnemonicParsing="false" onAction="#handleRedo"
+                                <MenuItem fx:id="menuItemRedo" accelerator="Shortcut + Y" mnemonicParsing="false"
+                                          onAction="#handleRedo"
                                           text="Redo">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP"
@@ -177,6 +181,7 @@
                                 </MenuItem>
                             </items>
                         </Menu>
+
                         <!--NAVIGATE MENU-->
                         <Menu mnemonicParsing="false" text="Navigate">
                             <MenuItem accelerator="Shift + Shortcut + C" mnemonicParsing="false"
@@ -185,6 +190,9 @@
                                     <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
                                 </accelerator>
+                                <graphic>
+                                    <FontAwesomeIconView glyphName="TERMINAL"/>
+                                </graphic>
                             </MenuItem>
                             <MenuItem accelerator="Shift + Shortcut + E" mnemonicParsing="false"
                                       onAction="#handleErrorLogger" text="Error Logger">
@@ -192,6 +200,9 @@
                                     <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
                                 </accelerator>
+                                <graphic>
+                                    <FontAwesomeIconView glyphName="BUG"/>
+                                </graphic>
                             </MenuItem>
                             <MenuItem accelerator="Shift + Shortcut + V" mnemonicParsing="false"
                                       onAction="#handleVisualizer" text="Visualizer">
@@ -199,12 +210,17 @@
                                     <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="DOWN"
                                                         shortcut="DOWN"/>
                                 </accelerator>
+                                <graphic>
+                                    <FontAwesomeIconView glyphName="EYE"/>
+                                </graphic>
                             </MenuItem>
                         </Menu>
+
                         <!--EXECUTE MENU-->
                         <Menu mnemonicParsing="false" text="Execute">
                             <items>
-                                <MenuItem fx:id="menuItemBuild" accelerator="Shortcut + B" mnemonicParsing="false" onAction="#handleBuild"
+                                <MenuItem fx:id="menuItemBuild" accelerator="Shortcut + B" mnemonicParsing="false"
+                                          onAction="#handleBuild"
                                           text="Build">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP"
@@ -277,7 +293,11 @@
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <!--<MenuItem mnemonicParsing="false" text="Documentation"/>-->
-                                <MenuItem mnemonicParsing="false" onAction="#handleHelpAbout" text="About"/>
+                                <MenuItem mnemonicParsing="false" onAction="#handleHelpAbout" text="About">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="QUESTION"/>
+                                    </graphic>
+                                </MenuItem>
                             </items>
                         </Menu>
                     </menus>
