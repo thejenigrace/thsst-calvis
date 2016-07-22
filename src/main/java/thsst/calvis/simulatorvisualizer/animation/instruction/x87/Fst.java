@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Fldl2t extends CalvisAnimation {
+public class Fst extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -63,17 +63,17 @@ public class Fldl2t extends CalvisAnimation {
         st8.setX(X);
         st8.setY(Y + 330);
 
-        Text label = new Text("Push log2 10 onto the FPU register stack.");
+        Text label = new Text("Copy the value in the ST(0) register to " + tokens[0].getValue());
         label.setX(X);
         label.setY(Y);
 
         Text labelFlags = new Text("Affected flags:\n" +
-                "C1 = 1, if stack overflow, else 0\n" +
+                "C1 = 0, if stack underflow\n" +
                 "C0, C2, C3 = undefined");
         labelFlags.setX(X);
         labelFlags.setY(Y + 380);
 
-        Text label0 = new Text("Value pushed: ");
+        Text label0 = new Text("Value of ST0: " );
         Text label1 = new Text("ST0");
         Text label2 = new Text("ST1");
         Text label3 = new Text("ST2");
@@ -105,27 +105,27 @@ public class Fldl2t extends CalvisAnimation {
         this.root.getChildren().addAll(st0, st1, st2, st3, st4, st5, st6, st7, st8,
                 label, label0, label1, label2, label3, label4, label5, label6, label7, label8, labelFlags);
 
-        Text textBit0a = new Text(X, Y + 10, "" + registers.get("ST0"));
-        Text textBit0 = new Text(X, Y + 20, "" + registers.get("ST0"));
-        Text textBit1 = new Text(X, Y + 60, "" + registers.get("ST1"));
-        Text textBit2 = new Text(X, Y + 100, "" + registers.get("ST2"));
-        Text textBit3 = new Text(X, Y + 140, "" + registers.get("ST3"));
-        Text textBit4 = new Text(X, Y + 180, "" + registers.get("ST4"));
-        Text textBit5 = new Text(X, Y + 220, "" + registers.get("ST5"));
-        Text textBit6 = new Text(X, Y + 260, "" + registers.get("ST6"));
-        Text textBit7 = new Text(X, Y + 290, "" + registers.get("ST7"));
+        Text textBit0a = new Text(X, Y + 60, "" + registers.get("ST0"));
+        Text textBit0 = new Text(X, Y + 60, "" + registers.get("ST0"));
+        Text textBit1 = new Text(X, Y + 100, "" + registers.get("ST1"));
+        Text textBit2 = new Text(X, Y + 140, "" + registers.get("ST2"));
+        Text textBit3 = new Text(X, Y + 180, "" + registers.get("ST3"));
+        Text textBit4 = new Text(X, Y + 220, "" + registers.get("ST4"));
+        Text textBit5 = new Text(X, Y + 260, "" + registers.get("ST5"));
+        Text textBit6 = new Text(X, Y + 300, "" + registers.get("ST6"));
+        Text textBit7 = new Text(X, Y + 340, "" + registers.get("ST7"));
 
         this.root.getChildren().addAll(textBit0, textBit1, textBit2, textBit3, textBit4, textBit5, textBit6, textBit7, textBit0a);
 
-        TranslateTransition bit8Transition = new TranslateTransition();
-        TranslateTransition bit7Transition = new TranslateTransition(new Duration(1000), textBit7);
-        TranslateTransition bit6Transition = new TranslateTransition(new Duration(1000), textBit6);
-        TranslateTransition bit5Transition = new TranslateTransition(new Duration(1000), textBit5);
-        TranslateTransition bit4Transition = new TranslateTransition(new Duration(1000), textBit4);
-        TranslateTransition bit3Transition = new TranslateTransition(new Duration(1000), textBit3);
-        TranslateTransition bit2Transition = new TranslateTransition(new Duration(1000), textBit2);
-        TranslateTransition bit1Transition = new TranslateTransition(new Duration(1000), textBit1);
-        TranslateTransition bit0Transition = new TranslateTransition(new Duration(1000), textBit0);
+        TranslateTransition bit8Transition = new TranslateTransition(new Duration(1000), textBit0a);
+        TranslateTransition bit7Transition = new TranslateTransition();
+        TranslateTransition bit6Transition = new TranslateTransition();
+        TranslateTransition bit5Transition = new TranslateTransition();
+        TranslateTransition bit4Transition = new TranslateTransition();
+        TranslateTransition bit3Transition = new TranslateTransition();
+        TranslateTransition bit2Transition = new TranslateTransition();
+        TranslateTransition bit1Transition = new TranslateTransition();
+        TranslateTransition bit0Transition = new TranslateTransition();
 
         bit8Transition.setNode(textBit0a);
         bit8Transition.fromXProperty().bind(st0.translateXProperty()
@@ -134,87 +134,80 @@ public class Fldl2t extends CalvisAnimation {
         bit8Transition.fromYProperty().bind(st0.translateYProperty()
                 .add(st0.getLayoutBounds().getHeight() / 3));
         bit8Transition.toXProperty().bind(bit8Transition.fromXProperty());
-        bit8Transition.toYProperty().bind(bit8Transition.fromYProperty());
+        bit8Transition.toYProperty().bind(bit8Transition.fromYProperty()
+                                    .add(-50));
 
-        bit7Transition.setInterpolator(Interpolator.LINEAR);
+        bit7Transition.setNode(textBit7);
         bit7Transition.fromXProperty().bind(st7.translateXProperty()
                 .add(st7.getLayoutBounds().getWidth() - 300)
                 .add((st7.getLayoutBounds().getWidth() - textBit7.getLayoutBounds().getWidth()) / 2));
         bit7Transition.fromYProperty().bind(st7.translateYProperty()
                 .add(st7.getLayoutBounds().getHeight() / 3));
         bit7Transition.toXProperty().bind(bit7Transition.fromXProperty());
-        bit7Transition.toYProperty().bind(bit7Transition.fromYProperty()
-                .add(50));
+        bit7Transition.toYProperty().bind(bit7Transition.fromYProperty());
 
-        bit6Transition.setInterpolator(Interpolator.LINEAR);
+        bit6Transition.setNode(textBit6);
         bit6Transition.fromXProperty().bind(st6.translateXProperty()
                 .add(st6.getLayoutBounds().getWidth() - 300)
                 .add((st6.getLayoutBounds().getWidth() - textBit6.getLayoutBounds().getWidth()) / 2));
         bit6Transition.fromYProperty().bind(st6.translateYProperty()
                 .add(st6.getLayoutBounds().getHeight() / 3));
         bit6Transition.toXProperty().bind(bit6Transition.fromXProperty());
-        bit6Transition.toYProperty().bind(bit6Transition.fromYProperty()
-                .add(40));
+        bit6Transition.toYProperty().bind(bit6Transition.fromYProperty());
 
-        bit5Transition.setInterpolator(Interpolator.LINEAR);
+        bit5Transition.setNode(textBit5);
         bit5Transition.fromXProperty().bind(st5.translateXProperty()
                 .add(st5.getLayoutBounds().getWidth() - 300)
                 .add((st5.getLayoutBounds().getWidth() - textBit5.getLayoutBounds().getWidth()) / 2));
         bit5Transition.fromYProperty().bind(st5.translateYProperty()
                 .add(st5.getLayoutBounds().getHeight() / 3));
         bit5Transition.toXProperty().bind(bit5Transition.fromXProperty());
-        bit5Transition.toYProperty().bind(bit5Transition.fromYProperty()
-                .add(40));
+        bit5Transition.toYProperty().bind(bit5Transition.fromYProperty());
 
-        bit4Transition.setInterpolator(Interpolator.LINEAR);
+        bit4Transition.setNode(textBit4);
         bit4Transition.fromXProperty().bind(st4.translateXProperty()
                 .add(st4.getLayoutBounds().getWidth() - 300)
                 .add((st4.getLayoutBounds().getWidth() - textBit4.getLayoutBounds().getWidth()) / 2));
         bit4Transition.fromYProperty().bind(st4.translateYProperty()
                 .add(st4.getLayoutBounds().getHeight() / 3));
         bit4Transition.toXProperty().bind(bit4Transition.fromXProperty());
-        bit4Transition.toYProperty().bind(bit4Transition.fromYProperty()
-                .add(40));
+        bit4Transition.toYProperty().bind(bit4Transition.fromYProperty());
 
-        bit3Transition.setInterpolator(Interpolator.LINEAR);
+        bit3Transition.setNode(textBit3);
         bit3Transition.fromXProperty().bind(st3.translateXProperty()
                 .add(st3.getLayoutBounds().getWidth() - 300)
                 .add((st3.getLayoutBounds().getWidth() - textBit3.getLayoutBounds().getWidth()) / 2));
         bit3Transition.fromYProperty().bind(st3.translateYProperty()
                 .add(st3.getLayoutBounds().getHeight() / 3));
         bit3Transition.toXProperty().bind(bit3Transition.fromXProperty());
-        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty()
-                .add(40));
+        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty());
 
-        bit2Transition.setInterpolator(Interpolator.LINEAR);
+        bit2Transition.setNode(textBit2);
         bit2Transition.fromXProperty().bind(st2.translateXProperty()
                 .add(st2.getLayoutBounds().getWidth() - 300)
                 .add((st2.getLayoutBounds().getWidth() - textBit2.getLayoutBounds().getWidth()) / 2));
         bit2Transition.fromYProperty().bind(st2.translateYProperty()
                 .add(st2.getLayoutBounds().getHeight() / 3));
         bit2Transition.toXProperty().bind(bit2Transition.fromXProperty());
-        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty()
-                .add(40));
+        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty());
 
-        bit1Transition.setInterpolator(Interpolator.LINEAR);
+        bit1Transition.setNode(textBit1);
         bit1Transition.fromXProperty().bind(st1.translateXProperty()
                 .add(st1.getLayoutBounds().getWidth() - 300)
                 .add((st1.getLayoutBounds().getWidth() - textBit1.getLayoutBounds().getWidth()) / 2));
         bit1Transition.fromYProperty().bind(st1.translateYProperty()
                 .add(st1.getLayoutBounds().getHeight() / 3));
         bit1Transition.toXProperty().bind(bit1Transition.fromXProperty());
-        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty()
-                .add(40));
+        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty());
 
-        bit0Transition.setInterpolator(Interpolator.LINEAR);
+        bit0Transition.setNode(textBit0);
         bit0Transition.fromXProperty().bind(st0.translateXProperty()
                 .add(st0.getLayoutBounds().getWidth() - 300)
                 .add((st0.getLayoutBounds().getWidth() - textBit0.getLayoutBounds().getWidth()) / 2));
         bit0Transition.fromYProperty().bind(st0.translateYProperty()
                 .add(st0.getLayoutBounds().getHeight() / 3));
         bit0Transition.toXProperty().bind(bit0Transition.fromXProperty());
-        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty()
-                .add(40));
+        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty());
 
         bit8Transition.play();
         bit7Transition.play();

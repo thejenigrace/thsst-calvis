@@ -15,7 +15,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Marielle Ong on 8 Jul 2016.
  */
-public class Fldl2t extends CalvisAnimation {
+public class Fcos extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane tab) {
@@ -63,17 +63,18 @@ public class Fldl2t extends CalvisAnimation {
         st8.setX(X);
         st8.setY(Y + 330);
 
-        Text label = new Text("Push log2 10 onto the FPU register stack.");
+        Text label = new Text("Compute an approximation of the cosine of ST(0) and store the result in ST(0).");
         label.setX(X);
         label.setY(Y);
 
         Text labelFlags = new Text("Affected flags:\n" +
-                "C1 = 1, if stack overflow, else 0\n" +
-                "C0, C2, C3 = undefined");
+                "C1 = 0, if stack underflow; 1, if result was rounded up, else 0; underfined, if C2 is 1\n" +
+                "C2 = 1, if outside range(−2^63 < source operand < +2^63), else 0\n" +
+                "C0, C3 = undefined");
         labelFlags.setX(X);
         labelFlags.setY(Y + 380);
 
-        Text label0 = new Text("Value pushed: ");
+        Text label0 = new Text("FCOS(ST0): ");
         Text label1 = new Text("ST0");
         Text label2 = new Text("ST1");
         Text label3 = new Text("ST2");
@@ -107,13 +108,13 @@ public class Fldl2t extends CalvisAnimation {
 
         Text textBit0a = new Text(X, Y + 10, "" + registers.get("ST0"));
         Text textBit0 = new Text(X, Y + 20, "" + registers.get("ST0"));
-        Text textBit1 = new Text(X, Y + 60, "" + registers.get("ST1"));
-        Text textBit2 = new Text(X, Y + 100, "" + registers.get("ST2"));
-        Text textBit3 = new Text(X, Y + 140, "" + registers.get("ST3"));
-        Text textBit4 = new Text(X, Y + 180, "" + registers.get("ST4"));
-        Text textBit5 = new Text(X, Y + 220, "" + registers.get("ST5"));
-        Text textBit6 = new Text(X, Y + 260, "" + registers.get("ST6"));
-        Text textBit7 = new Text(X, Y + 290, "" + registers.get("ST7"));
+        Text textBit1 = new Text(X, Y + 100, "" + registers.get("ST1"));
+        Text textBit2 = new Text(X, Y + 140, "" + registers.get("ST2"));
+        Text textBit3 = new Text(X, Y + 180, "" + registers.get("ST3"));
+        Text textBit4 = new Text(X, Y + 220, "" + registers.get("ST4"));
+        Text textBit5 = new Text(X, Y + 260, "" + registers.get("ST5"));
+        Text textBit6 = new Text(X, Y + 300, "" + registers.get("ST6"));
+        Text textBit7 = new Text(X, Y + 340, "" + registers.get("ST7"));
 
         this.root.getChildren().addAll(textBit0, textBit1, textBit2, textBit3, textBit4, textBit5, textBit6, textBit7, textBit0a);
 
@@ -143,8 +144,7 @@ public class Fldl2t extends CalvisAnimation {
         bit7Transition.fromYProperty().bind(st7.translateYProperty()
                 .add(st7.getLayoutBounds().getHeight() / 3));
         bit7Transition.toXProperty().bind(bit7Transition.fromXProperty());
-        bit7Transition.toYProperty().bind(bit7Transition.fromYProperty()
-                .add(50));
+        bit7Transition.toYProperty().bind(bit7Transition.fromYProperty());
 
         bit6Transition.setInterpolator(Interpolator.LINEAR);
         bit6Transition.fromXProperty().bind(st6.translateXProperty()
@@ -153,8 +153,7 @@ public class Fldl2t extends CalvisAnimation {
         bit6Transition.fromYProperty().bind(st6.translateYProperty()
                 .add(st6.getLayoutBounds().getHeight() / 3));
         bit6Transition.toXProperty().bind(bit6Transition.fromXProperty());
-        bit6Transition.toYProperty().bind(bit6Transition.fromYProperty()
-                .add(40));
+        bit6Transition.toYProperty().bind(bit6Transition.fromYProperty());
 
         bit5Transition.setInterpolator(Interpolator.LINEAR);
         bit5Transition.fromXProperty().bind(st5.translateXProperty()
@@ -163,8 +162,7 @@ public class Fldl2t extends CalvisAnimation {
         bit5Transition.fromYProperty().bind(st5.translateYProperty()
                 .add(st5.getLayoutBounds().getHeight() / 3));
         bit5Transition.toXProperty().bind(bit5Transition.fromXProperty());
-        bit5Transition.toYProperty().bind(bit5Transition.fromYProperty()
-                .add(40));
+        bit5Transition.toYProperty().bind(bit5Transition.fromYProperty());
 
         bit4Transition.setInterpolator(Interpolator.LINEAR);
         bit4Transition.fromXProperty().bind(st4.translateXProperty()
@@ -173,8 +171,7 @@ public class Fldl2t extends CalvisAnimation {
         bit4Transition.fromYProperty().bind(st4.translateYProperty()
                 .add(st4.getLayoutBounds().getHeight() / 3));
         bit4Transition.toXProperty().bind(bit4Transition.fromXProperty());
-        bit4Transition.toYProperty().bind(bit4Transition.fromYProperty()
-                .add(40));
+        bit4Transition.toYProperty().bind(bit4Transition.fromYProperty());
 
         bit3Transition.setInterpolator(Interpolator.LINEAR);
         bit3Transition.fromXProperty().bind(st3.translateXProperty()
@@ -183,8 +180,7 @@ public class Fldl2t extends CalvisAnimation {
         bit3Transition.fromYProperty().bind(st3.translateYProperty()
                 .add(st3.getLayoutBounds().getHeight() / 3));
         bit3Transition.toXProperty().bind(bit3Transition.fromXProperty());
-        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty()
-                .add(40));
+        bit3Transition.toYProperty().bind(bit3Transition.fromYProperty());
 
         bit2Transition.setInterpolator(Interpolator.LINEAR);
         bit2Transition.fromXProperty().bind(st2.translateXProperty()
@@ -193,8 +189,7 @@ public class Fldl2t extends CalvisAnimation {
         bit2Transition.fromYProperty().bind(st2.translateYProperty()
                 .add(st2.getLayoutBounds().getHeight() / 3));
         bit2Transition.toXProperty().bind(bit2Transition.fromXProperty());
-        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty()
-                .add(40));
+        bit2Transition.toYProperty().bind(bit2Transition.fromYProperty());
 
         bit1Transition.setInterpolator(Interpolator.LINEAR);
         bit1Transition.fromXProperty().bind(st1.translateXProperty()
@@ -203,8 +198,7 @@ public class Fldl2t extends CalvisAnimation {
         bit1Transition.fromYProperty().bind(st1.translateYProperty()
                 .add(st1.getLayoutBounds().getHeight() / 3));
         bit1Transition.toXProperty().bind(bit1Transition.fromXProperty());
-        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty()
-                .add(40));
+        bit1Transition.toYProperty().bind(bit1Transition.fromYProperty());
 
         bit0Transition.setInterpolator(Interpolator.LINEAR);
         bit0Transition.fromXProperty().bind(st0.translateXProperty()
@@ -213,8 +207,7 @@ public class Fldl2t extends CalvisAnimation {
         bit0Transition.fromYProperty().bind(st0.translateYProperty()
                 .add(st0.getLayoutBounds().getHeight() / 3));
         bit0Transition.toXProperty().bind(bit0Transition.fromXProperty());
-        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty()
-                .add(40));
+        bit0Transition.toYProperty().bind(bit0Transition.fromYProperty().add(40));
 
         bit8Transition.play();
         bit7Transition.play();
