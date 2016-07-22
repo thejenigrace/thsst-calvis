@@ -89,21 +89,25 @@ public class SystemController {
     public void pauseFromConsole() {
         this.consoleState = this.state;
         this.state = SimulationState.PAUSE;
-        this.workspaceController.disablePlayNextPrevious(true);
-        thread.interrupt();
+        Platform.runLater(() -> workspaceController.disablePlayNextPrevious(true));
+        if ( thread != null ) {
+            thread.interrupt();
+        }
     }
 
     public void resumeFromConsole() {
         this.state = this.consoleState;
-        this.workspaceController.disablePlayNextPrevious(false);
+        Platform.runLater(() -> workspaceController.disablePlayNextPrevious(false));
         beginSimulation();
     }
 
     public void pause() {
         if ( this.state == SimulationState.PLAY ) {
             this.state = SimulationState.PAUSE;
-            workspaceController.changeIconToPlay();
-            thread.interrupt();
+            Platform.runLater(() -> workspaceController.changeIconToPlay());
+            if ( thread != null ) {
+                thread.interrupt();
+            }
         }
     }
 
@@ -116,8 +120,16 @@ public class SystemController {
             this.state = SimulationState.PAUSE;
             push();
             pushOldEnvironment(0);
-            workspaceController.disableBuildButton(true);
-            workspaceController.disableAllSimulationButtons(false);
+            Platform.runLater(
+                    new Thread() {
+                        public void run() {
+                            workspaceController.disableBuildButton(true);
+                            workspaceController.disableAllSimulationButtons(false);
+                            workspaceController.disableCodeArea(true);
+                        }
+                    }
+            );
+
         } else {
             // parse was bad, stop everything
             end();
@@ -129,7 +141,9 @@ public class SystemController {
             case PLAY: // System is running, so we pause
                 this.state = SimulationState.PAUSE;
                 workspaceController.changeIconToPlay();
-                thread.interrupt();
+                if ( thread != null ) {
+                    thread.interrupt();
+                }
                 break;
             case PAUSE: // System is paused, so we resume
                 this.state = SimulationState.PLAY;
@@ -272,7 +286,7 @@ public class SystemController {
     }
 
     private void beginSimulation() {
-        workspaceController.disableCodeArea(true);
+//        workspaceController.disableCodeArea(true);
         thread = new Thread() {
             public void run() {
                 while ( (state == SimulationState.PLAY)
