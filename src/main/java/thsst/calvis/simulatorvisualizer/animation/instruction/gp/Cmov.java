@@ -50,7 +50,7 @@ public class Cmov extends CalvisAnimation {
 
             int desSize = registers.getBitSize(tokens[1]);
 
-            String flagsAffected = getConditionReminder(tokens[0].getValue(), registers);
+            String flagsAffected = getConditionReminder(tokens[0].getValue());
             Text detailsText = new Text(X, Y * 2, flagsAffected);
             Text desLabelText = this.createLabelText(X, Y, tokens[1]);
             Text desValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
@@ -122,16 +122,8 @@ public class Cmov extends CalvisAnimation {
         }
     }
 
-    public String getConditionReminder(String condition, RegisterList registers) {
-        String con = condition.toUpperCase();
-        EFlags flags = registers.getEFlags();
-        String CF = flags.getCarryFlag();
-        String ZF = flags.getZeroFlag();
-        String OF = flags.getOverflowFlag();
-        String PF = flags.getParityFlag();
-        String SF = flags.getSignFlag();
-
-        switch ( con ) {
+    public String getConditionReminder(String condition) {
+        switch ( condition.toUpperCase() ) {
             case "A":
             case "NBE": // fall through
                 return "Check if: CF = 0 or ZF = 0";
