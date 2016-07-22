@@ -68,7 +68,7 @@ public class Fistp extends CalvisAnimation {
         label.setY(Y);
 
         Text labelFlags = new Text("Affected flags:\n" +
-                "C1 = 0, if stack underflow, else 1\n" +
+                "C1 = 0, if stack underflow\n" +
                 "C0, C2, C3 = undefined");
         labelFlags.setX(X);
         labelFlags.setY(Y + 380);
