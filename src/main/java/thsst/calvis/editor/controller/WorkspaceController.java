@@ -12,7 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -471,14 +472,14 @@ public class WorkspaceController implements Initializable {
 
     @FXML
     private void handleHelpAbout() {
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
+        alert.setGraphic(new ImageView(new Image("/img/calvis_logo_98x98.png")));
         alert.setHeaderText("De La Salle University: CALVIS x86-32");
         alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, & Marielle Ong\n All rights reserved.");
 
         alert.showAndWait();
     }
-
 
     /**
      * MARK -- Helper Methods --

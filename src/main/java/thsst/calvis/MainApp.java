@@ -109,7 +109,7 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file
             loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/fxml/configuratio_environment.fxml"));
+            loader.setLocation(MainApp.class.getResource("/fxml/configuration_environment.fxml"));
             root = (BorderPane) loader.load();
 
             // Give the controller access to the main app
