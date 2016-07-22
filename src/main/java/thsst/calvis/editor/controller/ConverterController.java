@@ -8,11 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import thsst.calvis.configuration.model.engine.Converter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 /**
  * Created by Jennica on 19/07/2016.
  */
@@ -41,9 +41,6 @@ public class ConverterController implements Initializable {
     @FXML
     private Button btnClear;
 
-    private WorkspaceController workspaceController;
-    private Stage dialogStage;
-
     private String[] sizes = {"WORD", "DWORD", "QWORD"};
     private int[] bitSizes = {4, 8, 16};
     private int currentSizeMode = 0;
@@ -65,7 +62,7 @@ public class ConverterController implements Initializable {
                     if ( newValue.matches("[0-9a-fA-F]{0," + bitSizes[currentSizeMode] + "}") ) {
                         StringBuilder str = new StringBuilder(newValue.toUpperCase());
                         int idx = str.length() - 4;
-                        while (idx > 0) {
+                        while ( idx > 0 ) {
                             str.insert(idx, " ");
                             idx -= 4;
                         }
@@ -98,7 +95,7 @@ public class ConverterController implements Initializable {
                     newValue = newValue.replaceAll("\\s", "");
                     StringBuilder str = new StringBuilder(newValue);
                     int idx = str.length() - 4;
-                    while (idx > 0) {
+                    while ( idx > 0 ) {
                         str.insert(idx, " ");
                         idx -= 4;
                     }
@@ -113,7 +110,7 @@ public class ConverterController implements Initializable {
                     newValue = newValue.replaceAll("\\s", "");
                     StringBuilder str = new StringBuilder(newValue);
                     int idx = str.length() - 3;
-                    while (idx > 0) {
+                    while ( idx > 0 ) {
                         str.insert(idx, " ");
                         idx -= 3;
                     }
@@ -152,7 +149,7 @@ public class ConverterController implements Initializable {
                     break;
                 case QWORD:
                     String binaryString = converter.toBinaryString();
-                    if ( binaryString.length() <= 32 ){
+                    if ( binaryString.length() <= 32 ) {
                         textFieldBinaryUpper.setText(binaryString);
                         textFieldBinaryLower.setText("0");
                     } else {
@@ -171,17 +168,8 @@ public class ConverterController implements Initializable {
         }
     }
 
-
-    public void setWorkspaceController(WorkspaceController workspaceController) {
-        this.workspaceController = workspaceController;
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
     @FXML
-    public void changeSize(ActionEvent event){
+    public void changeSize(ActionEvent event) {
         currentSizeMode = (currentSizeMode + 1) % sizes.length;
         sizeMode.set(sizes[currentSizeMode]);
         String currentText = textFieldInput.getText();

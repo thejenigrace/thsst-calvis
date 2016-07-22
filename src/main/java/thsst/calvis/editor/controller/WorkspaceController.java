@@ -448,10 +448,8 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handleConverter(ActionEvent event) {
         try {
-            // Load root layout from fxml file
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/converter.fxml"));
-            Parent converterView = (BorderPane) loader.load();
+            // Load convert layout from fxml file
+            Parent converterView = FXMLLoader.load(getClass().getResource("/fxml/converter.fxml"));
 
             Stage converterStage = new Stage();
             converterStage.initModality(Modality.WINDOW_MODAL);
@@ -461,11 +459,6 @@ public class WorkspaceController implements Initializable {
             converterStage.setX(this.root.getWidth() / 3);
             converterStage.setY(this.root.getHeight() / 3);
             converterStage.show();
-
-            // Pass the current code in the text editor to ConverterController
-            ConverterController converterController = loader.getController();
-            converterController.setWorkspaceController(this);
-            converterController.setDialogStage(converterStage);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
