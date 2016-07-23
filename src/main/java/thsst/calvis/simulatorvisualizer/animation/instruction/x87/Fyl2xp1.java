@@ -34,23 +34,6 @@ public class Fyl2xp1 extends CalvisAnimation {
             System.out.println(tokens[i] + " : " + tokens[i].getClass());
         }
 
-        String value0 = finder.getRegister("ST0");
-        String value1 = finder.getRegister("ST1");
-        Calculator c = new Calculator(registers, memory);
-        BigInteger biSrcZero = new BigInteger(value0, 16);
-        BigInteger biSrcOne = new BigInteger(value1, 16);
-        double regValZero = c.convertHexToDoublePrecision(biSrcZero.toString(16));
-        double regValOne = c.convertHexToDoublePrecision(biSrcOne.toString(16));
-        double resultVal = 0.0;
-        if( - (1 - Math.sqrt(2)/2 ) > regValZero || (1 - Math.sqrt(2)/2 ) < regValZero){
-            resultVal = 0.01;
-            registers.getMxscr().setInvalidOperationFlag("1");
-        }else{
-            resultVal = regValOne * (Math.log(regValZero + 1.0) / Math.log(2) );
-        }
-
-        String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-
         // CODE HERE
         int width = 300;
         int height = 30;
@@ -125,7 +108,7 @@ public class Fyl2xp1 extends CalvisAnimation {
         this.root.getChildren().addAll(st0, st1, st2, st3, st4, st5, st6, st7, st8,
                 label, label0, label1, label2, label3, label4, label5, label6, label7, label8, labelFlags);
 
-        Text textBit0a = new Text(X, Y + 10, hexConvertedVal);
+        Text textBit0a = new Text(X, Y + 10, "" + registers.get("ST0"));
         Text textBit0 = new Text(X, Y + 60, "" + registers.get("ST0"));
         Text textBit1 = new Text(X, Y + 100, "" + registers.get("ST1"));
         Text textBit2 = new Text(X, Y + 140, "" + registers.get("ST2"));
@@ -149,7 +132,7 @@ public class Fyl2xp1 extends CalvisAnimation {
 
         bit8Transition.setNode(textBit0a);
         bit8Transition.fromXProperty().bind(st0.translateXProperty()
-                .add(st7.getLayoutBounds().getWidth() - 290)
+                .add(st7.getLayoutBounds().getWidth() - 270)
                 .add((st0.getLayoutBounds().getWidth() - textBit0a.getLayoutBounds().getWidth()) / 2));
         bit8Transition.fromYProperty().bind(st0.translateYProperty()
                 .add(st0.getLayoutBounds().getHeight() / 3));

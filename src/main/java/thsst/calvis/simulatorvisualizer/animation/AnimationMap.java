@@ -47,6 +47,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generateSSE() {
         this.generateSSEDataTransfer();
         this.generateSSEComparison();
+        this.generateSSEConversion();
         this.generateSSEUnpacked();
         this.generateSSELogical();
     }
@@ -242,6 +243,15 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("UCOMISS", new Comiss());
     }
 
+    private void generateSSEConversion() {
+        this.put("CVTPI2PS", new Cvtpi2ps());
+        this.put("CVTSI2SS", new Cvtsi2ss());
+        this.put("CVTPS2PI", new Cvtps2pi());
+        this.put("CVTTPS2PI", new Cvttps2pi());
+        this.put("CVTSS2SI", new Cvtss2si());
+        this.put("CVTTSS2SI", new Cvttss2si());
+    }
+
     private void generateSSELogical() {
         this.put("ANDPS", new Andps());
         this.put("ANDNPS", new Andnps());
@@ -317,7 +327,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FISTP", new Fistp());
         this.put("FBLD", new Fbld());
         this.put("FBSTP", new Fbstp());
-//        this.put("FLD1", new Fld1());
+        this.put("FLD1", new Fld1());
         this.put("FLDZ", new Fldz());
         this.put("FLDPI", new Fldpi());
         this.put("FLDL2E", new Fldl2e());
