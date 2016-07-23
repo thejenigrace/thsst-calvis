@@ -142,10 +142,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateGPRotate() {
-        this.put("ROR", new Ror());
-        this.put("ROL", new Rol());
+//        this.put("ROR", new Ror());
+//        this.put("ROL", new Rol());
         this.put("RCR", new Rcr());
-        this.put("RCL", new Rcl());
+//        this.put("RCL", new Rcl());
     }
 
     private void generateGPStack() {

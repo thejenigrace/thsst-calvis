@@ -40,7 +40,7 @@ public class Shrd extends CalvisAnimation {
         }
         else if ( tokens[0].getType() == Token.MEM ) {
             try {
-                des = finder.read(tokens[0], registers.getBitSize(tokens[0]));
+                des = finder.read(tokens[0], registers.getBitSize(tokens[1]));
             } catch (MemoryReadException e) {
                 e.printStackTrace();
             }
