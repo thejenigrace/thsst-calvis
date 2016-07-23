@@ -142,7 +142,6 @@ public class FileEditorTab {
     }
 
     private boolean load() {
-//        System.out.println("load text");
         Path path = this.path.get();
         if ( path == null ) {
             return false;

@@ -167,7 +167,7 @@ public class FileEditorTabPane {
             // check whether file is already opened
             FileEditorTab fileEditorTab = this.findFileEditor(path);
             if ( fileEditorTab == null ) {
-                System.out.println("Already Open!");
+//                System.out.println("Already Open!");
                 fileEditorTab = this.createFileEditor(path);
 
                 this.tabPane.getTabs().add(fileEditorTab.getTab());

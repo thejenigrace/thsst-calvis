@@ -479,7 +479,7 @@ public class WorkspaceController implements Initializable {
         alert.setTitle("About");
         alert.setGraphic(new ImageView(new Image("/img/calvis_logo_96x96.png")));
         alert.setHeaderText("De La Salle University: CALVIS x86-32");
-        alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, & Marielle Ong\n All rights reserved.");
+        alert.setContentText("Copyright (c) 2016 Jennica Alcalde, Goodwin Chua, Ivan Demabildo, Marielle Ong & Roger Uy\nAll rights reserved.");
         alert.initOwner(MainApp.primaryStage);
 
         alert.showAndWait();

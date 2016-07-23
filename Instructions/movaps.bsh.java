@@ -8,7 +8,7 @@ execute(des,src,registers,memory) {
 	if( src.isMemory() ) {
 		// srcValue = memory base address
 		srcValue = memory.removeSizeDirectives(src.getValue());
-		System.out.println("src-memory base address: " + srcValue);
+		// System.out.println("src-memory base address: " + srcValue);
 
 		// SOURCE == MEMORY; checks the memory alignment
 		if ( !srcValue.substring(srcValue.length() - 1).equals("0") ){
@@ -25,7 +25,7 @@ execute(des,src,registers,memory) {
 	if( des.isMemory() ) {
 		// desValue = memory base address
 		desValue = memory.removeSizeDirectives(des.getValue());
-		System.out.println("des-memory base address: " + desValue);
+		// System.out.println("des-memory base address: " + desValue);
 
 		// DESTINATION == MEMORY; checks the memory alignment
 		if ( !desValue.substring(desValue.length() - 1).equals("0") ){

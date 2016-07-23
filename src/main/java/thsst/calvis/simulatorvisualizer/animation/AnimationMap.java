@@ -2,7 +2,6 @@ package thsst.calvis.simulatorvisualizer.animation;
 
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.*;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
@@ -275,10 +274,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("MOVAPS", new Movapd());
         this.put("MOVUPS", new Movupd());
 //        this.put("MOVHLPD", new Movhlpd());
-//        this.put("MOVHPD", new Movhpd())
-//        this.put("MOVLPD", new Movlpd());
-//        this.put("MOVMSKPD", new Movmskpd());
-//        this.put("MOVSD", new Movsd());
+        this.put("MOVHPD", new Movhpd());
+        this.put("MOVLPD", new Movlpd());
+        this.put("MOVMSKPD", new Movmskpd());
+        this.put("MOVSD", new Movsd());
     }
 
     private void generateSSE2Comparison() {
