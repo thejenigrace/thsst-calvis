@@ -63,6 +63,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generatex87DataTransfer();
         this.generatex87Exchange();
         this.generatex87Transcedental();
+        this.generatex87Comparison();
     }
 
     /*
@@ -222,6 +223,8 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
      * MARKER -- SSE Instructions Animation
      */
     private void generateSSEDataTransfer() {
+        this.put("MOVAPS", new Movaps());
+        this.put("MOVUPS", new Movups());
         this.put("MOVDQ2Q", new Movdq2q());
         this.put("MOVDQA", new Movdqa());
         this.put("MOVDQU", new Movdqu());
@@ -259,6 +262,8 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
      * MARKER -- SSE2 Instructions Animation
      */
     private void generateSSE2DataTransfer() {
+        this.put("MOVAPS", new Movapd());
+        this.put("MOVUPS", new Movupd());
 //        this.put("MOVHLPD", new Movhlpd());
 //        this.put("MOVHPD", new Movhpd())
 //        this.put("MOVLPD", new Movlpd());
@@ -340,5 +345,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("F2XM1", new F2xm1());
         this.put("FYL2X", new Fyl2x());
         this.put("FYL2XP1", new Fyl2xp1());
+    }
+
+    private void generatex87Comparison() {
+        this.put("FXAM", new Fxam());
+        this.put("FCOM", new Fcom());
     }
 }

@@ -57,7 +57,7 @@ public abstract class CalvisAnimation {
 //                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
-                return new Rectangle();
+                return new Rectangle(width, height, Color.web("#D1CAAE", 1.0));
         }
     }
 
@@ -74,7 +74,7 @@ public abstract class CalvisAnimation {
 //                System.out.println("IMMEDIATE");
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
-                return new Rectangle();
+                return new Rectangle(width, height, Color.web("#D1CAAE", 1.0));
         }
     }
 

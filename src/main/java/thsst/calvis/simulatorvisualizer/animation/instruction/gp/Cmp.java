@@ -1,8 +1,5 @@
 package thsst.calvis.simulatorvisualizer.animation.instruction.gp;
 
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
-import thsst.calvis.configuration.model.engine.Token;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
@@ -11,10 +8,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Memory;
+import thsst.calvis.configuration.model.engine.RegisterList;
+import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 
 /**
- * Created by Goodwin Chua on 5 Jul 2016.
+ * Created by Jennica on 23/07/2016.
  */
 public class Cmp extends CalvisAnimation {
 
@@ -130,7 +130,7 @@ public class Cmp extends CalvisAnimation {
                     .add(subtrahendRectangle.getLayoutBounds().getHeight() / 1.5));
             subtrahendValueTransition.toXProperty().bind(subtrahendValueTransition.fromXProperty());
             subtrahendValueTransition.toYProperty().bind(subtrahendValueTransition.fromYProperty());
-            
+
             // Play 1000 milliseconds of animation
             minuendLabelTransition.play();
             minuendValueTransition.play();
@@ -140,4 +140,3 @@ public class Cmp extends CalvisAnimation {
         }
     }
 }
-
