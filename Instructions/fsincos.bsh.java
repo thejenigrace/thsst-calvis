@@ -21,6 +21,7 @@ execute(registers, memory) {
 		registers.x87().status().set("C2",'0');
 //		String hexConvertedCosVal = c.convertDoublePrecisionToHexString(resultCosVal);
 //		String hexConvertedSinVal = c.convertDoublePrecisionToHexString(resultSinVal);
+		registers.x87().pop();
 		registers.x87().push(resultCosVal + "");
 		registers.x87().push(resultSinVal + "");
 	}

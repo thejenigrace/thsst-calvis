@@ -63,11 +63,38 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generatex87DataTransfer();
         this.generatex87Exchange();
         this.generatex87Transcedental();
+        this.generatex87Arithmetic();
     }
 
     /*
     * MARKER -- GP Instructions Animation
     */
+
+    private void generatex87Arithmetic(){
+        this.put("FADD", new Fadd());
+        this.put("FADDP", new Faddp());
+        this.put("FIADD", new Fiadd());
+        this.put("FSUB", new Fsub());
+        this.put("FSUBP", new Fsubp());
+        this.put("FISUB", new Fisub());
+        this.put("FSUBR", new Fsubr());
+        this.put("FSUBRP", new Fsubrp());
+        this.put("FISUBR", new Fisubr());
+        this.put("FDIV", new Fdiv());
+        this.put("FIDIV", new Fidiv());
+        this.put("FDIVR", new Fdivr());
+        this.put("FDIVRP", new Fdivrp());
+        this.put("FDIVP", new Fdivp());
+        this.put("FIDIVR", new Fidivr());
+        this.put("FIMUL", new Fimul());
+        this.put("FMUL", new Fmul());
+        this.put("FMULP", new Fmulp());
+        this.put("FABS", new Fabs());
+        this.put("FPREM", new Fprem());
+        this.put("FPREM1", new Fprem1());
+        this.put("FCHS", new Fchs());
+
+    }
     private void generateGPDataTransfer() {
         this.put("MOV", new Mov());
         this.put("LEA", new Lea());

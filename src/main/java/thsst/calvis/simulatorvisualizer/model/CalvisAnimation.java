@@ -61,22 +61,31 @@ public abstract class CalvisAnimation {
         }
     }
 
-    protected Rectangle createRectangle(String token, int width, int height) {
-        // Check token type
-        switch ( token ) {
-            case Token.REG:
+    protected Rectangle createRectangle(String nameReg, int width, int height) {
 //                System.out.println("REG");
-                return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
-            case Token.MEM:
-//                System.out.println("MEM");
-                return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
-            case Token.HEX:
-//                System.out.println("IMMEDIATE");
-                return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
-            default:
-                return new Rectangle();
-        }
+        return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
     }
+
+    protected Text createLabelText(String name) {
+                return new Text(name);
+    }
+
+//    protected Rectangle createRectangle(String token, int width, int height) {
+//        // Check token type
+//        switch ( token ) {
+//            case Token.REG:
+////                System.out.println("REG");
+//                return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
+//            case Token.MEM:
+////                System.out.println("MEM");
+//                return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
+//            case Token.HEX:
+////                System.out.println("IMMEDIATE");
+//                return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
+//            default:
+//                return new Rectangle();
+//        }
+//    }
 
     protected Text createLabelText(Token token) {
         switch ( token.getType() ) {
