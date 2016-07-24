@@ -3,7 +3,6 @@ package thsst.calvis.simulatorvisualizer.animation.instruction.x87;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import thsst.calvis.configuration.model.engine.Calculator;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fadd extends CalvisAnimation {
+public class Fsqrt extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -49,63 +48,64 @@ public class Fadd extends CalvisAnimation {
         Rectangle desRec = new Rectangle();
         Rectangle srcRec = new Rectangle();
         Rectangle resRec = new Rectangle();
-        Text sign = timeFunc.generateText(new Text("+"), 30, "000000");
-        Text equal = timeFunc.generateText(new Text("="), 30, "000000");
+        Text sign = timeFunc.generateText(new Text("Transfer To ->"), 18, "000000");
+        Text equal = timeFunc.generateText(new Text("="), 18, "000000");
         ArrayList<Text> notes = new ArrayList<>();
+
         switch(tokens.length){
             case 0:
                 bitSize = registers.getBitSize("ST0");
-                sourceStr = finder.getRegister("ST1");
-                desStr = finder.getRegister("ST0");
+                sourceStr = registers.get("ST0");
+                desStr = "Square Root(" + finder.getRegister("ST0") + ")";
                 desLabel = this.createLabelText("ST0");
-                srcLabel = this.createLabelText("ST1");
-                resLabel = this.createLabelText("ST0");
+                srcLabel = this.createLabelText("ST0");
+//                resLabel = this.createLabelText("ST0");
                 desRec = this.createRectangle("ST0", 200, 60);
-                srcRec = this.createRectangle("ST1", 200, 60);
-                resRec = this.createRectangle("ST0", 200, 60);
-                resValue = new Text(registers.get("ST0"));
+                srcRec = this.createRectangle("ST0", 200, 60);
+//                resRec = this.createRectangle("ST0", 200, 60);
+//                resValue = new Text(registers.get("ST0"));
                 break;
             case 1:
 
                 src = tokens[0];
                 bitSize = timeFunc.getBitSize(src);
                 sourceStr = timeFunc.getPreviousValue(src, bitSize);
-                sourceStr = (Long.parseLong(sourceStr, 16) + 0.0 )+ "";
-                desStr = finder.getRegister("ST0");
+                sourceStr = timeFunc.getValue(src, bitSize) + "";
+                desStr = "Absolute Value(" + finder.getRegister("ST0") + ")";
                 desLabel = this.createLabelText("ST0");
                 resLabel = this.createLabelText("ST0");
                 srcLabel = this.createLabelText(src);
                 desRec = this.createRectangle("ST0", 200, 60);
                 srcRec = this.createRectangle(src, 200, 60);
-                resRec = this.createRectangle("ST0", 200, 60);
-                resValue = new Text(registers.get("ST0"));
+//                resRec = this.createRectangle("ST0", 200, 60);
+//                resValue = new Text(registers.get("ST0"));
                 break;
             case 2:
-                des = tokens[0];
-                src = tokens[1];
-                bitSize = timeFunc.getBitSize(src);
-                sourceStr = timeFunc.getPreviousValue(src, bitSize);
-                desStr = timeFunc.getPreviousValue(des, bitSize);
-                desLabel = this.createLabelText(des);
-                resLabel = this.createLabelText(des);
-                srcLabel = this.createLabelText(src);
-                desRec = this.createRectangle(des, 160, 60);
-                srcRec = this.createRectangle(src, 160, 60);
-                resRec = this.createRectangle(des, 160, 60);
-                resValue = new Text(registers.get(des));
+//                des = tokens[0];
+//                src = tokens[1];
+//                bitSize = timeFunc.getBitSize(src);
+//                sourceStr = timeFunc.getPreviousValue(src, bitSize);
+//                desStr = timeFunc.getPreviousValue(des, bitSize);
+//                desLabel = this.createLabelText(des);
+//                resLabel = this.createLabelText(des);
+//                srcLabel = this.createLabelText(src);
+//                desRec = this.createRectangle(des, 160, 60);
+//                srcRec = this.createRectangle(src, 160, 60);
+//                resRec = this.createRectangle(des, 160, 60);
+//                resValue = new Text(registers.get(des));
                 break;
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
-        parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal, poppedValue);
+        parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
         fake.setX(0);
         fake.setY(0);
 
         double posX = 30;
         double posY = 20;
-        double space = 60;
+        double space = 160;
 
         desRec.setX(posX);
         desRec.setY(posY);
@@ -134,7 +134,7 @@ public class Fadd extends CalvisAnimation {
         resValue.setX(posX + (resRec.getWidth() / 2 - resValue.getLayoutBounds().getWidth() / 2) + (desRec.getWidth() + space) * 2);
         resValue.setY(posY + 45);
 
-        sign.setX(posX + space / 4 + desRec.getWidth());
+        sign.setX(posX + 20 + desRec.getWidth());
         sign.setY(posY + 45);
 
         equal.setX(posX + space / 4 + (desRec.getWidth()) * 2 + space);

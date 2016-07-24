@@ -3,7 +3,6 @@ package thsst.calvis.simulatorvisualizer.animation.instruction.x87;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import thsst.calvis.configuration.model.engine.Calculator;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fadd extends CalvisAnimation {
+public class Fdivrp extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -49,7 +48,7 @@ public class Fadd extends CalvisAnimation {
         Rectangle desRec = new Rectangle();
         Rectangle srcRec = new Rectangle();
         Rectangle resRec = new Rectangle();
-        Text sign = timeFunc.generateText(new Text("+"), 30, "000000");
+        Text sign = timeFunc.generateText(new Text("/"), 30, "000000");
         Text equal = timeFunc.generateText(new Text("="), 30, "000000");
         ArrayList<Text> notes = new ArrayList<>();
         switch(tokens.length){
@@ -99,7 +98,7 @@ public class Fadd extends CalvisAnimation {
         desValue = new Text(desStr);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
-        parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal, poppedValue);
+        parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal);
         fake.setX(0);
         fake.setY(0);
 

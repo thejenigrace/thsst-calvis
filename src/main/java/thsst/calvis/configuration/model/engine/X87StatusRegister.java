@@ -69,6 +69,25 @@ public class X87StatusRegister extends X87Register {
         charArray[15] = '1';
     }
 
+    public char getFlag(String name){
+        int index = 0;
+        switch ( name ) {
+            case "C0":
+                index = 7;
+                break;
+            case "C1":
+                index = 6;
+                break;
+            case "C2":
+                index = 5;
+                break;
+            case "C3":
+                index = 1;
+                break;
+            default:
+        }
+        return charArray[index];
+    }
     public String getInvalidOperationFlag() {
         return charArray[15] + "";
     }

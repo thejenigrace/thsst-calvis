@@ -6,9 +6,7 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-		System.out.println("wowwww " + value);
         spValue = Long.parseLong(value, 16) + 0.0;
-		System.out.println("wowwww");
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue =  spValue / stValue;

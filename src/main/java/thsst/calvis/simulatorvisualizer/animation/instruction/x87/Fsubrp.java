@@ -3,7 +3,6 @@ package thsst.calvis.simulatorvisualizer.animation.instruction.x87;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import thsst.calvis.configuration.model.engine.Calculator;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fadd extends CalvisAnimation {
+public class Fsubrp extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -30,11 +29,6 @@ public class Fadd extends CalvisAnimation {
         TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory, finder);
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
-        String notesStr = "Additional Notes: \n" +
-                "\nC0, C2, C3 are undefined." +
-                "\nC1 is set to 0 if stack underflow." +
-                "\nC1 is set to 1 if result was rounded up; Else set to 0.";
-        Text poppedValue = timeFunc.generateText(new Text(notesStr), 15, "000000");
         Token des;
         Token src;
         String sourceStr = "";
@@ -46,10 +40,15 @@ public class Fadd extends CalvisAnimation {
         Text srcValue = new Text();
         Text desValue = new Text();
         Text resValue = new Text();
+        String notesStr = "Additional Notes: \nThe value " + finder.getRegister("ST0") + " is popped from the stack." +
+                          "\nC0, C2, C3 are undefined." +
+                          "\nC1 is set to 0 if stack underflow." +
+                          "\nC1 is set to 1 if result was rounded up; Else set to 0.";
+        Text poppedValue = timeFunc.generateText(new Text(notesStr), 15, "000000");
         Rectangle desRec = new Rectangle();
         Rectangle srcRec = new Rectangle();
         Rectangle resRec = new Rectangle();
-        Text sign = timeFunc.generateText(new Text("+"), 30, "000000");
+        Text sign = timeFunc.generateText(new Text("-"), 30, "000000");
         Text equal = timeFunc.generateText(new Text("="), 30, "000000");
         ArrayList<Text> notes = new ArrayList<>();
         switch(tokens.length){
@@ -142,6 +141,7 @@ public class Fadd extends CalvisAnimation {
 
         poppedValue.setX(posX + 5);
         poppedValue.setY(posY + desRec.getHeight() + 30);
+        
 
     }
 }

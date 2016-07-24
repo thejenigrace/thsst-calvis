@@ -76,6 +76,16 @@ public abstract class CalvisAnimation {
             default:
                 return new Rectangle(width, height, Color.web("#D1CAAE", 1.0));
         }
+        return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
+    }
+
+    protected Rectangle createRectangle(String nameReg, int width, int height) {
+//                System.out.println("REG");
+        return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
+    }
+
+    protected Text createLabelText(String name) {
+                return new Text(name);
     }
 
     protected Text createLabelText(Token token) {

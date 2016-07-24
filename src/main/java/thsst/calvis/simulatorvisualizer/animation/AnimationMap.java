@@ -62,6 +62,8 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.generatex87Exchange();
         this.generatex87Transcedental();
         this.generatex87Comparison();
+        this.generatex87Arithmetic();
+        this.generatex87ControlTransfer();
     }
 
     /*
@@ -140,10 +142,10 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     }
 
     private void generateGPRotate() {
-//        this.put("ROR", new Ror());
-//        this.put("ROL", new Rol());
+        this.put("ROR", new Ror());
+        this.put("ROL", new Rol());
         this.put("RCR", new Rcr());
-//        this.put("RCL", new Rcl());
+        this.put("RCL", new Rcl());
     }
 
     private void generateGPStack() {
@@ -357,5 +359,38 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
     private void generatex87Comparison() {
         this.put("FXAM", new Fxam());
         this.put("FCOM", new Fcom());
+    }
+
+    private void generatex87Arithmetic(){
+        this.put("FADD", new Fadd());
+        this.put("FADDP", new Faddp());
+        this.put("FIADD", new Fiadd());
+        this.put("FSUB", new Fsub());
+        this.put("FSUBP", new Fsubp());
+        this.put("FISUB", new Fisub());
+        this.put("FSUBR", new Fsubr());
+        this.put("FSUBRP", new Fsubrp());
+        this.put("FISUBR", new Fisubr());
+        this.put("FDIV", new Fdiv());
+        this.put("FIDIV", new Fidiv());
+        this.put("FDIVR", new Fdivr());
+        this.put("FDIVRP", new Fdivrp());
+        this.put("FDIVP", new Fdivp());
+        this.put("FIDIVR", new Fidivr());
+        this.put("FIMUL", new Fimul());
+        this.put("FMUL", new Fmul());
+        this.put("FMULP", new Fmulp());
+        this.put("FABS", new Fabs());
+        this.put("FPREM", new Fprem());
+        this.put("FPREM1", new Fprem1());
+        this.put("FCHS", new Fchs());
+        this.put("FINCSTP", new Fincstp());
+        this.put("FDECSTP", new Fdecstp());
+        this.put("FINIT", new Finit());
+        this.put("FNINIT", new Fninit());
+    }
+
+    private void generatex87ControlTransfer(){
+
     }
 }

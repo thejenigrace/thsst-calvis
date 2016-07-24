@@ -3,7 +3,6 @@ package thsst.calvis.simulatorvisualizer.animation.instruction.x87;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import thsst.calvis.configuration.model.engine.Calculator;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fadd extends CalvisAnimation {
+public class Fiadd extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {

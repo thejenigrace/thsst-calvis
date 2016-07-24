@@ -10,6 +10,7 @@ public class Calculator {
     public Calculator(RegisterList registers, Memory memory) {
         this.registers = registers;
         this.memory = memory;
+
     }
 
     public boolean evaluateCondition(String condition) {
