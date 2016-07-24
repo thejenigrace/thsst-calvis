@@ -33,7 +33,7 @@ public class Fxam extends CalvisAnimation {
         }
 
         // CODE HERE
-        int width = 140;
+        int width = 160;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(Token.REG, width, height);
         Rectangle srcRectangle = this.createRectangle(Token.STRING, width, height);
@@ -50,27 +50,25 @@ public class Fxam extends CalvisAnimation {
 
         Circle operandCircle = new Circle(desRectangle.xProperty().getValue() +
                 desRectangle.getLayoutBounds().getWidth() + 50,
-                135, 30, Color.web("#798788", 1.0));
+                135, 35, Color.web("#798788", 1.0));
 
         this.root.getChildren().addAll(desRectangle, srcRectangle, operandCircle);
 
-        int desBitSize = 0;
-        if ( tokens[0].getType() == Token.REG )
-            desBitSize = registers.getBitSize(tokens[0]);
-        else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
-            desBitSize = registers.getBitSize(tokens[1]);
-        else
-            desBitSize = memory.getBitSize(tokens[0]);
+        int desBitSize = registers.getBitSize("ST0");
 
         String description = "The C1 flag is set to the sign of the value in ST0, regardless of whether " +
                 "the register is empty or full";
         Text detailsText = new Text(X, Y * 2, description);
-        Text desLabelText = this.createLabelText(X, Y, tokens[0]);
-        Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desBitSize);
-        Text srcLabelText = new Text(X, Y, "Class");
-        Text srcValueText = new Text(X, Y, this.getConditionCodeClass());
+        Text desLabelText = new Text(X, Y, "ST0");
+        Text desValueText = new Text(X, Y, registers.get("ST0"));
+        Text srcLabelText = new Text(X, Y, "CLASS");
+        char C3 = registers.x87().status().getFlag("C3");
+        char C2 = registers.x87().status().getFlag("C2");
+        char C0 = registers.x87().status().getFlag("C0");
+        Text srcValueText = new Text(X, Y,
+                this.getConditionCodeClass(C3, C2, C0));
 
-        Text operandText = new Text(X, Y, "<=");
+        Text operandText = new Text(X, Y, "->");
         operandText.setFont(Font.font(48));
         operandText.setFill(Color.WHITESMOKE);
 
@@ -84,7 +82,7 @@ public class Fxam extends CalvisAnimation {
         TranslateTransition srcValueTransition = new TranslateTransition();
         TranslateTransition operandTransition = new TranslateTransition();
 
-        // Minuend label static
+        // DESTINATION LABEL -- STATIC
         desLabelTransition.setNode(desLabelText);
         desLabelTransition.fromXProperty().bind(desRectangle.translateXProperty()
                 .add((desRectangle.getLayoutBounds().getWidth() - desLabelText.getLayoutBounds().getWidth()) / 2));
@@ -93,7 +91,7 @@ public class Fxam extends CalvisAnimation {
         desLabelTransition.toXProperty().bind(desLabelTransition.fromXProperty());
         desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
-        // Minuend value static
+        // DESTINATION VALUE -- STATIC
         desValueTransition.fromXProperty().bind(desRectangle.translateXProperty()
                 .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
         desValueTransition.fromYProperty().bind(desRectangle.translateYProperty()
@@ -101,17 +99,17 @@ public class Fxam extends CalvisAnimation {
         desValueTransition.toXProperty().bind(desValueTransition.fromXProperty());
         desValueTransition.toYProperty().bind(desValueTransition.fromYProperty());
 
-        // Minus label static
+        // OPERAND LABEL STATIC
         operandTransition.setNode(operandText);
         operandTransition.fromXProperty().bind(desRectangle.translateXProperty()
-                .add(desRectangle.getLayoutBounds().getWidth() + 80 + srcRectangle.getLayoutBounds().getWidth())
+                .add(desRectangle.getLayoutBounds().getWidth() + 50 + srcRectangle.getLayoutBounds().getWidth())
                 .divide(2));
         operandTransition.fromYProperty().bind(desRectangle.translateYProperty()
                 .add(desRectangle.getLayoutBounds().getHeight() / 1.5));
         operandTransition.toXProperty().bind(operandTransition.fromXProperty());
         operandTransition.toYProperty().bind(operandTransition.fromYProperty());
 
-        // Subtrahend label static
+        // CLASS LABEL -- STATIC
         srcLabelTransition.setNode(srcLabelText);
         srcLabelTransition.fromXProperty().bind(srcRectangle.translateXProperty()
                 .add(desRectangle.getLayoutBounds().getWidth() + X)
@@ -120,7 +118,7 @@ public class Fxam extends CalvisAnimation {
         srcLabelTransition.toXProperty().bind(srcLabelTransition.fromXProperty());
         srcLabelTransition.toYProperty().bind(srcLabelTransition.fromYProperty());
 
-        // Subtrahend value static
+        // CLASS VALUE -- STATIC
         srcValueTransition.setNode(srcValueText);
         srcValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
                 .add(desRectangle.getLayoutBounds().getWidth() + X)
@@ -138,7 +136,18 @@ public class Fxam extends CalvisAnimation {
         operandTransition.play();
     }
 
-    private String getConditionCodeClass() {
-        return "Unsupported";
+    private String getConditionCodeClass(char C3, char C2, char C0) {
+        String conditionCodeFormat = "C3=" + C3 + "; C2=" + C2 + "; C0=" + C0;
+        String conditionCode = "" + C3 + C2 + C0;
+         switch ( conditionCode ) {
+             case "000": return "Unsupported\n" + conditionCodeFormat;
+             case "001": return "NaN\n" + conditionCodeFormat;
+             case "010": return "Normal Finite Number\n" + conditionCodeFormat;
+             case "011": return "Infinity\n" + conditionCodeFormat ;
+             case "100": return "Zero\n"+ conditionCodeFormat;
+             case "101": return "Empty\n" + conditionCodeFormat;
+             case "110": return "Denormal Number\n" + conditionCodeFormat;
+             default: return "";
+         }
     }
 }

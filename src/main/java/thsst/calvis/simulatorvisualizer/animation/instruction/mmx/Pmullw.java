@@ -57,9 +57,9 @@ public class Pmullw extends CalvisAnimation {
         double cordX = 200;
         double cordY = 25;
 
-        Rectangle desRec = this.createRectangle(des, 500, 60);
-        Rectangle srcRec = this.createRectangle(src, 500, 60);
-        Rectangle resRec = this.createRectangle(des, 500, 60);
+        Rectangle desRec = this.createRectangle(des.getType(), 500, 60);
+        Rectangle srcRec = this.createRectangle(src.getType(), 500, 60);
+        Rectangle resRec = this.createRectangle(des.getType(), 500, 60);
         parent.addAll(fake, desRec, srcRec, resRec, sign, equal);
 
         Text desLabel = this.createLabelText(des);

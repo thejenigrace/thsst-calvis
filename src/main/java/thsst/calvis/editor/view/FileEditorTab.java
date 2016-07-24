@@ -90,7 +90,7 @@ public class FileEditorTab {
     }
 
     private String getCodeTemplate() {
-        return ";write your code here\n\n\n\n" +
+        return ";write your code here\n\n\n" +
                 "SECTION .DATA";
     }
 
