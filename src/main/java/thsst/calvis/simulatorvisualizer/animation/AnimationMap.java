@@ -2,9 +2,6 @@ package thsst.calvis.simulatorvisualizer.animation;
 
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.*;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
-import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse2.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.x87.*;
@@ -174,17 +171,17 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
      * MARKER -- MMX Instructions Animation
      */
     private void generateMMXDataTransfer() {
-        this.put("MOVD", new Movd());
-        this.put("MOVQ", new Movq());
+//        this.put("MOVD", new Movd());
+//        this.put("MOVQ", new Movq());
         this.put("MAXSS", new Maxss());
         this.put("MAXPS", new Maxps());
         this.put("MINSD", new Minsd());
     }
 
     private void generateMMXComparison() {
-        this.put("PCMPEQB", new Pcmpeq(1));
-        this.put("PCMPEQW", new Pcmpeq(2));
-        this.put("PCMPEQD", new Pcmpeq(3));
+//        this.put("PCMPEQB", new Pcmpeq(1));
+//        this.put("PCMPEQW", new Pcmpeq(2));
+//        this.put("PCMPEQD", new Pcmpeq(3));
         this.put("PCMPGTB", new Pcmpgt(1));
         this.put("PCMPGTW", new Pcmpgt(2));
         this.put("PCMPGTD", new Pcmpgt(3));
