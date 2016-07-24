@@ -246,7 +246,7 @@ public class FileEditorTabPane {
             return true;
 
         Alert alert = MainApp.createAlert(Alert.AlertType.CONFIRMATION, "Close",
-                "''{0}'' has been modifiedc. Save changes?", fileEditorTab.getTab().getText());
+                "''{0}'' has been modified. Save changes?", fileEditorTab.getTab().getText());
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
         ButtonType result = alert.showAndWait().get();
