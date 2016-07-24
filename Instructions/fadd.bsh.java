@@ -12,14 +12,8 @@ execute(src, registers, memory) {
 
         double stValue = Double.parseDouble(st0);
 		double resultingValue = stValue + spValue;
-
-		if(resultingValue > Math.pow(2,64)){
-			registers.mxscr.setOverflowFlag("1");
-		}
-		else if(resultingValue < Math.pow(2, 64) * -1){
-			registers.mxscr.setUnderflowFlag("1");
-		}
-		else{
+		boolean isException = c.generateFPUExceptions(registers, resultingValue, "ST0");
+		if(!isException){
 			System.out.println(resultingValue + " value");
 			registers.set("ST0", Double.toString(resultingValue));
 		}
@@ -51,7 +45,7 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc + dbDes;
-			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			boolean isException = c.generateFPUExceptions(registers, resultingValue, des.getValue());
 			if(!isException){
 				//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), resultingValue + "");

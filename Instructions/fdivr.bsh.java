@@ -10,21 +10,12 @@ execute(src, registers, memory) {
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue =  spValue / stValue;
-		boolean isException = false;
-		if(resultingValue > Math.pow(2,64)){
-			registers.mxscr.setOverflowFlag("1");
-			isException = true;
-		}
-		if(resultingValue < Math.pow(2, 64) * -1){
-			registers.mxscr.setUnderflowFlag("1");
-			isException = true;
-		}
+		boolean isException = c.generateFPUExceptions(registers, resultingValue, "ST0");
 		if(stValue == 0){
-			registers.mxscr.setDivideByZeroFlag("1");
+			c.setDivideByZeroOperation(registers, spValue, stValue, "ST0");
 			isException = true;
 		}
 		if(!isException){
-			System.out.println(resultingValue + " value");
 			registers.set("ST0", "" + resultingValue);
 		}
         
@@ -57,10 +48,9 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc / dbDes;
-			boolean isException = c.generateFPUExceptions(registers, resultingValue);
-			System.out.println(resultingValue + " wut");
+			boolean isException = c.generateFPUExceptions(registers, resultingValue, des.getValue());
 			if(dbDes == 0){
-				registers.mxscr.setDivideByZeroFlag("1");
+				c.setDivideByZeroOperation(registers, dbDes, dbSrc, des.getValue());
 				isException = true;
 			}
 			if(!isException){

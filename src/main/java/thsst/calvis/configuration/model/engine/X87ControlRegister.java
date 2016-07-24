@@ -29,4 +29,34 @@ public class X87ControlRegister extends X87Register {
         charArray[5] = binaryNumber.charAt(1);
     }
 
+    public char getFlag(String name){
+        int index = 0;
+        int maxIndex = 15;
+        switch ( name ) {
+            case "IC":
+                index = maxIndex - 12;
+                break;
+            case "PM":
+                index = maxIndex - 5;
+                break;
+            case "UM":
+                index = maxIndex - 4;
+                break;
+            case "OM":
+                index = maxIndex - 3;
+                break;
+            case "ZM":
+                index = maxIndex - 2;
+                break;
+            case "DM":
+                index = maxIndex - 1;
+                break;
+            case "IM":
+                index = maxIndex - 0;
+                break;
+            default:
+        }
+        return charArray[index];
+    }
+
 }

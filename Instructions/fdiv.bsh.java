@@ -11,10 +11,9 @@ execute(src, registers, memory) {
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue = stValue / spValue;
-		System.out.println(resultingValue + " result");
-		boolean isException = c.generateFPUExceptions(registers, resultingValue);
+		boolean isException = c.generateFPUExceptions(registers, resultingValue, "ST0");
 		if(spValue == 0){
-			registers.mxscr.setDivideByZeroFlag("1");
+			c.setDivideByZeroOperation(registers, stValue, spValue, "ST0");
 			isException = true;
 		}
 		if(!isException){
@@ -50,9 +49,9 @@ execute(des, src, registers, memory) {
 			
 			double resultingValue =  dbDes / dbSrc;
 
-			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			boolean isException = c.generateFPUExceptions(registers, resultingValue, des.getValue());
 			if(dbSrc == 0){
-				registers.mxscr.setDivideByZeroFlag("1");
+				c.setDivideByZeroOperation(registers, dbDes, dbSrc, des.getValue());
 				isException = true;
 			}
 			if(!isException){

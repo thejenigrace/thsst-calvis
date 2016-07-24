@@ -27,7 +27,7 @@ execute(registers, memory) {
 	
 	
 //	String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
-	boolean isException = c.generateFPUExceptions(registers, resultVal);
+	boolean isException = c.generateFPUExceptions(registers, resultVal, "ST1");
 	if(!isException){
 		registers.set("ST1", resultVal + "");
 	}

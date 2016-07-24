@@ -37,24 +37,25 @@ public class Fyl2x extends CalvisAnimation {
         String value0 = finder.getRegister("ST0");
         String value1 = finder.getRegister("ST1");
         Calculator c = new Calculator(registers, memory);
-        BigInteger biSrcZero = new BigInteger(value0, 16);
-        BigInteger biSrcOne = new BigInteger(value1, 16);
-        double regValZero = c.convertHexToDoublePrecision(biSrcZero.toString(16));
-        double regValOne = c.convertHexToDoublePrecision(biSrcOne.toString(16));
+//        BigInteger biSrcZero = new BigInteger(value0, 16);
+//        BigInteger biSrcOne = new BigInteger(value1, 16);
+        double regValZero = Double.parseDouble(value0);
+        double regValOne = Double.parseDouble(value1);
         double resultVal = 0.0;
-        if(regValZero == 0.0 && registers.getMxscr().getDivideByZeroMask() == "1"){
-            if(biSrcOne.intValue() >= 0){
-                resultVal = -0.01;
+        if(regValZero == 0.0 && registers.x87().control().getFlag("ZM") == 1){
+            if(regValOne >= 0){
+                resultVal = Double.NEGATIVE_INFINITY;
             }
             else{
-                resultVal = 0.01;
+                resultVal = Double.POSITIVE_INFINITY;
             }
         }else{
             resultVal = regValOne * (Math.log(regValZero) / Math.log(2) );
         }
 
 
-        String hexConvertedVal = c.convertDoublePrecisionToHexString(resultVal);
+
+        String hexConvertedVal = resultVal + "";
 
         // CODE HERE
         int width = 300;

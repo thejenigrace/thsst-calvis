@@ -30,6 +30,7 @@ public class Fdivrp extends CalvisAnimation {
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         String notesStr = "Additional Notes: \n" +
+                "Additional Notes: \nThe value " + finder.getRegister("ST0") + " is popped from the stack." +
                 "\nC0, C2, C3 are undefined." +
                 "\nC1 is set to 0 if stack underflow." +
                 "\nC1 is set to 1 if result was rounded up; Else set to 0.";
@@ -98,7 +99,7 @@ public class Fdivrp extends CalvisAnimation {
         desValue = new Text(desStr);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
-        parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal);
+        parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal, poppedValue);
         fake.setX(0);
         fake.setY(0);
 

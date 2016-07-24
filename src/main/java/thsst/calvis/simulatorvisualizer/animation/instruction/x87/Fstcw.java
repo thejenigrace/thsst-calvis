@@ -9,6 +9,7 @@ import thsst.calvis.configuration.model.engine.Calculator;
 import thsst.calvis.configuration.model.engine.Memory;
 import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
+import thsst.calvis.configuration.model.exceptions.MemoryReadException;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fsqrt extends CalvisAnimation {
+public class Fstcw extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -30,9 +31,8 @@ public class Fsqrt extends CalvisAnimation {
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         String notesStr = "Additional Notes: \n" +
-                "\nC0, C2, C3 are undefined." +
-                "\nC1 is set to 0 if stack underflow." +
-                "\nC1 is set to 1 if result was rounded up; Else set to 0.";
+                "\nC0, C1, C2 is set to 0 ." +
+                "\nC3 is set to undefined.";
         Text poppedValue = timeFunc.generateText(new Text(notesStr), 15, "000000");
         Token des;
         Token src;
@@ -48,32 +48,38 @@ public class Fsqrt extends CalvisAnimation {
         Rectangle desRec = new Rectangle();
         Rectangle srcRec = new Rectangle();
         Rectangle resRec = new Rectangle();
-        Text sign = timeFunc.generateText(new Text("Transfer To ->"), 18, "000000");
+        Text sign = timeFunc.generateText(new Text("Transfer Value To"), 18, "000000");
         Text equal = timeFunc.generateText(new Text("="), 18, "000000");
         ArrayList<Text> notes = new ArrayList<>();
 
         switch(tokens.length){
             case 0:
                 bitSize = registers.getBitSize("ST0");
-                sourceStr = registers.get("ST0");
-                desStr = "Square Root(" + finder.getRegister("ST0") + ")";
-                desLabel = this.createLabelText("ST0");
-                srcLabel = this.createLabelText("ST0");
+                int top = (registers.x87().status().getTop() + 1) % 8;
+                desStr = "ST" + top;
+                sourceStr = "ST" + registers.x87().status().getTop();
+                desLabel = this.createLabelText("CURRENT FPU STACK POINTER");
+                srcLabel = this.createLabelText("NEW FPU STACK POINTER");
 //                resLabel = this.createLabelText("ST0");
-                desRec = this.createRectangle("ST0", 200, 60);
-                srcRec = this.createRectangle("ST0", 200, 60);
+                desRec = this.createRectangle("ST0", 180, 80);
+                srcRec = this.createRectangle("ST0", 180, 80);
 //                resRec = this.createRectangle("ST0", 200, 60);
 //                resValue = new Text(registers.get("ST0"));
+
                 break;
             case 1:
 
                 src = tokens[0];
-                bitSize = timeFunc.getBitSize(src);
-                sourceStr = timeFunc.getPreviousValue(src, bitSize);
-                sourceStr = timeFunc.getValue(src, bitSize) + "";
-                desStr = "Square Root(" + finder.getRegister("ST0") + ")";
-                desLabel = this.createLabelText("ST0");
-                resLabel = this.createLabelText("ST0");
+                String indexValue = src.getValue().substring(2);
+                int indexInt = Integer.parseInt(indexValue);
+                try{
+                    sourceStr = memory.read(src, 16);
+                } catch(MemoryReadException e){
+                    e.printStackTrace();
+                }
+                desStr = finder.getRegister("CONTROL");
+                desLabel = this.createLabelText("CONTROL REGISTER");
+//                resLabel = this.createLabelText("ST0");
                 srcLabel = this.createLabelText(src);
                 desRec = this.createRectangle("ST0", 200, 60);
                 srcRec = this.createRectangle(src, 200, 60);
@@ -97,6 +103,7 @@ public class Fsqrt extends CalvisAnimation {
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
+//        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
@@ -141,7 +148,7 @@ public class Fsqrt extends CalvisAnimation {
         equal.setY(posY + 45);
 
         poppedValue.setX(posX + 5);
-        poppedValue.setY(posY + desRec.getHeight() + 30);
+        poppedValue.setY(posY + desRec.getHeight() + 60);
 
     }
 }

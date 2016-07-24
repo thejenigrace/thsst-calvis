@@ -1,5 +1,7 @@
 package thsst.calvis.configuration.model.engine;
 
+import thsst.calvis.configuration.model.exceptions.DataTypeMismatchException;
+
 import java.math.BigInteger;
 
 public class Calculator {
@@ -851,22 +853,77 @@ public class Calculator {
         return Long.parseLong(text, 16);
     }
 
-    public boolean generateFPUExceptions(RegisterList registers, double resultingValue){
+    public boolean generateFPUExceptions(RegisterList registers, double resultingValue, String desValue){
         boolean isException = false;
-
+        boolean isOM = registers.x87().control().getFlag("OM") == '1';
+        boolean isUM = registers.x87().control().getFlag("UM") == '1';
 //        registers.getMxscr().setFlushToZero();
         boolean isSpecialConditions =  !Double.isNaN(resultingValue) && !Double.isInfinite(resultingValue);
-        System.out.println(resultingValue  + " wutthefuck");
+        boolean isMaskedUnderflow = registers.x87().control().getFlag("UM") == 1;
+        boolean isMaskedOverflow = registers.x87().control().getFlag("OM") == 1;
         if(resultingValue > Math.pow(2,64) && isSpecialConditions){
-            registers.getMxscr().setOverflowFlag("1");
+            registers.x87().status().set("OE", '1');
             isException = true;
-
+            if(isOM){
+                double setValue = 0;
+                int flagIC = registers.x87().control().getFlag("IC");
+                switch(flagIC){
+                    case 0:
+                        setValue = Double.POSITIVE_INFINITY;
+                        break;
+                    case 1:
+                        setValue = Double.NEGATIVE_INFINITY;
+                        break;
+                }
+                try{
+                    registers.set(desValue, setValue + "");
+                } catch(DataTypeMismatchException e){
+                    e.printStackTrace();
+                }
+            }
         }
-        if(resultingValue < Math.pow(2, 64) * -1 && isSpecialConditions){
-            registers.getMxscr().setUnderflowFlag("1");
+        if(resultingValue < Math.pow(2, 64) * -1 && isSpecialConditions && !isMaskedUnderflow){
+            registers.x87().status().set("UE", '1');
             isException = true;
+            if(isUM){
+                try{
+                    registers.set(desValue, 0.0 + "");
+                } catch(DataTypeMismatchException e){
+                    e.printStackTrace();
+                }
+            }
         }
+        System.out.println("PASSED");
         return isException;
+    }
+
+    public void setInvalidOperation(RegisterList registers, String desValue){
+        registers.x87().status().set("IE", '1');
+        if(registers.x87().control().getFlag("IM") == '1'){
+            try{
+                registers.set(desValue, Double.NaN + "");
+            } catch(DataTypeMismatchException e){
+                e.printStackTrace();
+            }
+        }
+        System.out.println("PASSED SIO");
+    }
+
+    public void setDivideByZeroOperation(RegisterList registers, double firstValue, double secondValue, String registerSet){
+        registers.x87().status().set("ZE", '1');
+        System.out.println(registers.x87().control().getFlag("ZM") + " WAOW");
+        if(registers.x87().control().getFlag("ZM") == '1'){
+            try{
+                int signFirst = (int) Math.signum(firstValue);
+                int signSecond = (int) Math.signum(secondValue);
+                double sign  = (signFirst ^ signSecond) + 0.0;
+                System.out.println(("PUTA") + sign * Double.POSITIVE_INFINITY);
+                registers.set(registerSet, sign * Double.POSITIVE_INFINITY + "");
+            } catch(DataTypeMismatchException e){
+                e.printStackTrace();
+            }
+        }
+        System.out.println("PASSED DBZO");
     }
 
     public boolean isInfinite(double value){

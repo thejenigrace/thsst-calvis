@@ -6,7 +6,7 @@ execute(registers, memory) {
 		registers.set("ST0","" + result);
 	}
 	else{
-		registers.getMxscr().setInvalidOperationFlag("1");
+		c.setInvalidOperation(registers, "ST0");
 	}
 
 	registers.x87().status().set("C3",'0');
