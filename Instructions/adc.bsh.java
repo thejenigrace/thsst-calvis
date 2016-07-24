@@ -1,28 +1,32 @@
 execute(des, src, registers, memory) {
 	int desBitSize = 0;
-	String desValue = "";
-	String srcValue = "";
+	String desValue;
+	String srcValue;
 	String maxHexValue = "FFFFFFFF";
 
-	// Check if des is either register or memory
+	// Check if DESTINATION is either REGISTER or MEMORY
 	if ( des.isRegister() ) {
 		System.out.println("des: register");
 		desBitSize = registers.getBitSize(des);
 		desValue = registers.get(des);
+	} else if ( des.isMemory() && src.isRegister() ){
+		System.out.println("des: memory");
+		desBitSize = registers.getBitSize(src);
+		desValue = memory.read(des, desBitSize);
 	} else {
 		System.out.println("des: memory");
 		desBitSize = memory.getBitSize(des);
 		desValue = memory.read(des, desBitSize);
 	}
 
-	// Check if src is either register, memory or immediate
+	// Check if SOURCE is either REGISTER, MEMORY or IMMEDIATE
 	if ( src.isRegister() ) {
 		System.out.println("src: register");
 		srcValue = registers.get(src);
 	} else if ( src.isMemory() ) {
 		System.out.println("src: memory");
 		srcValue = memory.read(src, desBitSize);
-	} else {
+	} else if ( src.isHex() ){
 		System.out.println("src: immediate");
 		srcValue = src.getValue();
 	}
@@ -38,7 +42,7 @@ execute(des, src, registers, memory) {
 	System.out.println(biDesValue.toString(16) + ": " + biDesValue.toString());
 	System.out.println(biSrcValue.toString(16) + ": " + biSrcValue.toString());
 
-	// Check if Carry Flag == 1
+	// Checks if Carry Flag == 1
   if ( eFlags.getCarryFlag().equals("1") ) {
       BigInteger biAddPlusOne = BigInteger.valueOf(new Integer(1).intValue());
       biResult = biResult.add(biAddPlusOne);
@@ -54,11 +58,11 @@ execute(des, src, registers, memory) {
   else
     finalResult = biResult.toString(16);
 
-	// Check if des is either register or memory
+	// Checks if DESTINATION is either REGISTER or MEMORY
 	if ( des.isRegister() ) {
 		System.out.println("des: register; result out");
 		registers.set( des, finalResult );
-	} else {
+	} else if ( des.isMemory() ) {
 		System.out.println("des: memory; result out");
 		memory.write( des, finalResult, desBitSize );
 	}

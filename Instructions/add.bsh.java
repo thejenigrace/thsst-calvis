@@ -1,225 +1,112 @@
 execute(des, src, registers, memory) {
-    String numberOfF = "";
-    String resultingValue = "";
-    int sizeOfF = 0;
-    if (des.isRegister())
-        sizeOfF = registers.getBitSize(des);
-    else if (des.isMemory()) {
-        if (src.isRegister())
-            sizeOfF = registers.getBitSize(src);
-        else
-            sizeOfF = memory.getBitSize(des);
-    }
-    for (int x = 0; x < sizeOfF / 4; x++) {
-        numberOfF += "F";
-    }
+  int desBitSize;
+  String desValue;
+  String srcValue;
 
-    if (des.isRegister()) {
-        int desSize = registers.getBitSize(des);
+  // Checks if DESTINATION is either REGISTER or MEMORY
+	if ( des.isRegister() ) {
+		System.out.println("des: register");
+		desBitSize = registers.getBitSize(des);
+		desValue = registers.get(des);
+	} else if( des.isMemory() && src.isRegister() ){
+		System.out.println("des: memory");
+		desBitSize = registers.getBitSize(src);
+		desValue = memory.read(des, desBitSize);
+	} else {
+		System.out.println("des: memory");
+		desBitSize = memory.getBitSize(des);
+		desValue = memory.read(des, desBitSize);
+	}
 
+  // Checks if SOURCE is either REGISTER, MEMORY or IMMEDIATE
+  if ( src.isRegister() ) {
+		System.out.println("src: register");
+		srcValue = registers.get(src);
+	} else if ( src.isMemory() ) {
+		System.out.println("src: memory");
+		srcValue = memory.read(src, desBitSize);
+	} else if( src.isHex() ){
+		System.out.println("src: immediate");
+		srcValue = src.getValue();
+	}
 
-        if (src.isRegister() && desSize == registers.getBitSize(src)) {
-            System.out.println("ADD register to register");
-            String x = registers.get(src);
-            String y = registers.get(des);
+  Calculator calculator = new Calculator(registers, memory);
+  EFlags eFlags = registers.getEFlags();
 
-            if (registers.getBitSize(des) == registers.getBitSize(src)) {
-                // Addition in Binary Format
-                BigInteger biX = new BigInteger(x, 16);
-                BigInteger biY = new BigInteger(y, 16);
-                BigInteger result = biY.add(biX);
+  // ADDITION
+  BigInteger biDesValue = new BigInteger(desValue, 16);
+  BigInteger biSrcValue = new BigInteger(srcValue, 16);
+  BigInteger biResult = biDesValue.add(biSrcValue);
 
-                Calculator c = new Calculator(registers, memory);
-                if (result.toString(16).length() > registers.getBitSize(src) / 4) {
-                    resultingValue = result.toString(2).substring(1);
-                } else {
-                    resultingValue = result.toString(2);
-                }
-                registers.set(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des));
+  System.out.println(biDesValue.toString(16) + ": " + biDesValue.toString());
+	System.out.println(biSrcValue.toString(16) + ": " + biSrcValue.toString());
+	System.out.println(biResult.toString(16) + ": " + biResult.toString());
 
-                EFlags ef = registers.getEFlags();
-                BigInteger biC = new BigInteger(numberOfF, 16);
-                if (result.compareTo(biC) == 1)
-                    ef.setCarryFlag("1");
-                else
-                    ef.setCarryFlag("0");
+	String finalResult;
+	if ( biResult.toString(16).length() > desBitSize/4 )
+	  finalResult = biResult.toString(16).substring(1);
+	else
+	  finalResult = biResult.toString(16);
 
-                ef.setParityFlag(c.checkParity(result.toString(2)));
+	System.out.println("finalResult: " + finalResult);
 
-                ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
-                if (result.testBit(desSize - 1))
-                    ef.setSignFlag("1");
-                else
-                    ef.setSignFlag("0");
+	// Check if DESTINATION is either REGISTER or MEMORY
+	if ( des.isRegister() ) {
+		System.out.println("des: register; result out");
+		registers.set( des, finalResult );
+	} else if ( des.isMemory() ) {
+		System.out.println("des: memory; result out");
+		memory.write( des, finalResult, desBitSize );
+	}
 
-				
-                if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
-                    ef.setZeroFlag("1");
-                else
-                    ef.setZeroFlag("0");
+	String desHexValue = biDesValue.toString(16);
+	String srcHexValue = biSrcValue.toString(16);
+	String resultHexValue = biResult.toString(16);
 
-                ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, des).charAt(0)));
-            }
-        } else if (src.isHex()) {
-            String x = src.getValue();
-            String y = registers.get(des);
+	String desBinaryValue = biDesValue.toString(2);
+	String srcBinaryValue = biSrcValue.toString(2);
+	String resultBinaryValue = biResult.toString(2);
 
-            // Addition in Binary Format
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(y, 16);
-            BigInteger result = biY.add(biX);
-            // System.out.println("result" + result);
-            Calculator c = new Calculator(registers, memory);
-            if (result.toString(16).length() > registers.getBitSize(des) / 4) {
-                resultingValue = result.toString(2).substring(1);
-            } else {
-                resultingValue = result.toString(2);
-            }
-            registers.set(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des));
-            EFlags ef = registers.getEFlags();
-            BigInteger biC = new BigInteger(numberOfF, 16);
+	// Create the MAX HEX VALUE depends on the HEX SIZE of DESTINATION
+	String maxHexValue = "";
+	for(int i = 0; i < desBitSize/4; i++)
+		maxHexValue = maxHexValue + "F";
 
-            if (result.compareTo(biC) == 1)
-                ef.setCarryFlag("1");
-            else
-                ef.setCarryFlag("0");
+	System.out.println("maxHexValue: " + maxHexValue);
 
-            ef.setParityFlag(c.checkParity(result.toString(2)));
+	// Checks Carry Flag
+  BigInteger biCF = new BigInteger(maxHexValue, 16);
+  if ( biResult.compareTo(biCF) == 1 )
+    eFlags.setCarryFlag("1");
+  else
+    eFlags.setCarryFlag("0");
 
-            ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
+	// Checks Parity Flag
+	String resultBinaryValueZeroExtend = calculator.binaryZeroExtend(resultBinaryValue, des);
+	String parityFlag = calculator.checkParity( resultBinaryValueZeroExtend );
+	eFlags.setParityFlag( parityFlag );
 
-            if (result.testBit(desSize - 1))
-                ef.setSignFlag("1");
-            else
-                ef.setSignFlag("0");
+	// Checks Auxialiary Flag
+	 String auxialiaryFlag = calculator.checkAuxiliary( srcHexValue, desHexValue );
+	 eFlags.setAuxiliaryFlag( auxialiaryFlag );
 
-            if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
-                ef.setZeroFlag("1");
-            else
-                ef.setZeroFlag("0");
+	// Checks Sign Flag
+	if( biResult.testBit(desBitSize - 1) )
+	 	eFlags.setSignFlag("1");
+	else
+		eFlags.setSignFlag("0");
 
-            ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, des).charAt(0)));
-        } else if (src.isMemory()) {
+	// Checks Zero Flag
+	if( finalResult.equals("0") )
+		eFlags.setZeroFlag("1");
+	else
+		eFlags.setZeroFlag("0");
 
-            String x = memory.read(src, desSize);
-            String y = registers.get(des);
+	// Checks Overflow Flag
+  char desMSB = calculator.binaryZeroExtend(desBinaryValue, des).charAt(0);
+  char srcMSB = calculator.binaryZeroExtend(srcBinaryValue, src).charAt(0);
+  char resultMSB = calculator.binaryZeroExtend(resultBinaryValue, des).charAt(0);
 
-            // Addition in Binary Format
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(y, 16);
-            BigInteger result = biY.add(biX);
-            resultingValue = result.toString(2);
-
-            Calculator c = new Calculator(registers, memory);
-            registers.set(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des));
-
-            EFlags ef = registers.getEFlags();
-            BigInteger biC = new BigInteger(numberOfF, 16);
-            if (result.compareTo(biC) == 1)
-                ef.setCarryFlag("1");
-            else
-                ef.setCarryFlag("0");
-
-            ef.setParityFlag(c.checkParity(result.toString(2)));
-
-            ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
-
-
-            if (result.testBit(desSize - 1))
-                ef.setSignFlag("1");
-            else
-                ef.setSignFlag("0");
-
-
-            if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
-                ef.setZeroFlag("1");
-            else
-                ef.setZeroFlag("0");
-
-            ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, des).charAt(0)));
-        }
-    } else if (des.isMemory()) {
-
-        int desSize = memory.getBitSize(des);
-        if (src.isRegister()) {
-            System.out.println("ADD register to register");
-            String x = registers.get(src);
-            String y = memory.read(des, registers.getBitSize(src));
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(y, 16);
-            BigInteger result = biY.add(biX);
-            Calculator c = new Calculator(registers, memory);
-
-            if (result.toString(16).length() > registers.getBitSize(src) / 4) {
-                resultingValue = result.toString(2).substring(1);
-            } else {
-                resultingValue = result.toString(2);
-            }
-            memory.write(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des), desSize);
-            EFlags ef = registers.getEFlags();
-            BigInteger biC = new BigInteger(numberOfF, 16);
-
-            if (result.compareTo(biC) == 1)
-                ef.setCarryFlag("1");
-            else
-                ef.setCarryFlag("0");
-
-            ef.setParityFlag(c.checkParity(result.toString(2)));
-            ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
-            if (result.testBit(registers.getBitSize(src) - 1))
-                ef.setSignFlag("1");
-            else
-                ef.setSignFlag("0");
-
-            System.out.println("ADD register to register");
-            if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
-                ef.setZeroFlag("1");
-            else
-                ef.setZeroFlag("0");
-
-            ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, des).charAt(0)));
-        } else if (src.isHex()) {
-            System.out.println("ADD register to register");
-            String x = src.getValue();
-            String y = memory.read(des, desSize);
-
-            // Addition in Binary Format
-            BigInteger biX = new BigInteger(x, 16);
-            BigInteger biY = new BigInteger(y, 16);
-            BigInteger result = biY.add(biX);
-
-            Calculator c = new Calculator(registers, memory);
-
-            if (result.toString(16).length() > memory.getBitSize(des) / 4) {
-                resultingValue = result.toString(2).substring(1);
-            } else {
-                resultingValue = result.toString(2);
-            }
-            memory.write(des, c.binaryToHexString(c.binaryZeroExtend(resultingValue, des), des), desSize);
-
-            EFlags ef = registers.getEFlags();
-            BigInteger biC = new BigInteger(numberOfF, 16);
-            if (result.compareTo(biC) == 1)
-                ef.setCarryFlag("1");
-            else
-                ef.setCarryFlag("0");
-
-            ef.setParityFlag(c.checkParity(result.toString(2)));
-
-            ef.setAuxiliaryFlag(c.checkAuxiliary(biX.toString(16), biY.toString(16)));
-
-            if (result.testBit(desSize - 1))
-                ef.setSignFlag("1");
-            else
-                ef.setSignFlag("0");
-
-
-            if (c.binaryZeroExtend(resultingValue, des).equals(c.binaryZeroExtend("0", des)))
-                ef.setZeroFlag("1");
-            else
-                ef.setZeroFlag("0");
-
-            ef.setOverflowFlag(c.checkOverflowAdd(c.binaryZeroExtend(biY.toString(2), src).charAt(0), c.binaryZeroExtend(biX.toString(2), src).charAt(0), c.binaryZeroExtend(resultingValue, des).charAt(0)));
-        }
-    }
+  String overflowFlag = calculator.checkOverflowAddWithFlag( srcMSB, desMSB, resultMSB, eFlags.getOverflowFlag() );
+  eFlags.setOverflowFlag( overflowFlag );
 }
