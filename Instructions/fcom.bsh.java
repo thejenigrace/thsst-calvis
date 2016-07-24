@@ -5,7 +5,7 @@ execute(registers, memory) {
     Double d1 = Double.parseDouble(st0);
     Double d2 = Double.parseDouble(st1);
 
-    comparison(d1, d2);
+    comparison(registers, d1, d2);
 }
 
 execute(src, registers, memory) {

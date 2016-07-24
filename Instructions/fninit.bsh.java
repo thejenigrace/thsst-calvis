@@ -1,7 +1,13 @@
 execute(registers, memory) {
-    registers.x87().clear();
-	registers.x87().status().set("C1", '0');
-	registers.x87().status().set("C0", '0');
-	registers.x87().status().set("C2", '0');
-	registers.x87().status().set("C3", '0');
+  int top = registers.x87().status().getTop();
+
+  while ( top < 8 ) {
+    top++;
+    registers.x87().rotateBarrel(1); // rotate right to simulate pop
+  }
+
+  registers.x87().status().initializeValue();
+  registers.x87().control().initializeValue();
+  registers.x87().tag().initializeValue();
+  registers.x87().refreshST();
 }
