@@ -1,5 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
-
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -17,7 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Psubusw extends CalvisAnimation {
+public class Pmulhw extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -37,7 +36,7 @@ public class Psubusw extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 4;
-        Text sign = timeFunc.generateText(new Text("+"), 30, "#98777b");
+        Text sign = timeFunc.generateText(new Text("*"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";
@@ -48,7 +47,7 @@ public class Psubusw extends CalvisAnimation {
             dividedStrSrc += (srcStr.substring(0 + x, operationSize + x)) + "     ";
             dividedStrRes += (resultStr.substring(0 + x, operationSize + x)) + "     ";
         }
-//        String x = dividedStrDes.contains("sadasdad");
+
         Rectangle fake = new Rectangle(0,0, Color.web("#4b5320"));
 
         fake.setX(0);

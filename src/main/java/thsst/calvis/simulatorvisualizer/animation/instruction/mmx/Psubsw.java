@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Pmulhuw extends CalvisAnimation {
+public class Psubsw extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -36,19 +36,19 @@ public class Pmulhuw extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 4;
-        Text sign = timeFunc.generateText(new Text("* (Unsigned)"), 30, "#98777b");
+        Text sign = timeFunc.generateText(new Text("+"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";
         String dividedStrRes = "";
 
-        for(int x = 0; x < (size/2) / 2; x = x + operationSize){
+        for ( int x = 0; x < (size / 2) / 2; x = x + operationSize ) {
             dividedStrDes += desStr.substring(0 + x, operationSize + x) + "     ";
             dividedStrSrc += (srcStr.substring(0 + x, operationSize + x)) + "     ";
             dividedStrRes += (resultStr.substring(0 + x, operationSize + x)) + "     ";
         }
-
-        Rectangle fake = new Rectangle(0,0, Color.web("#4b5320"));
+//        String x = dividedStrDes.contains("sadasdad");
+        Rectangle fake = new Rectangle(0, 0, Color.web("#4b5320"));
 
         fake.setX(0);
         fake.setY(0);
@@ -78,7 +78,7 @@ public class Pmulhuw extends CalvisAnimation {
         resRec.setX(cordX);
         resRec.setY(srcRec.getY() + 50 + srcRec.getLayoutBounds().getHeight());
 
-        desLabel.setX(srcRec.getLayoutBounds().getWidth() / 2 - desLabel.getLayoutBounds().getWidth() / 2 + desRec.getX() );
+        desLabel.setX(srcRec.getLayoutBounds().getWidth() / 2 - desLabel.getLayoutBounds().getWidth() / 2 + desRec.getX());
         desLabel.setY(cordY + 20);
 
         srcLabel.setX(srcRec.getLayoutBounds().getWidth() / 2 - srcLabel.getLayoutBounds().getWidth() / 2 + srcRec.getX());
@@ -86,13 +86,6 @@ public class Pmulhuw extends CalvisAnimation {
 
         resLabel.setX(resRec.getLayoutBounds().getWidth() / 2 - resLabel.getLayoutBounds().getWidth() / 2 + srcRec.getX());
         resLabel.setY(srcRec.getY() + 50 + srcRec.getLayoutBounds().getHeight() + 20);
-
-
-
-
-
-
-
 
 
         desVals.setText(dividedStrDes);
@@ -104,7 +97,7 @@ public class Pmulhuw extends CalvisAnimation {
         parent.addAll(resLabel, srcLabel, desLabel);
 
         double desComp = desRec.getLayoutBounds().getWidth() / 2 - desVals.getLayoutBounds().getWidth() / 2 + desRec.getX();
-        desVals.setX( desComp);
+        desVals.setX(desComp);
         desVals.setY(cordY + 40);
 
         double srcComp = srcRec.getLayoutBounds().getWidth() / 2 - srcVals.getLayoutBounds().getWidth() / 2 + srcRec.getX();

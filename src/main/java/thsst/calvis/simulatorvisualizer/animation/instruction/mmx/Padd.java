@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
 
 
 import javafx.animation.Interpolator;

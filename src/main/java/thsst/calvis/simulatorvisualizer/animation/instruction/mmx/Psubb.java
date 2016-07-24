@@ -1,4 +1,4 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
 
 
 import javafx.collections.ObservableList;
@@ -17,7 +17,7 @@ import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Paddb extends CalvisAnimation {
+public class Psubb extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -37,7 +37,7 @@ public class Paddb extends CalvisAnimation {
         String resultStr = timeFunc.getValue(des, size);
         System.out.println(resultStr + " jhere here");
         int operationSize = 2;
-        Text sign = timeFunc.generateText(new Text("+"), 30, "#98777b");
+        Text sign = timeFunc.generateText(new Text("-"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
         String dividedStrDes = "";
         String dividedStrSrc = "";

@@ -1,4 +1,5 @@
-package thsst.calvis.simulatorvisualizer.animation.instruction.sse;
+package thsst.calvis.simulatorvisualizer.animation.instruction.mmx;
+
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -13,11 +14,10 @@ import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 import thsst.calvis.simulatorvisualizer.model.TimeLineFunction;
 
-
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Paddusw extends CalvisAnimation {
+public class Psubusw extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
