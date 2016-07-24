@@ -3,6 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="FPU conversion&#10;fixed fcom, fucom">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fclex.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fclex.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcom.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomi.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomip.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomip.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcomp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fcompp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fcompp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficom.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/ficomp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnclex.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnclex.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucom.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucom.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomi.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomi.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomip.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomip.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucomp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucomp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fucompp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fucompp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,8 +71,8 @@
       <file leaf-file-name="X87StatusRegister.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9710392">
-              <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.24701874">
+              <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -68,16 +83,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnvironmentBagFinder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBagFinder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="29" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -124,6 +129,7 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87TagRegister.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
       </list>
     </option>
   </component>
@@ -642,7 +648,7 @@
       <updated>1469192287576</updated>
       <workItem from="1469202905908" duration="3905000" />
       <workItem from="1469239567388" duration="14449000" />
-      <workItem from="1469333554867" duration="19798000" />
+      <workItem from="1469333554867" duration="21465000" />
     </task>
     <task id="LOCAL-00001" summary="Fix Workspace UI Changes">
       <created>1469193132741</created>
@@ -710,11 +716,17 @@
       <option name="project" value="LOCAL" />
       <updated>1469364447952</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="FPU conversion&#10;fixed fcom, fucom">
+      <created>1469364470609</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1469364470609</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38152000" />
+    <option name="totallyTimeSpent" value="39819000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -736,10 +748,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32520324" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3850227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34266263" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1505295" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1505295" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1109,26 +1121,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBagFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1141,10 +1137,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/model/EnvironmentBagFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20272572">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9710392">
-          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.24701874">
+          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
           <folding />
         </state>
       </provider>
