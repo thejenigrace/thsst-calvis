@@ -18,6 +18,13 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
  */
 public class Fcom extends CalvisAnimation {
 
+    private int type;
+
+    public Fcom(int type) {
+        super();
+        this.type = type;
+    }
+
     @Override
     public void animate(ScrollPane scrollPane) {
         this.root.getChildren().clear();
@@ -35,8 +42,12 @@ public class Fcom extends CalvisAnimation {
         // CODE HERE
         int width = 300;
         int height = 70;
-        Rectangle firstOperandRectangle = this.createRectangle(tokens[0], width, height);
-        Rectangle secondOperandRectangle = this.createRectangle(tokens[1], width, height);
+        Rectangle firstOperandRectangle = this.createRectangle(Token.REG, width, height);
+        Rectangle secondOperandRectangle;
+        if(tokens.length > 0)
+            secondOperandRectangle = this.createRectangle(tokens[0].getType(), width, height);
+        else
+            secondOperandRectangle = this.createRectangle(Token.REG, width, height);
 
         if ( firstOperandRectangle != null && secondOperandRectangle != null ) {
             firstOperandRectangle.setX(X);
@@ -53,27 +64,31 @@ public class Fcom extends CalvisAnimation {
                     firstOperandRectangle.getLayoutBounds().getWidth() + 50,
                     135, 30, Color.web("#798788", 1.0));
 
-            root.getChildren().addAll(firstOperandRectangle, secondOperandRectangle, minusCircle);
+            this.root.getChildren().addAll(firstOperandRectangle, secondOperandRectangle, minusCircle);
 
-            int desBitSize = 64;
+            int desBitSize = registers.getBitSize("ST0");
+            char C3 = registers.x87().status().getFlag("C3");
+            char C2 = registers.x87().status().getFlag("C2");
+            char C0 = registers.x87().status().getFlag("C0");
 
-            String description = "Flags Affected <- S[63:0]   OPERAND   D[63:0]\n" +
-                    "The result is discarded but the status flags are updated according to the results.\n";
-            String flagsAffected = "Flags Affected: ZF, PF, CF";
-            Text detailsText = new Text(X, Y * 2, description + flagsAffected);
-            Text firstOperandLabelText = this.createLabelText(X, Y, tokens[0]);
-            String firstOperandString = this.getSubLowerHexValueString(tokens[0], registers, memory, desBitSize, desBitSize/4);
-            Text firstOperandValueText = new Text(X, Y, firstOperandString);
-            Text secondOperandLabelText = this.createLabelText(X, Y, tokens[1]);
-            String secondOperandString = this.getSubLowerHexValueString(tokens[1], registers, memory, desBitSize, desBitSize/4);
-            Text secondOperandValueText = new Text(X, Y, secondOperandString);
+            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C0=" + C0 + "\n";
+            Text detailsText = new Text(X, Y * 2, conditionCodeFormat + this.getDescriptionString());
+            Text firstOperandLabelText = new Text(X, Y, "ST0");
+            Text firstOperandValueText = new Text(X, Y, registers.get("ST0"));
+            Text secondOperandLabelText, secondOperandValueText;
+            if (tokens.length > 0) {
+                secondOperandLabelText = this.createLabelText(X, Y, tokens[0]);
+                secondOperandValueText = this.createValueText(X, Y, tokens[0], registers, memory, desBitSize);
+            } else {
+                secondOperandLabelText = new Text(X, Y, "ST1");
+                secondOperandValueText = new Text(X, Y, registers.get("ST1"));
+            }
 
-            Text operandText = new Text(X, Y, getOperandString(registers.getEFlags().getZeroFlag(),
-                    registers.getEFlags().getParityFlag(), registers.getEFlags().getCarryFlag()));
-            operandText.setFont(Font.font(48));
+            Text operandText = new Text(X, Y, getOperandString(C3, C2, C0));
+            operandText.setFont(Font.font(40));
             operandText.setFill(Color.WHITESMOKE);
 
-            root.getChildren().addAll(detailsText, secondOperandLabelText, secondOperandValueText,
+            this.root.getChildren().addAll(detailsText, secondOperandLabelText, secondOperandValueText,
                     firstOperandLabelText, firstOperandValueText, operandText);
 
             // ANIMATION LOGIC
@@ -143,16 +158,29 @@ public class Fcom extends CalvisAnimation {
         }
     }
 
-    private String getOperandString(String zeroFlag, String parityFlag, String carryFlag) {
-        if ( zeroFlag.equals("1") && parityFlag.equals("1") && carryFlag.equals("1") ) {
-            return "unordered";
-        } else if ( zeroFlag.equals("1") && parityFlag.equals("0") && carryFlag.equals("0") ) {
-            return "=";
-        } else if ( zeroFlag.equals("0") && parityFlag.equals("0") && carryFlag.equals("1") ) {
-            return "<";
-        } else if ( zeroFlag.equals("0") && parityFlag.equals("0") && carryFlag.equals("0") ) {
-            return ">";
+    private String getDescriptionString() {
+        String flagsNote = "Flags not set if unmasked invalid-arithmetic-operand (#IA) exception is generated.";
+        switch ( this.type ) {
+            case 0: return flagsNote;
+            case 1: return "Afterwards, the register stack is popped.\n" + flagsNote;
+            case 2: return "Afterwards, the register stack is popped twice.\n" + flagsNote;
+            default: return "";
         }
-        return "";
+    }
+
+    private String getOperandString(char C3, char C2, char C0) {
+        String conditionCode = "" + C3 + C2 + C0;
+        switch ( conditionCode ) {
+            case "000":
+                return ">";
+            case "001":
+                return "<";
+            case "100":
+                return "=";
+            case "111":
+                return "Unordered";
+            default:
+                return "";
+        }
     }
 }

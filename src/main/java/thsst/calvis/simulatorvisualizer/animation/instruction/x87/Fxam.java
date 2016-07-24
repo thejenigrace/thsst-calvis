@@ -54,8 +54,6 @@ public class Fxam extends CalvisAnimation {
 
         this.root.getChildren().addAll(desRectangle, srcRectangle, operandCircle);
 
-        int desBitSize = registers.getBitSize("ST0");
-
         String description = "The C1 flag is set to the sign of the value in ST0, regardless of whether " +
                 "the register is empty or full";
         Text detailsText = new Text(X, Y * 2, description);
@@ -65,8 +63,7 @@ public class Fxam extends CalvisAnimation {
         char C3 = registers.x87().status().getFlag("C3");
         char C2 = registers.x87().status().getFlag("C2");
         char C0 = registers.x87().status().getFlag("C0");
-        Text srcValueText = new Text(X, Y,
-                this.getConditionCodeClass(C3, C2, C0));
+        Text srcValueText = new Text(X, Y, this.getConditionCodeClass(C3, C2, C0));
 
         Text operandText = new Text(X, Y, "->");
         operandText.setFont(Font.font(48));

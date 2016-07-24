@@ -52,7 +52,7 @@ execute(des, src, registers, memory) {
 
   System.out.println(biResult.toString(16) + ": " + biResult.toString());
 
-	String finalResult = "";
+	String finalResult;
 	if ( biResult.toString(16).length() > desBitSize/4 )
     finalResult = biResult.toString(16).substring(1);
   else

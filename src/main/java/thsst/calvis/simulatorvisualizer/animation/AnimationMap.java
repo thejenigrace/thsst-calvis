@@ -358,7 +358,12 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
 
     private void generatex87Comparison() {
         this.put("FXAM", new Fxam());
-        this.put("FCOM", new Fcom());
+        this.put("FCOM", new Fcom(0));
+        this.put("FCOMP", new Fcom(1));
+        this.put("FCOMPP", new Fcom(2));
+        this.put("FUCOM", new Fcom(0));
+        this.put("FUCOMP", new Fcom(1));
+        this.put("FUCOMPP", new Fcom(2));
     }
 
     private void generatex87Arithmetic(){
