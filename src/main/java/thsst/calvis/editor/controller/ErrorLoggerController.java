@@ -2,6 +2,7 @@ package thsst.calvis.editor.controller;
 
 import com.github.pfmiles.dropincc.DropinccException;
 import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
+import thsst.calvis.configuration.model.exceptions.IncorrectParameterException;
 import thsst.calvis.editor.view.AssemblyComponent;
 import thsst.calvis.editor.model.ErrorLog;
 import javafx.collections.FXCollections;
@@ -59,6 +60,10 @@ public class ErrorLoggerController extends AssemblyComponent implements Initiali
             String type = e.getClass().getSimpleName();
             String cause = "N/A";
             String message = "N/A";
+
+            if ( e instanceof IncorrectParameterException ) {
+                cause = "Line: " + ((IncorrectParameterException) e).getLineNumber();
+            }
             if ( e.getCause() != null ) {
                 cause = e.getCause().getClass().getSimpleName();
                 message = e.getCause().getLocalizedMessage();

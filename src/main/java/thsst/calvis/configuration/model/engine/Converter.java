@@ -149,6 +149,13 @@ public class Converter {
         return b.longValue();
     }
 
+    public String to64BitSignedIntegerHex() {
+        BigInteger realInt = new BigInteger(value);
+        String intToHex = Long.toHexString(realInt.longValue());
+        intToHex = zeroExtendHex(intToHex, 64);
+        return intToHex;
+    }
+
     public String to64BitUnsignedInteger() {
         Long l = Long.parseUnsignedLong(value, 16);
         return Long.toUnsignedString(l);

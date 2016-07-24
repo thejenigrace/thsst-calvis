@@ -79,16 +79,11 @@ public class X87Handler {
             // underflow
             this.status.setStackFaultFlag();
             this.status.setInvalidOperationFlag();
+            this.status.set("C1", '0');
         }
 
         rotateBarrel(RIGHT);
-        barrel[0] = 0.0;
-
-        for ( int i = 0; i < barrel.length; i++ ) {
-            if ( barrel[i] == 0.0 ) {
-                this.tag.setTag(String.valueOf(i), X87TagRegister.EMPTY);
-            }
-        }
+        this.tag.setTag(String.valueOf(top), X87TagRegister.EMPTY);
 
         if ( top == 7 ) {
             top = 0;
@@ -110,22 +105,35 @@ public class X87Handler {
     public void setStackValue(String stIndex, String value) {
         double val = Double.parseDouble(value);
         int barrelIndex = 7 - Integer.parseInt(stIndex);
+
         barrel[barrelIndex] = val;
 
     }
 
-    private void rotateBarrel(int direction) {
-        if ( direction == LEFT ){
+    public void rotateBarrel(int direction) {
+        if ( direction == LEFT ) {
             // to the left
+            double a = barrel[0];
             for ( int i = 0; i < barrel.length - 1; i++ ) {
-                barrel[i] = barrel[i+1];
+                barrel[i] = barrel[i + 1];
             }
+            barrel[barrel.length-1] = a;
         } else { // to the right
+            double a = barrel[barrel.length-1];
             for ( int i = barrel.length - 1; i > 0; i-- ) {
-                barrel[i] = barrel[i-1];
+                barrel[i] = barrel[i - 1];
             }
+            barrel[0] = a;
         }
 
+    }
+
+    public void refreshST() throws DataTypeMismatchException {
+        int index = 0;
+        for ( int i = 7; i >= 0; i-- ) {
+            registerList.set("ST" + index, String.valueOf(barrel[i]));
+            index++;
+        }
     }
 
     public X87StatusRegister status() {

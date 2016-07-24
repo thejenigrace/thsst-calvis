@@ -167,7 +167,7 @@ public class FileEditorTabPane {
             // check whether file is already opened
             FileEditorTab fileEditorTab = this.findFileEditor(path);
             if ( fileEditorTab == null ) {
-                System.out.println("Already Open!");
+//                System.out.println("Already Open!");
                 fileEditorTab = this.createFileEditor(path);
 
                 this.tabPane.getTabs().add(fileEditorTab.getTab());
@@ -246,7 +246,7 @@ public class FileEditorTabPane {
             return true;
 
         Alert alert = MainApp.createAlert(Alert.AlertType.CONFIRMATION, "Close",
-                "''{0}'' has been modifiedc. Save changes?", fileEditorTab.getTab().getText());
+                "''{0}'' has been modified. Save changes?", fileEditorTab.getTab().getText());
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 
         ButtonType result = alert.showAndWait().get();
