@@ -2,6 +2,7 @@ package thsst.calvis.simulatorvisualizer.animation;
 
 import thsst.calvis.simulatorvisualizer.animation.instruction.gp.*;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.*;
+import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movd;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Movq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.mmx.Pcmpeq;
 import thsst.calvis.simulatorvisualizer.animation.instruction.sse.*;
