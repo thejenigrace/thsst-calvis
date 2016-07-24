@@ -19,71 +19,56 @@ public class Movq extends CalvisAnimation {
     @Override
     public void animate(ScrollPane scrollPane) {
         this.root.getChildren().clear();
-//        tab.setContent(root);
-        scrollPane.setContent(root);
+        scrollPane.setContent(this.root);
 
         RegisterList registers = this.currentInstruction.getRegisters();
         Memory memory = this.currentInstruction.getMemory();
 
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ ) {
+//        for ( int i = 0; i < tokens.length; i++ ) {
 //            System.out.println(tokens[i] + " : " + tokens[i].getClass());
-        }
+//        }
 
         // CODE HERE
-        int width = 140;
+        int width = 300;
         int height = 70;
         Rectangle desRectangle = this.createRectangle(tokens[0], width, height);
         Rectangle srcRectangle = this.createRectangle(tokens[1], width, height);
 
         if ( desRectangle != null && srcRectangle != null ) {
-            desRectangle.setX(100);
-            desRectangle.setY(100);
+            desRectangle.setX(X);
+            desRectangle.setY(Y);
             desRectangle.setArcWidth(10);
             desRectangle.setArcHeight(10);
 
-            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.widthProperty().getValue() + 100);
-            srcRectangle.setY(100);
+            srcRectangle.setX(desRectangle.xProperty().getValue() + desRectangle.widthProperty().getValue() + X);
+            srcRectangle.setY(Y);
             srcRectangle.setArcWidth(10);
             srcRectangle.setArcHeight(10);
 
-            root.getChildren().addAll(desRectangle, srcRectangle);
+            this.root.getChildren().addAll(desRectangle, srcRectangle);
 
-            int desSize = 0;
-            if ( tokens[0].getType() == Token.REG )
+            int desSize;
+            if ( tokens[0].getType().equals(Token.REG) )
                 desSize = registers.getBitSize(tokens[0]);
-            else if ( tokens[0].getType() == Token.MEM && tokens[1].getType() == Token.REG )
+            else if ( tokens[0].getType().equals(Token.MEM) && tokens[1].getType().equals(Token.REG) )
                 desSize = registers.getBitSize(tokens[1]);
             else
                 desSize = memory.getBitSize(tokens[0]);
 
-            Text desLabelText = this.createLabelText(tokens[0]);
-            Text desValueText = this.createValueText(tokens[0], registers, memory, desSize);
-            Text srcLabelText = this.createLabelText(tokens[1]);
-            Text srcValueText = this.createValueText(tokens[1], registers, memory, desSize);
+            Text desLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text desValueText = this.createValueText(X, Y, tokens[0], registers, memory, desSize);
+            Text srcLabelText = this.createLabelText(X, Y, tokens[1]);
+            Text srcValueText = this.createValueText(X, Y, tokens[1], registers, memory, desSize);
 
-            desLabelText.setX(100);
-            desLabelText.setY(100);
-
-            desValueText.setX(100);
-            desValueText.setY(100);
-            desValueText.setWrappingWidth(srcRectangle.getLayoutBounds().getWidth() - 20);
-
-            srcLabelText.setX(100);
-            srcLabelText.setY(100);
-
-            srcValueText.setWrappingWidth(srcRectangle.getLayoutBounds().getWidth() - 20);
-            srcValueText.setX(100);
-            srcValueText.setY(100);
-
-            root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
+            this.root.getChildren().addAll(desLabelText, desValueText, srcLabelText, srcValueText);
 
             // ANIMATION LOGIC
             TranslateTransition desLabelTransition = new TranslateTransition();
-            TranslateTransition desTransition = new TranslateTransition(new Duration(1000), desValueText);
+            TranslateTransition desValueTransition = new TranslateTransition(new Duration(1000), desValueText);
             TranslateTransition srcLabelTransition = new TranslateTransition();
-            TranslateTransition srcTransition = new TranslateTransition();
+            TranslateTransition srcValueTransition = new TranslateTransition();
 
             // Destination label static
             desLabelTransition.setNode(desLabelText);
@@ -95,15 +80,15 @@ public class Movq extends CalvisAnimation {
             desLabelTransition.toYProperty().bind(desLabelTransition.fromYProperty());
 
             // Destination value moving
-            desTransition.setInterpolator(Interpolator.LINEAR);
-            desTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+            desValueTransition.setInterpolator(Interpolator.LINEAR);
+            desValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + 100)
                     .add((srcRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-            desTransition.fromYProperty().bind(srcRectangle.translateYProperty()
+            desValueTransition.fromYProperty().bind(srcRectangle.translateYProperty()
                     .add(srcRectangle.getLayoutBounds().getHeight() / 1.5));
-            desTransition.toXProperty().bind(desRectangle.translateXProperty()
+            desValueTransition.toXProperty().bind(desRectangle.translateXProperty()
                     .add((desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
-            desTransition.toYProperty().bind(desTransition.fromYProperty());
+            desValueTransition.toYProperty().bind(desValueTransition.fromYProperty());
 
             // Source label static
             srcLabelTransition.setNode(srcLabelText);
@@ -115,19 +100,19 @@ public class Movq extends CalvisAnimation {
             srcLabelTransition.toYProperty().bind(srcLabelTransition.fromYProperty());
 
             // Source value static
-            srcTransition.setNode(srcValueText);
-            srcTransition.fromXProperty().bind(srcRectangle.translateXProperty()
+            srcValueTransition.setNode(srcValueText);
+            srcValueTransition.fromXProperty().bind(srcRectangle.translateXProperty()
                     .add(desRectangle.getLayoutBounds().getWidth() + 100)
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
-            srcTransition.fromYProperty().bind(desTransition.fromYProperty());
-            srcTransition.toXProperty().bind(srcTransition.fromXProperty());
-            srcTransition.toYProperty().bind(srcTransition.fromYProperty());
+            srcValueTransition.fromYProperty().bind(desValueTransition.fromYProperty());
+            srcValueTransition.toXProperty().bind(srcValueTransition.fromXProperty());
+            srcValueTransition.toYProperty().bind(srcValueTransition.fromYProperty());
 
             // Play 1000 milliseconds of animation
             desLabelTransition.play();
             srcLabelTransition.play();
-            desTransition.play();
-            srcTransition.play();
+            desValueTransition.play();
+            srcValueTransition.play();
         }
     }
 }
