@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Goodwin Chua on 5 Jul 2016.
  */
-public class Fprem extends CalvisAnimation {
+public class Fninit extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -30,11 +30,7 @@ public class Fprem extends CalvisAnimation {
         Calculator c = new Calculator(registers, memory);
         Token[] tokens = currentInstruction.getParameterTokens();
         String notesStr = "Additional Notes: \n" +
-                "\nC1 is set to 0 if stack underflow." +
-                "\nC1 is set to 1 if result was rounded up; Else set to 0." +
-                "\nC3 is set to the bit 1 of the quotient" +
-                "\nC0 is set to the bit 2 of the quotient";
-
+                "\nC0, C1, C2, C3 is set to 0 .";
         Text poppedValue = timeFunc.generateText(new Text(notesStr), 15, "000000");
         Token des;
         Token src;
@@ -57,13 +53,16 @@ public class Fprem extends CalvisAnimation {
         switch(tokens.length){
             case 0:
                 bitSize = registers.getBitSize("ST0");
-                sourceStr = registers.get("ST0");
-                desStr = finder.getRegister("ST0") + " mod " + finder.getRegister("ST1");
-                desLabel = this.createLabelText("ST0");
-                srcLabel = this.createLabelText("ST0");
+                int top = (registers.x87().status().getTop() + 1) % 8;
+                desStr = "FPU TAG REGISTER: " + registers.x87().tag().getValue() + "\n"
+                          + "FPU CONTROL REGISTER: " + registers.x87().control().getValue() + "\n"
+                          + "FPU STATUS REGISTER: " + registers.x87().status().getValue() + "\n"
+                          + "FPU STACK POINTER: " + "ST" + registers.x87().status().getTop();
+                desLabel = this.createLabelText("SET THE FF VALUE TO:");
+//                srcLabel = this.createLabelText("RESULTING CLEAR:");
 //                resLabel = this.createLabelText("ST0");
-                desRec = this.createRectangle("ST0", 200, 100);
-                srcRec = this.createRectangle("ST0", 200, 100);
+                desRec = this.createRectangle("ST0", 250, 100);
+                srcRec = this.createRectangle("ST0", 180, 80);
 //                resRec = this.createRectangle("ST0", 200, 60);
 //                resValue = new Text(registers.get("ST0"));
 
@@ -100,10 +99,10 @@ public class Fprem extends CalvisAnimation {
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
-        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
+//        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
-        parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
+        parent.addAll(fake, desRec, desValue, desLabel, poppedValue);
         fake.setX(0);
         fake.setY(0);
 
@@ -123,13 +122,13 @@ public class Fprem extends CalvisAnimation {
         desLabel.setX(posX + (desRec.getWidth() / 2 - desLabel.getLayoutBounds().getWidth() / 2) );
         desLabel.setY(posY + 20);
 
-        desValue.setX(posX + (desRec.getWidth() / 2 - desValue.getLayoutBounds().getWidth() / 2));
+        desValue.setX(posX + 40);
         desValue.setY(posY + 45);
 
         srcLabel.setX(posX + (srcRec.getWidth() / 2 - srcLabel.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space);
         srcLabel.setY(posY + 20);
 
-        srcValue.setX(posX + (srcRec.getWidth() / 2 - srcValue.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space);
+        srcValue.setX(posX + 40);
         srcValue.setY(posY + 45);
 
         resLabel.setX(posX + (resRec.getWidth() / 2 - resLabel.getLayoutBounds().getWidth() / 2) + (desRec.getWidth() + space) * 2);

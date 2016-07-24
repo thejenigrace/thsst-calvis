@@ -50,7 +50,7 @@ public class Fprem1 extends CalvisAnimation {
         Rectangle desRec = new Rectangle();
         Rectangle srcRec = new Rectangle();
         Rectangle resRec = new Rectangle();
-        Text sign = timeFunc.generateText(new Text("Transfer To ->"), 18, "000000");
+        Text sign = timeFunc.generateText(new Text("Transfer To ->"), 14, "000000");
         Text equal = timeFunc.generateText(new Text("="), 18, "000000");
         ArrayList<Text> notes = new ArrayList<>();
 
@@ -60,12 +60,14 @@ public class Fprem1 extends CalvisAnimation {
                 sourceStr = registers.get("ST0");
                 String st1Value = registers.get("ST1");
 
-                desStr = finder.getRegister("ST0") + " -  ( " + " ( Rounded( " + sourceStr  + " / " + st1Value + " )  * " + st1Value + ")" ;
+                desStr = finder.getRegister("ST0") + " -  ( Q * " + finder.getRegister("ST1") + " )\n\n"
+                         + "Q -> Rounded( " + finder.getRegister("ST0") + "  /  " + finder.getRegister("ST1") + " )";
+
                 desLabel = this.createLabelText("ST0");
                 srcLabel = this.createLabelText("ST0");
 //                resLabel = this.createLabelText("ST0");
-                desRec = this.createRectangle("ST0", 200, 60);
-                srcRec = this.createRectangle("ST0", 200, 60);
+                desRec = this.createRectangle("ST0", 265, 120);
+                srcRec = this.createRectangle("ST0", 265, 80);
 
 //                resRec = this.createRectangle("ST0", 200, 60);
 //                resValue = new Text(registers.get("ST0"));
@@ -102,7 +104,7 @@ public class Fprem1 extends CalvisAnimation {
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
-        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 20);
+        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
         System.out.println(desValue.getText() + " :(");
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
@@ -111,13 +113,13 @@ public class Fprem1 extends CalvisAnimation {
 
         double posX = 30;
         double posY = 20;
-        double space = 160;
+        double space = 210;
 
         desRec.setX(posX);
         desRec.setY(posY);
 
-        srcRec.setX(posX + space + desRec.getWidth());
-        srcRec.setY(posY);
+        srcRec.setX(posX + space / 2 + desRec.getWidth() + 20);
+        srcRec.setY(posY + desRec.getHeight() / 4);
 
         resRec.setX(posX + space + desRec.getWidth() + srcRec.getWidth() + space);
         resRec.setY(posY);
@@ -128,26 +130,26 @@ public class Fprem1 extends CalvisAnimation {
         desValue.setX(posX + (desRec.getWidth() / 2 - desValue.getLayoutBounds().getWidth() / 2));
         desValue.setY(posY + 45);
 
-        srcLabel.setX(posX + (srcRec.getWidth() / 2 - srcLabel.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space);
-        srcLabel.setY(posY + 20);
+        srcLabel.setX(posX + (srcRec.getWidth() / 2 - srcLabel.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space / 2 + 30);
+        srcLabel.setY(posY + 20 + desRec.getHeight() / 4);
 
-        srcValue.setX(posX + (srcRec.getWidth() / 2 - srcValue.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space);
-        srcValue.setY(posY + 45);
+        srcValue.setX(posX + (srcRec.getWidth() / 2 - srcValue.getLayoutBounds().getWidth() / 2) + desRec.getWidth() + space / 2 + 30);
+        srcValue.setY(posY + 45 + desRec.getHeight() / 4);
 
         resLabel.setX(posX + (resRec.getWidth() / 2 - resLabel.getLayoutBounds().getWidth() / 2) + (desRec.getWidth() + space) * 2);
         resLabel.setY(posY + 20);
 
         resValue.setX(posX + (resRec.getWidth() / 2 - resValue.getLayoutBounds().getWidth() / 2) + (desRec.getWidth() + space) * 2);
-        resValue.setY(posY + 45);
+        resValue.setY(posY + 55);
 
         sign.setX(posX + 20 + desRec.getWidth());
-        sign.setY(posY + 45);
+        sign.setY(posY + desRec.getHeight() / 2);
 
         equal.setX(posX + space / 4 + (desRec.getWidth()) * 2 + space);
         equal.setY(posY + 45);
 
         poppedValue.setX(posX + 5);
-        poppedValue.setY(posY + desRec.getHeight() + 30);
+        poppedValue.setY(posY + desRec.getHeight() + 45);
 
     }
 }
