@@ -15,7 +15,11 @@ execute(des, src, registers, memory) {
         d2 = Double.parseDouble(st1);
     }
 
-    if ( d1.compareTo(d2) > 0 ) {
+    if ( d1.isNaN() || d2.isNaN() ) {
+        registers.getEFlags().setZeroFlag("1");
+        registers.getEFlags().setParityFlag("1");
+        registers.getEFlags().setCarryFlag("1");
+    } else if ( d1.compareTo(d2) > 0 ) {
         registers.getEFlags().setZeroFlag("0");
         registers.getEFlags().setParityFlag("0");
         registers.getEFlags().setCarryFlag("0");
@@ -27,10 +31,6 @@ execute(des, src, registers, memory) {
         registers.getEFlags().setZeroFlag("1");
         registers.getEFlags().setParityFlag("0");
         registers.getEFlags().setCarryFlag("0");
-    } else if ( d1.isNaN() || d2.isNaN() ) {
-        registers.getEFlags().setZeroFlag("1");
-        registers.getEFlags().setParityFlag("1");
-        registers.getEFlags().setCarryFlag("1");
     }
 
     registers.x87().status().set("C1", '0');

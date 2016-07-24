@@ -35,7 +35,7 @@ public class X87StatusRegister extends X87Register {
 
     public void clearExceptions() {
         this.charArray[0] = '0';
-        for ( int i = 7; i < 16; i++ ) {
+        for ( int i = 8; i < 16; i++ ) {
             this.charArray[i] = '0';
         }
     }
