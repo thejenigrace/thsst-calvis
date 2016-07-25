@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer">
+    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer&#10;fixed fpu bcd instructions">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Registers/register64.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbld.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbld.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SaveFile/savelist.txt" afterPath="$PROJECT_DIR$/SaveFile/savelist.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fdecstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fdecstp.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fincstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fincstp.bsh.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,41 +36,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="X87ControlRegister.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java">
+      <file leaf-file-name="register_list.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Registers/register_list.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+              <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Converter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
+      <file leaf-file-name="register64.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Registers/register64.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07325383">
-              <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParserVariableFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="128" column="66" selection-start-line="128" selection-start-column="66" selection-end-line="128" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="164" column="62" selection-start-line="164" selection-start-column="62" selection-end-line="164" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.8398637">
+              <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -90,7 +69,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="merge-july-22-2016" />
+        <entry key="$PROJECT_DIR$" value="fpu-goodwin" />
       </map>
     </option>
   </component>
@@ -125,6 +104,8 @@
         <option value="$PROJECT_DIR$/Memory/config.csv" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
+        <option value="$PROJECT_DIR$/Registers/register_list.csv" />
+        <option value="$PROJECT_DIR$/Registers/register64.csv" />
       </list>
     </option>
   </component>
@@ -276,6 +257,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thsst-calvis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Registers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -553,7 +548,7 @@
       <updated>1469192287576</updated>
       <workItem from="1469202905908" duration="3905000" />
       <workItem from="1469239567388" duration="14449000" />
-      <workItem from="1469333554867" duration="63591000" />
+      <workItem from="1469333554867" duration="65741000" />
     </task>
     <task id="LOCAL-00001" summary="Fix Workspace UI Changes">
       <created>1469193132741</created>
@@ -639,11 +634,17 @@
       <option name="project" value="LOCAL" />
       <updated>1469450525395</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer&#10;fixed fpu bcd instructions">
+      <created>1469459043825</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1469459043826</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81945000" />
+    <option name="totallyTimeSpent" value="84095000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -736,7 +737,8 @@
     <MESSAGE value="FPU conversion&#10;fixed fcom, fucom" />
     <MESSAGE value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values" />
     <MESSAGE value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer" />
-    <option name="LAST_COMMIT_MESSAGE" value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer" />
+    <MESSAGE value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer&#10;fixed fpu bcd instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer&#10;fixed fpu bcd instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -747,16 +749,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/img/calvis_logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/img/calvis_logo_512x512.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/simulatorvisualizer/animation/instruction/gp/Cmov.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1564,14 +1556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="164" column="62" selection-start-line="164" selection-start-column="62" selection-end-line="164" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Register.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44974446">
@@ -1596,18 +1580,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07325383">
+          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.12606473">
           <caret line="128" column="66" selection-start-line="128" selection-start-column="66" selection-end-line="128" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07325383">
-          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.21805792">
+          <caret line="164" column="62" selection-start-line="164" selection-start-column="62" selection-end-line="164" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Registers/register_list.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Registers/register64.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8398637">
+          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding />
         </state>
       </provider>
