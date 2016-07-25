@@ -84,8 +84,8 @@ pushf,Instructions/pushf.bsh.java,1,0,0,,,
 pushfd,Instructions/pushfd.bsh.java,1,0,0,,,
 rcl,Instructions/rcl.bsh.java,1,0,2,r/m,c/i,
 rcr,Instructions/rcr.bsh.java,1,0,2,r/m,c/i,
-ret,Instructions/ret.bsh.java,3,0,1,i
-ret,Instructions/ret.bsh.java,3,0,0
+ret,Instructions/ret.bsh.java,3,0,1,i,,
+ret,Instructions/ret.bsh.java,3,0,0,,,
 rol,Instructions/rol.bsh.java,1,0,2,r/m,c/i,
 ror,Instructions/ror.bsh.java,1,0,2,r/m,c/i,
 sahf,Instructions/sahf.bsh.java,1,0,0,,,
