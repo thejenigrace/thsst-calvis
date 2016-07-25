@@ -21,7 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import thsst.calvis.MainApp;
-import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
+import thsst.calvis.configuration.model.engine.ConfiguratorEnvironment;
 import thsst.calvis.editor.view.FileEditorTab;
 import thsst.calvis.editor.view.FileEditorTabPane;
 import thsst.calvis.editor.view.TextEditor;

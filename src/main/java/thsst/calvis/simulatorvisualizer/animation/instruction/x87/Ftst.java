@@ -16,14 +16,7 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Jennica on 23/07/2016.
  */
-public class Fcom extends CalvisAnimation {
-
-    private int type;
-
-    public Fcom(int type) {
-        super();
-        this.type = type;
-    }
+public class Ftst extends CalvisAnimation {
 
     @Override
     public void animate(ScrollPane scrollPane) {
@@ -43,11 +36,7 @@ public class Fcom extends CalvisAnimation {
         int width = 300;
         int height = 70;
         Rectangle firstOperandRectangle = this.createRectangle(Token.REG, width, height);
-        Rectangle secondOperandRectangle;
-        if(tokens.length > 0)
-            secondOperandRectangle = this.createRectangle(tokens[0].getType(), width, height);
-        else
-            secondOperandRectangle = this.createRectangle(Token.REG, width, height);
+        Rectangle secondOperandRectangle = this.createRectangle(Token.HEX, width, height);
 
         if ( firstOperandRectangle != null && secondOperandRectangle != null ) {
             firstOperandRectangle.setX(X);
@@ -71,18 +60,12 @@ public class Fcom extends CalvisAnimation {
             char C2 = registers.x87().status().getFlag("C2");
             char C0 = registers.x87().status().getFlag("C0");
 
-            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C0=" + C0 + "\n";
-            Text detailsText = new Text(X, Y * 2, conditionCodeFormat + this.getDescriptionString());
+            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C1= 0; C0=" + C0 + "\n";
+            Text detailsText = new Text(X, Y * 2, conditionCodeFormat);
             Text firstOperandLabelText = new Text(X, Y, "ST0");
             Text firstOperandValueText = new Text(X, Y, this.finder.getRegister("ST0"));
-            Text secondOperandLabelText, secondOperandValueText;
-            if (tokens.length > 0) {
-                secondOperandLabelText = this.createLabelText(X, Y, tokens[0]);
-                secondOperandValueText = this.createValueTextUsingFinderNotHex(X, Y, tokens[0], desBitSize);
-            } else {
-                secondOperandLabelText = new Text(X, Y, "ST1");
-                secondOperandValueText = new Text(X, Y, this.finder.getRegister("ST1"));
-            }
+            Text secondOperandLabelText = new Text(X, Y, "");
+            Text secondOperandValueText = new Text(X, Y, "0.0");
 
             Text operandText = new Text(X, Y, getOperandString(C3, C2, C0));
             operandText.setFont(Font.font(40));
@@ -155,16 +138,6 @@ public class Fcom extends CalvisAnimation {
             secondOperandLabelTransition.play();
             secondOperandValueTransition.play();
             operandTransition.play();
-        }
-    }
-
-    private String getDescriptionString() {
-        String flagsNote = "Flags not set if unmasked invalid-arithmetic-operand (#IA) exception is generated.";
-        switch ( this.type ) {
-            case 0: return flagsNote;
-            case 1: return "Afterwards, the register stack is popped.\n" + flagsNote;
-            case 2: return "Afterwards, the register stack is popped twice.\n" + flagsNote;
-            default: return "";
         }
     }
 

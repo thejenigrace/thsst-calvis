@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.Converter;
 import thsst.calvis.configuration.model.engine.Memory;
 import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
@@ -16,11 +17,11 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Jennica on 23/07/2016.
  */
-public class Fcom extends CalvisAnimation {
+public class Ficom extends CalvisAnimation {
 
     private int type;
 
-    public Fcom(int type) {
+    public Ficom(int type) {
         super();
         this.type = type;
     }
@@ -44,7 +45,7 @@ public class Fcom extends CalvisAnimation {
         int height = 70;
         Rectangle firstOperandRectangle = this.createRectangle(Token.REG, width, height);
         Rectangle secondOperandRectangle;
-        if(tokens.length > 0)
+        if ( tokens.length > 0 )
             secondOperandRectangle = this.createRectangle(tokens[0].getType(), width, height);
         else
             secondOperandRectangle = this.createRectangle(Token.REG, width, height);
@@ -66,22 +67,28 @@ public class Fcom extends CalvisAnimation {
 
             this.root.getChildren().addAll(firstOperandRectangle, secondOperandRectangle, minusCircle);
 
-            int desBitSize = registers.getBitSize("ST0");
+            int srcBitSize = memory.getBitSize(tokens[0]);
             char C3 = registers.x87().status().getFlag("C3");
             char C2 = registers.x87().status().getFlag("C2");
             char C0 = registers.x87().status().getFlag("C0");
 
-            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C0=" + C0 + "\n";
+            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C1= 0; C0=" + C0 + "\n";
             Text detailsText = new Text(X, Y * 2, conditionCodeFormat + this.getDescriptionString());
             Text firstOperandLabelText = new Text(X, Y, "ST0");
             Text firstOperandValueText = new Text(X, Y, this.finder.getRegister("ST0"));
-            Text secondOperandLabelText, secondOperandValueText;
-            if (tokens.length > 0) {
-                secondOperandLabelText = this.createLabelText(X, Y, tokens[0]);
-                secondOperandValueText = this.createValueTextUsingFinderNotHex(X, Y, tokens[0], desBitSize);
-            } else {
-                secondOperandLabelText = new Text(X, Y, "ST1");
-                secondOperandValueText = new Text(X, Y, this.finder.getRegister("ST1"));
+            Text secondOperandLabelText = this.createLabelText(X, Y, tokens[0]);
+            Text secondOperandValueText = new Text();
+            secondOperandValueText.setX(X);
+            secondOperandValueText.setY(Y);
+            try {
+                String srcValue = this.finder.read(tokens[0], srcBitSize);
+                Converter converter = new Converter(srcValue);
+                if ( srcBitSize == 16 )
+                    secondOperandValueText.setText("" + converter.to16BitSignedInteger());
+                else if ( srcBitSize == 32 )
+                    secondOperandValueText.setText("" + converter.to32BitSignedInteger());
+            } catch ( Exception e ) {
+                e.printStackTrace();
             }
 
             Text operandText = new Text(X, Y, getOperandString(C3, C2, C0));
@@ -159,12 +166,12 @@ public class Fcom extends CalvisAnimation {
     }
 
     private String getDescriptionString() {
-        String flagsNote = "Flags not set if unmasked invalid-arithmetic-operand (#IA) exception is generated.";
         switch ( this.type ) {
-            case 0: return flagsNote;
-            case 1: return "Afterwards, the register stack is popped.\n" + flagsNote;
-            case 2: return "Afterwards, the register stack is popped twice.\n" + flagsNote;
-            default: return "";
+            case 1:
+                return "Afterwards, the register stack is popped.\n" +
+                        "To pop the register stack, the processor marks the ST0 register empty and increments the stack pointer by 1.\n";
+            default:
+                return "";
         }
     }
 

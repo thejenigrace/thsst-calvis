@@ -34,7 +34,7 @@ execute(src, registers, memory) {
     }
 
     comparison(registers, d1, d2);
-    System.out.println(d1.isNan());
+    System.out.println(d1.isNaN());
     registers.x87().pop();
 }
 

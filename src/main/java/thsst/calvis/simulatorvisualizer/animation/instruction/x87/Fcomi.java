@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import thsst.calvis.configuration.model.engine.EFlags;
 import thsst.calvis.configuration.model.engine.Memory;
 import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
@@ -16,11 +17,11 @@ import thsst.calvis.simulatorvisualizer.model.CalvisAnimation;
 /**
  * Created by Jennica on 23/07/2016.
  */
-public class Fcom extends CalvisAnimation {
+public class Fcomi extends CalvisAnimation {
 
     private int type;
 
-    public Fcom(int type) {
+    public Fcomi(int type) {
         super();
         this.type = type;
     }
@@ -67,24 +68,19 @@ public class Fcom extends CalvisAnimation {
             this.root.getChildren().addAll(firstOperandRectangle, secondOperandRectangle, minusCircle);
 
             int desBitSize = registers.getBitSize("ST0");
-            char C3 = registers.x87().status().getFlag("C3");
-            char C2 = registers.x87().status().getFlag("C2");
-            char C0 = registers.x87().status().getFlag("C0");
+            EFlags eFlags = registers.getEFlags();
+            String ZF = eFlags.getZeroFlag();
+            String PF = eFlags.getParityFlag();
+            String CF = eFlags.getCarryFlag();
 
-            String conditionCodeFormat = "Flags Affected: C3=" + C3 + "; C2=" + C2 + "; C0=" + C0 + "\n";
+            String conditionCodeFormat = "Flags Affected: ZF=" + ZF + "; PF=" + PF + "; CF=" + CF + "\n";
             Text detailsText = new Text(X, Y * 2, conditionCodeFormat + this.getDescriptionString());
             Text firstOperandLabelText = new Text(X, Y, "ST0");
             Text firstOperandValueText = new Text(X, Y, this.finder.getRegister("ST0"));
-            Text secondOperandLabelText, secondOperandValueText;
-            if (tokens.length > 0) {
-                secondOperandLabelText = this.createLabelText(X, Y, tokens[0]);
-                secondOperandValueText = this.createValueTextUsingFinderNotHex(X, Y, tokens[0], desBitSize);
-            } else {
-                secondOperandLabelText = new Text(X, Y, "ST1");
-                secondOperandValueText = new Text(X, Y, this.finder.getRegister("ST1"));
-            }
+            Text secondOperandLabelText = this.createLabelText(X, Y, tokens[1]);
+            Text secondOperandValueText = this.createValueTextUsingFinderNotHex(X, Y, tokens[1], desBitSize);
 
-            Text operandText = new Text(X, Y, getOperandString(C3, C2, C0));
+            Text operandText = new Text(X, Y, getOperandString(ZF, PF, CF));
             operandText.setFont(Font.font(40));
             operandText.setFill(Color.WHITESMOKE);
 
@@ -162,15 +158,17 @@ public class Fcom extends CalvisAnimation {
         String flagsNote = "Flags not set if unmasked invalid-arithmetic-operand (#IA) exception is generated.";
         switch ( this.type ) {
             case 0: return flagsNote;
-            case 1: return "Afterwards, the register stack is popped.\n" + flagsNote;
-            case 2: return "Afterwards, the register stack is popped twice.\n" + flagsNote;
+            case 1:
+                return "Afterwards, the register stack is popped.\n" +
+                        "To pop the register stack, the processor marks the ST0 register empty and increments the stack pointer by 1.\n"
+                        + flagsNote;
             default: return "";
         }
     }
 
-    private String getOperandString(char C3, char C2, char C0) {
-        String conditionCode = "" + C3 + C2 + C0;
-        switch ( conditionCode ) {
+    private String getOperandString(String ZF, String PF, String CF) {
+        String eFlagsCode = ZF + PF + CF;
+        switch ( eFlagsCode ) {
             case "000":
                 return ">";
             case "001":

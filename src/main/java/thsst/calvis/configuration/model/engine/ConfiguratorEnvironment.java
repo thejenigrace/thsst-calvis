@@ -1,9 +1,5 @@
-package thsst.calvis.configuration.controller;
+package thsst.calvis.configuration.model.engine;
 
-import thsst.calvis.configuration.model.engine.Parser;
-import thsst.calvis.configuration.model.engine.InstructionList;
-import thsst.calvis.configuration.model.engine.Memory;
-import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.errorlogging.ErrorLogger;
 
 import java.util.ArrayList;

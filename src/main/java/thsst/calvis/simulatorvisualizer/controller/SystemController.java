@@ -1,6 +1,6 @@
 package thsst.calvis.simulatorvisualizer.controller;
 
-import thsst.calvis.configuration.controller.ConfiguratorEnvironment;
+import thsst.calvis.configuration.model.engine.ConfiguratorEnvironment;
 import thsst.calvis.configuration.model.engine.*;
 import thsst.calvis.configuration.model.exceptions.DataTypeMismatchException;
 import thsst.calvis.configuration.model.exceptions.DuplicateLabelException;

@@ -177,6 +177,28 @@ public abstract class CalvisAnimation {
         }
     }
 
+    protected Text createValueTextUsingFinderNotHex(double x, double y, Token token, int bitSize) {
+        try {
+            System.out.println("Using Finder Not Hex!");
+            switch ( token.getType() ) {
+                case Token.REG:
+                    System.out.println("REG");
+                    return new Text(x, y, this.finder.getRegister(token.getValue()));
+                case Token.MEM:
+                    System.out.println("MEM");
+                    return new Text(x, y, this.finder.read(token, bitSize));
+                case Token.HEX:
+                    System.out.println("IMMEDIATE");
+                    return new Text(x, y, token.getValue());
+                default:
+                    return null;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     protected String getValueString(Token token, RegisterList registers, Memory memory, int bitSize) {
         try {
             switch ( token.getType() ) {
