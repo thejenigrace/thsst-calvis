@@ -1,17 +1,5 @@
 package thsst.calvis.configuration.controller;
 
-import thsst.calvis.configuration.model.engine.ConfiguratorEnvironment;
-import thsst.calvis.configuration.model.errorlogging.ErrorLogger;
-import thsst.calvis.configuration.model.errorlogging.ErrorMessageListWithSize;
-import thsst.calvis.configuration.model.errorlogging.FilePathLogger;
-import thsst.calvis.configuration.model.filehandling.ChoiceBoxLogger;
-import thsst.calvis.configuration.model.filehandling.FilePath;
-import thsst.calvis.configuration.model.filehandling.FilePathHandler;
-import thsst.calvis.configuration.model.filehandling.FilePathList;
-import thsst.calvis.configuration.model.filehandling.SaveFile;
-import thsst.calvis.MainApp;
-import thsst.calvis.editor.controller.LoaderController;
-import thsst.calvis.configuration.model.filehandling.StringCollectionContainer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -24,8 +12,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import thsst.calvis.MainApp;
+import thsst.calvis.configuration.model.engine.ConfiguratorEnvironment;
+import thsst.calvis.configuration.model.errorlogging.ErrorLogger;
+import thsst.calvis.configuration.model.errorlogging.ErrorMessageListWithSize;
+import thsst.calvis.configuration.model.errorlogging.FilePathLogger;
+import thsst.calvis.configuration.model.filehandling.*;
+import thsst.calvis.editor.controller.LoaderController;
 
 import java.io.File;
 import java.net.URL;
@@ -172,13 +169,13 @@ public class ConfigurationEnvironmentController implements Initializable {
     @FXML
     public void handleCancel(ActionEvent event) {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        exitAlert.setTitle("Exit CALVIS?");
+        exitAlert.setTitle("Exit");
         exitAlert.setHeaderText("Are you sure you want to exit CALVIS?");
+        exitAlert.setGraphic(new ImageView(new Image("/img/calvis_logo_96x96.png")));
+        exitAlert.initOwner(MainApp.primaryStage);
         Optional<ButtonType> result = exitAlert.showAndWait();
         if ( result.get() == ButtonType.OK ) {
             System.exit(0);
-        } else {
-
         }
     }
 

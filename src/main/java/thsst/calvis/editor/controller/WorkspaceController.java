@@ -318,6 +318,7 @@ public class WorkspaceController implements Initializable {
             settingsDialogStage.setResizable(false);
             settingsDialogStage.centerOnScreen();
             settingsDialogStage.initOwner(MainApp.primaryStage);
+            settingsDialogStage.getIcons().add(new Image("/img/calvis_logo_96x96.png"));
             settingsDialogStage.show();
 
             SettingsController settingsController = loader.getController();
@@ -373,6 +374,7 @@ public class WorkspaceController implements Initializable {
             findAndReplaceDialogStage.setResizable(false);
             findAndReplaceDialogStage.centerOnScreen();
             findAndReplaceDialogStage.initOwner(MainApp.primaryStage);
+            findAndReplaceDialogStage.getIcons().add(new Image("/img/calvis_logo_96x96.png"));
             findAndReplaceDialogStage.show();
 
             // Pass the current code in the text editor to FindDialogController
@@ -465,6 +467,7 @@ public class WorkspaceController implements Initializable {
             converterStage.setResizable(false);
             converterStage.centerOnScreen();
             converterStage.initOwner(MainApp.primaryStage);
+            converterStage.getIcons().add(new Image("/img/calvis_logo_96x96.png"));
             converterStage.show();
         } catch ( Exception e ) {
             e.printStackTrace();

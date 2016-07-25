@@ -230,7 +230,8 @@
                                         <FontAwesomeIconView glyphName="GAVEL"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem fx:id="menuItemPrevious" accelerator="Shortcut + D" mnemonicParsing="false" onAction="#handlePrevious"
+                                <MenuItem fx:id="menuItemPrevious" accelerator="Shortcut + D" mnemonicParsing="false"
+                                          onAction="#handlePrevious"
                                           text="Execute Previous Line">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="D" control="UP" meta="UP" shift="UP"
@@ -240,7 +241,8 @@
                                         <FontAwesomeIconView glyphName="STEP_BACKWARD"/>
                                     </graphic>
                                 </MenuItem>
-                                <MenuItem fx:id="menuItemNext" accelerator="Shortcut + F" mnemonicParsing="false" onAction="#handleNext"
+                                <MenuItem fx:id="menuItemNext" accelerator="Shortcut + F" mnemonicParsing="false"
+                                          onAction="#handleNext"
                                           text="Execute Next Line">
                                     <accelerator>
                                         <KeyCodeCombination alt="UP" code="F" control="UP" meta="UP" shift="UP"
@@ -289,9 +291,10 @@
                         <!--TOOLS MENU-->
                         <Menu mnemonicParsing="false" text="Tools">
                             <items>
-                                <MenuItem mnemonicParsing="false" accelerator="Shortcut + Q" onAction="#handleConverter" text="Converter">
+                                <MenuItem mnemonicParsing="false" accelerator="Shortcut + M" onAction="#handleConverter"
+                                          text="Converter">
                                     <accelerator>
-                                        <KeyCodeCombination alt="UP" code="Q" control="UP" meta="UP" shift="UP"
+                                        <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP" shift="UP"
                                                             shortcut="DOWN"/>
                                     </accelerator>
                                     <graphic>
