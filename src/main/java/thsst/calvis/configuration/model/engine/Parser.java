@@ -116,6 +116,8 @@ public class Parser {
         ArrayList<Element> twoParameterTokens = new ArrayList<>();
         ArrayList<Element> threeParameterTokens = new ArrayList<>();
 
+        ArrayList<Element> specialOneParameterTokens = new ArrayList<>();
+
         Iterator<String[]> instructionProductionRules = this.instructions.getInstructionProductionRules();
         while ( instructionProductionRules.hasNext() ) {
             String[] prodRule = instructionProductionRules.next();
@@ -142,7 +144,12 @@ public class Parser {
                     noParameterTokens.add(instructionName);
                     break;
                 case 1:
-                    oneParameterTokens.add(instructionName);
+                    // special case for one parameter not requiring size directives
+                    if ( prodRule[2].equals("4") ) {
+                        specialOneParameterTokens.add(instructionName);
+                    } else {
+                        oneParameterTokens.add(instructionName);
+                    }
                     break;
                 case 2:
                     twoParameterTokens.add(instructionName);
@@ -169,6 +176,14 @@ public class Parser {
             Alternative alternative = new Alternative(
                     new Element[]{elementConcatenator.concatenateOrSubRules(oneParameterTokens),
                             getAllParameters(true)});
+            alternative.setAction((Action<Object[]>) args -> prepareCalvisInstruction(args));
+            alternativeList.add(alternative);
+        }
+
+        if ( specialOneParameterTokens.size() != 0 ) {
+            Alternative alternative = new Alternative(
+                    new Element[]{elementConcatenator.concatenateOrSubRules(specialOneParameterTokens),
+                            getAllParameters(false)});
             alternative.setAction((Action<Object[]>) args -> prepareCalvisInstruction(args));
             alternativeList.add(alternative);
         }
