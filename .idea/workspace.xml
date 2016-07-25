@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values">
+    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/FPU_instructions.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/FPU_instructions.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/instruction_list.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/instruction_list.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fldenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fldenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnsave.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnsave.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnstcw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnstcw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnstenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnstenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fnstsw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fnstsw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fsave.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fsave.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fstcw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fstcw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fstenv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fstenv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fstsw.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fstsw.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fxrstore.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fxrstore.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fxsave.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fxsave.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbld.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbld.bsh.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fbstp.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SaveFile/savelist.txt" afterPath="$PROJECT_DIR$/SaveFile/savelist.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,8 +50,18 @@
       <file leaf-file-name="Converter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.56388414">
-              <caret line="45" column="32" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.07325383">
+              <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParserVariableFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="128" column="66" selection-start-line="128" selection-start-column="66" selection-end-line="128" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -118,7 +116,6 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/RegisterList.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/view/FileEditorTabPane.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87TagRegister.java" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87StatusRegister.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/errorlogging/RegisterInvalid.java" />
@@ -127,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/X87ControlRegister.java" />
         <option value="$PROJECT_DIR$/Memory/config.csv" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Parser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java" />
       </list>
     </option>
   </component>
@@ -555,7 +553,7 @@
       <updated>1469192287576</updated>
       <workItem from="1469202905908" duration="3905000" />
       <workItem from="1469239567388" duration="14449000" />
-      <workItem from="1469333554867" duration="55996000" />
+      <workItem from="1469333554867" duration="63591000" />
     </task>
     <task id="LOCAL-00001" summary="Fix Workspace UI Changes">
       <created>1469193132741</created>
@@ -635,11 +633,17 @@
       <option name="project" value="LOCAL" />
       <updated>1469366156078</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer">
+      <created>1469450525395</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1469450525395</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74350000" />
+    <option name="totallyTimeSpent" value="81945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -661,7 +665,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32357723" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2753404" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28441754" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17397882" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -731,7 +735,8 @@
     <MESSAGE value="FPU conversion" />
     <MESSAGE value="FPU conversion&#10;fixed fcom, fucom" />
     <MESSAGE value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values" />
-    <option name="LAST_COMMIT_MESSAGE" value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values" />
+    <MESSAGE value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer" />
+    <option name="LAST_COMMIT_MESSAGE" value="FPU conversion&#10;fixed fcom, fucom&#10;fixed comparison for NaN values&#10;fixed fpu control transfer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1476,14 +1481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61839867">
-          <caret line="182" column="20" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/WorkspaceController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1599,10 +1596,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/ParserVariableFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="128" column="66" selection-start-line="128" selection-start-column="66" selection-end-line="128" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Converter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.56388414">
-          <caret line="45" column="32" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.07325383">
+          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
           <folding />
         </state>
       </provider>

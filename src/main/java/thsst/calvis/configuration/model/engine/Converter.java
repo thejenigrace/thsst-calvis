@@ -174,4 +174,57 @@ public class Converter {
         return result;
     }
 
+    public String toBCD() {
+        String result = "";
+        for ( int i = value.length() - 1; i >= 2; i-- ){
+            String oneHex = value.charAt(i) + "";
+            int digit = Integer.parseInt(oneHex, 16);
+            if ( digit < 0 || digit > 9 ) {
+                return "NaN";
+            }
+            result = digit + result;
+        }
+        String first =  Integer.toBinaryString(Integer.parseInt(value.charAt(0) + "", 16));
+        while ( first.length() < 4 ) {
+            first = "0" + first;
+        }
+        if ( first.charAt(0) == '1' ) {
+            result = "-" + result;
+        }
+        return result;
+    }
+
+    public String toBCDHexString() {
+        Double d = Double.parseDouble(value);
+        String l = d.longValue() + "";
+        String result = "";
+        for ( int i = 0; i < l.length(); i++ ){
+            String oneHex = l.charAt(i) + "";
+            oneHex = Integer.toBinaryString(Integer.parseInt(oneHex));
+            while ( oneHex.length() < 4 ) {
+                oneHex = "0" + oneHex;
+            }
+            result = result + oneHex;
+        }
+
+        String hexString = "";
+        int start = 0;
+        int end = 4;
+        int count = result.length() / 4;
+        for ( int i = 0; i < count; i++ ) {
+            String oneHex = result.substring(start, end);
+            int k = Integer.parseInt(oneHex, 2);
+            oneHex = Integer.toHexString(k);
+            hexString = hexString + oneHex;
+            start += 4;
+            end += 4;
+        }
+
+        while ( hexString.length() < 20 ) {
+            hexString = "0" + hexString;
+        }
+
+        return hexString;
+    }
+
 }
