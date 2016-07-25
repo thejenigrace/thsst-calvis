@@ -11,7 +11,7 @@ execute(registers, memory) {
 		registers.x87().status().set("C1",'0');
 	}
 	else if(c.isNan(resultVal) || c.isInfinite(resultVal)){
-		registers.getMxscr().setInvalidOperationFlag("1");
+		c.setInvalidOperation(registers, "ST0");
 	}
 	else{
 		registers.x87().status().set("C2",'0');

@@ -393,6 +393,7 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FMUL", new Fmul());
         this.put("FMULP", new Fmulp());
         this.put("FABS", new Fabs());
+        this.put("FSQRT", new Fsqrt());
         this.put("FPREM", new Fprem());
         this.put("FPREM1", new Fprem1());
         this.put("FCHS", new Fchs());
@@ -400,6 +401,11 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FDECSTP", new Fdecstp());
         this.put("FINIT", new Finit());
         this.put("FNINIT", new Fninit());
+        this.put("FFREE", new Ffree());
+        this.put("FNSTCW", new Fnstcw());
+        this.put("FSTCW", new Fstcw());
+        this.put("FNSTSW", new Fnstsw());
+        this.put("FSTSW", new Fstsw());
     }
 
     private void generatex87ControlTransfer(){

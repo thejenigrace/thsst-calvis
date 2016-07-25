@@ -14,7 +14,7 @@ execute(registers, memory) {
 		registers.x87().status().set("C2",'1');
 		if(resultCosVal < Math.pow(2, 64) * -1 ||
 		   resultSinVal < Math.pow(2, 64) * -1){
-			registers.getMxscr().setUnderflowFlag("1");
+			registers.x87().status().set("UE", '1');
 		}
 	}
 	else{

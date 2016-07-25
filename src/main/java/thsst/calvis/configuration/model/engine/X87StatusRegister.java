@@ -15,6 +15,7 @@ public class X87StatusRegister extends X87Register {
 
     public void set(String flag, char val) {
         int index = 0;
+        int maxIndex = 15;
         switch ( flag ) {
             case "C0":
                 index = 7;
@@ -27,6 +28,24 @@ public class X87StatusRegister extends X87Register {
                 break;
             case "C3":
                 index = 1;
+                break;
+            case "PE":
+                index = maxIndex - 5;
+                break;
+            case "UE":
+                index = maxIndex - 4;
+                break;
+            case "OE":
+                index = maxIndex - 3;
+                break;
+            case "ZE":
+                index = maxIndex - 2;
+                break;
+            case "DE":
+                index = maxIndex - 1;
+                break;
+            case "IE":
+                index = maxIndex - 0;
                 break;
             default:
         }

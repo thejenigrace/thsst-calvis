@@ -12,8 +12,8 @@ execute(registers, memory) {
 	double regValOne = Double.parseDouble(valueOne);
 	double resultVal = Math.atan(regValOne/regValZero);
 
-	if(regValZero < Math.pow(2, 64) * -1 || regValOne < Math.pow(2, 64) * -1){
-		registers.getMxscr().setUnderflowFlag("1");
+	if(resultVal < Math.pow(2, 64) * -1 || resultVal < Math.pow(2, 64) * -1){
+		c.generateFPUExceptions(registers, resultVal, "ST1");
 	}
 	else{
 		registers.set("ST1", resultVal + "");

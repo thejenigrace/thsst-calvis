@@ -57,10 +57,13 @@ execute(des, src, registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc + dbDes;
-			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			boolean isException = c.generateFPUExceptions(registers, resultingValue, des.getValue());
 			if(!isException){
 					//System.out.println(resultingValue + " value");
 				registers.set(des.getValue(), "" + resultingValue);
+			}
+			else{
+
 			}
 
 			registers.x87().status().set("C3",'0');
@@ -79,7 +82,7 @@ execute(registers, memory) {
 			double dbSrc = Double.parseDouble(srcValue);
 			
 			double resultingValue = dbSrc + dbDes;
-			boolean isException = c.generateFPUExceptions(registers, resultingValue);
+			boolean isException = c.generateFPUExceptions(registers, resultingValue, "ST1");
 			if(!isException){
 				registers.set("ST1", Double.toString(resultingValue));
 			}

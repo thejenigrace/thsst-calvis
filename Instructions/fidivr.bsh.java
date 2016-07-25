@@ -10,9 +10,9 @@ execute(src, registers, memory) {
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
 		double resultingValue =  spValue / stValue;
-		boolean isException = c.generateFPUExceptions(registers, resultingValue);
+		boolean isException = c.generateFPUExceptions(registers, resultingValue, "ST0");
 		if(stValue == 0){
-			registers.mxscr.setDivideByZeroFlag("1");
+			c.setDivideByZeroOperation(registers, stValue, spValue, "ST0");
 			isException = true;
 		}
 		if(!isException){
