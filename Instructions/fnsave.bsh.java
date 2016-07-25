@@ -1,51 +1,32 @@
-execute(registers, memory) {
-    String st0 = registers.get("ST0");
-    
-    // examine st0
-    String first = st0.charAt(0) + "";
+execute(des, registers, memory) {
+  if ( des.isMemory() ) {
+      String control = registers.x87().control().getValue();
+      String status = registers.x87().status().getValue();
+      String tag = registers.x87().tag().getValue();
 
-    Calculator cal = new Calculator(registers, memory);
-    String binaryString  = cal.hexToBinaryString(first, 4);
-    
-    char[] array = binaryString.toCharArray();
-    registers.x87().set("C1", array[0]);
+      String env = tag + status + control;
 
-    switch ( st0 ) {
-    	case "Unsupported":
-    	    registers.x87().set("C3", '0');
-    	    registers.x87().set("C2", '0');
-    	    registers.x87().set("C0", '0');
-    	    break;
-    	case "NaN":
-    	    registers.x87().set("C3", '0');
-    	    registers.x87().set("C2", '0');
-    	    registers.x87().set("C0", '1');
-    	    break;
-        case "Normal Finite Number":
-    	    registers.x87().set("C3", '0');
-    	    registers.x87().set("C2", '1');
-    	    registers.x87().set("C0", '0');
-    	    break;
-    	case "Infinity":
-    	    registers.x87().set("C3", '0');
-    	    registers.x87().set("C2", '1');
-    	    registers.x87().set("C0", '1');
-    	    break;
-    	case "00000000000000000000": //Zero":
-    	    registers.x87().set("C3", '1');
-    	    registers.x87().set("C2", '0');
-    	    registers.x87().set("C0", '0');
-    	    break;
-    	case "Empty":
-    	    registers.x87().set("C3", '1');
-    	    registers.x87().set("C2", '0');
-    	    registers.x87().set("C0", '1');
-    	    break;
-    	case "Denormal Number":
-    	    registers.x87().set("C3", '1');
-    	    registers.x87().set("C2", '1');
-    	    registers.x87().set("C0", '0');
-    	    break;
-    }
-    
+      for( int i = 0; i < 8; i++ ) {
+        String st = registers.get("ST" + i);
+        Converter con = new Converter(st);
+        st = con.toDoublePrecisionHex();
+        while ( st.length() < 16 ) {
+          st = "0" + st;
+        }
+        env = st + env;
+      }
+
+      memory.write(des, env, 560);
+
+      int top = registers.x87().status().getTop();
+      while ( top < 8 ) {
+        top++;
+        registers.x87().rotateBarrel(1); // rotate right to simulate pop
+      }
+
+      registers.x87().status().initializeValue();
+      registers.x87().control().initializeValue();
+      registers.x87().tag().initializeValue();
+      registers.x87().refreshST();
+  }
 }

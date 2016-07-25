@@ -29,4 +29,9 @@ public class X87ControlRegister extends X87Register {
         charArray[5] = binaryNumber.charAt(1);
     }
 
+    @Override
+    public void setValue(String hexValue) {
+        super.setValue(hexValue);
+        this.charArray[9] = '1';
+    }
 }
