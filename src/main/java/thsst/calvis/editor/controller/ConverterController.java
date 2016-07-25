@@ -43,7 +43,7 @@ public class ConverterController implements Initializable {
 
     private String[] sizes = {"WORD", "DWORD", "QWORD"};
     private int[] bitSizes = {4, 8, 16};
-    private int currentSizeMode = 0;
+    private int currentSizeMode = 2;
     private SimpleStringProperty sizeMode;
 
     @Override

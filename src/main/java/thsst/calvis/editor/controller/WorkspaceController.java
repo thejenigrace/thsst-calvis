@@ -371,8 +371,7 @@ public class WorkspaceController implements Initializable {
             findAndReplaceDialogStage.setTitle("Find & Replace");
             findAndReplaceDialogStage.setScene(new Scene(findAndReplaceView));
             findAndReplaceDialogStage.setResizable(false);
-            findAndReplaceDialogStage.setX(this.root.getWidth() / 3);
-            findAndReplaceDialogStage.setY(this.root.getHeight() / 3);
+            findAndReplaceDialogStage.centerOnScreen();
             findAndReplaceDialogStage.initOwner(MainApp.primaryStage);
             findAndReplaceDialogStage.show();
 
@@ -464,8 +463,7 @@ public class WorkspaceController implements Initializable {
             converterStage.setTitle("Converter");
             converterStage.setScene(new Scene(converterView));
             converterStage.setResizable(false);
-            converterStage.setX(this.root.getWidth() / 3);
-            converterStage.setY(this.root.getHeight() / 3);
+            converterStage.centerOnScreen();
             converterStage.initOwner(MainApp.primaryStage);
             converterStage.show();
         } catch ( Exception e ) {

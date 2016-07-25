@@ -299,8 +299,8 @@ rcl,Instructions/rcl.bsh.java,1,0,2,r/m,c/i,
 rcpps,Instructions/rcpps.bsh.java,1,0,2,x,x/m128,
 rcpss,Instructions/rcpss.bsh.java,1,0,2,x,x/m32,
 rcr,Instructions/rcr.bsh.java,1,0,2,r/m,c/i,
-ret,Instructions/ret.bsh.java,3,0,1,i
-ret,Instructions/ret.bsh.java,3,0,0
+ret,Instructions/ret.bsh.java,3,0,1,i,,
+ret,Instructions/ret.bsh.java,3,0,0,,,
 rol,Instructions/rol.bsh.java,1,0,2,r/m,c/i,
 ror,Instructions/ror.bsh.java,1,0,2,r/m,c/i,
 rsqrtps,Instructions/rsqrtps.bsh.java,1,0,2,x,x/m128,
