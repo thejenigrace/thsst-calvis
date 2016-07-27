@@ -1,3 +1,33 @@
+@font-face {
+    font-family: 'DejaVu Sans Mono'
+    src: url('/font/DejaVuSansMono.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url("/font/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto Bold';
+    src: url("/font/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('/font/RobotoMono-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Lekton';
+    src: url("/font/Lekton-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Lekton Bold';
+    src: url("/font/Lekton-Bold.ttf");
+}
+
 /*.menu-bar {
   -fx-background-color: #355F7F;
 }

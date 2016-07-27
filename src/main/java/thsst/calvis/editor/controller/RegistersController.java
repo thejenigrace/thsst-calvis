@@ -9,10 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
 import thsst.calvis.configuration.model.engine.Register;
+import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.editor.model.Flag;
 import thsst.calvis.editor.view.AssemblyComponent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -44,14 +46,18 @@ public class RegistersController extends AssemblyComponent implements Initializa
     private ObservableList<Flag> mxcsrFlagList;
     private ObservableList<Flag> eFlagsList;
 
+    ArrayList<String> motherRegNameList = new ArrayList<>();
+    ArrayList<String> childRegNameList = new ArrayList<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colRegisterName.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> new ReadOnlyStringWrapper(
-                p.getValue().getValue().getName()
-        ));
-        colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> {
+        this.treeTableViewRegister.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        this.colRegisterName.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) ->
+                new ReadOnlyStringWrapper(p.getValue().getValue().getName()));
+
+        this.colRegisterHexValue.setCellValueFactory((TreeTableColumn.CellDataFeatures<Register, String> p) -> {
             String registerValue = p.getValue().getValue().getValue().toString();
-            String registerName = p.getValue().getValue().getName();
 
             Register someRegister = p.getValue().getValue();
 
@@ -68,25 +74,66 @@ public class RegistersController extends AssemblyComponent implements Initializa
             return stringWrapper;
         });
 
-        colMxcsrFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
+        this.colMxcsrFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        this.colMxcsrFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
 
-        colEFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
-        colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
+        this.colEFlagsName.setCellValueFactory(new PropertyValueFactory<Flag, String>("name"));
+        this.colEFlagsValue.setCellValueFactory(new PropertyValueFactory<Flag, String>("value"));
     }
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        treeTableViewRegister.refresh();
-        tableViewMxcsrFlags.refresh();
-        tableViewEFlags.refresh();
+        this.motherRegNameList.forEach(s -> {
+            System.out.println("ito: " + s);
+        });
+
+        this.treeTableViewRegister.refresh();
+        this.tableViewMxcsrFlags.refresh();
+        this.tableViewEFlags.refresh();
+
+        Token[] tokens = currentInstruction.getParameterTokens();
+        this.treeTableViewRegister.getSelectionModel().clearSelection();
+        for ( Token token : tokens ) {
+            System.out.println("chose: " + token);
+
+            int regIndex;
+            if ( this.childRegNameList.contains(token.getValue() ))
+                regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
+            else
+                regIndex = this.motherRegNameList.indexOf(token.getValue());
+
+            this.treeTableViewRegister.getSelectionModel().select(regIndex);
+        }
+    }
+
+    private String getMotherRegister(String childRegister) {
+        switch ( childRegister ) {
+            case "AX":
+            case "AH":
+            case "AL" : return "EAX";
+            case "BX":
+            case "BH":
+            case "BL": return "EBX";
+            case "CX":
+            case "CH":
+            case "CL" : return "ECX";
+            case "DX":
+            case "DH":
+            case "DL": return "EDX";
+            case "SI": return "ESI";
+            case "DI": return "EDI";
+            case "BP": return "ESP";
+            case "SP": return "EBP";
+            default: return "";
+        }
     }
 
     @Override
     public void refresh() {
-        treeTableViewRegister.refresh();
-        tableViewMxcsrFlags.refresh();
-        tableViewEFlags.refresh();
+        this.treeTableViewRegister.refresh();
+        this.treeTableViewRegister.getSelectionModel().clearSelection();
+        this.tableViewMxcsrFlags.refresh();
+        this.tableViewEFlags.refresh();
     }
 
     @Override
@@ -105,17 +152,21 @@ public class RegistersController extends AssemblyComponent implements Initializa
                     ObservableList<Register> childRegisters = FXCollections.observableArrayList(childMap.values());
                     for ( Register rChild : childRegisters ) {
                         motherRegister.getChildren().add(new TreeItem<>(rChild));
+                        // Add child register name for table row selection / highlight
+                        this.childRegNameList.add(rChild.getName());
                     }
                 }
 
                 dummyRoot.getChildren().add(motherRegister);
+                // Add mother register name for table row selection / highlight
+                this.motherRegNameList.add(motherRegister.getValue().getName());
             }
 
             this.treeTableViewRegister.setRoot(dummyRoot);
             this.treeTableViewRegister.setShowRoot(false);
 
             this.mxcsrFlagList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
-            tableViewMxcsrFlags.setItems(this.mxcsrFlagList);
+            this.tableViewMxcsrFlags.setItems(this.mxcsrFlagList);
 
             this.eFlagsList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
             this.tableViewEFlags.setItems(this.eFlagsList);

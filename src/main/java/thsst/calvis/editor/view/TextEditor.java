@@ -43,11 +43,15 @@ public class TextEditor extends AssemblyComponent {
     private static String INSTRUCTION_PATTERN;
     private static String REGISTER_PATTERN;
     private static String MEMORY_PATTERN;
+    private static String SECTION_DATA_PATTERN;
     private static Pattern PATTERN;
 
     public TextEditor() {
         this.codeArea = new CodeArea();
-        codeArea.setStyle("-fx-highlight-fill: lightgray; -fx-font-size: 14px;");
+        codeArea.getStyleClass().add("code-area");
+        codeArea.getStylesheets().add(TextEditor.class.getResource("/css/text-editor.css").toExternalForm());
+        codeArea.setUseInitialStyleForInsertion(true);
+        codeArea.setWrapText(true);
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
         codeArea.richChanges().subscribe(change -> {
             codeArea.setStyleSpans(0, computeHighlighting(codeArea.getText()));
@@ -132,10 +136,12 @@ public class TextEditor extends AssemblyComponent {
         REGISTER_PATTERN = "\\b(" + String.join("|", REGISTER_KEYWORDS) + ")\\b";
         MEMORY_KEYWORDS = this.sysCon.getKeywordBuilder().getMemoryKeywords();
         MEMORY_PATTERN = "\\b(" + String.join("|", MEMORY_KEYWORDS) + ")\\b";
+        SECTION_DATA_PATTERN = "\\b(SECTION .DATA)\\b";
         PATTERN = Pattern.compile(
                 "(?<INSTRUCTIONPATTERN>" + INSTRUCTION_PATTERN + ")"
                         + "|(?<REGISTERPATTERN>" + REGISTER_PATTERN + ")"
                         + "|(?<MEMORYPATTERN>" + MEMORY_PATTERN + ")"
+                        + "|(?<SECTIONDATAPATTERN>" + SECTION_DATA_PATTERN + ")"
                         + "|(?<PAREN>" + PAREN_PATTERN + ")"
                         + "|(?<BRACE>" + BRACE_PATTERN + ")"
                         + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
@@ -153,6 +159,7 @@ public class TextEditor extends AssemblyComponent {
             String styleClass = matcher.group("INSTRUCTIONPATTERN") != null ? "instruction"
                     : matcher.group("REGISTERPATTERN") != null ? "register"
                     : matcher.group("MEMORYPATTERN") != null ? "memory"
+                    : matcher.group("SECTIONDATAPATTERN") != null ? "section"
                     : matcher.group("PAREN") != null ? "paren"
                     : matcher.group("BRACE") != null ? "brace"
                     : matcher.group("BRACKET") != null ? "bracket"
@@ -283,6 +290,7 @@ public class TextEditor extends AssemblyComponent {
             while ( matcher.find() ) {
                 if ( !matcher.toMatchResult().group().contains(";") ) {
                     int[] arrRange = new int[2];
+//                    System.out.println("start: " + matcher.start() + "; end: " + matcher.end());
                     arrRange[0] = matcher.start();
                     arrRange[1] = matcher.end();
                     findHighlightRanges.put(c, arrRange);
@@ -292,12 +300,14 @@ public class TextEditor extends AssemblyComponent {
             int[] range = findHighlightRanges.get(lineNumber);
             if ( range != null ) {
                 // System.out.println(range[0] + " to " + range[1]);
+//                this.codeArea.selectLine();
                 this.codeArea.selectRange(range[0], range[1]);
                 this.codeArea.redo();
             }
         } else {
 //            System.out.println("null highlight currentLine");
-            this.codeArea.selectRange(0, 0);
+//            this.codeArea.selectRange(0, 0);
+            this.codeArea.deselect();
             this.redo();
         }
     }

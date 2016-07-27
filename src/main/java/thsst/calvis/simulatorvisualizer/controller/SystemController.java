@@ -187,8 +187,8 @@ public class SystemController {
     }
 
     public void reset() {
-        end();
-        clear();
+        this.end();
+        this.clear();
     }
 
     public void clear() {
