@@ -12,8 +12,8 @@
         <AnchorPane fx:id="paneMemoryFilter" prefHeight="28.0"/>
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TableView fx:id="tableViewMemory" stylesheets="@../css/register.css" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="colMemoryLabel" minWidth="50" text="Label"/>
                         <TableColumn fx:id="colMemoryAddress" maxWidth="100" minWidth="100" text="Address"/>

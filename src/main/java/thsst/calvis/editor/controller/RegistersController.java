@@ -83,26 +83,23 @@ public class RegistersController extends AssemblyComponent implements Initializa
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-        this.motherRegNameList.forEach(s -> {
-            System.out.println("ito: " + s);
-        });
-
         this.treeTableViewRegister.refresh();
         this.tableViewMxcsrFlags.refresh();
         this.tableViewEFlags.refresh();
+        this.treeTableViewRegister.getSelectionModel().clearSelection();
 
         Token[] tokens = currentInstruction.getParameterTokens();
-        this.treeTableViewRegister.getSelectionModel().clearSelection();
         for ( Token token : tokens ) {
-            System.out.println("chose: " + token);
+            if ( token.getType().equals(Token.REG) ) {
+                int regIndex;
+                if ( this.childRegNameList.contains(token.getValue()) )
+                    regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
+                else
+                    regIndex = this.motherRegNameList.indexOf(token.getValue());
 
-            int regIndex;
-            if ( this.childRegNameList.contains(token.getValue() ))
-                regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
-            else
-                regIndex = this.motherRegNameList.indexOf(token.getValue());
-
-            this.treeTableViewRegister.getSelectionModel().select(regIndex);
+                this.treeTableViewRegister.scrollTo(regIndex);
+                this.treeTableViewRegister.getSelectionModel().select(regIndex);
+            }
         }
     }
 
@@ -110,21 +107,30 @@ public class RegistersController extends AssemblyComponent implements Initializa
         switch ( childRegister ) {
             case "AX":
             case "AH":
-            case "AL" : return "EAX";
+            case "AL":
+                return "EAX";
             case "BX":
             case "BH":
-            case "BL": return "EBX";
+            case "BL":
+                return "EBX";
             case "CX":
             case "CH":
-            case "CL" : return "ECX";
+            case "CL":
+                return "ECX";
             case "DX":
             case "DH":
-            case "DL": return "EDX";
-            case "SI": return "ESI";
-            case "DI": return "EDI";
-            case "BP": return "ESP";
-            case "SP": return "EBP";
-            default: return "";
+            case "DL":
+                return "EDX";
+            case "SI":
+                return "ESI";
+            case "DI":
+                return "EDI";
+            case "BP":
+                return "ESP";
+            case "SP":
+                return "EBP";
+            default:
+                return "";
         }
     }
 
@@ -132,6 +138,7 @@ public class RegistersController extends AssemblyComponent implements Initializa
     public void refresh() {
         this.treeTableViewRegister.refresh();
         this.treeTableViewRegister.getSelectionModel().clearSelection();
+        this.treeTableViewRegister.scrollTo(0);
         this.tableViewMxcsrFlags.refresh();
         this.tableViewEFlags.refresh();
     }
