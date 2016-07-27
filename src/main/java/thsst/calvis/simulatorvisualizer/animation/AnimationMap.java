@@ -271,9 +271,8 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
      * MARKER -- SSE2 Instructions Animation
      */
     private void generateSSE2DataTransfer() {
-        this.put("MOVAPS", new Movapd());
-        this.put("MOVUPS", new Movupd());
-//        this.put("MOVHLPD", new Movhlpd());
+        this.put("MOVAPD", new Movapd());
+        this.put("MOVUPD", new Movupd());
         this.put("MOVHPD", new Movhpd());
         this.put("MOVLPD", new Movlpd());
         this.put("MOVMSKPD", new Movmskpd());
@@ -397,7 +396,9 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FPREM", new Fprem());
         this.put("FPREM1", new Fprem1());
         this.put("FCHS", new Fchs());
-        //tapos na
+    }
+
+    private void generatex87ControlTransfer(){
         this.put("FINCSTP", new Fincstp());
         this.put("FDECSTP", new Fdecstp());
         this.put("FINIT", new Finit());
@@ -416,9 +417,5 @@ public class AnimationMap extends HashMap<String, CalvisAnimation> {
         this.put("FXRSTOR", new Fxrstor());
         this.put("FCLEX", new Fclex());
         this.put("FNCLEX", new Fnclex());
-    }
-
-    private void generatex87ControlTransfer(){
-
     }
 }
