@@ -1,3 +1,4 @@
+/* TreeTableView CSS */
 .tree-table-view .column-header{
     -fx-text-fill: -fx-selection-bar-text;
     -fx-font-size: 14;
@@ -6,28 +7,35 @@
 }
 
 .tree-table-view .column-header-background{
-    /*-fx-background-color: #355F7F;*/
     -fx-background-color: #b9b9b9;
-    /*-fx-background-color: #FCBD6D;*/
 }
 
 .tree-table-view .column-header-background .label{
-    /*-fx-text-fill: white;*/
     -fx-text-fill: #1d1d1d;
 }
 
 .tree-table-view .table-column{
-    /*-fx-text-fill: -fx-selection-bar-text;*/
     -fx-font-size: 14;
     -fx-font-family: "Roboto";
-    /*-fx-background-color: white;*/
 }
 
-.tree-table-row-cell:selected {
+/* Selected Row */
+.tree-table-view:focused .tree-table-row-cell:filled:selected {
     -fx-background-color: #FCBD6D;
+    -fx-table-cell-border-color: #FCBD6D;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
 }
 
+/* Selected Row when table not focused */
+.tree-table-row-cell:filled:selected {
+    -fx-background-color: #FCBD6D;
+    -fx-table-cell-border-color: #FCBD6D;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
 
+/* TableView CSS */
 .table-view .column-header{
     -fx-text-fill: -fx-selection-bar-text;
     -fx-font-size: 14;
@@ -36,13 +44,10 @@
 }
 
 .table-view .column-header-background{
-    /*-fx-background-color: #355F7F;*/
     -fx-background-color: #b9b9b9;
-    /*-fx-background-color: #79CFCE;*/
 }
 
 .table-view .column-header-background .label{
-    /*-fx-text-fill: white;*/
     -fx-text-fill: #1d1d1d;
 }
 
@@ -52,15 +57,18 @@
     -fx-font-family: "Roboto";
 }
 
-.table-row-cell:selected {
+/* Selected Row */
+.table-view:focused .table-row-cell:filled:selected {
     -fx-background-color: #79CFCE;
+    -fx-table-cell-border-color: #79CFCE;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
 }
 
-/*#colRegisterValue{
-    -fx-alignment: CENTER-RIGHT;
-    -fx-font-family: "Roboto";
+/* Selected Row when table not focused */
+.table-row-cell:filled:selected {
+    -fx-background-color: #79CFCE;
+    -fx-table-cell-border-color: #79CFCE;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
 }
-
-#memoryAddress{
-    -fx-font-family: "Roboto";
-}*/
