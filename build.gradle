@@ -20,90 +20,16 @@ task fatJar(type: Jar) {
     with jar
 }
 
-buildscript {
-    dependencies {
-        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.5.1'
-    }
-
-    repositories {
-        mavenCentral()
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-//    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'com.github.pfmiles', name: 'dropincc.java', version: '0.2.2'
     compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-    compile group: 'org.beanshell', name: 'bsh', version: '2.0b4'
+    compile group: 'org.apache-extras.beanshell', name: 'bsh', version: '2.0b6'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.10'
     compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
-}
-
-apply plugin:  'javafx-gradle-plugin'
-
-// configure javafx-gradle-plugin
-jfx {
-    verbose = true
-    mainClass = "thsst.calvis.MainApp"
-    jfxAppOutputDir = "build/jfx/app"
-    jfxMainAppJarName = "CALVIS.jar"
-    deployDir = "src/main/deploy"
-
-    // gradle jfxJar
-    css2bin = false
-    preLoader = null
-    updateExistingJar = false
-    allPermissions = false
-    manifestAttributes = null // Map<String, String>
-    addPackagerJar = true
-
-    // gradle jfxNative
-    identifier = null // setting this for windows-bundlers makes it possible to generate upgradeable installers (using same GUID)
-    vendor = "DLSU CALVIS Team"
-    nativeOutputDir = "build/jfx/native"
-    bundler = "ALL" // set this to some specific, if your don't want all bundlers running, examples "windows.app", "jnlp", ...
-    jvmProperties = null // Map<String, String>
-    jvmArgs = null // List<String>
-    userJvmArgs = null // Map<String, String>
-    launcherArguments = null // List<String>
-    nativeReleaseVersion = "1.0"
-    needShortcut = false
-    needMenu = false
-    bundleArguments = [
-            // dont bundle JRE (not recommended, but increases build-size/-speed)
-            runtime: null
-    ]
-    appName = "CALVIS" // this is used for files below "src/main/deploy", e.g. "src/main/deploy/windows/project.ico"
-    additionalAppResources = null // path to some additional resources when creating application-bundle
-    secondaryLaunchers = [[appName:"somethingDifferent"], [appName:"somethingDifferent2"]]
-    fileAssociations = null // List<Map<String, Object>>
-    noBlobSigning = false // when using bundler "jnlp", you can choose to NOT use blob signing
-    customBundlers // List<String>
-    skipNativeLauncherWorkaround205 = false
-
-    skipNativeLauncherWorkaround124 = false
-    skipNativeLauncherWorkaround167 = false
-    skipJNLPRessourcePathWorkaround182 = false
-    skipSigningJarFilesJNLP185 = false
-    skipSizeRecalculationForJNLP185 = false
-
-    // gradle jfxGenerateKeyStore
-    keyStore = "src/main/deploy/keystore.jks"
-    keyStoreAlias = "myalias"
-    keyStorePassword = "password"
-    keyPassword = null // will default to keyStorePassword
-    keyStoreType = "jks"
-    overwriteKeyStore = false
-
-    certDomain = null // required
-    certOrgUnit = null // defaults to "none"
-    certOrg = null // required
-    certState = null // required
-    certCountry = null // required
 }

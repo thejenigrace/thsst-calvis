@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="thsst_calvis.jnlp">
   <information>
-    <title>thsst-calvis</title>
-    <vendor>Unknown</vendor>
-    <description>thsst-calvis</description>
+    <title>CALVIS</title>
+    <vendor>DLSU CALVIS Team</vendor>
+    <description>Computer Assembly Language Visualizer and Simulator for Intel x86-32 Architecture</description>
     <offline-allowed/>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="thsst_calvis.jar" size="140739" download="eager" />
+    <jar href="bsh-2.0b6.jar" size="389033" download="eager" />
+    <jar href="commons-lang3-3.4.jar" size="434678" download="eager" />
+    <jar href="controlsfx-8.40.10.jar" size="954085" download="eager" />
+    <jar href="dropincc.java-0.2.2.jar" size="158607" download="eager" />
+    <jar href="flowless-0.4.5.jar" size="55773" download="eager" />
+    <jar href="fontawesomefx-8.9.jar" size="571068" download="eager" />
+    <jar href="hamcrest-core-1.3.jar" size="45024" download="eager" />
+    <jar href="reactfx-2.0-M4u1.jar" size="407140" download="eager" />
+    <jar href="richtextfx-0.6.10.jar" size="150088" download="eager" />
+    <jar href="thsst_calvis.jar" size="1352723" download="eager" />
+    <jar href="undofx-1.2.jar" size="21145" download="eager" />
+    <jar href="wellbehavedfx-0.1.1.jar" size="43039" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="600" height="400" main-class="MainEditor.controller.MainApp"  name="thsst-calvis" />
+  <jfx:javafx-desc  width="600" height="400" main-class="thsst.calvis.MainApp"  name="thsst-calvis" />
   <update check="background"/>
 </jnlp>
