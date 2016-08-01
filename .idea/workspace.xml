@@ -6,15 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="Fix color accent in table view row selection and change syntax color theme">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/thsst_calvis.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_extras_beanshell_bsh_2_0b6.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_beanshell_bsh_2_0b4.xml" afterPath="" />
+    <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="Fix gradle dependencies">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jar" afterPath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jnlp" afterPath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jnlp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thsst-calvis.iml" afterPath="$PROJECT_DIR$/thsst-calvis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" />
     </list>
     <ignored path="thsst-calvis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -492,9 +488,9 @@
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/MemoryController.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/editor/controller/RegistersController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/console.css" />
-        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/ConfigurationEnvironmentController.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java" />
       </list>
     </option>
   </component>
@@ -561,10 +557,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.1750663" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build" />
   </component>
@@ -578,7 +574,7 @@
       <recent name="$PROJECT_DIR$/Instructions" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.thsst-calvis [fatJar]">
+  <component name="RunManager" selected="Application.MainApp">
     <configuration default="false" name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -591,7 +587,7 @@
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/jre" />
+      <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -611,24 +607,6 @@
         <option name="taskNames">
           <list>
             <option value="fatJar" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="false" name="thsst-calvis [jfxNative]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jfxNative" />
           </list>
         </option>
         <option name="vmOptions" value="" />
@@ -900,16 +878,14 @@
       <listeners />
       <method />
     </configuration>
-    <list size="3">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Application.MainApp" />
       <item index="1" class="java.lang.String" itemvalue="Gradle.thsst-calvis [fatJar]" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.thsst-calvis [jfxNative]" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.thsst-calvis [jfxNative]" />
-        <item index="1" class="java.lang.String" itemvalue="Application.MainApp" />
-        <item index="2" class="java.lang.String" itemvalue="Gradle.thsst-calvis [fatJar]" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Application.MainApp" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.thsst-calvis [fatJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -1122,7 +1098,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469839010105</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Fix gradle dependencies">
+      <created>1470014174673</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1470014174673</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1140,11 +1122,12 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.5028612" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3223684" sideWeight="0.49713877" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31842107" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31842107" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21173105" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1155,7 +1138,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1204,7 +1186,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Change CALVIS logo resolution" />
     <MESSAGE value="Add FCMOVcc Instructions" />
     <MESSAGE value="Fix CMOV Instruction" />
     <MESSAGE value="Merge with branch &quot;FPU-Comparison&quot;" />
@@ -1229,7 +1210,8 @@
     <MESSAGE value="Fix font face of the workspace; Add sync simulation register tablerowhighlight" />
     <MESSAGE value="Add sync highlight of memory during simulation &amp; Auto-scroll" />
     <MESSAGE value="Fix color accent in table view row selection and change syntax color theme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix color accent in table view row selection and change syntax color theme" />
+    <MESSAGE value="Fix gradle dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix gradle dependencies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1553,14 +1535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/controller/FileHandlerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.73770493">
@@ -1617,6 +1591,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/thsst/calvis/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53061223">
+          <caret line="138" column="64" selection-start-line="138" selection-start-column="64" selection-end-line="138" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="gradleExecuteTaskHistory">
     <option value="$PROJECT_DIR$" />
@@ -1629,8 +1611,8 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="artifact" />
               <type id="library" />
+              <type id="artifact" />
             </show-content>
           </artifact-editor>
           <last-edited>thsst-calvis</last-edited>
@@ -1638,6 +1620,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1669,7 +1652,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8.0_74</last-edited>
+          <last-edited>1.8.0_91</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

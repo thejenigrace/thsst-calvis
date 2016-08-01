@@ -138,11 +138,11 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         String OS = System.getProperty("os.name").toLowerCase();
         if ( OS.contains("win") ) {
-//            System.out.println("windows");
-//            System.out.println("C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
-            System.setProperty("java.home", "C:\\Program Files\\Java\\jdk" + System.getProperty("java.version"));
+            System.setProperty("java.home", "C:\\Program Files\\Java\\jdk"
+                    + System.getProperty("java.version") +"\\jre\\");
         } else if ( OS.contains("mac") ) {
-            System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk" + System.getProperty("java.version") + ".jdk/Contents/Home/");
+            System.setProperty("java.home", "/Library/Java/JavaVirtualMachines/jdk"
+                    + System.getProperty("java.version") + ".jdk/Contents/Home/jre/");
         }
 
         try {
