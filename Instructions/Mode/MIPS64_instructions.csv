@@ -1,6 +1,6 @@
 Instruction,Location,isSizeVerified,isCC,Parameters,,,
 andi,Instructions/andi.bsh.java,1,0,3,r64,r64,i
-bne,Instructions/bne.bsh.java,1,0,3,r64,r64,l
+bne,Instructions/bne.bsh.java,3,0,3,r64,r64,l
 daddiu,Instructions/daddiu.bsh.java,1,0,3,r64,r64,i
 daddu,Instructions/daddu.bsh.java,1,0,3,r64,r64,r64
 slt,Instructions/slt.bsh.java,1,0,3,r64,r64,r64
