@@ -1,5 +1,6 @@
 package thsst.calvis.editor.controller;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,13 +93,18 @@ public class RegistersController extends AssemblyComponent implements Initializa
         for ( Token token : tokens ) {
             if ( token.getType().equals(Token.REG) ) {
                 int regIndex;
-                if ( this.childRegNameList.contains(token.getValue()) )
+                if ( this.childRegNameList.contains(token.getValue()) ) {
                     regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
-                else
+                    System.out.println("Child");
+                } else {
                     regIndex = this.motherRegNameList.indexOf(token.getValue());
+                    System.out.println("Mother");
+                }
 
-                this.treeTableViewRegister.scrollTo(regIndex);
-                this.treeTableViewRegister.getSelectionModel().select(regIndex);
+                Platform.runLater(() -> {
+                    this.treeTableViewRegister.scrollTo(regIndex);
+                    this.treeTableViewRegister.getSelectionModel().select(regIndex);
+                });
             }
         }
     }

@@ -1,5 +1,6 @@
 package thsst.calvis.editor.controller;
 
+import javafx.application.Platform;
 import javafx.scene.control.SelectionMode;
 import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
 import thsst.calvis.configuration.model.engine.Memory;
@@ -69,8 +70,11 @@ public class MemoryController extends AssemblyComponent implements Initializable
                 String baseAddress = this.memory.removeSizeDirectives(token.getValue());
                 System.out.println("mem baseAddress: " + baseAddress);
                 int memIndex = this.memoryAddressList.indexOf(baseAddress);
-                this.tableViewMemory.scrollTo(memIndex);
-                this.tableViewMemory.getSelectionModel().select(memIndex);
+
+                Platform.runLater(() -> {
+                    this.tableViewMemory.scrollTo(memIndex);
+                    this.tableViewMemory.getSelectionModel().select(memIndex);
+                });
             }
         }
     }
