@@ -13,13 +13,19 @@ execute(des, src, registers, memory) {
 	}
 	else{
 		srcSize = memory.getBitSize(src);
+		if(srcSize == 0 && desSize == 64){
+			srcSize = 128;
+		}
+		else if(srcSize == 0 && desSize == 128){
+			srcSize = 128;
+		}
 	}
 	///end of defining sizes///
 	if ( des.isRegister() ) {
 		String sourceReg = "";
 		if(desSize == 128 || desSize == 64 ){
 			if (src.isMemory()){
-				sourceReg = c.hexZeroExtend(memory.read(src, 64), des);
+				sourceReg = c.hexZeroExtend(memory.read(src, srcSize/2), des);
 			}
 			else{
 				if(desSize == 64){
@@ -28,7 +34,9 @@ execute(des, src, registers, memory) {
 				else{
 					sourceReg = c.hexZeroExtend(registers.get(src).substring(16, 32), 128 / 16);
 				}
+
 			}
+		System.out.println(sourceReg + " huhu");
 		}
 		registers.set(des, sourceReg);
 	}
