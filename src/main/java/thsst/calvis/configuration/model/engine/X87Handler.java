@@ -22,9 +22,15 @@ public class X87Handler {
     }
 
     public void clear() {
-        this.status.initializeValue();
-        this.control.initializeValue();
-        this.tag.initializeValue();
+        if ( this.status != null ) {
+            this.status.initializeValue();
+        }
+        if ( this.control != null ) {
+            this.control.initializeValue();
+        }
+        if ( this.control != null ) {
+            this.tag.initializeValue();
+        }
         this.barrel = new double[8];
     }
 
