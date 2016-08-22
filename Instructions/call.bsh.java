@@ -21,14 +21,14 @@ execute(rel, registers, memory) throws Exception {
 	Calculator cal = new Calculator(registers, memory);
 	if ( cal.isWithinBounds(result, Memory.DEFAULT_RELATIVE_SIZE) ) {
 		// Push current EIP to stack
-		String stackPointer = registers.get("ESP");
+		String stackPointer = registers.getStackPointer();
 		BigInteger stackAddress = new BigInteger(stackPointer, 16);
 		BigInteger offset = new BigInteger("32");
 		offset = offset.divide(new BigInteger("8"));
 		stackAddress = stackAddress.subtract(offset);
 
-		registers.set("ESP", stackAddress.toString(16));
-		String stackEntry = registers.get("ESP");
+		registers.setStackPointer(stackAddress.toString(16));
+		String stackEntry = registers.getStackPointer();
 		memory.writeToStack(stackEntry, fromAddress, 32);
 		// Set EIP to determined address
 		registers.setInstructionPointer(toAddress);

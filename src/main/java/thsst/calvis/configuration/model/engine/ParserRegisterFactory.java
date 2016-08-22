@@ -67,7 +67,10 @@ public class ParserRegisterFactory {
     }
 
     public Element getMemoryAddressableRegisters() {
-        return getRegisterElements("1");
+        ArrayList<Element> memoryAddressable = new ArrayList<>();
+        memoryAddressable.add(getRegisterElements("1"));
+        memoryAddressable.add(getRegisterElements("8"));
+        return elementConcatenator.concatenateOrSubRules(memoryAddressable);
     }
 
     public Element getAllRegisterElements() {

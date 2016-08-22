@@ -16,7 +16,7 @@
                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="colMemoryLabel" minWidth="50" text="Label"/>
-                        <TableColumn fx:id="colMemoryAddress" maxWidth="100" minWidth="100" text="Address"/>
+                        <TableColumn fx:id="colMemoryAddress" prefWidth="100" minWidth="100" text="Address"/>
                         <TableColumn fx:id="colMemoryRepresentation" sortable="false" text="Value"/>
                     </columns>
                     <columnResizePolicy>

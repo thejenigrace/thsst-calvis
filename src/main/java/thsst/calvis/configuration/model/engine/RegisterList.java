@@ -20,8 +20,13 @@ public class RegisterList {
     public static final int TYPE = 3;
     public static final int START = 4;
     public static final int END = 5;
+
     public static String instructionPointerName = "EIP";
     public static int instructionPointerSize = 32;
+
+    public static String stackPointerName = "ESP";
+    public static int stackPointerSize = 32;
+
     public static int MAX_SIZE = 32; //default is 32 bit registers
 
     private TreeMap<String, Register> map;
@@ -155,6 +160,12 @@ public class RegisterList {
                                 instructionPointerSize = regSize;
                                 this.map.put(reg[NAME], h);
                                 break;
+                            case "8": // Stack Pointer
+                                StackPointerRegister spr = new StackPointerRegister(reg[NAME], regSize);
+                                stackPointerName = reg[NAME];
+                                stackPointerSize = regSize;
+                                this.map.put(reg[NAME], spr);
+                                break;
                             default:
                                 errorMessages.add(
                                         new ErrorMessage(Types.invalidRegister,
@@ -163,16 +174,27 @@ public class RegisterList {
                                 break;
                         }
                     } else {
-                        Register g = new Register(reg[NAME], regSize);
+                        Register baby;
+                        switch ( reg[TYPE] ) {
+                            case "3": // Instruction Pointer
+                                baby = new Register(reg[NAME], regSize);
+                                break;
+                            case "8": // Stack Pointer
+                                baby = new StackPointerRegister(reg[NAME], regSize);
+                                break;
+                            default:
+                                baby = new Register(reg[NAME], regSize);
+                        }
+
                         if ( childMap.get(reg[SOURCE]) == null ) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
 //                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
+                            group.put(reg[NAME], baby);
                             this.childMap.put(reg[SOURCE], group);
                         } else {
                             TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
 //                            System.out.println("Sibling-Type 2: " + reg[NAME]);
-                            group.put(reg[NAME], g);
+                            group.put(reg[NAME], baby);
                             this.childMap.replace(reg[SOURCE], group);
                         }
                     }
@@ -368,6 +390,14 @@ public class RegisterList {
 
     public void setInstructionPointer(String value) throws DataTypeMismatchException {
         set(instructionPointerName, value);
+    }
+
+    public String getStackPointer() {
+        return get(stackPointerName);
+    }
+
+    public void setStackPointer(String value) throws DataTypeMismatchException {
+        set(stackPointerName, value);
     }
 
     public void clear() {

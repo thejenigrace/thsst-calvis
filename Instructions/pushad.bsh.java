@@ -1,7 +1,7 @@
 execute(registers, memory) {
 	int size = 32;
-	String stackPointer = registers.get("ESP");
-	
+	String stackPointer = registers.getStackPointer();
+
 	String eax = registers.get("EAX");
 	String ecx = registers.get("ECX");
 	String edx = registers.get("EDX");
@@ -16,17 +16,17 @@ execute(registers, memory) {
 	BigInteger stackAddress = new BigInteger(stackPointer, 16);
 	BigInteger offset = new BigInteger(size + "");
 	offset = offset.divide(new BigInteger("8"));
-	
+
 	for ( int i = 0; i < generalRegisters.length; i++ ) {
 		stackAddress = stackAddress.subtract(offset);
-	
+
 		if ( stackAddress.compareTo(new BigInteger("0", 16)) == -1 ) {
 			throw new StackPushException();
-		} else {	
-			registers.set("ESP", stackAddress.toString(16));
-			String stackEntry = registers.get("ESP");
+		} else {
+			registers.setStackPointer(stackAddress.toString(16));
+			String stackEntry = registers.getStackPointer();
 			memory.writeToStack(stackEntry, generalRegisters[i], size);
 		}
 	}
-	
+
 }

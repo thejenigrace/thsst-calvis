@@ -79,7 +79,7 @@ public class CalvisFormattedInstruction {
             MemoryWriteException, DataTypeMismatchException, MemoryAlignmentException {
         String input = console.retrieveScanned();
 
-        String stackPointer = registers.get("ESP");
+        String stackPointer = registers.getStackPointer();
         String pointingTo = memory.read(stackPointer, 32);
         BigInteger pointer = new BigInteger(pointingTo, 16);
 

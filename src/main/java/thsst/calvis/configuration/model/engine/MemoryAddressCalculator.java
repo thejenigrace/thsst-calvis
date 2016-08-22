@@ -31,6 +31,9 @@ public class MemoryAddressCalculator {
 
         if ( token1.isRegister() ) {
             baseAddress = registers.get(token1);
+            if ( baseAddress.length() > 8 ) {
+                baseAddress = baseAddress.substring(baseAddress.length() - 8);
+            }
         } else if ( token1.isHex() ) {
             baseAddress = extend(token1.getValue(), Memory.MAX_ADDRESS_SIZE, "0");
         } else if ( token1.isLabel() ) {

@@ -1,5 +1,5 @@
 consoleExecute(registers, memory, console) {
-	String stackPointer = registers.get("ESP");
+	String stackPointer = registers.getStackPointer();
 
     // pointingTo is the first "pop" from stack.
 	String pointingTo = memory.read(stackPointer, 32);
@@ -9,7 +9,7 @@ consoleExecute(registers, memory, console) {
 
 	while ( !memory.read(pointer.toString(16), 8).equals("00") ) {
 		// get one byte
-	    String first = memory.read(pointer.toString(16), 8); 
+	    String first = memory.read(pointer.toString(16), 8);
 		char ascii = (char) Integer.parseInt(first, 16);
 		if ( ascii == '\\' ) {
 			// increment one more
@@ -55,7 +55,7 @@ consoleExecute(registers, memory, console) {
     int iteratorCounter = 0;
     int shift = 0;
 
-    String stackPointer = registers.get("ESP");
+    String stackPointer = registers.getStackPointer();
     BigInteger stackAddress = new BigInteger(stackPointer, 16);
 
     while (it.hasNext()) {
@@ -63,7 +63,7 @@ consoleExecute(registers, memory, console) {
         int key = (int) m.getKey();
         int[] value = (int[]) m.getValue();
 
-        String format = printed.substring(value[0] - shift, value[1] - shift); 
+        String format = printed.substring(value[0] - shift, value[1] - shift);
 
         BigInteger offset = new BigInteger(initialOffset + "");
 	    offset = offset.divide(new BigInteger("8"));
@@ -71,7 +71,7 @@ consoleExecute(registers, memory, console) {
 
         if ( stackAddress.compareTo(new BigInteger("FFFE", 16)) == 1 ) {
 			throw new StackPopException(offset.intValue());
-		} else {  
+		} else {
 	        if ( format.matches("%[0-9]*d") ) {
 	            // 16 bit signed int
 				String bits  = memory.read(stackAddress.toString(16), 16);
@@ -97,7 +97,7 @@ consoleExecute(registers, memory, console) {
 				String bits  = memory.read(stackAddress.toString(16), 16);
 				BigInteger b = new BigInteger(bits, 16);
 				String unsigned = getUnsigned(16, b.toString(2));
-				
+
 				BigInteger b2 = new BigInteger(unsigned);
 				// add object to object array for printf args
 				printfArgs[iteratorCounter] = b2.intValueExact();
@@ -174,7 +174,7 @@ consoleExecute(registers, memory, console) {
 				String stringVariable = "";
 				while ( !memory.read(stringPointer.toString(16), 8).equals("00") ) {
 					// get one byte
-				    String first = memory.read(stringPointer.toString(16), 8); 
+				    String first = memory.read(stringPointer.toString(16), 8);
 					char ascii = (char) Integer.parseInt(first, 16);
 					if ( ascii == '\\' ) {
 						// increment one more because of escape key
@@ -214,7 +214,7 @@ consoleExecute(registers, memory, console) {
             }
         }
     );
-    
+
 }
 
 String getUnsigned(size, stringBits){
@@ -226,7 +226,7 @@ String getUnsigned(size, stringBits){
 
 	StringBuilder tempBit = new StringBuilder(temp);
 	String returnable = "";
-	
+
 	if (tempBit.charAt(0) == '1') {
 		tempBit.setCharAt(0, '0');
 		tempBit.insert(1, "1");
@@ -236,7 +236,7 @@ String getUnsigned(size, stringBits){
 		BigInteger bi = new BigInteger(tempBit.toString(), 2);
 		returnable = bi.toString(10);
 	}
-	return returnable;	
+	return returnable;
 }
 
 long parseUnsignedHex(String text) {

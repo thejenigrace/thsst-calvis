@@ -22,15 +22,11 @@ public class Register {
      */
     public void initializeValue() {
         String regInitialValue = "";
-        for ( int i = 0; i < this.size / 4; i++ ) {
-            regInitialValue += "0";
+
+        while ( regInitialValue.length() < this.size / 4 ) {
+            regInitialValue = "0" + regInitialValue;
         }
         this.value = regInitialValue;
-        if ( this.name.equals("ESP") ) {
-            this.value = "0000FFFE";
-        } else if ( this.name.equals("SP") ) {
-            this.value = "FFFE";
-        }
     }
 
     public String getValue() {
