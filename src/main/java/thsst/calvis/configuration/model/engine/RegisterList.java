@@ -393,11 +393,19 @@ public class RegisterList {
     }
 
     public String getStackPointer() {
-        return get(stackPointerName);
+        String registerStackValue = get(stackPointerName);
+        if(registerStackValue.length() > 8){
+            return registerStackValue.substring(8);
+        }
+        else{
+            return registerStackValue;
+        }
     }
 
     public void setStackPointer(String value) throws DataTypeMismatchException {
-        set(stackPointerName, value);
+        String officialValue = value;
+
+        set(stackPointerName, officialValue);
     }
 
     public void clear() {

@@ -36,6 +36,10 @@ if (!immediate.isHex() && !des.isHex() && !src.isHex()) {
 String[] getRegisterProper(reg, registers,memory){
 	String[] arrayReturnables = new String[2];
 	switch(reg){
+		case "R29":
+			arrayReturnables[0] = "R29";
+			arrayReturnables[1] = "R29";
+			return arrayReturnables;
 		case "R0":
 		case "$ZERO":
 			arrayReturnables[0] = "R0";

@@ -14,8 +14,8 @@ execute(des, src, rel, registers, memory) throws Exception {
 	if(!isAccepted){
 		throw new IncorrectParameterException("BNEZ");
 	}
-	System.out.println(desBi.compareTo(srcBi));
-	if(desBi.compareTo(srcBi)) != 0){
+	System.out.println(desBi.compareTo(srcBi) + " pasok ba?");
+	if(desBi.compareTo(srcBi) != 0){
 		// default is rel 16
 		if( rel.isLabel()){
 			toAddress = memory.getFromLabelMap(rel.getValue());
@@ -34,5 +34,14 @@ execute(des, src, rel, registers, memory) throws Exception {
 		else {
 			throw new JumpOutOfBoundsException(from, to);
 		}
+	}
+	else {
+		/**
+		 * Else, incremet instruction pointer to proceed to next instruction;
+		 */
+		String currentLine = registers.getInstructionPointer();
+		BigInteger value = new BigInteger(currentLine, 16);
+		value = value.add(new BigInteger("1"));
+		registers.setInstructionPointer(value.toString(16));
 	}
 }

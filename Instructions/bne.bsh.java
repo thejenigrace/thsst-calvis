@@ -17,7 +17,6 @@ execute(des, src, rel, registers, memory) throws Exception {
 	System.out.println(desBi.compareTo(srcBi));
 	if(desBi.compareTo(srcBi) == -1 || desBi.compareTo(srcBi) == 1){
 		// default is rel 16
-		System.out.println("putangina");
 		if( rel.isLabel()){
 			toAddress = memory.getFromLabelMap(rel.getValue());
 		}

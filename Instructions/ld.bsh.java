@@ -1,5 +1,5 @@
 execute(des, src, registers, memory) {
-	if ( des.isRegister() ) {
+	if ( des.isRegister()) {
 		if ( src.isMemory() ) {
 			String[] arrReturn = getRegisterProper(des.getValue(), registers, memory);
 			int desRegSize = registers.getBitSize(des);
