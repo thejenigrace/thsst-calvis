@@ -933,6 +933,14 @@ public class Calculator {
     public boolean isNan(double value){
         return Double.isNaN(value);
     }
+
+    public double switchPrecisionValue(int size, String value){
+        if(size == 32)
+            return HexToSinglePrecisionFloatingPointSingle(value);
+        else{
+            return hexToDoublePrecisionFloatingPoint(value);
+        }
+    }
 }
 
 

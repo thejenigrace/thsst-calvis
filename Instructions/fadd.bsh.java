@@ -6,8 +6,10 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-		spValue = Long.parseLong(value, 16) + 0.0;
-		
+
+		spValue = c.switchPrecisionValue(size, value);
+
+		System.out.println(spValue + " spValue");
         String st0 = registers.get("ST0");
 
         double stValue = Double.parseDouble(st0);
@@ -43,7 +45,7 @@ execute(des, src, registers, memory) {
 			
 			double dbDes = Double.parseDouble(desValue);
 			double dbSrc = Double.parseDouble(srcValue);
-			
+
 			double resultingValue = dbSrc + dbDes;
 			boolean isException = c.generateFPUExceptions(registers, resultingValue, des.getValue());
 			if(!isException){
