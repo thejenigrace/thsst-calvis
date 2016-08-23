@@ -343,9 +343,6 @@ public class FileEditorTabPane {
                 case "PLAY":
                     this.workspaceController.getSysCon().play();
                     break;
-                case "PAUSE":
-                    this.workspaceController.getSysCon().pause();
-                    break;
                 case "STOP":
                     this.workspaceController.getSysCon().end();
                     break;
@@ -357,6 +354,9 @@ public class FileEditorTabPane {
                     break;
                 case "RESET":
                     this.workspaceController.getSysCon().reset();
+                    break;
+                case "FAST":
+                    this.workspaceController.getSysCon().fastForward();
                     break;
                 default: System.out.println("None");
             }

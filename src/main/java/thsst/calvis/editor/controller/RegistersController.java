@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import thsst.calvis.configuration.model.engine.CalvisFormattedInstruction;
 import thsst.calvis.configuration.model.engine.Register;
+import thsst.calvis.configuration.model.engine.RegisterList;
 import thsst.calvis.configuration.model.engine.Token;
 import thsst.calvis.editor.model.Flag;
 import thsst.calvis.editor.view.AssemblyComponent;
@@ -44,6 +45,8 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @FXML
     private TableColumn colEFlagsValue;
 
+    private RegisterList registerList;
+    
     private ObservableList<Flag> mxcsrFlagList;
     private ObservableList<Flag> eFlagsList;
 
@@ -61,16 +64,21 @@ public class RegistersController extends AssemblyComponent implements Initializa
             String registerValue = p.getValue().getValue().getValue().toString();
 
             Register someRegister = p.getValue().getValue();
+            int registerSize = someRegister.getSize();
 
-            if ( someRegister.getSize() == 128 && registerValue.length() == 32 ) {
-                registerValue = registerValue.substring(0, 8) + " "
-                        + registerValue.substring(8, 16) + " "
-                        + registerValue.substring(16, 24) + " "
-                        + registerValue.substring(24);
-            } else if ( someRegister.getSize() == 64 && registerValue.length() == 16 ) {
-                registerValue = registerValue.substring(0, 8) + " "
-                        + registerValue.substring(8);
+            if ( registerSize >= 64 ) {
+                int cuts = registerSize / 32;
+                String result = "";
+                int start = 0;
+                int end = 8;
+                for ( int i = 0; i < cuts; i++ ) {
+                    result = result + " " + registerValue.substring(start, end);
+                    start = end;
+                    end = end + 8;
+                }
+                registerValue = result;
             }
+
             ReadOnlyStringWrapper stringWrapper = new ReadOnlyStringWrapper(registerValue);
             return stringWrapper;
         });
@@ -87,7 +95,14 @@ public class RegistersController extends AssemblyComponent implements Initializa
         this.treeTableViewRegister.refresh();
         this.tableViewMxcsrFlags.refresh();
         this.tableViewEFlags.refresh();
-        this.treeTableViewRegister.getSelectionModel().clearSelection();
+
+        Platform.runLater(
+                new Thread() {
+                    public void run() {
+                        treeTableViewRegister.getSelectionModel().clearSelection();
+                    }
+                }
+        );
 
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( Token token : tokens ) {
@@ -95,10 +110,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 int regIndex;
                 if ( this.childRegNameList.contains(token.getValue()) ) {
                     regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
-                    System.out.println("Child");
+//                    System.out.println("Child");
                 } else {
                     regIndex = this.motherRegNameList.indexOf(token.getValue());
-                    System.out.println("Mother");
+//                    System.out.println("Mother");
                 }
 
                 Platform.runLater(() -> {
@@ -110,34 +125,8 @@ public class RegistersController extends AssemblyComponent implements Initializa
     }
 
     private String getMotherRegister(String childRegister) {
-        switch ( childRegister ) {
-            case "AX":
-            case "AH":
-            case "AL":
-                return "EAX";
-            case "BX":
-            case "BH":
-            case "BL":
-                return "EBX";
-            case "CX":
-            case "CH":
-            case "CL":
-                return "ECX";
-            case "DX":
-            case "DH":
-            case "DL":
-                return "EDX";
-            case "SI":
-                return "ESI";
-            case "DI":
-                return "EDI";
-            case "BP":
-                return "ESP";
-            case "SP":
-                return "EBP";
-            default:
-                return "";
-        }
+        String[] lookupArray = registerList.find(childRegister);
+        return lookupArray[RegisterList.SOURCE];
     }
 
     @Override
@@ -152,14 +141,15 @@ public class RegistersController extends AssemblyComponent implements Initializa
     @Override
     public void build() {
         try {
-            Map map = this.sysCon.getRegisterState().getRegisterMap();
+            registerList = this.sysCon.getRegisterState();
+            Map map = registerList.getRegisterMap();
 
             ObservableList<Register> registers = FXCollections.observableArrayList(map.values());
             TreeItem<Register> dummyRoot = new TreeItem<>();
 
             for ( Register rMother : registers ) {
                 TreeItem<Register> motherRegister = new TreeItem<>(rMother);
-                Map childMap = this.sysCon.getRegisterState().getChildRegisterMap(rMother.getName());
+                Map childMap = registerList.getChildRegisterMap(rMother.getName());
 
                 if ( childMap != null ) {
                     ObservableList<Register> childRegisters = FXCollections.observableArrayList(childMap.values());
@@ -178,11 +168,12 @@ public class RegistersController extends AssemblyComponent implements Initializa
             this.treeTableViewRegister.setRoot(dummyRoot);
             this.treeTableViewRegister.setShowRoot(false);
 
-            this.mxcsrFlagList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getMxscr().getFlagList());
+            this.mxcsrFlagList = FXCollections.observableArrayList(registerList.getMxscr().getFlagList());
             this.tableViewMxcsrFlags.setItems(this.mxcsrFlagList);
 
-            this.eFlagsList = FXCollections.observableArrayList(this.sysCon.getRegisterState().getEFlags().getFlagList());
+            this.eFlagsList = FXCollections.observableArrayList(registerList.getEFlags().getFlagList());
             this.tableViewEFlags.setItems(this.eFlagsList);
+
         } catch ( Exception e ) {
             e.printStackTrace();
         }
