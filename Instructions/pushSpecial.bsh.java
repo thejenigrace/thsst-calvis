@@ -1,4 +1,4 @@
-execute(src, registers, memory) throws Exception {
+execute(src, des, registers, memory) throws Exception {
 	int size = Memory.MAX_ADDRESS_SIZE; // 32
 	String stackPointer = registers.getStackPointer();
 	String val = "";
@@ -27,4 +27,16 @@ execute(src, registers, memory) throws Exception {
 		String stackEntry = registers.getStackPointer();
 		memory.writeToStack(stackEntry, val, size);
 	}
+	// proceed to store string
+	String registerValue = registers.get(des);
+	String decimalValue = new BigInteger(registerValue, 16).toString(10) + "";
+	char[] chars = decimalValue.toCharArray();
+	String sbHex = "";
+	for (int i = 0; i < chars.length; i++)
+	{
+		sbHex += Integer.toHexString((int) chars[i]);
+	}
+	int regSize = registers.getBitSize(des);
+	System.out.println("SBHEX: " + sbHex);
+	memory.write(val, sbHex, sbHex.length() * 8);
 }

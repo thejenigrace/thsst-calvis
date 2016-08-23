@@ -6,7 +6,7 @@ execute(src, registers, memory) {
         int size = memory.getBitSize(src);
         String value = memory.read(src, size);
 		double spValue = 0.0;
-        spValue = Long.parseLong(value, 16) + 0.0;
+        spValue = c.switchPrecisionValue(size, value);
 		
         String st0 = registers.get("ST0");
         double stValue = Double.parseDouble(st0);
