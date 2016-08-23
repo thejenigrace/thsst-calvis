@@ -137,7 +137,7 @@ public class RegisterList {
                                 this.map.put(reg[NAME], g);
                                 break;
                             case "5":
-                                FpuRegister st0 = new FpuRegister(reg[NAME], regSize);
+                                FpuRegister st0 = new FpuRegister(reg[NAME], 0);
                                 this.map.put(reg[NAME], st0);
                                 break;
                             case "7":

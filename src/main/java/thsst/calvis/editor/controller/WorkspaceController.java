@@ -56,6 +56,8 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Button btnPlay;
     @FXML
+    private Button btnFastForward;
+    @FXML
     private Button btnStop;
     @FXML
     private Button btnReset;
@@ -454,7 +456,7 @@ public class WorkspaceController implements Initializable {
 
     @FXML
     private void handleFastForward(ActionEvent event) {
-
+        this.fileEditorTabPane.simulationAction("FAST");
     }
 
     @FXML
@@ -529,6 +531,7 @@ public class WorkspaceController implements Initializable {
         this.disableStepMode(flag);
         this.btnPlay.setDisable(flag);
         this.menuItemPlay.setDisable(flag);
+        this.btnFastForward.setDisable(flag);
     }
 
     public void disableStepMode(boolean flag) {

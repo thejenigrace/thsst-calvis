@@ -20,7 +20,9 @@ import java.util.*;
  */
 public class SystemController {
 
-    static long SIMULATION_DELAY = 1000;
+    final long SIMULATION_DELAY = 1000;
+
+    private long delay = SIMULATION_DELAY;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;
@@ -101,16 +103,6 @@ public class SystemController {
         beginSimulation();
     }
 
-    public void pause() {
-        if ( this.state == SimulationState.PLAY ) {
-            this.state = SimulationState.PAUSE;
-            Platform.runLater(() -> workspaceController.changeIconToPlay());
-            if ( thread != null ) {
-                thread.interrupt();
-            }
-        }
-    }
-
     public void build(String code){
         clear();
         workspaceController.formatCodeArea(code);
@@ -150,21 +142,34 @@ public class SystemController {
                 workspaceController.changeIconToPause();
                 beginSimulation();
                 break;
-//            case STOP: // System is not running, so we start playing
-//                clear();
-//                workspaceController.formatCodeArea(code);
-//                workspaceController.changeIconToPause();
-//                boolean isSuccessful = parse(code);
-//                if ( isSuccessful ) {
-//                    this.state = SimulationState.PLAY;
-//                    push();
-//                    pushOldEnvironment(0);
-//                    beginSimulation();
-//                } else {
-//                    end();
-//                }
-//                break;
         }
+    }
+
+    public void fastForward() {
+        this.state = SimulationState.PLAY;
+        workspaceController.changeIconToPause();
+        delay = 1;
+//        beginSimulation();
+        thread = new Thread() {
+            public void run() {
+                while ( (state == SimulationState.PLAY)
+                        && executionMap.containsKey(registerList.getInstructionPointer()) ) {
+                    try {
+                        executeOneLine();
+                    }  catch ( DataTypeMismatchException e ) {
+                        try {
+                            workspaceController.handleErrorLoggerTab(e);
+                        } catch ( Exception e1 ) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+                if ( state == SimulationState.PLAY ) {
+                    end();
+                }
+            }
+        };
+        thread.start();
     }
 
     public void end() {
@@ -200,6 +205,7 @@ public class SystemController {
         this.memoryStackMap = new HashMap<>();
         this.stackCount = 0;
         this.parsedCode = "";
+        delay = SIMULATION_DELAY;
         refreshAllObservers();
     }
 
@@ -292,7 +298,7 @@ public class SystemController {
                 while ( (state == SimulationState.PLAY)
                         && executionMap.containsKey(registerList.getInstructionPointer()) ) {
                     try {
-                        Thread.sleep(SIMULATION_DELAY);
+                        Thread.sleep(delay);
                         executeOneLine();
                     } catch ( InterruptedException e ) {
 //                        System.out.println("Simulation Thread interrupted");
