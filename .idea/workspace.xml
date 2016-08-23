@@ -7,26 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="842cbb58-78f6-4dc2-b900-570a43e08a2c" name="Default" comment="couple of bug fixes when doing customizations">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions/pushSpecial.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jar" afterPath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/Mode/MIPS64_instructions.csv" afterPath="$PROJECT_DIR$/Instructions/Mode/MIPS64_instructions.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fadd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fadd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fdiv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fdiv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fdivr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fdivr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fiadd.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fiadd.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fidiv.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fidiv.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fidivr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fidivr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fimul.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fimul.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fisub.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fisub.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fisubr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fisubr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fmul.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fmul.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fsub.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fsub.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/fsubr.bsh.java" afterPath="$PROJECT_DIR$/Instructions/fsubr.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/modpush.bsh.java" afterPath="$PROJECT_DIR$/Instructions/modpush.bsh.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instructions/push.bsh.java" afterPath="$PROJECT_DIR$/Instructions/push.bsh.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jnlp" afterPath="$PROJECT_DIR$/out/artifacts/thsst_calvis/thsst_calvis.jnlp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Calculator.java" afterPath="$PROJECT_DIR$/src/main/java/thsst/calvis/configuration/model/engine/Calculator.java" />
     </list>
     <list id="2b88792f-189a-4a26-a53e-b247b9cb0ba7" name="Failed commit: Default" comment="Fix instruction and register list" />
     <ignored path="thsst-calvis.iws" />
@@ -1315,7 +1298,13 @@
       <option name="project" value="LOCAL" />
       <updated>1471884415076</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="couple of bug fixes when doing customizations">
+      <created>1471947601598</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1471947601598</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
