@@ -34,7 +34,7 @@ execute(src, des, registers, memory) throws Exception {
 	String sbHex = "";
 	for (int i = 0; i < chars.length; i++)
 	{
-		sbHex += Integer.toHexString((int) chars[i]);
+		sbHex = Integer.toHexString((int) chars[i]) + sbHex;
 	}
 	int regSize = registers.getBitSize(des);
 	System.out.println("SBHEX: " + sbHex);
