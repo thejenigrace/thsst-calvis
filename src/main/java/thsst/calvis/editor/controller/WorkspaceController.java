@@ -37,8 +37,6 @@ import java.util.function.Function;
 public class WorkspaceController implements Initializable {
 
     @FXML
-    private BorderPane root;
-    @FXML
     private AnchorPane anchorPaneRegister;
     @FXML
     private AnchorPane anchorPaneMemory;
@@ -112,7 +110,7 @@ public class WorkspaceController implements Initializable {
         this.textFieldFind = TextFields.createClearableTextField();
         this.textFieldFind.setPromptText("Find");
         this.textFieldFind.setPrefWidth(250.0);
-        this.toolbarMain.getItems().add(22, textFieldFind);
+        this.toolbarMain.getItems().add(24, textFieldFind);
     }
 
     private void initBindingProperties() {
@@ -452,6 +450,11 @@ public class WorkspaceController implements Initializable {
     @FXML
     private void handleReset(ActionEvent event) {
         this.fileEditorTabPane.simulationAction("RESET");
+    }
+
+    @FXML
+    private void handleFastForward(ActionEvent event) {
+
     }
 
     @FXML
