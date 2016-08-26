@@ -84,7 +84,7 @@ public class SettingsController implements Initializable {
 
     public void changeView(String settings) throws Exception {
        if(settings.equals("Editor")) {
-           System.out.println("Selected Editor");
+           
            FXMLLoader loader = new FXMLLoader();
            loader.setLocation(getClass().getResource("/fxml/settings_editor.fxml"));
            Parent settingsEditorView = (VBox) loader.load();

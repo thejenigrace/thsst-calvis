@@ -38,7 +38,7 @@ public class SettingsEditor implements Initializable{
         sliderPlaySpeed.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println("newValue = " + newValue);
+                
             }
         });
 

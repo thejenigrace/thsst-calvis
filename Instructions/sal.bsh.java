@@ -32,7 +32,7 @@ execute(des, src, registers, memory) {
                 setFlags(calculator, flags, registers, des, limit, originalSign, desSize, originalDes, r);
             }
         }
-        else if ( src.isHex() && src.getValue().length() <= 2){
+        else if ( src.isHex() && src.getValue().length() <= 2) {
             //get size of des
             int desSize = registers.getBitSize(des);
             String originalDes = calculator.hexToBinaryString(registers.get(des), des);
@@ -62,7 +62,7 @@ execute(des, src, registers, memory) {
             }
         }
     }
-    else if ( des.isMemory() ){
+    else if ( des.isMemory() ) {
         if( src.isRegister() && src.getValue().equals("CL") ) {
             //get size of des
             int desSize = memory.getBitSize(des);

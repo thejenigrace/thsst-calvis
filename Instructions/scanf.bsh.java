@@ -1,3 +1,3 @@
 consoleExecute(registers, memory, console) {
-	console.scanf();
+    console.scanf();
 }

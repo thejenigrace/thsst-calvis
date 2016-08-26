@@ -105,7 +105,7 @@ public class EFlags extends Register {
             }
             this.value = hexValue.toUpperCase();
         } else {
-            System.out.println("Invalid flag value");
+            
         }
     }
 

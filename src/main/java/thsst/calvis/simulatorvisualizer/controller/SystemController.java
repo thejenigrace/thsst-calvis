@@ -1,5 +1,6 @@
 package thsst.calvis.simulatorvisualizer.controller;
 
+import com.github.pfmiles.dropincc.DropinccException;
 import thsst.calvis.configuration.model.engine.ConfiguratorEnvironment;
 import thsst.calvis.configuration.model.engine.*;
 import thsst.calvis.configuration.model.exceptions.DataTypeMismatchException;
@@ -21,8 +22,6 @@ import java.util.*;
 public class SystemController {
 
     final long SIMULATION_DELAY = 1000;
-
-    private long delay = SIMULATION_DELAY;
 
     private ConfiguratorEnvironment environment;
     private RegisterList registerList;
@@ -89,21 +88,28 @@ public class SystemController {
     }
 
     public void pauseFromConsole() {
-        this.consoleState = this.state;
-        this.state = SimulationState.PAUSE;
-        Platform.runLater(() -> workspaceController.disablePlayNextPrevious(true));
         if ( thread != null ) {
             thread.interrupt();
         }
+
+        this.consoleState = this.state;
+        this.state = SimulationState.PAUSE;
+
+        Platform.runLater(() -> workspaceController.disablePlayNextPrevious(true));
+
     }
 
     public void resumeFromConsole() {
         this.state = this.consoleState;
         Platform.runLater(() -> workspaceController.disablePlayNextPrevious(false));
-        beginSimulation();
+        if ( this.state == SimulationState.FAST ) {
+            fastForward();
+        } else {
+            beginSimulation();
+        }
     }
 
-    public void build(String code){
+    public void build(String code) {
         clear();
         workspaceController.formatCodeArea(code);
         boolean isSuccessful = parse(code);
@@ -117,7 +123,7 @@ public class SystemController {
                         public void run() {
                             workspaceController.disableBuildButton(true);
                             workspaceController.disableAllSimulationButtons(false);
-                            workspaceController.disableCodeArea(true);
+                            workspaceController.codeAreaSetEditable(false);
                         }
                     }
             );
@@ -146,38 +152,22 @@ public class SystemController {
     }
 
     public void fastForward() {
-        this.state = SimulationState.PLAY;
+        this.state = SimulationState.FAST;
         workspaceController.changeIconToPause();
-        delay = 1;
-//        beginSimulation();
         thread = new Thread() {
             public void run() {
-                while ( (state == SimulationState.PLAY)
-                        && executionMap.containsKey(registerList.getInstructionPointer()) ) {
-                    try {
-                        executeOneLine();
-                    }  catch ( DataTypeMismatchException e ) {
-                        try {
-                            workspaceController.handleErrorLoggerTab(e);
-                        } catch ( Exception e1 ) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
-                if ( state == SimulationState.PLAY ) {
-                    end();
-                }
+                executeAll();
             }
         };
         thread.start();
     }
 
     public void end() {
-        this.state = SimulationState.STOP;
         if ( thread != null ) {
-            this.console.stopConsole();
             thread.interrupt();
         }
+        this.state = SimulationState.STOP;
+        console.stopConsole();
         Platform.runLater(
                 new Thread() {
                     public void run() {
@@ -185,7 +175,8 @@ public class SystemController {
                         workspaceController.disableAllSimulationButtons(true);
                         workspaceController.disableBuildButton(false);
                         workspaceController.disableStepMode(true);
-                        workspaceController.disableCodeArea(false);
+                        workspaceController.codeAreaSetEditable(true);
+
                     }
                 }
         );
@@ -205,7 +196,6 @@ public class SystemController {
         this.memoryStackMap = new HashMap<>();
         this.stackCount = 0;
         this.parsedCode = "";
-        delay = SIMULATION_DELAY;
         refreshAllObservers();
     }
 
@@ -298,10 +288,10 @@ public class SystemController {
                 while ( (state == SimulationState.PLAY)
                         && executionMap.containsKey(registerList.getInstructionPointer()) ) {
                     try {
-                        Thread.sleep(delay);
+                        Thread.sleep(SIMULATION_DELAY);
                         executeOneLine();
                     } catch ( InterruptedException e ) {
-//                        System.out.println("Simulation Thread interrupted");
+
                     } catch ( DataTypeMismatchException e ) {
                         try {
                             workspaceController.handleErrorLoggerTab(e);
@@ -319,19 +309,24 @@ public class SystemController {
     }
 
     private void executeOneLine() throws DataTypeMismatchException {
-        // 1. Retrieve EIP value and store it to @var currentLine
+        // 1. Retrieve instruction pointer value and store it @currentLine
         String currentLine = registerList.getInstructionPointer();
         // 2. Retrieve and execute the CALVIS Instruction based on @var currentLine
-        boolean flag = true;
+        boolean isControlTransfer = true;
+        // 2. Retrieve current CalvisFormattedInstruction object
+        CalvisFormattedInstruction currentInstruction = executionMap.get(currentLine);
+        // 3. Try to execute the currentInstruction, determine if it is a control transfer
         try {
-            // EXECUTE THE CALVIS INSTRUCTION
-            flag = executionMap.get(currentLine).execute();
+            isControlTransfer = currentInstruction.execute();
 
             // 3. Parse currentLine to int @var value
             int value = Integer.parseInt(currentLine, 16);
             int highlightedLine = value;
-            // 4. Increment @var currentLine and store it to EIP register
-            if ( flag ) {
+
+            // 4. If it's not a control transfer,
+            // increment @var currentLine
+            // store it to instruction pointer register
+            if ( !isControlTransfer ) {
                 value++;
                 registerList.setInstructionPointer(Integer.toHexString(value));
             }
@@ -342,18 +337,16 @@ public class SystemController {
             pushOldEnvironment(this.stackCount - 1);
 
             // 6. Notify all observers that an instruction has been executed
-
             notifyAllObservers(executionMap.get(currentLine), highlightedLine);
-
         } catch ( Exception e ) {
             e.printStackTrace();
+            end();
             Platform.runLater(
                     new Thread() {
                         @Override
                         public void run() {
                             try {
                                 workspaceController.handleErrorLoggerTab(e);
-                                end();
                             } catch ( Exception someOtherException ) {
                                 someOtherException.printStackTrace();
                             }
@@ -361,6 +354,64 @@ public class SystemController {
                     }
             );
         }
+    }
+
+    private void executeAll() {
+        String currentLine = registerList.getInstructionPointer();
+        boolean isControlTransfer = true;
+        while ( state == SimulationState.FAST && executionMap.containsKey(currentLine) ) {
+            // 1. Retrieve instruction pointer value and store it @currentLine
+            currentLine = registerList.getInstructionPointer();
+            // 2. Retrieve current CalvisFormattedInstruction object
+            CalvisFormattedInstruction currentInstruction = executionMap.get(currentLine);
+            // 3. Try to execute the currentInstruction, determine if it is a control transfer
+            try {
+                isControlTransfer = currentInstruction.execute();
+                // 3.1. Trigger console specific instructions
+                String bigName = currentInstruction.getName().toUpperCase();
+                if ( bigName.matches("PRINTF|SCANF|CLS") ) {
+                    console.update(currentInstruction, 0);
+                }
+            } catch ( NullPointerException npe ) {
+                // no more instructions found
+                end();
+            } catch ( Exception e ) {
+                end();
+                e.printStackTrace();
+                Platform.runLater(
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    workspaceController.handleErrorLoggerTab(e);
+                                } catch ( Exception someOtherException ) {
+                                    someOtherException.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
+
+            // 4. Parse currentLine to int @lineNumber
+            int lineNumber = Integer.parseInt(currentLine, 16);
+
+            // 5. Increment @currentLine and store it to instruction pointer register
+            if ( !isControlTransfer ) {
+                lineNumber++;
+                try {
+                    registerList.setInstructionPointer(Integer.toHexString(lineNumber));
+                } catch ( DataTypeMismatchException e ) {
+                    e.printStackTrace();
+                    end();
+                }
+            }
+
+        }
+
+        if ( !executionMap.containsKey(currentLine) ) {
+            end();
+        }
+
     }
 
     private void push() {
@@ -434,22 +485,35 @@ public class SystemController {
                  */
                 calvisInstruction.verifyParameters(lineCounter);
             }
-        } catch ( Exception e ) {
-            if ( e instanceof DuplicateLabelException ) {
-                DuplicateLabelException duplicateLabelException = (DuplicateLabelException) e;
-                int labelOccurrence = 0;
-                for ( int i = 0; i < codeLines.length; i++ ) {
-                    if ( codeLines[i].contains(duplicateLabelException.getLabel()) ) {
-                        if ( !codeLines[i].matches("[;].*" + duplicateLabelException.getLabel()) ) {
-                            labelOccurrence++;
-                        }
-                    }
-                    if ( labelOccurrence == 2 ) {
-                        duplicateLabelException.setLineNumber(i + 1);
-                        break;
+        } catch ( DuplicateLabelException e ) {
+            DuplicateLabelException duplicateLabelException = e;
+            int labelOccurrence = 0;
+            for ( int i = 0; i < codeLines.length; i++ ) {
+                if ( codeLines[i].contains(duplicateLabelException.getLabel()) ) {
+                    if ( !codeLines[i].matches("[;].*" + duplicateLabelException.getLabel()) ) {
+                        labelOccurrence++;
                     }
                 }
+                if ( labelOccurrence == 2 ) {
+                    duplicateLabelException.setLineNumber(i + 1);
+                    break;
+                }
             }
+        } catch ( DropinccException e ) {
+            isSuccessful = false;
+            Platform.runLater(
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                workspaceController.handleErrorLoggerTab(e);
+                            } catch ( Exception viewException ) {
+                                viewException.printStackTrace();
+                            }
+                        }
+                    }
+            );
+        } catch ( Exception e ) {
             isSuccessful = false;
             e.printStackTrace();
             Platform.runLater(

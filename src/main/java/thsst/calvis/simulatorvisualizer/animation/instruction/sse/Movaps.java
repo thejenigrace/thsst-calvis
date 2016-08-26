@@ -27,7 +27,7 @@ public class Movaps extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+            
         }
 
         // CODE HERE
@@ -132,7 +132,7 @@ public class Movaps extends CalvisAnimation {
 //        String desStr = timeFunc.getPreviousValue(des, size);
 //        String srcStr = timeFunc.getPreviousValue(src, size);
 //        String resultStr = timeFunc.getValue(des, size);
-//        System.out.println(resultStr + " jhere here");
+
 //        int operationSize = 8;
 //        Text sign = timeFunc.generateText(new Text("Transfer To:"), 22, "#98777b");
 //        Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");

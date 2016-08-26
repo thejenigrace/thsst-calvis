@@ -40,7 +40,7 @@ public class Rol extends CalvisAnimation {
         ObservableList<Node> parent = this.root.getChildren();
 
         ArrayList<RotateModel> rotateModels = new ArrayList<>();
-        System.out.println(timeFunc.getPreviousValue(des, timeFunc.getBitSize(des) ) + " puta");
+        
         String destination = timeFunc.getPreviousValue(des, timeFunc.getBitSize(des));
         BigInteger biDes = new BigInteger(destination, 16);
         BigInteger biResult = biDes;

@@ -41,8 +41,8 @@ cmp(registers, memory, flags, calculator, tokenEAX) {
 
     for(int i = 31; i >= 0; i--) {
         r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-        - Integer.parseInt(String.valueOf(source.charAt(i)))
-        - borrow;
+            - Integer.parseInt(String.valueOf(source.charAt(i)))
+            - borrow;
 
         if( r < 0 ) {
             borrow = 1;
@@ -98,54 +98,54 @@ cmp(registers, memory, flags, calculator, tokenEAX) {
 
 // SSE2 CMPSD Comparison Instruction
 execute(des,src,op3,registers,memory) {
-  int QWORD = 64;
-  String desValue = registers.get(des);
-  String srcValue;
-  Calculator calculator = new Calculator(registers,memory);
-  if(src.isRegister()) {
-    srcValue = registers.get(src);
-    srcValue = calculator.cutToCertainHexSize("getLower",srcValue,QWORD/4);
-  } else if(src.isMemory()) {
-    srcValue = memory.read(src,QWORD);
-  }
+    int QWORD = 64;
+    String desValue = registers.get(des);
+    String srcValue;
+    Calculator calculator = new Calculator(registers,memory);
+    if(src.isRegister()) {
+        srcValue = registers.get(src);
+        srcValue = calculator.cutToCertainHexSize("getLower",srcValue,QWORD/4);
+    } else if(src.isMemory()) {
+        srcValue = memory.read(src,QWORD);
+    }
 
-  String desNewValue = calculator.cutToCertainHexSize("getUpper",desValue,QWORD/4);
+    String desNewValue = calculator.cutToCertainHexSize("getUpper",desValue,QWORD/4);
 
-  // Get the desValue from 0 to 63 bit
-  desValue = calculator.cutToCertainHexSize("getLower",desValue,QWORD/4);
+    // Get the desValue from 0 to 63 bit
+    desValue = calculator.cutToCertainHexSize("getLower",desValue,QWORD/4);
 
-  double doubleDes = calculator.convertHexToDoublePrecision(desValue);
-  double doubleSrc = calculator.convertHexToDoublePrecision(srcValue);
+    double doubleDes = calculator.convertHexToDoublePrecision(desValue);
+    double doubleSrc = calculator.convertHexToDoublePrecision(srcValue);
 
-    System.out.println("d: " + doubleDes + " _ s: " + doubleSrc);
 
-  String operand = op3.getValue();
-  int intOperand = Integer.parseInt(operand,16);
-  System.out.println("intOperand = " + intOperand);
 
-  int retval = Double.compare(doubleDes, doubleSrc);
-  System.out.println("retval = " + retval);
-  switch(intOperand) {
+    String operand = op3.getValue();
+    int intOperand = Integer.parseInt(operand,16);
+
+
+    int retval = Double.compare(doubleDes, doubleSrc);
+
+    switch(intOperand) {
     case 0:
-    // des == src
+        // des == src
         if(retval == 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 1:
-    // des < src
+        // des < src
         if(retval < 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 2:
-    // des <= src
+        // des <= src
         if(retval < 0 || retval == 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 3:
         if(doubleDes.isNaN() || doubleSrc.isNaN())
@@ -154,32 +154,32 @@ execute(des,src,op3,registers,memory) {
             registers.set(des,desNewValue.concat("00000000"));
         break;
     case 4:
-    // des != src
+        // des != src
         if(retval != 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 5:
-    // des >= src
+        // des >= src
         if(retval > 0 || retval == 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 6:
-    // des > src
+        // des > src
         if(retval > 0)
-          registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
+            registers.set(des,desNewValue.concat("FFFFFFFFFFFFFFFF"));
         else
-          registers.set(des,desNewValue.concat("0000000000000000"));
+            registers.set(des,desNewValue.concat("0000000000000000"));
         break;
     case 7:
-      if(!doubleDes.isNaN() && !doubleSrc.isNaN())
-        registers.set(des,desNewValue.concat("FFFFFFFF"));
-      else
-        registers.set(des,desNewValue.concat("00000000"));
-      break;
-    default: System.out.println("NONE");
-  }
+        if(!doubleDes.isNaN() && !doubleSrc.isNaN())
+            registers.set(des,desNewValue.concat("FFFFFFFF"));
+        else
+            registers.set(des,desNewValue.concat("00000000"));
+        break;
+    default:
+    }
 }

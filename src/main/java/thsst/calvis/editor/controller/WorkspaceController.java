@@ -546,8 +546,8 @@ public class WorkspaceController implements Initializable {
         this.btnFindMoveDownward.setDisable(flag);
     }
 
-    public void disableCodeArea(boolean flag) {
-        this.fileEditorTabPane.disableCodeArea(flag);
+    public void codeAreaSetEditable(boolean flag) {
+        this.fileEditorTabPane.codeAreaSetEditable(flag);
     }
 
     public void formatCodeArea(String codeBlock) {

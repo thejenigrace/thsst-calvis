@@ -90,7 +90,7 @@ public class Pinsrw extends CalvisAnimation {
         srcValue.setY(posY + 40 + desRec.getHeight() + 45);
 
         String srcBits = c.convertHexToBits(srcStr, timeFunc.getBitSize(src));
-        System.out.println("srcBITS " + srcBits);
+        
         Text counterText = new Text(this.createLabelText(src).getText() + "Word Index : " + Integer.toString(count));
         Text extractedWord = new Text(" " + foundWord + "");
         Text foundedWord = new Text("Found Word: " + foundWord);
@@ -100,7 +100,7 @@ public class Pinsrw extends CalvisAnimation {
             firstHalf.setText(srcStr.substring((0), 4 * count));
         }
         Text secondHalf = new Text("");
-        System.out.println((count) + " wow " + (size/16));
+        
         if(count + 1 < timeFunc.getBitSize(des) / 16){
             secondHalf.setText(srcStr.substring((4 * count) + 4));
         }

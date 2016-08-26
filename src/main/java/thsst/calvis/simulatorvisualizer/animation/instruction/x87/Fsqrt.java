@@ -97,7 +97,7 @@ public class Fsqrt extends CalvisAnimation {
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
-        System.out.println(desValue.getText() + " :(");
+        
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
         fake.setX(0);

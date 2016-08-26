@@ -25,7 +25,7 @@ public class Cmpxchgs8 extends CalvisAnimation {
     public void animate(ScrollPane tab) {
         this.root.getChildren().clear();
         tab.setContent(root);
-        System.out.println("puta");
+        
         RegisterList registers = currentInstruction.getRegisters();
         Memory memory = currentInstruction.getMemory();
         TimeLineFunction timeFunc = new TimeLineFunction(timeline, root, registers, memory, finder);

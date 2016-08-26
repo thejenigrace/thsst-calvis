@@ -34,7 +34,7 @@ public class Pmulhuw extends CalvisAnimation {
         String desStr = timeFunc.getPreviousValue(des, size);
         String srcStr = timeFunc.getPreviousValue(src, size);
         String resultStr = timeFunc.getValue(des, size);
-        System.out.println(resultStr + " jhere here");
+        
         int operationSize = 4;
         Text sign = timeFunc.generateText(new Text("* (Unsigned)"), 30, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");

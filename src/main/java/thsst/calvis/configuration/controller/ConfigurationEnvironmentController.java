@@ -202,7 +202,7 @@ public class ConfigurationEnvironmentController implements Initializable {
     private void initializeDefaultChoiceBoxes() {
         FilePathHandler readSaveFile = FileHandlerController.loadFilenames("SaveFile/savelist.txt");
 //        FileHandlerController fhc = new FileHandlerController();
-//        System.out.println(fhc.checkIfFileExists("SaveFile/savelist.txt"));
+
         AddToChoiceBoxes(memoryChoiceBox, readSaveFile.getFilePaths().get(0));
         AddToChoiceBoxes(registerChoiceBox, readSaveFile.getFilePaths().get(1));
         AddToChoiceBoxes(instructionChoiceBox, readSaveFile.getFilePaths().get(2));

@@ -27,8 +27,8 @@ execute(des, registers, memory) throws Exception {
                 // throw new InvalidArithmeticOperandException(l, size);
                 registers.x87().status().setInvalidOperationFlag();
             } else {
-              value = converter.to32BitSignedIntegerHex();
-              memory.write(des, value, des);
+                value = converter.to32BitSignedIntegerHex();
+                memory.write(des, value, des);
             }
         }
     }

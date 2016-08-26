@@ -82,7 +82,7 @@ public class Memory {
                 }
                 if ( lineCounter != 0 ) {
                     this.lookup.add(row);
-//                    System.out.println(" Name = [" + row[Memory.SIZE_DIRECTIVE_NAME] +
+
 //		                    "], Prefix = [" + row[Memory.SIZE_DIRECTIVE_PREFIX] +
 //		                    "], Size = [" + row[Memory.SIZE_DIRECTIVE_SIZE] + "]");
                 }
@@ -198,7 +198,7 @@ public class Memory {
                 throw new MemoryWriteException(succeedingAddress);
             }
         }
-        //System.out.println("Memory read in little endian starting at: " + baseAddr);
+        
     }
 
     public String read(String address) {
@@ -238,14 +238,14 @@ public class Memory {
         if ( checkSizeDirective.contains("/") ) {
             checkSizeDirective = baseAddress.split("/")[1];
         }
-        //System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
+        
         inc = Integer.parseInt(checkSizeDirective, 16);
         int offsetHex = offset / 4;
         for ( int i = 0; i < offsetHex / 2; i++ ) {
             result = read(reformatAddress(Integer.toHexString(inc))) + result;
             inc++;
         }
-//        System.out.println("Memory read in little endian: " + result);
+
         if ( result.contains("null") ) {
             throw new MemoryReadException(baseAddress, offset);
         }
@@ -268,7 +268,7 @@ public class Memory {
             Map.Entry<String, String> x = ite.next();
             if ( Integer.parseInt(x.getKey(), 16) >= Integer.parseInt(start, 16)
                     && Integer.parseInt(x.getKey(), 16) <= Integer.parseInt(end, 16) ) {
-                System.out.println(x);
+                
             }
         }
     }

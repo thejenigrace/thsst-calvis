@@ -145,8 +145,8 @@ public class Punpcklqdq extends CalvisAnimation {
 //           int srcXCompute = new Double(posX + ( srcRec.getWidth() / 2 - srcGroup.getLayoutBounds().getWidth() / 2)
 //                   - (srcGroup.getLayoutBounds().getWidth() / 2 - (txtSrc.get(x).getLayoutBounds().getWidth() / 2 + distanceWord) / 2) * 7).intValue();
 //            int srcYCompute = new Double(posY + posLabelY + posValueY).intValue();
-//            System.out.println(txtSrc.get(x).getLayoutBounds().getWidth() + " wow");
-//           System.out.println(srcGroup.getLayoutBounds().getWidth() + " wow");
+
+
 //           Line line = timeFunc.drawLine(srcXCompute, srcYCompute, 150, 150);
 //           parent.add(line);
 //       }

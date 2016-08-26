@@ -48,13 +48,13 @@ public abstract class CalvisAnimation {
         // Check token type
         switch ( token.getType() ) {
             case Token.REG:
-//                System.out.println("REG");
+
                 return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
             case Token.MEM:
-//                System.out.println("MEM");
+
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-//                System.out.println("IMMEDIATE");
+
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return new Rectangle(width, height, Color.web("#D1CAAE", 1.0));
@@ -65,13 +65,13 @@ public abstract class CalvisAnimation {
         // Check token type
         switch ( token ) {
             case Token.REG:
-//                System.out.println("REG");
+
                 return new Rectangle(width, height, Color.web("#FCBD6D", 1.0));
             case Token.MEM:
-//                System.out.println("MEM");
+
                 return new Rectangle(width, height, Color.web("#79CFCE", 1.0));
             case Token.HEX:
-//                System.out.println("IMMEDIATE");
+
                 return new Rectangle(width, height, Color.web("#7BB88C", 1.0));
             default:
                 return new Rectangle(width, height, Color.web("#D1CAAE", 1.0));
@@ -116,14 +116,14 @@ public abstract class CalvisAnimation {
         try {
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG");
+                    
                     return new Text("0x" + registers.get(token));
                 case Token.MEM:
-                    System.out.println("MEM");
+                    
 
                     return new Text(memory.read(token, bitSize));
                 case Token.HEX:
-                    System.out.println("IMMEDIATE");
+                    
                     return new Text("0x" + token.getValue());
                 default:
                     return null;
@@ -138,13 +138,13 @@ public abstract class CalvisAnimation {
         try {
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG");
+                    
                     return new Text(x, y, "0x" + registers.get(token));
                 case Token.MEM:
-                    System.out.println("MEM");
+                    
                     return new Text(x, y, memory.read(token, bitSize));
                 case Token.HEX:
-                    System.out.println("IMMEDIATE");
+                    
                     return new Text(x, y, "0x" + token.getValue());
                 default:
                     return null;
@@ -157,16 +157,16 @@ public abstract class CalvisAnimation {
 
     protected Text createValueTextUsingFinder(double x, double y, Token token, int bitSize) {
         try {
-            System.out.println("Using Finder!");
+            
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG");
+                    
                     return new Text(x, y, "0x" + this.finder.getRegister(token.getValue()));
                 case Token.MEM:
-                    System.out.println("MEM");
+                    
                     return new Text(x, y, this.finder.read(token, bitSize));
                 case Token.HEX:
-                    System.out.println("IMMEDIATE");
+                    
                     return new Text(x, y, "0x" + token.getValue());
                 default:
                     return null;
@@ -179,16 +179,16 @@ public abstract class CalvisAnimation {
 
     protected Text createValueTextUsingFinderNotHex(double x, double y, Token token, int bitSize) {
         try {
-            System.out.println("Using Finder Not Hex!");
+            
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG");
+                    
                     return new Text(x, y, this.finder.getRegister(token.getValue()));
                 case Token.MEM:
-                    System.out.println("MEM");
+                    
                     return new Text(x, y, this.finder.read(token, bitSize));
                 case Token.HEX:
-                    System.out.println("IMMEDIATE");
+                    
                     return new Text(x, y, token.getValue());
                 default:
                     return null;
@@ -203,13 +203,13 @@ public abstract class CalvisAnimation {
         try {
             switch ( token.getType() ) {
                 case Token.REG:
-                    System.out.println("REG -- VALUE STRING");
+                    
                     return registers.get(token);
                 case Token.MEM:
-                    System.out.println("MEM -- VALUE STRING");
+                    
                     return memory.read(token, bitSize);
                 case Token.HEX:
-                    System.out.println("IMMEDIATE -- VALUE STRING");
+                    
                     return token.getValue();
                 default:
                     return null;
@@ -223,11 +223,11 @@ public abstract class CalvisAnimation {
     protected String getSubHigherHexValueString(Token token, RegisterList registers, Memory memory, int bitSize, int packedSize) {
         String hexValue = this.getValueString(token, registers, memory, bitSize);
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("bitSize = " + bitSize + "; packedSize = " + packedSize);
+        
+        
 
         if ( packedSize != hexValue.length() ) {
-            System.out.println("subHigherHexValue = " + hexValue.substring(0, packedSize));
+            
             return hexValue.substring(0, packedSize);
         }
 
@@ -237,11 +237,11 @@ public abstract class CalvisAnimation {
     protected String getSubLowerHexValueString(Token token, RegisterList registers, Memory memory, int bitSize, int packedSize) {
         String hexValue = this.getValueString(token, registers, memory, bitSize);
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("bitSize = " + bitSize + "; packedSize = " + packedSize);
+        
+        
 
         if ( packedSize != hexValue.length() ) {
-            System.out.println("subLowerHexValue = " + hexValue.substring(hexValue.length()-packedSize, hexValue.length()));
+            
             return hexValue.substring(hexValue.length()-packedSize, hexValue.length());
         }
 
@@ -252,10 +252,10 @@ public abstract class CalvisAnimation {
         // Chop hex value into certain given packed size (hex size)
         String desValueWithDesign = "";
 
-        System.out.println(packedSize);
+        
 
         if ( packedSize != hexValue.length() / 2 ) {
-            System.out.println("IF");
+            
             for ( int i = 1; i <= hexValue.length(); i++ ) {
                 if ( i % packedSize == 0 )
                     desValueWithDesign += hexValue.charAt(i - 1) + "    ";
@@ -263,13 +263,13 @@ public abstract class CalvisAnimation {
                     desValueWithDesign += hexValue.charAt(i - 1);
             }
         } else {
-            System.out.println("ELSE");
+            
             int halfIndexPosition = hexValue.length() / 2 - 1;
             desValueWithDesign += hexValue.substring(0, halfIndexPosition + 1) +
                     "       " + hexValue.substring(halfIndexPosition + 1);
         }
 
-        System.out.println("desValueWithDesign: " + desValueWithDesign);
+        
 
         return desValueWithDesign;
     }

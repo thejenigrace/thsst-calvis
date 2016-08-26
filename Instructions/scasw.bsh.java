@@ -33,8 +33,8 @@ cmp(registers, memory, flags, calculator, tokenEDI, tokenAX) {
 
     for(int i = 15; i >= 0; i--) {
         r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-        - Integer.parseInt(String.valueOf(source.charAt(i)))
-        - borrow;
+            - Integer.parseInt(String.valueOf(source.charAt(i)))
+            - borrow;
 
         if( r < 0 ) {
             borrow = 1;

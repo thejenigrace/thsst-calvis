@@ -77,11 +77,11 @@ public class Pmovmskb extends CalvisAnimation {
         srcValue.setY(posY + 40 + desRec.getHeight() + 45);
 
         String srcBits = c.convertHexToBits(srcStr, sizeSrc);
-        System.out.println("srcBITS " + srcBits);
+        
         ArrayList<Text> arrIndexesBit = new ArrayList<>();
         for(int x = 0; x < 8; x++){
             arrIndexesBit.add( new Text(this.createLabelText(des).getText() + "[" + x + "] <- " + this.createLabelText(src).getText() + "[" + (7 + (8 * x)) + "]:" + srcBits.charAt(sizeSrc - 1 - (7 + (8 * x)))));
-            System.out.println(sizeSrc - (7 + (8 * x)) + " value");
+            
             parent.add(arrIndexesBit.get(x));
             arrIndexesBit.get(x).setX(posX + (srcRec.getLayoutBounds().getWidth() / 2 - arrIndexesBit.get(x).getLayoutBounds().getWidth() * 0.75));
             arrIndexesBit.get(x).setY(posY + 60 + 20 * arrIndexesBit.size() + desRec.getHeight() + 45);

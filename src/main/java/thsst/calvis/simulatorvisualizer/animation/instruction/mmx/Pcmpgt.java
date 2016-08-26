@@ -33,8 +33,6 @@ public class Pcmpgt extends CalvisAnimation {
 
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ )
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
 
         // CODE HERE
         int width = 280;
@@ -66,7 +64,7 @@ public class Pcmpgt extends CalvisAnimation {
 
         // Cut per byte
         String desValue = this.finder.getRegister(tokens[0].getValue());
-        System.out.println("desValue = " + desValue);
+        
 
         switch ( packedType ) {
             case 1:
@@ -83,7 +81,7 @@ public class Pcmpgt extends CalvisAnimation {
         }
 
         String desValueChop = this.chopHexValue(desValue, this.packedSize);
-        System.out.println(desValueChop);
+        
 
         Text desLabelText = this.createLabelText(X, Y, tokens[0]);
         Text desValueText = new Text(X, Y, desValueChop);

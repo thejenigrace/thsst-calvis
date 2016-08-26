@@ -41,8 +41,8 @@ public class FindAndReplaceDialogController {
 
     @FXML
     private void handleFindAndReplace(ActionEvent event) throws Exception {
-        System.out.println("FIND: " + this.getFindField());
-        System.out.println("REPLACE: " + this.getReplaceField());
+        
+        
 
         this.workspaceController.onActionFindAndReplace(this.getFindField(), this.getReplaceField());
     }

@@ -104,8 +104,8 @@ public class FileEditorTab {
     }
 
     private void activate() {
-//        System.out.println("tabPane = " + this.tab.getTabPane());
-//        System.out.println("tabContent = " + this.tab.getContent());
+
+
 
         if( this.tab.getTabPane() == null || !tab.isSelected() )
             return; // Tab is already closed or no longer active

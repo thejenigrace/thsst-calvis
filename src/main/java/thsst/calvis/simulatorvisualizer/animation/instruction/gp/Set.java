@@ -23,7 +23,7 @@ public class Set extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+            
         }
 
         // CODE HERE
@@ -132,7 +132,7 @@ public class Set extends CalvisAnimation {
                 break;
 
             default:
-                System.out.println("Condition not found");
+                
                 text = "Condition not found";
                 break;
 

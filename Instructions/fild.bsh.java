@@ -6,7 +6,7 @@ execute(src, registers, memory) {
         BigInteger convertedValue = new BigInteger(value, 16);
         String binaryValue = convertedValue.toString(2);
 
-        // make the binary value's length divisble by 4 
+        // make the binary value's length divisble by 4
         while ( binaryValue.length() % 4 != 0 ) {
             binaryValue = "0" + binaryValue;
         }

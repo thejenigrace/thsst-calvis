@@ -34,18 +34,14 @@ public class ConsoleTextArea extends StyleClassedTextArea {
 
     @Override
     public void replaceText(int start, int end, String text) {
-        String current = getText();
-        // only insert if no new lines after insert position:
-        if (!current.substring(start).contains("\n") && this.textState) {
+        if ( this.textState ) {
             super.replaceText(start, end, text);
         }
     }
 
     @Override
     public void replaceSelection(String text) {
-        String current = getText();
-        int selectionStart = getSelection().getStart();
-        if (!current.substring(selectionStart).contains("\n") && this.textState) {
+        if ( this.textState ) {
             super.replaceSelection(text);
         }
     }

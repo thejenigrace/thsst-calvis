@@ -19,31 +19,31 @@ execute(des,src,ctr,registers,memory) {
         desValue = memory.read(des, desBitSize);
 
     }
-    if( src.isRegister() ){
+    if( src.isRegister() ) {
         srcValue = registers.get(src);
         srcBitSize = registers.getBitSize(src);
         srcHexSize = registers.getHexSize(src);
     }
-    if(desBitSize == 32){
-        int count = 0 ;
+    if(desBitSize == 32) {
+        int count = 0;
 
-        if(src.isRegister()){
-            if(srcBitSize == 64 && ctr.isHex()){
+        if(src.isRegister()) {
+            if(srcBitSize == 64 && ctr.isHex()) {
                 count = new BigInteger(ctr.getValue(), 16).intValue() % 4;
             }
-            else if(srcBitSize == 128 && ctr.isHex()){
+            else if(srcBitSize == 128 && ctr.isHex()) {
                 count = new BigInteger(ctr.getValue(), 16).intValue() % 8;
             }
         }
-		System.out.println("dafuq");
-        if(des.isRegister()){
-		System.out.println("go gog ogo" + "0000" + srcValue.substring(count * 4, count * 4 + 4));
-            if( des.isRegister()){
+
+        if(des.isRegister()) {
+
+            if( des.isRegister()) {
                 registers.set(des, "0000" + srcValue.substring(count * 4, count * 4 + 4));
             }
         }
-        else if(des.isMemory()){
-			System.out.println(srcValue.substring(count * 4, count * 4 + 4) + " woah");
+        else if(des.isMemory()) {
+
             memory.write(des, srcValue.substring(count * 4, count * 4 + 4), desBitSize / 2);
         }
     }

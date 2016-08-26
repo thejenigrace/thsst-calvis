@@ -99,7 +99,7 @@ public class FileHandlerController {
                     selectedIndexes.add(Integer.parseInt(line));
                 } else {
                     filepathList.add(line);
-                    System.out.println(line);
+                    
                 }
                 if ( !IsSkept ) {
                     line = br.readLine();

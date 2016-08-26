@@ -18,7 +18,7 @@ execute(registers, memory) {
     String oldCF = flags.getCarryFlag();
     flags.setCarryFlag("0");
 
-    if( oldAF.equals("1") || biLowerAL.intValue() > 9 ) {
+    if ( oldAF.equals("1") || biLowerAL.intValue() > 9 ) {
         biAX = biAX.subtract(toAddAF);
         biAH = biAH.subtract(toAddAH);
         storeResultInDes(registers, calculator, biAX, biAH, tokenAX, tokenAH);
@@ -27,8 +27,7 @@ execute(registers, memory) {
         flags.setCarryFlag("1");
         flags.setAuxiliaryFlag("1");
         setFlags(flags);
-    }
-    else {
+    } else {
         storeResultInDes(registers, calculator, biAX, biAH, tokenAX, tokenAH);
 
         //Flags

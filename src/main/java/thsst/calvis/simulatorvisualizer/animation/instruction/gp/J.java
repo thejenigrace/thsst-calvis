@@ -37,7 +37,7 @@ public class J extends CalvisAnimation {
         Token cc = tokens[0];
         String labelName = timeFunc.getValue(des, 0);
         String jumpMode = "J" + cc.getValue();
-        System.out.println(labelName  + " fuck " + jumpMode);
+        
         ObservableList<Node> parent = this.root.getChildren();
 
         String conditionalTextResult = "";
@@ -58,8 +58,8 @@ public class J extends CalvisAnimation {
                 proceedOrNot = "Don't Proceed To";
         }
 
-        System.out.println(conditionalTextResult);
-        System.out.println(proceedOrNot);
+        
+        
 
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         Rectangle fromRec = timeFunc.createRectangle(140, 130, Color.web("#002e63"));

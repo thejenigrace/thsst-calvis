@@ -18,16 +18,12 @@ execute(des, src, registers, memory) {
                 String source = calculator.hexToBinaryString(registers.get(src), src);
                 String destination = calculator.hexToBinaryString(registers.get(des), des);
                 storeResultToRegister(registers, calculator, des, source, destination);
-            } else {
-                //throw exception
             }
         } else if( src.isMemory() ) {
             String source = calculator.hexToBinaryString(memory.read(src, desSize), src);
             String destination = calculator.hexToBinaryString(registers.get(des), des);
             storeResultToRegister(registers, calculator, des, source, destination);
         }
-    } else {
-        //throw exception
     }
 }
 

@@ -31,7 +31,7 @@ execute(des, src, registers, memory) {
         registers.getEFlags().setZeroFlag("1");
         registers.getEFlags().setParityFlag("0");
         registers.getEFlags().setCarryFlag("0");
-    } 
+    }
 
     registers.x87().status().set("C1", '0');
 

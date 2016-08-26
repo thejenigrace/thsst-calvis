@@ -32,7 +32,7 @@ public class Mul extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
         for ( Token token : tokens ) {
-            System.out.println(token + " : " + token.getClass());
+            
         }
 
         // CODE HERE

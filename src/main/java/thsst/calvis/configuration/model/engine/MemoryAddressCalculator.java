@@ -20,7 +20,7 @@ public class MemoryAddressCalculator {
     public static Token evaluateExpression(Token[] matched, RegisterList registers, Memory memory)
             throws NumberFormatException, EvalError, MemoryRestrictedAccessException {
         Token token1 = matched[0];
-        //System.out.println(token1.getValue() + " : " + token1.getType());
+        
         String baseAddress = "";
         int equationStartIndex = 1;
 
@@ -49,7 +49,7 @@ public class MemoryAddressCalculator {
                 String[] operands = equation.split(" ");
                 String semiEquation = base + " ";
                 for ( String operand : operands ) {
-                    //System.out.println(operand);
+                    
                     if ( registers.isExisting(operand) ) {
                         semiEquation += Integer.parseInt(registers.get(operand), 16) + " ";
                     } else if ( operand.matches("[0-9a-fA-F]{1," + Memory.MAX_ADDRESS_SIZE + "}") ) {
@@ -67,7 +67,7 @@ public class MemoryAddressCalculator {
             if ( matched[0].isMemory() ) {
                 result = matched[0].getValue() + "/" + result;
             }
-            // System.out.println(base + " " + result);
+            
 
         } else {
             throw new MemoryRestrictedAccessException(baseAddress);

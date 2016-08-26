@@ -153,7 +153,7 @@ public class Cmpxchg extends CalvisAnimation {
         timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75 + 200, 110, 100, eaxValue);
         timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16 ) * .75 + 400, 110, Duration.ZERO, srcValue);
         timeFunc.addTimeline(desSize / 16 * 1 + (32 - desSize / 16) * .75 + 400, 110, 100, srcValue);
-        System.out.println(srcLabel.getText() + " putangina");
+        
         timeline.play();
 
 

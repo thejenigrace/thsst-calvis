@@ -1,10 +1,8 @@
 consoleExecute(registers, memory, console) {
-	Platform.runLater(
-		new Thread() {
-            public void run() {
-                console.cls();
-            }
+    Platform.runLater(new Thread() {
+        public void run() {
+            console.cls();
         }
-    );
-    
+    });
+
 }

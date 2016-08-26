@@ -68,7 +68,7 @@ public class MemoryController extends AssemblyComponent implements Initializable
         for ( Token token : tokens ) {
             if ( token.getType().equals(Token.MEM) ) {
                 String baseAddress = this.memory.removeSizeDirectives(token.getValue());
-                System.out.println("mem baseAddress: " + baseAddress);
+                
                 int memIndex = this.memoryAddressList.indexOf(baseAddress);
 
                 Platform.runLater(() -> {

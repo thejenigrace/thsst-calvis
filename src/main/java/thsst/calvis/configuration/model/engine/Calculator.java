@@ -84,7 +84,7 @@ public class Calculator {
                 return PF.equals("0");
 
             default:
-                System.out.println("Condition not found");
+                
                 return false;
         }
     }
@@ -183,7 +183,7 @@ public class Calculator {
 //            a += count;
 //
 //            convertedString += binaryZeroExtend(new BigInteger(miniResult, 2).toString(16), count / 4);
-//            System.out.println(convertedString + " string");
+
 //        }
 //        return convertedString.toUpperCase();
 //    }
@@ -192,14 +192,14 @@ public class Calculator {
 //        ArrayList<String> arrDes = new ArrayList<>();
 //        ArrayList<String> arrSrc = new ArrayList<>();
         String result = "";
-        System.out.println(destination + " destination");
+        
 
         for ( int x = 0; x < destination.length(); x = x + count ) {
-//            System.out.println(x + count + " : count");
+
             String subDes = destination.substring(x, x + count);
             String subSrc = source.substring(x, x + count);
-//            System.out.println(subDes);
-//            System.out.println(subSrc + " srccccccc");
+
+
             BigInteger des = new BigInteger(subDes, 16);
             BigInteger src = new BigInteger(subSrc, 16);
             BigInteger res = des.add(src);
@@ -207,35 +207,35 @@ public class Calculator {
             result += hexZeroExtend(res.toString(16), count);
 
         }
-//        System.out.println(result + " result");
+
         return result;
     }
 
     public long convertToSignedInteger(BigInteger hexValue, int bitSize) {
-        System.out.println("--Convert to Signed Integer--");
+        
         long result = Long.parseLong(hexValue.toString());
         String twosComplement = hexValue.toString(2);
 
         int missingZeroes = bitSize - twosComplement.length();
 
-        System.out.println("bitSize = " + bitSize);
-        System.out.println("original hex = " + hexValue.toString(16));
-        System.out.println("original decimal = " + hexValue.toString());
-        System.out.println("original twosComplement = " + twosComplement);
+        
+        
+        
+        
 
         // zero extend
         for ( int k = 0; k < missingZeroes; k++ ) {
             twosComplement = "0" + twosComplement;
         }
 
-        System.out.println("twosComplement = " + twosComplement);
+        
 
         // Negative Two's Complement
         if ( twosComplement.charAt(0) == '1' ) {
             BigInteger biOnesComplement = hexValue.subtract(BigInteger.ONE);
 
             String onesComplement = biOnesComplement.toString(2);
-            System.out.println("onesComplement = " + onesComplement);
+            
 
             missingZeroes = bitSize - onesComplement.length();
             // zero extend
@@ -243,7 +243,7 @@ public class Calculator {
                 onesComplement = "0" + onesComplement;
             }
 
-            System.out.println("zero-extend onesComplement = " + onesComplement);
+            
 
             // Convert 1's Complement to Normal Binary
             StringBuilder sb = new StringBuilder();
@@ -255,18 +255,18 @@ public class Calculator {
                 }
             }
 
-            System.out.println("decimalBinaryF = " + sb.toString());
+            
 
             BigInteger decimal = new BigInteger(sb.toString(), 2);
-            System.out.println("decimal = " + decimal.toString());
+            
 
             String signedDecimal = "-" + decimal.toString();
-            System.out.println("signedDecimal = " + Long.parseLong(signedDecimal));
+            
 
             result = Long.parseLong(signedDecimal);
         }
 
-        System.out.println("result = " + result);
+        
 
         return result;
     }
@@ -282,17 +282,17 @@ public class Calculator {
         }
 
         if ( type.equals("getUpper") ) {
-            System.out.println("getUpper");
+            
             newValue = value.substring(0, size);
         } else if ( type.equals("getLower") ) {
-            System.out.println("getLower");
+            
             newValue = value.substring(value.length() - size, value.length());
         }
 
-        System.out.println("--Cut To Certain Hex Size--");
-        System.out.println("hex size = " + size);
-        System.out.println("oldValue = " + value);
-        System.out.println("newValue = " + newValue);
+        
+        
+        
+        
 
         return newValue;
     }
@@ -300,7 +300,7 @@ public class Calculator {
     public String[] cutToCertainSize(String value, int size) {
         BigInteger bi = new BigInteger(value, 16);
         String val = bi.toString(16);
-        System.out.println("cut.size = " + size);
+        
 
         int missingZeroes = size * 2 - val.length();
         //zero extend
@@ -308,7 +308,7 @@ public class Calculator {
             val = "0" + val;
         }
 
-        System.out.println("cut.value = " + val);
+        
 
         StringBuilder sb0 = new StringBuilder();
         StringBuilder sb1 = new StringBuilder();
@@ -321,12 +321,12 @@ public class Calculator {
             }
 
             if ( i - size - 1 == 0 ) {
-                System.out.println("Initialize result[0] = " + sb0.toString());
+                
                 result[0] = sb0.toString();
             }
 
             if ( i - size == size - 1 ) {
-                System.out.println("Initialize result[1] = " + sb1.toString());
+                
                 result[1] = sb1.toString();
             }
         }
@@ -629,7 +629,7 @@ public class Calculator {
         int a = 0;
         Long i = Long.parseLong(value, 16);
         Float f = Float.intBitsToFloat(i.intValue());
-        System.out.println(f);
+        
         return f;
     }
 
@@ -641,7 +641,7 @@ public class Calculator {
 
         String hexConverted = "";
         for ( int x = 0; x < floatValues.length; x++ ) {
-//            System.out.println("result:" + floatValues[x]);
+
             hexConverted += SinglePrecisionFloatingPointToHexSingle(floatValues[x]);
         }
         return hexConverted;
@@ -676,13 +676,13 @@ public class Calculator {
                 arrSrc[index] = srcValue.substring(i, i + 8);
             }
             index++;
-//            System.out.println("Created an Array " + i);
+
         }
 
         StringBuilder sbResult = new StringBuilder();
         for ( int i = 0; i < hexSize / cutSize; i++ ) {
-            System.out.println("arrDes[" + i + "] = " + arrDes[i]);
-            System.out.println("arrSrc[" + i + "] = " + arrSrc[i]);
+            
+            
 
             if ( arrDes[i].equals(arrSrc[i]) && cutSize == 2 && operation == 'e' ) {
                 sbResult.append("FF");
@@ -727,10 +727,10 @@ public class Calculator {
             }
         }
 
-        System.out.println("hexSize = " + hexSize);
-        System.out.println("desValue = " + desValue);
-        System.out.println("srcValue = " + srcValue);
-        System.out.println("resValue = " + sbResult.toString());
+        
+        
+        
+        
         return sbResult.toString();
     }
 
@@ -746,9 +746,9 @@ public class Calculator {
         Long signedLong = l;
         Float sp = signedLong.floatValue();
 
-        System.out.println("signedLong = " + signedLong);
-        System.out.println("sp = " + sp);
-        System.out.println("result hex = " + convertSinglePrecisionToHexString(sp));
+        
+        
+        
 
         return this.convertSinglePrecisionToHexString(sp);
     }
@@ -757,9 +757,9 @@ public class Calculator {
         Long signedLong = l;
         Double dp = signedLong.doubleValue();
 
-        System.out.println("signedLong = " + signedLong);
-        System.out.println("dp = " + dp);
-        System.out.println("result hex = " + convertDoublePrecisionToHexString(dp));
+        
+        
+        
 
         return this.convertDoublePrecisionToHexString(dp);
     }
@@ -798,8 +798,8 @@ public class Calculator {
         Float sp = convertHexToSinglePrecision(hexValue);
         Double dp = sp.doubleValue();
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("result hex = " + convertDoublePrecisionToHexString(dp));
+        
+        
 
         return convertDoublePrecisionToHexString(dp);
     }
@@ -808,8 +808,8 @@ public class Calculator {
         Double dp = convertHexToDoublePrecision(hexValue);
         Float sp = dp.floatValue();
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("result hex = " + convertSinglePrecisionToHexString(sp));
+        
+        
 
         return convertSinglePrecisionToHexString(sp);
     }
@@ -819,10 +819,10 @@ public class Calculator {
         Float sp = convertHexToSinglePrecision(hexValue);
         Integer i = Float.floatToIntBits(sp);
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("sp = " + sp);
-        System.out.println("int = " + i);
-        System.out.println("hex result = " + Integer.toHexString(i));
+        
+        
+        
+        
 
         return Integer.toHexString(i);
     }
@@ -831,10 +831,10 @@ public class Calculator {
         Double dp = convertHexToDoublePrecision(hexValue);
         Long l = Double.doubleToLongBits(dp);
 
-        System.out.println("hexValue = " + hexValue);
-        System.out.println("dp = " + dp);
-        System.out.println("int = " + l);
-        System.out.println("hex result = " + Long.toHexString(l));
+        
+        
+        
+        
 
         return Long.toHexString(l);
     }
@@ -893,7 +893,7 @@ public class Calculator {
                 }
             }
         }
-        System.out.println("PASSED");
+        
         return isException;
     }
 
@@ -906,24 +906,24 @@ public class Calculator {
                 e.printStackTrace();
             }
         }
-        System.out.println("PASSED SIO");
+        
     }
 
     public void setDivideByZeroOperation(RegisterList registers, double firstValue, double secondValue, String registerSet){
         registers.x87().status().set("ZE", '1');
-        System.out.println(registers.x87().control().getFlag("ZM") + " WAOW");
+        
         if(registers.x87().control().getFlag("ZM") == '1'){
             try{
                 int signFirst = (int) Math.signum(firstValue);
                 int signSecond = (int) Math.signum(secondValue);
                 double sign  = (signFirst ^ signSecond) + 0.0;
-                System.out.println(("PUTA") + sign * Double.POSITIVE_INFINITY);
+                
                 registers.set(registerSet, sign * Double.POSITIVE_INFINITY + "");
             } catch(DataTypeMismatchException e){
                 e.printStackTrace();
             }
         }
-        System.out.println("PASSED DBZO");
+        
     }
 
     public boolean isInfinite(double value){

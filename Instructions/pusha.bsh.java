@@ -1,32 +1,32 @@
 execute(registers, memory) {
-	int size = 16;
-	String stackPointer = registers.getStackPointer();
+    int size = 16;
+    String stackPointer = registers.getStackPointer();
 
-	String ax = registers.get("AX");
-	String cx = registers.get("CX");
-	String dx = registers.get("DX");
-	String bx = registers.get("BX");
-	String sp = registers.get("SP");
-	String bp = registers.get("BP");
-	String si = registers.get("SI");
-	String di = registers.get("DI");
+    String ax = registers.get("AX");
+    String cx = registers.get("CX");
+    String dx = registers.get("DX");
+    String bx = registers.get("BX");
+    String sp = registers.get("SP");
+    String bp = registers.get("BP");
+    String si = registers.get("SI");
+    String di = registers.get("DI");
 
-	String[] generalRegisters = {ax, cx, dx, bx, sp, bp, si, di};
+    String[] generalRegisters = {ax, cx, dx, bx, sp, bp, si, di};
 
-	BigInteger stackAddress = new BigInteger(stackPointer, 16);
-	BigInteger offset = new BigInteger(size + "");
-	offset = offset.divide(new BigInteger("8"));
+    BigInteger stackAddress = new BigInteger(stackPointer, 16);
+    BigInteger offset = new BigInteger(size + "");
+    offset = offset.divide(new BigInteger("8"));
 
-	for ( int i = 0; i < generalRegisters.length; i++ ) {
-		stackAddress = stackAddress.subtract(offset);
+    for ( int i = 0; i < generalRegisters.length; i++ ) {
+        stackAddress = stackAddress.subtract(offset);
 
-		if ( stackAddress.compareTo(new BigInteger("0", 16)) == -1 ) {
-			throw new StackPushException();
-		} else {	
-			registers.setStackPointer(stackAddress.toString(16));
-			String stackEntry = registers.getStackPointer();
-			memory.writeToStack(stackEntry, generalRegisters[i], size);
-		}
-	}
+        if ( stackAddress.compareTo(new BigInteger("0", 16)) == -1 ) {
+            throw new StackPushException();
+        } else {
+            registers.setStackPointer(stackAddress.toString(16));
+            String stackEntry = registers.getStackPointer();
+            memory.writeToStack(stackEntry, generalRegisters[i], size);
+        }
+    }
 
 }

@@ -4,8 +4,6 @@ execute(des, src, registers, memory) {
     int bitMode = 32;
     if (des.isRegister()) {
         if (src.isRegister() && src.getValue().equals("CL")) {
-            System.out.println("SHL register and CL");
-
             //get size of des
             int desSize = registers.getBitSize(des);
             String originalDes = calculator.hexToBinaryString(registers.get(des), des);
@@ -27,30 +25,30 @@ execute(des, src, registers, memory) {
 
                 //proceed rotate
                 String carryFlagValue = flags.getCarryFlag();
-				boolean bitSet = false;
-				for (int x = 1; x < limit + 1; x++) {
-				bitSet = biResult.testBit(desSize - 1);
-				biResult = biResult.shiftLeft(1);
-				if (bitSet) {
-				carryFlagValue = "1";
-				} else {
-				carryFlagValue = "0";
-				}
-				boolean isFlagSet = flags.getCarryFlag().equals("1");
-				if(isFlagSet){
-				biResult = biResult.setBit(0);
-				}
-				else{
-				biResult = biResult.clearBit(0);
-				}
-				flags.setCarryFlag(carryFlagValue);
-				System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
-				}
+                boolean bitSet = false;
+                for (int x = 1; x < limit + 1; x++) {
+                    bitSet = biResult.testBit(desSize - 1);
+                    biResult = biResult.shiftLeft(1);
+                    if (bitSet) {
+                        carryFlagValue = "1";
+                    } else {
+                        carryFlagValue = "0";
+                    }
+                    boolean isFlagSet = flags.getCarryFlag().equals("1");
+                    if(isFlagSet) {
+                        biResult = biResult.setBit(0);
+                    }
+                    else{
+                        biResult = biResult.clearBit(0);
+                    }
+                    flags.setCarryFlag(carryFlagValue);
+
+                }
 
 
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-				if (registers.getHexSize(des) < result.length()) {
-				int cut = result.length() - registers.getHexSize(des);
+                if (registers.getHexSize(des) < result.length()) {
+                    int cut = result.length() - registers.getHexSize(des);
                     String t = result.substring(cut);
                     registers.set(des, t);
                 } else {
@@ -74,16 +72,11 @@ execute(des, src, registers, memory) {
                         flags.setOverflowFlag("0");
                     } else if (limit == 1 && !originalSign.equals(sign)) {
                         flags.setOverflowFlag("1");
-                    } else {
-                        // flags.setOverflowFlag(undefined);
                     }
-
-                    //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
-                    //flags.setAuxiliaryFlag(undefined)
                 }
             }
         } else if (src.isHex() && src.getValue().length() <= 2) {
-            System.out.println("ROL register and i8");
+
 
             //get size of des
             int desSize = registers.getBitSize(des);
@@ -106,48 +99,30 @@ execute(des, src, registers, memory) {
 
                 //proceed rotate
                 String carryFlagValue = flags.getCarryFlag();
-//                boolean bitSet = false;
-//                for (int x = 0; x < count; x++) {
-//                    biResult = biResult.shiftLeft(1);
-//                    bitSet = biDes.testBit(desSize - 1);
-//
-//                    if (carryFlagValue.equals("0"))
-//                        biResult = biResult.clearBit(0);
-//                    else
-//                        biResult = biResult.setBit(0);
-//
-//                    if (bitSet) {
-//                        carryFlagValue = "1";
-//                    } else {
-//                        carryFlagValue = "0";
-//                    }
-//					flags.setCarryFlag(carryFlagValue);
-//					System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
-//                }
+                boolean bitSet = false;
 
-				boolean bitSet = false;
-				for (int x = 1; x < limit + 1; x++) {
-				bitSet = biResult.testBit(desSize - 1);
-				biResult = biResult.shiftLeft(1);
-					if (bitSet) {
-						carryFlagValue = "1";
-					} else {
-						carryFlagValue = "0";
-					}
-				boolean isFlagSet = flags.getCarryFlag().equals("1");
-				if(isFlagSet){
-					biResult = biResult.setBit(0);
-				}
-				else{
-					biResult = biResult.clearBit(0);
-				}
-				flags.setCarryFlag(carryFlagValue);
-				System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
-				}
+                for (int x = 1; x < limit + 1; x++) {
+                    bitSet = biResult.testBit(desSize - 1);
+                    biResult = biResult.shiftLeft(1);
+                    if (bitSet) {
+                        carryFlagValue = "1";
+                    } else {
+                        carryFlagValue = "0";
+                    }
+                    boolean isFlagSet = flags.getCarryFlag().equals("1");
+                    if(isFlagSet) {
+                        biResult = biResult.setBit(0);
+                    }
+                    else{
+                        biResult = biResult.clearBit(0);
+                    }
+                    flags.setCarryFlag(carryFlagValue);
+
+                }
 
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-				if (registers.getHexSize(des) < result.length()) {
-				int cut = result.length() - registers.getHexSize(des);
+                if (registers.getHexSize(des) < result.length()) {
+                    int cut = result.length() - registers.getHexSize(des);
                     String t = result.substring(cut);
                     registers.set(des, t);
                 } else {
@@ -173,20 +148,12 @@ execute(des, src, registers, memory) {
                         flags.setOverflowFlag("0");
                     } else if (limit == 1 && !originalSign.equals(sign)) {
                         flags.setOverflowFlag("1");
-                    } else {
-                        // flags.setOverflowFlag(undefined);
                     }
-
-                    //			flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
-
-                    //flags.setAuxiliaryFlag(undefined)
                 }
             }
         }
     } else if (des.isMemory() && memory.getBitSize(des) > 0) {
         if (src.isRegister() && src.getValue().equals("CL")) {
-            System.out.println("ROL memory and CL");
-
             //get size of des
             int desSize = memory.getBitSize(des);
             String originalDes = calculator.hexToBinaryString(memory.read(des, desSize), des);
@@ -208,28 +175,28 @@ execute(des, src, registers, memory) {
 
                 //proceed rotate
                 String carryFlagValue = flags.getCarryFlag();
-				boolean bitSet = false;
-				for (int x = 1; x < limit + 1; x++) {
-				bitSet = biResult.testBit(desSize - 1);
-				biResult = biResult.shiftLeft(1);
-				if (bitSet) {
-				carryFlagValue = "1";
-				} else {
-				carryFlagValue = "0";
-				}
-				boolean isFlagSet = flags.getCarryFlag().equals("1");
-				if(isFlagSet){
-				biResult = biResult.setBit(0);
-				}
-				else{
-				biResult = biResult.clearBit(0);
-				}
-				flags.setCarryFlag(carryFlagValue);
-				System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
-				}
+                boolean bitSet = false;
+                for (int x = 1; x < limit + 1; x++) {
+                    bitSet = biResult.testBit(desSize - 1);
+                    biResult = biResult.shiftLeft(1);
+                    if (bitSet) {
+                        carryFlagValue = "1";
+                    } else {
+                        carryFlagValue = "0";
+                    }
+                    boolean isFlagSet = flags.getCarryFlag().equals("1");
+                    if(isFlagSet) {
+                        biResult = biResult.setBit(0);
+                    }
+                    else{
+                        biResult = biResult.clearBit(0);
+                    }
+                    flags.setCarryFlag(carryFlagValue);
+
+                }
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-				if (memory.getHexSize(des) < result.length()) {
-					int cut = result.length() - memory.getHexSize(des);
+                if (memory.getHexSize(des) < result.length()) {
+                    int cut = result.length() - memory.getHexSize(des);
                     String t = result.substring(cut);
                     memory.write(des, t, desSize);
                 } else {
@@ -253,17 +220,10 @@ execute(des, src, registers, memory) {
                         flags.setOverflowFlag("0");
                     } else if (limit == 1 && !originalSign.equals(sign)) {
                         flags.setOverflowFlag("1");
-                    } else {
-                        // flags.setOverflowFlag(undefined);
                     }
-
-                    //				flags.setCarryFlag(originalDes.charAt(limit - 1).toString());
-                    //flags.setAuxiliaryFlag(undefined)
                 }
             }
         } else if (src.isHex() && src.getValue().length() <= 2) {
-            System.out.println("ROL register and i8");
-
             //get size of des
             int desSize = memory.getBitSize(des);
             String originalDes = calculator.hexToBinaryString(memory.read(des, desSize), des);
@@ -285,29 +245,29 @@ execute(des, src, registers, memory) {
 
                 //proceed rotate
                 String carryFlagValue = flags.getCarryFlag();
-				boolean bitSet = false;
-				for (int x = 1; x < limit + 1; x++) {
-				bitSet = biResult.testBit(desSize - 1);
-				biResult = biResult.shiftLeft(1);
-				if (bitSet) {
-				carryFlagValue = "1";
-				} else {
-				carryFlagValue = "0";
-				}
-				boolean isFlagSet = flags.getCarryFlag().equals("1");
-				if(isFlagSet){
-				biResult = biResult.setBit(0);
-				}
-				else{
-				biResult = biResult.clearBit(0);
-				}
-				flags.setCarryFlag(carryFlagValue);
-				System.out.println(calculator.binaryZeroExtend(biResult.toString(2), des) + " shifted");
-				}
+                boolean bitSet = false;
+                for (int x = 1; x < limit + 1; x++) {
+                    bitSet = biResult.testBit(desSize - 1);
+                    biResult = biResult.shiftLeft(1);
+                    if (bitSet) {
+                        carryFlagValue = "1";
+                    } else {
+                        carryFlagValue = "0";
+                    }
+                    boolean isFlagSet = flags.getCarryFlag().equals("1");
+                    if(isFlagSet) {
+                        biResult = biResult.setBit(0);
+                    }
+                    else{
+                        biResult = biResult.clearBit(0);
+                    }
+                    flags.setCarryFlag(carryFlagValue);
+
+                }
 
                 String result = calculator.binaryToHexString(biResult.toString(2), des);
-				if (memory.getHexSize(des) < result.length()) {
-					int cut = result.length() - memory.getHexSize(des);
+                if (memory.getHexSize(des) < result.length()) {
+                    int cut = result.length() - memory.getHexSize(des);
                     String t = result.substring(cut);
                     memory.write(des, t, desSize);
                 } else {

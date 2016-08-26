@@ -88,7 +88,7 @@ String performSar(calculator, des, destination, count) {
     for(int i = 0; i <= count.intValue(); i++) {
         bufferResult.setCharAt(i, destination.charAt(0));
     }
-    
+
     String result = calculator.binaryToHexString(bufferResult.toString(), des);
 
     return result;

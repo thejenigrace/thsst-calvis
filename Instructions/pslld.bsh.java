@@ -4,8 +4,8 @@ execute(des, src, registers, memory) {
     int desSize = 0;
 
     if( des.isRegister() ) {
-		desSize = registers.getBitSize(des);
-	}
+        desSize = registers.getBitSize(des);
+    }
 
     if( des.isRegister() ) {
         if( src.isRegister() ) {

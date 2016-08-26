@@ -28,7 +28,7 @@ public class Fld extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+            
         }
 
         // CODE HERE

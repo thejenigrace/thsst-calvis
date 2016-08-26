@@ -110,10 +110,10 @@ public class RegistersController extends AssemblyComponent implements Initializa
                 int regIndex;
                 if ( this.childRegNameList.contains(token.getValue()) ) {
                     regIndex = this.motherRegNameList.indexOf(this.getMotherRegister(token.getValue()));
-//                    System.out.println("Child");
+
                 } else {
                     regIndex = this.motherRegNameList.indexOf(token.getValue());
-//                    System.out.println("Mother");
+
                 }
 
                 Platform.runLater(() -> {

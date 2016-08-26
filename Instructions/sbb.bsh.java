@@ -77,8 +77,8 @@ execute(des, src, registers, memory) {
 
             for(int i = srcSize - 1; i >= 0; i--) {
                 r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-                - Integer.parseInt(String.valueOf(source.charAt(i)))
-                - borrow;
+                    - Integer.parseInt(String.valueOf(source.charAt(i)))
+                    - borrow;
 
                 if( r < 0 ) {
                     borrow = 1;
@@ -151,8 +151,8 @@ execute(des, src, registers, memory) {
 
             for(int i = desSize - 1; i >= 0; i--) {
                 r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-                - Integer.parseInt(String.valueOf(source.charAt(i)))
-                - borrow;
+                    - Integer.parseInt(String.valueOf(source.charAt(i)))
+                    - borrow;
 
                 if( r < 0 ) {
                     borrow = 1;
@@ -216,8 +216,8 @@ performSbbRegister(source, destination, registers, calculator, flags, des, desSi
 
     for(int i = desSize - 1; i >= 0; i--) {
         r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-        - Integer.parseInt(String.valueOf(source.charAt(i)))
-        - borrow;
+            - Integer.parseInt(String.valueOf(source.charAt(i)))
+            - borrow;
 
         if( r < 0 ) {
             borrow = 1;

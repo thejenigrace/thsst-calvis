@@ -26,8 +26,6 @@ public class Cmpss extends CalvisAnimation {
 
         // ANIMATION ASSETS
         Token[] tokens = this.currentInstruction.getParameterTokens();
-        for ( int i = 0; i < tokens.length; i++ )
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
 
         // CODE HERE
         int width = 320;
@@ -59,13 +57,13 @@ public class Cmpss extends CalvisAnimation {
 
         // Cut per byte
         String desValue = this.finder.getRegister(tokens[0].getValue());
-        System.out.println("desValue = " + desValue);
+        
 
         this.packedSize = 8;
         String space = "      ";
 
         String desValueChop = desValue.substring(0, 24) + space + desValue.substring(24);
-        System.out.println(desValueChop);
+        
 
         Text desLabelText = this.createLabelText(X, Y, tokens[0]);
         Text desValueText = new Text(X, Y, desValueChop);

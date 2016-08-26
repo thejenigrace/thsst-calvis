@@ -20,13 +20,13 @@ public class ParserLabelFactory {
     public ArrayList<Exception> createLabel(Object[] matched) {
         int labelValue = 0;
         for ( Object obj : matched ) {
-//					System.out.println("LINE: " + labelValue);
+
             Object[] objects = (Object[]) obj;
             for ( int i = 0; i < objects.length; i++ ) {
-//						System.out.println(i + " " + objects[i]);
+
                 if ( objects[i] != null ) {
                     if ( i == 1 && objects[i] instanceof Object[] ) {
-//                        System.out.println("we found an object array");
+
                         Object[] objects1 = (Object[]) objects[i];
                         /**
                          * objects1[0] = contains label
@@ -44,9 +44,9 @@ public class ParserLabelFactory {
                                 exceptions.add(e);
                             }
                         }
-//								System.out.println(((Token) objects1[0]).getValue() + " -> " + instructionAddress );
+
 //								for (int j = 0; j < objects1.length; j++) {
-//									System.out.println(i + " " + j + " " + objects1[j]);
+
 //								}
                     }
                 }

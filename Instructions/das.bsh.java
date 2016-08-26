@@ -1,7 +1,7 @@
 execute(registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
-    
+
     Token token = new Token(Token.REG, "AL");
 
     String sAL = calculator.hexToBinaryString(registers.get("AL"), token);

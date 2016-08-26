@@ -122,11 +122,6 @@ public class Parser {
         while ( instructionProductionRules.hasNext() ) {
             String[] prodRule = instructionProductionRules.next();
 
-            for ( int i = 0; i < prodRule.length; i++ ) {
-                System.out.print(prodRule[i] + " ");
-            }
-            System.out.println("");
-
             String insName = "(\\b" + prodRule[0] + "\\b)|(\\b" + prodRule[0].toLowerCase() + "\\b)";
 
             String appendType = prodRule[3];
@@ -278,7 +273,7 @@ public class Parser {
                     specifications1.add(entry[i]);
                 }
             }
-//			System.out.println(specifications1);
+
 
             String[] secondParameter = prodRule[6].split("/");
             ArrayList<String[]> secondParameterList = new ArrayList<>();
@@ -303,7 +298,7 @@ public class Parser {
                     }
                 }
             }
-//			System.out.println(specifications2);
+
 
             for ( String first : specifications1 ) {
                 for ( String second : specifications2 ) {
@@ -316,7 +311,6 @@ public class Parser {
 
         }
 
-//        System.out.println(result);
 
         CalvisFormattedInstruction CalvisInstruction
                 = new CalvisFormattedInstruction(someInstruction, anInstruction,

@@ -119,7 +119,7 @@ public class ParserVariableFactory {
                                     byte[] bytes = tokenValue.getBytes();
                                     for ( int i = 0; i < bytes.length; i++ ) {
                                         String asciiHexValue = String.format("%0" + declaredSize + "X", bytes[i]);
-//                                    System.out.println(tokenValue.charAt(i) + " " + asciiHexValue);
+
                                         memory.write(memory.getVariablePointer(), asciiHexValue, prefixSize);
                                         memory.incrementVariablePointer(prefixSize);
                                     }

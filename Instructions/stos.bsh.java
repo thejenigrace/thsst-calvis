@@ -10,7 +10,7 @@ execute(cc, registers, memory) {
     BigInteger offset;
 
     switch ( conditionSize ) {
-        case "B": 
+        case "B":
             source = "AL";
             size = 8;
             offset = new BigInteger("1");
@@ -26,7 +26,7 @@ execute(cc, registers, memory) {
             offset = new BigInteger("4");
             break;
         default:
-            // invalid 
+            // invalid
     }
 
     memory.write(registers.get("EDI"), registers.get(source), size);

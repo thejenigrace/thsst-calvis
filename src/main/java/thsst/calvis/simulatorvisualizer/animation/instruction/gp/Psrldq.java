@@ -48,7 +48,7 @@ public class Psrldq extends CalvisAnimation {
         String resultingHex = destination;
         for(int x = 0; x < (counter); x++){
             temp = resultingHex.substring(0, 30);
-            System.out.println(32 - ((x + 1) * 2) + " num");
+            
             temp = "00" + temp;
             resultingHex = temp;
             rotateModels.add(new RotateModel(resultingHex, "0"));

@@ -69,7 +69,7 @@ public class Ffree extends CalvisAnimation {
             case 1:
 
                 src = tokens[0];
-                System.out.println(src.getValue() + " fuck");
+                
                 String indexValue = src.getValue().substring(2);
                 int indexInt = Integer.parseInt(indexValue);
                 sourceStr = registers.x87().tag().getTag(indexValue);
@@ -100,7 +100,7 @@ public class Ffree extends CalvisAnimation {
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
 //        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
-        System.out.println(desValue.getText() + " :(");
+        
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, srcRec, srcValue, desValue, desLabel, srcLabel, sign, poppedValue);
         fake.setX(0);

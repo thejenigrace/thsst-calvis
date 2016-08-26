@@ -74,7 +74,7 @@ public class Movmskps extends CalvisAnimation {
         srcValue.setY(posY + 40 + desRec.getHeight() + 45);
 
         String srcBits = c.convertHexToBits(srcStr, timeFunc.getBitSize(src));
-        System.out.println("srcBITS " + srcBits);
+        
         Text desFirstBit = new Text(this.createLabelText(des).getText() + "[0] <- " + this.createLabelText(src).getText() + "[31]:" + srcBits.charAt(127 - 31));
         Text desSecondBit = new Text(this.createLabelText(des).getText() + "[1] <- " + this.createLabelText(src).getText() + "[63]:" + srcBits.charAt(127 - 63));
         Text desThirdBit = new Text(this.createLabelText(des).getText() + "[2] <- " + this.createLabelText(src).getText() + "[95]:" + srcBits.charAt(127 - 95));

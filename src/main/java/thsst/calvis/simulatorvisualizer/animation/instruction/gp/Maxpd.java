@@ -34,7 +34,7 @@ public class Maxpd extends CalvisAnimation {
         String desStr = timeFunc.getPreviousValue(des, size);
         String srcStr = timeFunc.getPreviousValue(src, size);
         String resultStr = timeFunc.getValue(des, size);
-        System.out.println(resultStr + " jhere here");
+        
         int operationSize = 16;
         Text sign = timeFunc.generateText(new Text("Extract Max Value"), 2, "#98777b");
         Text equal = timeFunc.generateText(new Text("="), 30, "#98777b");
@@ -57,7 +57,7 @@ public class Maxpd extends CalvisAnimation {
             dividedConvertedDes += c.hexToDoublePrecisionFloatingPoint(extractedHexDes) + "      ";
             dividedConvertedSrc += c.hexToDoublePrecisionFloatingPoint(extractedHexSrc) + "      ";
             dividedConvertedRes += c.hexToDoublePrecisionFloatingPoint(extractedHexRes) + "      ";
-//            System.out.println(" wowo naman " + c.hexToDoublePrecisionFloatingPoint(extractedHexRes));
+
         }
 
         Rectangle fake = new Rectangle(0,0, Color.web("#4b5320"));

@@ -100,7 +100,7 @@ public class Fninit extends CalvisAnimation {
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
 //        desValue.setWrappingWidth(desRec.getLayoutBounds().getWidth() - 40);
-        System.out.println(desValue.getText() + " :(");
+        
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, desValue, desLabel, poppedValue);
         fake.setX(0);

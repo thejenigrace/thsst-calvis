@@ -57,8 +57,8 @@ public class Loop extends CalvisAnimation {
                 proceedOrNot = "Don't Proceed To";
         }
 
-        System.out.println(conditionalTextResult);
-        System.out.println(proceedOrNot);
+        
+        
 
         Rectangle fake = timeFunc.createRectangle(0, 0, Color.WHITE);
         Rectangle fromRec = timeFunc.createRectangle(140, 130, Color.web("#002e63"));

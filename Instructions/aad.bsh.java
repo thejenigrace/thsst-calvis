@@ -15,7 +15,7 @@ execute(registers, memory) {
 execute(des, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
-    
+
     Token tokenAL = new Token(Token.REG, "AL");
     Token tokenAH = new Token(Token.REG, "AH");
 
@@ -47,10 +47,9 @@ setFlags(registers, flags, calculator, tokenAL) {
     flags.setAuxiliaryFlag("0");
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
-    if(bi.equals(BigInteger.ZERO)) {
+    if (bi.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
-    }
-    else {
+    } else {
         flags.setZeroFlag("0");
     }
 

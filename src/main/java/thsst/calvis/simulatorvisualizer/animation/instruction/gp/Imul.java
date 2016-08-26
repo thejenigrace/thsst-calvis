@@ -46,7 +46,7 @@ public class Imul extends CalvisAnimation {
         // ANIMATION ASSETS
         this.tokens = this.currentInstruction.getParameterTokens();
         for ( Token token : this.tokens ) {
-            System.out.println(token + " : " + token.getClass());
+            
         }
 
         // CODE HERE
@@ -61,10 +61,10 @@ public class Imul extends CalvisAnimation {
                 this.imulThreeOperand();
                 break;
             default:
-                System.out.println("None!");
+                
         }
 
-        System.out.println("Continue");
+        
 
         this.desRectangle.setX(X);
         this.desRectangle.setY(Y);
@@ -203,7 +203,7 @@ public class Imul extends CalvisAnimation {
     }
 
     private void imulOneOperand() {
-        System.out.println("ONE OPERAND!");
+        
         this.equalPosition = 110;
         this.desRectangle = this.createRectangle(Token.REG, this.width + 40, this.height);
         this.multiplierRectangle = this.createRectangle(Token.REG, this.width, this.height);
@@ -254,7 +254,7 @@ public class Imul extends CalvisAnimation {
 
 
     private void imulTwoOperand() {
-        System.out.println("TWO OPERAND!");
+        
         this.equalPosition = 70;
         this.desRectangle = this.createRectangle(this.tokens[0], this.width, this.height);
         this.multiplierRectangle = this.createRectangle(this.tokens[0], this.width, this.height);
@@ -277,7 +277,7 @@ public class Imul extends CalvisAnimation {
     }
 
     private void imulThreeOperand() {
-        System.out.println("THREE OPERAND!");
+        
         this.equalPosition = 70;
         this.desRectangle = this.createRectangle(this.tokens[0], this.width, this.height);
         this.multiplierRectangle = this.createRectangle(this.tokens[1], this.width, this.height);

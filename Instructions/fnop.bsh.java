@@ -1,3 +1,3 @@
 execute(registers, memory) {
-   // do nothing    
+    // do nothing
 }

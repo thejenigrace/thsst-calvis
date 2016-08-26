@@ -28,8 +28,7 @@ execute(registers, memory) {
         flags.setCarryFlag("1");
         flags.setAuxiliaryFlag("1");
         setFlags(flags);
-    }
-    else {
+    } else {
         storeResultInDes(registers, calculator, biAL, biAH, tokenAL, tokenAH);
 
         //Flags

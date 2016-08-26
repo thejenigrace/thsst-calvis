@@ -4,8 +4,8 @@ execute(des, src, registers, memory) {
     int desSize = 0;
 
     if( des.isRegister() ) {
-		desSize = registers.getBitSize(des);
-	}
+        desSize = registers.getBitSize(des);
+    }
 
     if( des.isRegister() ) {
         if( src.isRegister() ) {
@@ -14,8 +14,6 @@ execute(des, src, registers, memory) {
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            } else {
-                //throw exception
             }
         } else if( src.isMemory() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
@@ -23,8 +21,6 @@ execute(des, src, registers, memory) {
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            } else {
-                //throw exception
             }
         } else if( src.isHex() ) {
             if( checkSizeOfRegister(registers, desSize) ) {
@@ -32,12 +28,8 @@ execute(des, src, registers, memory) {
                 int source = count.intValue();
                 String destination = registers.get(des);
                 storeResultToRegister(registers, calculator, des, source, destination, desSize);
-            } else {
-                //throw exception
             }
         }
-    } else {
-        //throw exception
     }
 }
 

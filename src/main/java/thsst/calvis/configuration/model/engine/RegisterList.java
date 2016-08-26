@@ -36,7 +36,7 @@ public class RegisterList {
     private X87Handler x87;
 
     private ErrorLogger errorLogger = new ErrorLogger(new ArrayList<>());
-    private TreeMap<String, TreeMap<String, Register>> childMap;
+    private TreeMap<String, TreeMap<String, Register> > childMap;
 
     public RegisterList(String csvFile, int maxSize) {
         Comparator<String> orderedComparator = (s1, s2) -> Integer.compare(indexOf(s1), indexOf(s2));
@@ -70,17 +70,17 @@ public class RegisterList {
                 if ( missingParametersRegister.size() > 0 ) {
                     isSkipped = true;
                     errorMessages.add(new ErrorMessage(
-                            Types.registerShouldNotBeEmpty,
-                            missingParametersRegister,
-                            Integer.toString(lineCounter)));
+                                          Types.registerShouldNotBeEmpty,
+                                          missingParametersRegister,
+                                          Integer.toString(lineCounter)));
                 }
 
                 if ( invalidParametersRegister.size() > 0 && lineCounter != 0 ) {
                     isSkipped = true;
                     errorMessages.add(new ErrorMessage(
-                            Types.registerShouldNotBeInvalid,
-                            invalidParametersRegister,
-                            Integer.toString(lineCounter)));
+                                          Types.registerShouldNotBeInvalid,
+                                          invalidParametersRegister,
+                                          Integer.toString(lineCounter)));
                 }
 
                 // we need to get the max register size listed in the csv file
@@ -95,11 +95,11 @@ public class RegisterList {
                         int endIndex = Integer.parseInt(reg[END]);
 
                         if ( (startIndex == 0 && endIndex + 1 != regSize)
-                                || (startIndex > 0 && endIndex - startIndex + 1 != regSize) ) {
+                             || (startIndex > 0 && endIndex - startIndex + 1 != regSize) ) {
                             errorMessages.add(new ErrorMessage(
-                                    Types.registerInvalidSizeFormat,
-                                    HandleConfigFunctions.generateArrayListString(reg[NAME]),
-                                    Integer.toString(lineCounter)));
+                                                  Types.registerInvalidSizeFormat,
+                                                  HandleConfigFunctions.generateArrayListString(reg[NAME]),
+                                                  Integer.toString(lineCounter)));
                             //						reg = HandleConfigFunctions.adjustAnArray(reg, 1);
                             //						reg[reg.length - 1] = "0";
                         }
@@ -121,7 +121,7 @@ public class RegisterList {
                         reg[END] = String.valueOf(startIndex);
                         reg[NAME] = reg[NAME].toUpperCase();
                         // add csv row to lookup table
-//						System.out.println(reg[0] + " " +reg[1] + " " +reg[2]
+
 //						 + " " + reg[3] + " "   + reg[4] + " " + reg[5]);
                         this.lookup.add(reg);
                     }
@@ -168,9 +168,9 @@ public class RegisterList {
                                 break;
                             default:
                                 errorMessages.add(
-                                        new ErrorMessage(Types.invalidRegister,
-                                                HandleConfigFunctions.generateArrayListString(reg[TYPE]),
-                                                Integer.toString(lineCounter + 1)));
+                                    new ErrorMessage(Types.invalidRegister,
+                                                     HandleConfigFunctions.generateArrayListString(reg[TYPE]),
+                                                     Integer.toString(lineCounter + 1)));
                                 break;
                         }
                     } else {
@@ -188,12 +188,12 @@ public class RegisterList {
 
                         if ( childMap.get(reg[SOURCE]) == null ) {
                             TreeMap<String, Register> group = new TreeMap<>(orderedComparator);
-//                            System.out.println("Create 1st Child-Type 2: " + reg[NAME]);
+
                             group.put(reg[NAME], baby);
                             this.childMap.put(reg[SOURCE], group);
                         } else {
                             TreeMap<String, Register> group = childMap.get(reg[SOURCE]);
-//                            System.out.println("Sibling-Type 2: " + reg[NAME]);
+
                             group.put(reg[NAME], baby);
                             this.childMap.replace(reg[SOURCE], group);
                         }
@@ -207,14 +207,14 @@ public class RegisterList {
             int index = 0;
             for ( String[] lookupEntry : lookUpCopy ) {
                 // if all source (mother) registers are existent
-                //System.out.println(lookupEntry[1]);
+
                 if ( !this.map.containsKey(lookupEntry[1]) ) {
 //					int lineNumber = index;
 //					if(isEmptyError)
 //						lineNumber = index + 1;
                     errorMessages.add(new ErrorMessage(
-                            Types.doesNotExist, HandleConfigFunctions.generateArrayListString(lookupEntry[1]),
-                            Integer.toString(index + 1)));
+                                          Types.doesNotExist, HandleConfigFunctions.generateArrayListString(lookupEntry[1]),
+                                          Integer.toString(index + 1)));
                 }
                 index++;
             }
@@ -308,9 +308,9 @@ public class RegisterList {
                 return mother.getValue().substring(startIndex, endIndex + 1);
             }
         } else {
-            System.out.println("ERROR: Register " + key + " does not exist.");
+
             errorMessages.add(new ErrorMessage(Types.doesNotExist,
-                    HandleConfigFunctions.generateArrayListString(key), ""));
+                                               HandleConfigFunctions.generateArrayListString(key), ""));
             errorLogger.get(0).add(errorMessages);
         }
         return null;
@@ -351,7 +351,7 @@ public class RegisterList {
                 newValue = new String(val);
                 newValue = newValue.toUpperCase();
                 mother.setValue(newValue);
-                
+
                 TreeMap<String, Register> treeMap = childMap.get(register[SOURCE]);
 
                 if ( treeMap != null ) {
@@ -369,14 +369,11 @@ public class RegisterList {
                 }
             } else {
                 if ( hexString.equals("") ) {
-                    System.out.println("Writing to register failed.");
                     errorMessages.add(new ErrorMessage(Types.writeRegisterFailed,
-                            new ArrayList<>(), ""));
+                                                       new ArrayList<>(), ""));
                 } else {
-                    System.out.println("Size mismatch between "
-                            + register[0] + ":" + child + " and " + hexString);
                     errorMessages.add(new ErrorMessage(Types.dataTypeMismatch,
-                            HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
+                                                       HandleConfigFunctions.generateArrayListString(register[0], child, hexString), ""));
                     throw new DataTypeMismatchException(register[0] + ":" + child, hexString);
                 }
                 errorLogger.get(0).add(errorMessages);
@@ -394,7 +391,7 @@ public class RegisterList {
 
     public String getStackPointer() {
         String registerStackValue = get(stackPointerName);
-        if(registerStackValue.length() > 8){
+        if(registerStackValue.length() > 8) {
             return registerStackValue.substring(8);
         }
         else{
@@ -423,10 +420,6 @@ public class RegisterList {
             }
         }
 
-    }
-
-    public void print() {
-        map.entrySet().forEach(System.out::println);
     }
 
     public String[] find(String registerName) {
@@ -510,6 +503,6 @@ public class RegisterList {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-        System.out.println("Loaded Register Content");
+
     }
 }

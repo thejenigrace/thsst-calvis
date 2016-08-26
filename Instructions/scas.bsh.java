@@ -8,8 +8,8 @@ execute(cc, registers, memory) {
     int size = 0;
     BigInteger offset;
 
-     switch ( conditionSize ) {
-        case "B": 
+    switch ( conditionSize ) {
+        case "B":
             registerName = "AL";
             size = 8;
             offset = new BigInteger("1");
@@ -25,7 +25,7 @@ execute(cc, registers, memory) {
             offset = new BigInteger("4");
             break;
         default:
-            // invalid 
+            // invalid
     }
 
     Token tokenEDI = new Token(Token.REG, "EDI");
@@ -59,8 +59,8 @@ cmp(registers, memory, flags, calculator, tokenEDI, tokenA, size, registerName) 
 
     for(int i = size - 1; i >= 0; i--) {
         r = Integer.parseInt(String.valueOf(destination.charAt(i)))
-        - Integer.parseInt(String.valueOf(source.charAt(i)))
-        - borrow;
+            - Integer.parseInt(String.valueOf(source.charAt(i)))
+            - borrow;
 
         if( r < 0 ) {
             borrow = 1;

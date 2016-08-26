@@ -88,7 +88,7 @@ public class EnvironmentBagFinder {
     }
 
     public String read(Token baseAddressToken, int offset) throws MemoryReadException {
-        System.out.println("value eto:" + baseAddressToken.getValue());
+        
         return read(baseAddressToken.getValue(), offset);
     }
 
@@ -117,14 +117,14 @@ public class EnvironmentBagFinder {
         if ( checkSizeDirective.contains("/") ) {
             checkSizeDirective = baseAddress.split("/")[1];
         }
-        //System.out.println("BASE ADDRESS = " + reformatAddress(baseAddr));
+        
         inc = Integer.parseInt(checkSizeDirective, 16);
         int offsetHex = offset / 4;
         for ( int i = 0; i < offsetHex / 2; i++ ) {
             result = read(Memory.reformatAddress(Integer.toHexString(inc))) + result;
             inc++;
         }
-//        System.out.println("Memory read in little endian: " + result);
+
         if ( result.contains("null") ) {
             throw new MemoryReadException(baseAddress, offset);
         }

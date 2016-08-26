@@ -19,7 +19,7 @@ execute(registers, memory) {
 execute(des, registers, memory) {
     Calculator calculator = new Calculator(registers, memory);
     EFlags flags = registers.getEFlags();
-    
+
     Token tokenAL = new Token(Token.REG, "AL");
 
     if( des.getValue().length() <= 2 ) {
@@ -40,15 +40,14 @@ storeResultInDes(registers, result) {
 }
 
 setFlags(registers, flags, calculator, tokenAL) {
-    flags.setCarryFlag("0"); //undefined
-    flags.setAuxiliaryFlag("0"); //undefined
-    flags.setOverflowFlag("0"); //undefined
+    flags.setCarryFlag("0");     //undefined
+    flags.setAuxiliaryFlag("0");     //undefined
+    flags.setOverflowFlag("0");     //undefined
 
     BigInteger bi = new BigInteger(registers.get("AL"), 16);
-    if(bi.equals(BigInteger.ZERO)) {
+    if (bi.equals(BigInteger.ZERO)) {
         flags.setZeroFlag("1");
-    }
-    else {
+    } else {
         flags.setZeroFlag("0");
     }
 

@@ -33,7 +33,7 @@ public class Xadd extends CalvisAnimation {
         // ANIMATION ASSETS
         Token[] tokens = currentInstruction.getParameterTokens();
         for ( int i = 0; i < tokens.length; i++ ) {
-            System.out.println(tokens[i] + " : " + tokens[i].getClass());
+            
         }
 
         // CODE HERE
@@ -208,7 +208,7 @@ public class Xadd extends CalvisAnimation {
                     .add((srcRectangle.getLayoutBounds().getWidth() - srcValueText.getLayoutBounds().getWidth()) / 2));
 
             srcTransition.fromYProperty().bind(desTransition.fromYProperty());
-            System.out.println(srcValueText.getLayoutBounds().getWidth() + " width");
+            
             srcTransition.toXProperty().bind(desRectangle.translateXProperty()
                     .add(130 + 110 + 11 + (desRectangle.getLayoutBounds().getWidth() - desValueText.getLayoutBounds().getWidth()) / 2));
 

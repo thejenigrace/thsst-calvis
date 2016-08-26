@@ -8,23 +8,23 @@ execute(cc, registers, memory) {
     BigInteger offset;
 
     switch ( conditionSize ) {
-        case "B": 
-            source = "AL";
-            size = 8;
-            offset = new BigInteger("1");
-            break;
-        case "W":
-            source = "AX";
-            size = 16;
-            offset = new BigInteger("2");
-            break;
-        case "D":
-            source = "EAX";
-            size = 32;
-            offset = new BigInteger("4");
-            break;
-        default:
-            // invalid 
+    case "B":
+        source = "AL";
+        size = 8;
+        offset = new BigInteger("1");
+        break;
+    case "W":
+        source = "AX";
+        size = 16;
+        offset = new BigInteger("2");
+        break;
+    case "D":
+        source = "EAX";
+        size = 32;
+        offset = new BigInteger("4");
+        break;
+    default:
+        // invalid
     }
 
     Token token = new Token(Token.REG, source);

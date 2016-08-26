@@ -42,7 +42,8 @@ public class InstructionList {
             "BE", "NA", "G", "NLE", "GE", "NL",
             "L", "NGE", "LE", "NG", "E", "Z",
             "NE", "NZ", "P", "PE", "NP", "PO",
-            "O", "NO", "C", "NC", "S", "NS"};
+            "O", "NO", "C", "NC", "S", "NS"
+    };
     private final String[] fcmovConditions = {"B", "E", "BE", "U", "NB", "NE", "NBE", "NU"};
     private final String[] sizeRelatedConditionsArray = {"B", "W", "D"};
     private final String[] equalityConditionsArray = {"", "E", "Z", "NE", "NZ"};
@@ -81,13 +82,6 @@ public class InstructionList {
                     inst[i] = inst[i].trim();
                 }
                 inst[0] = inst[0].toUpperCase();
-
-                // debug printing
-                //				for (int i = 0; i < inst.length; i++){
-                //					inst[i] = inst[i].trim();
-                //					System.out.print(inst[i] + " ");
-                //				}
-                //				System.out.println("");
 
                 // inst[0] contains instruction name
                 // inst[1] contains .bsh file location
@@ -176,7 +170,7 @@ public class InstructionList {
                     if ( filePathInvalid.length() > 0 ) {
                         instructionErrorCollection.add(filePathInvalid);
                     }
-//							System.out.println(filePathInvalid.length());
+
                     //check for duplicates
 
                     if ( instructionErrorCollection.size() > 0 ) {
@@ -208,7 +202,7 @@ public class InstructionList {
                         } else if ( inst[3].equals("4") ) {
                             this.appendType4.add(inst[0].toLowerCase());
                         }
-//							System.out.println("Loaded: " + inst[0]);
+
                     }
                 }
                 lineCounter++;

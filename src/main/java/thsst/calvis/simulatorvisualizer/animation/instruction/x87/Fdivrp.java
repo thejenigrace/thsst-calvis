@@ -97,7 +97,7 @@ public class Fdivrp extends CalvisAnimation {
         }
         srcValue = new Text(sourceStr);
         desValue = new Text(desStr);
-        System.out.println(desValue.getText() + " :(");
+        
         Rectangle fake = new Rectangle(0,0);
         parent.addAll(fake, desRec, resRec, srcRec, srcValue, desValue, resValue, desLabel, resLabel, srcLabel, sign, equal, poppedValue);
         fake.setX(0);

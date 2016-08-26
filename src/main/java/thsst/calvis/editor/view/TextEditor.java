@@ -61,8 +61,8 @@ public class TextEditor extends AssemblyComponent {
                 String text = codeArea.getText();
                 int caretPosition = codeArea.getCaretPosition();
                 int caretColumn = codeArea.getCaretColumn();
-//                System.out.println("caretPosition = " + caretPosition);
-//                System.out.println("caretColumn = " + caretColumn);
+
+
 
                 text = text.replaceAll("[\\t\\n\\r\\f\\v]", " ");
 
@@ -86,9 +86,9 @@ public class TextEditor extends AssemblyComponent {
                         && !event.getCode().equals(KeyCode.ENTER) && !event.getCode().equals(KeyCode.TAB) ) {
                     // Check if the current character is whitespace; start autocomplete after the whitespace
 
-//                    System.out.println("wordCount = " + wordCount);
+
 //
-//                    System.out.println("text = " + text.substring(caretPosition-wordCount-1, caretPosition));
+
 
 //                    if ( caretPosition > 1 && codeArea.getText(caretPosition - wordCount - 1, caretPosition - wordCount).equals(" ") )
 //                        this.autocomplete(codeArea.getText(caretPosition - wordCount, caretPosition), caretPosition - wordCount, caretPosition);
@@ -101,8 +101,8 @@ public class TextEditor extends AssemblyComponent {
                 }
 
 //                } else if ( event.getCode().equals(KeyCode.ENTER) ) {
-//                    System.out.println("catch enter");
-//                    System.out.println(caretPosition-afterEnter);
+
+
 //                    this.autocomplete(codeArea.getText(caretPosition-afterEnter, caretPosition), caretPosition-1, caretPosition);
 //                }
             } catch ( Exception e ) {
@@ -191,25 +191,25 @@ public class TextEditor extends AssemblyComponent {
 
     private void autocomplete(String text, int start, int end) {
         text = text.replaceAll("[\\t\\n\\r\\f\\v]", "");
-//        System.out.println("in text = " + text);
+
         if ( text.length() == 0 || this.entries.contains(text) ) {
-//            System.out.println("Hide Autocomplete!");
+
             this.entriesPopup.hide();
         } else {
-//            System.out.println("Show Autocomplete!");
+
             LinkedList<String> searchResult = new LinkedList<>();
             searchResult.addAll(this.entries.subSet(text, text + Character.MAX_VALUE));
-//            System.out.println("text = " + text);
-//            System.out.println("searchResult = " + searchResult.size());
+
+
             if ( searchResult.size() > 0 ) {
-//                System.out.println("POPULATE");
+
                 this.populatePopupItems(searchResult, start, end);
                 if ( !entriesPopup.isShowing() ) {
-//                    System.out.println("SHOW POPUP");
+
                     this.entriesPopup.show(MainApp.primaryStage);
                 }
             } else {
-//                System.out.println("HIDE DUMDUM!");
+
                 this.entriesPopup.hide();
             }
         }
@@ -278,7 +278,7 @@ public class TextEditor extends AssemblyComponent {
 
     @Override
     public void update(CalvisFormattedInstruction currentInstruction, int lineNumber) {
-//        System.out.println("Update TextEditor!");
+
         String currentLine = currentInstruction.toString();
         if ( currentLine != null ) {
             String codeAreaText = this.codeArea.getText();
@@ -290,7 +290,7 @@ public class TextEditor extends AssemblyComponent {
             while ( matcher.find() ) {
                 if ( !matcher.toMatchResult().group().contains(";") ) {
                     int[] arrRange = new int[2];
-//                    System.out.println("start: " + matcher.start() + "; end: " + matcher.end());
+
                     arrRange[0] = matcher.start();
                     arrRange[1] = matcher.end();
                     findHighlightRanges.put(c, arrRange);
@@ -299,13 +299,13 @@ public class TextEditor extends AssemblyComponent {
             }
             int[] range = findHighlightRanges.get(lineNumber);
             if ( range != null ) {
-                // System.out.println(range[0] + " to " + range[1]);
+                
 //                this.codeArea.selectLine();
                 this.codeArea.selectRange(range[0], range[1]);
                 this.codeArea.redo();
             }
         } else {
-//            System.out.println("null highlight currentLine");
+
 //            this.codeArea.selectRange(0, 0);
             this.codeArea.deselect();
             this.redo();
