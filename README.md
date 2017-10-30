@@ -61,7 +61,7 @@ Sample Assembly Code:
     STD                     ; set direction flag
 
     MOV EAX, 100_d          ; move 100 as decimal value to EAX
-    MOV word [0x0000], 0xFF ; move 00FFh in the memory space     starting from 0000 to 0003
+    MOV word [0x0000], 0xFF ; move 00FFh in the memory space starting from 0000 to 0003
 
     JMP label1              ; jumps to label1
     MOV EAX, EBX            ; skipped
