@@ -30,20 +30,21 @@ For Mac OSX:
 	 to "/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/lib"
 2. Run the CALVIS-1.3.5.jar with your configuration preferences.
 
-================================================================================
+================================================
+
 The developers can be reached at:
-Jennica Alcalde
-	Email: jennica_alcalde@dlsu.edu.ph
-	Contact Number: +639177965194
-Goodwin Chua
+
+    Jennica Alcalde
+    Email: jeca.interactive@gmail.com
+    
+    Goodwin Chua
 	Email: goodwin_chua@dlsu.edu.ph
-	Contact Number: +639228932699
-Ivan Demabildo
+    
+    Ivan Demabildo
 	Email: ivan_demabildo@dlsu.edu.ph
-	Contact Number: +639053884995
-Marielle Ong
+
+    Marielle Ong
 	Email: marielle_ong@dlsu.edu.ph
-	Contact Number: +639176319535
 
 Please submit suggestions, report the problems and bugs that you encountered to
 the developers.
