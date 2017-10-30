@@ -50,8 +50,9 @@ Please submit suggestions, report the problems and bugs that you encountered to
 the developers.
 
 Copyright 2016 CALVIS. All rights reserved.
----------------------------------------------------------
+
 Sample Assembly Code:
+---------------------------------------------------------
 
     MOV EAX, 0xFFFFabcd     ; move hex value to EAX
     MOV BX, [0x0001]        ; move a hex value from the memory to   BX (follows little endian)
